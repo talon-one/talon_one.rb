@@ -1,0 +1,10 @@
+build:
+  image: mwendler/ruby.tiny.rake
+  environment:
+    - TALONONE_ENDPOINT=$$TALONONE_ENDPOINT
+    - TALONONE_EMAIL=$$TALONONE_EMAIL
+    - TALONONE_PASSWORD=$$TALONONE_PASSWORD
+  commands:
+    - apk update
+    - apk add ca-certificates ruby-json ruby-minitest
+    - rake test
