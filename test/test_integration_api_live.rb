@@ -8,7 +8,7 @@ class TestIntegrationApiLive < LiveApiTest
     )
   end
 
-  def tear_down
+  def teardown
     management_client.delete_shop @shop
   end
 
