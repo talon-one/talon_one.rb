@@ -24,6 +24,14 @@ module TalonOne
           TalonOne::Integration::Effect.new raw_array
         end
       end
+
+      def accepted_coupon?
+        effects.any? {|e| e.function == "acceptCoupon"}
+      end
+
+      def rejected_coupon?
+        !accepted_coupon? && effects.any? {|e| e.function == "rejectCoupon"}
+      end
     end
   end
 end
