@@ -38,11 +38,11 @@ module TalonOne
       end
 
       def update_customer_session(session_id, data)
-        request "Put", "/customer_sessions/#{session_id}", data
+        request "Put", "/v1/customer_sessions/#{session_id}", data
       end
 
       def update_customer_profile(profile_id, data)
-        request "Put", "/customer_profiles/#{profile_id}", data
+        request "Put", "/v1/customer_profiles/#{profile_id}", data
       end
 
       def close_customer_session(session_id)
