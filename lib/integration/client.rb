@@ -1,4 +1,5 @@
 require 'openssl'
+require_relative './response'
 
 module TalonOne
   module Integration
@@ -26,7 +27,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          res.body && JSON.parse(res.body)
+          TalonOne::Integration::Response.new(JSON.parse(res.body))
         else
           raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
         end
