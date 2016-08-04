@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'talon_one'
-  s.version = '0.0.0'
-  s.date = '2017-07-22'
+  s.version = '0.0.1'
+  s.date = '2016-08-04'
   s.summary = 'Client for the Talon.One API'
   s.description = 'A simple client for using the Talon.One API'
   s.authors = ['Stephen Sugden']
