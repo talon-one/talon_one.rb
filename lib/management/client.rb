@@ -6,6 +6,7 @@ module TalonOne
         @endpoint = URI(
           config[:endpoint] || ENV["TALONONE_ENDPOINT"] || "https://app.talon.one"
         )
+        @endpoint.path = @endpoint.path.sub(/\/+$/, '')
         @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
         @http.use_ssl = true
         @token = ENV["TALONONE_SESSION_TOKEN"]
