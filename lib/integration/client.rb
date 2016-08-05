@@ -7,19 +7,20 @@ module TalonOne
     class Client
       def initialize(config = {})
         @endpoint = URI(
-          config[:endpoint] || ENV["TALONONE_ENDPOINT"] || "https://app.talon.one"
+          config[:endpoint] || ENV["TALONONE_ENDPOINT"] || "https://example.talon.one"
         )
+        @endpoint.path = @endpoint.path.sub(/\/+$/, '')
         @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
         @http.use_ssl = @endpoint.scheme == "https"
 
         @shop_id = config[:shop_id] || ENV["TALONONE_SHOPID"]
-        @secret = [config[:secret] || ENV["TALONONE_SECRET"]].pack('H*')
+        @shop_key = [config[:shop_key] || ENV["TALONONE_SHOPKEY"]].pack('H*')
       end
 
       def request(method, path, payload = nil)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         req.body = payload.to_json
-        signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @secret, req.body)
+        signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @shop_key, req.body)
 
         req['Content-Type'] = 'application/json'
         req['Content-Signature'] = "signer=#{@shop_id}; signature=#{signature}"
@@ -51,4 +52,3 @@ module TalonOne
     end
   end
 end
-

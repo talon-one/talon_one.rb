@@ -23,7 +23,7 @@ class TestIntegrationApiLive < LiveApiTest
   end
 
   def integration_config
-    { shop_id: @shop["id"], secret: @shop["key"] }
+    { shop_id: @shop["id"], shop_key: @shop["key"] }
   end
 
   def test_track_event

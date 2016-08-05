@@ -41,7 +41,7 @@ client = TalonOne::Integration::Client.new :endpoint => 'https://mycompany.talon
 ``` 
 
 Defaults for these configuration parameters can also be set via the environment
-variables `TALONONE_ENDPOINT`, `TALONONE_SHOPID`, and `TALONONE_SECRET`. 
+variables `TALONONE_ENDPOINT`, `TALONONE_SHOPID`, and `TALONONE_SHOPKEY`. 
 
 Once the `client` has been created, you can start sending customer profiles,
 sessions, and events to Talon.One:
