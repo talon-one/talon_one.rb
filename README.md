@@ -7,7 +7,7 @@ provides 2 Ruby API clients:
  - `TalonOne::Integration::Client` is used to feed customer activities (e.g.
    purchasing items or referring friends) into the Talon.One platform so that
    your marketing campaigns can react to these events. Authentication for the
-   Integration API is done with a Shop ID and secret key.
+   Integration API is done with an Application ID and secret key.
 
  - `TalonOne::Management::Client` is used to create and manipulate campaigns,
    coupons, and user accounts on the Talon.One platform. Unlike the integration
@@ -25,23 +25,18 @@ gem 'talon_one', :git => 'https://github.com/talon-one/talon-one.rb'
 
 ## Getting started with the Integration API
 
-First, you will need to know your API endpoint, Shop ID, and Shop Key. You can
-find all of these in the Camapaign Manager by going to the "Settings" tab. The
-Key will be a hexadecimal string like `5ea4583bfb81d2e9`, while the endpoint and
-Shop ID can be found in the address bar. As an example, if the URL in the
-address bar is `https://mycompany.talon.one/shops/213/settings` your Talon.One
-endpoint will be `https://mycompany.talon.one` and the Shop ID will be `213`.
+First, you will need to find your API endpoint, Application ID and Application Key in the Camapaign Manager by going to the "Settings" tab.
 
 With these 3 things we can set up the integration API client:
 
 ```ruby
 client = TalonOne::Integration::Client.new :endpoint => 'https://mycompany.talon.one',
-                                           :shop_id => 213,
-                                           :shop_key => '5ea4583bfb81d2e9'
+                                           :application_id => 213,
+                                           :application_key => '5ea4583bfb81d2e9'
 ``` 
 
 Defaults for these configuration parameters can also be set via the environment
-variables `TALONONE_ENDPOINT`, `TALONONE_SHOPID`, and `TALONONE_SHOPKEY`. 
+variables `TALONONE_ENDPOINT`, `TALONONE_APP_ID`, and `TALONONE_APP_KEY`. 
 
 Once the `client` has been created, you can start sending customer profiles,
 sessions, and events to Talon.One:

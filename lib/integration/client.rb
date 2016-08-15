@@ -13,17 +13,17 @@ module TalonOne
         @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
         @http.use_ssl = @endpoint.scheme == "https"
 
-        @shop_id = config[:shop_id] || ENV["TALONONE_SHOPID"]
-        @shop_key = [config[:shop_key] || ENV["TALONONE_SHOPKEY"]].pack('H*')
+        @application_id = config[:application_id] || ENV["TALONONE_APP_ID"]
+        @application_key = [config[:application_key] || ENV["TALONONE_APP_KEY"]].pack('H*')
       end
 
       def request(method, path, payload = nil)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         req.body = payload.to_json
-        signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @shop_key, req.body)
+        signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
 
         req['Content-Type'] = 'application/json'
-        req['Content-Signature'] = "signer=#{@shop_id}; signature=#{signature}"
+        req['Content-Signature'] = "signer=#{@application_id}; signature=#{signature}"
 
         res = @http.request(req)
 

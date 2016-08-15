@@ -57,12 +57,12 @@ module TalonOne
         request "Delete", path
       end
 
-      def create_shop(params)
-        post "/v1/shops", params
+      def create_application(params)
+        post "/v1/applications", params
       end
 
-      def delete_shop(shop)
-        delete "/v1/shops/#{shop["id"]}"
+      def delete_application(application)
+        delete "/v1/applications/#{application["id"]}"
       end
     end
   end

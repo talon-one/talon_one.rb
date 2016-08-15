@@ -1,3 +1,7 @@
+# 0.0.3 / unreleased
+
+* [CHORE] Renamed "Shop" to "Application"
+
 # 0.0.2 / 2016-08-04
 
 * [BUG] Constructor param for integration client is `:shop_key` not `:secret`.

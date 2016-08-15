@@ -1,13 +1,13 @@
 class TestIntegrationApiLive < LiveApiTest
   def setup
-    @shop = management_client.create_shop(
-      name: "Ruby SDK Test Shop",
+    @app = management_client.create_application(
+      name: "Ruby SDK Test App",
       key: "fefecafedeadbeef",
       currency: "USD",
       timezone: "UTC"
     )
-    @campaign = management_client.post "/v1/shops/#{@shop["id"]}/campaigns", { name: "Test Campaign" }
-    @ruleset = management_client.post "/v1/shops/#{@shop["id"]}/campaigns/#{@campaign["id"]}/rulesets", rules: [{
+    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign" }
+    @ruleset = management_client.post "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}/rulesets", rules: [{
       title: "Free money for all!",
       condition: ["and", true],
       effects: [
@@ -15,15 +15,15 @@ class TestIntegrationApiLive < LiveApiTest
       ]
     }]
     @campaign["activeRulesetId"] = @ruleset["id"]
-    management_client.put "/v1/shops/#{@shop["id"]}/campaigns/#{@campaign["id"]}", @campaign
+    management_client.put "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}", @campaign
   end
 
   def teardown
-    management_client.delete_shop @shop
+    management_client.delete_application @app
   end
 
   def integration_config
-    { shop_id: @shop["id"], shop_key: @shop["key"] }
+    { application_id: @app["id"], application_key: @app["key"] }
   end
 
   def test_track_event

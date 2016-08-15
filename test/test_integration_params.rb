@@ -10,14 +10,14 @@ class TestIntegrationParams < Minitest::Test
   def test_initialize_parameter_normalization
     client = TalonOne::Integration::Client.new(
       endpoint: "https://this.will.have.no.trailing.slashes////",
-      shop_id: "1234",
-      shop_key: "blah"
+      application_id: "1234",
+      application_key: "blah"
     )
 
-    normalized = client.instance_eval do
-      { :endpoint => @endpoint, :shop_id => @shop_id, :shop_key => @shop_key }
+    normalized_endpoint = client.instance_eval do
+      @endpoint.to_s
     end
 
-    assert_equal normalized[:endpoint].to_s, "https://this.will.have.no.trailing.slashes"
+    assert_equal normalized_endpoint, "https://this.will.have.no.trailing.slashes"
   end
 end
