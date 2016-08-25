@@ -38,12 +38,13 @@ class TestIntegrationApiLive < LiveApiTest
     assert_equal "the-event", res.event.type
     assert_equal "a-session", res.event.session_id, "a-session"
     assert_equal({"parameter" => "blah"}, res.event.value)
+    assert_instance_of BigDecimal, res.session["discounts"]["Free money"]
   end
 
   def test_update_customer_session
     res = integration_client.update_customer_session "new-session", {
       coupon: "invalid coupon code",
-      total: 1234
+      total: BigDecimal.new("45.55"),
     }
     assert res.event.rejected_coupon?, "invalid coupon code was rejected"
   end
