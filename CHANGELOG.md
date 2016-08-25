@@ -1,4 +1,4 @@
-# 0.0.3 / unreleased
+# 0.0.3 / 2016-08-25
 
 * [CHORE] Renamed "Shop" to "Application"
 
