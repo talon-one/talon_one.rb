@@ -6,5 +6,6 @@ build:
     - TALONONE_PASSWORD=$$TALONONE_PASSWORD
   commands:
     - apk update
-    - apk add git ca-certificates ruby-json ruby-minitest
+    - apk add git ca-certificates ruby-json ruby-minitest ruby-bundler ruby-dev build-base
+    - bundle
     - rake test

@@ -1,4 +1,5 @@
 require 'openssl'
+require 'oj'
 require_relative './response'
 
 module TalonOne
@@ -19,7 +20,7 @@ module TalonOne
 
       def request(method, path, payload = nil)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
-        req.body = payload.to_json
+        req.body = Oj.dump payload, oj_options(:compat)
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
 
         req['Content-Type'] = 'application/json'
@@ -28,7 +29,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          TalonOne::Integration::Response.new(JSON.parse(res.body))
+          TalonOne::Integration::Response.new(Oj.load(res.body, oj_options(:strict)))
         else
           raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
         end
@@ -48,6 +49,16 @@ module TalonOne
 
       def close_customer_session(session_id)
         update_customer_session session_id, { state: "closed" }
+      end
+
+      private
+
+      def oj_options(mode)
+        { :mode => mode,
+          :class_cache => false,
+          :escape_mode => :json,
+          :bigdecimal_as_decimal => true,
+          :bigdecimal_load => :bigdecimal }
       end
     end
   end
