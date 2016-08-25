@@ -1,3 +1,8 @@
+# 0.0.4 / 2016-08-25
+
+* [FEATURE] Use BigDecimal for all decimal numbers coming in/out of the
+  Integration API.
+
 # 0.0.3 / 2016-08-25
 
 * [CHORE] Renamed "Shop" to "Application"
