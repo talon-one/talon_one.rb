@@ -66,4 +66,4 @@ client.track_event "my_unique_session_id", "viewed_promo_page", "url" => "http:/
 
 To view the full list of data that each of these API calls accepts, please consult our [API documentation][].
 
-[API documentation]: http://help.talon.one/customer/portal/articles/2544586-api-reference?b_id=14115
+[API documentation]: http://developers.talon.one/integration-api/
