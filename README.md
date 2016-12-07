@@ -1,4 +1,4 @@
-# Talon.One Ruby SDK [![Build Status](https://drone.talon.one/api/badges/talon-one/talon_one.rb/status.svg)](https://drone.talon.one/talon-one/talon_one.rb)
+# Talon.One Ruby SDK [![Build Status](https://travis-ci.org/talon-one/talon_one.rb.svg?branch=master)](https://travis-ci.org/talon-one/talon_one.rb)
 
 Talon.One enables marketers to create coupon, discount, loyalty, and referral
 marketing campaigns of virtually unlimited power and flexibility. This library
@@ -66,4 +66,4 @@ client.track_event "my_unique_session_id", "viewed_promo_page", "url" => "http:/
 
 To view the full list of data that each of these API calls accepts, please consult our [API documentation][].
 
-[API documentation]: http://developers.talon.one/integration-api/
+[API documentation]: http://developers.talon.one/integration-api/reference/
