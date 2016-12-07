@@ -36,7 +36,7 @@ module TalonOne
       end
 
       def track_event(session_id, event_type, value)
-        request "Post", "/v1/events", { sessionId: session_id, type: event_type, value: value }
+        request "Post", "/v1/events", { sessionId: session_id, type: event_type, attributes: value }
       end
 
       def update_customer_session(session_id, data)

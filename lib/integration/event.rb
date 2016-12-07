@@ -15,8 +15,8 @@ module TalonOne
         @raw["sessionId"]
       end
 
-      def value
-        @raw["value"]
+      def attributes
+        @raw["attributes"]
       end
 
       def effects

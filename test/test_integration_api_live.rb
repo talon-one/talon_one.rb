@@ -6,7 +6,7 @@ class TestIntegrationApiLive < LiveApiTest
       currency: "USD",
       timezone: "UTC"
     )
-    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign" }
+    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign", state: 'disabled', tags: [] }
     @ruleset = management_client.post "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}/rulesets", rules: [{
       title: "Free money for all!",
       condition: ["and", true],
@@ -15,6 +15,7 @@ class TestIntegrationApiLive < LiveApiTest
       ]
     }]
     @campaign["activeRulesetId"] = @ruleset["id"]
+    @campaign["state"] = "enabled"
     management_client.put "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}", @campaign
   end
 
@@ -27,7 +28,7 @@ class TestIntegrationApiLive < LiveApiTest
   end
 
   def test_track_event
-    res = integration_client.track_event "a-session", "the-event", { parameter: "blah" }
+    res = integration_client.track_event "a-session", "Viewed Page", { URL: "http://example.com" }
     assert res.profile
     assert res.session
     assert_instance_of TalonOne::Integration::Event, res.event
@@ -35,9 +36,9 @@ class TestIntegrationApiLive < LiveApiTest
     assert !res.event.accepted_coupon?, "No coupon -> no acceptCoupon effect"
     assert_equal 1, res.event.effects.length
     assert_equal "setDiscount", res.event.effects[0].function
-    assert_equal "the-event", res.event.type
+    assert_equal "Viewed Page", res.event.type
     assert_equal "a-session", res.event.session_id, "a-session"
-    assert_equal({"parameter" => "blah"}, res.event.value)
+    assert_equal({ "URL" => "http://example.com" }, res.event.attributes)
     assert_instance_of BigDecimal, res.session["discounts"]["Free money"]
   end
 
