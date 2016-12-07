@@ -11,4 +11,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/talon-one/talon-one.rb'
   s.license = 'MIT'
   s.add_runtime_dependency 'oj', '~> 2.17'
+  s.add_development_dependency 'rake', '~> 12.0.0'
+  s.add_development_dependency 'minitest', '~> 5.10.1'
 end
