@@ -57,7 +57,9 @@ client.update_customer_session "my_unique_session_id",
     "quantity" => 1,
     "currency" => "USD"
   }],
-  "shippingCost" => 3.75,
+  "attributes" => {
+    "ShippingCost" => 3.75
+  },
   "total" => 53.74  # total is _not_ required to match up to item cost + shipping"
 
 # When the customer does something else interesting
