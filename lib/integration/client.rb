@@ -4,7 +4,7 @@ require_relative './response'
 
 module TalonOne
   module Integration
-    # Basic REST client for the TalonOne management API
+    # Basic REST client for the TalonOne integration API
     class Client
       def initialize(config = {})
         @endpoint = URI(
@@ -49,6 +49,22 @@ module TalonOne
 
       def close_customer_session(session_id)
         update_customer_session session_id, { state: "closed" }
+      end
+
+      def create_referral_code(campaign_id, advocate_profile_id, friend_profile_id, start, expire)
+        newReferral = {
+          campaignId: campaign_id,
+          advocateProfileIntegrationId: advocate_profile_id,
+          friendProfileIntegrationId: friend_profile_id
+        }
+        start.to_s.empty? ? nil : newReferral[:startDate] = start
+        expire.to_s.empty? ? nil : newReferral[:expiryDate] = expire
+
+        request "Post", "/v1/referrals", newReferral
+      end
+
+      def search_profiles_by_attributes(profileAttr)
+        request "Post", "/v1/customer_profiles_search", { attributes: profileAttr }
       end
 
       private
