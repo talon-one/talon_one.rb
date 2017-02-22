@@ -1,6 +1,10 @@
 require 'openssl'
 require 'oj'
-require_relative './response'
+
+require_relative './search_profiles_result'
+require_relative './rule_engine_result'
+require_relative './referral_code'
+require_relative './referral_code_options'
 
 module TalonOne
   module Integration
@@ -29,7 +33,13 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          TalonOne::Integration::Response.new(Oj.load(res.body, oj_options(:strict)))
+          if path == "/v1/referrals"
+            TalonOne::Integration::ReferralCode.new(Oj.load(res.body, oj_options(:strict)))
+          elsif path == "/v1/customer_profiles_search"
+            TalonOne::Integration::SearchProfilesResult.new(Oj.load(res.body, oj_options(:strict)))
+          else
+            TalonOne::Integration::RuleEngineResult.new(Oj.load(res.body, oj_options(:strict)))
+          end
         else
           raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
         end
@@ -51,15 +61,16 @@ module TalonOne
         update_customer_session session_id, { state: "closed" }
       end
 
-      def create_referral_code(campaign_id, advocate_profile_id, friend_profile_id, start, expire)
+      def create_referral_code(campaign_id, advocate_profile_id, options)
         newReferral = {
           campaignId: campaign_id,
           advocateProfileIntegrationId: advocate_profile_id,
-          friendProfileIntegrationId: friend_profile_id
         }
-        start.to_s.empty? ? nil : newReferral[:startDate] = start
-        expire.to_s.empty? ? nil : newReferral[:expiryDate] = expire
-
+        if options != nil
+          newReferral[:friendProfileIntegrationId] = options.friend_id?.to_s
+          options.start?.to_s.empty? ? nil : newReferral[:startDate] = options.start?
+          options.expire?.to_s.empty? ? nil : newReferral[:expiryDate] = options.expire?
+        end
         request "Post", "/v1/referrals", newReferral
       end
 

@@ -2,7 +2,7 @@ require_relative './event'
 
 module TalonOne
   module Integration
-    class Response
+    class RuleEngineResult
       def initialize(raw_data)
         @raw = raw_data
       end
