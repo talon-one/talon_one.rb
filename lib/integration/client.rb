@@ -22,7 +22,7 @@ module TalonOne
         @application_key = [config[:application_key] || ENV["TALONONE_APP_KEY"]].pack('H*')
       end
 
-      def request(method, path, payload = nil)
+      def request(method, path, payload = nil, result = TalonOne::Integration::RuleEngineResult)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         req.body = Oj.dump payload, oj_options(:compat)
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
@@ -33,13 +33,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          if path == "/v1/referrals"
-            TalonOne::Integration::ReferralCode.new(Oj.load(res.body, oj_options(:strict)))
-          elsif path == "/v1/customer_profiles_search"
-            TalonOne::Integration::SearchProfilesResult.new(Oj.load(res.body, oj_options(:strict)))
-          else
-            TalonOne::Integration::RuleEngineResult.new(Oj.load(res.body, oj_options(:strict)))
-          end
+          result.new(Oj.load(res.body, oj_options(:strict)))
         else
           raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
         end
@@ -71,11 +65,11 @@ module TalonOne
           options.start?.to_s.empty? ? nil : newReferral[:startDate] = options.start?
           options.expire?.to_s.empty? ? nil : newReferral[:expiryDate] = options.expire?
         end
-        request "Post", "/v1/referrals", newReferral
+        request "Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode
       end
 
       def search_profiles_by_attributes(profileAttr)
-        request "Post", "/v1/customer_profiles_search", { attributes: profileAttr }
+        request "Post", "/v1/customer_profiles_search", { attributes: profileAttr }, TalonOne::Integration::SearchProfilesResult
       end
 
       private
