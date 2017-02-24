@@ -17,7 +17,7 @@ module TalonOne
         @raw["created"]
       end
 
-      def advocate_profile_integration_id
+      def advocate_id
         @raw["advocateProfileIntegrationId"]
       end
 
@@ -25,15 +25,15 @@ module TalonOne
         @raw["code"]
       end
 
-      def friend_profile_integration_id?
+      def friend_id
         @raw["friendProfileIntegrationId"]
       end
 
-      def start_date?
+      def start_date
         @raw["startDate"]
       end
 
-      def expiry_date?
+      def expiry_date
         @raw["expiryDate"]
       end
 

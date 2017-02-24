@@ -5,15 +5,15 @@ module TalonOne
         @raw = raw_data
       end
 
-      def friend_id?
+      def friend_id
         @raw["friendId"]
       end
 
-      def start?
+      def start
         @raw["start"]
       end
 
-      def expire?
+      def expire
         @raw["expire"]
       end
     end
