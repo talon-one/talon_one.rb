@@ -8,7 +8,7 @@ module TalonOne
       end
 
       def profiles
-        @profiles ||= @raw.map do |raw_array|
+        @profiles ||= @raw["data"].map do |raw_array|
           TalonOne::Integration::CustomerProfile.new raw_array
         end
       end
