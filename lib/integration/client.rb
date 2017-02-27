@@ -60,8 +60,12 @@ module TalonOne
           advocateProfileIntegrationId: advocate_profile_id,
           friendProfileIntegrationId: friend_id,
         }
-        start.to_s.empty? ? nil : newReferral[:startDate] = start
-        expire.to_s.empty? ? nil : newReferral[:expiryDate] = expire
+        if start
+          newReferral[:startDate] = start
+        end
+        if expire
+          newReferral[:expiryDate] = expire
+        end
         request "Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode
       end
 
