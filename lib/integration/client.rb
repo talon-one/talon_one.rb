@@ -4,7 +4,6 @@ require 'oj'
 require_relative './search_profiles_result'
 require_relative './rule_engine_result'
 require_relative './referral_code'
-require_relative './referral_code_options'
 
 module TalonOne
   module Integration
@@ -55,16 +54,14 @@ module TalonOne
         update_customer_session session_id, { state: "closed" }
       end
 
-      def create_referral_code(campaign_id, advocate_profile_id, options)
+      def create_referral_code(campaign_id, advocate_profile_id, friend_id: "", start: nil, expire: nil)
         newReferral = {
           campaignId: campaign_id,
           advocateProfileIntegrationId: advocate_profile_id,
+          friendProfileIntegrationId: friend_id,
         }
-        if options != nil
-          newReferral[:friendProfileIntegrationId] = options.friend_id.to_s
-          options.start.to_s.empty? ? nil : newReferral[:startDate] = options.start
-          options.expire.to_s.empty? ? nil : newReferral[:expiryDate] = options.expire
-        end
+        start.to_s.empty? ? nil : newReferral[:startDate] = start
+        expire.to_s.empty? ? nil : newReferral[:expiryDate] = expire
         request "Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode
       end
 
