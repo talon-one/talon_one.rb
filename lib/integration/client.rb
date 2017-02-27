@@ -1,10 +1,13 @@
 require 'openssl'
 require 'oj'
-require_relative './response'
+
+require_relative './search_profiles_result'
+require_relative './rule_engine_result'
+require_relative './referral_code'
 
 module TalonOne
   module Integration
-    # Basic REST client for the TalonOne management API
+    # Basic REST client for the TalonOne integration API
     class Client
       def initialize(config = {})
         @endpoint = URI(
@@ -18,7 +21,7 @@ module TalonOne
         @application_key = [config[:application_key] || ENV["TALONONE_APP_KEY"]].pack('H*')
       end
 
-      def request(method, path, payload = nil)
+      def request(method, path, payload = nil, result = TalonOne::Integration::RuleEngineResult)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         req.body = Oj.dump payload, oj_options(:compat)
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
@@ -29,7 +32,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          TalonOne::Integration::Response.new(Oj.load(res.body, oj_options(:strict)))
+          result.new(Oj.load(res.body, oj_options(:strict)))
         else
           raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
         end
@@ -49,6 +52,25 @@ module TalonOne
 
       def close_customer_session(session_id)
         update_customer_session session_id, { state: "closed" }
+      end
+
+      def create_referral_code(campaign_id, advocate_profile_id, friend_id: "", start: nil, expire: nil)
+        newReferral = {
+          campaignId: campaign_id,
+          advocateProfileIntegrationId: advocate_profile_id,
+          friendProfileIntegrationId: friend_id,
+        }
+        if start
+          newReferral[:startDate] = start
+        end
+        if expire
+          newReferral[:expiryDate] = expire
+        end
+        request "Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode
+      end
+
+      def search_profiles_by_attributes(profileAttr)
+        request "Post", "/v1/customer_profiles_search", { attributes: profileAttr }, TalonOne::Integration::SearchProfilesResult
       end
 
       private

@@ -32,6 +32,14 @@ module TalonOne
       def rejected_coupon?
         !accepted_coupon? && effects.any? {|e| e.function == "rejectCoupon"}
       end
+
+      def accepted_referral?
+        effects.any? {|e| e.function == "acceptReferral"}
+      end
+
+      def rejected_referral?
+        !accepted_referral? && effects.any? {|e| e.function == "rejectReferral"}
+      end
     end
   end
 end
