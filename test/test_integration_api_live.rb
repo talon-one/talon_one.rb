@@ -6,7 +6,7 @@ class TestIntegrationApiLive < LiveApiTest
       currency: "USD",
       timezone: "UTC"
     )
-    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign", state: 'disabled', tags: [] }
+    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign", state: 'disabled', tags: [], limits: [] }
     @ruleset = management_client.post "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}/rulesets", rules: [{
       title: "Free money for all!",
       condition: ["and", true],
