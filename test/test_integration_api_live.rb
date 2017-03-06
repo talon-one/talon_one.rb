@@ -1,7 +1,7 @@
 class TestIntegrationApiLive < LiveApiTest
   def setup
     @app = management_client.create_application(
-      name: "Ruby SDK Test App",
+      name: "Ruby SDK Test App #{rand(36**3).to_s(36)}",
       key: "fefecafedeadbeef",
       currency: "USD",
       timezone: "UTC"
