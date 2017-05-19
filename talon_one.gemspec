@@ -4,8 +4,9 @@ Gem::Specification.new do |s|
   s.date = '2017-03-06'
   s.summary = 'Client for the Talon.One API'
   s.description = 'A simple client for using the Talon.One API'
-  s.authors = ['Stephen Sugden']
-  s.email = 'stephen@talon.one'
+  s.authors = ['Stephen Sugden', 'Laurens Van Wiele']
+  s.email = ['stephen@talon.one', 'vanwiele@talon.one']
+  s.required_ruby_version = '>= 2.2.0'
   s.files = `git ls-files`.split("\n")
   s.require_paths = ['lib']
   s.homepage = 'https://github.com/talon-one/talon-one.rb'

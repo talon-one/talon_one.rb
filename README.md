@@ -16,11 +16,10 @@ provides 2 Ruby API clients:
    
 ## Installation
 
-There is no gem release yet, for now we recommend pulling directly from GitHub
-in your Gemfile:
+The TalonOne Ruby SDK is available as a standard [gem release][]. Just add it in your Gemfile:
 
 ```ruby
-gem 'talon_one', :git => 'https://github.com/talon-one/talon-one.rb'
+gem 'talon_one'
 ```
 
 ## Getting started with the Integration API
@@ -69,3 +68,4 @@ client.track_event "my_unique_session_id", "viewed_promo_page", "url" => "http:/
 To view the full list of data that each of these API calls accepts, please consult our [API documentation][].
 
 [API documentation]: http://developers.talon.one/integration-api/reference/
+[gem release]: https://rubygems.org/gems/talon_one
