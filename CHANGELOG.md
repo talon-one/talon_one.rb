@@ -1,3 +1,8 @@
+# 0.0.6 / 2017-05-19
+
+* [FEATURE] Allow setting token on Management Client Config (instead of email + password)
+* [BUG] Only use SSL if endpoint is https
+
 # 0.0.4 / 2016-08-25
 
 * [FEATURE] Use BigDecimal for all decimal numbers coming in/out of the

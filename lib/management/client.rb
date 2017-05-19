@@ -8,8 +8,8 @@ module TalonOne
         )
         @endpoint.path = @endpoint.path.sub(/\/+$/, '')
         @http = Net::HTTP.new(@endpoint.host, @endpoint.port)
-        @http.use_ssl = true
-        @token = ENV["TALONONE_SESSION_TOKEN"]
+        @http.use_ssl = @endpoint.scheme == "https"
+        @token = config[:token] || ENV["TALONONE_SESSION_TOKEN"]
         if !@token
           email = config[:email] || ENV["TALONONE_EMAIL"]
           password = config[:password] || ENV["TALONONE_PASSWORD"]
