@@ -60,10 +60,27 @@ module TalonOne
       def create_application(params)
         post "/v1/applications", params
       end
-
-      def delete_application(application)
-        delete "/v1/applications/#{application["id"]}"
+      
+      def get_application(application_id)
+        get "v1/applications/#{application_id}"
       end
+
+      def delete_application(application_id)
+        delete "/v1/applications/#{application_id}"
+      end
+      
+      def get_applications
+        get "/v1/applications"
+      end
+      
+      def create_campaign(application_id, params)
+        post "/v1/applications/#{application_id}/campaigns", params
+      end
+      
+      def get_campaign(application_id, campaign_id)
+        get "v1/applications/#{application_id}/campaigns/#{campaign_id}"
+      end
+      
     end
   end
 end

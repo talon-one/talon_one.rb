@@ -1,3 +1,7 @@
+# 0.0.7 / 2017-05-24
+
+* [FEATURE] Add support for creating and retrieving campaigns using the Management API
+
 # 0.0.6 / 2017-05-19
 
 * [FEATURE] Allow setting token on Management Client Config (instead of email + password)
