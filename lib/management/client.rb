@@ -14,14 +14,10 @@ module TalonOne
           email = config[:email] || ENV["TALONONE_EMAIL"]
           password = config[:password] || ENV["TALONONE_PASSWORD"]
           if email && password
-            login(email, password)
+            res = login(email, password)
+            @token = res["token"]
           end
         end
-      end
-
-      def login(email, password) 
-        res = request "Post", "/v1/sessions", {"email" => email, "password" => password}
-        @token = res["token"]
       end
 
       def request(method, path, payload = nil)
@@ -55,6 +51,10 @@ module TalonOne
 
       def delete(path)
         request "Delete", path
+      end
+
+      def login(email, password) 
+        post "/v1/sessions", {"email" => email, "password" => password} 
       end
 
       def create_application(params)

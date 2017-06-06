@@ -1,3 +1,7 @@
+# 0.0.8 / 2017-06-06
+
+* [FEATURE] Expose login API call
+
 # 0.0.7 / 2017-05-24
 
 * [FEATURE] Add support for creating and retrieving campaigns using the Management API
