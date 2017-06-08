@@ -99,11 +99,11 @@ module TalonOne
         update_campaign(application_id, campaign_id, campaign)
       end
 
-      def create_custom_attribute(params)
+      def create_attribute(params)
         post "/v1/attributes", params
       end
 
-      def delete_custom_attribute(attribute_id)
+      def delete_attribute(attribute_id)
         delete "/v1/attributes/#{attribute_id}"
       end
       
