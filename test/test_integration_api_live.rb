@@ -6,21 +6,23 @@ class TestIntegrationApiLive < LiveApiTest
       currency: "USD",
       timezone: "UTC"
     )
-    @campaign = management_client.post "/v1/applications/#{@app["id"]}/campaigns", { name: "Test Campaign", state: 'disabled', tags: [], limits: [] }
-    @ruleset = management_client.post "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}/rulesets", rules: [{
+    @campaign = management_client.create_campaign @app["id"], { name: "Test Campaign", state: 'disabled', tags: [], limits: [] }
+    @ruleset = management_client.update_ruleset_for_campaign @app["id"], @campaign["id"], rules: [{
       title: "Free money for all!",
       condition: ["and", true],
       effects: [
         ["setDiscount", "Free money", 45.55]
       ]
     }]
-    @campaign["activeRulesetId"] = @ruleset["id"]
-    @campaign["state"] = "enabled"
-    management_client.put "/v1/applications/#{@app["id"]}/campaigns/#{@campaign["id"]}", @campaign
+
+    management_client.update_campaign_status @app["id"], @campaign["id"], "enabled"
+
+    @attribute ||= management_client.create_custom_attribute({ entity: "Event", eventType: "Viewed Page", name: "URL", title: "Page URL", type: "string", description: "The URL of the page that the user has viewed", tags: [], editable: true })
   end
 
   def teardown
-    management_client.delete_application @app
+    management_client.delete_application @app["id"]
+    management_client.delete_custom_attribute @attribute["id"]
   end
 
   def integration_config
