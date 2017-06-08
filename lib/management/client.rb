@@ -21,7 +21,6 @@ module TalonOne
       end
 
       def request(method, path, payload = nil)
-        #puts "Going to visit #{@endpoint.path + path}"
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         if @token
           req["Authorization"] = "Bearer #{@token}"
