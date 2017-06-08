@@ -1,3 +1,10 @@
+# 0.0.9 / 2017-06-08
+
+* [FEATURE] Add support for creating and deleting attributes
+* [FEATURE] Add support for adding a ruleset to a campaign
+* [FEATURE] Add support for updating campaign status
+* [CHORE] Update integration tests
+
 # 0.0.8 / 2017-06-06
 
 * [FEATURE] Expose login API call
