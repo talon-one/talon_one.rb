@@ -62,7 +62,7 @@ module TalonOne
       end
       
       def get_application(application_id)
-        get "v1/applications/#{application_id}"
+        get "/v1/applications/#{application_id}"
       end
 
       def delete_application(application_id)
@@ -78,7 +78,33 @@ module TalonOne
       end
       
       def get_campaign(application_id, campaign_id)
-        get "v1/applications/#{application_id}/campaigns/#{campaign_id}"
+        get "/v1/applications/#{application_id}/campaigns/#{campaign_id}"
+      end
+
+      def update_campaign(application_id, campaign_id, params)
+        put "/v1/applications/#{application_id}/campaigns/#{campaign_id}", params
+      end
+
+      def update_ruleset_for_campaign(application_id, campaign_id, params)
+        ruleset = post "/v1/applications/#{application_id}/campaigns/#{campaign_id}/rulesets", params
+        campaign = get_campaign(application_id, campaign_id)
+        campaign["activeRulesetId"] = ruleset["id"]
+        update_campaign(application_id, campaign_id, campaign)
+        return ruleset
+      end
+
+      def update_campaign_status(application_id, campaign_id, campaign_status)
+        campaign = get_campaign(application_id, campaign_id)
+        campaign["state"] = campaign_status
+        update_campaign(application_id, campaign_id, campaign)
+      end
+
+      def create_attribute(params)
+        post "/v1/attributes", params
+      end
+
+      def delete_attribute(attribute_id)
+        delete "/v1/attributes/#{attribute_id}"
       end
       
     end
