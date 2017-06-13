@@ -1,3 +1,7 @@
+# 0.0.10 / 2017-06-13
+
+* [FEATURE] Throw custom errors in stead of general RunTime errors whenever the API returns a 400
+
 # 0.0.9 / 2017-06-08
 
 * [FEATURE] Add support for creating and deleting attributes
