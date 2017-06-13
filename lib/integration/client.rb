@@ -4,6 +4,7 @@ require 'oj'
 require_relative './search_profiles_result'
 require_relative './rule_engine_result'
 require_relative './referral_code'
+require_relative './client_error'
 
 module TalonOne
   module Integration
@@ -34,7 +35,7 @@ module TalonOne
         if res.code[0] == '2'
           result.new(Oj.load(res.body, oj_options(:strict)))
         else
-          raise "#{method.upcase} #{path} -> #{res.code} #{res.body}"
+          raise TalonOne::Integration::ClientError.new("#{method.upcase} #{path} -> #{res.code} #{res.body}")
         end
       end
 
