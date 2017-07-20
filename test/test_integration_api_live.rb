@@ -53,6 +53,11 @@ class TestIntegrationApiLive < LiveApiTest
     assert res.event.rejected_coupon?, "invalid coupon code was rejected"
   end
 
+  def test_close_customer_session
+    res = integration_client.close_customer_session "new_session"
+    assert res.profile
+  end
+
   def test_raise_error
     err = assert_raises TalonOne::Integration::ClientError do
       integration_client.track_event "a-session", @event_type, { BADURL: "http://example.com" }
