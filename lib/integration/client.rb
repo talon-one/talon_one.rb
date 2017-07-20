@@ -33,7 +33,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          result.new(Oj.load(res.body, oj_options(:strict)))
+          result.new(Oj.load(res.body, oj_options(:custom)))
         else
           raise TalonOne::Integration::ClientError.new("#{method.upcase} #{path} -> #{res.code} #{res.body}")
         end
@@ -81,7 +81,8 @@ module TalonOne
           :class_cache => false,
           :escape_mode => :json,
           :bigdecimal_as_decimal => true,
-          :bigdecimal_load => :bigdecimal }
+          :bigdecimal_load => :bigdecimal,
+          :use_as_json => true }
       end
     end
   end
