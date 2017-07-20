@@ -24,7 +24,7 @@ module TalonOne
 
       def request(method, path, payload = nil, result = TalonOne::Integration::RuleEngineResult)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
-        req.body = Oj.dump payload, oj_options(:compat)
+        req.body = Oj.dump payload, oj_options(:custom)
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
 
         req['Content-Type'] = 'application/json'
@@ -33,7 +33,7 @@ module TalonOne
         res = @http.request(req)
 
         if res.code[0] == '2'
-          result.new(Oj.load(res.body, oj_options(:custom)))
+          result.new(Oj.load(res.body, oj_options(:strict)))
         else
           raise TalonOne::Integration::ClientError.new("#{method.upcase} #{path} -> #{res.code} #{res.body}")
         end
