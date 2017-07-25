@@ -53,6 +53,17 @@ class TestIntegrationApiLive < LiveApiTest
     assert res.event.rejected_coupon?, "invalid coupon code was rejected"
   end
 
+  def test_oj_as_json
+    payload = Object.new
+    payload.instance_eval do
+      def as_json
+        return { URL: "http://example.com" }
+      end
+    end
+    res = integration_client.track_event "another-session", @event_type, payload
+    assert res.profile
+  end
+
   def test_close_customer_session
     res = integration_client.close_customer_session "new_session"
     assert res.profile
