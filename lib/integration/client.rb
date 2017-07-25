@@ -25,16 +25,12 @@ module TalonOne
       def request(method, path, payload = nil, result = TalonOne::Integration::RuleEngineResult)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
         req.body = Oj.dump payload, oj_options(:custom)
-        puts "Request to path " + path
-        puts req.body
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
 
         req['Content-Type'] = 'application/json'
         req['Content-Signature'] = "signer=#{@application_id}; signature=#{signature}"
 
         res = @http.request(req)
-
-        puts res.body
 
         if res.code[0] == '2'
           result.new(Oj.load(res.body, oj_options(:strict)))
@@ -85,7 +81,8 @@ module TalonOne
           :class_cache => false,
           :escape_mode => :json,
           :bigdecimal_as_decimal => true,
-          :bigdecimal_load => :bigdecimal }
+          :bigdecimal_load => :bigdecimal,
+          :use_as_json => :true }
       end
     end
   end
