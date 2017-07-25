@@ -24,7 +24,7 @@ module TalonOne
 
       def request(method, path, payload = nil, result = TalonOne::Integration::RuleEngineResult)
         req = Net::HTTP.const_get(method).new(@endpoint.path + path)
-        req.body = Oj.dump payload, oj_options(:compat)
+        req.body = Oj.dump payload, oj_options(:custom)
         signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), @application_key, req.body)
 
         req['Content-Type'] = 'application/json'
@@ -81,7 +81,8 @@ module TalonOne
           :class_cache => false,
           :escape_mode => :json,
           :bigdecimal_as_decimal => true,
-          :bigdecimal_load => :bigdecimal }
+          :bigdecimal_load => :bigdecimal,
+          :use_as_json => true }
       end
     end
   end
