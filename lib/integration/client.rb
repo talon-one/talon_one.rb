@@ -81,8 +81,7 @@ module TalonOne
           :class_cache => false,
           :escape_mode => :json,
           :bigdecimal_as_decimal => true,
-          :bigdecimal_load => :bigdecimal,
-          :use_as_json => true }
+          :bigdecimal_load => :bigdecimal }
       end
     end
   end
