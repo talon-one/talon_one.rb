@@ -1,3 +1,7 @@
+# 0.1.0 / 2017-07-25
+
+* [BUG] talon_one.rb is now compatible wit Oj version 3 and above (bumped the minimum version to 3.0)
+
 # 0.0.10 / 2017-06-13
 
 * [FEATURE] Throw custom errors in stead of general RunTime errors whenever the API returns a 400
