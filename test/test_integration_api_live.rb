@@ -6,7 +6,7 @@ class TestIntegrationApiLive < LiveApiTest
       currency: "USD",
       timezone: "UTC"
     )
-    @campaign = management_client.create_campaign @app["id"], { name: "Test Campaign", state: 'disabled', tags: [], limits: [] }
+    @campaign = management_client.create_campaign @app["id"], { name: "Test Campaign", state: 'disabled', tags: [], limits: [], features: [] }
     @ruleset = management_client.update_ruleset_for_campaign @app["id"], @campaign["id"], rules: [{
       title: "Free money for all!",
       condition: ["and", true],
