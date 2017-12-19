@@ -43,8 +43,10 @@ sessions, and events to Talon.One:
 ```ruby
 # When the customer registers or updates their account
 client.update_customer_profile "my_unique_profile_id",
-  "name" => "Val Kust",
-  "billingAddress1" => "21 Jump St."
+  "attributes" => {
+    "Name" => "Val Kust",
+    "BillingAddress1" => "21 Jump St."
+  }
 
 # When the customer adds an item to their cart
 client.update_customer_session "my_unique_session_id",
