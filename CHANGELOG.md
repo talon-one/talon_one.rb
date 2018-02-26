@@ -1,3 +1,7 @@
+# 0.1.1 / 2018-02-26
+
+* [FEATURE] campaign_id is now an exposed attribute of the effect class
+
 # 0.1.0 / 2017-07-25
 
 * [BUG] talon_one.rb is now compatible wit Oj version 3 and above (bumped the minimum version to 3.0)
