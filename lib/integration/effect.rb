@@ -8,6 +8,10 @@ module TalonOne
         @raw = raw_array[3]
       end
 
+      def campaign_id
+        @campaign_id
+      end
+
       def function
         @raw[0]
       end

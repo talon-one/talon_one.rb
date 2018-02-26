@@ -38,6 +38,7 @@ class TestIntegrationApiLive < LiveApiTest
     assert !res.event.rejected_coupon?, "No coupon -> no rejectCoupon effect"
     assert !res.event.accepted_coupon?, "No coupon -> no acceptCoupon effect"
     assert_equal 1, res.event.effects.length
+    assert_equal 1, res.event.effects[0].campaign_id
     assert_equal "setDiscount", res.event.effects[0].function
     assert_equal @event_type, res.event.type
     assert_equal "a-session", res.event.session_id, "a-session"
