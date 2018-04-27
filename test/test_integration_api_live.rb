@@ -23,7 +23,7 @@ class TestIntegrationApiLive < LiveApiTest
     @coupon_code = "mycode"
     @attribute_name = "Description#{rand(36**3).to_s(36)}"
     @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "Coupon Description", type: "string", description: "Description for this coupon", tags: [], editable: true })
-    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { @attribute_name.to_sym: "some text" } })
+    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { @attribute_name.to_sym => "some text" } })
   end
 
   def teardown
