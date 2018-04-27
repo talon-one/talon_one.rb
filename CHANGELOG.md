@@ -1,3 +1,7 @@
+# 0.1.2 / 2018-04-27
+
+* [FEATURE] event meta-data is now exposed as `event.meta.coupon_data` and `event.meta.campaign_data`
+
 # 0.1.1 / 2018-02-26
 
 * [FEATURE] campaign_id is now an exposed attribute of the effect class
