@@ -52,9 +52,10 @@ class TestIntegrationApiLive < LiveApiTest
       total: BigDecimal.new("45.55"),
     }
     assert res.event.accepted_coupon?, "coupon code was accepted"
-    assert_equal 1, res.event.effects.length
+    assert_equal 2, res.event.effects.length
     assert_equal @campaign["id"], res.event.effects[0].campaign_id
-    assert_equal "setDiscount", res.event.effects[0].function
+    assert_equal "acceptCoupon", res.event.effects[0].function
+    assert_equal "setDiscount", res.event.effects[1].function
     assert_equal @event_type, res.event.type
     assert_instance_of BigDecimal, res.session["discounts"]["Free money"]
     assert_equal "some text", res.event.meta.coupon_data
