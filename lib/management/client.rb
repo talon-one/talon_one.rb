@@ -106,6 +106,10 @@ module TalonOne
       def delete_attribute(attribute_id)
         delete "/v1/attributes/#{attribute_id}"
       end
+
+      def create_coupon(application_id, campaign_id, params)
+        post "/v1/applications/#{application_id}/campaigns/#{campaign_id}/coupons", params
+      end
       
     end
   end
