@@ -21,8 +21,9 @@ class TestIntegrationApiLive < LiveApiTest
     @attribute ||= management_client.create_attribute({ entity: "Event", eventType: @event_type, name: "URL", title: "Page URL", type: "string", description: "The URL of the page that the user has viewed", tags: [], editable: true })
 
     @coupon_code = "mycode"
-    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: "Description", title: "Coupon Description", type: "string", description: "Description for this coupon", tags: [], editable: true })
-    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { Description: "some text" } })
+    @attribute_name = "Description#{rand(36**3).to_s(36)}"
+    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "Coupon Description", type: "string", description: "Description for this coupon", tags: [], editable: true })
+    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { @attribute_name.to_sym "some text" } })
   end
 
   def teardown
@@ -47,7 +48,7 @@ class TestIntegrationApiLive < LiveApiTest
   end
 
   def test_update_customer_session
-    res = integration_client.update_customer_session "new-session", {
+    res = integration_client.update_customer_session "new-session#{rand(36**3).to_s(36)}", {
       coupon: @coupon_code,
       total: BigDecimal.new("45.55"),
     }
@@ -56,7 +57,7 @@ class TestIntegrationApiLive < LiveApiTest
     assert_equal @campaign["id"], res.event.effects[0].campaign_id
     assert_equal "acceptCoupon", res.event.effects[0].function
     assert_equal "setDiscount", res.event.effects[1].function
-    assert_equal @event_type, res.event.type
+    assert_equal "talon_session_created", res.event.type
     assert_instance_of BigDecimal, res.session["discounts"]["Free money"]
     assert_equal "some text", res.event.meta.coupon_data
   end
