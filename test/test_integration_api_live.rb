@@ -9,7 +9,7 @@ class TestIntegrationApiLive < LiveApiTest
     @campaign = management_client.create_campaign @app["id"], { name: "Test Campaign", state: 'disabled', tags: [], limits: [], features: [] }
     @ruleset = management_client.update_ruleset_for_campaign @app["id"], @campaign["id"], rules: [{
       title: "Free money for all!",
-      condition: ["and", "couponValid"],
+      condition: ["and", ["couponValid"]],
       effects: [
         ["setDiscount", "Free money", 45.55]
       ]
