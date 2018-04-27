@@ -20,8 +20,9 @@ class TestIntegrationApiLive < LiveApiTest
     @event_type ||= "Viewed Page#{rand(36**3).to_s(36)}"
     @attribute ||= management_client.create_attribute({ entity: "Event", eventType: @event_type, name: "URL", title: "Page URL", type: "string", description: "The URL of the page that the user has viewed", tags: [], editable: true })
 
+    @coupon_code = "mycode"
     @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: "Description", title: "Coupon Description", type: "string", description: "Description for this coupon", tags: [], editable: true })
-    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: "mycode", usageLimit: 0, numberOfCoupons: 1, attributes: { Description: "some text" } })
+    @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { Description: "some text" } })
   end
 
   def teardown
@@ -47,7 +48,7 @@ class TestIntegrationApiLive < LiveApiTest
 
   def test_update_customer_session
     res = integration_client.update_customer_session "new-session", {
-      coupon: "invalid coupon code",
+      coupon: @coupon_code,
       total: BigDecimal.new("45.55"),
     }
     assert res.event.accepted_coupon?, "coupon code was accepted"
