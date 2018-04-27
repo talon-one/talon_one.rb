@@ -1,4 +1,5 @@
 require_relative './effect'
+require_relative "./meta_data"
 
 module TalonOne
   module Integration
@@ -23,6 +24,10 @@ module TalonOne
         @effects ||= @raw["effects"].map do |raw_array|
           TalonOne::Integration::Effect.new raw_array
         end
+      end
+
+      def meta
+        @meta ||= TalonOne::Integration::MetaData.new @raw["meta"]
       end
 
       def accepted_coupon?
