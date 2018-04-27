@@ -22,7 +22,7 @@ class TestIntegrationApiLive < LiveApiTest
 
     @coupon_code = "mycode"
     @attribute_name = "Description#{rand(36**3).to_s(36)}"
-    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "Coupon Description", type: "string", description: "Description for this coupon", tags: [], editable: true })
+    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "#{rand(36**3).to_s(36)}", type: "string", description: "Description for this coupon", tags: [], editable: true })
     @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { @attribute_name.to_sym => "some text" } })
   end
 
@@ -59,7 +59,7 @@ class TestIntegrationApiLive < LiveApiTest
     assert_equal "setDiscount", res.event.effects[1].function
     assert_equal "talon_session_created", res.event.type
     assert_instance_of BigDecimal, res.session["discounts"]["Free money"]
-    assert_equal "some text", res.event.meta.coupon_data
+    assert_equal "some text", res.event.meta.coupon_data[@coupon_code][@attribute_name]
   end
 
   def test_oj_calls_as_json
