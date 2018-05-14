@@ -50,7 +50,7 @@ class TestIntegrationApiLive < LiveApiTest
   def test_update_customer_session
     res = integration_client.update_customer_session "new-session#{rand(36**3).to_s(36)}", {
       coupon: @coupon_code,
-      total: BigDecimal.new("45.55"),
+      total: 45.55,
     }
     assert res.event.accepted_coupon?, "coupon code was accepted"
     assert_equal 2, res.event.effects.length
