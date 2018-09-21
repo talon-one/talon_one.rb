@@ -18,11 +18,11 @@ class TestIntegrationApiLive < LiveApiTest
     management_client.update_campaign_status @app["id"], @campaign["id"], "enabled"
 
     @event_type ||= "Viewed Page#{rand(36**3).to_s(36)}"
-    @attribute ||= management_client.create_attribute({ entity: "Event", eventType: @event_type, name: "URL", title: "Page URL", type: "string", description: "The URL of the page that the user has viewed", tags: [], editable: true })
+    @attribute ||= management_client.create_attribute({ entity: "Event", eventType: @event_type, name: "URL", title: "Page URL", type: "string", description: "The URL of the page that the user has viewed", tags: [], suggestions: [], editable: true })
 
     @coupon_code = "mycode"
     @attribute_name = "Description#{rand(36**3).to_s(36)}"
-    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "#{rand(36**3).to_s(36)}", type: "string", description: "Description for this coupon", tags: [], editable: true })
+    @coupon_attribute ||= management_client.create_attribute({ entity: "Coupon", name: @attribute_name, title: "#{rand(36**3).to_s(36)}", type: "string", description: "Description for this coupon", tags: [], suggestions: [], editable: true })
     @coupon ||= management_client.create_coupon(@app["id"], @campaign["id"], { validCharacters: [], couponPattern: @coupon_code, usageLimit: 0, numberOfCoupons: 1, attributes: { @attribute_name.to_sym => "some text" } })
   end
 
