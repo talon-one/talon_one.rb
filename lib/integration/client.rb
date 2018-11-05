@@ -32,23 +32,25 @@ module TalonOne
 
         res = @http.request(req)
 
-        if res.code[0] == '2'
+        if res.code[0] == '2' && res.code != '204'
           result.new(Oj.load(res.body, oj_options(:strict)))
+        elsif res.code == '204'
+          true
         else
           raise TalonOne::Integration::ClientError.new("#{method.upcase} #{path} -> #{res.code} #{res.body}")
         end
       end
 
       def track_event(session_id, event_type, value)
-        request "Post", "/v1/events", { sessionId: session_id, type: event_type, attributes: value }
+        request("Post", "/v1/events", { sessionId: session_id, type: event_type, attributes: value })
       end
 
       def update_customer_session(session_id, data)
-        request "Put", "/v1/customer_sessions/#{session_id}", data
+        request("Put", "/v1/customer_sessions/#{session_id}", data)
       end
 
       def update_customer_profile(profile_id, data)
-        request "Put", "/v1/customer_profiles/#{profile_id}", data
+        request("Put", "/v1/customer_profiles/#{profile_id}", data)
       end
 
       def close_customer_session(session_id)
@@ -67,11 +69,15 @@ module TalonOne
         if expire
           newReferral[:expiryDate] = expire
         end
-        request "Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode
+        request("Post", "/v1/referrals", newReferral, TalonOne::Integration::ReferralCode)
       end
 
       def search_profiles_by_attributes(profileAttr)
-        request "Post", "/v1/customer_profiles_search", { attributes: profileAttr }, TalonOne::Integration::SearchProfilesResult
+        request("Post", "/v1/customer_profiles_search", { attributes: profileAttr }, TalonOne::Integration::SearchProfilesResult)
+      end
+
+      def delete_customer_data(customerId)
+        request("Delete", "/v1/customer_data/#{customerId}", nil, nil)
       end
 
       private

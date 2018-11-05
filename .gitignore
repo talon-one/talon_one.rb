@@ -1,3 +1,4 @@
 talon_one-*.gem
+.local
 secrets.yml
 Gemfile.lock
