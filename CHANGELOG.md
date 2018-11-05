@@ -1,3 +1,7 @@
+# 0.1.3 / 2018-04-27
+
+* [FEATURE] delete_customer_data is now exposed on the integration API
+
 # 0.1.2 / 2018-04-27
 
 * [FEATURE] event meta-data is now exposed as `event.meta.coupon_data` and `event.meta.campaign_data`
