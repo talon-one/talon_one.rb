@@ -85,7 +85,7 @@ Method | HTTP request | Description
 
 
 # **add_loyalty_points**
-> add_loyalty_points(program_id, integration_id, opts)
+> add_loyalty_points(program_id, integration_id, body)
 
 Add points in a certain loyalty program for the specified customer
 
@@ -109,13 +109,12 @@ program_id = 'program_id_example' # String |
 
 integration_id = 'integration_id_example' # String | 
 
-opts = { 
-  body: TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
-}
+body = TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
+
 
 begin
   #Add points in a certain loyalty program for the specified customer
-  api_instance.add_loyalty_points(program_id, integration_id, opts)
+  api_instance.add_loyalty_points(program_id, integration_id, body)
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->add_loyalty_points: #{e}"
 end
@@ -127,7 +126,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **program_id** | **String**|  | 
  **integration_id** | **String**|  | 
- **body** | [**LoyaltyPoints**](LoyaltyPoints.md)|  | [optional] 
+ **body** | [**LoyaltyPoints**](LoyaltyPoints.md)|  | 
 
 ### Return type
 
@@ -145,7 +144,7 @@ nil (empty response body)
 
 
 # **copy_campaign_to_applications**
-> InlineResponse2003 copy_campaign_to_applications(application_id, campaign_id, opts)
+> InlineResponse2003 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into every specified application
 
@@ -169,13 +168,12 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::CampaignCopy.new # CampaignCopy | 
-}
+body = TalonOne::CampaignCopy.new # CampaignCopy | 
+
 
 begin
   #Copy the campaign into every specified application
-  result = api_instance.copy_campaign_to_applications(application_id, campaign_id, opts)
+  result = api_instance.copy_campaign_to_applications(application_id, campaign_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->copy_campaign_to_applications: #{e}"
@@ -188,7 +186,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**CampaignCopy**](CampaignCopy.md)|  | [optional] 
+ **body** | [**CampaignCopy**](CampaignCopy.md)|  | 
 
 ### Return type
 
@@ -206,7 +204,7 @@ Name | Type | Description  | Notes
 
 
 # **create_campaign**
-> Campaign create_campaign(application_id, opts)
+> Campaign create_campaign(application_id, body)
 
 Create a Campaign
 
@@ -228,13 +226,12 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::NewCampaign.new # NewCampaign | 
-}
+body = TalonOne::NewCampaign.new # NewCampaign | 
+
 
 begin
   #Create a Campaign
-  result = api_instance.create_campaign(application_id, opts)
+  result = api_instance.create_campaign(application_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->create_campaign: #{e}"
@@ -246,7 +243,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
- **body** | [**NewCampaign**](NewCampaign.md)|  | [optional] 
+ **body** | [**NewCampaign**](NewCampaign.md)|  | 
 
 ### Return type
 
@@ -264,7 +261,7 @@ Name | Type | Description  | Notes
 
 
 # **create_coupons**
-> InlineResponse2001 create_coupons(application_id, campaign_id, opts)
+> InlineResponse2001 create_coupons(application_id, campaign_id, body, opts)
 
 Create Coupons
 
@@ -288,14 +285,15 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
+body = TalonOne::NewCoupons.new # NewCoupons | 
+
 opts = { 
-  silent: 'silent_example', # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
-  body: TalonOne::NewCoupons.new # NewCoupons | 
+  silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
 }
 
 begin
   #Create Coupons
-  result = api_instance.create_coupons(application_id, campaign_id, opts)
+  result = api_instance.create_coupons(application_id, campaign_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->create_coupons: #{e}"
@@ -308,8 +306,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
+ **body** | [**NewCoupons**](NewCoupons.md)|  | 
  **silent** | **String**| If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000). | [optional] 
- **body** | [**NewCoupons**](NewCoupons.md)|  | [optional] 
 
 ### Return type
 
@@ -327,7 +325,7 @@ Name | Type | Description  | Notes
 
 
 # **create_password_recovery_email**
-> NewPasswordEmail create_password_recovery_email(opts)
+> NewPasswordEmail create_password_recovery_email(body)
 
 Request a password reset
 
@@ -347,13 +345,12 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-opts = { 
-  body: TalonOne::NewPasswordEmail.new # NewPasswordEmail | 
-}
+body = TalonOne::NewPasswordEmail.new # NewPasswordEmail | 
+
 
 begin
   #Request a password reset
-  result = api_instance.create_password_recovery_email(opts)
+  result = api_instance.create_password_recovery_email(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->create_password_recovery_email: #{e}"
@@ -364,7 +361,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewPasswordEmail**](NewPasswordEmail.md)|  | [optional] 
+ **body** | [**NewPasswordEmail**](NewPasswordEmail.md)|  | 
 
 ### Return type
 
@@ -382,7 +379,7 @@ Name | Type | Description  | Notes
 
 
 # **create_ruleset**
-> Ruleset create_ruleset(application_id, campaign_id, opts)
+> Ruleset create_ruleset(application_id, campaign_id, body)
 
 Create a Ruleset
 
@@ -406,13 +403,12 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::NewRuleset.new # NewRuleset | 
-}
+body = TalonOne::NewRuleset.new # NewRuleset | 
+
 
 begin
   #Create a Ruleset
-  result = api_instance.create_ruleset(application_id, campaign_id, opts)
+  result = api_instance.create_ruleset(application_id, campaign_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->create_ruleset: #{e}"
@@ -425,7 +421,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**NewRuleset**](NewRuleset.md)|  | [optional] 
+ **body** | [**NewRuleset**](NewRuleset.md)|  | 
 
 ### Return type
 
@@ -443,7 +439,7 @@ Name | Type | Description  | Notes
 
 
 # **create_session**
-> Session create_session(opts)
+> Session create_session(body)
 
 Create a Session
 
@@ -463,13 +459,12 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-opts = { 
-  body: TalonOne::LoginParams.new # LoginParams | 
-}
+body = TalonOne::LoginParams.new # LoginParams | 
+
 
 begin
   #Create a Session
-  result = api_instance.create_session(opts)
+  result = api_instance.create_session(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->create_session: #{e}"
@@ -480,7 +475,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**LoginParams**](LoginParams.md)|  | [optional] 
+ **body** | [**LoginParams**](LoginParams.md)|  | 
 
 ### Return type
 
@@ -1461,7 +1456,7 @@ Name | Type | Description  | Notes
 
 
 # **get_application_customers_by_attributes**
-> InlineResponse20013 get_application_customers_by_attributes(opts)
+> InlineResponse20013 get_application_customers_by_attributes(body)
 
 Get a list of the customer profiles that match the given attributes
 
@@ -1481,13 +1476,12 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-opts = { 
-  body: TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
-}
+body = TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
+
 
 begin
   #Get a list of the customer profiles that match the given attributes
-  result = api_instance.get_application_customers_by_attributes(opts)
+  result = api_instance.get_application_customers_by_attributes(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_application_customers_by_attributes: #{e}"
@@ -1498,7 +1492,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**ApplicationCustomerSearch**](ApplicationCustomerSearch.md)|  | [optional] 
+ **body** | [**ApplicationCustomerSearch**](ApplicationCustomerSearch.md)|  | 
 
 ### Return type
 
@@ -2108,7 +2102,7 @@ Name | Type | Description  | Notes
 
 
 # **get_campaign_by_attributes**
-> InlineResponse2003 get_campaign_by_attributes(application_id, opts)
+> InlineResponse2003 get_campaign_by_attributes(application_id, body, opts)
 
 Get a list of all campaigns that match the given attributes
 
@@ -2130,17 +2124,18 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
+body = TalonOne::CampaignSearch.new # CampaignSearch | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
-  campaign_state: 'campaign_state_example', # String | Filter results by the state of the campaign.
-  body: TalonOne::CampaignSearch.new # CampaignSearch | 
+  campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
 begin
   #Get a list of all campaigns that match the given attributes
-  result = api_instance.get_campaign_by_attributes(application_id, opts)
+  result = api_instance.get_campaign_by_attributes(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_campaign_by_attributes: #{e}"
@@ -2152,11 +2147,11 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
+ **body** | [**CampaignSearch**](CampaignSearch.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
- **body** | [**CampaignSearch**](CampaignSearch.md)|  | [optional] 
 
 ### Return type
 
@@ -2450,7 +2445,7 @@ Name | Type | Description  | Notes
 
 
 # **get_coupons_by_attributes**
-> InlineResponse2001 get_coupons_by_attributes(application_id, campaign_id, opts)
+> InlineResponse2001 get_coupons_by_attributes(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -2474,6 +2469,8 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
+body = TalonOne::CouponSearch.new # CouponSearch | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -2486,13 +2483,12 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  body: TalonOne::CouponSearch.new # CouponSearch | 
+  batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
 begin
   #Get a list of the coupons that match the given attributes
-  result = api_instance.get_coupons_by_attributes(application_id, campaign_id, opts)
+  result = api_instance.get_coupons_by_attributes(application_id, campaign_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_coupons_by_attributes: #{e}"
@@ -2505,6 +2501,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
+ **body** | [**CouponSearch**](CouponSearch.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -2517,7 +2514,6 @@ Name | Type | Description  | Notes
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **body** | [**CouponSearch**](CouponSearch.md)|  | [optional] 
 
 ### Return type
 
@@ -2535,7 +2531,7 @@ Name | Type | Description  | Notes
 
 
 # **get_coupons_by_attributes_application_wide**
-> InlineResponse2001 get_coupons_by_attributes_application_wide(application_id, opts)
+> InlineResponse2001 get_coupons_by_attributes_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
 
@@ -2557,6 +2553,8 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
+body = TalonOne::CouponSearch.new # CouponSearch | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -2570,13 +2568,12 @@ opts = {
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  campaign_state: 'campaign_state_example', # String | Filter results by the state of the campaign.
-  body: TalonOne::CouponSearch.new # CouponSearch | 
+  campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
 begin
   #Get a list of the coupons that match the given attributes in all active campaigns of an application
-  result = api_instance.get_coupons_by_attributes_application_wide(application_id, opts)
+  result = api_instance.get_coupons_by_attributes_application_wide(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_coupons_by_attributes_application_wide: #{e}"
@@ -2588,6 +2585,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
+ **body** | [**CouponSearch**](CouponSearch.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -2601,7 +2599,6 @@ Name | Type | Description  | Notes
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
- **body** | [**CouponSearch**](CouponSearch.md)|  | [optional] 
 
 ### Return type
 
@@ -3102,7 +3099,7 @@ Name | Type | Description  | Notes
 
 
 # **get_customers_by_attributes**
-> InlineResponse20013 get_customers_by_attributes(opts)
+> InlineResponse20013 get_customers_by_attributes(body, opts)
 
 Get a list of the customer profiles that match the given attributes
 
@@ -3122,15 +3119,16 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
+body = TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  skip: 56, # Integer | Skips the given number of items when paging through large result sets.
-  body: TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
+  skip: 56 # Integer | Skips the given number of items when paging through large result sets.
 }
 
 begin
   #Get a list of the customer profiles that match the given attributes
-  result = api_instance.get_customers_by_attributes(opts)
+  result = api_instance.get_customers_by_attributes(body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_customers_by_attributes: #{e}"
@@ -3141,9 +3139,9 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **body** | [**ApplicationCustomerSearch**](ApplicationCustomerSearch.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
- **body** | [**ApplicationCustomerSearch**](ApplicationCustomerSearch.md)|  | [optional] 
 
 ### Return type
 
@@ -4255,7 +4253,7 @@ nil (empty response body)
 
 
 # **remove_loyalty_points**
-> remove_loyalty_points(program_id, integration_id, opts)
+> remove_loyalty_points(program_id, integration_id, body)
 
 Deduct points in a certain loyalty program for the specified customer
 
@@ -4279,13 +4277,12 @@ program_id = 'program_id_example' # String |
 
 integration_id = 'integration_id_example' # String | 
 
-opts = { 
-  body: TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
-}
+body = TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
+
 
 begin
   #Deduct points in a certain loyalty program for the specified customer
-  api_instance.remove_loyalty_points(program_id, integration_id, opts)
+  api_instance.remove_loyalty_points(program_id, integration_id, body)
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->remove_loyalty_points: #{e}"
 end
@@ -4297,7 +4294,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **program_id** | **String**|  | 
  **integration_id** | **String**|  | 
- **body** | [**LoyaltyPoints**](LoyaltyPoints.md)|  | [optional] 
+ **body** | [**LoyaltyPoints**](LoyaltyPoints.md)|  | 
 
 ### Return type
 
@@ -4315,7 +4312,7 @@ nil (empty response body)
 
 
 # **reset_password**
-> NewPassword reset_password(opts)
+> NewPassword reset_password(body)
 
 Reset password
 
@@ -4335,13 +4332,12 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-opts = { 
-  body: TalonOne::NewPassword.new # NewPassword | 
-}
+body = TalonOne::NewPassword.new # NewPassword | 
+
 
 begin
   #Reset password
-  result = api_instance.reset_password(opts)
+  result = api_instance.reset_password(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->reset_password: #{e}"
@@ -4352,7 +4348,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewPassword**](NewPassword.md)|  | [optional] 
+ **body** | [**NewPassword**](NewPassword.md)|  | 
 
 ### Return type
 
@@ -4370,7 +4366,7 @@ Name | Type | Description  | Notes
 
 
 # **search_coupons_advanced**
-> InlineResponse2001 search_coupons_advanced(application_id, campaign_id, opts)
+> InlineResponse2001 search_coupons_advanced(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -4394,6 +4390,8 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
+body = TalonOne::AttributeQuery.new # AttributeQuery | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -4406,13 +4404,12 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  body: TalonOne::AttributeQuery.new # AttributeQuery | 
+  batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
 begin
   #Get a list of the coupons that match the given attributes
-  result = api_instance.search_coupons_advanced(application_id, campaign_id, opts)
+  result = api_instance.search_coupons_advanced(application_id, campaign_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->search_coupons_advanced: #{e}"
@@ -4425,6 +4422,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
+ **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4437,7 +4435,6 @@ Name | Type | Description  | Notes
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | [optional] 
 
 ### Return type
 
@@ -4455,7 +4452,7 @@ Name | Type | Description  | Notes
 
 
 # **search_coupons_advanced_application_wide**
-> InlineResponse2001 search_coupons_advanced_application_wide(application_id, opts)
+> InlineResponse2001 search_coupons_advanced_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
 
@@ -4477,6 +4474,8 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
+body = TalonOne::AttributeQuery.new # AttributeQuery | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -4490,13 +4489,12 @@ opts = {
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  campaign_state: 'campaign_state_example', # String | Filter results by the state of the campaign.
-  body: TalonOne::AttributeQuery.new # AttributeQuery | 
+  campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
 begin
   #Get a list of the coupons that match the given attributes in all active campaigns of an application
-  result = api_instance.search_coupons_advanced_application_wide(application_id, opts)
+  result = api_instance.search_coupons_advanced_application_wide(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->search_coupons_advanced_application_wide: #{e}"
@@ -4508,6 +4506,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
+ **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4521,7 +4520,6 @@ Name | Type | Description  | Notes
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | [optional] 
 
 ### Return type
 
@@ -4539,7 +4537,7 @@ Name | Type | Description  | Notes
 
 
 # **search_coupons_advanced_application_wide_without_total_count**
-> InlineResponse2005 search_coupons_advanced_application_wide_without_total_count(application_id, opts)
+> InlineResponse2005 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
 
@@ -4561,6 +4559,8 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
+body = TalonOne::AttributeQuery.new # AttributeQuery | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -4574,13 +4574,12 @@ opts = {
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  campaign_state: 'campaign_state_example', # String | Filter results by the state of the campaign.
-  body: TalonOne::AttributeQuery.new # AttributeQuery | 
+  campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
 begin
   #Get a list of the coupons that match the given attributes in all active campaigns of an application
-  result = api_instance.search_coupons_advanced_application_wide_without_total_count(application_id, opts)
+  result = api_instance.search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->search_coupons_advanced_application_wide_without_total_count: #{e}"
@@ -4592,6 +4591,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
+ **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4605,7 +4605,6 @@ Name | Type | Description  | Notes
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | [optional] 
 
 ### Return type
 
@@ -4623,7 +4622,7 @@ Name | Type | Description  | Notes
 
 
 # **search_coupons_advanced_without_total_count**
-> InlineResponse2005 search_coupons_advanced_without_total_count(application_id, campaign_id, opts)
+> InlineResponse2005 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -4647,6 +4646,8 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
+body = TalonOne::AttributeQuery.new # AttributeQuery | 
+
 opts = { 
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -4659,13 +4660,12 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
-  batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  body: TalonOne::AttributeQuery.new # AttributeQuery | 
+  batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
 begin
   #Get a list of the coupons that match the given attributes
-  result = api_instance.search_coupons_advanced_without_total_count(application_id, campaign_id, opts)
+  result = api_instance.search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->search_coupons_advanced_without_total_count: #{e}"
@@ -4678,6 +4678,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
+ **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4690,7 +4691,6 @@ Name | Type | Description  | Notes
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | [optional] 
 
 ### Return type
 
@@ -4708,7 +4708,7 @@ Name | Type | Description  | Notes
 
 
 # **set_account_limits**
-> set_account_limits(account_id, opts)
+> set_account_limits(account_id, body)
 
 Set account limits
 
@@ -4730,13 +4730,12 @@ api_instance = TalonOne::ManagementApi.new
 
 account_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::AccountLimits.new # AccountLimits | 
-}
+body = TalonOne::AccountLimits.new # AccountLimits | 
+
 
 begin
   #Set account limits
-  api_instance.set_account_limits(account_id, opts)
+  api_instance.set_account_limits(account_id, body)
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->set_account_limits: #{e}"
 end
@@ -4747,7 +4746,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **Integer**|  | 
- **body** | [**AccountLimits**](AccountLimits.md)|  | [optional] 
+ **body** | [**AccountLimits**](AccountLimits.md)|  | 
 
 ### Return type
 
@@ -4765,7 +4764,7 @@ nil (empty response body)
 
 
 # **update_campaign**
-> Campaign update_campaign(application_id, campaign_id, opts)
+> Campaign update_campaign(application_id, campaign_id, body)
 
 Update a Campaign
 
@@ -4789,13 +4788,12 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::UpdateCampaign.new # UpdateCampaign | 
-}
+body = TalonOne::UpdateCampaign.new # UpdateCampaign | 
+
 
 begin
   #Update a Campaign
-  result = api_instance.update_campaign(application_id, campaign_id, opts)
+  result = api_instance.update_campaign(application_id, campaign_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->update_campaign: #{e}"
@@ -4808,7 +4806,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**UpdateCampaign**](UpdateCampaign.md)|  | [optional] 
+ **body** | [**UpdateCampaign**](UpdateCampaign.md)|  | 
 
 ### Return type
 
@@ -4826,7 +4824,7 @@ Name | Type | Description  | Notes
 
 
 # **update_campaign_set**
-> CampaignSet update_campaign_set(application_id, opts)
+> CampaignSet update_campaign_set(application_id, body)
 
 Update a Campaign Set
 
@@ -4848,13 +4846,12 @@ api_instance = TalonOne::ManagementApi.new
 
 application_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::NewCampaignSet.new # NewCampaignSet | 
-}
+body = TalonOne::NewCampaignSet.new # NewCampaignSet | 
+
 
 begin
   #Update a Campaign Set
-  result = api_instance.update_campaign_set(application_id, opts)
+  result = api_instance.update_campaign_set(application_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->update_campaign_set: #{e}"
@@ -4866,7 +4863,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
- **body** | [**NewCampaignSet**](NewCampaignSet.md)|  | [optional] 
+ **body** | [**NewCampaignSet**](NewCampaignSet.md)|  | 
 
 ### Return type
 
@@ -4884,7 +4881,7 @@ Name | Type | Description  | Notes
 
 
 # **update_coupon**
-> Coupon update_coupon(application_id, campaign_id, coupon_id, opts)
+> Coupon update_coupon(application_id, campaign_id, coupon_id, body)
 
 Update a Coupon
 
@@ -4910,13 +4907,12 @@ campaign_id = 56 # Integer |
 
 coupon_id = 'coupon_id_example' # String | The ID of the coupon code to update
 
-opts = { 
-  body: TalonOne::UpdateCoupon.new # UpdateCoupon | 
-}
+body = TalonOne::UpdateCoupon.new # UpdateCoupon | 
+
 
 begin
   #Update a Coupon
-  result = api_instance.update_coupon(application_id, campaign_id, coupon_id, opts)
+  result = api_instance.update_coupon(application_id, campaign_id, coupon_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->update_coupon: #{e}"
@@ -4930,7 +4926,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **coupon_id** | **String**| The ID of the coupon code to update | 
- **body** | [**UpdateCoupon**](UpdateCoupon.md)|  | [optional] 
+ **body** | [**UpdateCoupon**](UpdateCoupon.md)|  | 
 
 ### Return type
 
@@ -4948,7 +4944,7 @@ Name | Type | Description  | Notes
 
 
 # **update_coupon_batch**
-> update_coupon_batch(application_id, campaign_id, opts)
+> update_coupon_batch(application_id, campaign_id, body)
 
 Update a Batch of Coupons
 
@@ -4972,13 +4968,12 @@ application_id = 56 # Integer |
 
 campaign_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::UpdateCouponBatch.new # UpdateCouponBatch | 
-}
+body = TalonOne::UpdateCouponBatch.new # UpdateCouponBatch | 
+
 
 begin
   #Update a Batch of Coupons
-  api_instance.update_coupon_batch(application_id, campaign_id, opts)
+  api_instance.update_coupon_batch(application_id, campaign_id, body)
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->update_coupon_batch: #{e}"
 end
@@ -4990,7 +4985,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**UpdateCouponBatch**](UpdateCouponBatch.md)|  | [optional] 
+ **body** | [**UpdateCouponBatch**](UpdateCouponBatch.md)|  | 
 
 ### Return type
 
@@ -5008,7 +5003,7 @@ nil (empty response body)
 
 
 # **update_ruleset**
-> Ruleset update_ruleset(application_id, campaign_id, ruleset_id, opts)
+> Ruleset update_ruleset(application_id, campaign_id, ruleset_id, body)
 
 Update a Ruleset
 
@@ -5034,13 +5029,12 @@ campaign_id = 56 # Integer |
 
 ruleset_id = 56 # Integer | 
 
-opts = { 
-  body: TalonOne::NewRuleset.new # NewRuleset | 
-}
+body = TalonOne::NewRuleset.new # NewRuleset | 
+
 
 begin
   #Update a Ruleset
-  result = api_instance.update_ruleset(application_id, campaign_id, ruleset_id, opts)
+  result = api_instance.update_ruleset(application_id, campaign_id, ruleset_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->update_ruleset: #{e}"
@@ -5054,7 +5048,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **ruleset_id** | **Integer**|  | 
- **body** | [**NewRuleset**](NewRuleset.md)|  | [optional] 
+ **body** | [**NewRuleset**](NewRuleset.md)|  | 
 
 ### Return type
 

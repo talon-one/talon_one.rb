@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_coupon_reservation**
-> Coupon create_coupon_reservation(coupon_value, opts)
+> Coupon create_coupon_reservation(coupon_value, body)
 
 Create a new coupon reservation
 
@@ -43,13 +43,12 @@ api_instance = TalonOne::IntegrationApi.new
 
 coupon_value = 'coupon_value_example' # String | The value of a coupon
 
-opts = { 
-  body: TalonOne::CouponReservations.new # CouponReservations | 
-}
+body = TalonOne::CouponReservations.new # CouponReservations | 
+
 
 begin
   #Create a new coupon reservation
-  result = api_instance.create_coupon_reservation(coupon_value, opts)
+  result = api_instance.create_coupon_reservation(coupon_value, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->create_coupon_reservation: #{e}"
@@ -61,7 +60,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **coupon_value** | **String**| The value of a coupon | 
- **body** | [**CouponReservations**](CouponReservations.md)|  | [optional] 
+ **body** | [**CouponReservations**](CouponReservations.md)|  | 
 
 ### Return type
 
@@ -79,7 +78,7 @@ Name | Type | Description  | Notes
 
 
 # **create_referral**
-> Referral create_referral(opts)
+> Referral create_referral(body)
 
 Create a referral code for an advocate
 
@@ -104,13 +103,12 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 
-opts = { 
-  body: TalonOne::NewReferral.new # NewReferral | 
-}
+body = TalonOne::NewReferral.new # NewReferral | 
+
 
 begin
   #Create a referral code for an advocate
-  result = api_instance.create_referral(opts)
+  result = api_instance.create_referral(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->create_referral: #{e}"
@@ -121,7 +119,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewReferral**](NewReferral.md)|  | [optional] 
+ **body** | [**NewReferral**](NewReferral.md)|  | 
 
 ### Return type
 
@@ -139,7 +137,7 @@ Name | Type | Description  | Notes
 
 
 # **delete_coupon_reservation**
-> delete_coupon_reservation(coupon_value, opts)
+> delete_coupon_reservation(coupon_value, body)
 
 Delete coupon reservations
 
@@ -166,13 +164,12 @@ api_instance = TalonOne::IntegrationApi.new
 
 coupon_value = 'coupon_value_example' # String | The value of a coupon
 
-opts = { 
-  body: TalonOne::CouponReservations.new # CouponReservations | 
-}
+body = TalonOne::CouponReservations.new # CouponReservations | 
+
 
 begin
   #Delete coupon reservations
-  api_instance.delete_coupon_reservation(coupon_value, opts)
+  api_instance.delete_coupon_reservation(coupon_value, body)
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->delete_coupon_reservation: #{e}"
 end
@@ -183,7 +180,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **coupon_value** | **String**| The value of a coupon | 
- **body** | [**CouponReservations**](CouponReservations.md)|  | [optional] 
+ **body** | [**CouponReservations**](CouponReservations.md)|  | 
 
 ### Return type
 
@@ -377,7 +374,7 @@ Name | Type | Description  | Notes
 
 
 # **track_event**
-> IntegrationState track_event(opts)
+> IntegrationState track_event(body)
 
 Track an Event
 
@@ -402,13 +399,12 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 
-opts = { 
-  body: TalonOne::NewEvent.new # NewEvent | 
-}
+body = TalonOne::NewEvent.new # NewEvent | 
+
 
 begin
   #Track an Event
-  result = api_instance.track_event(opts)
+  result = api_instance.track_event(body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->track_event: #{e}"
@@ -419,7 +415,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewEvent**](NewEvent.md)|  | [optional] 
+ **body** | [**NewEvent**](NewEvent.md)|  | 
 
 ### Return type
 
@@ -437,7 +433,7 @@ Name | Type | Description  | Notes
 
 
 # **update_customer_profile**
-> IntegrationState update_customer_profile(integration_id, opts)
+> IntegrationState update_customer_profile(integration_id, body)
 
 Update a Customer Profile
 
@@ -464,13 +460,12 @@ api_instance = TalonOne::IntegrationApi.new
 
 integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
 
-opts = { 
-  body: TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
-}
+body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
+
 
 begin
   #Update a Customer Profile
-  result = api_instance.update_customer_profile(integration_id, opts)
+  result = api_instance.update_customer_profile(integration_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile: #{e}"
@@ -482,7 +477,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
- **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | [optional] 
+ **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
 
 ### Return type
 
@@ -500,7 +495,7 @@ Name | Type | Description  | Notes
 
 
 # **update_customer_session**
-> IntegrationState update_customer_session(customer_session_id, opts)
+> IntegrationState update_customer_session(customer_session_id, body)
 
 Update a Customer Session
 
@@ -527,13 +522,12 @@ api_instance = TalonOne::IntegrationApi.new
 
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
 
-opts = { 
-  body: TalonOne::NewCustomerSession.new # NewCustomerSession | 
-}
+body = TalonOne::NewCustomerSession.new # NewCustomerSession | 
+
 
 begin
   #Update a Customer Session
-  result = api_instance.update_customer_session(customer_session_id, opts)
+  result = api_instance.update_customer_session(customer_session_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_session: #{e}"
@@ -545,7 +539,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
- **body** | [**NewCustomerSession**](NewCustomerSession.md)|  | [optional] 
+ **body** | [**NewCustomerSession**](NewCustomerSession.md)|  | 
 
 ### Return type
 
