@@ -32,18 +32,16 @@ integration_api = TalonOne::IntegrationApi.new
 
 session_integration_id = 'f985583f-fa7d-4098-91dd-99c898ed3cd3' # String | The integration identifier of the session
 
-opts = { 
-  # NewCustomerSession | 
-  body: TalonOne::NewCustomerSession.new({
-    'coupon': 'Kewl',
-    'total': 100,
-    'state': 'open'
-  })
-}
+# NewCustomerSession Object
+customer_session = TalonOne::NewCustomerSession.new({
+  'coupon': 'Kewl',
+  'total': 100,
+  'state': 'open'
+})
 
 begin
   # Create/update a customer session using `update_customer_session` function
-  result = integration_api.update_customer_session(session_integration_id, opts)
+  result = integration_api.update_customer_session(session_integration_id, customer_session)
 
   # Prints response to the console
   puts result
@@ -68,14 +66,12 @@ management_api = TalonOne::ManagementApi.new
 
 begin
   # Acquire session token
-  opts = {
-    body: TalonOne::LoginParams.new({
-      'email': 'admin@talon.one',
-      'password': 'Wow$0$ecure!'
-    })
-  }
+  login_params = TalonOne::LoginParams.new({
+    'email': 'demo@talon.one',
+    'password': 'Demo1234'
+  })
   
-  login_result = management_api.create_session(opts)
+  login_result = management_api.create_session(login_params)
   token = login_result.token
 
   # Save token in the configuration for future management API calls
