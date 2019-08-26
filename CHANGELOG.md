@@ -1,3 +1,9 @@
+# 1.0.0 / 2019-08-21
+
+* [CHORE] Using [swagger-codegen](https://github.com/swagger-api/swagger-codegen) generation tool
+* [FEATURE] Add management api client
+* [FEATURE] Add coupons reservation integration endpoints
+
 # 0.1.3 / 2018-04-27
 
 * [FEATURE] delete_customer_data is now exposed on the integration API
