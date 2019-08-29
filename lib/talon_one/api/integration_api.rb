@@ -269,7 +269,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_reserved_coupons"
       end
       # resource path
-      local_var_path = '/v1/coupon_reservations/coupons/{integrationID}'.sub('{' + 'integrationId' + '}', integration_id.to_s)
+      local_var_path = '/v1/coupon_reservations/coupons/{integrationId}'.sub('{' + 'integrationId' + '}', integration_id.to_s)
 
       # query parameters
       query_params = {}

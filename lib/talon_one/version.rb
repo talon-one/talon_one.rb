@@ -11,5 +11,5 @@ Swagger Codegen version: 2.4.7
 =end
 
 module TalonOne
-  VERSION = '1.0.0'
+  VERSION = '1.1.0'
 end

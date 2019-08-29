@@ -24,12 +24,16 @@ module TalonOne
     # Indicates the duration after which the added loyalty points should expire. The format is a number followed by one letter indicating the unit, like '1h' or '40m' or '30d'.
     attr_accessor :expiry_duration
 
+    # This specifies if we are adding loyalty points to the main ledger or a subledger
+    attr_accessor :sub_ledger_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'points' => :'points',
         :'name' => :'name',
-        :'expiry_duration' => :'expiryDuration'
+        :'expiry_duration' => :'expiryDuration',
+        :'sub_ledger_id' => :'subLedgerID'
       }
     end
 
@@ -38,7 +42,8 @@ module TalonOne
       {
         :'points' => :'Float',
         :'name' => :'String',
-        :'expiry_duration' => :'String'
+        :'expiry_duration' => :'String',
+        :'sub_ledger_id' => :'String'
       }
     end
 
@@ -60,6 +65,10 @@ module TalonOne
 
       if attributes.has_key?(:'expiryDuration')
         self.expiry_duration = attributes[:'expiryDuration']
+      end
+
+      if attributes.has_key?(:'subLedgerID')
+        self.sub_ledger_id = attributes[:'subLedgerID']
       end
     end
 
@@ -88,7 +97,8 @@ module TalonOne
       self.class == o.class &&
           points == o.points &&
           name == o.name &&
-          expiry_duration == o.expiry_duration
+          expiry_duration == o.expiry_duration &&
+          sub_ledger_id == o.sub_ledger_id
     end
 
     # @see the `==` method
@@ -100,7 +110,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [points, name, expiry_duration].hash
+      [points, name, expiry_duration, sub_ledger_id].hash
     end
 
     # Builds the object from hash

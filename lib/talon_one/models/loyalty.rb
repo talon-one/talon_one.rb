@@ -28,7 +28,7 @@ module TalonOne
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'programs' => :'Hash<String, LoyaltyProgramBalance>'
+        :'programs' => :'Hash<String, LoyaltyProgramLedgers>'
       }
     end
 

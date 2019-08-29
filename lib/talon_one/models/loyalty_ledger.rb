@@ -15,40 +15,25 @@ require 'date'
 module TalonOne
   # Ledger of Balance in Loyalty Program for a Customer
   class LoyaltyLedger
-    # The current balance in the program.
-    attr_accessor :total
+    # The balance of the main ledger in the loyalty program
+    attr_accessor :ledger
 
-    # Transactions contains a list of all events that have happened such as additions, subtractions and expiries
-    attr_accessor :transactions
-
-    # ExpiringPoints contains a list of all points that will expiry and when
-    attr_accessor :expiring_points
-
-    # The ID of the loyalty program this ledger belongs to.
-    attr_accessor :loyalty_program_id
-
-    # The name of the loyalty program this ledger belongs to.
-    attr_accessor :loyalty_program_name
+    # A map containing a list of all loyalty subledger balances
+    attr_accessor :sub_ledgers
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total' => :'total',
-        :'transactions' => :'transactions',
-        :'expiring_points' => :'expiringPoints',
-        :'loyalty_program_id' => :'loyaltyProgramId',
-        :'loyalty_program_name' => :'loyaltyProgramName'
+        :'ledger' => :'ledger',
+        :'sub_ledgers' => :'subLedgers'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'total' => :'Float',
-        :'transactions' => :'Array<LoyaltyLedgerEntry>',
-        :'expiring_points' => :'Array<LoyaltyLedgerEntry>',
-        :'loyalty_program_id' => :'Integer',
-        :'loyalty_program_name' => :'String'
+        :'ledger' => :'LoyaltySubLedger',
+        :'sub_ledgers' => :'Hash<String, LoyaltySubLedger>'
       }
     end
 
@@ -60,28 +45,14 @@ module TalonOne
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'total')
-        self.total = attributes[:'total']
+      if attributes.has_key?(:'ledger')
+        self.ledger = attributes[:'ledger']
       end
 
-      if attributes.has_key?(:'transactions')
-        if (value = attributes[:'transactions']).is_a?(Array)
-          self.transactions = value
+      if attributes.has_key?(:'subLedgers')
+        if (value = attributes[:'subLedgers']).is_a?(Hash)
+          self.sub_ledgers = value
         end
-      end
-
-      if attributes.has_key?(:'expiringPoints')
-        if (value = attributes[:'expiringPoints']).is_a?(Array)
-          self.expiring_points = value
-        end
-      end
-
-      if attributes.has_key?(:'loyaltyProgramId')
-        self.loyalty_program_id = attributes[:'loyaltyProgramId']
-      end
-
-      if attributes.has_key?(:'loyaltyProgramName')
-        self.loyalty_program_name = attributes[:'loyaltyProgramName']
       end
     end
 
@@ -89,12 +60,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @transactions.nil?
-        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
+      if @ledger.nil?
+        invalid_properties.push('invalid value for "ledger", ledger cannot be nil.')
       end
 
       invalid_properties
@@ -103,8 +70,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @total.nil?
-      return false if @transactions.nil?
+      return false if @ledger.nil?
       true
     end
 
@@ -113,11 +79,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total == o.total &&
-          transactions == o.transactions &&
-          expiring_points == o.expiring_points &&
-          loyalty_program_id == o.loyalty_program_id &&
-          loyalty_program_name == o.loyalty_program_name
+          ledger == o.ledger &&
+          sub_ledgers == o.sub_ledgers
     end
 
     # @see the `==` method
@@ -129,7 +92,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [total, transactions, expiring_points, loyalty_program_id, loyalty_program_name].hash
+      [ledger, sub_ledgers].hash
     end
 
     # Builds the object from hash

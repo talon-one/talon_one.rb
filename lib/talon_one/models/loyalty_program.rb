@@ -36,6 +36,9 @@ module TalonOne
     # Indicates the default duration after which new loyalty points should expire. The format is a number, followed by one letter indicating the unit; like '1h' or '40m' or '30d'.
     attr_accessor :default_validity
 
+    # Indicates if this program supports subledgers inside the program
+    attr_accessor :allow_subledger
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +48,8 @@ module TalonOne
         :'title' => :'title',
         :'description' => :'description',
         :'subscribed_applications' => :'subscribedApplications',
-        :'default_validity' => :'defaultValidity'
+        :'default_validity' => :'defaultValidity',
+        :'allow_subledger' => :'allowSubledger'
       }
     end
 
@@ -58,7 +62,8 @@ module TalonOne
         :'title' => :'String',
         :'description' => :'String',
         :'subscribed_applications' => :'Array<Integer>',
-        :'default_validity' => :'String'
+        :'default_validity' => :'String',
+        :'allow_subledger' => :'BOOLEAN'
       }
     end
 
@@ -99,6 +104,10 @@ module TalonOne
       if attributes.has_key?(:'defaultValidity')
         self.default_validity = attributes[:'defaultValidity']
       end
+
+      if attributes.has_key?(:'allowSubledger')
+        self.allow_subledger = attributes[:'allowSubledger']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,6 +142,10 @@ module TalonOne
         invalid_properties.push('invalid value for "default_validity", default_validity cannot be nil.')
       end
 
+      if @allow_subledger.nil?
+        invalid_properties.push('invalid value for "allow_subledger", allow_subledger cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -146,6 +159,7 @@ module TalonOne
       return false if @description.nil?
       return false if @subscribed_applications.nil?
       return false if @default_validity.nil?
+      return false if @allow_subledger.nil?
       true
     end
 
@@ -160,7 +174,8 @@ module TalonOne
           title == o.title &&
           description == o.description &&
           subscribed_applications == o.subscribed_applications &&
-          default_validity == o.default_validity
+          default_validity == o.default_validity &&
+          allow_subledger == o.allow_subledger
     end
 
     # @see the `==` method
@@ -172,7 +187,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, account_id, name, title, description, subscribed_applications, default_validity].hash
+      [id, account_id, name, title, description, subscribed_applications, default_validity, allow_subledger].hash
     end
 
     # Builds the object from hash

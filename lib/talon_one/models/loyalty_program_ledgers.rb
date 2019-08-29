@@ -13,47 +13,37 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # A new loyalty program
-  class NewLoyaltyProgram
-    # The internal name for the Loyalty Program. This is an immutable value.
-    attr_accessor :name
-
-    # The display title for the Loyalty Program.
+  # Customer specific information about loyalty points.
+  class LoyaltyProgramLedgers
+    # Visable name of loyalty program
     attr_accessor :title
 
-    # Description of our Loyalty Program.
-    attr_accessor :description
+    # Internal name of loyalty program
+    attr_accessor :name
 
-    # A list containing the IDs of all applications that are subscribed to this Loyalty Program.
-    attr_accessor :subscribed_applications
+    # The balance of the main ledger in the loyalty program
+    attr_accessor :ledger
 
-    # Indicates the default duration after which new loyalty points should expire. The format is a number, followed by one letter indicating the unit; like '1h' or '40m' or '30d'.
-    attr_accessor :default_validity
-
-    # Indicates if this program supports subledgers inside the program
-    attr_accessor :allow_subledger
+    # A map containing a list of all loyalty subledger balances
+    attr_accessor :sub_ledgers
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
         :'title' => :'title',
-        :'description' => :'description',
-        :'subscribed_applications' => :'subscribedApplications',
-        :'default_validity' => :'defaultValidity',
-        :'allow_subledger' => :'allowSubledger'
+        :'name' => :'name',
+        :'ledger' => :'ledger',
+        :'sub_ledgers' => :'subLedgers'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'name' => :'String',
         :'title' => :'String',
-        :'description' => :'String',
-        :'subscribed_applications' => :'Array<Integer>',
-        :'default_validity' => :'String',
-        :'allow_subledger' => :'BOOLEAN'
+        :'name' => :'String',
+        :'ledger' => :'LoyaltyProgramBalance',
+        :'sub_ledgers' => :'Hash<String, LoyaltyProgramBalance>'
       }
     end
 
@@ -65,30 +55,22 @@ module TalonOne
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
       if attributes.has_key?(:'title')
         self.title = attributes[:'title']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'subscribedApplications')
-        if (value = attributes[:'subscribedApplications']).is_a?(Array)
-          self.subscribed_applications = value
+      if attributes.has_key?(:'ledger')
+        self.ledger = attributes[:'ledger']
+      end
+
+      if attributes.has_key?(:'subLedgers')
+        if (value = attributes[:'subLedgers']).is_a?(Hash)
+          self.sub_ledgers = value
         end
-      end
-
-      if attributes.has_key?(:'defaultValidity')
-        self.default_validity = attributes[:'defaultValidity']
-      end
-
-      if attributes.has_key?(:'allowSubledger')
-        self.allow_subledger = attributes[:'allowSubledger']
       end
     end
 
@@ -96,20 +78,16 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
-      if @default_validity.nil?
-        invalid_properties.push('invalid value for "default_validity", default_validity cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @allow_subledger.nil?
-        invalid_properties.push('invalid value for "allow_subledger", allow_subledger cannot be nil.')
+      if @ledger.nil?
+        invalid_properties.push('invalid value for "ledger", ledger cannot be nil.')
       end
 
       invalid_properties
@@ -118,10 +96,9 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
       return false if @title.nil?
-      return false if @default_validity.nil?
-      return false if @allow_subledger.nil?
+      return false if @name.nil?
+      return false if @ledger.nil?
       true
     end
 
@@ -130,12 +107,10 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
           title == o.title &&
-          description == o.description &&
-          subscribed_applications == o.subscribed_applications &&
-          default_validity == o.default_validity &&
-          allow_subledger == o.allow_subledger
+          name == o.name &&
+          ledger == o.ledger &&
+          sub_ledgers == o.sub_ledgers
     end
 
     # @see the `==` method
@@ -147,7 +122,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, title, description, subscribed_applications, default_validity, allow_subledger].hash
+      [title, name, ledger, sub_ledgers].hash
     end
 
     # Builds the object from hash

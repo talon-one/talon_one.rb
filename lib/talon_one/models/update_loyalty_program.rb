@@ -27,13 +27,17 @@ module TalonOne
     # Indicates the default duration after which new loyalty points should expire. The format is a number, followed by one letter indicating the unit; like '1h' or '40m' or '30d'.
     attr_accessor :default_validity
 
+    # Indicates if this program supports subledgers inside the program
+    attr_accessor :allow_subledger
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'title' => :'title',
         :'description' => :'description',
         :'subscribed_applications' => :'subscribedApplications',
-        :'default_validity' => :'defaultValidity'
+        :'default_validity' => :'defaultValidity',
+        :'allow_subledger' => :'allowSubledger'
       }
     end
 
@@ -43,7 +47,8 @@ module TalonOne
         :'title' => :'String',
         :'description' => :'String',
         :'subscribed_applications' => :'Array<Integer>',
-        :'default_validity' => :'String'
+        :'default_validity' => :'String',
+        :'allow_subledger' => :'BOOLEAN'
       }
     end
 
@@ -72,6 +77,10 @@ module TalonOne
       if attributes.has_key?(:'defaultValidity')
         self.default_validity = attributes[:'defaultValidity']
       end
+
+      if attributes.has_key?(:'allowSubledger')
+        self.allow_subledger = attributes[:'allowSubledger']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -95,7 +104,8 @@ module TalonOne
           title == o.title &&
           description == o.description &&
           subscribed_applications == o.subscribed_applications &&
-          default_validity == o.default_validity
+          default_validity == o.default_validity &&
+          allow_subledger == o.allow_subledger
     end
 
     # @see the `==` method
@@ -107,7 +117,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [title, description, subscribed_applications, default_validity].hash
+      [title, description, subscribed_applications, default_validity, allow_subledger].hash
     end
 
     # Builds the object from hash

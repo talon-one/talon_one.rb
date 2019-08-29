@@ -34,6 +34,9 @@ module TalonOne
     # A name referencing the condition or effect that added this entry, or the specific name provided in an API call.
     attr_accessor :name
 
+    # This specifies if we are adding loyalty points to the main ledger or a subledger
+    attr_accessor :sub_ledger_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,7 +70,8 @@ module TalonOne
         :'type' => :'type',
         :'amount' => :'amount',
         :'expiry_date' => :'expiryDate',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'sub_ledger_id' => :'subLedgerID'
       }
     end
 
@@ -82,7 +86,8 @@ module TalonOne
         :'type' => :'String',
         :'amount' => :'Float',
         :'expiry_date' => :'DateTime',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'sub_ledger_id' => :'String'
       }
     end
 
@@ -129,6 +134,10 @@ module TalonOne
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
+
+      if attributes.has_key?(:'subLedgerID')
+        self.sub_ledger_id = attributes[:'subLedgerID']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -159,6 +168,10 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      if @sub_ledger_id.nil?
+        invalid_properties.push('invalid value for "sub_ledger_id", sub_ledger_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -173,6 +186,7 @@ module TalonOne
       return false unless type_validator.valid?(@type)
       return false if @amount.nil?
       return false if @name.nil?
+      return false if @sub_ledger_id.nil?
       true
     end
 
@@ -199,7 +213,8 @@ module TalonOne
           type == o.type &&
           amount == o.amount &&
           expiry_date == o.expiry_date &&
-          name == o.name
+          name == o.name &&
+          sub_ledger_id == o.sub_ledger_id
     end
 
     # @see the `==` method
@@ -211,7 +226,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, expiry_date, name].hash
+      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, expiry_date, name, sub_ledger_id].hash
     end
 
     # Builds the object from hash

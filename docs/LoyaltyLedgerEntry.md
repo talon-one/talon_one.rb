@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **amount** | **Float** |  | 
 **expiry_date** | **DateTime** |  | [optional] 
 **name** | **String** | A name referencing the condition or effect that added this entry, or the specific name provided in an API call. | 
+**sub_ledger_id** | **String** | This specifies if we are adding loyalty points to the main ledger or a subledger | 
 
 
