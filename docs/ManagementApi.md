@@ -2055,7 +2055,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-application_id = 56 # Integer | The identifier for the application
+application_id = 56 # Integer | 
 
 campaign_id = 56 # Integer | 
 
@@ -2080,7 +2080,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**| The identifier for the application | 
+ **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **range_start** | **DateTime**| Only return results from after this timestamp, must be an RFC3339 timestamp string | 
  **range_end** | **DateTime**| Only return results from before this timestamp, must be an RFC3339 timestamp string | 
@@ -4712,7 +4712,7 @@ Name | Type | Description  | Notes
 
 Set account limits
 
-sets account limits  
+sets account limits 
 
 ### Example
 ```ruby

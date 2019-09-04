@@ -138,10 +138,6 @@ module TalonOne
         invalid_properties.push('invalid value for "total_sales", total_sales cannot be nil.')
       end
 
-      if @loyalty_memberships.nil?
-        invalid_properties.push('invalid value for "loyalty_memberships", loyalty_memberships cannot be nil.')
-      end
-
       if @last_activity.nil?
         invalid_properties.push('invalid value for "last_activity", last_activity cannot be nil.')
       end
@@ -158,7 +154,6 @@ module TalonOne
       return false if @account_id.nil?
       return false if @closed_sessions.nil?
       return false if @total_sales.nil?
-      return false if @loyalty_memberships.nil?
       return false if @last_activity.nil?
       true
     end

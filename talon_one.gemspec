@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.version     = TalonOne::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Talon.One GmbH"]
-  s.email       = ["support@talon.one"]
+  s.email       = ["devs@talon.one"]
   s.homepage    = "https://github.com/talon-one/talon_one.rb/"
   s.summary     = "Talon.One API Ruby Gem"
   s.description = "The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns."

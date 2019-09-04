@@ -2144,7 +2144,7 @@ module TalonOne
     end
     # Get analytics of campaigns
     # 
-    # @param application_id The identifier for the application
+    # @param application_id 
     # @param campaign_id 
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -2158,7 +2158,7 @@ module TalonOne
 
     # Get analytics of campaigns
     # 
-    # @param application_id The identifier for the application
+    # @param application_id 
     # @param campaign_id 
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -5123,7 +5123,7 @@ module TalonOne
       return data, status_code, headers
     end
     # Set account limits
-    # sets account limits  
+    # sets account limits 
     # @param account_id 
     # @param body 
     # @param [Hash] opts the optional parameters
@@ -5134,7 +5134,7 @@ module TalonOne
     end
 
     # Set account limits
-    # sets account limits  
+    # sets account limits 
     # @param account_id 
     # @param body 
     # @param [Hash] opts the optional parameters
