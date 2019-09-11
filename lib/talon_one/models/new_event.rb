@@ -18,22 +18,22 @@ module TalonOne
     # ID of the customers profile as used within this Talon.One account. May be omitted or set to the empty string if the customer does not yet have a known profile ID.
     attr_accessor :profile_id
 
-    # The ID of the session that this event occurred in.
-    attr_accessor :session_id
-
     # A string representing the event. Must not be a reserved event name.
     attr_accessor :type
 
     # Arbitrary additional JSON data associated with the event.
     attr_accessor :attributes
 
+    # The ID of the session that this event occurred in.
+    attr_accessor :session_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'profile_id' => :'profileId',
-        :'session_id' => :'sessionId',
         :'type' => :'type',
-        :'attributes' => :'attributes'
+        :'attributes' => :'attributes',
+        :'session_id' => :'sessionId'
       }
     end
 
@@ -41,9 +41,9 @@ module TalonOne
     def self.swagger_types
       {
         :'profile_id' => :'String',
-        :'session_id' => :'String',
         :'type' => :'String',
-        :'attributes' => :'Object'
+        :'attributes' => :'Object',
+        :'session_id' => :'String'
       }
     end
 
@@ -59,10 +59,6 @@ module TalonOne
         self.profile_id = attributes[:'profileId']
       end
 
-      if attributes.has_key?(:'sessionId')
-        self.session_id = attributes[:'sessionId']
-      end
-
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
       end
@@ -70,20 +66,16 @@ module TalonOne
       if attributes.has_key?(:'attributes')
         self.attributes = attributes[:'attributes']
       end
+
+      if attributes.has_key?(:'sessionId')
+        self.session_id = attributes[:'sessionId']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @session_id.nil?
-        invalid_properties.push('invalid value for "session_id", session_id cannot be nil.')
-      end
-
-      if @session_id.to_s.length < 1
-        invalid_properties.push('invalid value for "session_id", the character length must be great than or equal to 1.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -96,32 +88,26 @@ module TalonOne
         invalid_properties.push('invalid value for "attributes", attributes cannot be nil.')
       end
 
+      if @session_id.nil?
+        invalid_properties.push('invalid value for "session_id", session_id cannot be nil.')
+      end
+
+      if @session_id.to_s.length < 1
+        invalid_properties.push('invalid value for "session_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @session_id.nil?
-      return false if @session_id.to_s.length < 1
       return false if @type.nil?
       return false if @type.to_s.length < 1
       return false if @attributes.nil?
+      return false if @session_id.nil?
+      return false if @session_id.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] session_id Value to be assigned
-    def session_id=(session_id)
-      if session_id.nil?
-        fail ArgumentError, 'session_id cannot be nil'
-      end
-
-      if session_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "session_id", the character length must be great than or equal to 1.'
-      end
-
-      @session_id = session_id
     end
 
     # Custom attribute writer method with validation
@@ -138,15 +124,29 @@ module TalonOne
       @type = type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] session_id Value to be assigned
+    def session_id=(session_id)
+      if session_id.nil?
+        fail ArgumentError, 'session_id cannot be nil'
+      end
+
+      if session_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "session_id", the character length must be great than or equal to 1.'
+      end
+
+      @session_id = session_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           profile_id == o.profile_id &&
-          session_id == o.session_id &&
           type == o.type &&
-          attributes == o.attributes
+          attributes == o.attributes &&
+          session_id == o.session_id
     end
 
     # @see the `==` method
@@ -158,7 +158,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [profile_id, session_id, type, attributes].hash
+      [profile_id, type, attributes, session_id].hash
     end
 
     # Builds the object from hash

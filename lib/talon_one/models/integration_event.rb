@@ -14,16 +14,7 @@ require 'date'
 
 module TalonOne
   # 
-  class Event
-    # Unique ID for this entity.
-    attr_accessor :id
-
-    # The exact moment this entity was created.
-    attr_accessor :created
-
-    # The ID of the application that owns this entity.
-    attr_accessor :application_id
-
+  class IntegrationEvent
     # ID of the customers profile as used within this Talon.One account. May be omitted or set to the empty string if the customer does not yet have a known profile ID.
     attr_accessor :profile_id
 
@@ -33,46 +24,21 @@ module TalonOne
     # Arbitrary additional JSON data associated with the event.
     attr_accessor :attributes
 
-    # The ID of the session that this event occurred in.
-    attr_accessor :session_id
-
-    # An array of \"effects\" that must be applied in response to this event. Example effects include `addItemToCart` or `setDiscount`. 
-    attr_accessor :effects
-
-    # Ledger entries for the event.
-    attr_accessor :ledger_entries
-
-    attr_accessor :meta
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created' => :'created',
-        :'application_id' => :'applicationId',
         :'profile_id' => :'profileId',
         :'type' => :'type',
-        :'attributes' => :'attributes',
-        :'session_id' => :'sessionId',
-        :'effects' => :'effects',
-        :'ledger_entries' => :'ledgerEntries',
-        :'meta' => :'meta'
+        :'attributes' => :'attributes'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'created' => :'DateTime',
-        :'application_id' => :'Integer',
         :'profile_id' => :'String',
         :'type' => :'String',
-        :'attributes' => :'Object',
-        :'session_id' => :'String',
-        :'effects' => :'Array<Object>',
-        :'ledger_entries' => :'Array<LedgerEntry>',
-        :'meta' => :'Meta'
+        :'attributes' => :'Object'
       }
     end
 
@@ -83,18 +49,6 @@ module TalonOne
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'created')
-        self.created = attributes[:'created']
-      end
-
-      if attributes.has_key?(:'applicationId')
-        self.application_id = attributes[:'applicationId']
-      end
 
       if attributes.has_key?(:'profileId')
         self.profile_id = attributes[:'profileId']
@@ -107,44 +61,12 @@ module TalonOne
       if attributes.has_key?(:'attributes')
         self.attributes = attributes[:'attributes']
       end
-
-      if attributes.has_key?(:'sessionId')
-        self.session_id = attributes[:'sessionId']
-      end
-
-      if attributes.has_key?(:'effects')
-        if (value = attributes[:'effects']).is_a?(Array)
-          self.effects = value
-        end
-      end
-
-      if attributes.has_key?(:'ledgerEntries')
-        if (value = attributes[:'ledgerEntries']).is_a?(Array)
-          self.ledger_entries = value
-        end
-      end
-
-      if attributes.has_key?(:'meta')
-        self.meta = attributes[:'meta']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
-      if @application_id.nil?
-        invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -157,28 +79,15 @@ module TalonOne
         invalid_properties.push('invalid value for "attributes", attributes cannot be nil.')
       end
 
-      if @effects.nil?
-        invalid_properties.push('invalid value for "effects", effects cannot be nil.')
-      end
-
-      if @ledger_entries.nil?
-        invalid_properties.push('invalid value for "ledger_entries", ledger_entries cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created.nil?
-      return false if @application_id.nil?
       return false if @type.nil?
       return false if @type.to_s.length < 1
       return false if @attributes.nil?
-      return false if @effects.nil?
-      return false if @ledger_entries.nil?
       true
     end
 
@@ -201,16 +110,9 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created == o.created &&
-          application_id == o.application_id &&
           profile_id == o.profile_id &&
           type == o.type &&
-          attributes == o.attributes &&
-          session_id == o.session_id &&
-          effects == o.effects &&
-          ledger_entries == o.ledger_entries &&
-          meta == o.meta
+          attributes == o.attributes
     end
 
     # @see the `==` method
@@ -222,7 +124,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, application_id, profile_id, type, attributes, session_id, effects, ledger_entries, meta].hash
+      [profile_id, type, attributes].hash
     end
 
     # Builds the object from hash
