@@ -14,7 +14,5 @@ Name | Type | Description | Notes
 **description** | **String** | A description of this attribute. | 
 **suggestions** | **Array&lt;String&gt;** | A list of suggestions for the attribute. | 
 **editable** | **BOOLEAN** | Whether or not this attribute can be edited. | 
-**locked** | **BOOLEAN** | Indicates whether this attribute is in use. If in use only title can be changed and other operations are prohibited. | [default to false]
-**used_at** | **Array&lt;String&gt;** | array of rulesets where the attribute is used | 
 
 

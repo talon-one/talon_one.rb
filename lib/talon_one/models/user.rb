@@ -51,6 +51,8 @@ module TalonOne
     # Contains a list of all roles a user is a memeber of
     attr_accessor :roles
 
+    attr_accessor :application_notification_subscriptions
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -87,7 +89,8 @@ module TalonOne
         :'policy' => :'policy',
         :'release_update' => :'releaseUpdate',
         :'latest_feature' => :'latestFeature',
-        :'roles' => :'roles'
+        :'roles' => :'roles',
+        :'application_notification_subscriptions' => :'applicationNotificationSubscriptions'
       }
     end
 
@@ -105,7 +108,8 @@ module TalonOne
         :'policy' => :'String',
         :'release_update' => :'BOOLEAN',
         :'latest_feature' => :'String',
-        :'roles' => :'Array<Integer>'
+        :'roles' => :'Array<Integer>',
+        :'application_notification_subscriptions' => :'Object'
       }
     end
 
@@ -165,6 +169,10 @@ module TalonOne
         if (value = attributes[:'roles']).is_a?(Array)
           self.roles = value
         end
+      end
+
+      if attributes.has_key?(:'applicationNotificationSubscriptions')
+        self.application_notification_subscriptions = attributes[:'applicationNotificationSubscriptions']
       end
     end
 
@@ -259,7 +267,8 @@ module TalonOne
           policy == o.policy &&
           release_update == o.release_update &&
           latest_feature == o.latest_feature &&
-          roles == o.roles
+          roles == o.roles &&
+          application_notification_subscriptions == o.application_notification_subscriptions
     end
 
     # @see the `==` method
@@ -271,7 +280,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, modified, email, account_id, invite_token, state, name, policy, release_update, latest_feature, roles].hash
+      [id, created, modified, email, account_id, invite_token, state, name, policy, release_update, latest_feature, roles, application_notification_subscriptions].hash
     end
 
     # Builds the object from hash

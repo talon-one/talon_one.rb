@@ -24,12 +24,16 @@ module TalonOne
     # Line number in uploaded multipart file that caused this error. 'N/A' if unknown.
     attr_accessor :line
 
+    # Pointer to the resource that caused this error
+    attr_accessor :resource
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'pointer' => :'pointer',
         :'parameter' => :'parameter',
-        :'line' => :'line'
+        :'line' => :'line',
+        :'resource' => :'resource'
       }
     end
 
@@ -38,7 +42,8 @@ module TalonOne
       {
         :'pointer' => :'String',
         :'parameter' => :'String',
-        :'line' => :'String'
+        :'line' => :'String',
+        :'resource' => :'String'
       }
     end
 
@@ -60,6 +65,10 @@ module TalonOne
 
       if attributes.has_key?(:'line')
         self.line = attributes[:'line']
+      end
+
+      if attributes.has_key?(:'resource')
+        self.resource = attributes[:'resource']
       end
     end
 
@@ -83,7 +92,8 @@ module TalonOne
       self.class == o.class &&
           pointer == o.pointer &&
           parameter == o.parameter &&
-          line == o.line
+          line == o.line &&
+          resource == o.resource
     end
 
     # @see the `==` method
@@ -95,7 +105,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [pointer, parameter, line].hash
+      [pointer, parameter, line, resource].hash
     end
 
     # Builds the object from hash

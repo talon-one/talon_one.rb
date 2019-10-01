@@ -22,6 +22,8 @@ module TalonOne
 
     attr_accessor :coupon_rejection_reason
 
+    attr_accessor :referral_rejection_reason
+
     attr_accessor :warnings
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -30,6 +32,7 @@ module TalonOne
         :'campaigns' => :'campaigns',
         :'coupons' => :'coupons',
         :'coupon_rejection_reason' => :'couponRejectionReason',
+        :'referral_rejection_reason' => :'referralRejectionReason',
         :'warnings' => :'warnings'
       }
     end
@@ -40,6 +43,7 @@ module TalonOne
         :'campaigns' => :'Object',
         :'coupons' => :'Object',
         :'coupon_rejection_reason' => :'CouponRejectionReason',
+        :'referral_rejection_reason' => :'ReferralRejectionReason',
         :'warnings' => :'Object'
       }
     end
@@ -62,6 +66,10 @@ module TalonOne
 
       if attributes.has_key?(:'couponRejectionReason')
         self.coupon_rejection_reason = attributes[:'couponRejectionReason']
+      end
+
+      if attributes.has_key?(:'referralRejectionReason')
+        self.referral_rejection_reason = attributes[:'referralRejectionReason']
       end
 
       if attributes.has_key?(:'warnings')
@@ -90,6 +98,7 @@ module TalonOne
           campaigns == o.campaigns &&
           coupons == o.coupons &&
           coupon_rejection_reason == o.coupon_rejection_reason &&
+          referral_rejection_reason == o.referral_rejection_reason &&
           warnings == o.warnings
     end
 
@@ -102,7 +111,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [campaigns, coupons, coupon_rejection_reason, warnings].hash
+      [campaigns, coupons, coupon_rejection_reason, referral_rejection_reason, warnings].hash
     end
 
     # Builds the object from hash

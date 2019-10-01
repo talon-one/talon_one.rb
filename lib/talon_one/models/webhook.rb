@@ -48,9 +48,6 @@ module TalonOne
     # Enables or disables webhook from showing in rule builder
     attr_accessor :enabled
 
-    # array of rulesets where webhook is used
-    attr_accessor :used_at
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -86,8 +83,7 @@ module TalonOne
         :'headers' => :'headers',
         :'payload' => :'payload',
         :'params' => :'params',
-        :'enabled' => :'enabled',
-        :'used_at' => :'usedAt'
+        :'enabled' => :'enabled'
       }
     end
 
@@ -104,8 +100,7 @@ module TalonOne
         :'headers' => :'Array<String>',
         :'payload' => :'String',
         :'params' => :'Array<TemplateArgDef>',
-        :'enabled' => :'BOOLEAN',
-        :'used_at' => :'Array<String>'
+        :'enabled' => :'BOOLEAN'
       }
     end
 
@@ -166,12 +161,6 @@ module TalonOne
       if attributes.has_key?(:'enabled')
         self.enabled = attributes[:'enabled']
       end
-
-      if attributes.has_key?(:'usedAt')
-        if (value = attributes[:'usedAt']).is_a?(Array)
-          self.used_at = value
-        end
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -218,10 +207,6 @@ module TalonOne
         invalid_properties.push('invalid value for "enabled", enabled cannot be nil.')
       end
 
-      if @used_at.nil?
-        invalid_properties.push('invalid value for "used_at", used_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -240,7 +225,6 @@ module TalonOne
       return false if @headers.nil?
       return false if @params.nil?
       return false if @enabled.nil?
-      return false if @used_at.nil?
       true
     end
 
@@ -269,8 +253,7 @@ module TalonOne
           headers == o.headers &&
           payload == o.payload &&
           params == o.params &&
-          enabled == o.enabled &&
-          used_at == o.used_at
+          enabled == o.enabled
     end
 
     # @see the `==` method
@@ -282,7 +265,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, modified, application_ids, title, verb, url, headers, payload, params, enabled, used_at].hash
+      [id, created, modified, application_ids, title, verb, url, headers, payload, params, enabled].hash
     end
 
     # Builds the object from hash

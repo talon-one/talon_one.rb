@@ -14,6 +14,5 @@ Name | Type | Description | Notes
 **payload** | **String** | API payload (supports templating using parameters) for this webhook | [optional] 
 **params** | [**Array&lt;TemplateArgDef&gt;**](TemplateArgDef.md) | Array of template argument definitions | 
 **enabled** | **BOOLEAN** | Enables or disables webhook from showing in rule builder | 
-**used_at** | **Array&lt;String&gt;** | array of rulesets where webhook is used | 
 
 

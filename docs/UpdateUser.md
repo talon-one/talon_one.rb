@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **release_update** | **BOOLEAN** | Update the user via email | [optional] 
 **latest_feature** | **String** | The latest feature you&#39;ve been notified. | [optional] 
 **roles** | **Array&lt;Integer&gt;** | Update | [optional] 
+**application_notification_subscriptions** | **Object** |  | [optional] 
 
 

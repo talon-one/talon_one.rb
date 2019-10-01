@@ -13,43 +13,13 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # 
-  class ApplicationSession
-    # Unique ID for this entity.
-    attr_accessor :id
+  # Holds a reference to the campaign, the referral and the reason for which that referral was rejected. Should only be present when there is a 'rejectReferral' effect.
+  class ReferralRejectionReason
+    attr_accessor :campaign_id
 
-    # The exact moment this entity was created. The exact moment this entity was created.
-    attr_accessor :created
+    attr_accessor :referral_id
 
-    # The ID of the application that owns this entity.
-    attr_accessor :application_id
-
-    # The globally unique Talon.One ID of the customer that created this entity.
-    attr_accessor :profile_id
-
-    # The ID used for this entity in the application system.
-    attr_accessor :integration_id
-
-    # Any coupon code entered.
-    attr_accessor :coupon
-
-    # Any referral code entered.
-    attr_accessor :referral
-
-    # Indicating if the customer session is in progress (\"open\"), \"closed\", or \"cancelled\".
-    attr_accessor :state
-
-    # Serialized JSON representation.
-    attr_accessor :cart_items
-
-    # A map of labelled discount values, in the same currency as the session.
-    attr_accessor :discounts
-
-    # The total sum of the session before any discounts applied.
-    attr_accessor :total
-
-    # Arbitrary properties associated with this item
-    attr_accessor :attributes
+    attr_accessor :reason
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -76,36 +46,18 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created' => :'created',
-        :'application_id' => :'applicationId',
-        :'profile_id' => :'profileId',
-        :'integration_id' => :'integrationId',
-        :'coupon' => :'coupon',
-        :'referral' => :'referral',
-        :'state' => :'state',
-        :'cart_items' => :'cartItems',
-        :'discounts' => :'discounts',
-        :'total' => :'total',
-        :'attributes' => :'attributes'
+        :'campaign_id' => :'campaignId',
+        :'referral_id' => :'referralId',
+        :'reason' => :'reason'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'created' => :'DateTime',
-        :'application_id' => :'Integer',
-        :'profile_id' => :'Integer',
-        :'integration_id' => :'String',
-        :'coupon' => :'String',
-        :'referral' => :'String',
-        :'state' => :'String',
-        :'cart_items' => :'Array<CartItem>',
-        :'discounts' => :'Hash<String, Float>',
-        :'total' => :'Float',
-        :'attributes' => :'Object'
+        :'campaign_id' => :'Integer',
+        :'referral_id' => :'Integer',
+        :'reason' => :'String'
       }
     end
 
@@ -117,56 +69,16 @@ module TalonOne
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'campaignId')
+        self.campaign_id = attributes[:'campaignId']
       end
 
-      if attributes.has_key?(:'created')
-        self.created = attributes[:'created']
+      if attributes.has_key?(:'referralId')
+        self.referral_id = attributes[:'referralId']
       end
 
-      if attributes.has_key?(:'applicationId')
-        self.application_id = attributes[:'applicationId']
-      end
-
-      if attributes.has_key?(:'profileId')
-        self.profile_id = attributes[:'profileId']
-      end
-
-      if attributes.has_key?(:'integrationId')
-        self.integration_id = attributes[:'integrationId']
-      end
-
-      if attributes.has_key?(:'coupon')
-        self.coupon = attributes[:'coupon']
-      end
-
-      if attributes.has_key?(:'referral')
-        self.referral = attributes[:'referral']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'cartItems')
-        if (value = attributes[:'cartItems']).is_a?(Array)
-          self.cart_items = value
-        end
-      end
-
-      if attributes.has_key?(:'discounts')
-        if (value = attributes[:'discounts']).is_a?(Hash)
-          self.discounts = value
-        end
-      end
-
-      if attributes.has_key?(:'total')
-        self.total = attributes[:'total']
-      end
-
-      if attributes.has_key?(:'attributes')
-        self.attributes = attributes[:'attributes']
+      if attributes.has_key?(:'reason')
+        self.reason = attributes[:'reason']
       end
     end
 
@@ -174,40 +86,16 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      if @campaign_id.nil?
+        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
       end
 
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
+      if @referral_id.nil?
+        invalid_properties.push('invalid value for "referral_id", referral_id cannot be nil.')
       end
 
-      if @application_id.nil?
-        invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
-      end
-
-      if @integration_id.nil?
-        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
-      end
-
-      if @coupon.nil?
-        invalid_properties.push('invalid value for "coupon", coupon cannot be nil.')
-      end
-
-      if @referral.nil?
-        invalid_properties.push('invalid value for "referral", referral cannot be nil.')
-      end
-
-      if @state.nil?
-        invalid_properties.push('invalid value for "state", state cannot be nil.')
-      end
-
-      if @cart_items.nil?
-        invalid_properties.push('invalid value for "cart_items", cart_items cannot be nil.')
-      end
-
-      if @discounts.nil?
-        invalid_properties.push('invalid value for "discounts", discounts cannot be nil.')
+      if @reason.nil?
+        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
       end
 
       invalid_properties
@@ -216,28 +104,22 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created.nil?
-      return false if @application_id.nil?
-      return false if @integration_id.nil?
-      return false if @coupon.nil?
-      return false if @referral.nil?
-      return false if @state.nil?
-      state_validator = EnumAttributeValidator.new('String', ['open', 'closed', 'cancelled'])
-      return false unless state_validator.valid?(@state)
-      return false if @cart_items.nil?
-      return false if @discounts.nil?
+      return false if @campaign_id.nil?
+      return false if @referral_id.nil?
+      return false if @reason.nil?
+      reason_validator = EnumAttributeValidator.new('String', ['ReferralNotFound', 'ReferralRecipientIdSameAsAdvocate', 'ReferralPartOfNotRunningCampaign', 'ReferralValidConditionMissing', 'ReferralLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'ReferralRecipientDoesNotMatch', 'ReferralExpired', 'ReferralStartDateInFuture', 'ReferralRejectedByCondition', 'EffectCouldNotBeApplied'])
+      return false unless reason_validator.valid?(@reason)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ['open', 'closed', 'cancelled'])
-      unless validator.valid?(state)
-        fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
+    # @param [Object] reason Object to be assigned
+    def reason=(reason)
+      validator = EnumAttributeValidator.new('String', ['ReferralNotFound', 'ReferralRecipientIdSameAsAdvocate', 'ReferralPartOfNotRunningCampaign', 'ReferralValidConditionMissing', 'ReferralLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'ReferralRecipientDoesNotMatch', 'ReferralExpired', 'ReferralStartDateInFuture', 'ReferralRejectedByCondition', 'EffectCouldNotBeApplied'])
+      unless validator.valid?(reason)
+        fail ArgumentError, 'invalid value for "reason", must be one of #{validator.allowable_values}.'
       end
-      @state = state
+      @reason = reason
     end
 
     # Checks equality by comparing each attribute.
@@ -245,18 +127,9 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created == o.created &&
-          application_id == o.application_id &&
-          profile_id == o.profile_id &&
-          integration_id == o.integration_id &&
-          coupon == o.coupon &&
-          referral == o.referral &&
-          state == o.state &&
-          cart_items == o.cart_items &&
-          discounts == o.discounts &&
-          total == o.total &&
-          attributes == o.attributes
+          campaign_id == o.campaign_id &&
+          referral_id == o.referral_id &&
+          reason == o.reason
     end
 
     # @see the `==` method
@@ -268,7 +141,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, application_id, profile_id, integration_id, coupon, referral, state, cart_items, discounts, total, attributes].hash
+      [campaign_id, referral_id, reason].hash
     end
 
     # Builds the object from hash

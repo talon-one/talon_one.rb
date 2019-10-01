@@ -13,76 +13,22 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # 
-  class Attribute
-    # Unique ID for this entity.
+  class Notification
+    # id of the notification
     attr_accessor :id
 
-    # The exact moment this entity was created.
-    attr_accessor :created
-
-    # The ID of the account that owns this entity.
-    attr_accessor :account_id
-
-    # The name of the entity that can have this attribute. When creating or updating the entities of a given type, you can include an `attributes` object with keys corresponding to the `name` of the custom attributes for that type.
-    attr_accessor :entity
-
-    attr_accessor :event_type
-
-    # The attribute name that will be used in API requests and Talang. E.g. if `name == \"region\"` then you would set the region attribute by including an `attributes.region` property in your request payload. 
+    # name of the notification
     attr_accessor :name
 
-    # The human-readable name for the attribute that will be shown in the Campaign Manager. Like `name`, the combination of entity and title must also be unique.
-    attr_accessor :title
-
-    # The data type of the attribute, a `time` attribute must be sent as a string that conforms to the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) timestamp format.
-    attr_accessor :type
-
-    # A description of this attribute.
+    # description of the notification
     attr_accessor :description
-
-    # A list of suggestions for the attribute.
-    attr_accessor :suggestions
-
-    # Whether or not this attribute can be edited.
-    attr_accessor :editable
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'created' => :'created',
-        :'account_id' => :'accountId',
-        :'entity' => :'entity',
-        :'event_type' => :'eventType',
         :'name' => :'name',
-        :'title' => :'title',
-        :'type' => :'type',
-        :'description' => :'description',
-        :'suggestions' => :'suggestions',
-        :'editable' => :'editable'
+        :'description' => :'description'
       }
     end
 
@@ -90,16 +36,8 @@ module TalonOne
     def self.swagger_types
       {
         :'id' => :'Integer',
-        :'created' => :'DateTime',
-        :'account_id' => :'Integer',
-        :'entity' => :'String',
-        :'event_type' => :'String',
         :'name' => :'String',
-        :'title' => :'String',
-        :'type' => :'String',
-        :'description' => :'String',
-        :'suggestions' => :'Array<String>',
-        :'editable' => :'BOOLEAN'
+        :'description' => :'String'
       }
     end
 
@@ -115,46 +53,12 @@ module TalonOne
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'created')
-        self.created = attributes[:'created']
-      end
-
-      if attributes.has_key?(:'accountId')
-        self.account_id = attributes[:'accountId']
-      end
-
-      if attributes.has_key?(:'entity')
-        self.entity = attributes[:'entity']
-      end
-
-      if attributes.has_key?(:'eventType')
-        self.event_type = attributes[:'eventType']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
-      end
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
       if attributes.has_key?(:'description')
         self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'suggestions')
-        if (value = attributes[:'suggestions']).is_a?(Array)
-          self.suggestions = value
-        end
-      end
-
-      if attributes.has_key?(:'editable')
-        self.editable = attributes[:'editable']
       end
     end
 
@@ -166,40 +70,12 @@ module TalonOne
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @entity.nil?
-        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
-      end
-
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @title.nil?
-        invalid_properties.push('invalid value for "title", title cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       if @description.nil?
         invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
-      if @suggestions.nil?
-        invalid_properties.push('invalid value for "suggestions", suggestions cannot be nil.')
-      end
-
-      if @editable.nil?
-        invalid_properties.push('invalid value for "editable", editable cannot be nil.')
       end
 
       invalid_properties
@@ -209,40 +85,9 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @created.nil?
-      return false if @account_id.nil?
-      return false if @entity.nil?
-      entity_validator = EnumAttributeValidator.new('String', ['Account', 'Application', 'Campaign', 'CustomerProfile', 'CustomerSession', 'CartItem', 'Coupon', 'Event'])
-      return false unless entity_validator.valid?(@entity)
       return false if @name.nil?
-      return false if @title.nil?
-      return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ['string', 'number', 'boolean', 'time', '(list string)', '(list number)', '(list time)', 'location', '(list location)'])
-      return false unless type_validator.valid?(@type)
       return false if @description.nil?
-      return false if @suggestions.nil?
-      return false if @editable.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] entity Object to be assigned
-    def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ['Account', 'Application', 'Campaign', 'CustomerProfile', 'CustomerSession', 'CartItem', 'Coupon', 'Event'])
-      unless validator.valid?(entity)
-        fail ArgumentError, 'invalid value for "entity", must be one of #{validator.allowable_values}.'
-      end
-      @entity = entity
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ['string', 'number', 'boolean', 'time', '(list string)', '(list number)', '(list time)', 'location', '(list location)'])
-      unless validator.valid?(type)
-        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -251,16 +96,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          created == o.created &&
-          account_id == o.account_id &&
-          entity == o.entity &&
-          event_type == o.event_type &&
           name == o.name &&
-          title == o.title &&
-          type == o.type &&
-          description == o.description &&
-          suggestions == o.suggestions &&
-          editable == o.editable
+          description == o.description
     end
 
     # @see the `==` method
@@ -272,7 +109,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, account_id, entity, event_type, name, title, type, description, suggestions, editable].hash
+      [id, name, description].hash
     end
 
     # Builds the object from hash
