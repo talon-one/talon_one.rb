@@ -15,5 +15,6 @@ Name | Type | Description | Notes
 **release_update** | **BOOLEAN** | Update the user via email | 
 **latest_feature** | **String** | Latest feature the user has been notified. | [optional] 
 **roles** | **Array&lt;Integer&gt;** | Contains a list of all roles a user is a memeber of | [optional] 
+**application_notification_subscriptions** | **Object** |  | [optional] 
 
 

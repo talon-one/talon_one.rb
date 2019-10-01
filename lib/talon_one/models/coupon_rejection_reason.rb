@@ -107,7 +107,7 @@ module TalonOne
       return false if @campaign_id.nil?
       return false if @coupon_id.nil?
       return false if @reason.nil?
-      reason_validator = EnumAttributeValidator.new('String', ['CouponNotFound', 'CouponPartOfNotRunningCampaign', 'CouponLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'CouponRecipientDoesNotMatch', 'CouponExpired', 'CouponStartDateInFuture', 'CouponRejectedByCondition'])
+      reason_validator = EnumAttributeValidator.new('String', ['CouponNotFound', 'CouponPartOfNotRunningCampaign', 'CouponValidConditionMissing', 'CouponLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'CouponRecipientDoesNotMatch', 'CouponExpired', 'CouponStartDateInFuture', 'CouponRejectedByCondition', 'EffectCouldNotBeApplied'])
       return false unless reason_validator.valid?(@reason)
       true
     end
@@ -115,7 +115,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason)
-      validator = EnumAttributeValidator.new('String', ['CouponNotFound', 'CouponPartOfNotRunningCampaign', 'CouponLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'CouponRecipientDoesNotMatch', 'CouponExpired', 'CouponStartDateInFuture', 'CouponRejectedByCondition'])
+      validator = EnumAttributeValidator.new('String', ['CouponNotFound', 'CouponPartOfNotRunningCampaign', 'CouponValidConditionMissing', 'CouponLimitReached', 'CampaignLimitReached', 'ProfileLimitReached', 'CouponRecipientDoesNotMatch', 'CouponExpired', 'CouponStartDateInFuture', 'CouponRejectedByCondition', 'EffectCouldNotBeApplied'])
       unless validator.valid?(reason)
         fail ArgumentError, 'invalid value for "reason", must be one of #{validator.allowable_values}.'
       end

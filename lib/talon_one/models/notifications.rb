@@ -13,88 +13,16 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # 
-  class UpdateUser
-    # The email address associated with your account.
-    attr_accessor :email
-
-    # Your name.
-    attr_accessor :name
-
-    # Your old password.
-    attr_accessor :password
-
-    # Your new password.
-    attr_accessor :new_password
-
-    # a blob of acl json
-    attr_accessor :policy
-
-    # New state (\"deactivated\" or \"active\") for the user. Only usable by admins for the user.
-    attr_accessor :state
-
-    # Update the user via email
-    attr_accessor :release_update
-
-    # The latest feature you've been notified.
-    attr_accessor :latest_feature
-
-    # Update
-    attr_accessor :roles
-
-    attr_accessor :application_notification_subscriptions
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
+  class Notifications
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'email' => :'email',
-        :'name' => :'name',
-        :'password' => :'password',
-        :'new_password' => :'newPassword',
-        :'policy' => :'policy',
-        :'state' => :'state',
-        :'release_update' => :'releaseUpdate',
-        :'latest_feature' => :'latestFeature',
-        :'roles' => :'roles',
-        :'application_notification_subscriptions' => :'applicationNotificationSubscriptions'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'email' => :'String',
-        :'name' => :'String',
-        :'password' => :'String',
-        :'new_password' => :'String',
-        :'policy' => :'String',
-        :'state' => :'String',
-        :'release_update' => :'BOOLEAN',
-        :'latest_feature' => :'String',
-        :'roles' => :'Array<Integer>',
-        :'application_notification_subscriptions' => :'Object'
       }
     end
 
@@ -105,95 +33,26 @@ module TalonOne
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'password')
-        self.password = attributes[:'password']
-      end
-
-      if attributes.has_key?(:'newPassword')
-        self.new_password = attributes[:'newPassword']
-      end
-
-      if attributes.has_key?(:'policy')
-        self.policy = attributes[:'policy']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'releaseUpdate')
-        self.release_update = attributes[:'releaseUpdate']
-      end
-
-      if attributes.has_key?(:'latestFeature')
-        self.latest_feature = attributes[:'latestFeature']
-      end
-
-      if attributes.has_key?(:'roles')
-        if (value = attributes[:'roles']).is_a?(Array)
-          self.roles = value
-        end
-      end
-
-      if attributes.has_key?(:'applicationNotificationSubscriptions')
-        self.application_notification_subscriptions = attributes[:'applicationNotificationSubscriptions']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @email.nil?
-        invalid_properties.push('invalid value for "email", email cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @email.nil?
-      state_validator = EnumAttributeValidator.new('String', ['deactivated', 'active'])
-      return false unless state_validator.valid?(@state)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ['deactivated', 'active'])
-      unless validator.valid?(state)
-        fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
-      end
-      @state = state
     end
 
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
-      self.class == o.class &&
-          email == o.email &&
-          name == o.name &&
-          password == o.password &&
-          new_password == o.new_password &&
-          policy == o.policy &&
-          state == o.state &&
-          release_update == o.release_update &&
-          latest_feature == o.latest_feature &&
-          roles == o.roles &&
-          application_notification_subscriptions == o.application_notification_subscriptions
+      self.class == o.class
     end
 
     # @see the `==` method
@@ -205,7 +64,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [email, name, password, new_password, policy, state, release_update, latest_feature, roles, application_notification_subscriptions].hash
+      [].hash
     end
 
     # Builds the object from hash
