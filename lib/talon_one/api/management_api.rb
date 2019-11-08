@@ -2438,6 +2438,11 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Integer] :application_id 
+    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+    # @option opts [BOOLEAN] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+    # @option opts [BOOLEAN] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
     # @return [InlineResponse20025]
     def get_changes(opts = {})
       data, _status_code, _headers = get_changes_with_http_info(opts)
@@ -2450,6 +2455,11 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Integer] :application_id 
+    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+    # @option opts [BOOLEAN] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+    # @option opts [BOOLEAN] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
     # @return [Array<(InlineResponse20025, Fixnum, Hash)>] InlineResponse20025 data, response status code and response headers
     def get_changes_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -2463,6 +2473,11 @@ module TalonOne
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
       query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'applicationId'] = opts[:'application_id'] if !opts[:'application_id'].nil?
+      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
+      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+      query_params[:'includeOld'] = opts[:'include_old'] if !opts[:'include_old'].nil?
 
       # header parameters
       header_params = {}

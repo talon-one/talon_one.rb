@@ -35,7 +35,7 @@ describe 'LimitConfig' do
   describe 'test attribute "action"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["redeemCoupon", "redeemReferral", "setDiscount", "createCoupon"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["redeemCoupon", "redeemReferral", "setDiscount", "createCoupon", "setDiscountEffect"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.action = value }.not_to raise_error
       # end

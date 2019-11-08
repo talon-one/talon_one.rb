@@ -16,5 +16,6 @@ Name | Type | Description | Notes
 **latest_feature** | **String** | Latest feature the user has been notified. | [optional] 
 **roles** | **Array&lt;Integer&gt;** | Contains a list of all roles a user is a memeber of | [optional] 
 **application_notification_subscriptions** | **Object** |  | [optional] 
+**auth_method** | **String** | The Authentication method for this user | [optional] 
 
 
