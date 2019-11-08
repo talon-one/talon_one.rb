@@ -33,9 +33,6 @@ module TalonOne
     # A longer description of the application.
     attr_accessor :description
 
-    # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
-    attr_accessor :key
-
     # A string containing an IANA timezone descriptor.
     attr_accessor :timezone
 
@@ -50,6 +47,9 @@ module TalonOne
 
     # Default limits for campaigns created in this application
     attr_accessor :limits
+
+    # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
+    attr_accessor :key
 
     # An array containing all the loyalty programs to which this application is subscribed
     attr_accessor :loyalty_programs
@@ -85,12 +85,12 @@ module TalonOne
         :'account_id' => :'accountId',
         :'name' => :'name',
         :'description' => :'description',
-        :'key' => :'key',
         :'timezone' => :'timezone',
         :'currency' => :'currency',
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
         :'limits' => :'limits',
+        :'key' => :'key',
         :'loyalty_programs' => :'loyaltyPrograms'
       }
     end
@@ -104,12 +104,12 @@ module TalonOne
         :'account_id' => :'Integer',
         :'name' => :'String',
         :'description' => :'String',
-        :'key' => :'String',
         :'timezone' => :'String',
         :'currency' => :'String',
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
+        :'key' => :'String',
         :'loyalty_programs' => :'Array<LoyaltyProgram>'
       }
     end
@@ -146,10 +146,6 @@ module TalonOne
         self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'key')
-        self.key = attributes[:'key']
-      end
-
       if attributes.has_key?(:'timezone')
         self.timezone = attributes[:'timezone']
       end
@@ -170,6 +166,10 @@ module TalonOne
         if (value = attributes[:'limits']).is_a?(Array)
           self.limits = value
         end
+      end
+
+      if attributes.has_key?(:'key')
+        self.key = attributes[:'key']
       end
 
       if attributes.has_key?(:'loyaltyPrograms')
@@ -207,22 +207,6 @@ module TalonOne
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
-      if @key.nil?
-        invalid_properties.push('invalid value for "key", key cannot be nil.')
-      end
-
-      if @key.to_s.length > 16
-        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 16.')
-      end
-
-      if @key.to_s.length < 16
-        invalid_properties.push('invalid value for "key", the character length must be great than or equal to 16.')
-      end
-
-      if @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        invalid_properties.push('invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.')
-      end
-
       if @timezone.nil?
         invalid_properties.push('invalid value for "timezone", timezone cannot be nil.')
       end
@@ -237,6 +221,22 @@ module TalonOne
 
       if @currency.to_s.length < 1
         invalid_properties.push('invalid value for "currency", the character length must be great than or equal to 1.')
+      end
+
+      if @key.nil?
+        invalid_properties.push('invalid value for "key", key cannot be nil.')
+      end
+
+      if @key.to_s.length > 16
+        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 16.')
+      end
+
+      if @key.to_s.length < 16
+        invalid_properties.push('invalid value for "key", the character length must be great than or equal to 16.')
+      end
+
+      if @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
+        invalid_properties.push('invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.')
       end
 
       if @loyalty_programs.nil?
@@ -255,16 +255,16 @@ module TalonOne
       return false if @account_id.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @key.nil?
-      return false if @key.to_s.length > 16
-      return false if @key.to_s.length < 16
-      return false if @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
       return false if @timezone.nil?
       return false if @timezone.to_s.length < 1
       return false if @currency.nil?
       return false if @currency.to_s.length < 1
       case_sensitivity_validator = EnumAttributeValidator.new('String', ['sensitive', 'insensitive-uppercase', 'insensitive-lowercase'])
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
+      return false if @key.nil?
+      return false if @key.to_s.length > 16
+      return false if @key.to_s.length < 16
+      return false if @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
       return false if @loyalty_programs.nil?
       true
     end
@@ -281,28 +281,6 @@ module TalonOne
       end
 
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] key Value to be assigned
-    def key=(key)
-      if key.nil?
-        fail ArgumentError, 'key cannot be nil'
-      end
-
-      if key.to_s.length > 16
-        fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 16.'
-      end
-
-      if key.to_s.length < 16
-        fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 16.'
-      end
-
-      if key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        fail ArgumentError, 'invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.'
-      end
-
-      @key = key
     end
 
     # Custom attribute writer method with validation
@@ -343,6 +321,28 @@ module TalonOne
       @case_sensitivity = case_sensitivity
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] key Value to be assigned
+    def key=(key)
+      if key.nil?
+        fail ArgumentError, 'key cannot be nil'
+      end
+
+      if key.to_s.length > 16
+        fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 16.'
+      end
+
+      if key.to_s.length < 16
+        fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 16.'
+      end
+
+      if key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
+        fail ArgumentError, 'invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.'
+      end
+
+      @key = key
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -354,12 +354,12 @@ module TalonOne
           account_id == o.account_id &&
           name == o.name &&
           description == o.description &&
-          key == o.key &&
           timezone == o.timezone &&
           currency == o.currency &&
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
           limits == o.limits &&
+          key == o.key &&
           loyalty_programs == o.loyalty_programs
     end
 
@@ -372,7 +372,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, modified, account_id, name, description, key, timezone, currency, case_sensitivity, attributes, limits, loyalty_programs].hash
+      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, key, loyalty_programs].hash
     end
 
     # Builds the object from hash

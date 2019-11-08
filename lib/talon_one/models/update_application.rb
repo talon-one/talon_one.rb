@@ -13,8 +13,7 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # 
-  class NewApplication
+  class UpdateApplication
     # The name of this application.
     attr_accessor :name
 
@@ -35,9 +34,6 @@ module TalonOne
 
     # Default limits for campaigns created in this application
     attr_accessor :limits
-
-    # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
-    attr_accessor :key
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -70,8 +66,7 @@ module TalonOne
         :'currency' => :'currency',
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
-        :'limits' => :'limits',
-        :'key' => :'key'
+        :'limits' => :'limits'
       }
     end
 
@@ -84,8 +79,7 @@ module TalonOne
         :'currency' => :'String',
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
-        :'limits' => :'Array<LimitConfig>',
-        :'key' => :'String'
+        :'limits' => :'Array<LimitConfig>'
       }
     end
 
@@ -126,10 +120,6 @@ module TalonOne
           self.limits = value
         end
       end
-
-      if attributes.has_key?(:'key')
-        self.key = attributes[:'key']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -160,18 +150,6 @@ module TalonOne
         invalid_properties.push('invalid value for "currency", the character length must be great than or equal to 1.')
       end
 
-      if !@key.nil? && @key.to_s.length > 16
-        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 16.')
-      end
-
-      if !@key.nil? && @key.to_s.length < 16
-        invalid_properties.push('invalid value for "key", the character length must be great than or equal to 16.')
-      end
-
-      if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        invalid_properties.push('invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.')
-      end
-
       invalid_properties
     end
 
@@ -186,9 +164,6 @@ module TalonOne
       return false if @currency.to_s.length < 1
       case_sensitivity_validator = EnumAttributeValidator.new('String', ['sensitive', 'insensitive-uppercase', 'insensitive-lowercase'])
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
-      return false if !@key.nil? && @key.to_s.length > 16
-      return false if !@key.nil? && @key.to_s.length < 16
-      return false if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
       true
     end
 
@@ -244,24 +219,6 @@ module TalonOne
       @case_sensitivity = case_sensitivity
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] key Value to be assigned
-    def key=(key)
-      if !key.nil? && key.to_s.length > 16
-        fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 16.'
-      end
-
-      if !key.nil? && key.to_s.length < 16
-        fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 16.'
-      end
-
-      if !key.nil? && key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        fail ArgumentError, 'invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.'
-      end
-
-      @key = key
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -273,8 +230,7 @@ module TalonOne
           currency == o.currency &&
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
-          limits == o.limits &&
-          key == o.key
+          limits == o.limits
     end
 
     # @see the `==` method
@@ -286,7 +242,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, key].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits].hash
     end
 
     # Builds the object from hash

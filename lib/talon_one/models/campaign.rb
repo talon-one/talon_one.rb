@@ -70,6 +70,12 @@ module TalonOne
     # Total amount of discounts redeemed in the campaign.
     attr_accessor :discount_count
 
+    # Total number of times discounts were redeemed in this campaign.
+    attr_accessor :discount_effect_count
+
+    # Total number of coupons created by rules in this campaign.
+    attr_accessor :coupon_creation_count
+
     # Timestamp of the most recent event received by this campaign.
     attr_accessor :last_activity
 
@@ -126,6 +132,8 @@ module TalonOne
         :'coupon_redemption_count' => :'couponRedemptionCount',
         :'referral_redemption_count' => :'referralRedemptionCount',
         :'discount_count' => :'discountCount',
+        :'discount_effect_count' => :'discountEffectCount',
+        :'coupon_creation_count' => :'couponCreationCount',
         :'last_activity' => :'lastActivity',
         :'updated' => :'updated',
         :'created_by' => :'createdBy',
@@ -155,6 +163,8 @@ module TalonOne
         :'coupon_redemption_count' => :'Integer',
         :'referral_redemption_count' => :'Integer',
         :'discount_count' => :'Integer',
+        :'discount_effect_count' => :'Integer',
+        :'coupon_creation_count' => :'Integer',
         :'last_activity' => :'DateTime',
         :'updated' => :'DateTime',
         :'created_by' => :'String',
@@ -252,6 +262,14 @@ module TalonOne
 
       if attributes.has_key?(:'discountCount')
         self.discount_count = attributes[:'discountCount']
+      end
+
+      if attributes.has_key?(:'discountEffectCount')
+        self.discount_effect_count = attributes[:'discountEffectCount']
+      end
+
+      if attributes.has_key?(:'couponCreationCount')
+        self.coupon_creation_count = attributes[:'couponCreationCount']
       end
 
       if attributes.has_key?(:'lastActivity')
@@ -389,6 +407,8 @@ module TalonOne
           coupon_redemption_count == o.coupon_redemption_count &&
           referral_redemption_count == o.referral_redemption_count &&
           discount_count == o.discount_count &&
+          discount_effect_count == o.discount_effect_count &&
+          coupon_creation_count == o.coupon_creation_count &&
           last_activity == o.last_activity &&
           updated == o.updated &&
           created_by == o.created_by &&
@@ -404,7 +424,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, coupon_redemption_count, referral_redemption_count, discount_count, last_activity, updated, created_by, updated_by].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, last_activity, updated, created_by, updated_by].hash
     end
 
     # Builds the object from hash

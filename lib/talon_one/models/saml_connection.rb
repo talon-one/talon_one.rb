@@ -14,78 +14,75 @@ require 'date'
 
 module TalonOne
   # 
-  class NewApplication
-    # The name of this application.
+  class SamlConnection
+    attr_accessor :id
+
+    # Unix timestamp indicating when the session was first created.
+    attr_accessor :created
+
+    # The ID of the account that owns this SAML Service.
+    attr_accessor :account_id
+
+    # The location where the SAML assertion is sent with a HTTP POST.
+    attr_accessor :assertion_consumer_service_url
+
+    # ID of the SAML service.
     attr_accessor :name
 
-    # A longer description of the application.
-    attr_accessor :description
+    # Determines if this SAML connection active.
+    attr_accessor :enabled
 
-    # A string containing an IANA timezone descriptor.
-    attr_accessor :timezone
+    # Identity Provider Entity ID.
+    attr_accessor :issuer
 
-    # A string describing a default currency for new customer sessions.
-    attr_accessor :currency
+    # Single Sign-On URL.
+    attr_accessor :sign_on_url
 
-    # A string indicating how should campaigns in this application deal with case sensitivity on coupon codes.
-    attr_accessor :case_sensitivity
+    # Single Sign-Out URL.
+    attr_accessor :sign_out_url
 
-    # Arbitrary properties associated with this campaign
-    attr_accessor :attributes
+    # Metadata URL.
+    attr_accessor :metadata_url
 
-    # Default limits for campaigns created in this application
-    attr_accessor :limits
+    # X.509 Certificate.
+    attr_accessor :x509certificate
 
-    # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
-    attr_accessor :key
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # The application-defined unique identifier that is the intended audience of the SAML assertion.  This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
+    attr_accessor :audience
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'created' => :'created',
+        :'account_id' => :'accountId',
+        :'assertion_consumer_service_url' => :'assertionConsumerServiceURL',
         :'name' => :'name',
-        :'description' => :'description',
-        :'timezone' => :'timezone',
-        :'currency' => :'currency',
-        :'case_sensitivity' => :'caseSensitivity',
-        :'attributes' => :'attributes',
-        :'limits' => :'limits',
-        :'key' => :'key'
+        :'enabled' => :'enabled',
+        :'issuer' => :'issuer',
+        :'sign_on_url' => :'signOnURL',
+        :'sign_out_url' => :'signOutURL',
+        :'metadata_url' => :'metadataURL',
+        :'x509certificate' => :'x509certificate',
+        :'audience' => :'audience'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'created' => :'DateTime',
+        :'account_id' => :'Integer',
+        :'assertion_consumer_service_url' => :'String',
         :'name' => :'String',
-        :'description' => :'String',
-        :'timezone' => :'String',
-        :'currency' => :'String',
-        :'case_sensitivity' => :'String',
-        :'attributes' => :'Object',
-        :'limits' => :'Array<LimitConfig>',
-        :'key' => :'String'
+        :'enabled' => :'BOOLEAN',
+        :'issuer' => :'String',
+        :'sign_on_url' => :'String',
+        :'sign_out_url' => :'String',
+        :'metadata_url' => :'String',
+        :'x509certificate' => :'String',
+        :'audience' => :'String'
       }
     end
 
@@ -97,38 +94,52 @@ module TalonOne
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.has_key?(:'accountId')
+        self.account_id = attributes[:'accountId']
+      end
+
+      if attributes.has_key?(:'assertionConsumerServiceURL')
+        self.assertion_consumer_service_url = attributes[:'assertionConsumerServiceURL']
+      end
+
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'enabled')
+        self.enabled = attributes[:'enabled']
       end
 
-      if attributes.has_key?(:'timezone')
-        self.timezone = attributes[:'timezone']
+      if attributes.has_key?(:'issuer')
+        self.issuer = attributes[:'issuer']
       end
 
-      if attributes.has_key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.has_key?(:'signOnURL')
+        self.sign_on_url = attributes[:'signOnURL']
       end
 
-      if attributes.has_key?(:'caseSensitivity')
-        self.case_sensitivity = attributes[:'caseSensitivity']
+      if attributes.has_key?(:'signOutURL')
+        self.sign_out_url = attributes[:'signOutURL']
       end
 
-      if attributes.has_key?(:'attributes')
-        self.attributes = attributes[:'attributes']
+      if attributes.has_key?(:'metadataURL')
+        self.metadata_url = attributes[:'metadataURL']
       end
 
-      if attributes.has_key?(:'limits')
-        if (value = attributes[:'limits']).is_a?(Array)
-          self.limits = value
-        end
+      if attributes.has_key?(:'x509certificate')
+        self.x509certificate = attributes[:'x509certificate']
       end
 
-      if attributes.has_key?(:'key')
-        self.key = attributes[:'key']
+      if attributes.has_key?(:'audience')
+        self.audience = attributes[:'audience']
       end
     end
 
@@ -136,6 +147,22 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @created.nil?
+        invalid_properties.push('invalid value for "created", created cannot be nil.')
+      end
+
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @assertion_consumer_service_url.nil?
+        invalid_properties.push('invalid value for "assertion_consumer_service_url", assertion_consumer_service_url cannot be nil.')
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
@@ -144,32 +171,36 @@ module TalonOne
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
-      if @timezone.nil?
-        invalid_properties.push('invalid value for "timezone", timezone cannot be nil.')
+      if @enabled.nil?
+        invalid_properties.push('invalid value for "enabled", enabled cannot be nil.')
       end
 
-      if @timezone.to_s.length < 1
-        invalid_properties.push('invalid value for "timezone", the character length must be great than or equal to 1.')
+      if @issuer.nil?
+        invalid_properties.push('invalid value for "issuer", issuer cannot be nil.')
       end
 
-      if @currency.nil?
-        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      if @issuer.to_s.length < 1
+        invalid_properties.push('invalid value for "issuer", the character length must be great than or equal to 1.')
       end
 
-      if @currency.to_s.length < 1
-        invalid_properties.push('invalid value for "currency", the character length must be great than or equal to 1.')
+      if @sign_on_url.nil?
+        invalid_properties.push('invalid value for "sign_on_url", sign_on_url cannot be nil.')
       end
 
-      if !@key.nil? && @key.to_s.length > 16
-        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 16.')
+      if @sign_on_url.to_s.length < 1
+        invalid_properties.push('invalid value for "sign_on_url", the character length must be great than or equal to 1.')
       end
 
-      if !@key.nil? && @key.to_s.length < 16
-        invalid_properties.push('invalid value for "key", the character length must be great than or equal to 16.')
+      if @x509certificate.nil?
+        invalid_properties.push('invalid value for "x509certificate", x509certificate cannot be nil.')
       end
 
-      if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        invalid_properties.push('invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.')
+      if @x509certificate.to_s.length < 1
+        invalid_properties.push('invalid value for "x509certificate", the character length must be great than or equal to 1.')
+      end
+
+      if @audience.nil?
+        invalid_properties.push('invalid value for "audience", audience cannot be nil.')
       end
 
       invalid_properties
@@ -178,17 +209,20 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @created.nil?
+      return false if @account_id.nil?
+      return false if @assertion_consumer_service_url.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @timezone.nil?
-      return false if @timezone.to_s.length < 1
-      return false if @currency.nil?
-      return false if @currency.to_s.length < 1
-      case_sensitivity_validator = EnumAttributeValidator.new('String', ['sensitive', 'insensitive-uppercase', 'insensitive-lowercase'])
-      return false unless case_sensitivity_validator.valid?(@case_sensitivity)
-      return false if !@key.nil? && @key.to_s.length > 16
-      return false if !@key.nil? && @key.to_s.length < 16
-      return false if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
+      return false if @enabled.nil?
+      return false if @issuer.nil?
+      return false if @issuer.to_s.length < 1
+      return false if @sign_on_url.nil?
+      return false if @sign_on_url.to_s.length < 1
+      return false if @x509certificate.nil?
+      return false if @x509certificate.to_s.length < 1
+      return false if @audience.nil?
       true
     end
 
@@ -207,59 +241,45 @@ module TalonOne
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] timezone Value to be assigned
-    def timezone=(timezone)
-      if timezone.nil?
-        fail ArgumentError, 'timezone cannot be nil'
+    # @param [Object] issuer Value to be assigned
+    def issuer=(issuer)
+      if issuer.nil?
+        fail ArgumentError, 'issuer cannot be nil'
       end
 
-      if timezone.to_s.length < 1
-        fail ArgumentError, 'invalid value for "timezone", the character length must be great than or equal to 1.'
+      if issuer.to_s.length < 1
+        fail ArgumentError, 'invalid value for "issuer", the character length must be great than or equal to 1.'
       end
 
-      @timezone = timezone
+      @issuer = issuer
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] currency Value to be assigned
-    def currency=(currency)
-      if currency.nil?
-        fail ArgumentError, 'currency cannot be nil'
+    # @param [Object] sign_on_url Value to be assigned
+    def sign_on_url=(sign_on_url)
+      if sign_on_url.nil?
+        fail ArgumentError, 'sign_on_url cannot be nil'
       end
 
-      if currency.to_s.length < 1
-        fail ArgumentError, 'invalid value for "currency", the character length must be great than or equal to 1.'
+      if sign_on_url.to_s.length < 1
+        fail ArgumentError, 'invalid value for "sign_on_url", the character length must be great than or equal to 1.'
       end
 
-      @currency = currency
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] case_sensitivity Object to be assigned
-    def case_sensitivity=(case_sensitivity)
-      validator = EnumAttributeValidator.new('String', ['sensitive', 'insensitive-uppercase', 'insensitive-lowercase'])
-      unless validator.valid?(case_sensitivity)
-        fail ArgumentError, 'invalid value for "case_sensitivity", must be one of #{validator.allowable_values}.'
-      end
-      @case_sensitivity = case_sensitivity
+      @sign_on_url = sign_on_url
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] key Value to be assigned
-    def key=(key)
-      if !key.nil? && key.to_s.length > 16
-        fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 16.'
+    # @param [Object] x509certificate Value to be assigned
+    def x509certificate=(x509certificate)
+      if x509certificate.nil?
+        fail ArgumentError, 'x509certificate cannot be nil'
       end
 
-      if !key.nil? && key.to_s.length < 16
-        fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 16.'
+      if x509certificate.to_s.length < 1
+        fail ArgumentError, 'invalid value for "x509certificate", the character length must be great than or equal to 1.'
       end
 
-      if !key.nil? && key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
-        fail ArgumentError, 'invalid value for "key", must conform to the pattern /^[a-fA-F0-9]{16}$/.'
-      end
-
-      @key = key
+      @x509certificate = x509certificate
     end
 
     # Checks equality by comparing each attribute.
@@ -267,14 +287,18 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          created == o.created &&
+          account_id == o.account_id &&
+          assertion_consumer_service_url == o.assertion_consumer_service_url &&
           name == o.name &&
-          description == o.description &&
-          timezone == o.timezone &&
-          currency == o.currency &&
-          case_sensitivity == o.case_sensitivity &&
-          attributes == o.attributes &&
-          limits == o.limits &&
-          key == o.key
+          enabled == o.enabled &&
+          issuer == o.issuer &&
+          sign_on_url == o.sign_on_url &&
+          sign_out_url == o.sign_out_url &&
+          metadata_url == o.metadata_url &&
+          x509certificate == o.x509certificate &&
+          audience == o.audience
     end
 
     # @see the `==` method
@@ -286,7 +310,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, key].hash
+      [id, created, account_id, assertion_consumer_service_url, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, x509certificate, audience].hash
     end
 
     # Builds the object from hash

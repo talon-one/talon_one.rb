@@ -23,13 +23,16 @@ module TalonOne
 
     attr_accessor :loyalty
 
+    attr_accessor :coupon
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'session' => :'session',
         :'profile' => :'profile',
         :'event' => :'event',
-        :'loyalty' => :'loyalty'
+        :'loyalty' => :'loyalty',
+        :'coupon' => :'coupon'
       }
     end
 
@@ -39,7 +42,8 @@ module TalonOne
         :'session' => :'CustomerSession',
         :'profile' => :'CustomerProfile',
         :'event' => :'Event',
-        :'loyalty' => :'Loyalty'
+        :'loyalty' => :'Loyalty',
+        :'coupon' => :'Coupon'
       }
     end
 
@@ -65,6 +69,10 @@ module TalonOne
 
       if attributes.has_key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
+      end
+
+      if attributes.has_key?(:'coupon')
+        self.coupon = attributes[:'coupon']
       end
     end
 
@@ -104,7 +112,8 @@ module TalonOne
           session == o.session &&
           profile == o.profile &&
           event == o.event &&
-          loyalty == o.loyalty
+          loyalty == o.loyalty &&
+          coupon == o.coupon
     end
 
     # @see the `==` method
@@ -116,7 +125,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [session, profile, event, loyalty].hash
+      [session, profile, event, loyalty, coupon].hash
     end
 
     # Builds the object from hash

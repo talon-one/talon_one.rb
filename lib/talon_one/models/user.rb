@@ -53,6 +53,9 @@ module TalonOne
 
     attr_accessor :application_notification_subscriptions
 
+    # The Authentication method for this user
+    attr_accessor :auth_method
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -90,7 +93,8 @@ module TalonOne
         :'release_update' => :'releaseUpdate',
         :'latest_feature' => :'latestFeature',
         :'roles' => :'roles',
-        :'application_notification_subscriptions' => :'applicationNotificationSubscriptions'
+        :'application_notification_subscriptions' => :'applicationNotificationSubscriptions',
+        :'auth_method' => :'authMethod'
       }
     end
 
@@ -109,7 +113,8 @@ module TalonOne
         :'release_update' => :'BOOLEAN',
         :'latest_feature' => :'String',
         :'roles' => :'Array<Integer>',
-        :'application_notification_subscriptions' => :'Object'
+        :'application_notification_subscriptions' => :'Object',
+        :'auth_method' => :'String'
       }
     end
 
@@ -173,6 +178,10 @@ module TalonOne
 
       if attributes.has_key?(:'applicationNotificationSubscriptions')
         self.application_notification_subscriptions = attributes[:'applicationNotificationSubscriptions']
+      end
+
+      if attributes.has_key?(:'authMethod')
+        self.auth_method = attributes[:'authMethod']
       end
     end
 
@@ -268,7 +277,8 @@ module TalonOne
           release_update == o.release_update &&
           latest_feature == o.latest_feature &&
           roles == o.roles &&
-          application_notification_subscriptions == o.application_notification_subscriptions
+          application_notification_subscriptions == o.application_notification_subscriptions &&
+          auth_method == o.auth_method
     end
 
     # @see the `==` method
@@ -280,7 +290,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, modified, email, account_id, invite_token, state, name, policy, release_update, latest_feature, roles, application_notification_subscriptions].hash
+      [id, created, modified, email, account_id, invite_token, state, name, policy, release_update, latest_feature, roles, application_notification_subscriptions, auth_method].hash
     end
 
     # Builds the object from hash
