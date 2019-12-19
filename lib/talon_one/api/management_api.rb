@@ -150,6 +150,60 @@ module TalonOne
       end
       return data, status_code, headers
     end
+    # Define a new custom attribute
+    # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+    # @param body 
+    # @param [Hash] opts the optional parameters
+    # @return [Attribute]
+    def create_attribute(body, opts = {})
+      data, _status_code, _headers = create_attribute_with_http_info(body, opts)
+      data
+    end
+
+    # Define a new custom attribute
+    # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+    # @param body 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Attribute, Fixnum, Hash)>] Attribute data, response status code and response headers
+    def create_attribute_with_http_info(body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.create_attribute ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_attribute"
+      end
+      # resource path
+      local_var_path = '/v1/attributes'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(body)
+      auth_names = ['manager_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Attribute')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#create_attribute\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Create a Campaign
     # 
     # @param application_id 
@@ -211,7 +265,7 @@ module TalonOne
       return data, status_code, headers
     end
     # Create Coupons
-    # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupns can be created.
+    # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
     # @param application_id 
     # @param campaign_id 
     # @param body 
@@ -224,7 +278,7 @@ module TalonOne
     end
 
     # Create Coupons
-    # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupns can be created.
+    # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
     # @param application_id 
     # @param campaign_id 
     # @param body 
@@ -817,8 +871,8 @@ module TalonOne
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -835,8 +889,8 @@ module TalonOne
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -909,8 +963,8 @@ module TalonOne
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -927,8 +981,8 @@ module TalonOne
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -1103,67 +1157,13 @@ module TalonOne
       end
       return data, status_code, headers
     end
-    # Get Account Limits
-    # Returns a list of all account limits set 
-    # @param account_id 
-    # @param [Hash] opts the optional parameters
-    # @return [AccountLimits]
-    def get_account_limits(account_id, opts = {})
-      data, _status_code, _headers = get_account_limits_with_http_info(account_id, opts)
-      data
-    end
-
-    # Get Account Limits
-    # Returns a list of all account limits set 
-    # @param account_id 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountLimits, Fixnum, Hash)>] AccountLimits data, response status code and response headers
-    def get_account_limits_with_http_info(account_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_account_limits ...'
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling ManagementApi.get_account_limits"
-      end
-      # resource path
-      local_var_path = '/v1/accounts/{accountId}/limits'.sub('{' + 'accountId' + '}', account_id.to_s)
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      auth_names = ['manager_auth']
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'AccountLimits')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_account_limits\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
     # Get all access logs
     # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -1179,8 +1179,8 @@ module TalonOne
     # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-    # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+    # @option opts [String] :path Only return results where the request path matches the given regular expression.
+    # @option opts [String] :method Only return results where the request method matches the given regular expression.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -1245,7 +1245,7 @@ module TalonOne
     end
     # Get all roles.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20028]
+    # @return [InlineResponse20029]
     def get_all_roles(opts = {})
       data, _status_code, _headers = get_all_roles_with_http_info(opts)
       data
@@ -1253,7 +1253,7 @@ module TalonOne
 
     # Get all roles.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20028, Fixnum, Hash)>] InlineResponse20028 data, response status code and response headers
+    # @return [Array<(InlineResponse20029, Fixnum, Hash)>] InlineResponse20029 data, response status code and response headers
     def get_all_roles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_all_roles ...'
@@ -1283,7 +1283,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20028')
+        :return_type => 'InlineResponse20029')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_all_roles\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -1512,7 +1512,7 @@ module TalonOne
       return data, status_code, headers
     end
     # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id=14115#customer-profile 
+    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body 
     # @param [Hash] opts the optional parameters
     # @return [InlineResponse20013]
@@ -1522,7 +1522,7 @@ module TalonOne
     end
 
     # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id&#x3D;14115#customer-profile 
+    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body 
     # @param [Hash] opts the optional parameters
     # @return [Array<(InlineResponse20013, Fixnum, Hash)>] InlineResponse20013 data, response status code and response headers
@@ -2082,6 +2082,63 @@ module TalonOne
       end
       return data, status_code, headers
     end
+    # List custom attributes
+    # Returns all the defined custom attributes for the account. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @return [InlineResponse20020]
+    def get_attributes(opts = {})
+      data, _status_code, _headers = get_attributes_with_http_info(opts)
+      data
+    end
+
+    # List custom attributes
+    # Returns all the defined custom attributes for the account. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @return [Array<(InlineResponse20020, Fixnum, Hash)>] InlineResponse20020 data, response status code and response headers
+    def get_attributes_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_attributes ...'
+      end
+      # resource path
+      local_var_path = '/v1/attributes'
+
+      # query parameters
+      query_params = {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['manager_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'InlineResponse20020')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_attributes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Get a Campaign
     # 
     # @param application_id 
@@ -2443,7 +2500,7 @@ module TalonOne
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
     # @option opts [BOOLEAN] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
     # @option opts [BOOLEAN] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [InlineResponse20025]
+    # @return [InlineResponse20026]
     def get_changes(opts = {})
       data, _status_code, _headers = get_changes_with_http_info(opts)
       data
@@ -2460,7 +2517,7 @@ module TalonOne
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
     # @option opts [BOOLEAN] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
     # @option opts [BOOLEAN] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [Array<(InlineResponse20025, Fixnum, Hash)>] InlineResponse20025 data, response status code and response headers
+    # @return [Array<(InlineResponse20026, Fixnum, Hash)>] InlineResponse20026 data, response status code and response headers
     def get_changes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_changes ...'
@@ -2498,7 +2555,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20025')
+        :return_type => 'InlineResponse20026')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_changes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -3378,7 +3435,7 @@ module TalonOne
       return data, status_code, headers
     end
     # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id=14115#customer-profile 
+    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -3390,7 +3447,7 @@ module TalonOne
     end
 
     # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id&#x3D;14115#customer-profile 
+    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -3446,7 +3503,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20023]
+    # @return [InlineResponse20024]
     def get_event_types(opts = {})
       data, _status_code, _headers = get_event_types_with_http_info(opts)
       data
@@ -3461,7 +3518,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20023, Fixnum, Hash)>] InlineResponse20023 data, response status code and response headers
+    # @return [Array<(InlineResponse20024, Fixnum, Hash)>] InlineResponse20024 data, response status code and response headers
     def get_event_types_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_event_types ...'
@@ -3497,7 +3554,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20023')
+        :return_type => 'InlineResponse20024')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_event_types\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -3511,7 +3568,7 @@ module TalonOne
     # @option opts [Integer] :application_id 
     # @option opts [Integer] :campaign_id 
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [InlineResponse20026]
+    # @return [InlineResponse20027]
     def get_exports(opts = {})
       data, _status_code, _headers = get_exports_with_http_info(opts)
       data
@@ -3525,7 +3582,7 @@ module TalonOne
     # @option opts [Integer] :application_id 
     # @option opts [Integer] :campaign_id 
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [Array<(InlineResponse20026, Fixnum, Hash)>] InlineResponse20026 data, response status code and response headers
+    # @return [Array<(InlineResponse20027, Fixnum, Hash)>] InlineResponse20027 data, response status code and response headers
     def get_exports_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_exports ...'
@@ -3563,7 +3620,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20026')
+        :return_type => 'InlineResponse20027')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_exports\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -3574,7 +3631,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20027]
+    # @return [InlineResponse20028]
     def get_imports(opts = {})
       data, _status_code, _headers = get_imports_with_http_info(opts)
       data
@@ -3585,7 +3642,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20027, Fixnum, Hash)>] InlineResponse20027 data, response status code and response headers
+    # @return [Array<(InlineResponse20028, Fixnum, Hash)>] InlineResponse20028 data, response status code and response headers
     def get_imports_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_imports ...'
@@ -3617,7 +3674,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20027')
+        :return_type => 'InlineResponse20028')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_imports\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -4218,7 +4275,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20024]
+    # @return [InlineResponse20025]
     def get_users(opts = {})
       data, _status_code, _headers = get_users_with_http_info(opts)
       data
@@ -4230,7 +4287,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20024, Fixnum, Hash)>] InlineResponse20024 data, response status code and response headers
+    # @return [Array<(InlineResponse20025, Fixnum, Hash)>] InlineResponse20025 data, response status code and response headers
     def get_users_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_users ...'
@@ -4263,7 +4320,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20024')
+        :return_type => 'InlineResponse20025')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -4335,7 +4392,7 @@ module TalonOne
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-    # @return [InlineResponse20021]
+    # @return [InlineResponse20022]
     def get_webhook_activation_logs(opts = {})
       data, _status_code, _headers = get_webhook_activation_logs_with_http_info(opts)
       data
@@ -4353,7 +4410,7 @@ module TalonOne
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-    # @return [Array<(InlineResponse20021, Fixnum, Hash)>] InlineResponse20021 data, response status code and response headers
+    # @return [Array<(InlineResponse20022, Fixnum, Hash)>] InlineResponse20022 data, response status code and response headers
     def get_webhook_activation_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_activation_logs ...'
@@ -4392,7 +4449,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20021')
+        :return_type => 'InlineResponse20022')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_webhook_activation_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -4411,7 +4468,7 @@ module TalonOne
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-    # @return [InlineResponse20022]
+    # @return [InlineResponse20023]
     def get_webhook_logs(opts = {})
       data, _status_code, _headers = get_webhook_logs_with_http_info(opts)
       data
@@ -4430,7 +4487,7 @@ module TalonOne
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-    # @return [Array<(InlineResponse20022, Fixnum, Hash)>] InlineResponse20022 data, response status code and response headers
+    # @return [Array<(InlineResponse20023, Fixnum, Hash)>] InlineResponse20023 data, response status code and response headers
     def get_webhook_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_logs ...'
@@ -4473,7 +4530,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20022')
+        :return_type => 'InlineResponse20023')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_webhook_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -4486,7 +4543,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20020]
+    # @return [InlineResponse20021]
     def get_webhooks(opts = {})
       data, _status_code, _headers = get_webhooks_with_http_info(opts)
       data
@@ -4499,7 +4556,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20020, Fixnum, Hash)>] InlineResponse20020 data, response status code and response headers
+    # @return [Array<(InlineResponse20021, Fixnum, Hash)>] InlineResponse20021 data, response status code and response headers
     def get_webhooks_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhooks ...'
@@ -4533,7 +4590,7 @@ module TalonOne
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse20020')
+        :return_type => 'InlineResponse20021')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_webhooks\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -5137,37 +5194,37 @@ module TalonOne
       end
       return data, status_code, headers
     end
-    # Set account limits
-    # sets account limits 
-    # @param account_id 
+    # Update a custom attribute
+    # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name `region`, and your integration is sending `attributes.region` with customer profile updates, changing the name to `locale` would cause the integration requests to begin failing.  If you **really** need to change the `type` or `name` property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
+    # @param attribute_id 
     # @param body 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def set_account_limits(account_id, body, opts = {})
-      set_account_limits_with_http_info(account_id, body, opts)
-      nil
+    # @return [Attribute]
+    def update_attribute(attribute_id, body, opts = {})
+      data, _status_code, _headers = update_attribute_with_http_info(attribute_id, body, opts)
+      data
     end
 
-    # Set account limits
-    # sets account limits 
-    # @param account_id 
+    # Update a custom attribute
+    # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name &#x60;region&#x60;, and your integration is sending &#x60;attributes.region&#x60; with customer profile updates, changing the name to &#x60;locale&#x60; would cause the integration requests to begin failing.  If you **really** need to change the &#x60;type&#x60; or &#x60;name&#x60; property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
+    # @param attribute_id 
     # @param body 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def set_account_limits_with_http_info(account_id, body, opts = {})
+    # @return [Array<(Attribute, Fixnum, Hash)>] Attribute data, response status code and response headers
+    def update_attribute_with_http_info(attribute_id, body, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.set_account_limits ...'
+        @api_client.config.logger.debug 'Calling API: ManagementApi.update_attribute ...'
       end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling ManagementApi.set_account_limits"
+      # verify the required parameter 'attribute_id' is set
+      if @api_client.config.client_side_validation && attribute_id.nil?
+        fail ArgumentError, "Missing the required parameter 'attribute_id' when calling ManagementApi.update_attribute"
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.set_account_limits"
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_attribute"
       end
       # resource path
-      local_var_path = '/v1/accounts/{accountId}/limits'.sub('{' + 'accountId' + '}', account_id.to_s)
+      local_var_path = '/v1/attributes/{attributeId}'.sub('{' + 'attributeId' + '}', attribute_id.to_s)
 
       # query parameters
       query_params = {}
@@ -5190,9 +5247,10 @@ module TalonOne
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Attribute')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#set_account_limits\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ManagementApi#update_attribute\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

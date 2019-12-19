@@ -13,8 +13,14 @@ Swagger Codegen version: 2.4.7
 require 'date'
 
 module TalonOne
-  # A new SAML 2.0 connection.
+  # 
   class NewSamlConnection
+    # X.509 Certificate.
+    attr_accessor :x509certificate
+
+    # The ID of the account that owns this entity.
+    attr_accessor :account_id
+
     # ID of the SAML service.
     attr_accessor :name
 
@@ -33,37 +39,36 @@ module TalonOne
     # Metadata URL.
     attr_accessor :metadata_url
 
-    # X.509 Certificate.
-    attr_accessor :x509certificate
-
-    # The application-defined unique identifier that is the intended audience of the SAML assertion.  This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
-    attr_accessor :audience
+    # The application-defined unique identifier that is the intended audience of the SAML assertion. This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
+    attr_accessor :audience_uri
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'x509certificate' => :'x509certificate',
+        :'account_id' => :'accountId',
         :'name' => :'name',
         :'enabled' => :'enabled',
         :'issuer' => :'issuer',
         :'sign_on_url' => :'signOnURL',
         :'sign_out_url' => :'signOutURL',
         :'metadata_url' => :'metadataURL',
-        :'x509certificate' => :'x509certificate',
-        :'audience' => :'audience'
+        :'audience_uri' => :'audienceURI'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'x509certificate' => :'String',
+        :'account_id' => :'Integer',
         :'name' => :'String',
         :'enabled' => :'BOOLEAN',
         :'issuer' => :'String',
         :'sign_on_url' => :'String',
         :'sign_out_url' => :'String',
         :'metadata_url' => :'String',
-        :'x509certificate' => :'String',
-        :'audience' => :'String'
+        :'audience_uri' => :'String'
       }
     end
 
@@ -74,6 +79,14 @@ module TalonOne
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'x509certificate')
+        self.x509certificate = attributes[:'x509certificate']
+      end
+
+      if attributes.has_key?(:'accountId')
+        self.account_id = attributes[:'accountId']
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -99,12 +112,8 @@ module TalonOne
         self.metadata_url = attributes[:'metadataURL']
       end
 
-      if attributes.has_key?(:'x509certificate')
-        self.x509certificate = attributes[:'x509certificate']
-      end
-
-      if attributes.has_key?(:'audience')
-        self.audience = attributes[:'audience']
+      if attributes.has_key?(:'audienceURI')
+        self.audience_uri = attributes[:'audienceURI']
       end
     end
 
@@ -112,6 +121,18 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @x509certificate.nil?
+        invalid_properties.push('invalid value for "x509certificate", x509certificate cannot be nil.')
+      end
+
+      if @x509certificate.to_s.length < 1
+        invalid_properties.push('invalid value for "x509certificate", the character length must be great than or equal to 1.')
+      end
+
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
@@ -140,20 +161,15 @@ module TalonOne
         invalid_properties.push('invalid value for "sign_on_url", the character length must be great than or equal to 1.')
       end
 
-      if @x509certificate.nil?
-        invalid_properties.push('invalid value for "x509certificate", x509certificate cannot be nil.')
-      end
-
-      if @x509certificate.to_s.length < 1
-        invalid_properties.push('invalid value for "x509certificate", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @x509certificate.nil?
+      return false if @x509certificate.to_s.length < 1
+      return false if @account_id.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
       return false if @enabled.nil?
@@ -161,9 +177,21 @@ module TalonOne
       return false if @issuer.to_s.length < 1
       return false if @sign_on_url.nil?
       return false if @sign_on_url.to_s.length < 1
-      return false if @x509certificate.nil?
-      return false if @x509certificate.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] x509certificate Value to be assigned
+    def x509certificate=(x509certificate)
+      if x509certificate.nil?
+        fail ArgumentError, 'x509certificate cannot be nil'
+      end
+
+      if x509certificate.to_s.length < 1
+        fail ArgumentError, 'invalid value for "x509certificate", the character length must be great than or equal to 1.'
+      end
+
+      @x509certificate = x509certificate
     end
 
     # Custom attribute writer method with validation
@@ -208,33 +236,20 @@ module TalonOne
       @sign_on_url = sign_on_url
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] x509certificate Value to be assigned
-    def x509certificate=(x509certificate)
-      if x509certificate.nil?
-        fail ArgumentError, 'x509certificate cannot be nil'
-      end
-
-      if x509certificate.to_s.length < 1
-        fail ArgumentError, 'invalid value for "x509certificate", the character length must be great than or equal to 1.'
-      end
-
-      @x509certificate = x509certificate
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          x509certificate == o.x509certificate &&
+          account_id == o.account_id &&
           name == o.name &&
           enabled == o.enabled &&
           issuer == o.issuer &&
           sign_on_url == o.sign_on_url &&
           sign_out_url == o.sign_out_url &&
           metadata_url == o.metadata_url &&
-          x509certificate == o.x509certificate &&
-          audience == o.audience
+          audience_uri == o.audience_uri
     end
 
     # @see the `==` method
@@ -246,7 +261,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, x509certificate, audience].hash
+      [x509certificate, account_id, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, audience_uri].hash
     end
 
     # Builds the object from hash

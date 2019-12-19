@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Import&gt;**](Import.md) |  | 
+**data** | [**Array&lt;Export&gt;**](Export.md) |  | 
 
 

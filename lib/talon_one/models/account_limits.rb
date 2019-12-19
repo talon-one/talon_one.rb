@@ -44,6 +44,9 @@ module TalonOne
     # Total allowed api volume
     attr_accessor :api_volume
 
+    # Total allowed active rulesets
+    attr_accessor :active_rules
+
     # array of rulesets where webhook is used
     attr_accessor :promotion_types
 
@@ -60,6 +63,7 @@ module TalonOne
         :'webhooks' => :'webhooks',
         :'users' => :'users',
         :'api_volume' => :'apiVolume',
+        :'active_rules' => :'activeRules',
         :'promotion_types' => :'promotionTypes'
       }
     end
@@ -77,6 +81,7 @@ module TalonOne
         :'webhooks' => :'Integer',
         :'users' => :'Integer',
         :'api_volume' => :'Integer',
+        :'active_rules' => :'Integer',
         :'promotion_types' => :'Array<String>'
       }
     end
@@ -127,6 +132,10 @@ module TalonOne
 
       if attributes.has_key?(:'apiVolume')
         self.api_volume = attributes[:'apiVolume']
+      end
+
+      if attributes.has_key?(:'activeRules')
+        self.active_rules = attributes[:'activeRules']
       end
 
       if attributes.has_key?(:'promotionTypes')
@@ -219,6 +228,7 @@ module TalonOne
           webhooks == o.webhooks &&
           users == o.users &&
           api_volume == o.api_volume &&
+          active_rules == o.active_rules &&
           promotion_types == o.promotion_types
     end
 
@@ -231,7 +241,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [live_applications, sandbox_applications, active_campaigns, coupons, referral_codes, live_loyalty_programs, sandbox_loyalty_programs, webhooks, users, api_volume, promotion_types].hash
+      [live_applications, sandbox_applications, active_campaigns, coupons, referral_codes, live_loyalty_programs, sandbox_loyalty_programs, webhooks, users, api_volume, active_rules, promotion_types].hash
     end
 
     # Builds the object from hash

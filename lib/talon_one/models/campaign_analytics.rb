@@ -17,11 +17,17 @@ module TalonOne
   class CampaignAnalytics
     attr_accessor :date
 
-    # Amount of revenue in this campaign.
+    # Amount of revenue in this campaign (for coupon or discount sessions).
     attr_accessor :campaign_revenue
 
-    # Amount of revenue in this campaign since it began.
+    # Amount of revenue in this campaign since it began (for coupon or discount sessions).
     attr_accessor :total_campaign_revenue
+
+    # Amount of refunds in this campaign (for coupon or discount sessions).
+    attr_accessor :campaign_refund
+
+    # Amount of refunds in this campaign since it began (for coupon or discount sessions).
+    attr_accessor :total_campaign_refund
 
     # Amount of cost caused by discounts given in the campaign.
     attr_accessor :campaign_discount_costs
@@ -29,17 +35,29 @@ module TalonOne
     # Amount of cost caused by discounts given in the campaign since it began.
     attr_accessor :total_campaign_discount_costs
 
+    # Amount of discounts rolledback due to refund in the campaign.
+    attr_accessor :campaign_refunded_discounts
+
+    # Amount of discounts rolledback due to refund in the campaign since it began.
+    attr_accessor :total_campaign_refunded_discounts
+
     # Amount of free items given in the campaign.
     attr_accessor :campaign_free_items
 
     # Amount of free items given in the campaign since it began.
     attr_accessor :total_campaign_free_items
 
-    # Number of coupon redemptions in the campaign (only accepted referrals on sessions that were closed are considered).
+    # Number of coupon redemptions in the campaign.
     attr_accessor :coupon_redemptions
 
     # Number of coupon redemptions in the campaign since it began.
     attr_accessor :total_coupon_redemptions
+
+    # Number of coupon redemptions that have been rolled back (due to canceling closed session) in the campaign.
+    attr_accessor :coupon_rolledback_redemptions
+
+    # Number of coupon redemptions that have been rolled back (due to canceling closed session) in the campaign since it began.
+    attr_accessor :total_coupon_rolledback_redemptions
 
     # Number of referral redemptions in the campaign.
     attr_accessor :referral_redemptions
@@ -65,12 +83,18 @@ module TalonOne
         :'date' => :'date',
         :'campaign_revenue' => :'campaignRevenue',
         :'total_campaign_revenue' => :'totalCampaignRevenue',
+        :'campaign_refund' => :'campaignRefund',
+        :'total_campaign_refund' => :'totalCampaignRefund',
         :'campaign_discount_costs' => :'campaignDiscountCosts',
         :'total_campaign_discount_costs' => :'totalCampaignDiscountCosts',
+        :'campaign_refunded_discounts' => :'campaignRefundedDiscounts',
+        :'total_campaign_refunded_discounts' => :'totalCampaignRefundedDiscounts',
         :'campaign_free_items' => :'campaignFreeItems',
         :'total_campaign_free_items' => :'totalCampaignFreeItems',
         :'coupon_redemptions' => :'couponRedemptions',
         :'total_coupon_redemptions' => :'totalCouponRedemptions',
+        :'coupon_rolledback_redemptions' => :'couponRolledbackRedemptions',
+        :'total_coupon_rolledback_redemptions' => :'totalCouponRolledbackRedemptions',
         :'referral_redemptions' => :'referralRedemptions',
         :'total_referral_redemptions' => :'totalReferralRedemptions',
         :'coupons_created' => :'couponsCreated',
@@ -86,12 +110,18 @@ module TalonOne
         :'date' => :'DateTime',
         :'campaign_revenue' => :'Float',
         :'total_campaign_revenue' => :'Float',
+        :'campaign_refund' => :'Float',
+        :'total_campaign_refund' => :'Float',
         :'campaign_discount_costs' => :'Float',
         :'total_campaign_discount_costs' => :'Float',
+        :'campaign_refunded_discounts' => :'Float',
+        :'total_campaign_refunded_discounts' => :'Float',
         :'campaign_free_items' => :'Integer',
         :'total_campaign_free_items' => :'Integer',
         :'coupon_redemptions' => :'Integer',
         :'total_coupon_redemptions' => :'Integer',
+        :'coupon_rolledback_redemptions' => :'Integer',
+        :'total_coupon_rolledback_redemptions' => :'Integer',
         :'referral_redemptions' => :'Integer',
         :'total_referral_redemptions' => :'Integer',
         :'coupons_created' => :'Integer',
@@ -121,12 +151,28 @@ module TalonOne
         self.total_campaign_revenue = attributes[:'totalCampaignRevenue']
       end
 
+      if attributes.has_key?(:'campaignRefund')
+        self.campaign_refund = attributes[:'campaignRefund']
+      end
+
+      if attributes.has_key?(:'totalCampaignRefund')
+        self.total_campaign_refund = attributes[:'totalCampaignRefund']
+      end
+
       if attributes.has_key?(:'campaignDiscountCosts')
         self.campaign_discount_costs = attributes[:'campaignDiscountCosts']
       end
 
       if attributes.has_key?(:'totalCampaignDiscountCosts')
         self.total_campaign_discount_costs = attributes[:'totalCampaignDiscountCosts']
+      end
+
+      if attributes.has_key?(:'campaignRefundedDiscounts')
+        self.campaign_refunded_discounts = attributes[:'campaignRefundedDiscounts']
+      end
+
+      if attributes.has_key?(:'totalCampaignRefundedDiscounts')
+        self.total_campaign_refunded_discounts = attributes[:'totalCampaignRefundedDiscounts']
       end
 
       if attributes.has_key?(:'campaignFreeItems')
@@ -143,6 +189,14 @@ module TalonOne
 
       if attributes.has_key?(:'totalCouponRedemptions')
         self.total_coupon_redemptions = attributes[:'totalCouponRedemptions']
+      end
+
+      if attributes.has_key?(:'couponRolledbackRedemptions')
+        self.coupon_rolledback_redemptions = attributes[:'couponRolledbackRedemptions']
+      end
+
+      if attributes.has_key?(:'totalCouponRolledbackRedemptions')
+        self.total_coupon_rolledback_redemptions = attributes[:'totalCouponRolledbackRedemptions']
       end
 
       if attributes.has_key?(:'referralRedemptions')
@@ -186,12 +240,28 @@ module TalonOne
         invalid_properties.push('invalid value for "total_campaign_revenue", total_campaign_revenue cannot be nil.')
       end
 
+      if @campaign_refund.nil?
+        invalid_properties.push('invalid value for "campaign_refund", campaign_refund cannot be nil.')
+      end
+
+      if @total_campaign_refund.nil?
+        invalid_properties.push('invalid value for "total_campaign_refund", total_campaign_refund cannot be nil.')
+      end
+
       if @campaign_discount_costs.nil?
         invalid_properties.push('invalid value for "campaign_discount_costs", campaign_discount_costs cannot be nil.')
       end
 
       if @total_campaign_discount_costs.nil?
         invalid_properties.push('invalid value for "total_campaign_discount_costs", total_campaign_discount_costs cannot be nil.')
+      end
+
+      if @campaign_refunded_discounts.nil?
+        invalid_properties.push('invalid value for "campaign_refunded_discounts", campaign_refunded_discounts cannot be nil.')
+      end
+
+      if @total_campaign_refunded_discounts.nil?
+        invalid_properties.push('invalid value for "total_campaign_refunded_discounts", total_campaign_refunded_discounts cannot be nil.')
       end
 
       if @campaign_free_items.nil?
@@ -208,6 +278,14 @@ module TalonOne
 
       if @total_coupon_redemptions.nil?
         invalid_properties.push('invalid value for "total_coupon_redemptions", total_coupon_redemptions cannot be nil.')
+      end
+
+      if @coupon_rolledback_redemptions.nil?
+        invalid_properties.push('invalid value for "coupon_rolledback_redemptions", coupon_rolledback_redemptions cannot be nil.')
+      end
+
+      if @total_coupon_rolledback_redemptions.nil?
+        invalid_properties.push('invalid value for "total_coupon_rolledback_redemptions", total_coupon_rolledback_redemptions cannot be nil.')
       end
 
       if @referral_redemptions.nil?
@@ -243,12 +321,18 @@ module TalonOne
       return false if @date.nil?
       return false if @campaign_revenue.nil?
       return false if @total_campaign_revenue.nil?
+      return false if @campaign_refund.nil?
+      return false if @total_campaign_refund.nil?
       return false if @campaign_discount_costs.nil?
       return false if @total_campaign_discount_costs.nil?
+      return false if @campaign_refunded_discounts.nil?
+      return false if @total_campaign_refunded_discounts.nil?
       return false if @campaign_free_items.nil?
       return false if @total_campaign_free_items.nil?
       return false if @coupon_redemptions.nil?
       return false if @total_coupon_redemptions.nil?
+      return false if @coupon_rolledback_redemptions.nil?
+      return false if @total_coupon_rolledback_redemptions.nil?
       return false if @referral_redemptions.nil?
       return false if @total_referral_redemptions.nil?
       return false if @coupons_created.nil?
@@ -266,12 +350,18 @@ module TalonOne
           date == o.date &&
           campaign_revenue == o.campaign_revenue &&
           total_campaign_revenue == o.total_campaign_revenue &&
+          campaign_refund == o.campaign_refund &&
+          total_campaign_refund == o.total_campaign_refund &&
           campaign_discount_costs == o.campaign_discount_costs &&
           total_campaign_discount_costs == o.total_campaign_discount_costs &&
+          campaign_refunded_discounts == o.campaign_refunded_discounts &&
+          total_campaign_refunded_discounts == o.total_campaign_refunded_discounts &&
           campaign_free_items == o.campaign_free_items &&
           total_campaign_free_items == o.total_campaign_free_items &&
           coupon_redemptions == o.coupon_redemptions &&
           total_coupon_redemptions == o.total_coupon_redemptions &&
+          coupon_rolledback_redemptions == o.coupon_rolledback_redemptions &&
+          total_coupon_rolledback_redemptions == o.total_coupon_rolledback_redemptions &&
           referral_redemptions == o.referral_redemptions &&
           total_referral_redemptions == o.total_referral_redemptions &&
           coupons_created == o.coupons_created &&
@@ -289,7 +379,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [date, campaign_revenue, total_campaign_revenue, campaign_discount_costs, total_campaign_discount_costs, campaign_free_items, total_campaign_free_items, coupon_redemptions, total_coupon_redemptions, referral_redemptions, total_referral_redemptions, coupons_created, total_coupons_created, referrals_created, total_referrals_created].hash
+      [date, campaign_revenue, total_campaign_revenue, campaign_refund, total_campaign_refund, campaign_discount_costs, total_campaign_discount_costs, campaign_refunded_discounts, total_campaign_refunded_discounts, campaign_free_items, total_campaign_free_items, coupon_redemptions, total_coupon_redemptions, coupon_rolledback_redemptions, total_coupon_rolledback_redemptions, referral_redemptions, total_referral_redemptions, coupons_created, total_coupons_created, referrals_created, total_referrals_created].hash
     end
 
     # Builds the object from hash

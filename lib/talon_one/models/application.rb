@@ -48,6 +48,8 @@ module TalonOne
     # Default limits for campaigns created in this application
     attr_accessor :limits
 
+    attr_accessor :attributes_settings
+
     # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
     attr_accessor :key
 
@@ -90,6 +92,7 @@ module TalonOne
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
         :'limits' => :'limits',
+        :'attributes_settings' => :'attributesSettings',
         :'key' => :'key',
         :'loyalty_programs' => :'loyaltyPrograms'
       }
@@ -109,6 +112,7 @@ module TalonOne
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
+        :'attributes_settings' => :'AttributesSettings',
         :'key' => :'String',
         :'loyalty_programs' => :'Array<LoyaltyProgram>'
       }
@@ -166,6 +170,10 @@ module TalonOne
         if (value = attributes[:'limits']).is_a?(Array)
           self.limits = value
         end
+      end
+
+      if attributes.has_key?(:'attributesSettings')
+        self.attributes_settings = attributes[:'attributesSettings']
       end
 
       if attributes.has_key?(:'key')
@@ -359,6 +367,7 @@ module TalonOne
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
           limits == o.limits &&
+          attributes_settings == o.attributes_settings &&
           key == o.key &&
           loyalty_programs == o.loyalty_programs
     end
@@ -372,7 +381,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, key, loyalty_programs].hash
+      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, attributes_settings, key, loyalty_programs].hash
     end
 
     # Builds the object from hash

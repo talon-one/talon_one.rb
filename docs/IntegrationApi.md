@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_referral**](IntegrationApi.md#create_referral) | **POST** /v1/referrals | Create a referral code for an advocate
 [**delete_coupon_reservation**](IntegrationApi.md#delete_coupon_reservation) | **DELETE** /v1/coupon_reservations/{couponValue} | Delete coupon reservations
 [**delete_customer_data**](IntegrationApi.md#delete_customer_data) | **DELETE** /v1/customer_data/{integrationId} | Delete the personal data of a customer.
+[**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | Get an inventory of all data associated with a specific customer profile.
 [**get_reserved_coupons**](IntegrationApi.md#get_reserved_coupons) | **GET** /v1/coupon_reservations/coupons/{integrationId} | Get all valid reserved coupons
 [**get_reserved_customers**](IntegrationApi.md#get_reserved_customers) | **GET** /v1/coupon_reservations/customerprofiles/{couponValue} | Get the users that have this coupon reserved
 [**track_event**](IntegrationApi.md#track_event) | **POST** /v1/events | Track an Event
@@ -243,6 +244,71 @@ Name | Type | Description  | Notes
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **get_customer_inventory**
+> CustomerInventory get_customer_inventory(integration_id, opts)
+
+Get an inventory of all data associated with a specific customer profile.
+
+Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+
+### Example
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: integration_auth
+  config.api_key['Content-Signature'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Content-Signature'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+
+integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
+
+opts = { 
+  profile: nil, # Object | optional flag to decide if you would like customer profile information in the response
+  referrals: nil # Object | optional flag to decide if you would like referral information in the response
+}
+
+begin
+  #Get an inventory of all data associated with a specific customer profile.
+  result = api_instance.get_customer_inventory(integration_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->get_customer_inventory: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
+ **profile** | [**Object**](.md)| optional flag to decide if you would like customer profile information in the response | [optional] 
+ **referrals** | [**Object**](.md)| optional flag to decide if you would like referral information in the response | [optional] 
+
+### Return type
+
+[**CustomerInventory**](CustomerInventory.md)
 
 ### Authorization
 

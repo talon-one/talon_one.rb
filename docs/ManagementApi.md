@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_loyalty_points**](ManagementApi.md#add_loyalty_points) | **PUT** /v1/loyalty_programs/{programID}/profile/{integrationID}/add_points | Add points in a certain loyalty program for the specified customer
 [**copy_campaign_to_applications**](ManagementApi.md#copy_campaign_to_applications) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/copy | Copy the campaign into every specified application
+[**create_attribute**](ManagementApi.md#create_attribute) | **POST** /v1/attributes | Define a new custom attribute
 [**create_campaign**](ManagementApi.md#create_campaign) | **POST** /v1/applications/{applicationId}/campaigns | Create a Campaign
 [**create_coupons**](ManagementApi.md#create_coupons) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Create Coupons
 [**create_password_recovery_email**](ManagementApi.md#create_password_recovery_email) | **POST** /v1/password_recovery_emails | Request a password reset
@@ -20,7 +21,6 @@ Method | HTTP request | Description
 [**get_access_logs_without_total_count**](ManagementApi.md#get_access_logs_without_total_count) | **GET** /v1/applications/{applicationId}/access_logs/no_total | Get access logs for application
 [**get_account**](ManagementApi.md#get_account) | **GET** /v1/accounts/{accountId} | Get Account Details
 [**get_account_analytics**](ManagementApi.md#get_account_analytics) | **GET** /v1/accounts/{accountId}/analytics | Get Account Analytics
-[**get_account_limits**](ManagementApi.md#get_account_limits) | **GET** /v1/accounts/{accountId}/limits | Get Account Limits
 [**get_all_access_logs**](ManagementApi.md#get_all_access_logs) | **GET** /v1/access_logs | Get all access logs
 [**get_all_roles**](ManagementApi.md#get_all_roles) | **GET** /v1/roles | Get all roles.
 [**get_application**](ManagementApi.md#get_application) | **GET** /v1/applications/{applicationId} | Get Application
@@ -35,6 +35,7 @@ Method | HTTP request | Description
 [**get_application_sessions**](ManagementApi.md#get_application_sessions) | **GET** /v1/applications/{applicationId}/sessions | List Application Sessions
 [**get_applications**](ManagementApi.md#get_applications) | **GET** /v1/applications | List Applications
 [**get_attribute**](ManagementApi.md#get_attribute) | **GET** /v1/attributes/{attributeId} | Get a custom attribute
+[**get_attributes**](ManagementApi.md#get_attributes) | **GET** /v1/attributes | List custom attributes
 [**get_campaign**](ManagementApi.md#get_campaign) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId} | Get a Campaign
 [**get_campaign_analytics**](ManagementApi.md#get_campaign_analytics) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/analytics | Get analytics of campaigns
 [**get_campaign_by_attributes**](ManagementApi.md#get_campaign_by_attributes) | **POST** /v1/applications/{applicationId}/campaigns_search | Get a list of all campaigns that match the given attributes
@@ -76,7 +77,7 @@ Method | HTTP request | Description
 [**search_coupons_advanced_application_wide**](ManagementApi.md#search_coupons_advanced_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search_advanced | Get a list of the coupons that match the given attributes in all active campaigns of an application
 [**search_coupons_advanced_application_wide_without_total_count**](ManagementApi.md#search_coupons_advanced_application_wide_without_total_count) | **POST** /v1/applications/{applicationId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes in all active campaigns of an application
 [**search_coupons_advanced_without_total_count**](ManagementApi.md#search_coupons_advanced_without_total_count) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes
-[**set_account_limits**](ManagementApi.md#set_account_limits) | **PUT** /v1/accounts/{accountId}/limits | Set account limits
+[**update_attribute**](ManagementApi.md#update_attribute) | **PUT** /v1/attributes/{attributeId} | Update a custom attribute
 [**update_campaign**](ManagementApi.md#update_campaign) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId} | Update a Campaign
 [**update_campaign_set**](ManagementApi.md#update_campaign_set) | **PUT** /v1/applications/{applicationId}/campaign_set | Update a Campaign Set
 [**update_coupon**](ManagementApi.md#update_coupon) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/{couponId} | Update a Coupon
@@ -203,6 +204,60 @@ Name | Type | Description  | Notes
 
 
 
+# **create_attribute**
+> Attribute create_attribute(body)
+
+Define a new custom attribute
+
+Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+
+### Example
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+
+body = TalonOne::NewAttribute.new # NewAttribute | 
+
+
+begin
+  #Define a new custom attribute
+  result = api_instance.create_attribute(body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->create_attribute: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**NewAttribute**](NewAttribute.md)|  | 
+
+### Return type
+
+[**Attribute**](Attribute.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
 # **create_campaign**
 > Campaign create_campaign(application_id, body)
 
@@ -265,7 +320,7 @@ Name | Type | Description  | Notes
 
 Create Coupons
 
-Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupns can be created.
+Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
 
 ### Example
 ```ruby
@@ -837,8 +892,8 @@ range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only retu
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
 
 opts = { 
-  path: 'path_example', # String | Only return results where the request path matches the given regular expresssion.
-  method: 'method_example', # String | Only return results where the request method matches the given regular expresssion.
+  path: 'path_example', # String | Only return results where the request path matches the given regular expression.
+  method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -861,8 +916,8 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **range_start** | **DateTime**| Only return results from after this timestamp, must be an RFC3339 timestamp string | 
  **range_end** | **DateTime**| Only return results from before this timestamp, must be an RFC3339 timestamp string | 
- **path** | **String**| Only return results where the request path matches the given regular expresssion. | [optional] 
- **method** | **String**| Only return results where the request method matches the given regular expresssion. | [optional] 
+ **path** | **String**| Only return results where the request path matches the given regular expression. | [optional] 
+ **method** | **String**| Only return results where the request method matches the given regular expression. | [optional] 
  **status** | **String**| Filter results by HTTP status codes. | [optional] 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
@@ -911,8 +966,8 @@ range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only retu
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
 
 opts = { 
-  path: 'path_example', # String | Only return results where the request path matches the given regular expresssion.
-  method: 'method_example', # String | Only return results where the request method matches the given regular expresssion.
+  path: 'path_example', # String | Only return results where the request path matches the given regular expression.
+  method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -935,8 +990,8 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **range_start** | **DateTime**| Only return results from after this timestamp, must be an RFC3339 timestamp string | 
  **range_end** | **DateTime**| Only return results from before this timestamp, must be an RFC3339 timestamp string | 
- **path** | **String**| Only return results where the request path matches the given regular expresssion. | [optional] 
- **method** | **String**| Only return results where the request method matches the given regular expresssion. | [optional] 
+ **path** | **String**| Only return results where the request path matches the given regular expression. | [optional] 
+ **method** | **String**| Only return results where the request method matches the given regular expression. | [optional] 
  **status** | **String**| Filter results by HTTP status codes. | [optional] 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
@@ -1065,60 +1120,6 @@ Name | Type | Description  | Notes
 
 
 
-# **get_account_limits**
-> AccountLimits get_account_limits(account_id)
-
-Get Account Limits
-
-Returns a list of all account limits set 
-
-### Example
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-
-account_id = 56 # Integer | 
-
-
-begin
-  #Get Account Limits
-  result = api_instance.get_account_limits(account_id)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_account_limits: #{e}"
-end
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **account_id** | **Integer**|  | 
-
-### Return type
-
-[**AccountLimits**](AccountLimits.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-
 # **get_all_access_logs**
 > InlineResponse2009 get_all_access_logs(range_start, range_end, opts)
 
@@ -1145,8 +1146,8 @@ range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only retu
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
 
 opts = { 
-  path: 'path_example', # String | Only return results where the request path matches the given regular expresssion.
-  method: 'method_example', # String | Only return results where the request method matches the given regular expresssion.
+  path: 'path_example', # String | Only return results where the request path matches the given regular expression.
+  method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
@@ -1168,8 +1169,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **range_start** | **DateTime**| Only return results from after this timestamp, must be an RFC3339 timestamp string | 
  **range_end** | **DateTime**| Only return results from before this timestamp, must be an RFC3339 timestamp string | 
- **path** | **String**| Only return results where the request path matches the given regular expresssion. | [optional] 
- **method** | **String**| Only return results where the request method matches the given regular expresssion. | [optional] 
+ **path** | **String**| Only return results where the request path matches the given regular expression. | [optional] 
+ **method** | **String**| Only return results where the request method matches the given regular expression. | [optional] 
  **status** | **String**| Filter results by HTTP status codes. | [optional] 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
@@ -1191,7 +1192,7 @@ Name | Type | Description  | Notes
 
 
 # **get_all_roles**
-> InlineResponse20028 get_all_roles
+> InlineResponse20029 get_all_roles
 
 Get all roles.
 
@@ -1223,7 +1224,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -1460,7 +1461,7 @@ Name | Type | Description  | Notes
 
 Get a list of the customer profiles that match the given attributes
 
-Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id=14115#customer-profile 
+Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
 
 ### Example
 ```ruby
@@ -1977,6 +1978,65 @@ Name | Type | Description  | Notes
 
 
 
+# **get_attributes**
+> InlineResponse20020 get_attributes(opts)
+
+List custom attributes
+
+Returns all the defined custom attributes for the account. 
+
+### Example
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+
+opts = { 
+  page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  skip: 56, # Integer | Skips the given number of items when paging through large result sets.
+  sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+}
+
+begin
+  #List custom attributes
+  result = api_instance.get_attributes(opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_attributes: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
+ **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+
+### Return type
+
+[**InlineResponse20020**](InlineResponse20020.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
 # **get_campaign**
 > Campaign get_campaign(application_id, campaign_id)
 
@@ -2295,7 +2355,7 @@ Name | Type | Description  | Notes
 
 
 # **get_changes**
-> InlineResponse20025 get_changes(opts)
+> InlineResponse20026 get_changes(opts)
 
 Get audit log for an account
 
@@ -2350,7 +2410,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -3113,7 +3173,7 @@ Name | Type | Description  | Notes
 
 Get a list of the customer profiles that match the given attributes
 
-Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id=14115#customer-profile 
+Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
 
 ### Example
 ```ruby
@@ -3169,7 +3229,7 @@ Name | Type | Description  | Notes
 
 
 # **get_event_types**
-> InlineResponse20023 get_event_types(opts)
+> InlineResponse20024 get_event_types(opts)
 
 List Event Types
 
@@ -3220,7 +3280,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -3234,7 +3294,7 @@ Name | Type | Description  | Notes
 
 
 # **get_exports**
-> InlineResponse20026 get_exports(opts)
+> InlineResponse20027 get_exports(opts)
 
 Get Exports
 
@@ -3283,7 +3343,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -3297,7 +3357,7 @@ Name | Type | Description  | Notes
 
 
 # **get_imports**
-> InlineResponse20027 get_imports(opts)
+> InlineResponse20028 get_imports(opts)
 
 Get Imports
 
@@ -3340,7 +3400,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -3898,7 +3958,7 @@ Name | Type | Description  | Notes
 
 
 # **get_users**
-> InlineResponse20024 get_users(opts)
+> InlineResponse20025 get_users(opts)
 
 List Users in your account
 
@@ -3943,7 +4003,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -4011,7 +4071,7 @@ Name | Type | Description  | Notes
 
 
 # **get_webhook_activation_logs**
-> InlineResponse20021 get_webhook_activation_logs(opts)
+> InlineResponse20022 get_webhook_activation_logs(opts)
 
 List Webhook activation Log Entries
 
@@ -4068,7 +4128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -4082,7 +4142,7 @@ Name | Type | Description  | Notes
 
 
 # **get_webhook_logs**
-> InlineResponse20022 get_webhook_logs(opts)
+> InlineResponse20023 get_webhook_logs(opts)
 
 List Webhook Log Entries
 
@@ -4141,7 +4201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -4155,7 +4215,7 @@ Name | Type | Description  | Notes
 
 
 # **get_webhooks**
-> InlineResponse20020 get_webhooks(opts)
+> InlineResponse20021 get_webhooks(opts)
 
 List Webhooks
 
@@ -4202,7 +4262,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -4717,12 +4777,12 @@ Name | Type | Description  | Notes
 
 
 
-# **set_account_limits**
-> set_account_limits(account_id, body)
+# **update_attribute**
+> Attribute update_attribute(attribute_id, body)
 
-Set account limits
+Update a custom attribute
 
-sets account limits 
+Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name `region`, and your integration is sending `attributes.region` with customer profile updates, changing the name to `locale` would cause the integration requests to begin failing.  If you **really** need to change the `type` or `name` property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
 
 ### Example
 ```ruby
@@ -4738,16 +4798,17 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 
-account_id = 56 # Integer | 
+attribute_id = 56 # Integer | 
 
-body = TalonOne::AccountLimits.new # AccountLimits | 
+body = TalonOne::NewAttribute.new # NewAttribute | 
 
 
 begin
-  #Set account limits
-  api_instance.set_account_limits(account_id, body)
+  #Update a custom attribute
+  result = api_instance.update_attribute(attribute_id, body)
+  p result
 rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->set_account_limits: #{e}"
+  puts "Exception when calling ManagementApi->update_attribute: #{e}"
 end
 ```
 
@@ -4755,12 +4816,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **account_id** | **Integer**|  | 
- **body** | [**AccountLimits**](AccountLimits.md)|  | 
+ **attribute_id** | **Integer**|  | 
+ **body** | [**NewAttribute**](NewAttribute.md)|  | 
 
 ### Return type
 
-nil (empty response body)
+[**Attribute**](Attribute.md)
 
 ### Authorization
 

@@ -60,6 +60,18 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for create_attribute
+  # Define a new custom attribute
+  # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [Attribute]
+  describe 'create_attribute test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_campaign
   # Create a Campaign
   # 
@@ -75,7 +87,7 @@ describe 'ManagementApi' do
 
   # unit tests for create_coupons
   # Create Coupons
-  # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupns can be created.
+  # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
   # @param application_id 
   # @param campaign_id 
   # @param body 
@@ -214,8 +226,8 @@ describe 'ManagementApi' do
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-  # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+  # @option opts [String] :path Only return results where the request path matches the given regular expression.
+  # @option opts [String] :method Only return results where the request method matches the given regular expression.
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -234,8 +246,8 @@ describe 'ManagementApi' do
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-  # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+  # @option opts [String] :path Only return results where the request path matches the given regular expression.
+  # @option opts [String] :method Only return results where the request method matches the given regular expression.
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -271,26 +283,14 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for get_account_limits
-  # Get Account Limits
-  # Returns a list of all account limits set 
-  # @param account_id 
-  # @param [Hash] opts the optional parameters
-  # @return [AccountLimits]
-  describe 'get_account_limits test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_all_access_logs
   # Get all access logs
   # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :path Only return results where the request path matches the given regular expresssion.
-  # @option opts [String] :method Only return results where the request method matches the given regular expresssion.
+  # @option opts [String] :path Only return results where the request path matches the given regular expression.
+  # @option opts [String] :method Only return results where the request method matches the given regular expression.
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -305,7 +305,7 @@ describe 'ManagementApi' do
   # unit tests for get_all_roles
   # Get all roles.
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20028]
+  # @return [InlineResponse20029]
   describe 'get_all_roles test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -363,7 +363,7 @@ describe 'ManagementApi' do
 
   # unit tests for get_application_customers_by_attributes
   # Get a list of the customer profiles that match the given attributes
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id&#x3D;14115#customer-profile 
+  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse20013]
@@ -497,6 +497,20 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for get_attributes
+  # List custom attributes
+  # Returns all the defined custom attributes for the account. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @return [InlineResponse20020]
+  describe 'get_attributes test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_campaign
   # Get a Campaign
   # 
@@ -587,7 +601,7 @@ describe 'ManagementApi' do
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
   # @option opts [BOOLEAN] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   # @option opts [BOOLEAN] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-  # @return [InlineResponse20025]
+  # @return [InlineResponse20026]
   describe 'get_changes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -803,7 +817,7 @@ describe 'ManagementApi' do
 
   # unit tests for get_customers_by_attributes
   # Get a list of the customer profiles that match the given attributes
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: http://help.talon.one/customer/en/portal/articles/2525263-data-model?b_id&#x3D;14115#customer-profile 
+  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -825,7 +839,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20023]
+  # @return [InlineResponse20024]
   describe 'get_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -841,7 +855,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :application_id 
   # @option opts [Integer] :campaign_id 
   # @option opts [String] :entity The name of the entity type that was exported.
-  # @return [InlineResponse20026]
+  # @return [InlineResponse20027]
   describe 'get_exports test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -854,7 +868,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20027]
+  # @return [InlineResponse20028]
   describe 'get_imports test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1001,7 +1015,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20024]
+  # @return [InlineResponse20025]
   describe 'get_users test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1033,7 +1047,7 @@ describe 'ManagementApi' do
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [DateTime] :created_before Only return events created before this date.
   # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-  # @return [InlineResponse20021]
+  # @return [InlineResponse20022]
   describe 'get_webhook_activation_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1054,7 +1068,7 @@ describe 'ManagementApi' do
   # @option opts [String] :request_uuid Filter results by request UUID.
   # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
   # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20023]
   describe 'get_webhook_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1069,7 +1083,7 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20020]
+  # @return [InlineResponse20021]
   describe 'get_webhooks test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1217,14 +1231,14 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for set_account_limits
-  # Set account limits
-  # sets account limits 
-  # @param account_id 
+  # unit tests for update_attribute
+  # Update a custom attribute
+  # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name &#x60;region&#x60;, and your integration is sending &#x60;attributes.region&#x60; with customer profile updates, changing the name to &#x60;locale&#x60; would cause the integration requests to begin failing.  If you **really** need to change the &#x60;type&#x60; or &#x60;name&#x60; property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
+  # @param attribute_id 
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'set_account_limits test' do
+  # @return [Attribute]
+  describe 'update_attribute test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

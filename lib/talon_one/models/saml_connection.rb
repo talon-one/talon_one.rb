@@ -15,16 +15,11 @@ require 'date'
 module TalonOne
   # 
   class SamlConnection
-    attr_accessor :id
-
-    # Unix timestamp indicating when the session was first created.
-    attr_accessor :created
-
-    # The ID of the account that owns this SAML Service.
-    attr_accessor :account_id
-
     # The location where the SAML assertion is sent with a HTTP POST.
     attr_accessor :assertion_consumer_service_url
+
+    # The ID of the account that owns this entity.
+    attr_accessor :account_id
 
     # ID of the SAML service.
     attr_accessor :name
@@ -44,45 +39,46 @@ module TalonOne
     # Metadata URL.
     attr_accessor :metadata_url
 
-    # X.509 Certificate.
-    attr_accessor :x509certificate
+    # The application-defined unique identifier that is the intended audience of the SAML assertion. This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
+    attr_accessor :audience_uri
 
-    # The application-defined unique identifier that is the intended audience of the SAML assertion.  This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
-    attr_accessor :audience
+    # Unique ID for this entity.
+    attr_accessor :id
+
+    # The exact moment this entity was created.
+    attr_accessor :created
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created' => :'created',
-        :'account_id' => :'accountId',
         :'assertion_consumer_service_url' => :'assertionConsumerServiceURL',
+        :'account_id' => :'accountId',
         :'name' => :'name',
         :'enabled' => :'enabled',
         :'issuer' => :'issuer',
         :'sign_on_url' => :'signOnURL',
         :'sign_out_url' => :'signOutURL',
         :'metadata_url' => :'metadataURL',
-        :'x509certificate' => :'x509certificate',
-        :'audience' => :'audience'
+        :'audience_uri' => :'audienceURI',
+        :'id' => :'id',
+        :'created' => :'created'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'created' => :'DateTime',
-        :'account_id' => :'Integer',
         :'assertion_consumer_service_url' => :'String',
+        :'account_id' => :'Integer',
         :'name' => :'String',
         :'enabled' => :'BOOLEAN',
         :'issuer' => :'String',
         :'sign_on_url' => :'String',
         :'sign_out_url' => :'String',
         :'metadata_url' => :'String',
-        :'x509certificate' => :'String',
-        :'audience' => :'String'
+        :'audience_uri' => :'String',
+        :'id' => :'Integer',
+        :'created' => :'DateTime'
       }
     end
 
@@ -94,20 +90,12 @@ module TalonOne
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'created')
-        self.created = attributes[:'created']
+      if attributes.has_key?(:'assertionConsumerServiceURL')
+        self.assertion_consumer_service_url = attributes[:'assertionConsumerServiceURL']
       end
 
       if attributes.has_key?(:'accountId')
         self.account_id = attributes[:'accountId']
-      end
-
-      if attributes.has_key?(:'assertionConsumerServiceURL')
-        self.assertion_consumer_service_url = attributes[:'assertionConsumerServiceURL']
       end
 
       if attributes.has_key?(:'name')
@@ -134,12 +122,16 @@ module TalonOne
         self.metadata_url = attributes[:'metadataURL']
       end
 
-      if attributes.has_key?(:'x509certificate')
-        self.x509certificate = attributes[:'x509certificate']
+      if attributes.has_key?(:'audienceURI')
+        self.audience_uri = attributes[:'audienceURI']
       end
 
-      if attributes.has_key?(:'audience')
-        self.audience = attributes[:'audience']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'created')
+        self.created = attributes[:'created']
       end
     end
 
@@ -147,20 +139,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
+      if @assertion_consumer_service_url.nil?
+        invalid_properties.push('invalid value for "assertion_consumer_service_url", assertion_consumer_service_url cannot be nil.')
       end
 
       if @account_id.nil?
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @assertion_consumer_service_url.nil?
-        invalid_properties.push('invalid value for "assertion_consumer_service_url", assertion_consumer_service_url cannot be nil.')
       end
 
       if @name.nil?
@@ -191,16 +175,16 @@ module TalonOne
         invalid_properties.push('invalid value for "sign_on_url", the character length must be great than or equal to 1.')
       end
 
-      if @x509certificate.nil?
-        invalid_properties.push('invalid value for "x509certificate", x509certificate cannot be nil.')
+      if @audience_uri.nil?
+        invalid_properties.push('invalid value for "audience_uri", audience_uri cannot be nil.')
       end
 
-      if @x509certificate.to_s.length < 1
-        invalid_properties.push('invalid value for "x509certificate", the character length must be great than or equal to 1.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @audience.nil?
-        invalid_properties.push('invalid value for "audience", audience cannot be nil.')
+      if @created.nil?
+        invalid_properties.push('invalid value for "created", created cannot be nil.')
       end
 
       invalid_properties
@@ -209,10 +193,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created.nil?
-      return false if @account_id.nil?
       return false if @assertion_consumer_service_url.nil?
+      return false if @account_id.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
       return false if @enabled.nil?
@@ -220,9 +202,9 @@ module TalonOne
       return false if @issuer.to_s.length < 1
       return false if @sign_on_url.nil?
       return false if @sign_on_url.to_s.length < 1
-      return false if @x509certificate.nil?
-      return false if @x509certificate.to_s.length < 1
-      return false if @audience.nil?
+      return false if @audience_uri.nil?
+      return false if @id.nil?
+      return false if @created.nil?
       true
     end
 
@@ -268,37 +250,22 @@ module TalonOne
       @sign_on_url = sign_on_url
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] x509certificate Value to be assigned
-    def x509certificate=(x509certificate)
-      if x509certificate.nil?
-        fail ArgumentError, 'x509certificate cannot be nil'
-      end
-
-      if x509certificate.to_s.length < 1
-        fail ArgumentError, 'invalid value for "x509certificate", the character length must be great than or equal to 1.'
-      end
-
-      @x509certificate = x509certificate
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created == o.created &&
-          account_id == o.account_id &&
           assertion_consumer_service_url == o.assertion_consumer_service_url &&
+          account_id == o.account_id &&
           name == o.name &&
           enabled == o.enabled &&
           issuer == o.issuer &&
           sign_on_url == o.sign_on_url &&
           sign_out_url == o.sign_out_url &&
           metadata_url == o.metadata_url &&
-          x509certificate == o.x509certificate &&
-          audience == o.audience
+          audience_uri == o.audience_uri &&
+          id == o.id &&
+          created == o.created
     end
 
     # @see the `==` method
@@ -310,7 +277,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created, account_id, assertion_consumer_service_url, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, x509certificate, audience].hash
+      [assertion_consumer_service_url, account_id, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, audience_uri, id, created].hash
     end
 
     # Builds the object from hash

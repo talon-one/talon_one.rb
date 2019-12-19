@@ -82,6 +82,20 @@ describe 'IntegrationApi' do
     end
   end
 
+  # unit tests for get_customer_inventory
+  # Get an inventory of all data associated with a specific customer profile.
+  # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+  # @param integration_id The custom identifier for this profile, must be unique within the account.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Object] :profile optional flag to decide if you would like customer profile information in the response
+  # @option opts [Object] :referrals optional flag to decide if you would like referral information in the response
+  # @return [CustomerInventory]
+  describe 'get_customer_inventory test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_reserved_coupons
   # Get all valid reserved coupons
   # Returns all coupons this user is subscribed to that are valid and usable 

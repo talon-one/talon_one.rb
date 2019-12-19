@@ -35,6 +35,8 @@ module TalonOne
     # Default limits for campaigns created in this application
     attr_accessor :limits
 
+    attr_accessor :attributes_settings
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -66,7 +68,8 @@ module TalonOne
         :'currency' => :'currency',
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
-        :'limits' => :'limits'
+        :'limits' => :'limits',
+        :'attributes_settings' => :'attributesSettings'
       }
     end
 
@@ -79,7 +82,8 @@ module TalonOne
         :'currency' => :'String',
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
-        :'limits' => :'Array<LimitConfig>'
+        :'limits' => :'Array<LimitConfig>',
+        :'attributes_settings' => :'AttributesSettings'
       }
     end
 
@@ -119,6 +123,10 @@ module TalonOne
         if (value = attributes[:'limits']).is_a?(Array)
           self.limits = value
         end
+      end
+
+      if attributes.has_key?(:'attributesSettings')
+        self.attributes_settings = attributes[:'attributesSettings']
       end
     end
 
@@ -230,7 +238,8 @@ module TalonOne
           currency == o.currency &&
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
-          limits == o.limits
+          limits == o.limits &&
+          attributes_settings == o.attributes_settings
     end
 
     # @see the `==` method
@@ -242,7 +251,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, attributes_settings].hash
     end
 
     # Builds the object from hash

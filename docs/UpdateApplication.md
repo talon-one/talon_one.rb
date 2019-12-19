@@ -10,5 +10,6 @@ Name | Type | Description | Notes
 **case_sensitivity** | **String** | A string indicating how should campaigns in this application deal with case sensitivity on coupon codes. | [optional] 
 **attributes** | **Object** | Arbitrary properties associated with this campaign | [optional] 
 **limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | Default limits for campaigns created in this application | [optional] 
+**attributes_settings** | [**AttributesSettings**](AttributesSettings.md) |  | [optional] 
 
 
