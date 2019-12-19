@@ -3,8 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | [optional] 
-**has_more** | **BOOLEAN** |  | [optional] 
-**data** | [**Array&lt;Change&gt;**](Change.md) |  | 
+**total_result_size** | **Integer** |  | 
+**data** | [**Array&lt;User&gt;**](User.md) |  | 
 
 

@@ -245,6 +245,66 @@ module TalonOne
       end
       return data, status_code, headers
     end
+    # Get an inventory of all data associated with a specific customer profile.
+    # Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+    # @param integration_id The custom identifier for this profile, must be unique within the account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Object] :profile optional flag to decide if you would like customer profile information in the response
+    # @option opts [Object] :referrals optional flag to decide if you would like referral information in the response
+    # @return [CustomerInventory]
+    def get_customer_inventory(integration_id, opts = {})
+      data, _status_code, _headers = get_customer_inventory_with_http_info(integration_id, opts)
+      data
+    end
+
+    # Get an inventory of all data associated with a specific customer profile.
+    # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+    # @param integration_id The custom identifier for this profile, must be unique within the account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Object] :profile optional flag to decide if you would like customer profile information in the response
+    # @option opts [Object] :referrals optional flag to decide if you would like referral information in the response
+    # @return [Array<(CustomerInventory, Fixnum, Hash)>] CustomerInventory data, response status code and response headers
+    def get_customer_inventory_with_http_info(integration_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.get_customer_inventory ...'
+      end
+      # verify the required parameter 'integration_id' is set
+      if @api_client.config.client_side_validation && integration_id.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_customer_inventory"
+      end
+      # resource path
+      local_var_path = '/v1/customer_profiles/{integrationId}/inventory'.sub('{' + 'integrationId' + '}', integration_id.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'profile'] = opts[:'profile'] if !opts[:'profile'].nil?
+      query_params[:'referrals'] = opts[:'referrals'] if !opts[:'referrals'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['api_key_v1', 'integration_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'CustomerInventory')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#get_customer_inventory\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Get all valid reserved coupons
     # Returns all coupons this user is subscribed to that are valid and usable 
     # @param integration_id The custom identifier for this profile, must be unique within the account.

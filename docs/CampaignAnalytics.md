@@ -4,14 +4,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **date** | **DateTime** |  | 
-**campaign_revenue** | **Float** | Amount of revenue in this campaign. | 
-**total_campaign_revenue** | **Float** | Amount of revenue in this campaign since it began. | 
+**campaign_revenue** | **Float** | Amount of revenue in this campaign (for coupon or discount sessions). | 
+**total_campaign_revenue** | **Float** | Amount of revenue in this campaign since it began (for coupon or discount sessions). | 
+**campaign_refund** | **Float** | Amount of refunds in this campaign (for coupon or discount sessions). | 
+**total_campaign_refund** | **Float** | Amount of refunds in this campaign since it began (for coupon or discount sessions). | 
 **campaign_discount_costs** | **Float** | Amount of cost caused by discounts given in the campaign. | 
 **total_campaign_discount_costs** | **Float** | Amount of cost caused by discounts given in the campaign since it began. | 
+**campaign_refunded_discounts** | **Float** | Amount of discounts rolledback due to refund in the campaign. | 
+**total_campaign_refunded_discounts** | **Float** | Amount of discounts rolledback due to refund in the campaign since it began. | 
 **campaign_free_items** | **Integer** | Amount of free items given in the campaign. | 
 **total_campaign_free_items** | **Integer** | Amount of free items given in the campaign since it began. | 
-**coupon_redemptions** | **Integer** | Number of coupon redemptions in the campaign (only accepted referrals on sessions that were closed are considered). | 
+**coupon_redemptions** | **Integer** | Number of coupon redemptions in the campaign. | 
 **total_coupon_redemptions** | **Integer** | Number of coupon redemptions in the campaign since it began. | 
+**coupon_rolledback_redemptions** | **Integer** | Number of coupon redemptions that have been rolled back (due to canceling closed session) in the campaign. | 
+**total_coupon_rolledback_redemptions** | **Integer** | Number of coupon redemptions that have been rolled back (due to canceling closed session) in the campaign since it began. | 
 **referral_redemptions** | **Integer** | Number of referral redemptions in the campaign. | 
 **total_referral_redemptions** | **Integer** | Number of referral redemptions in the campaign since it began. | 
 **coupons_created** | **Integer** | Number of coupons created in the campaign by the rule engine. | 

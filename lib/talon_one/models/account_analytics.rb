@@ -56,6 +56,9 @@ module TalonOne
     # Total Number of loyalty programs inside the account
     attr_accessor :loyalty_programs
 
+    # Total Number of active rules in the account
+    attr_accessor :active_rules
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -72,7 +75,8 @@ module TalonOne
         :'users' => :'users',
         :'roles' => :'roles',
         :'webhooks' => :'webhooks',
-        :'loyalty_programs' => :'loyaltyPrograms'
+        :'loyalty_programs' => :'loyaltyPrograms',
+        :'active_rules' => :'activeRules'
       }
     end
 
@@ -92,7 +96,8 @@ module TalonOne
         :'users' => :'Integer',
         :'roles' => :'Integer',
         :'webhooks' => :'Integer',
-        :'loyalty_programs' => :'Integer'
+        :'loyalty_programs' => :'Integer',
+        :'active_rules' => :'Integer'
       }
     end
 
@@ -159,6 +164,10 @@ module TalonOne
       if attributes.has_key?(:'loyaltyPrograms')
         self.loyalty_programs = attributes[:'loyaltyPrograms']
       end
+
+      if attributes.has_key?(:'activeRules')
+        self.active_rules = attributes[:'activeRules']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -221,6 +230,10 @@ module TalonOne
         invalid_properties.push('invalid value for "loyalty_programs", loyalty_programs cannot be nil.')
       end
 
+      if @active_rules.nil?
+        invalid_properties.push('invalid value for "active_rules", active_rules cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -241,6 +254,7 @@ module TalonOne
       return false if @roles.nil?
       return false if @webhooks.nil?
       return false if @loyalty_programs.nil?
+      return false if @active_rules.nil?
       true
     end
 
@@ -262,7 +276,8 @@ module TalonOne
           users == o.users &&
           roles == o.roles &&
           webhooks == o.webhooks &&
-          loyalty_programs == o.loyalty_programs
+          loyalty_programs == o.loyalty_programs &&
+          active_rules == o.active_rules
     end
 
     # @see the `==` method
@@ -274,7 +289,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [applications, active_campaigns, campaigns, coupons, active_coupons, expired_coupons, custom_attributes, referral_codes, active_referral_codes, expired_referral_codes, users, roles, webhooks, loyalty_programs].hash
+      [applications, active_campaigns, campaigns, coupons, active_coupons, expired_coupons, custom_attributes, referral_codes, active_referral_codes, expired_referral_codes, users, roles, webhooks, loyalty_programs, active_rules].hash
     end
 
     # Builds the object from hash

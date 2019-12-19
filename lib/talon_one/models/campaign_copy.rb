@@ -20,11 +20,27 @@ module TalonOne
     # Application IDs of the applications to which a campaign should be copied to
     attr_accessor :application_ids
 
+    # A detailed description of the campaign.
+    attr_accessor :description
+
+    # Datetime when the campaign will become active.
+    attr_accessor :start_time
+
+    # Datetime when the campaign will become in-active.
+    attr_accessor :end_time
+
+    # A list of tags for the campaign.
+    attr_accessor :tags
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'application_ids' => :'applicationIds'
+        :'application_ids' => :'applicationIds',
+        :'description' => :'description',
+        :'start_time' => :'startTime',
+        :'end_time' => :'endTime',
+        :'tags' => :'tags'
       }
     end
 
@@ -32,7 +48,11 @@ module TalonOne
     def self.swagger_types
       {
         :'name' => :'String',
-        :'application_ids' => :'Array<String>'
+        :'application_ids' => :'Array<String>',
+        :'description' => :'String',
+        :'start_time' => :'DateTime',
+        :'end_time' => :'DateTime',
+        :'tags' => :'Array<String>'
       }
     end
 
@@ -51,6 +71,24 @@ module TalonOne
       if attributes.has_key?(:'applicationIds')
         if (value = attributes[:'applicationIds']).is_a?(Array)
           self.application_ids = value
+        end
+      end
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.has_key?(:'startTime')
+        self.start_time = attributes[:'startTime']
+      end
+
+      if attributes.has_key?(:'endTime')
+        self.end_time = attributes[:'endTime']
+      end
+
+      if attributes.has_key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
         end
       end
     end
@@ -79,7 +117,11 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          application_ids == o.application_ids
+          application_ids == o.application_ids &&
+          description == o.description &&
+          start_time == o.start_time &&
+          end_time == o.end_time &&
+          tags == o.tags
     end
 
     # @see the `==` method
@@ -91,7 +133,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, application_ids].hash
+      [name, application_ids, description, start_time, end_time, tags].hash
     end
 
     # Builds the object from hash

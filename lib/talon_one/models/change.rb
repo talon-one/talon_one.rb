@@ -27,10 +27,10 @@ module TalonOne
     # API endpoint on which the change was initiated.
     attr_accessor :entity
 
-    # Resource before the change occured.
+    # Resource before the change occurred.
     attr_accessor :old
 
-    # Resource after the change occured.
+    # Resource after the change occurred.
     attr_accessor :new
 
     # Attribute mapping from ruby-style variable name to JSON key.

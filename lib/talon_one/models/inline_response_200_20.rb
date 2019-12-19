@@ -30,7 +30,7 @@ module TalonOne
     def self.swagger_types
       {
         :'total_result_size' => :'Integer',
-        :'data' => :'Array<Webhook>'
+        :'data' => :'Array<Attribute>'
       }
     end
 
