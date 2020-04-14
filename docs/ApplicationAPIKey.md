@@ -1,6 +1,7 @@
 # TalonOne::ApplicationAPIKey
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | ID of the API Key | 
@@ -10,5 +11,19 @@ Name | Type | Description | Notes
 **application_id** | **Integer** | ID of application the key is used for | 
 **created** | **DateTime** | The date the API key was created | 
 **expires** | **DateTime** | The date the API key expired | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::ApplicationAPIKey.new(id: null,
+                                 created_by: null,
+                                 title: null,
+                                 account_id: null,
+                                 application_id: null,
+                                 created: null,
+                                 expires: null)
+```
 
 

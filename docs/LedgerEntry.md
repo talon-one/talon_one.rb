@@ -1,6 +1,7 @@
 # TalonOne::LedgerEntry
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. | 
@@ -13,5 +14,22 @@ Name | Type | Description | Notes
 **reason** | **String** | reason for awarding/deducting points | 
 **expiry_date** | **DateTime** | Expiry date of the points | 
 **reference_id** | **Integer** | The ID of the balancing ledgerEntry | [optional] 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::LedgerEntry.new(id: null,
+                                 created: null,
+                                 profile_id: null,
+                                 account_id: null,
+                                 loyalty_program_id: null,
+                                 event_id: null,
+                                 amount: null,
+                                 reason: null,
+                                 expiry_date: null,
+                                 reference_id: null)
+```
 
 

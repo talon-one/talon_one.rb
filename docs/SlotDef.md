@@ -1,6 +1,7 @@
 # TalonOne::SlotDef
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | The dot-separated path to this slot for use in Talang. | 
@@ -8,6 +9,19 @@ Name | Type | Description | Notes
 **title** | **String** | Campaigner-friendly name for the slot. | 
 **description** | **String** | A short description of the slot. | [optional] 
 **help** | **String** | Extended help text for the slot. | [optional] 
-**writable** | **BOOLEAN** | Whether or not this slot can be updated by rule effects. | 
+**writable** | **Boolean** | Whether or not this slot can be updated by rule effects. | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::SlotDef.new(name: null,
+                                 type: null,
+                                 title: null,
+                                 description: null,
+                                 help: null,
+                                 writable: null)
+```
 
 

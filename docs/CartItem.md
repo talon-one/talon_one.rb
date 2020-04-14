@@ -1,6 +1,7 @@
 # TalonOne::CartItem
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** |  | 
@@ -13,7 +14,26 @@ Name | Type | Description | Notes
 **width** | **Float** | Width of item in mm | [optional] 
 **length** | **Float** | Length of item in mm | [optional] 
 **position** | **Float** | Position of the Cart Item in the Cart (calculated internally) | [optional] 
-**attributes** | **Object** | Arbitrary properties associated with this item | [optional] 
+**attributes** | [**Object**](.md) | Arbitrary properties associated with this item | [optional] 
 **adjustment** | [**CartItemAdjustment**](CartItemAdjustment.md) |  | [optional] 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::CartItem.new(name: null,
+                                 sku: null,
+                                 quantity: null,
+                                 price: null,
+                                 category: null,
+                                 weight: null,
+                                 height: null,
+                                 width: null,
+                                 length: null,
+                                 position: null,
+                                 attributes: null,
+                                 adjustment: null)
+```
 
 

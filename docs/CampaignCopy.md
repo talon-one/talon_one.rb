@@ -1,6 +1,7 @@
 # TalonOne::CampaignCopy
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | Name of the copied campaign (Defaults to \&quot;Copy of original campaign name\&quot;) | [optional] 
@@ -9,5 +10,18 @@ Name | Type | Description | Notes
 **start_time** | **DateTime** | Datetime when the campaign will become active. | [optional] 
 **end_time** | **DateTime** | Datetime when the campaign will become in-active. | [optional] 
 **tags** | **Array&lt;String&gt;** | A list of tags for the campaign. | [optional] 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::CampaignCopy.new(name: null,
+                                 application_ids: null,
+                                 description: null,
+                                 start_time: null,
+                                 end_time: null,
+                                 tags: null)
+```
 
 

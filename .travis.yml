@@ -1,5 +1,13 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.2
-  - 2.3.3
+  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
+  - 2.7
+script:
+  - bundle install --path vendor/bundle
+  - bundle exec rspec
+  - gem build talon_one.gemspec
+  - gem install ./talon_one-2.0.0.gem

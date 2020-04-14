@@ -1,6 +1,7 @@
 # TalonOne::CustomerActivityReport
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **integration_id** | **String** | The ID used for this entity in the application system. | 
@@ -16,5 +17,25 @@ Name | Type | Description | Notes
 **total_orders** | **Integer** | Number of orders in all customer campaigns. | 
 **total_orders_no_coupon** | **Integer** | Number of orders without coupon used in all customer campaigns. | 
 **campaign_name** | **String** | The name of the campaign this customer belongs to. | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::CustomerActivityReport.new(integration_id: null,
+                                 created: null,
+                                 name: null,
+                                 customer_id: null,
+                                 last_activity: null,
+                                 coupon_redemptions: null,
+                                 coupon_use_attempts: null,
+                                 coupon_failed_attempts: null,
+                                 accrued_discounts: null,
+                                 accrued_revenue: null,
+                                 total_orders: null,
+                                 total_orders_no_coupon: null,
+                                 campaign_name: null)
+```
 
 
