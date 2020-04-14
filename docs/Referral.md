@@ -1,6 +1,7 @@
 # TalonOne::Referral
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. | 
@@ -13,5 +14,22 @@ Name | Type | Description | Notes
 **code** | **String** | The actual referral code. | 
 **usage_counter** | **Integer** | The number of times this referral code has been successfully used. | 
 **usage_limit** | **Integer** | The number of times a referral code can be used. This can be set to 0 for no limit, but any campaign usage limits will still apply.  | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::Referral.new(id: null,
+                                 created: null,
+                                 campaign_id: null,
+                                 advocate_profile_integration_id: null,
+                                 friend_profile_integration_id: null,
+                                 start_date: null,
+                                 expiry_date: null,
+                                 code: null,
+                                 usage_counter: null,
+                                 usage_limit: null)
+```
 
 

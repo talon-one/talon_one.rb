@@ -1,6 +1,7 @@
 # TalonOne::CampaignAnalytics
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **date** | **DateTime** |  | 
@@ -24,5 +25,33 @@ Name | Type | Description | Notes
 **total_coupons_created** | **Integer** | Number of coupons created in the campaign by the rule engine since it began. | 
 **referrals_created** | **Integer** | Number of referrals created in the campaign by the rule engine. | 
 **total_referrals_created** | **Integer** | Number of referrals created in the campaign by the rule engine since it began. | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::CampaignAnalytics.new(date: null,
+                                 campaign_revenue: null,
+                                 total_campaign_revenue: null,
+                                 campaign_refund: null,
+                                 total_campaign_refund: null,
+                                 campaign_discount_costs: null,
+                                 total_campaign_discount_costs: null,
+                                 campaign_refunded_discounts: null,
+                                 total_campaign_refunded_discounts: null,
+                                 campaign_free_items: null,
+                                 total_campaign_free_items: null,
+                                 coupon_redemptions: null,
+                                 total_coupon_redemptions: null,
+                                 coupon_rolledback_redemptions: null,
+                                 total_coupon_rolledback_redemptions: null,
+                                 referral_redemptions: null,
+                                 total_referral_redemptions: null,
+                                 coupons_created: null,
+                                 total_coupons_created: null,
+                                 referrals_created: null,
+                                 total_referrals_created: null)
+```
 
 

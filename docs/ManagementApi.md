@@ -1,11 +1,12 @@
 # TalonOne::ManagementApi
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_loyalty_points**](ManagementApi.md#add_loyalty_points) | **PUT** /v1/loyalty_programs/{programID}/profile/{integrationID}/add_points | Add points in a certain loyalty program for the specified customer
 [**copy_campaign_to_applications**](ManagementApi.md#copy_campaign_to_applications) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/copy | Copy the campaign into every specified application
+[**create_additional_cost**](ManagementApi.md#create_additional_cost) | **POST** /v1/additional_costs | Define a new additional cost
 [**create_attribute**](ManagementApi.md#create_attribute) | **POST** /v1/attributes | Define a new custom attribute
 [**create_campaign**](ManagementApi.md#create_campaign) | **POST** /v1/applications/{applicationId}/campaigns | Create a Campaign
 [**create_coupons**](ManagementApi.md#create_coupons) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Create Coupons
@@ -21,6 +22,8 @@ Method | HTTP request | Description
 [**get_access_logs_without_total_count**](ManagementApi.md#get_access_logs_without_total_count) | **GET** /v1/applications/{applicationId}/access_logs/no_total | Get access logs for application
 [**get_account**](ManagementApi.md#get_account) | **GET** /v1/accounts/{accountId} | Get Account Details
 [**get_account_analytics**](ManagementApi.md#get_account_analytics) | **GET** /v1/accounts/{accountId}/analytics | Get Account Analytics
+[**get_additional_cost**](ManagementApi.md#get_additional_cost) | **GET** /v1/additional_costs/{additionalCostId} | Get an additional cost
+[**get_additional_costs**](ManagementApi.md#get_additional_costs) | **GET** /v1/additional_costs | List additional costs
 [**get_all_access_logs**](ManagementApi.md#get_all_access_logs) | **GET** /v1/access_logs | Get all access logs
 [**get_all_roles**](ManagementApi.md#get_all_roles) | **GET** /v1/roles | Get all roles.
 [**get_application**](ManagementApi.md#get_application) | **GET** /v1/applications/{applicationId} | Get Application
@@ -70,13 +73,13 @@ Method | HTTP request | Description
 [**get_webhook_activation_logs**](ManagementApi.md#get_webhook_activation_logs) | **GET** /v1/webhook_activation_logs | List Webhook activation Log Entries
 [**get_webhook_logs**](ManagementApi.md#get_webhook_logs) | **GET** /v1/webhook_logs | List Webhook Log Entries
 [**get_webhooks**](ManagementApi.md#get_webhooks) | **GET** /v1/webhooks | List Webhooks
-[**refresh_analytics**](ManagementApi.md#refresh_analytics) | **POST** /v1/refresh_analytics | Trigger refresh on stale analytics.
 [**remove_loyalty_points**](ManagementApi.md#remove_loyalty_points) | **PUT** /v1/loyalty_programs/{programID}/profile/{integrationID}/deduct_points | Deduct points in a certain loyalty program for the specified customer
 [**reset_password**](ManagementApi.md#reset_password) | **POST** /v1/reset_password | Reset password
 [**search_coupons_advanced**](ManagementApi.md#search_coupons_advanced) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced | Get a list of the coupons that match the given attributes
 [**search_coupons_advanced_application_wide**](ManagementApi.md#search_coupons_advanced_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search_advanced | Get a list of the coupons that match the given attributes in all active campaigns of an application
 [**search_coupons_advanced_application_wide_without_total_count**](ManagementApi.md#search_coupons_advanced_application_wide_without_total_count) | **POST** /v1/applications/{applicationId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes in all active campaigns of an application
 [**search_coupons_advanced_without_total_count**](ManagementApi.md#search_coupons_advanced_without_total_count) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes
+[**update_additional_cost**](ManagementApi.md#update_additional_cost) | **PUT** /v1/additional_costs/{additionalCostId} | Update an additional cost
 [**update_attribute**](ManagementApi.md#update_attribute) | **PUT** /v1/attributes/{attributeId} | Update a custom attribute
 [**update_campaign**](ManagementApi.md#update_campaign) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId} | Update a Campaign
 [**update_campaign_set**](ManagementApi.md#update_campaign_set) | **PUT** /v1/applications/{applicationId}/campaign_set | Update a Campaign Set
@@ -85,14 +88,15 @@ Method | HTTP request | Description
 [**update_ruleset**](ManagementApi.md#update_ruleset) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Update a Ruleset
 
 
-# **add_loyalty_points**
+
+## add_loyalty_points
+
 > add_loyalty_points(program_id, integration_id, body)
 
 Add points in a certain loyalty program for the specified customer
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -105,13 +109,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 program_id = 'program_id_example' # String | 
-
 integration_id = 'integration_id_example' # String | 
-
 body = TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
-
 
 begin
   #Add points in a certain loyalty program for the specified customer
@@ -122,6 +122,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -139,12 +140,12 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 
+## copy_campaign_to_applications
 
-# **copy_campaign_to_applications**
 > InlineResponse2003 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into every specified application
@@ -152,6 +153,7 @@ Copy the campaign into every specified application
 Copy the campaign into every specified application.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -164,13 +166,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::CampaignCopy.new # CampaignCopy | 
-
 
 begin
   #Copy the campaign into every specified application
@@ -182,6 +180,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -199,19 +198,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_additional_cost
 
-# **create_attribute**
-> Attribute create_attribute(body)
+> AccountAdditionalCost create_additional_cost(body)
 
-Define a new custom attribute
+Define a new additional cost
 
-Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+Defines a new _additional cost_ in this account.  These additional costs are shared across all applications in your account, and are never required. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -224,9 +224,61 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
+body = TalonOne::NewAdditionalCost.new # NewAdditionalCost | 
 
+begin
+  #Define a new additional cost
+  result = api_instance.create_additional_cost(body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->create_additional_cost: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**NewAdditionalCost**](NewAdditionalCost.md)|  | 
+
+### Return type
+
+[**AccountAdditionalCost**](AccountAdditionalCost.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_attribute
+
+> Attribute create_attribute(body)
+
+Define a new custom attribute
+
+Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
 body = TalonOne::NewAttribute.new # NewAttribute | 
-
 
 begin
   #Define a new custom attribute
@@ -238,6 +290,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -253,19 +306,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_campaign
 
-# **create_campaign**
 > Campaign create_campaign(application_id, body)
 
 Create a Campaign
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -278,11 +330,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 body = TalonOne::NewCampaign.new # NewCampaign | 
-
 
 begin
   #Create a Campaign
@@ -294,6 +343,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -310,12 +360,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_coupons
 
-# **create_coupons**
 > InlineResponse2001 create_coupons(application_id, campaign_id, body, opts)
 
 Create Coupons
@@ -323,6 +373,7 @@ Create Coupons
 Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -335,14 +386,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::NewCoupons.new # NewCoupons | 
-
-opts = { 
+opts = {
   silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
 }
 
@@ -356,6 +403,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -374,12 +422,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_password_recovery_email
 
-# **create_password_recovery_email**
 > NewPasswordEmail create_password_recovery_email(body)
 
 Request a password reset
@@ -387,6 +435,7 @@ Request a password reset
 Sends an email with a password recovery link to the email of an existing account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -399,9 +448,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 body = TalonOne::NewPasswordEmail.new # NewPasswordEmail | 
-
 
 begin
   #Request a password reset
@@ -413,6 +460,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -428,19 +476,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_ruleset
 
-# **create_ruleset**
 > Ruleset create_ruleset(application_id, campaign_id, body)
 
 Create a Ruleset
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -453,13 +500,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::NewRuleset.new # NewRuleset | 
-
 
 begin
   #Create a Ruleset
@@ -471,6 +514,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -488,19 +532,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## create_session
 
-# **create_session**
 > Session create_session(body)
 
 Create a Session
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -513,9 +556,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 body = TalonOne::LoginParams.new # LoginParams | 
-
 
 begin
   #Create a Session
@@ -527,6 +568,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -542,19 +584,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## delete_campaign
 
-# **delete_campaign**
 > delete_campaign(application_id, campaign_id)
 
 Delete a Campaign
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -567,11 +608,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 
 begin
   #Delete a Campaign
@@ -582,6 +620,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -598,19 +637,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## delete_coupon
 
-# **delete_coupon**
 > delete_coupon(application_id, campaign_id, coupon_id)
 
 Delete one Coupon
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -623,13 +661,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 coupon_id = 'coupon_id_example' # String | The ID of the coupon code to delete
-
 
 begin
   #Delete one Coupon
@@ -640,6 +674,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -657,19 +692,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## delete_coupons
 
-# **delete_coupons**
 > delete_coupons(application_id, campaign_id, opts)
 
 Delete Coupons
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -682,12 +716,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
@@ -700,7 +731,7 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false # Boolean | Filter results to an exact case-insensitive matching against the coupon code
 }
 
 begin
@@ -712,6 +743,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -729,7 +761,7 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
 
 ### Return type
 
@@ -741,19 +773,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## delete_referral
 
-# **delete_referral**
 > delete_referral(application_id, campaign_id, referral_id)
 
 Delete one Referral
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -766,13 +797,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 referral_id = 'referral_id_example' # String | The ID of the referral code to delete
-
 
 begin
   #Delete one Referral
@@ -783,6 +810,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -800,19 +828,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## delete_ruleset
 
-# **delete_ruleset**
 > delete_ruleset(application_id, campaign_id, ruleset_id)
 
 Delete a Ruleset
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -825,13 +852,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 ruleset_id = 56 # Integer | 
-
 
 begin
   #Delete a Ruleset
@@ -842,6 +865,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -859,19 +883,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## get_access_logs
 
-# **get_access_logs**
 > InlineResponse2009 get_access_logs(application_id, range_start, range_end, opts)
 
 Get access logs for application
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -884,14 +907,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
-opts = { 
+opts = {
   path: 'path_example', # String | Only return results where the request path matches the given regular expression.
   method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
@@ -910,6 +929,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -933,19 +953,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_access_logs_without_total_count
 
-# **get_access_logs_without_total_count**
 > InlineResponse20010 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
 
 Get access logs for application
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -958,14 +977,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
-opts = { 
+opts = {
   path: 'path_example', # String | Only return results where the request path matches the given regular expression.
   method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
@@ -984,6 +999,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1007,12 +1023,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_account
 
-# **get_account**
 > Account get_account(account_id)
 
 Get Account Details
@@ -1020,6 +1036,7 @@ Get Account Details
 Return the details of your companies Talon.One account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1032,9 +1049,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 account_id = 56 # Integer | 
-
 
 begin
   #Get Account Details
@@ -1046,6 +1061,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1061,12 +1077,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_account_analytics
 
-# **get_account_analytics**
 > AccountAnalytics get_account_analytics(account_id)
 
 Get Account Analytics
@@ -1074,6 +1090,7 @@ Get Account Analytics
 Return the analytics of your companies Talon.One account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1086,9 +1103,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 account_id = 56 # Integer | 
-
 
 begin
   #Get Account Analytics
@@ -1100,6 +1115,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1115,19 +1131,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_additional_cost
 
-# **get_all_access_logs**
-> InlineResponse2009 get_all_access_logs(range_start, range_end, opts)
+> AccountAdditionalCost get_additional_cost(additional_cost_id)
 
-Get all access logs
+Get an additional cost
 
-Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
+Returns additional cost for the account by its id. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1140,12 +1157,123 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
+additional_cost_id = 56 # Integer | 
 
+begin
+  #Get an additional cost
+  result = api_instance.get_additional_cost(additional_cost_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_additional_cost: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **additional_cost_id** | **Integer**|  | 
+
+### Return type
+
+[**AccountAdditionalCost**](AccountAdditionalCost.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_additional_costs
+
+> InlineResponse20021 get_additional_costs(opts)
+
+List additional costs
+
+Returns all the defined additional costs for the account. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+opts = {
+  page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  skip: 56, # Integer | Skips the given number of items when paging through large result sets.
+  sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+}
+
+begin
+  #List additional costs
+  result = api_instance.get_additional_costs(opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_additional_costs: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
+ **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+
+### Return type
+
+[**InlineResponse20021**](InlineResponse20021.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_all_access_logs
+
+> InlineResponse2009 get_all_access_logs(range_start, range_end, opts)
+
+Get all access logs
+
+Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
-opts = { 
+opts = {
   path: 'path_example', # String | Only return results where the request path matches the given regular expression.
   method: 'method_example', # String | Only return results where the request method matches the given regular expression.
   status: 'status_example', # String | Filter results by HTTP status codes.
@@ -1164,6 +1292,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1186,17 +1315,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_all_roles
 
-# **get_all_roles**
-> InlineResponse20029 get_all_roles
+> InlineResponse20030 get_all_roles
 
 Get all roles.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1220,11 +1350,12 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20030**](InlineResponse20030.md)
 
 ### Authorization
 
@@ -1232,12 +1363,12 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application
 
-# **get_application**
 > Application get_application(application_id)
 
 Get Application
@@ -1245,6 +1376,7 @@ Get Application
 Get the application specified by the ID.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1257,9 +1389,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 
 begin
   #Get Application
@@ -1271,6 +1401,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1286,19 +1417,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_api_health
 
-# **get_application_api_health**
 > ApplicationApiHealth get_application_api_health(application_id)
 
 Get report of health of application API
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1311,9 +1441,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 
 begin
   #Get report of health of application API
@@ -1325,6 +1453,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1340,19 +1469,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_customer
 
-# **get_application_customer**
 > ApplicationCustomer get_application_customer(application_id, customer_id)
 
 Get Application Customer
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1365,11 +1493,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 customer_id = 56 # Integer | 
-
 
 begin
   #Get Application Customer
@@ -1381,6 +1506,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1397,19 +1523,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_customers
 
-# **get_application_customers**
 > InlineResponse20012 get_application_customers(application_id)
 
 List Application Customers
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1422,9 +1547,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 
 begin
   #List Application Customers
@@ -1436,6 +1559,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1451,12 +1575,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_customers_by_attributes
 
-# **get_application_customers_by_attributes**
 > InlineResponse20013 get_application_customers_by_attributes(body)
 
 Get a list of the customer profiles that match the given attributes
@@ -1464,6 +1588,7 @@ Get a list of the customer profiles that match the given attributes
 Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1476,9 +1601,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 body = TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
-
 
 begin
   #Get a list of the customer profiles that match the given attributes
@@ -1490,6 +1613,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1505,12 +1629,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## get_application_event_types
 
-# **get_application_event_types**
 > InlineResponse20019 get_application_event_types(application_id, opts)
 
 List Applications Event Types
@@ -1518,6 +1642,7 @@ List Applications Event Types
 Get all of the distinct values of the Event `type` property for events recorded in the application.  See also: [Track an event](/integration-api/reference/#trackEvent) 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1530,10 +1655,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -1549,6 +1672,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1567,12 +1691,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_events
 
-# **get_application_events**
 > InlineResponse20017 get_application_events(application_id, opts)
 
 List Applications Events
@@ -1580,6 +1704,7 @@ List Applications Events
 Lists all events recorded for an application. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1592,10 +1717,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -1606,8 +1729,8 @@ opts = {
   profile: 'profile_example', # String | Profile integration ID filter for events. Must be exact match.
   customer_name: 'customer_name_example', # String | Customer name filter for events. Will match substrings case-insensitively.
   customer_email: 'customer_email_example', # String | Customer e-mail address filter for events. Will match substrings case-insensitively.
-  effects_query: 'effects_query_example', # String | Effects filter for events. Will perform a full-text search on the text content of the events effects, if any.
-  attributes_query: 'attributes_query_example', # String | Attributes filter for events. Will perform a full-text search on the text content of the events attributes, both keys and values.
+  coupon_code: 'coupon_code_example', # String | Coupon code
+  referral_code: 'referral_code_example', # String | Referral code
   rule_query: 'rule_query_example', # String | Rule name filter for events
   campaign_query: 'campaign_query_example' # String | Campaign name filter for events
 }
@@ -1623,6 +1746,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
@@ -1636,8 +1760,8 @@ Name | Type | Description  | Notes
  **profile** | **String**| Profile integration ID filter for events. Must be exact match. | [optional] 
  **customer_name** | **String**| Customer name filter for events. Will match substrings case-insensitively. | [optional] 
  **customer_email** | **String**| Customer e-mail address filter for events. Will match substrings case-insensitively. | [optional] 
- **effects_query** | **String**| Effects filter for events. Will perform a full-text search on the text content of the events effects, if any. | [optional] 
- **attributes_query** | **String**| Attributes filter for events. Will perform a full-text search on the text content of the events attributes, both keys and values. | [optional] 
+ **coupon_code** | **String**| Coupon code | [optional] 
+ **referral_code** | **String**| Referral code | [optional] 
  **rule_query** | **String**| Rule name filter for events | [optional] 
  **campaign_query** | **String**| Campaign name filter for events | [optional] 
 
@@ -1651,12 +1775,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_events_without_total_count
 
-# **get_application_events_without_total_count**
 > InlineResponse20018 get_application_events_without_total_count(application_id, opts)
 
 List Applications Events
@@ -1664,6 +1788,7 @@ List Applications Events
 Lists all events recorded for an application. Instead of having the total number of results in the response, this endpoint only if there are more results. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1676,10 +1801,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -1690,8 +1813,8 @@ opts = {
   profile: 'profile_example', # String | Profile integration ID filter for events. Must be exact match.
   customer_name: 'customer_name_example', # String | Customer name filter for events. Will match substrings case-insensitively.
   customer_email: 'customer_email_example', # String | Customer e-mail address filter for events. Will match substrings case-insensitively.
-  effects_query: 'effects_query_example', # String | Effects filter for events. Will perform a full-text search on the text content of the events effects, if any.
-  attributes_query: 'attributes_query_example', # String | Attributes filter for events. Will perform a full-text search on the text content of the events attributes, both keys and values.
+  coupon_code: 'coupon_code_example', # String | Coupon code
+  referral_code: 'referral_code_example', # String | Referral code
   rule_query: 'rule_query_example', # String | Rule name filter for events
   campaign_query: 'campaign_query_example' # String | Campaign name filter for events
 }
@@ -1707,6 +1830,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
@@ -1720,8 +1844,8 @@ Name | Type | Description  | Notes
  **profile** | **String**| Profile integration ID filter for events. Must be exact match. | [optional] 
  **customer_name** | **String**| Customer name filter for events. Will match substrings case-insensitively. | [optional] 
  **customer_email** | **String**| Customer e-mail address filter for events. Will match substrings case-insensitively. | [optional] 
- **effects_query** | **String**| Effects filter for events. Will perform a full-text search on the text content of the events effects, if any. | [optional] 
- **attributes_query** | **String**| Attributes filter for events. Will perform a full-text search on the text content of the events attributes, both keys and values. | [optional] 
+ **coupon_code** | **String**| Coupon code | [optional] 
+ **referral_code** | **String**| Referral code | [optional] 
  **rule_query** | **String**| Rule name filter for events | [optional] 
  **campaign_query** | **String**| Campaign name filter for events | [optional] 
 
@@ -1735,19 +1859,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_session
 
-# **get_application_session**
 > ApplicationSession get_application_session(application_id, session_id)
 
 Get Application Session
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1760,11 +1883,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 session_id = 56 # Integer | 
-
 
 begin
   #Get Application Session
@@ -1776,6 +1896,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1792,19 +1913,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_application_sessions
 
-# **get_application_sessions**
 > InlineResponse20016 get_application_sessions(application_id, opts)
 
 List Application Sessions
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1817,16 +1937,17 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   profile: 'profile_example', # String | Profile integration ID filter for sessions. Must be exact match.
   state: 'state_example', # String | Filter by sessions with this state. Must be exact match.
-  coupon: 'coupon_example' # String | Filter by sessions with this coupon. Must be exact match.
+  coupon: 'coupon_example', # String | Filter by sessions with this coupon. Must be exact match.
+  referral: 'referral_example', # String | Filter by sessions with this referral. Must be exact match.
+  integration_id: 'integration_id_example', # String | Filter by sessions with this integrationId. Must be exact match.
+  customer_id: 'customer_id_example' # String | Filter by integration ID of the customer for the session
 }
 
 begin
@@ -1840,6 +1961,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
@@ -1849,6 +1971,9 @@ Name | Type | Description  | Notes
  **profile** | **String**| Profile integration ID filter for sessions. Must be exact match. | [optional] 
  **state** | **String**| Filter by sessions with this state. Must be exact match. | [optional] 
  **coupon** | **String**| Filter by sessions with this coupon. Must be exact match. | [optional] 
+ **referral** | **String**| Filter by sessions with this referral. Must be exact match. | [optional] 
+ **integration_id** | **String**| Filter by sessions with this integrationId. Must be exact match. | [optional] 
+ **customer_id** | **String**| Filter by integration ID of the customer for the session | [optional] 
 
 ### Return type
 
@@ -1860,12 +1985,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_applications
 
-# **get_applications**
 > InlineResponse2002 get_applications(opts)
 
 List Applications
@@ -1873,6 +1998,7 @@ List Applications
 List all application in the current account.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1885,8 +2011,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -1902,6 +2027,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1919,12 +2045,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_attribute
 
-# **get_attribute**
 > Attribute get_attribute(attribute_id)
 
 Get a custom attribute
@@ -1932,6 +2058,7 @@ Get a custom attribute
 Returns custom attribute for the account by its id. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1944,9 +2071,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 attribute_id = 56 # Integer | 
-
 
 begin
   #Get a custom attribute
@@ -1958,6 +2083,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1973,12 +2099,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_attributes
 
-# **get_attributes**
 > InlineResponse20020 get_attributes(opts)
 
 List custom attributes
@@ -1986,6 +2112,7 @@ List custom attributes
 Returns all the defined custom attributes for the account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -1998,8 +2125,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2015,6 +2141,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2032,19 +2159,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_campaign
 
-# **get_campaign**
 > Campaign get_campaign(application_id, campaign_id)
 
 Get a Campaign
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2057,11 +2183,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 
 begin
   #Get a Campaign
@@ -2073,6 +2196,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2089,19 +2213,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_campaign_analytics
 
-# **get_campaign_analytics**
 > InlineResponse20011 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2114,16 +2237,11 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
-opts = { 
+opts = {
   granularity: 'granularity_example' # String | The time interval between the results in the returned time-series.
 }
 
@@ -2137,6 +2255,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2156,12 +2275,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_campaign_by_attributes
 
-# **get_campaign_by_attributes**
 > InlineResponse2003 get_campaign_by_attributes(application_id, body, opts)
 
 Get a list of all campaigns that match the given attributes
@@ -2169,6 +2288,7 @@ Get a list of all campaigns that match the given attributes
 Gets a list of all the campaigns that exactly match a set of attributes. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2181,12 +2301,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 body = TalonOne::CampaignSearch.new # CampaignSearch | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2203,6 +2320,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2223,19 +2341,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## get_campaign_set
 
-# **get_campaign_set**
 > CampaignSet get_campaign_set(application_id)
 
 List CampaignSet
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2248,9 +2365,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 
 begin
   #List CampaignSet
@@ -2262,6 +2377,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2277,19 +2393,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_campaigns
 
-# **get_campaigns**
 > InlineResponse2003 get_campaigns(application_id, opts)
 
 List your Campaigns
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2302,10 +2417,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2326,6 +2439,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2349,19 +2463,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_changes
 
-# **get_changes**
-> InlineResponse20026 get_changes(opts)
+> InlineResponse20027 get_changes(opts)
 
 Get audit log for an account
 
 Get list of changes caused by API calls for an account. Only accessible for admins.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2374,16 +2489,15 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   application_id: 56, # Integer | 
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
-  with_total_result_size: true, # BOOLEAN | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
-  include_old: true # BOOLEAN | When this flag is set to false, the state without the change will not be returned. The default value is true.
+  with_total_result_size: true, # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+  include_old: true # Boolean | When this flag is set to false, the state without the change will not be returned. The default value is true.
 }
 
 begin
@@ -2397,6 +2511,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -2405,12 +2520,12 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. | [optional] 
- **with_total_result_size** | **BOOLEAN**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
- **include_old** | **BOOLEAN**| When this flag is set to false, the state without the change will not be returned. The default value is true. | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
+ **include_old** | **Boolean**| When this flag is set to false, the state without the change will not be returned. The default value is true. | [optional] 
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -2418,19 +2533,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_coupons
 
-# **get_coupons**
 > InlineResponse2001 get_coupons(application_id, campaign_id, opts)
 
 List Coupons
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2443,12 +2557,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2464,7 +2575,7 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false # Boolean | Filter results to an exact case-insensitive matching against the coupon code
 }
 
 begin
@@ -2477,6 +2588,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2497,7 +2609,7 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
 
 ### Return type
 
@@ -2509,12 +2621,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_coupons_by_attributes
 
-# **get_coupons_by_attributes**
 > InlineResponse2001 get_coupons_by_attributes(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
@@ -2522,6 +2634,7 @@ Get a list of the coupons that match the given attributes
 Gets a list of all the coupons that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2534,14 +2647,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::CouponSearch.new # CouponSearch | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2552,7 +2661,7 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
@@ -2567,6 +2676,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
@@ -2582,7 +2692,7 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
 
 ### Return type
@@ -2595,12 +2705,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## get_coupons_by_attributes_application_wide
 
-# **get_coupons_by_attributes_application_wide**
 > InlineResponse2001 get_coupons_by_attributes_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
@@ -2608,6 +2718,7 @@ Get a list of the coupons that match the given attributes in all active campaign
 Gets a list of all the coupons with attributes matching the query criteria Application wide 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2620,12 +2731,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 body = TalonOne::CouponSearch.new # CouponSearch | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2637,7 +2745,7 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
@@ -2652,6 +2760,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
@@ -2667,7 +2776,7 @@ Name | Type | Description  | Notes
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
 
 ### Return type
@@ -2680,19 +2789,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## get_coupons_without_total_count
 
-# **get_coupons_without_total_count**
 > InlineResponse2005 get_coupons_without_total_count(application_id, campaign_id, opts)
 
 List Coupons
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2705,12 +2813,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2722,7 +2827,7 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false # Boolean | Filter results to an exact case-insensitive matching against the coupon code
 }
 
 begin
@@ -2735,6 +2840,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2751,7 +2857,7 @@ Name | Type | Description  | Notes
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
 
 ### Return type
 
@@ -2763,12 +2869,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_activity_report
 
-# **get_customer_activity_report**
 > CustomerActivityReport get_customer_activity_report(range_start, range_end, application_id, customer_id, opts)
 
 Get Activity Report for Single Customer
@@ -2776,6 +2882,7 @@ Get Activity Report for Single Customer
 Fetch summary report for single application customer based on a time range
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2788,16 +2895,11 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
 application_id = 56 # Integer | 
-
 customer_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56 # Integer | Skips the given number of items when paging through large result sets.
 }
@@ -2812,6 +2914,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2832,12 +2935,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_activity_reports
 
-# **get_customer_activity_reports**
 > InlineResponse20014 get_customer_activity_reports(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
@@ -2845,6 +2948,7 @@ Get Activity Reports for Application Customers
 Fetch summary reports for all application customers based on a time range
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2857,14 +2961,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2884,6 +2984,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2908,12 +3009,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_activity_reports_without_total_count
 
-# **get_customer_activity_reports_without_total_count**
 > InlineResponse20015 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
@@ -2921,6 +3022,7 @@ Get Activity Reports for Application Customers
 Fetch summary reports for all application customers based on a time range. Instead of having the total number of results in the response, this endpoint only if there are more results.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -2933,14 +3035,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
-
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
-
 application_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -2960,6 +3058,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -2984,12 +3083,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_analytics
 
-# **get_customer_analytics**
 > CustomerAnalytics get_customer_analytics(application_id, customer_id, opts)
 
 Get Analytics Report for a Customer
@@ -2997,6 +3096,7 @@ Get Analytics Report for a Customer
 Fetch analytics for single application customer
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3009,12 +3109,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 customer_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3030,6 +3127,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3049,19 +3147,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_profile
 
-# **get_customer_profile**
 > ApplicationCustomer get_customer_profile(application_id, customer_id)
 
 Get Customer Profile
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3074,11 +3171,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 customer_id = 56 # Integer | 
-
 
 begin
   #Get Customer Profile
@@ -3090,6 +3184,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3106,19 +3201,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customer_profiles
 
-# **get_customer_profiles**
 > InlineResponse20013 get_customer_profiles(opts)
 
 List Customer Profiles
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3131,8 +3225,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56 # Integer | Skips the given number of items when paging through large result sets.
 }
@@ -3147,6 +3240,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3163,12 +3257,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_customers_by_attributes
 
-# **get_customers_by_attributes**
 > InlineResponse20013 get_customers_by_attributes(body, opts)
 
 Get a list of the customer profiles that match the given attributes
@@ -3176,6 +3270,7 @@ Get a list of the customer profiles that match the given attributes
 Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3188,10 +3283,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 body = TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56 # Integer | Skips the given number of items when paging through large result sets.
 }
@@ -3206,6 +3299,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3223,19 +3317,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## get_event_types
 
-# **get_event_types**
-> InlineResponse20024 get_event_types(opts)
+> InlineResponse20025 get_event_types(opts)
 
 List Event Types
 
 Fetch all event type definitions for your account. Each event type can be 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3248,11 +3343,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   application_ids: 'application_ids_example', # String | Filter by one or more application ids separated by comma
   name: 'name_example', # String | Filter results to event types with the given name. This parameter implies `includeOldVersions`.
-  include_old_versions: false, # BOOLEAN | Include all versions of every event type.
+  include_old_versions: false, # Boolean | Include all versions of every event type.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3269,18 +3363,19 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_ids** | **String**| Filter by one or more application ids separated by comma | [optional] 
  **name** | **String**| Filter results to event types with the given name. This parameter implies &#x60;includeOldVersions&#x60;. | [optional] 
- **include_old_versions** | **BOOLEAN**| Include all versions of every event type. | [optional] [default to false]
+ **include_old_versions** | **Boolean**| Include all versions of every event type. | [optional] [default to false]
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -3288,19 +3383,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_exports
 
-# **get_exports**
-> InlineResponse20027 get_exports(opts)
+> InlineResponse20028 get_exports(opts)
 
 Get Exports
 
 Get a list of all past exports 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3313,8 +3409,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   application_id: 56, # Integer | 
@@ -3333,6 +3428,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -3343,7 +3439,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -3351,19 +3447,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_imports
 
-# **get_imports**
-> InlineResponse20028 get_imports(opts)
+> InlineResponse20029 get_imports(opts)
 
 Get Imports
 
 Get a list of all past imports 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3376,8 +3473,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56 # Integer | Skips the given number of items when paging through large result sets.
 }
@@ -3393,6 +3489,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -3400,7 +3497,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -3408,12 +3505,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_loyalty_points
 
-# **get_loyalty_points**
 > LoyaltyLedger get_loyalty_points(program_id, integration_id)
 
 get the Loyalty Ledger for this integrationID
@@ -3421,6 +3518,7 @@ get the Loyalty Ledger for this integrationID
 Get the Loyalty Ledger for this profile integration ID.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3433,11 +3531,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 program_id = 'program_id_example' # String | The identifier for the application, must be unique within the account.
-
 integration_id = 'integration_id_example' # String | The identifier for the application, must be unique within the account.
-
 
 begin
   #get the Loyalty Ledger for this integrationID
@@ -3449,6 +3544,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3465,19 +3561,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_loyalty_program
 
-# **get_loyalty_program**
 > LoyaltyProgram get_loyalty_program(program_id)
 
 Get a loyalty program
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3490,9 +3585,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 program_id = 'program_id_example' # String | 
-
 
 begin
   #Get a loyalty program
@@ -3504,6 +3597,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3519,19 +3613,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_loyalty_programs
 
-# **get_loyalty_programs**
 > InlineResponse2008 get_loyalty_programs
 
 List all loyalty Programs
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3555,6 +3648,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -3567,19 +3661,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_referrals
 
-# **get_referrals**
 > InlineResponse2006 get_referrals(application_id, campaign_id, opts)
 
 List Referrals
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3592,12 +3685,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3619,6 +3709,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3644,19 +3735,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_referrals_without_total_count
 
-# **get_referrals_without_total_count**
 > InlineResponse2007 get_referrals_without_total_count(application_id, campaign_id, opts)
 
 List Referrals
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3669,12 +3759,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3696,6 +3783,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3721,17 +3809,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_role
 
-# **get_role**
 > Role get_role(role_id)
 
 Get information for the specified role.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3744,9 +3833,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 role_id = 56 # Integer | 
-
 
 begin
   #Get information for the specified role.
@@ -3758,6 +3845,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3773,19 +3861,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_ruleset
 
-# **get_ruleset**
 > Ruleset get_ruleset(application_id, campaign_id, ruleset_id)
 
 Get a Ruleset
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3798,13 +3885,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 ruleset_id = 56 # Integer | 
-
 
 begin
   #Get a Ruleset
@@ -3816,6 +3899,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3833,19 +3917,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_rulesets
 
-# **get_rulesets**
 > InlineResponse2004 get_rulesets(application_id, campaign_id, opts)
 
 List Campaign Rulesets
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3858,12 +3941,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3879,6 +3959,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3898,12 +3979,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_user
 
-# **get_user**
 > User get_user(user_id)
 
 Get a single User
@@ -3911,6 +3992,7 @@ Get a single User
 Retrieves the data (including an invitation code) for a user. Non-admin users can only get themselves. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3923,9 +4005,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 user_id = 56 # Integer | 
-
 
 begin
   #Get a single User
@@ -3937,6 +4017,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -3952,19 +4033,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_users
 
-# **get_users**
-> InlineResponse20025 get_users(opts)
+> InlineResponse20026 get_users(opts)
 
 List Users in your account
 
 Retrieve all users in your account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -3977,8 +4059,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -3995,6 +4076,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -4003,7 +4085,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -4011,12 +4093,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_webhook
 
-# **get_webhook**
 > Webhook get_webhook(webhook_id)
 
 Get Webhook
@@ -4024,6 +4106,7 @@ Get Webhook
 Returns an webhook by its id.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4036,9 +4119,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 webhook_id = 56 # Integer | 
-
 
 begin
   #Get Webhook
@@ -4050,6 +4131,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4065,19 +4147,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_webhook_activation_logs
 
-# **get_webhook_activation_logs**
-> InlineResponse20022 get_webhook_activation_logs(opts)
+> InlineResponse20023 get_webhook_activation_logs(opts)
 
 List Webhook activation Log Entries
 
 Webhook activation log entries would be created as soon as an integration request triggered an effect with a webhook
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4090,15 +4173,14 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   integration_request_uuid: 'integration_request_uuid_example', # String | Filter results by integration request UUID.
-  webhook_id: 8.14, # Float | Filter results by Webhook.
-  application_id: 8.14, # Float | 
-  campaign_id: 8.14, # Float | Filter results by campaign.
+  webhook_id: 3.4, # Float | Filter results by Webhook.
+  application_id: 3.4, # Float | 
+  campaign_id: 3.4, # Float | Filter results by campaign.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
 }
@@ -4114,6 +4196,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -4128,7 +4211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -4136,19 +4219,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_webhook_logs
 
-# **get_webhook_logs**
-> InlineResponse20023 get_webhook_logs(opts)
+> InlineResponse20024 get_webhook_logs(opts)
 
 List Webhook Log Entries
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4161,15 +4243,14 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   status: 'status_example', # String | Filter results by HTTP status codes.
-  webhook_id: 8.14, # Float | Filter results by Webhook.
-  application_id: 8.14, # Float | 
-  campaign_id: 8.14, # Float | Filter results by campaign.
+  webhook_id: 3.4, # Float | Filter results by Webhook.
+  application_id: 3.4, # Float | 
+  campaign_id: 3.4, # Float | Filter results by campaign.
   request_uuid: 'request_uuid_example', # String | Filter results by request UUID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
@@ -4186,6 +4267,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
@@ -4201,7 +4283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -4209,19 +4291,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_webhooks
 
-# **get_webhooks**
-> InlineResponse20021 get_webhooks(opts)
+> InlineResponse20022 get_webhooks(opts)
 
 List Webhooks
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4234,8 +4315,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
-opts = { 
+opts = {
   application_ids: 'application_ids_example', # String | Filter by one or more application ids separated by comma
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -4253,6 +4333,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_ids** | **String**| Filter by one or more application ids separated by comma | [optional] 
@@ -4262,7 +4343,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -4270,66 +4351,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## remove_loyalty_points
 
-# **refresh_analytics**
-> refresh_analytics
-
-Trigger refresh on stale analytics.
-
-Should be used to trigger a manual refresh of analytics.
-
-### Example
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-
-begin
-  #Trigger refresh on stale analytics.
-  api_instance.refresh_analytics
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->refresh_analytics: #{e}"
-end
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-
-# **remove_loyalty_points**
 > remove_loyalty_points(program_id, integration_id, body)
 
 Deduct points in a certain loyalty program for the specified customer
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4342,13 +4375,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 program_id = 'program_id_example' # String | 
-
 integration_id = 'integration_id_example' # String | 
-
 body = TalonOne::LoyaltyPoints.new # LoyaltyPoints | 
-
 
 begin
   #Deduct points in a certain loyalty program for the specified customer
@@ -4359,6 +4388,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4376,12 +4406,12 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 
+## reset_password
 
-# **reset_password**
 > NewPassword reset_password(body)
 
 Reset password
@@ -4389,6 +4419,7 @@ Reset password
 Consumes the supplied password reset token and updates the password for the associated account. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4401,9 +4432,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 body = TalonOne::NewPassword.new # NewPassword | 
-
 
 begin
   #Reset password
@@ -4415,6 +4444,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4430,12 +4460,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## search_coupons_advanced
 
-# **search_coupons_advanced**
 > InlineResponse2001 search_coupons_advanced(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
@@ -4443,6 +4473,7 @@ Get a list of the coupons that match the given attributes
 Gets a list of all the coupons with attributes matching the query criteria 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4455,14 +4486,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-body = TalonOne::AttributeQuery.new # AttributeQuery | 
-
-opts = { 
+body = nil # Object | 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -4473,7 +4500,7 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
@@ -4488,11 +4515,12 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
+ **body** | **Object**|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4503,7 +4531,7 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
 
 ### Return type
@@ -4516,12 +4544,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## search_coupons_advanced_application_wide
 
-# **search_coupons_advanced_application_wide**
 > InlineResponse2001 search_coupons_advanced_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
@@ -4529,6 +4557,7 @@ Get a list of the coupons that match the given attributes in all active campaign
 Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4541,12 +4570,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-body = TalonOne::AttributeQuery.new # AttributeQuery | 
-
-opts = { 
+body = nil # Object | 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -4558,7 +4584,7 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
@@ -4573,10 +4599,11 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
+ **body** | **Object**|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4588,7 +4615,7 @@ Name | Type | Description  | Notes
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
 
 ### Return type
@@ -4601,12 +4628,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## search_coupons_advanced_application_wide_without_total_count
 
-# **search_coupons_advanced_application_wide_without_total_count**
 > InlineResponse2005 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
@@ -4614,6 +4641,7 @@ Get a list of the coupons that match the given attributes in all active campaign
 Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4626,12 +4654,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
-body = TalonOne::AttributeQuery.new # AttributeQuery | 
-
-opts = { 
+body = nil # Object | 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -4643,7 +4668,7 @@ opts = {
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
 }
 
@@ -4658,10 +4683,11 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
+ **body** | **Object**|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4673,7 +4699,7 @@ Name | Type | Description  | Notes
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
 
 ### Return type
@@ -4686,12 +4712,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## search_coupons_advanced_without_total_count
 
-# **search_coupons_advanced_without_total_count**
 > InlineResponse2005 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
@@ -4699,6 +4725,7 @@ Get a list of the coupons that match the given attributes
 Gets a list of all the coupons with attributes matching the query criteria 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4711,14 +4738,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
-body = TalonOne::AttributeQuery.new # AttributeQuery | 
-
-opts = { 
+body = nil # Object | 
+opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
@@ -4729,7 +4752,7 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false, # BOOLEAN | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
   batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
@@ -4744,11 +4767,12 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
- **body** | [**AttributeQuery**](AttributeQuery.md)|  | 
+ **body** | **Object**|  | 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
@@ -4759,7 +4783,7 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
  **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **BOOLEAN**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
 
 ### Return type
@@ -4772,19 +4796,20 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## update_additional_cost
 
-# **update_attribute**
-> Attribute update_attribute(attribute_id, body)
+> AccountAdditionalCost update_additional_cost(additional_cost_id, body)
 
-Update a custom attribute
+Update an additional cost
 
-Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name `region`, and your integration is sending `attributes.region` with customer profile updates, changing the name to `locale` would cause the integration requests to begin failing.  If you **really** need to change the `type` or `name` property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
+Updates an existing additional cost. Once created, the only property of an additional cost that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4797,11 +4822,64 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
+additional_cost_id = 56 # Integer | 
+body = TalonOne::NewAdditionalCost.new # NewAdditionalCost | 
 
+begin
+  #Update an additional cost
+  result = api_instance.update_additional_cost(additional_cost_id, body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->update_additional_cost: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **additional_cost_id** | **Integer**|  | 
+ **body** | [**NewAdditionalCost**](NewAdditionalCost.md)|  | 
+
+### Return type
+
+[**AccountAdditionalCost**](AccountAdditionalCost.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_attribute
+
+> Attribute update_attribute(attribute_id, body)
+
+Update a custom attribute
+
+Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name `region`, and your integration is sending `attributes.region` with customer profile updates, changing the name to `locale` would cause the integration requests to begin failing.  If you **really** need to change the `type` or `name` property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
 attribute_id = 56 # Integer | 
-
 body = TalonOne::NewAttribute.new # NewAttribute | 
-
 
 begin
   #Update a custom attribute
@@ -4813,6 +4891,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4829,19 +4908,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## update_campaign
 
-# **update_campaign**
 > Campaign update_campaign(application_id, campaign_id, body)
 
 Update a Campaign
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4854,13 +4932,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::UpdateCampaign.new # UpdateCampaign | 
-
 
 begin
   #Update a Campaign
@@ -4872,6 +4946,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4889,19 +4964,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## update_campaign_set
 
-# **update_campaign_set**
 > CampaignSet update_campaign_set(application_id, body)
 
 Update a Campaign Set
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4914,11 +4988,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 body = TalonOne::NewCampaignSet.new # NewCampaignSet | 
-
 
 begin
   #Update a Campaign Set
@@ -4930,6 +5001,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -4946,19 +5018,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## update_coupon
 
-# **update_coupon**
 > Coupon update_coupon(application_id, campaign_id, coupon_id, body)
 
 Update a Coupon
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -4971,15 +5042,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 coupon_id = 'coupon_id_example' # String | The ID of the coupon code to update
-
 body = TalonOne::UpdateCoupon.new # UpdateCoupon | 
-
 
 begin
   #Update a Coupon
@@ -4991,6 +5057,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -5009,19 +5076,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## update_coupon_batch
 
-# **update_coupon_batch**
 > update_coupon_batch(application_id, campaign_id, body)
 
 Update a Batch of Coupons
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -5034,13 +5100,9 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 body = TalonOne::UpdateCouponBatch.new # UpdateCouponBatch | 
-
 
 begin
   #Update a Batch of Coupons
@@ -5051,6 +5113,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -5068,19 +5131,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 
+## update_ruleset
 
-# **update_ruleset**
 > Ruleset update_ruleset(application_id, campaign_id, ruleset_id, body)
 
 Update a Ruleset
 
-
-
 ### Example
+
 ```ruby
 # load the gem
 require 'talon_one'
@@ -5093,15 +5155,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-
 application_id = 56 # Integer | 
-
 campaign_id = 56 # Integer | 
-
 ruleset_id = 56 # Integer | 
-
 body = TalonOne::NewRuleset.new # NewRuleset | 
-
 
 begin
   #Update a Ruleset
@@ -5113,6 +5170,7 @@ end
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -5131,8 +5189,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
+- **Content-Type**: application/json
+- **Accept**: application/json
 

@@ -1,6 +1,7 @@
 # TalonOne::Campaign
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. | 
@@ -11,7 +12,7 @@ Name | Type | Description | Notes
 **description** | **String** | A detailed description of the campaign. | 
 **start_time** | **DateTime** | Datetime when the campaign will become active. | [optional] 
 **end_time** | **DateTime** | Datetime when the campaign will become in-active. | [optional] 
-**attributes** | **Object** | Arbitrary properties associated with this campaign | [optional] 
+**attributes** | [**Object**](.md) | Arbitrary properties associated with this campaign | [optional] 
 **state** | **String** | A disabled or archived campaign is not evaluated for rules or coupons.  | [default to &#39;enabled&#39;]
 **active_ruleset_id** | **Integer** | ID of Ruleset this campaign applies on customer session evaluation. | [optional] 
 **tags** | **Array&lt;String&gt;** | A list of tags for the campaign. | 
@@ -28,5 +29,37 @@ Name | Type | Description | Notes
 **updated** | **DateTime** | Timestamp of the most recent update to the campaign or any of its elements. | [optional] 
 **created_by** | **String** | Name of the user who created this campaign if available. | [optional] 
 **updated_by** | **String** | Name of the user who last updated this campaign if available. | [optional] 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::Campaign.new(id: null,
+                                 created: null,
+                                 application_id: null,
+                                 user_id: null,
+                                 name: null,
+                                 description: null,
+                                 start_time: null,
+                                 end_time: null,
+                                 attributes: null,
+                                 state: null,
+                                 active_ruleset_id: null,
+                                 tags: null,
+                                 features: null,
+                                 coupon_settings: null,
+                                 referral_settings: null,
+                                 limits: null,
+                                 coupon_redemption_count: null,
+                                 referral_redemption_count: null,
+                                 discount_count: null,
+                                 discount_effect_count: null,
+                                 coupon_creation_count: null,
+                                 last_activity: null,
+                                 updated: null,
+                                 created_by: null,
+                                 updated_by: null)
+```
 
 

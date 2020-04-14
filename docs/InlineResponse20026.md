@@ -1,10 +1,19 @@
 # TalonOne::InlineResponse20026
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | [optional] 
-**has_more** | **BOOLEAN** |  | [optional] 
-**data** | [**Array&lt;Change&gt;**](Change.md) |  | 
+**total_result_size** | **Integer** |  | 
+**data** | [**Array&lt;User&gt;**](User.md) |  | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::InlineResponse20026.new(total_result_size: null,
+                                 data: null)
+```
 
 

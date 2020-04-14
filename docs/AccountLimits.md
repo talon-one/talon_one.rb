@@ -1,6 +1,7 @@
 # TalonOne::AccountLimits
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **live_applications** | **Integer** | Total Number of allowed live applications in the account | 
@@ -15,5 +16,24 @@ Name | Type | Description | Notes
 **api_volume** | **Integer** | Total allowed api volume | 
 **active_rules** | **Integer** | Total allowed active rulesets | [optional] 
 **promotion_types** | **Array&lt;String&gt;** | array of rulesets where webhook is used | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::AccountLimits.new(live_applications: null,
+                                 sandbox_applications: null,
+                                 active_campaigns: null,
+                                 coupons: null,
+                                 referral_codes: null,
+                                 live_loyalty_programs: null,
+                                 sandbox_loyalty_programs: null,
+                                 webhooks: null,
+                                 users: null,
+                                 api_volume: null,
+                                 active_rules: null,
+                                 promotion_types: null)
+```
 
 
