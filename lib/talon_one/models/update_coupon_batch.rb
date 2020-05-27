@@ -18,6 +18,9 @@ module TalonOne
     # The number of times a coupon code can be redeemed. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
     attr_accessor :usage_limit
 
+    # The amount of discounts that can be given with this coupon code. 
+    attr_accessor :discount_limit
+
     # Timestamp at which point the coupon becomes valid.
     attr_accessor :start_date
 
@@ -34,6 +37,7 @@ module TalonOne
     def self.attribute_map
       {
         :'usage_limit' => :'usageLimit',
+        :'discount_limit' => :'discountLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
         :'attributes' => :'attributes',
@@ -45,6 +49,7 @@ module TalonOne
     def self.openapi_types
       {
         :'usage_limit' => :'Integer',
+        :'discount_limit' => :'Float',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
         :'attributes' => :'Object',
@@ -77,6 +82,10 @@ module TalonOne
         self.usage_limit = attributes[:'usage_limit']
       end
 
+      if attributes.key?(:'discount_limit')
+        self.discount_limit = attributes[:'discount_limit']
+      end
+
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
       end
@@ -106,6 +115,14 @@ module TalonOne
         invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
       end
 
+      if !@discount_limit.nil? && @discount_limit > 999999
+        invalid_properties.push('invalid value for "discount_limit", must be smaller than or equal to 999999.')
+      end
+
+      if !@discount_limit.nil? && @discount_limit < 0
+        invalid_properties.push('invalid value for "discount_limit", must be greater than or equal to 0.')
+      end
+
       if @batch_id.nil?
         invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
       end
@@ -118,6 +135,8 @@ module TalonOne
     def valid?
       return false if !@usage_limit.nil? && @usage_limit > 999999
       return false if !@usage_limit.nil? && @usage_limit < 0
+      return false if !@discount_limit.nil? && @discount_limit > 999999
+      return false if !@discount_limit.nil? && @discount_limit < 0
       return false if @batch_id.nil?
       true
     end
@@ -136,12 +155,27 @@ module TalonOne
       @usage_limit = usage_limit
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] discount_limit Value to be assigned
+    def discount_limit=(discount_limit)
+      if !discount_limit.nil? && discount_limit > 999999
+        fail ArgumentError, 'invalid value for "discount_limit", must be smaller than or equal to 999999.'
+      end
+
+      if !discount_limit.nil? && discount_limit < 0
+        fail ArgumentError, 'invalid value for "discount_limit", must be greater than or equal to 0.'
+      end
+
+      @discount_limit = discount_limit
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           usage_limit == o.usage_limit &&
+          discount_limit == o.discount_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
           attributes == o.attributes &&
@@ -157,7 +191,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, start_date, expiry_date, attributes, batch_id].hash
+      [usage_limit, discount_limit, start_date, expiry_date, attributes, batch_id].hash
     end
 
     # Builds the object from hash

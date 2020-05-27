@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **usage_limit** | **Integer** | The number of times a coupon code can be redeemed. This can be set to 0 for no limit, but any campaign usage limits will still apply.  | 
+**discount_limit** | **Float** | The amount of discounts that can be given with this coupon code.  | [optional] 
 **start_date** | **DateTime** | Timestamp at which point the coupon becomes valid. | [optional] 
 **expiry_date** | **DateTime** | Expiry date of the coupon. Coupon never expires if this is omitted, zero, or negative. | [optional] 
 **valid_characters** | **Array&lt;String&gt;** | Set of characters to be used when generating random part of code. Defaults to [A-Z, 0-9] (in terms of RegExp). | 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::NewCoupons.new(usage_limit: null,
+                                 discount_limit: null,
                                  start_date: null,
                                  expiry_date: null,
                                  valid_characters: null,

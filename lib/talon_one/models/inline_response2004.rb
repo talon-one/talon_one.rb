@@ -30,7 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'total_result_size' => :'Integer',
-        :'data' => :'Array<Ruleset>'
+        :'data' => :'Array<Coupon>'
       }
     end
 

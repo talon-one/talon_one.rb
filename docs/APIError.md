@@ -1,4 +1,4 @@
-# TalonOne::ApiError
+# TalonOne::APIError
 
 ## Properties
 

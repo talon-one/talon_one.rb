@@ -42,7 +42,6 @@ Method | HTTP request | Description
 [**get_campaign**](ManagementApi.md#get_campaign) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId} | Get a Campaign
 [**get_campaign_analytics**](ManagementApi.md#get_campaign_analytics) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/analytics | Get analytics of campaigns
 [**get_campaign_by_attributes**](ManagementApi.md#get_campaign_by_attributes) | **POST** /v1/applications/{applicationId}/campaigns_search | Get a list of all campaigns that match the given attributes
-[**get_campaign_set**](ManagementApi.md#get_campaign_set) | **GET** /v1/applications/{applicationId}/campaign_set | List CampaignSet
 [**get_campaigns**](ManagementApi.md#get_campaigns) | **GET** /v1/applications/{applicationId}/campaigns | List your Campaigns
 [**get_changes**](ManagementApi.md#get_changes) | **GET** /v1/changes | Get audit log for an account
 [**get_coupons**](ManagementApi.md#get_coupons) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | List Coupons
@@ -82,7 +81,6 @@ Method | HTTP request | Description
 [**update_additional_cost**](ManagementApi.md#update_additional_cost) | **PUT** /v1/additional_costs/{additionalCostId} | Update an additional cost
 [**update_attribute**](ManagementApi.md#update_attribute) | **PUT** /v1/attributes/{attributeId} | Update a custom attribute
 [**update_campaign**](ManagementApi.md#update_campaign) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId} | Update a Campaign
-[**update_campaign_set**](ManagementApi.md#update_campaign_set) | **PUT** /v1/applications/{applicationId}/campaign_set | Update a Campaign Set
 [**update_coupon**](ManagementApi.md#update_coupon) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/{couponId} | Update a Coupon
 [**update_coupon_batch**](ManagementApi.md#update_coupon_batch) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Update a Batch of Coupons
 [**update_ruleset**](ManagementApi.md#update_ruleset) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Update a Ruleset
@@ -146,7 +144,7 @@ nil (empty response body)
 
 ## copy_campaign_to_applications
 
-> InlineResponse2003 copy_campaign_to_applications(application_id, campaign_id, body)
+> InlineResponse2002 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into every specified application
 
@@ -190,7 +188,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -366,7 +364,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons
 
-> InlineResponse2001 create_coupons(application_id, campaign_id, body, opts)
+> InlineResponse2004 create_coupons(application_id, campaign_id, body, opts)
 
 Create Coupons
 
@@ -414,7 +412,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -1991,7 +1989,7 @@ Name | Type | Description  | Notes
 
 ## get_applications
 
-> InlineResponse2002 get_applications(opts)
+> InlineResponse2001 get_applications(opts)
 
 List Applications
 
@@ -2037,7 +2035,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -2281,7 +2279,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_by_attributes
 
-> InlineResponse2003 get_campaign_by_attributes(application_id, body, opts)
+> InlineResponse2002 get_campaign_by_attributes(application_id, body, opts)
 
 Get a list of all campaigns that match the given attributes
 
@@ -2333,7 +2331,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -2345,61 +2343,9 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## get_campaign_set
-
-> CampaignSet get_campaign_set(application_id)
-
-List CampaignSet
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-application_id = 56 # Integer | 
-
-begin
-  #List CampaignSet
-  result = api_instance.get_campaign_set(application_id)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_campaign_set: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**|  | 
-
-### Return type
-
-[**CampaignSet**](CampaignSet.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_campaigns
 
-> InlineResponse2003 get_campaigns(application_id, opts)
+> InlineResponse2002 get_campaigns(application_id, opts)
 
 List your Campaigns
 
@@ -2455,7 +2401,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -2539,7 +2485,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons
 
-> InlineResponse2001 get_coupons(application_id, campaign_id, opts)
+> InlineResponse2004 get_coupons(application_id, campaign_id, opts)
 
 List Coupons
 
@@ -2613,7 +2559,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -2627,7 +2573,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_by_attributes
 
-> InlineResponse2001 get_coupons_by_attributes(application_id, campaign_id, body, opts)
+> InlineResponse2004 get_coupons_by_attributes(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -2697,7 +2643,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -2711,7 +2657,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_by_attributes_application_wide
 
-> InlineResponse2001 get_coupons_by_attributes_application_wide(application_id, body, opts)
+> InlineResponse2004 get_coupons_by_attributes_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
 
@@ -2781,7 +2727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -3923,7 +3869,7 @@ Name | Type | Description  | Notes
 
 ## get_rulesets
 
-> InlineResponse2004 get_rulesets(application_id, campaign_id, opts)
+> InlineResponse2003 get_rulesets(application_id, campaign_id, opts)
 
 List Campaign Rulesets
 
@@ -3971,7 +3917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -4466,7 +4412,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced
 
-> InlineResponse2001 search_coupons_advanced(application_id, campaign_id, body, opts)
+> InlineResponse2004 search_coupons_advanced(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -4536,7 +4482,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -4550,7 +4496,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_application_wide
 
-> InlineResponse2001 search_coupons_advanced_application_wide(application_id, body, opts)
+> InlineResponse2004 search_coupons_advanced_application_wide(application_id, body, opts)
 
 Get a list of the coupons that match the given attributes in all active campaigns of an application
 
@@ -4620,7 +4566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -4957,60 +4903,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Campaign**](Campaign.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_campaign_set
-
-> CampaignSet update_campaign_set(application_id, body)
-
-Update a Campaign Set
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-application_id = 56 # Integer | 
-body = TalonOne::NewCampaignSet.new # NewCampaignSet | 
-
-begin
-  #Update a Campaign Set
-  result = api_instance.update_campaign_set(application_id, body)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->update_campaign_set: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**|  | 
- **body** | [**NewCampaignSet**](NewCampaignSet.md)|  | 
-
-### Return type
-
-[**CampaignSet**](CampaignSet.md)
 
 ### Authorization
 

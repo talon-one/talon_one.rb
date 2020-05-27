@@ -282,11 +282,12 @@ module TalonOne
     end
 
     # Get an inventory of all data associated with a specific customer profile.
-    # Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+    # Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information, referral codes and reserved coupons. In the future, this will be expanded with loyalty points.
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :profile optional flag to decide if you would like customer profile information in the response
     # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
+    # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
     # @return [CustomerInventory]
     def get_customer_inventory(integration_id, opts = {})
       data, _status_code, _headers = get_customer_inventory_with_http_info(integration_id, opts)
@@ -294,11 +295,12 @@ module TalonOne
     end
 
     # Get an inventory of all data associated with a specific customer profile.
-    # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+    # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information, referral codes and reserved coupons. In the future, this will be expanded with loyalty points.
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :profile optional flag to decide if you would like customer profile information in the response
     # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
+    # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
     # @return [Array<(CustomerInventory, Integer, Hash)>] CustomerInventory data, response status code and response headers
     def get_customer_inventory_with_http_info(integration_id, opts = {})
       if @api_client.config.debugging
@@ -315,6 +317,7 @@ module TalonOne
       query_params = opts[:query_params] || {}
       query_params[:'profile'] = opts[:'profile'] if !opts[:'profile'].nil?
       query_params[:'referrals'] = opts[:'referrals'] if !opts[:'referrals'].nil?
+      query_params[:'coupons'] = opts[:'coupons'] if !opts[:'coupons'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -345,68 +348,6 @@ module TalonOne
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: IntegrationApi#get_customer_inventory\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get all valid reserved coupons
-    # Returns all coupons this user is subscribed to that are valid and usable 
-    # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
-    # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2001]
-    def get_reserved_coupons(integration_id, opts = {})
-      data, _status_code, _headers = get_reserved_coupons_with_http_info(integration_id, opts)
-      data
-    end
-
-    # Get all valid reserved coupons
-    # Returns all coupons this user is subscribed to that are valid and usable 
-    # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
-    def get_reserved_coupons_with_http_info(integration_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: IntegrationApi.get_reserved_coupons ...'
-      end
-      # verify the required parameter 'integration_id' is set
-      if @api_client.config.client_side_validation && integration_id.nil?
-        fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_reserved_coupons"
-      end
-      # resource path
-      local_var_path = '/v1/coupon_reservations/coupons/{integrationId}'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: IntegrationApi#get_reserved_coupons\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -477,6 +418,7 @@ module TalonOne
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The `sessionId` body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same `profileId` or an error will be returned.  As with customer sessions, you can use an empty string for `profileId` to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
     # @param body [NewEvent] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [IntegrationState]
     def track_event(body, opts = {})
       data, _status_code, _headers = track_event_with_http_info(body, opts)
@@ -487,6 +429,7 @@ module TalonOne
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
     # @param body [NewEvent] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def track_event_with_http_info(body, opts = {})
       if @api_client.config.debugging
@@ -501,6 +444,7 @@ module TalonOne
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'dry'] = opts[:'dry'] if !opts[:'dry'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -542,6 +486,7 @@ module TalonOne
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param body [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [IntegrationState]
     def update_customer_profile(integration_id, body, opts = {})
       data, _status_code, _headers = update_customer_profile_with_http_info(integration_id, body, opts)
@@ -553,6 +498,7 @@ module TalonOne
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param body [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def update_customer_profile_with_http_info(integration_id, body, opts = {})
       if @api_client.config.debugging
@@ -571,6 +517,7 @@ module TalonOne
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'dry'] = opts[:'dry'] if !opts[:'dry'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -607,11 +554,82 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # Update a Customer Profile
+    # Update (or create) a [Customer Profile][].   The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+    # @param customer_profile_id [String] The custom identifier for this profile, must be unique within the account.
+    # @param body [NewCustomerProfile] 
+    # @param [Hash] opts the optional parameters
+    # @return [CustomerProfileUpdate]
+    def update_customer_profile_v2(customer_profile_id, body, opts = {})
+      data, _status_code, _headers = update_customer_profile_v2_with_http_info(customer_profile_id, body, opts)
+      data
+    end
+
+    # Update a Customer Profile
+    # Update (or create) a [Customer Profile][].   The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+    # @param customer_profile_id [String] The custom identifier for this profile, must be unique within the account.
+    # @param body [NewCustomerProfile] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CustomerProfileUpdate, Integer, Hash)>] CustomerProfileUpdate data, response status code and response headers
+    def update_customer_profile_v2_with_http_info(customer_profile_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_profile_v2 ...'
+      end
+      # verify the required parameter 'customer_profile_id' is set
+      if @api_client.config.client_side_validation && customer_profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'customer_profile_id' when calling IntegrationApi.update_customer_profile_v2"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_profile_v2"
+      end
+      # resource path
+      local_var_path = '/v2/customer_profiles/{customerProfileId}'.sub('{' + 'customerProfileId' + '}', CGI.escape(customer_profile_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'CustomerProfileUpdate' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['api_key_v1']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#update_customer_profile_v2\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update a Customer Session
     # Update (or create) a [Customer Session][]. For example, the items in a customers cart are part of a session.  The Talon.One platform supports multiple simultaneous sessions for the same profile, so if you have multiple ways of accessing the same application you have the option of either tracking multiple independent sessions or using the same session across all of them. You should share sessions when application access points share other state, such as the users cart. If two points of access to the application have independent state (e.g. a user can have different items in their cart across the two) they should use independent customer session ID's.  The `profileId` parameter in the request body should correspond to an `integrationId` for a customer profile, to track an anonymous session use the empty string (`\"\"`) as the `profileId`. Note that you do **not** need to create a customer profile first: if the specified profile does not yet exist, an empty profile will be created automatically.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated.  [Customer Session]: /Getting-Started/entities#customer-session 
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [IntegrationState]
     def update_customer_session(customer_session_id, body, opts = {})
       data, _status_code, _headers = update_customer_session_with_http_info(customer_session_id, body, opts)
@@ -623,6 +641,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def update_customer_session_with_http_info(customer_session_id, body, opts = {})
       if @api_client.config.debugging
@@ -641,6 +660,7 @@ module TalonOne
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'dry'] = opts[:'dry'] if !opts[:'dry'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -682,6 +702,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [IntegrationStateV2]
     def update_customer_session_v2(customer_session_id, body, opts = {})
       data, _status_code, _headers = update_customer_session_v2_with_http_info(customer_session_id, body, opts)
@@ -693,6 +714,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
     # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
     def update_customer_session_v2_with_http_info(customer_session_id, body, opts = {})
       if @api_client.config.debugging
@@ -711,6 +733,7 @@ module TalonOne
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'dry'] = opts[:'dry'] if !opts[:'dry'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

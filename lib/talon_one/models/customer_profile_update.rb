@@ -13,41 +13,20 @@ OpenAPI Generator version: 4.2.3
 require 'date'
 
 module TalonOne
-  # 
-  class CampaignSet
-    # Unique ID for this entity.
-    attr_accessor :id
-
-    # The exact moment this entity was created.
-    attr_accessor :created
-
-    # The ID of the application that owns this entity.
-    attr_accessor :application_id
-
-    # Version of the campaign set
-    attr_accessor :version
-
-    attr_accessor :set
+  class CustomerProfileUpdate
+    attr_accessor :customer_profile
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created' => :'created',
-        :'application_id' => :'applicationId',
-        :'version' => :'version',
-        :'set' => :'set'
+        :'customer_profile' => :'customerProfile'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'Integer',
-        :'created' => :'DateTime',
-        :'application_id' => :'Integer',
-        :'version' => :'Integer',
-        :'set' => :'CampaignSetBranchNode'
+        :'customer_profile' => :'CustomerProfile'
       }
     end
 
@@ -61,35 +40,19 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::CampaignSet` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::CustomerProfileUpdate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::CampaignSet`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::CustomerProfileUpdate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'created')
-        self.created = attributes[:'created']
-      end
-
-      if attributes.key?(:'application_id')
-        self.application_id = attributes[:'application_id']
-      end
-
-      if attributes.key?(:'version')
-        self.version = attributes[:'version']
-      end
-
-      if attributes.key?(:'set')
-        self.set = attributes[:'set']
+      if attributes.key?(:'customer_profile')
+        self.customer_profile = attributes[:'customer_profile']
       end
     end
 
@@ -97,28 +60,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
-      if @application_id.nil?
-        invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
-      end
-
-      if @version.nil?
-        invalid_properties.push('invalid value for "version", version cannot be nil.')
-      end
-
-      if @version < 1
-        invalid_properties.push('invalid value for "version", must be greater than or equal to 1.')
-      end
-
-      if @set.nil?
-        invalid_properties.push('invalid value for "set", set cannot be nil.')
+      if @customer_profile.nil?
+        invalid_properties.push('invalid value for "customer_profile", customer_profile cannot be nil.')
       end
 
       invalid_properties
@@ -127,27 +70,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created.nil?
-      return false if @application_id.nil?
-      return false if @version.nil?
-      return false if @version < 1
-      return false if @set.nil?
+      return false if @customer_profile.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] version Value to be assigned
-    def version=(version)
-      if version.nil?
-        fail ArgumentError, 'version cannot be nil'
-      end
-
-      if version < 1
-        fail ArgumentError, 'invalid value for "version", must be greater than or equal to 1.'
-      end
-
-      @version = version
     end
 
     # Checks equality by comparing each attribute.
@@ -155,11 +79,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created == o.created &&
-          application_id == o.application_id &&
-          version == o.version &&
-          set == o.set
+          customer_profile == o.customer_profile
     end
 
     # @see the `==` method
@@ -171,7 +91,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, version, set].hash
+      [customer_profile].hash
     end
 
     # Builds the object from hash

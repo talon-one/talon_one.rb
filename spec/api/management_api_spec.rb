@@ -52,7 +52,7 @@ describe 'ManagementApi' do
   # @param campaign_id 
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2003]
+  # @return [InlineResponse2002]
   describe 'copy_campaign_to_applications test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -103,7 +103,7 @@ describe 'ManagementApi' do
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'create_coupons test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -503,7 +503,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse2002]
+  # @return [InlineResponse2001]
   describe 'get_applications test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -573,19 +573,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
-  # @return [InlineResponse2003]
+  # @return [InlineResponse2002]
   describe 'get_campaign_by_attributes test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_campaign_set
-  # List CampaignSet
-  # @param application_id 
-  # @param [Hash] opts the optional parameters
-  # @return [CampaignSet]
-  describe 'get_campaign_set test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -603,7 +592,7 @@ describe 'ManagementApi' do
   # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-  # @return [InlineResponse2003]
+  # @return [InlineResponse2002]
   describe 'get_campaigns test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -650,7 +639,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
   # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'get_coupons test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -676,7 +665,7 @@ describe 'ManagementApi' do
   # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @option opts [String] :batch_id Filter results by batches of coupons
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'get_coupons_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -702,7 +691,7 @@ describe 'ManagementApi' do
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'get_coupons_by_attributes_application_wide test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1000,7 +989,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse2004]
+  # @return [InlineResponse2003]
   describe 'get_rulesets test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1143,7 +1132,7 @@ describe 'ManagementApi' do
   # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @option opts [String] :batch_id Filter results by batches of coupons
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'search_coupons_advanced test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1169,7 +1158,7 @@ describe 'ManagementApi' do
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2004]
   describe 'search_coupons_advanced_application_wide test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1262,18 +1251,6 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @return [Campaign]
   describe 'update_campaign test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for update_campaign_set
-  # Update a Campaign Set
-  # @param application_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @return [CampaignSet]
-  describe 'update_campaign_set test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

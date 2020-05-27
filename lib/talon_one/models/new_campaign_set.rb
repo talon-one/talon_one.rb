@@ -18,12 +18,16 @@ module TalonOne
     # The ID of the application that owns this entity.
     attr_accessor :application_id
 
+    # Version of the campaign set
+    attr_accessor :version
+
     attr_accessor :set
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'application_id' => :'applicationId',
+        :'version' => :'version',
         :'set' => :'set'
       }
     end
@@ -32,6 +36,7 @@ module TalonOne
     def self.openapi_types
       {
         :'application_id' => :'Integer',
+        :'version' => :'Integer',
         :'set' => :'CampaignSetBranchNode'
       }
     end
@@ -61,6 +66,10 @@ module TalonOne
         self.application_id = attributes[:'application_id']
       end
 
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
       if attributes.key?(:'set')
         self.set = attributes[:'set']
       end
@@ -74,6 +83,14 @@ module TalonOne
         invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
       end
 
+      if @version.nil?
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
+      end
+
+      if @version < 1
+        invalid_properties.push('invalid value for "version", must be greater than or equal to 1.')
+      end
+
       if @set.nil?
         invalid_properties.push('invalid value for "set", set cannot be nil.')
       end
@@ -85,8 +102,24 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @application_id.nil?
+      return false if @version.nil?
+      return false if @version < 1
       return false if @set.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] version Value to be assigned
+    def version=(version)
+      if version.nil?
+        fail ArgumentError, 'version cannot be nil'
+      end
+
+      if version < 1
+        fail ArgumentError, 'invalid value for "version", must be greater than or equal to 1.'
+      end
+
+      @version = version
     end
 
     # Checks equality by comparing each attribute.
@@ -95,6 +128,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           application_id == o.application_id &&
+          version == o.version &&
           set == o.set
     end
 
@@ -107,7 +141,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application_id, set].hash
+      [application_id, version, set].hash
     end
 
     # Builds the object from hash

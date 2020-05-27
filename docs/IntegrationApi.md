@@ -9,10 +9,10 @@ Method | HTTP request | Description
 [**delete_coupon_reservation**](IntegrationApi.md#delete_coupon_reservation) | **DELETE** /v1/coupon_reservations/{couponValue} | Delete coupon reservations
 [**delete_customer_data**](IntegrationApi.md#delete_customer_data) | **DELETE** /v1/customer_data/{integrationId} | Delete the personal data of a customer.
 [**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | Get an inventory of all data associated with a specific customer profile.
-[**get_reserved_coupons**](IntegrationApi.md#get_reserved_coupons) | **GET** /v1/coupon_reservations/coupons/{integrationId} | Get all valid reserved coupons
 [**get_reserved_customers**](IntegrationApi.md#get_reserved_customers) | **GET** /v1/coupon_reservations/customerprofiles/{couponValue} | Get the users that have this coupon reserved
 [**track_event**](IntegrationApi.md#track_event) | **POST** /v1/events | Track an Event
 [**update_customer_profile**](IntegrationApi.md#update_customer_profile) | **PUT** /v1/customer_profiles/{integrationId} | Update a Customer Profile
+[**update_customer_profile_v2**](IntegrationApi.md#update_customer_profile_v2) | **PUT** /v2/customer_profiles/{customerProfileId} | Update a Customer Profile
 [**update_customer_session**](IntegrationApi.md#update_customer_session) | **PUT** /v1/customer_sessions/{customerSessionId} | Update a Customer Session
 [**update_customer_session_v2**](IntegrationApi.md#update_customer_session_v2) | **PUT** /v2/customer_sessions/{customerSessionId} | Update a Customer Session
 
@@ -262,7 +262,7 @@ nil (empty response body)
 
 Get an inventory of all data associated with a specific customer profile.
 
-Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+Get information regarding entities referencing this customer profile's integrationId. Currently we support customer profile information, referral codes and reserved coupons. In the future, this will be expanded with loyalty points.
 
 ### Example
 
@@ -286,7 +286,8 @@ api_instance = TalonOne::IntegrationApi.new
 integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
 opts = {
   profile: true, # Boolean | optional flag to decide if you would like customer profile information in the response
-  referrals: true # Boolean | optional flag to decide if you would like referral information in the response
+  referrals: true, # Boolean | optional flag to decide if you would like referral information in the response
+  coupons: true # Boolean | optional flag to decide if you would like coupon information in the response
 }
 
 begin
@@ -306,69 +307,11 @@ Name | Type | Description  | Notes
  **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
  **profile** | **Boolean**| optional flag to decide if you would like customer profile information in the response | [optional] 
  **referrals** | **Boolean**| optional flag to decide if you would like referral information in the response | [optional] 
+ **coupons** | **Boolean**| optional flag to decide if you would like coupon information in the response | [optional] 
 
 ### Return type
 
 [**CustomerInventory**](CustomerInventory.md)
-
-### Authorization
-
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_reserved_coupons
-
-> InlineResponse2001 get_reserved_coupons(integration_id)
-
-Get all valid reserved coupons
-
-Returns all coupons this user is subscribed to that are valid and usable 
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: api_key_v1
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
-end
-
-api_instance = TalonOne::IntegrationApi.new
-integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
-
-begin
-  #Get all valid reserved coupons
-  result = api_instance.get_reserved_coupons(integration_id)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling IntegrationApi->get_reserved_coupons: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
-
-### Return type
-
-[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -441,7 +384,7 @@ Name | Type | Description  | Notes
 
 ## track_event
 
-> IntegrationState track_event(body)
+> IntegrationState track_event(body, opts)
 
 Track an Event
 
@@ -467,10 +410,13 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 body = TalonOne::NewEvent.new # NewEvent | 
+opts = {
+  dry: true # Boolean | Flag to indicate whether to skip persisting the changes or not (Will not persist if set to 'true').
+}
 
 begin
   #Track an Event
-  result = api_instance.track_event(body)
+  result = api_instance.track_event(body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->track_event: #{e}"
@@ -483,6 +429,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**NewEvent**](NewEvent.md)|  | 
+ **dry** | **Boolean**| Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
 
 ### Return type
 
@@ -500,7 +447,7 @@ Name | Type | Description  | Notes
 
 ## update_customer_profile
 
-> IntegrationState update_customer_profile(integration_id, body)
+> IntegrationState update_customer_profile(integration_id, body, opts)
 
 Update a Customer Profile
 
@@ -527,10 +474,13 @@ end
 api_instance = TalonOne::IntegrationApi.new
 integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
 body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
+opts = {
+  dry: true # Boolean | Flag to indicate whether to skip persisting the changes or not (Will not persist if set to 'true').
+}
 
 begin
   #Update a Customer Profile
-  result = api_instance.update_customer_profile(integration_id, body)
+  result = api_instance.update_customer_profile(integration_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile: #{e}"
@@ -544,6 +494,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
  **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
+ **dry** | **Boolean**| Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
 
 ### Return type
 
@@ -559,9 +510,65 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## update_customer_profile_v2
+
+> CustomerProfileUpdate update_customer_profile_v2(customer_profile_id, body)
+
+Update a Customer Profile
+
+Update (or create) a [Customer Profile][].   The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+customer_profile_id = 'customer_profile_id_example' # String | The custom identifier for this profile, must be unique within the account.
+body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
+
+begin
+  #Update a Customer Profile
+  result = api_instance.update_customer_profile_v2(customer_profile_id, body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->update_customer_profile_v2: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customer_profile_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
+ **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
+
+### Return type
+
+[**CustomerProfileUpdate**](CustomerProfileUpdate.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_customer_session
 
-> IntegrationState update_customer_session(customer_session_id, body)
+> IntegrationState update_customer_session(customer_session_id, body, opts)
 
 Update a Customer Session
 
@@ -588,10 +595,13 @@ end
 api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
 body = TalonOne::NewCustomerSession.new # NewCustomerSession | 
+opts = {
+  dry: true # Boolean | Flag to indicate whether to skip persisting the changes or not (Will not persist if set to 'true').
+}
 
 begin
   #Update a Customer Session
-  result = api_instance.update_customer_session(customer_session_id, body)
+  result = api_instance.update_customer_session(customer_session_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_session: #{e}"
@@ -605,6 +615,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
  **body** | [**NewCustomerSession**](NewCustomerSession.md)|  | 
+ **dry** | **Boolean**| Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
 
 ### Return type
 
@@ -622,7 +633,7 @@ Name | Type | Description  | Notes
 
 ## update_customer_session_v2
 
-> IntegrationStateV2 update_customer_session_v2(customer_session_id, body)
+> IntegrationStateV2 update_customer_session_v2(customer_session_id, body, opts)
 
 Update a Customer Session
 
@@ -644,10 +655,13 @@ end
 api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
 body = TalonOne::IntegrationRequest.new # IntegrationRequest | 
+opts = {
+  dry: true # Boolean | Flag to indicate whether to skip persisting the changes or not (Will not persist if set to 'true').
+}
 
 begin
   #Update a Customer Session
-  result = api_instance.update_customer_session_v2(customer_session_id, body)
+  result = api_instance.update_customer_session_v2(customer_session_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_session_v2: #{e}"
@@ -661,6 +675,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
  **body** | [**IntegrationRequest**](IntegrationRequest.md)|  | 
+ **dry** | **Boolean**| Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
 
 ### Return type
 

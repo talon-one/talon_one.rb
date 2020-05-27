@@ -37,6 +37,9 @@ module TalonOne
     # This specifies if we are adding loyalty points to the main ledger or a subledger
     attr_accessor :sub_ledger_id
 
+    # This is the ID of the user who created this entry, if the addition or subtraction was done manually.
+    attr_accessor :user_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -71,7 +74,8 @@ module TalonOne
         :'amount' => :'amount',
         :'expiry_date' => :'expiryDate',
         :'name' => :'name',
-        :'sub_ledger_id' => :'subLedgerID'
+        :'sub_ledger_id' => :'subLedgerID',
+        :'user_id' => :'userID'
       }
     end
 
@@ -87,7 +91,8 @@ module TalonOne
         :'amount' => :'Float',
         :'expiry_date' => :'DateTime',
         :'name' => :'String',
-        :'sub_ledger_id' => :'String'
+        :'sub_ledger_id' => :'String',
+        :'user_id' => :'Integer'
       }
     end
 
@@ -150,6 +155,10 @@ module TalonOne
 
       if attributes.key?(:'sub_ledger_id')
         self.sub_ledger_id = attributes[:'sub_ledger_id']
+      end
+
+      if attributes.key?(:'user_id')
+        self.user_id = attributes[:'user_id']
       end
     end
 
@@ -227,7 +236,8 @@ module TalonOne
           amount == o.amount &&
           expiry_date == o.expiry_date &&
           name == o.name &&
-          sub_ledger_id == o.sub_ledger_id
+          sub_ledger_id == o.sub_ledger_id &&
+          user_id == o.user_id
     end
 
     # @see the `==` method
@@ -239,7 +249,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, expiry_date, name, sub_ledger_id].hash
+      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, expiry_date, name, sub_ledger_id, user_id].hash
     end
 
     # Builds the object from hash

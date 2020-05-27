@@ -48,6 +48,9 @@ module TalonOne
     # Default limits for campaigns created in this application
     attr_accessor :limits
 
+    # Default priority for campaigns created in this application, can be one of (universal, stackable, exclusive)
+    attr_accessor :campaign_priority
+
     attr_accessor :attributes_settings
 
     # An array containing all the loyalty programs to which this application is subscribed
@@ -89,6 +92,7 @@ module TalonOne
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
         :'limits' => :'limits',
+        :'campaign_priority' => :'campaignPriority',
         :'attributes_settings' => :'attributesSettings',
         :'loyalty_programs' => :'loyaltyPrograms'
       }
@@ -108,6 +112,7 @@ module TalonOne
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
+        :'campaign_priority' => :'String',
         :'attributes_settings' => :'AttributesSettings',
         :'loyalty_programs' => :'Array<LoyaltyProgram>'
       }
@@ -178,6 +183,10 @@ module TalonOne
         if (value = attributes[:'limits']).is_a?(Array)
           self.limits = value
         end
+      end
+
+      if attributes.key?(:'campaign_priority')
+        self.campaign_priority = attributes[:'campaign_priority']
       end
 
       if attributes.key?(:'attributes_settings')
@@ -257,6 +266,8 @@ module TalonOne
       return false if @currency.to_s.length < 1
       case_sensitivity_validator = EnumAttributeValidator.new('String', ["sensitive", "insensitive-uppercase", "insensitive-lowercase"])
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
+      campaign_priority_validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
+      return false unless campaign_priority_validator.valid?(@campaign_priority)
       return false if @loyalty_programs.nil?
       true
     end
@@ -313,6 +324,16 @@ module TalonOne
       @case_sensitivity = case_sensitivity
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_priority Object to be assigned
+    def campaign_priority=(campaign_priority)
+      validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
+      unless validator.valid?(campaign_priority)
+        fail ArgumentError, "invalid value for \"campaign_priority\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_priority = campaign_priority
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -329,6 +350,7 @@ module TalonOne
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
           limits == o.limits &&
+          campaign_priority == o.campaign_priority &&
           attributes_settings == o.attributes_settings &&
           loyalty_programs == o.loyalty_programs
     end
@@ -342,7 +364,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, attributes_settings, loyalty_programs].hash
+      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, attributes_settings, loyalty_programs].hash
     end
 
     # Builds the object from hash
