@@ -204,7 +204,7 @@ module TalonOne
       return false if @program_id.nil?
       return false if @customer_profile_id.nil?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
+      type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction", "expire"])
       return false unless type_validator.valid?(@type)
       return false if @amount.nil?
       return false if @name.nil?
@@ -215,7 +215,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
+      validator = EnumAttributeValidator.new('String', ["addition", "subtraction", "expire"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

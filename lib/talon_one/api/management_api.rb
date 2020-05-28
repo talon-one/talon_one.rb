@@ -1027,7 +1027,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get access logs for application
+    # Get access logs for application (with total count)
     # @param application_id [Integer] 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -1044,7 +1044,7 @@ module TalonOne
       data
     end
 
-    # Get access logs for application
+    # Get access logs for application (with total count)
     # @param application_id [Integer] 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -1876,7 +1876,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the customer profiles that match the given attributes
+    # Get a list of the customer profiles that match the given attributes (with total count)
     # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body [ApplicationCustomerSearch] 
     # @param [Hash] opts the optional parameters
@@ -1886,7 +1886,7 @@ module TalonOne
       data
     end
 
-    # Get a list of the customer profiles that match the given attributes
+    # Get a list of the customer profiles that match the given attributes (with total count)
     # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body [ApplicationCustomerSearch] 
     # @param [Hash] opts the optional parameters
@@ -2011,7 +2011,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Applications Events
+    # List Applications Events (with total count)
     # Lists all events recorded for an application. 
     # @param application_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -2035,7 +2035,7 @@ module TalonOne
       data
     end
 
-    # List Applications Events
+    # List Applications Events (with total count)
     # Lists all events recorded for an application. 
     # @param application_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -2991,7 +2991,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Coupons
+    # List Coupons (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3017,7 +3017,7 @@ module TalonOne
       data
     end
 
-    # List Coupons
+    # List Coupons (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3233,7 +3233,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria Application wide 
     # @param application_id [Integer] 
     # @param body [CouponSearch] 
@@ -3257,7 +3257,7 @@ module TalonOne
       data
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria Application wide 
     # @param application_id [Integer] 
     # @param body [CouponSearch] 
@@ -3552,7 +3552,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Activity Reports for Application Customers
+    # Get Activity Reports for Application Customers (with total count)
     # Fetch summary reports for all application customers based on a time range
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -3571,7 +3571,7 @@ module TalonOne
       data
     end
 
-    # Get Activity Reports for Application Customers
+    # Get Activity Reports for Application Customers (with total count)
     # Fetch summary reports for all application customers based on a time range
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -4412,7 +4412,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Referrals
+    # List Referrals (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -4431,7 +4431,7 @@ module TalonOne
       data
     end
 
-    # List Referrals
+    # List Referrals (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -5383,7 +5383,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes
+    # Get a list of the coupons that match the given attributes (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria 
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
@@ -5407,7 +5407,7 @@ module TalonOne
       data
     end
 
-    # Get a list of the coupons that match the given attributes
+    # Get a list of the coupons that match the given attributes (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria 
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
@@ -5503,7 +5503,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
     # @param application_id [Integer] 
     # @param body [Object] 
@@ -5527,7 +5527,7 @@ module TalonOne
       data
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
     # @param application_id [Integer] 
     # @param body [Object] 
