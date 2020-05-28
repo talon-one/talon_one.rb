@@ -30,6 +30,9 @@ module TalonOne
     # The number of times a coupon code can be redeemed. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
     attr_accessor :usage_limit
 
+    # The amount of discounts that can be given with this coupon code. 
+    attr_accessor :discount_limit
+
     # Timestamp at which point the coupon becomes valid.
     attr_accessor :start_date
 
@@ -39,13 +42,19 @@ module TalonOne
     # The number of times this coupon has been successfully used.
     attr_accessor :usage_counter
 
+    # The amount of discounts given on rules redeeming this coupon. Only usable if a coupon discount budget was set for this coupon.
+    attr_accessor :discount_counter
+
+    # The remaining discount this coupon can give.
+    attr_accessor :discount_remainder
+
     # Arbitrary properties associated with this item
     attr_accessor :attributes
 
     # The integration ID of the referring customer (if any) for whom this coupon was created as an effect.
     attr_accessor :referral_id
 
-    # The integration ID of a referred customer profile.
+    # The Integration ID of the customer that is allowed to redeem this coupon.
     attr_accessor :recipient_integration_id
 
     # The ID of the Import which created this coupon.
@@ -65,9 +74,12 @@ module TalonOne
         :'campaign_id' => :'campaignId',
         :'value' => :'value',
         :'usage_limit' => :'usageLimit',
+        :'discount_limit' => :'discountLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
         :'usage_counter' => :'usageCounter',
+        :'discount_counter' => :'discountCounter',
+        :'discount_remainder' => :'discountRemainder',
         :'attributes' => :'attributes',
         :'referral_id' => :'referralId',
         :'recipient_integration_id' => :'recipientIntegrationId',
@@ -85,9 +97,12 @@ module TalonOne
         :'campaign_id' => :'Integer',
         :'value' => :'String',
         :'usage_limit' => :'Integer',
+        :'discount_limit' => :'Float',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
         :'usage_counter' => :'Integer',
+        :'discount_counter' => :'Float',
+        :'discount_remainder' => :'Float',
         :'attributes' => :'Object',
         :'referral_id' => :'Integer',
         :'recipient_integration_id' => :'String',
@@ -138,6 +153,10 @@ module TalonOne
         self.usage_limit = attributes[:'usage_limit']
       end
 
+      if attributes.key?(:'discount_limit')
+        self.discount_limit = attributes[:'discount_limit']
+      end
+
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
       end
@@ -148,6 +167,14 @@ module TalonOne
 
       if attributes.key?(:'usage_counter')
         self.usage_counter = attributes[:'usage_counter']
+      end
+
+      if attributes.key?(:'discount_counter')
+        self.discount_counter = attributes[:'discount_counter']
+      end
+
+      if attributes.key?(:'discount_remainder')
+        self.discount_remainder = attributes[:'discount_remainder']
       end
 
       if attributes.key?(:'attributes')
@@ -211,6 +238,14 @@ module TalonOne
         invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
       end
 
+      if !@discount_limit.nil? && @discount_limit > 999999
+        invalid_properties.push('invalid value for "discount_limit", must be smaller than or equal to 999999.')
+      end
+
+      if !@discount_limit.nil? && @discount_limit < 0
+        invalid_properties.push('invalid value for "discount_limit", must be greater than or equal to 0.')
+      end
+
       if @usage_counter.nil?
         invalid_properties.push('invalid value for "usage_counter", usage_counter cannot be nil.')
       end
@@ -229,6 +264,8 @@ module TalonOne
       return false if @usage_limit.nil?
       return false if @usage_limit > 999999
       return false if @usage_limit < 0
+      return false if !@discount_limit.nil? && @discount_limit > 999999
+      return false if !@discount_limit.nil? && @discount_limit < 0
       return false if @usage_counter.nil?
       true
     end
@@ -265,6 +302,20 @@ module TalonOne
       @usage_limit = usage_limit
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] discount_limit Value to be assigned
+    def discount_limit=(discount_limit)
+      if !discount_limit.nil? && discount_limit > 999999
+        fail ArgumentError, 'invalid value for "discount_limit", must be smaller than or equal to 999999.'
+      end
+
+      if !discount_limit.nil? && discount_limit < 0
+        fail ArgumentError, 'invalid value for "discount_limit", must be greater than or equal to 0.'
+      end
+
+      @discount_limit = discount_limit
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -275,9 +326,12 @@ module TalonOne
           campaign_id == o.campaign_id &&
           value == o.value &&
           usage_limit == o.usage_limit &&
+          discount_limit == o.discount_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
           usage_counter == o.usage_counter &&
+          discount_counter == o.discount_counter &&
+          discount_remainder == o.discount_remainder &&
           attributes == o.attributes &&
           referral_id == o.referral_id &&
           recipient_integration_id == o.recipient_integration_id &&
@@ -295,7 +349,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, campaign_id, value, usage_limit, start_date, expiry_date, usage_counter, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id].hash
+      [id, created, campaign_id, value, usage_limit, discount_limit, start_date, expiry_date, usage_counter, discount_counter, discount_remainder, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id].hash
     end
 
     # Builds the object from hash

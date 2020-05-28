@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **expiry_date** | **DateTime** |  | [optional] 
 **name** | **String** | A name referencing the condition or effect that added this entry, or the specific name provided in an API call. | 
 **sub_ledger_id** | **String** | This specifies if we are adding loyalty points to the main ledger or a subledger | 
+**user_id** | **Integer** | This is the ID of the user who created this entry, if the addition or subtraction was done manually. | [optional] 
 
 ## Code Sample
 
@@ -29,7 +30,8 @@ instance = TalonOne::LoyaltyLedgerEntry.new(created: null,
                                  amount: null,
                                  expiry_date: null,
                                  name: null,
-                                 sub_ledger_id: null)
+                                 sub_ledger_id: null,
+                                 user_id: null)
 ```
 
 

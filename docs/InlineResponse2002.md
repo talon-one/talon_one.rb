@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Application&gt;**](Application.md) |  | 
+**data** | [**Array&lt;Campaign&gt;**](Campaign.md) |  | 
 
 ## Code Sample
 

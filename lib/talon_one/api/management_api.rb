@@ -97,7 +97,7 @@ module TalonOne
     # @param campaign_id [Integer] 
     # @param body [CampaignCopy] 
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2002]
     def copy_campaign_to_applications(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = copy_campaign_to_applications_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -109,7 +109,7 @@ module TalonOne
     # @param campaign_id [Integer] 
     # @param body [CampaignCopy] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def copy_campaign_to_applications_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.copy_campaign_to_applications ...'
@@ -146,7 +146,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2002' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -370,7 +370,7 @@ module TalonOne
     # @param body [NewCoupons] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def create_coupons(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = create_coupons_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -383,7 +383,7 @@ module TalonOne
     # @param body [NewCoupons] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def create_coupons_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.create_coupons ...'
@@ -421,7 +421,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -1027,7 +1027,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get access logs for application
+    # Get access logs for application (with total count)
     # @param application_id [Integer] 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -1044,7 +1044,7 @@ module TalonOne
       data
     end
 
-    # Get access logs for application
+    # Get access logs for application (with total count)
     # @param application_id [Integer] 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -1876,7 +1876,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the customer profiles that match the given attributes
+    # Get a list of the customer profiles that match the given attributes (with total count)
     # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body [ApplicationCustomerSearch] 
     # @param [Hash] opts the optional parameters
@@ -1886,7 +1886,7 @@ module TalonOne
       data
     end
 
-    # Get a list of the customer profiles that match the given attributes
+    # Get a list of the customer profiles that match the given attributes (with total count)
     # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
     # @param body [ApplicationCustomerSearch] 
     # @param [Hash] opts the optional parameters
@@ -2011,7 +2011,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Applications Events
+    # List Applications Events (with total count)
     # Lists all events recorded for an application. 
     # @param application_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -2035,7 +2035,7 @@ module TalonOne
       data
     end
 
-    # List Applications Events
+    # List Applications Events (with total count)
     # Lists all events recorded for an application. 
     # @param application_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -2398,7 +2398,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse2002]
+    # @return [InlineResponse2001]
     def get_applications(opts = {})
       data, _status_code, _headers = get_applications_with_http_info(opts)
       data
@@ -2410,7 +2410,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
     def get_applications_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_applications ...'
@@ -2436,7 +2436,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2002' 
+      return_type = opts[:return_type] || 'InlineResponse2001' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2746,7 +2746,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2002]
     def get_campaign_by_attributes(application_id, body, opts = {})
       data, _status_code, _headers = get_campaign_by_attributes_with_http_info(application_id, body, opts)
       data
@@ -2761,7 +2761,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def get_campaign_by_attributes_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_by_attributes ...'
@@ -2802,7 +2802,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2002' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2823,66 +2823,6 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List CampaignSet
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @return [CampaignSet]
-    def get_campaign_set(application_id, opts = {})
-      data, _status_code, _headers = get_campaign_set_with_http_info(application_id, opts)
-      data
-    end
-
-    # List CampaignSet
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(CampaignSet, Integer, Hash)>] CampaignSet data, response status code and response headers
-    def get_campaign_set_with_http_info(application_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_set ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_campaign_set"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaign_set'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'CampaignSet' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_campaign_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # List your Campaigns
     # @param application_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -2894,7 +2834,7 @@ module TalonOne
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2002]
     def get_campaigns(application_id, opts = {})
       data, _status_code, _headers = get_campaigns_with_http_info(application_id, opts)
       data
@@ -2911,7 +2851,7 @@ module TalonOne
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def get_campaigns_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaigns ...'
@@ -2950,7 +2890,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2002' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3051,7 +2991,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Coupons
+    # List Coupons (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3071,13 +3011,13 @@ module TalonOne
     # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def get_coupons(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_coupons_with_http_info(application_id, campaign_id, opts)
       data
     end
 
-    # List Coupons
+    # List Coupons (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3097,7 +3037,7 @@ module TalonOne
     # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_coupons_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons ...'
@@ -3152,7 +3092,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3191,7 +3131,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def get_coupons_by_attributes(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = get_coupons_by_attributes_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -3215,7 +3155,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_coupons_by_attributes_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons_by_attributes ...'
@@ -3272,7 +3212,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3293,7 +3233,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria Application wide 
     # @param application_id [Integer] 
     # @param body [CouponSearch] 
@@ -3311,13 +3251,13 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def get_coupons_by_attributes_application_wide(application_id, body, opts = {})
       data, _status_code, _headers = get_coupons_by_attributes_application_wide_with_http_info(application_id, body, opts)
       data
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria Application wide 
     # @param application_id [Integer] 
     # @param body [CouponSearch] 
@@ -3335,7 +3275,7 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_coupons_by_attributes_application_wide_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons_by_attributes_application_wide ...'
@@ -3393,7 +3333,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3612,7 +3552,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Activity Reports for Application Customers
+    # Get Activity Reports for Application Customers (with total count)
     # Fetch summary reports for all application customers based on a time range
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -3631,7 +3571,7 @@ module TalonOne
       data
     end
 
-    # Get Activity Reports for Application Customers
+    # Get Activity Reports for Application Customers (with total count)
     # Fetch summary reports for all application customers based on a time range
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -4472,7 +4412,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Referrals
+    # List Referrals (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -4491,7 +4431,7 @@ module TalonOne
       data
     end
 
-    # List Referrals
+    # List Referrals (with total count)
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -4813,7 +4753,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse2004]
+    # @return [InlineResponse2003]
     def get_rulesets(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_rulesets_with_http_info(application_id, campaign_id, opts)
       data
@@ -4826,7 +4766,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
+    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
     def get_rulesets_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_rulesets ...'
@@ -4860,7 +4800,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
+      return_type = opts[:return_type] || 'InlineResponse2003' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5443,7 +5383,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes
+    # Get a list of the coupons that match the given attributes (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria 
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
@@ -5461,13 +5401,13 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def search_coupons_advanced(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = search_coupons_advanced_with_http_info(application_id, campaign_id, body, opts)
       data
     end
 
-    # Get a list of the coupons that match the given attributes
+    # Get a list of the coupons that match the given attributes (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria 
     # @param application_id [Integer] 
     # @param campaign_id [Integer] 
@@ -5485,7 +5425,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def search_coupons_advanced_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced ...'
@@ -5542,7 +5482,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5563,7 +5503,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
     # @param application_id [Integer] 
     # @param body [Object] 
@@ -5581,13 +5521,13 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2004]
     def search_coupons_advanced_application_wide(application_id, body, opts = {})
       data, _status_code, _headers = search_coupons_advanced_application_wide_with_http_info(application_id, body, opts)
       data
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
+    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
     # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
     # @param application_id [Integer] 
     # @param body [Object] 
@@ -5605,7 +5545,7 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def search_coupons_advanced_application_wide_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced_application_wide ...'
@@ -5663,7 +5603,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -6135,74 +6075,6 @@ module TalonOne
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#update_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Update a Campaign Set
-    # @param application_id [Integer] 
-    # @param body [NewCampaignSet] 
-    # @param [Hash] opts the optional parameters
-    # @return [CampaignSet]
-    def update_campaign_set(application_id, body, opts = {})
-      data, _status_code, _headers = update_campaign_set_with_http_info(application_id, body, opts)
-      data
-    end
-
-    # Update a Campaign Set
-    # @param application_id [Integer] 
-    # @param body [NewCampaignSet] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(CampaignSet, Integer, Hash)>] CampaignSet data, response status code and response headers
-    def update_campaign_set_with_http_info(application_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.update_campaign_set ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.update_campaign_set"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_campaign_set"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaign_set'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'CampaignSet' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#update_campaign_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

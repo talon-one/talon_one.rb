@@ -232,6 +232,10 @@ module TalonOne
         invalid_properties.push('invalid value for "discounts", discounts cannot be nil.')
       end
 
+      if @total.nil?
+        invalid_properties.push('invalid value for "total", total cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -249,6 +253,7 @@ module TalonOne
       return false unless state_validator.valid?(@state)
       return false if @cart_items.nil?
       return false if @discounts.nil?
+      return false if @total.nil?
       true
     end
 

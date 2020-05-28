@@ -32,7 +32,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
-  s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
+  s.files         = %x[git ls-files -z].split("\x0").reject { |f| f.match(%r{^(test|spec|\.openapi-generator)/}) } -
+                    %w[.gitignore .openapi-generator-ignore .rubocop.yml .travis.yml git_push.sh]
   s.test_files    = `find spec/*`.split("\n")
   s.executables   = []
   s.require_paths = ["lib"]

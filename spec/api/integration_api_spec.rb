@@ -84,25 +84,14 @@ describe 'IntegrationApi' do
 
   # unit tests for get_customer_inventory
   # Get an inventory of all data associated with a specific customer profile.
-  # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information and referral codes. In the future, this will be expanded with coupon codes and loyalty points.
+  # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information, referral codes and reserved coupons. In the future, this will be expanded with loyalty points.
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :profile optional flag to decide if you would like customer profile information in the response
   # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
+  # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
   # @return [CustomerInventory]
   describe 'get_customer_inventory test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_reserved_coupons
-  # Get all valid reserved coupons
-  # Returns all coupons this user is subscribed to that are valid and usable 
-  # @param integration_id The custom identifier for this profile, must be unique within the account.
-  # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2001]
-  describe 'get_reserved_coupons test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -125,6 +114,7 @@ describe 'IntegrationApi' do
   # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
   # @param body 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'track_event test' do
     it 'should work' do
@@ -138,8 +128,22 @@ describe 'IntegrationApi' do
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'update_customer_profile test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for update_customer_profile_v2
+  # Update a Customer Profile
+  # Update (or create) a [Customer Profile][].   The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+  # @param customer_profile_id The custom identifier for this profile, must be unique within the account.
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [CustomerProfileUpdate]
+  describe 'update_customer_profile_v2 test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -151,6 +155,7 @@ describe 'IntegrationApi' do
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'update_customer_session test' do
     it 'should work' do
@@ -164,6 +169,7 @@ describe 'IntegrationApi' do
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationStateV2]
   describe 'update_customer_session_v2 test' do
     it 'should work' do

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 [**delete_coupons**](ManagementApi.md#delete_coupons) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Delete Coupons
 [**delete_referral**](ManagementApi.md#delete_referral) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/{referralId} | Delete one Referral
 [**delete_ruleset**](ManagementApi.md#delete_ruleset) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Delete a Ruleset
-[**get_access_logs**](ManagementApi.md#get_access_logs) | **GET** /v1/applications/{applicationId}/access_logs | Get access logs for application
+[**get_access_logs**](ManagementApi.md#get_access_logs) | **GET** /v1/applications/{applicationId}/access_logs | Get access logs for application (with total count)
 [**get_access_logs_without_total_count**](ManagementApi.md#get_access_logs_without_total_count) | **GET** /v1/applications/{applicationId}/access_logs/no_total | Get access logs for application
 [**get_account**](ManagementApi.md#get_account) | **GET** /v1/accounts/{accountId} | Get Account Details
 [**get_account_analytics**](ManagementApi.md#get_account_analytics) | **GET** /v1/accounts/{accountId}/analytics | Get Account Analytics
@@ -30,9 +30,9 @@ Method | HTTP request | Description
 [**get_application_api_health**](ManagementApi.md#get_application_api_health) | **GET** /v1/applications/{applicationId}/health_report | Get report of health of application API
 [**get_application_customer**](ManagementApi.md#get_application_customer) | **GET** /v1/applications/{applicationId}/customers/{customerId} | Get Application Customer
 [**get_application_customers**](ManagementApi.md#get_application_customers) | **GET** /v1/applications/{applicationId}/customers | List Application Customers
-[**get_application_customers_by_attributes**](ManagementApi.md#get_application_customers_by_attributes) | **POST** /v1/application_customer_search | Get a list of the customer profiles that match the given attributes
+[**get_application_customers_by_attributes**](ManagementApi.md#get_application_customers_by_attributes) | **POST** /v1/application_customer_search | Get a list of the customer profiles that match the given attributes (with total count)
 [**get_application_event_types**](ManagementApi.md#get_application_event_types) | **GET** /v1/applications/{applicationId}/event_types | List Applications Event Types
-[**get_application_events**](ManagementApi.md#get_application_events) | **GET** /v1/applications/{applicationId}/events | List Applications Events
+[**get_application_events**](ManagementApi.md#get_application_events) | **GET** /v1/applications/{applicationId}/events | List Applications Events (with total count)
 [**get_application_events_without_total_count**](ManagementApi.md#get_application_events_without_total_count) | **GET** /v1/applications/{applicationId}/events/no_total | List Applications Events
 [**get_application_session**](ManagementApi.md#get_application_session) | **GET** /v1/applications/{applicationId}/sessions/{sessionId} | Get Application Session
 [**get_application_sessions**](ManagementApi.md#get_application_sessions) | **GET** /v1/applications/{applicationId}/sessions | List Application Sessions
@@ -42,15 +42,14 @@ Method | HTTP request | Description
 [**get_campaign**](ManagementApi.md#get_campaign) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId} | Get a Campaign
 [**get_campaign_analytics**](ManagementApi.md#get_campaign_analytics) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/analytics | Get analytics of campaigns
 [**get_campaign_by_attributes**](ManagementApi.md#get_campaign_by_attributes) | **POST** /v1/applications/{applicationId}/campaigns_search | Get a list of all campaigns that match the given attributes
-[**get_campaign_set**](ManagementApi.md#get_campaign_set) | **GET** /v1/applications/{applicationId}/campaign_set | List CampaignSet
 [**get_campaigns**](ManagementApi.md#get_campaigns) | **GET** /v1/applications/{applicationId}/campaigns | List your Campaigns
 [**get_changes**](ManagementApi.md#get_changes) | **GET** /v1/changes | Get audit log for an account
-[**get_coupons**](ManagementApi.md#get_coupons) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | List Coupons
+[**get_coupons**](ManagementApi.md#get_coupons) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | List Coupons (with total count)
 [**get_coupons_by_attributes**](ManagementApi.md#get_coupons_by_attributes) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search | Get a list of the coupons that match the given attributes
-[**get_coupons_by_attributes_application_wide**](ManagementApi.md#get_coupons_by_attributes_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search | Get a list of the coupons that match the given attributes in all active campaigns of an application
+[**get_coupons_by_attributes_application_wide**](ManagementApi.md#get_coupons_by_attributes_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search | Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
 [**get_coupons_without_total_count**](ManagementApi.md#get_coupons_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/no_total | List Coupons
 [**get_customer_activity_report**](ManagementApi.md#get_customer_activity_report) | **GET** /v1/applications/{applicationId}/customer_activity_reports/{customerId} | Get Activity Report for Single Customer
-[**get_customer_activity_reports**](ManagementApi.md#get_customer_activity_reports) | **GET** /v1/applications/{applicationId}/customer_activity_reports | Get Activity Reports for Application Customers
+[**get_customer_activity_reports**](ManagementApi.md#get_customer_activity_reports) | **GET** /v1/applications/{applicationId}/customer_activity_reports | Get Activity Reports for Application Customers (with total count)
 [**get_customer_activity_reports_without_total_count**](ManagementApi.md#get_customer_activity_reports_without_total_count) | **GET** /v1/applications/{applicationId}/customer_activity_reports/no_total | Get Activity Reports for Application Customers
 [**get_customer_analytics**](ManagementApi.md#get_customer_analytics) | **GET** /v1/applications/{applicationId}/customers/{customerId}/analytics | Get Analytics Report for a Customer
 [**get_customer_profile**](ManagementApi.md#get_customer_profile) | **GET** /v1/customers/{customerId} | Get Customer Profile
@@ -62,7 +61,7 @@ Method | HTTP request | Description
 [**get_loyalty_points**](ManagementApi.md#get_loyalty_points) | **GET** /v1/loyalty_programs/{programID}/profile/{integrationID} | get the Loyalty Ledger for this integrationID
 [**get_loyalty_program**](ManagementApi.md#get_loyalty_program) | **GET** /v1/loyalty_programs/{programID} | Get a loyalty program
 [**get_loyalty_programs**](ManagementApi.md#get_loyalty_programs) | **GET** /v1/loyalty_programs | List all loyalty Programs
-[**get_referrals**](ManagementApi.md#get_referrals) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals | List Referrals
+[**get_referrals**](ManagementApi.md#get_referrals) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals | List Referrals (with total count)
 [**get_referrals_without_total_count**](ManagementApi.md#get_referrals_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/no_total | List Referrals
 [**get_role**](ManagementApi.md#get_role) | **GET** /v1/roles/{roleId} | Get information for the specified role.
 [**get_ruleset**](ManagementApi.md#get_ruleset) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Get a Ruleset
@@ -75,14 +74,13 @@ Method | HTTP request | Description
 [**get_webhooks**](ManagementApi.md#get_webhooks) | **GET** /v1/webhooks | List Webhooks
 [**remove_loyalty_points**](ManagementApi.md#remove_loyalty_points) | **PUT** /v1/loyalty_programs/{programID}/profile/{integrationID}/deduct_points | Deduct points in a certain loyalty program for the specified customer
 [**reset_password**](ManagementApi.md#reset_password) | **POST** /v1/reset_password | Reset password
-[**search_coupons_advanced**](ManagementApi.md#search_coupons_advanced) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced | Get a list of the coupons that match the given attributes
-[**search_coupons_advanced_application_wide**](ManagementApi.md#search_coupons_advanced_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search_advanced | Get a list of the coupons that match the given attributes in all active campaigns of an application
+[**search_coupons_advanced**](ManagementApi.md#search_coupons_advanced) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced | Get a list of the coupons that match the given attributes (with total count)
+[**search_coupons_advanced_application_wide**](ManagementApi.md#search_coupons_advanced_application_wide) | **POST** /v1/applications/{applicationId}/coupons_search_advanced | Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
 [**search_coupons_advanced_application_wide_without_total_count**](ManagementApi.md#search_coupons_advanced_application_wide_without_total_count) | **POST** /v1/applications/{applicationId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes in all active campaigns of an application
 [**search_coupons_advanced_without_total_count**](ManagementApi.md#search_coupons_advanced_without_total_count) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced/no_total | Get a list of the coupons that match the given attributes
 [**update_additional_cost**](ManagementApi.md#update_additional_cost) | **PUT** /v1/additional_costs/{additionalCostId} | Update an additional cost
 [**update_attribute**](ManagementApi.md#update_attribute) | **PUT** /v1/attributes/{attributeId} | Update a custom attribute
 [**update_campaign**](ManagementApi.md#update_campaign) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId} | Update a Campaign
-[**update_campaign_set**](ManagementApi.md#update_campaign_set) | **PUT** /v1/applications/{applicationId}/campaign_set | Update a Campaign Set
 [**update_coupon**](ManagementApi.md#update_coupon) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/{couponId} | Update a Coupon
 [**update_coupon_batch**](ManagementApi.md#update_coupon_batch) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Update a Batch of Coupons
 [**update_ruleset**](ManagementApi.md#update_ruleset) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Update a Ruleset
@@ -146,7 +144,7 @@ nil (empty response body)
 
 ## copy_campaign_to_applications
 
-> InlineResponse2003 copy_campaign_to_applications(application_id, campaign_id, body)
+> InlineResponse2002 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into every specified application
 
@@ -190,7 +188,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -366,7 +364,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons
 
-> InlineResponse2001 create_coupons(application_id, campaign_id, body, opts)
+> InlineResponse2004 create_coupons(application_id, campaign_id, body, opts)
 
 Create Coupons
 
@@ -414,7 +412,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -891,7 +889,7 @@ nil (empty response body)
 
 > InlineResponse2009 get_access_logs(application_id, range_start, range_end, opts)
 
-Get access logs for application
+Get access logs for application (with total count)
 
 ### Example
 
@@ -920,7 +918,7 @@ opts = {
 }
 
 begin
-  #Get access logs for application
+  #Get access logs for application (with total count)
   result = api_instance.get_access_logs(application_id, range_start, range_end, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -1583,7 +1581,7 @@ Name | Type | Description  | Notes
 
 > InlineResponse20013 get_application_customers_by_attributes(body)
 
-Get a list of the customer profiles that match the given attributes
+Get a list of the customer profiles that match the given attributes (with total count)
 
 Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
 
@@ -1604,7 +1602,7 @@ api_instance = TalonOne::ManagementApi.new
 body = TalonOne::ApplicationCustomerSearch.new # ApplicationCustomerSearch | 
 
 begin
-  #Get a list of the customer profiles that match the given attributes
+  #Get a list of the customer profiles that match the given attributes (with total count)
   result = api_instance.get_application_customers_by_attributes(body)
   p result
 rescue TalonOne::ApiError => e
@@ -1699,7 +1697,7 @@ Name | Type | Description  | Notes
 
 > InlineResponse20017 get_application_events(application_id, opts)
 
-List Applications Events
+List Applications Events (with total count)
 
 Lists all events recorded for an application. 
 
@@ -1736,7 +1734,7 @@ opts = {
 }
 
 begin
-  #List Applications Events
+  #List Applications Events (with total count)
   result = api_instance.get_application_events(application_id, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -1991,7 +1989,7 @@ Name | Type | Description  | Notes
 
 ## get_applications
 
-> InlineResponse2002 get_applications(opts)
+> InlineResponse2001 get_applications(opts)
 
 List Applications
 
@@ -2037,7 +2035,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -2281,7 +2279,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_by_attributes
 
-> InlineResponse2003 get_campaign_by_attributes(application_id, body, opts)
+> InlineResponse2002 get_campaign_by_attributes(application_id, body, opts)
 
 Get a list of all campaigns that match the given attributes
 
@@ -2333,7 +2331,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -2345,61 +2343,9 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## get_campaign_set
-
-> CampaignSet get_campaign_set(application_id)
-
-List CampaignSet
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-application_id = 56 # Integer | 
-
-begin
-  #List CampaignSet
-  result = api_instance.get_campaign_set(application_id)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_campaign_set: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**|  | 
-
-### Return type
-
-[**CampaignSet**](CampaignSet.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_campaigns
 
-> InlineResponse2003 get_campaigns(application_id, opts)
+> InlineResponse2002 get_campaigns(application_id, opts)
 
 List your Campaigns
 
@@ -2455,7 +2401,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -2539,9 +2485,9 @@ Name | Type | Description  | Notes
 
 ## get_coupons
 
-> InlineResponse2001 get_coupons(application_id, campaign_id, opts)
+> InlineResponse2004 get_coupons(application_id, campaign_id, opts)
 
-List Coupons
+List Coupons (with total count)
 
 ### Example
 
@@ -2579,7 +2525,7 @@ opts = {
 }
 
 begin
-  #List Coupons
+  #List Coupons (with total count)
   result = api_instance.get_coupons(application_id, campaign_id, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -2613,7 +2559,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -2627,7 +2573,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_by_attributes
 
-> InlineResponse2001 get_coupons_by_attributes(application_id, campaign_id, body, opts)
+> InlineResponse2004 get_coupons_by_attributes(application_id, campaign_id, body, opts)
 
 Get a list of the coupons that match the given attributes
 
@@ -2697,7 +2643,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -2711,9 +2657,9 @@ Name | Type | Description  | Notes
 
 ## get_coupons_by_attributes_application_wide
 
-> InlineResponse2001 get_coupons_by_attributes_application_wide(application_id, body, opts)
+> InlineResponse2004 get_coupons_by_attributes_application_wide(application_id, body, opts)
 
-Get a list of the coupons that match the given attributes in all active campaigns of an application
+Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
 
 Gets a list of all the coupons with attributes matching the query criteria Application wide 
 
@@ -2750,7 +2696,7 @@ opts = {
 }
 
 begin
-  #Get a list of the coupons that match the given attributes in all active campaigns of an application
+  #Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
   result = api_instance.get_coupons_by_attributes_application_wide(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -2781,7 +2727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -2943,7 +2889,7 @@ Name | Type | Description  | Notes
 
 > InlineResponse20014 get_customer_activity_reports(range_start, range_end, application_id, opts)
 
-Get Activity Reports for Application Customers
+Get Activity Reports for Application Customers (with total count)
 
 Fetch summary reports for all application customers based on a time range
 
@@ -2975,7 +2921,7 @@ opts = {
 }
 
 begin
-  #Get Activity Reports for Application Customers
+  #Get Activity Reports for Application Customers (with total count)
   result = api_instance.get_customer_activity_reports(range_start, range_end, application_id, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -3669,7 +3615,7 @@ This endpoint does not need any parameter.
 
 > InlineResponse2006 get_referrals(application_id, campaign_id, opts)
 
-List Referrals
+List Referrals (with total count)
 
 ### Example
 
@@ -3700,7 +3646,7 @@ opts = {
 }
 
 begin
-  #List Referrals
+  #List Referrals (with total count)
   result = api_instance.get_referrals(application_id, campaign_id, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -3923,7 +3869,7 @@ Name | Type | Description  | Notes
 
 ## get_rulesets
 
-> InlineResponse2004 get_rulesets(application_id, campaign_id, opts)
+> InlineResponse2003 get_rulesets(application_id, campaign_id, opts)
 
 List Campaign Rulesets
 
@@ -3971,7 +3917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -4466,9 +4412,9 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced
 
-> InlineResponse2001 search_coupons_advanced(application_id, campaign_id, body, opts)
+> InlineResponse2004 search_coupons_advanced(application_id, campaign_id, body, opts)
 
-Get a list of the coupons that match the given attributes
+Get a list of the coupons that match the given attributes (with total count)
 
 Gets a list of all the coupons with attributes matching the query criteria 
 
@@ -4505,7 +4451,7 @@ opts = {
 }
 
 begin
-  #Get a list of the coupons that match the given attributes
+  #Get a list of the coupons that match the given attributes (with total count)
   result = api_instance.search_coupons_advanced(application_id, campaign_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -4536,7 +4482,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -4550,9 +4496,9 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_application_wide
 
-> InlineResponse2001 search_coupons_advanced_application_wide(application_id, body, opts)
+> InlineResponse2004 search_coupons_advanced_application_wide(application_id, body, opts)
 
-Get a list of the coupons that match the given attributes in all active campaigns of an application
+Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
 
 Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
 
@@ -4589,7 +4535,7 @@ opts = {
 }
 
 begin
-  #Get a list of the coupons that match the given attributes in all active campaigns of an application
+  #Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
   result = api_instance.search_coupons_advanced_application_wide(application_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -4620,7 +4566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -4957,60 +4903,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Campaign**](Campaign.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_campaign_set
-
-> CampaignSet update_campaign_set(application_id, body)
-
-Update a Campaign Set
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-application_id = 56 # Integer | 
-body = TalonOne::NewCampaignSet.new # NewCampaignSet | 
-
-begin
-  #Update a Campaign Set
-  result = api_instance.update_campaign_set(application_id, body)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->update_campaign_set: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**|  | 
- **body** | [**NewCampaignSet**](NewCampaignSet.md)|  | 
-
-### Return type
-
-[**CampaignSet**](CampaignSet.md)
 
 ### Authorization
 

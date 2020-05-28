@@ -36,6 +36,9 @@ module TalonOne
     # Default limits for campaigns created in this application
     attr_accessor :limits
 
+    # Default priority for campaigns created in this application, can be one of (universal, stackable, exclusive)
+    attr_accessor :campaign_priority
+
     attr_accessor :attributes_settings
 
     # Hex key for HMAC-signing API calls as coming from this application (16 hex digits)
@@ -73,6 +76,7 @@ module TalonOne
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
         :'limits' => :'limits',
+        :'campaign_priority' => :'campaignPriority',
         :'attributes_settings' => :'attributesSettings',
         :'key' => :'key'
       }
@@ -88,6 +92,7 @@ module TalonOne
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
+        :'campaign_priority' => :'String',
         :'attributes_settings' => :'AttributesSettings',
         :'key' => :'String'
       }
@@ -144,6 +149,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'campaign_priority')
+        self.campaign_priority = attributes[:'campaign_priority']
+      end
+
       if attributes.key?(:'attributes_settings')
         self.attributes_settings = attributes[:'attributes_settings']
       end
@@ -181,14 +190,6 @@ module TalonOne
         invalid_properties.push('invalid value for "currency", the character length must be great than or equal to 1.')
       end
 
-      if !@key.nil? && @key.to_s.length > 16
-        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 16.')
-      end
-
-      if !@key.nil? && @key.to_s.length < 16
-        invalid_properties.push('invalid value for "key", the character length must be great than or equal to 16.')
-      end
-
       pattern = Regexp.new(/^[a-fA-F0-9]{16}$/)
       if !@key.nil? && @key !~ pattern
         invalid_properties.push("invalid value for \"key\", must conform to the pattern #{pattern}.")
@@ -208,8 +209,8 @@ module TalonOne
       return false if @currency.to_s.length < 1
       case_sensitivity_validator = EnumAttributeValidator.new('String', ["sensitive", "insensitive-uppercase", "insensitive-lowercase"])
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
-      return false if !@key.nil? && @key.to_s.length > 16
-      return false if !@key.nil? && @key.to_s.length < 16
+      campaign_priority_validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
+      return false unless campaign_priority_validator.valid?(@campaign_priority)
       return false if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
       true
     end
@@ -266,17 +267,19 @@ module TalonOne
       @case_sensitivity = case_sensitivity
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_priority Object to be assigned
+    def campaign_priority=(campaign_priority)
+      validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
+      unless validator.valid?(campaign_priority)
+        fail ArgumentError, "invalid value for \"campaign_priority\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_priority = campaign_priority
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] key Value to be assigned
     def key=(key)
-      if !key.nil? && key.to_s.length > 16
-        fail ArgumentError, 'invalid value for "key", the character length must be smaller than or equal to 16.'
-      end
-
-      if !key.nil? && key.to_s.length < 16
-        fail ArgumentError, 'invalid value for "key", the character length must be great than or equal to 16.'
-      end
-
       pattern = Regexp.new(/^[a-fA-F0-9]{16}$/)
       if !key.nil? && key !~ pattern
         fail ArgumentError, "invalid value for \"key\", must conform to the pattern #{pattern}."
@@ -297,6 +300,7 @@ module TalonOne
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
           limits == o.limits &&
+          campaign_priority == o.campaign_priority &&
           attributes_settings == o.attributes_settings &&
           key == o.key
     end
@@ -310,7 +314,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, attributes_settings, key].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, attributes_settings, key].hash
     end
 
     # Builds the object from hash

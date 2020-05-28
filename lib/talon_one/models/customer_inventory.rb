@@ -18,11 +18,14 @@ module TalonOne
 
     attr_accessor :referrals
 
+    attr_accessor :coupons
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'profile' => :'profile',
-        :'referrals' => :'referrals'
+        :'referrals' => :'referrals',
+        :'coupons' => :'coupons'
       }
     end
 
@@ -30,7 +33,8 @@ module TalonOne
     def self.openapi_types
       {
         :'profile' => :'CustomerProfile',
-        :'referrals' => :'Array<Referral>'
+        :'referrals' => :'Array<Referral>',
+        :'coupons' => :'Array<Coupon>'
       }
     end
 
@@ -64,6 +68,12 @@ module TalonOne
           self.referrals = value
         end
       end
+
+      if attributes.key?(:'coupons')
+        if (value = attributes[:'coupons']).is_a?(Array)
+          self.coupons = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,7 +95,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           profile == o.profile &&
-          referrals == o.referrals
+          referrals == o.referrals &&
+          coupons == o.coupons
     end
 
     # @see the `==` method
@@ -97,7 +108,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile, referrals].hash
+      [profile, referrals, coupons].hash
     end
 
     # Builds the object from hash
