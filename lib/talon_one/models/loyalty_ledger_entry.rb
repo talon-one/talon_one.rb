@@ -25,6 +25,7 @@ module TalonOne
 
     attr_accessor :event_id
 
+    # The type of the ledger transaction. Possible values are addition, subtraction, expire or expiring (for expiring points ledgers) 
     attr_accessor :type
 
     attr_accessor :amount
@@ -39,28 +40,6 @@ module TalonOne
 
     # This is the ID of the user who created this entry, if the addition or subtraction was done manually.
     attr_accessor :user_id
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -204,22 +183,10 @@ module TalonOne
       return false if @program_id.nil?
       return false if @customer_profile_id.nil?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction", "expire"])
-      return false unless type_validator.valid?(@type)
       return false if @amount.nil?
       return false if @name.nil?
       return false if @sub_ledger_id.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["addition", "subtraction", "expire"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
