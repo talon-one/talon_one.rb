@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **customer_profile_id** | **String** |  | 
 **customer_session_id** | **String** |  | [optional] 
 **event_id** | **Integer** |  | [optional] 
-**type** | **String** |  | 
+**type** | **String** | The type of the ledger transaction. Possible values are addition, subtraction, expire or expiring (for expiring points ledgers)  | 
 **amount** | **Float** |  | 
 **expiry_date** | **DateTime** |  | [optional] 
 **name** | **String** | A name referencing the condition or effect that added this entry, or the specific name provided in an API call. | 
