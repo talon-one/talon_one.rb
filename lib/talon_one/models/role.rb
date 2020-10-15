@@ -21,6 +21,9 @@ module TalonOne
     # The ID of the Talon.One account that owns this role.
     attr_accessor :account_id
 
+    # The ID of the Campaign Group this role was created for.
+    attr_accessor :campaign_group_id
+
     # Name of the role
     attr_accessor :name
 
@@ -30,7 +33,7 @@ module TalonOne
     # A list of user identifiers assigned to this role
     attr_accessor :members
 
-    # Role Policy this should be a stringified blob of json
+    # Role ACL Policy
     attr_accessor :acl
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -38,6 +41,7 @@ module TalonOne
       {
         :'id' => :'id',
         :'account_id' => :'accountID',
+        :'campaign_group_id' => :'campaignGroupID',
         :'name' => :'name',
         :'description' => :'description',
         :'members' => :'members',
@@ -50,10 +54,11 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'account_id' => :'Integer',
+        :'campaign_group_id' => :'Integer',
         :'name' => :'String',
         :'description' => :'String',
         :'members' => :'Array<Integer>',
-        :'acl' => :'String'
+        :'acl' => :'Object'
       }
     end
 
@@ -84,6 +89,10 @@ module TalonOne
 
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.key?(:'campaign_group_id')
+        self.campaign_group_id = attributes[:'campaign_group_id']
       end
 
       if attributes.key?(:'name')
@@ -135,6 +144,7 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           account_id == o.account_id &&
+          campaign_group_id == o.campaign_group_id &&
           name == o.name &&
           description == o.description &&
           members == o.members &&
@@ -150,7 +160,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, name, description, members, acl].hash
+      [id, account_id, campaign_group_id, name, description, members, acl].hash
     end
 
     # Builds the object from hash

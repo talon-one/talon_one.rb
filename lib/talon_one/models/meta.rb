@@ -24,6 +24,7 @@ module TalonOne
 
     attr_accessor :referral_rejection_reason
 
+    # Contains warnings about possible misuse.
     attr_accessor :warnings
 
     # Attribute mapping from ruby-style variable name to JSON key.

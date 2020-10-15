@@ -24,12 +24,16 @@ module TalonOne
     # The index of the item in the cart items list on which this discount should be applied
     attr_accessor :position
 
+    # The sub-index of the item in an item stack on which this discount should be applied
+    attr_accessor :sub_position
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'value' => :'value',
-        :'position' => :'position'
+        :'position' => :'position',
+        :'sub_position' => :'subPosition'
       }
     end
 
@@ -38,7 +42,8 @@ module TalonOne
       {
         :'name' => :'String',
         :'value' => :'Float',
-        :'position' => :'Float'
+        :'position' => :'Float',
+        :'sub_position' => :'Float'
       }
     end
 
@@ -73,6 +78,10 @@ module TalonOne
 
       if attributes.key?(:'position')
         self.position = attributes[:'position']
+      end
+
+      if attributes.key?(:'sub_position')
+        self.sub_position = attributes[:'sub_position']
       end
     end
 
@@ -111,7 +120,8 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           value == o.value &&
-          position == o.position
+          position == o.position &&
+          sub_position == o.sub_position
     end
 
     # @see the `==` method
@@ -123,7 +133,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value, position].hash
+      [name, value, position, sub_position].hash
     end
 
     # Builds the object from hash

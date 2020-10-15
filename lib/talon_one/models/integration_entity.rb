@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class IntegrationEntity
-    # The ID used for this entity in the application system.
+    # The integration ID for this entity sent to and used in the Talon.One system.
     attr_accessor :integration_id
 
     # The exact moment this entity was created.

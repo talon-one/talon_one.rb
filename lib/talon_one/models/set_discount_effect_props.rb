@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.2.3
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"setDiscount\" effect. This gets triggered whenever a validated rule contained a \"set discount\" effect. This is a discount that should be applied globally on the session total.
+  # The properties specific to the \"setDiscount\" effect. This gets triggered whenever a validated rule contained a \"set discount\" effect. This is a discount that should be applied on the scope of defined with it.
   class SetDiscountEffectProps
     # The name/description of this discount
     attr_accessor :name
@@ -21,11 +21,15 @@ module TalonOne
     # The total monetary value of the discount
     attr_accessor :value
 
+    # The scope which the discount was applied on, can be one of (cartItems,additionalCosts,sessionTotal)
+    attr_accessor :scope
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'scope' => :'scope'
       }
     end
 
@@ -33,7 +37,8 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'value' => :'Float'
+        :'value' => :'Float',
+        :'scope' => :'String'
       }
     end
 
@@ -64,6 +69,10 @@ module TalonOne
 
       if attributes.key?(:'value')
         self.value = attributes[:'value']
+      end
+
+      if attributes.key?(:'scope')
+        self.scope = attributes[:'scope']
       end
     end
 
@@ -96,7 +105,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          value == o.value
+          value == o.value &&
+          scope == o.scope
     end
 
     # @see the `==` method
@@ -108,7 +118,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value].hash
+      [name, value, scope].hash
     end
 
     # Builds the object from hash

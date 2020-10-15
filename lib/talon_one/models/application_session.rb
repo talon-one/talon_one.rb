@@ -27,7 +27,7 @@ module TalonOne
     # The globally unique Talon.One ID of the customer that created this entity.
     attr_accessor :profile_id
 
-    # The ID used for this entity in the application system.
+    # The integration ID for this entity sent to and used in the Talon.One system.
     attr_accessor :integration_id
 
     # Integration ID of the customer for the session.

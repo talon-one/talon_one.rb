@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **coupons** | [**Object**](.md) | Maps the coupon value to a key-value list of that coupons attributes. | [optional] 
 **coupon_rejection_reason** | [**CouponRejectionReason**](CouponRejectionReason.md) |  | [optional] 
 **referral_rejection_reason** | [**ReferralRejectionReason**](ReferralRejectionReason.md) |  | [optional] 
-**warnings** | [**Object**](.md) |  | [optional] 
+**warnings** | [**Object**](.md) | Contains warnings about possible misuse. | [optional] 
 
 ## Code Sample
 

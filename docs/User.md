@@ -12,9 +12,8 @@ Name | Type | Description | Notes
 **invite_token** | **String** | Invite token, empty if the user as already accepted their invite. | 
 **state** | **String** | Current user state. | 
 **name** | **String** | Full name | 
-**policy** | **String** | A blob of ACL JSON | 
-**release_update** | **Boolean** | Update the user via email | 
-**latest_feature** | **String** | Latest feature the user has been notified. | [optional] 
+**policy** | [**Object**](.md) | User ACL Policy | 
+**latest_feed_timestamp** | **DateTime** | Latest timestamp the user has been notified for feed. | [optional] 
 **roles** | **Array&lt;Integer&gt;** | Contains a list of all roles the user is a member of | [optional] 
 **application_notification_subscriptions** | [**Object**](.md) |  | [optional] 
 **auth_method** | **String** | The Authentication method for this user | [optional] 
@@ -33,8 +32,7 @@ instance = TalonOne::User.new(id: null,
                                  state: null,
                                  name: null,
                                  policy: null,
-                                 release_update: null,
-                                 latest_feature: null,
+                                 latest_feed_timestamp: null,
                                  roles: null,
                                  application_notification_subscriptions: null,
                                  auth_method: null)

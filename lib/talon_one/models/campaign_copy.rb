@@ -48,7 +48,7 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'application_ids' => :'Array<String>',
+        :'application_ids' => :'Array<Integer>',
         :'description' => :'String',
         :'start_time' => :'DateTime',
         :'end_time' => :'DateTime',

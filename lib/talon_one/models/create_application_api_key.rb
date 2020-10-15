@@ -20,11 +20,37 @@ module TalonOne
     # The date the API key expired
     attr_accessor :expires
 
+    # Platform the API key is valid for.
+    attr_accessor :platform
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'title' => :'title',
-        :'expires' => :'expires'
+        :'expires' => :'expires',
+        :'platform' => :'platform'
       }
     end
 
@@ -32,7 +58,8 @@ module TalonOne
     def self.openapi_types
       {
         :'title' => :'String',
-        :'expires' => :'DateTime'
+        :'expires' => :'DateTime',
+        :'platform' => :'String'
       }
     end
 
@@ -64,6 +91,10 @@ module TalonOne
       if attributes.key?(:'expires')
         self.expires = attributes[:'expires']
       end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -86,7 +117,19 @@ module TalonOne
     def valid?
       return false if @title.nil?
       return false if @expires.nil?
+      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle"])
+      return false unless platform_validator.valid?(@platform)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
+      end
+      @platform = platform
     end
 
     # Checks equality by comparing each attribute.
@@ -95,7 +138,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           title == o.title &&
-          expires == o.expires
+          expires == o.expires &&
+          platform == o.platform
     end
 
     # @see the `==` method
@@ -107,7 +151,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, expires].hash
+      [title, expires, platform].hash
     end
 
     # Builds the object from hash

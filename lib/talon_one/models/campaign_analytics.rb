@@ -77,6 +77,18 @@ module TalonOne
     # Number of referrals created in the campaign by the rule engine since it began.
     attr_accessor :total_referrals_created
 
+    # Number of added loyalty points in the campaign in a specific interval.
+    attr_accessor :added_loyalty_points
+
+    # Number of added loyalty points in the campaign since it began.
+    attr_accessor :total_added_loyalty_points
+
+    # Number of deducted loyalty points in the campaign in a specific interval.
+    attr_accessor :deducted_loyalty_points
+
+    # Number of deducted loyalty points in the campaign since it began.
+    attr_accessor :total_deducted_loyalty_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -100,7 +112,11 @@ module TalonOne
         :'coupons_created' => :'couponsCreated',
         :'total_coupons_created' => :'totalCouponsCreated',
         :'referrals_created' => :'referralsCreated',
-        :'total_referrals_created' => :'totalReferralsCreated'
+        :'total_referrals_created' => :'totalReferralsCreated',
+        :'added_loyalty_points' => :'addedLoyaltyPoints',
+        :'total_added_loyalty_points' => :'totalAddedLoyaltyPoints',
+        :'deducted_loyalty_points' => :'deductedLoyaltyPoints',
+        :'total_deducted_loyalty_points' => :'totalDeductedLoyaltyPoints'
       }
     end
 
@@ -127,7 +143,11 @@ module TalonOne
         :'coupons_created' => :'Integer',
         :'total_coupons_created' => :'Integer',
         :'referrals_created' => :'Integer',
-        :'total_referrals_created' => :'Integer'
+        :'total_referrals_created' => :'Integer',
+        :'added_loyalty_points' => :'Float',
+        :'total_added_loyalty_points' => :'Float',
+        :'deducted_loyalty_points' => :'Float',
+        :'total_deducted_loyalty_points' => :'Float'
       }
     end
 
@@ -235,6 +255,22 @@ module TalonOne
       if attributes.key?(:'total_referrals_created')
         self.total_referrals_created = attributes[:'total_referrals_created']
       end
+
+      if attributes.key?(:'added_loyalty_points')
+        self.added_loyalty_points = attributes[:'added_loyalty_points']
+      end
+
+      if attributes.key?(:'total_added_loyalty_points')
+        self.total_added_loyalty_points = attributes[:'total_added_loyalty_points']
+      end
+
+      if attributes.key?(:'deducted_loyalty_points')
+        self.deducted_loyalty_points = attributes[:'deducted_loyalty_points']
+      end
+
+      if attributes.key?(:'total_deducted_loyalty_points')
+        self.total_deducted_loyalty_points = attributes[:'total_deducted_loyalty_points']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -325,6 +361,22 @@ module TalonOne
         invalid_properties.push('invalid value for "total_referrals_created", total_referrals_created cannot be nil.')
       end
 
+      if @added_loyalty_points.nil?
+        invalid_properties.push('invalid value for "added_loyalty_points", added_loyalty_points cannot be nil.')
+      end
+
+      if @total_added_loyalty_points.nil?
+        invalid_properties.push('invalid value for "total_added_loyalty_points", total_added_loyalty_points cannot be nil.')
+      end
+
+      if @deducted_loyalty_points.nil?
+        invalid_properties.push('invalid value for "deducted_loyalty_points", deducted_loyalty_points cannot be nil.')
+      end
+
+      if @total_deducted_loyalty_points.nil?
+        invalid_properties.push('invalid value for "total_deducted_loyalty_points", total_deducted_loyalty_points cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -352,6 +404,10 @@ module TalonOne
       return false if @total_coupons_created.nil?
       return false if @referrals_created.nil?
       return false if @total_referrals_created.nil?
+      return false if @added_loyalty_points.nil?
+      return false if @total_added_loyalty_points.nil?
+      return false if @deducted_loyalty_points.nil?
+      return false if @total_deducted_loyalty_points.nil?
       true
     end
 
@@ -380,7 +436,11 @@ module TalonOne
           coupons_created == o.coupons_created &&
           total_coupons_created == o.total_coupons_created &&
           referrals_created == o.referrals_created &&
-          total_referrals_created == o.total_referrals_created
+          total_referrals_created == o.total_referrals_created &&
+          added_loyalty_points == o.added_loyalty_points &&
+          total_added_loyalty_points == o.total_added_loyalty_points &&
+          deducted_loyalty_points == o.deducted_loyalty_points &&
+          total_deducted_loyalty_points == o.total_deducted_loyalty_points
     end
 
     # @see the `==` method
@@ -392,7 +452,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, campaign_revenue, total_campaign_revenue, campaign_refund, total_campaign_refund, campaign_discount_costs, total_campaign_discount_costs, campaign_refunded_discounts, total_campaign_refunded_discounts, campaign_free_items, total_campaign_free_items, coupon_redemptions, total_coupon_redemptions, coupon_rolledback_redemptions, total_coupon_rolledback_redemptions, referral_redemptions, total_referral_redemptions, coupons_created, total_coupons_created, referrals_created, total_referrals_created].hash
+      [date, campaign_revenue, total_campaign_revenue, campaign_refund, total_campaign_refund, campaign_discount_costs, total_campaign_discount_costs, campaign_refunded_discounts, total_campaign_refunded_discounts, campaign_free_items, total_campaign_free_items, coupon_redemptions, total_coupon_redemptions, coupon_rolledback_redemptions, total_coupon_rolledback_redemptions, referral_redemptions, total_referral_redemptions, coupons_created, total_coupons_created, referrals_created, total_referrals_created, added_loyalty_points, total_added_loyalty_points, deducted_loyalty_points, total_deducted_loyalty_points].hash
     end
 
     # Builds the object from hash

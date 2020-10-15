@@ -14,69 +14,81 @@ require 'date'
 
 module TalonOne
   class AccountAnalytics
-    # Total Number of Applications inside the account
+    # Total number of applications in the account
     attr_accessor :applications
 
-    # Total Number of Active Applications inside the account
-    attr_accessor :active_campaigns
+    # Total number of live applications in the account
+    attr_accessor :live_applications
 
-    # Total Number of campaigns inside the account
+    # Total number of sandbox applications in the account
+    attr_accessor :sandbox_applications
+
+    # Total number of campaigns in the account
     attr_accessor :campaigns
 
-    # Total Number of coupons inside the account
+    # Total number of active campaigns in the account
+    attr_accessor :active_campaigns
+
+    # Total number of active campaigns in live applications in the account
+    attr_accessor :live_active_campaigns
+
+    # Total number of coupons in the account
     attr_accessor :coupons
 
-    # Total Number of active coupons inside the account
+    # Total number of active coupons in the account
     attr_accessor :active_coupons
 
-    # Total Number of expired coupons inside the account
+    # Total number of expired coupons in the account
     attr_accessor :expired_coupons
 
-    # Total Number of custom attributes inside the account
-    attr_accessor :custom_attributes
-
-    # Total Number of referral codes inside the account
+    # Total number of referral codes in the account
     attr_accessor :referral_codes
 
-    # Total Number of active referral codes inside the account
+    # Total number of active referral codes in the account
     attr_accessor :active_referral_codes
 
-    # Total Number of expired referral codes inside the account
+    # Total number of expired referral codes in the account
     attr_accessor :expired_referral_codes
 
-    # Total Number of users inside the account
+    # Total number of active rules in the account
+    attr_accessor :active_rules
+
+    # Total number of users in the account
     attr_accessor :users
 
-    # Total Number of roles inside the account
+    # Total number of roles in the account
     attr_accessor :roles
 
-    # Total Number of webhooks inside the account
+    # Total number of custom attributes in the account
+    attr_accessor :custom_attributes
+
+    # Total number of webhooks in the account
     attr_accessor :webhooks
 
-    # Total Number of loyalty programs inside the account
+    # Total number of loyalty programs in the account
     attr_accessor :loyalty_programs
-
-    # Total Number of active rules in the account
-    attr_accessor :active_rules
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'applications' => :'applications',
-        :'active_campaigns' => :'activeCampaigns',
+        :'live_applications' => :'liveApplications',
+        :'sandbox_applications' => :'sandboxApplications',
         :'campaigns' => :'campaigns',
+        :'active_campaigns' => :'activeCampaigns',
+        :'live_active_campaigns' => :'liveActiveCampaigns',
         :'coupons' => :'coupons',
         :'active_coupons' => :'activeCoupons',
         :'expired_coupons' => :'expiredCoupons',
-        :'custom_attributes' => :'customAttributes',
         :'referral_codes' => :'referralCodes',
         :'active_referral_codes' => :'activeReferralCodes',
         :'expired_referral_codes' => :'expiredReferralCodes',
+        :'active_rules' => :'activeRules',
         :'users' => :'users',
         :'roles' => :'roles',
+        :'custom_attributes' => :'customAttributes',
         :'webhooks' => :'webhooks',
-        :'loyalty_programs' => :'loyaltyPrograms',
-        :'active_rules' => :'activeRules'
+        :'loyalty_programs' => :'loyaltyPrograms'
       }
     end
 
@@ -84,20 +96,23 @@ module TalonOne
     def self.openapi_types
       {
         :'applications' => :'Integer',
-        :'active_campaigns' => :'Integer',
+        :'live_applications' => :'Integer',
+        :'sandbox_applications' => :'Integer',
         :'campaigns' => :'Integer',
+        :'active_campaigns' => :'Integer',
+        :'live_active_campaigns' => :'Integer',
         :'coupons' => :'Integer',
         :'active_coupons' => :'Integer',
         :'expired_coupons' => :'Integer',
-        :'custom_attributes' => :'Integer',
         :'referral_codes' => :'Integer',
         :'active_referral_codes' => :'Integer',
         :'expired_referral_codes' => :'Integer',
+        :'active_rules' => :'Integer',
         :'users' => :'Integer',
         :'roles' => :'Integer',
+        :'custom_attributes' => :'Integer',
         :'webhooks' => :'Integer',
-        :'loyalty_programs' => :'Integer',
-        :'active_rules' => :'Integer'
+        :'loyalty_programs' => :'Integer'
       }
     end
 
@@ -126,12 +141,24 @@ module TalonOne
         self.applications = attributes[:'applications']
       end
 
-      if attributes.key?(:'active_campaigns')
-        self.active_campaigns = attributes[:'active_campaigns']
+      if attributes.key?(:'live_applications')
+        self.live_applications = attributes[:'live_applications']
+      end
+
+      if attributes.key?(:'sandbox_applications')
+        self.sandbox_applications = attributes[:'sandbox_applications']
       end
 
       if attributes.key?(:'campaigns')
         self.campaigns = attributes[:'campaigns']
+      end
+
+      if attributes.key?(:'active_campaigns')
+        self.active_campaigns = attributes[:'active_campaigns']
+      end
+
+      if attributes.key?(:'live_active_campaigns')
+        self.live_active_campaigns = attributes[:'live_active_campaigns']
       end
 
       if attributes.key?(:'coupons')
@@ -146,10 +173,6 @@ module TalonOne
         self.expired_coupons = attributes[:'expired_coupons']
       end
 
-      if attributes.key?(:'custom_attributes')
-        self.custom_attributes = attributes[:'custom_attributes']
-      end
-
       if attributes.key?(:'referral_codes')
         self.referral_codes = attributes[:'referral_codes']
       end
@@ -162,6 +185,10 @@ module TalonOne
         self.expired_referral_codes = attributes[:'expired_referral_codes']
       end
 
+      if attributes.key?(:'active_rules')
+        self.active_rules = attributes[:'active_rules']
+      end
+
       if attributes.key?(:'users')
         self.users = attributes[:'users']
       end
@@ -170,16 +197,16 @@ module TalonOne
         self.roles = attributes[:'roles']
       end
 
+      if attributes.key?(:'custom_attributes')
+        self.custom_attributes = attributes[:'custom_attributes']
+      end
+
       if attributes.key?(:'webhooks')
         self.webhooks = attributes[:'webhooks']
       end
 
       if attributes.key?(:'loyalty_programs')
         self.loyalty_programs = attributes[:'loyalty_programs']
-      end
-
-      if attributes.key?(:'active_rules')
-        self.active_rules = attributes[:'active_rules']
       end
     end
 
@@ -191,12 +218,24 @@ module TalonOne
         invalid_properties.push('invalid value for "applications", applications cannot be nil.')
       end
 
-      if @active_campaigns.nil?
-        invalid_properties.push('invalid value for "active_campaigns", active_campaigns cannot be nil.')
+      if @live_applications.nil?
+        invalid_properties.push('invalid value for "live_applications", live_applications cannot be nil.')
+      end
+
+      if @sandbox_applications.nil?
+        invalid_properties.push('invalid value for "sandbox_applications", sandbox_applications cannot be nil.')
       end
 
       if @campaigns.nil?
         invalid_properties.push('invalid value for "campaigns", campaigns cannot be nil.')
+      end
+
+      if @active_campaigns.nil?
+        invalid_properties.push('invalid value for "active_campaigns", active_campaigns cannot be nil.')
+      end
+
+      if @live_active_campaigns.nil?
+        invalid_properties.push('invalid value for "live_active_campaigns", live_active_campaigns cannot be nil.')
       end
 
       if @coupons.nil?
@@ -211,10 +250,6 @@ module TalonOne
         invalid_properties.push('invalid value for "expired_coupons", expired_coupons cannot be nil.')
       end
 
-      if @custom_attributes.nil?
-        invalid_properties.push('invalid value for "custom_attributes", custom_attributes cannot be nil.')
-      end
-
       if @referral_codes.nil?
         invalid_properties.push('invalid value for "referral_codes", referral_codes cannot be nil.')
       end
@@ -227,12 +262,20 @@ module TalonOne
         invalid_properties.push('invalid value for "expired_referral_codes", expired_referral_codes cannot be nil.')
       end
 
+      if @active_rules.nil?
+        invalid_properties.push('invalid value for "active_rules", active_rules cannot be nil.')
+      end
+
       if @users.nil?
         invalid_properties.push('invalid value for "users", users cannot be nil.')
       end
 
       if @roles.nil?
         invalid_properties.push('invalid value for "roles", roles cannot be nil.')
+      end
+
+      if @custom_attributes.nil?
+        invalid_properties.push('invalid value for "custom_attributes", custom_attributes cannot be nil.')
       end
 
       if @webhooks.nil?
@@ -243,10 +286,6 @@ module TalonOne
         invalid_properties.push('invalid value for "loyalty_programs", loyalty_programs cannot be nil.')
       end
 
-      if @active_rules.nil?
-        invalid_properties.push('invalid value for "active_rules", active_rules cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -254,20 +293,23 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @applications.nil?
-      return false if @active_campaigns.nil?
+      return false if @live_applications.nil?
+      return false if @sandbox_applications.nil?
       return false if @campaigns.nil?
+      return false if @active_campaigns.nil?
+      return false if @live_active_campaigns.nil?
       return false if @coupons.nil?
       return false if @active_coupons.nil?
       return false if @expired_coupons.nil?
-      return false if @custom_attributes.nil?
       return false if @referral_codes.nil?
       return false if @active_referral_codes.nil?
       return false if @expired_referral_codes.nil?
+      return false if @active_rules.nil?
       return false if @users.nil?
       return false if @roles.nil?
+      return false if @custom_attributes.nil?
       return false if @webhooks.nil?
       return false if @loyalty_programs.nil?
-      return false if @active_rules.nil?
       true
     end
 
@@ -277,20 +319,23 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           applications == o.applications &&
-          active_campaigns == o.active_campaigns &&
+          live_applications == o.live_applications &&
+          sandbox_applications == o.sandbox_applications &&
           campaigns == o.campaigns &&
+          active_campaigns == o.active_campaigns &&
+          live_active_campaigns == o.live_active_campaigns &&
           coupons == o.coupons &&
           active_coupons == o.active_coupons &&
           expired_coupons == o.expired_coupons &&
-          custom_attributes == o.custom_attributes &&
           referral_codes == o.referral_codes &&
           active_referral_codes == o.active_referral_codes &&
           expired_referral_codes == o.expired_referral_codes &&
+          active_rules == o.active_rules &&
           users == o.users &&
           roles == o.roles &&
+          custom_attributes == o.custom_attributes &&
           webhooks == o.webhooks &&
-          loyalty_programs == o.loyalty_programs &&
-          active_rules == o.active_rules
+          loyalty_programs == o.loyalty_programs
     end
 
     # @see the `==` method
@@ -302,7 +347,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [applications, active_campaigns, campaigns, coupons, active_coupons, expired_coupons, custom_attributes, referral_codes, active_referral_codes, expired_referral_codes, users, roles, webhooks, loyalty_programs, active_rules].hash
+      [applications, live_applications, sandbox_applications, campaigns, active_campaigns, live_active_campaigns, coupons, active_coupons, expired_coupons, referral_codes, active_referral_codes, expired_referral_codes, active_rules, users, roles, custom_attributes, webhooks, loyalty_programs].hash
     end
 
     # Builds the object from hash

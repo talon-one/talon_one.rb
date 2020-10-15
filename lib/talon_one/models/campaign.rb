@@ -61,6 +61,9 @@ module TalonOne
     # The set of limits that will operate for this campaign
     attr_accessor :limits
 
+    # The IDs of the campaign groups that own this entity.
+    attr_accessor :campaign_groups
+
     # Number of coupons redeemed in the campaign.
     attr_accessor :coupon_redemption_count
 
@@ -129,6 +132,7 @@ module TalonOne
         :'coupon_settings' => :'couponSettings',
         :'referral_settings' => :'referralSettings',
         :'limits' => :'limits',
+        :'campaign_groups' => :'campaignGroups',
         :'coupon_redemption_count' => :'couponRedemptionCount',
         :'referral_redemption_count' => :'referralRedemptionCount',
         :'discount_count' => :'discountCount',
@@ -160,6 +164,7 @@ module TalonOne
         :'coupon_settings' => :'CodeGeneratorSettings',
         :'referral_settings' => :'CodeGeneratorSettings',
         :'limits' => :'Array<LimitConfig>',
+        :'campaign_groups' => :'Array<Integer>',
         :'coupon_redemption_count' => :'Integer',
         :'referral_redemption_count' => :'Integer',
         :'discount_count' => :'Integer',
@@ -262,6 +267,12 @@ module TalonOne
       if attributes.key?(:'limits')
         if (value = attributes[:'limits']).is_a?(Array)
           self.limits = value
+        end
+      end
+
+      if attributes.key?(:'campaign_groups')
+        if (value = attributes[:'campaign_groups']).is_a?(Array)
+          self.campaign_groups = value
         end
       end
 
@@ -417,6 +428,7 @@ module TalonOne
           coupon_settings == o.coupon_settings &&
           referral_settings == o.referral_settings &&
           limits == o.limits &&
+          campaign_groups == o.campaign_groups &&
           coupon_redemption_count == o.coupon_redemption_count &&
           referral_redemption_count == o.referral_redemption_count &&
           discount_count == o.discount_count &&
@@ -437,7 +449,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, last_activity, updated, created_by, updated_by].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, last_activity, updated, created_by, updated_by].hash
     end
 
     # Builds the object from hash

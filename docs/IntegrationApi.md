@@ -11,9 +11,11 @@ Method | HTTP request | Description
 [**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | Get an inventory of all data associated with a specific customer profile.
 [**get_reserved_customers**](IntegrationApi.md#get_reserved_customers) | **GET** /v1/coupon_reservations/customerprofiles/{couponValue} | Get the users that have this coupon reserved
 [**track_event**](IntegrationApi.md#track_event) | **POST** /v1/events | Track an Event
-[**update_customer_profile**](IntegrationApi.md#update_customer_profile) | **PUT** /v1/customer_profiles/{integrationId} | Update a Customer Profile
-[**update_customer_profile_v2**](IntegrationApi.md#update_customer_profile_v2) | **PUT** /v2/customer_profiles/{customerProfileId} | Update a Customer Profile
-[**update_customer_session**](IntegrationApi.md#update_customer_session) | **PUT** /v1/customer_sessions/{customerSessionId} | Update a Customer Session
+[**update_customer_profile**](IntegrationApi.md#update_customer_profile) | **PUT** /v1/customer_profiles/{integrationId} | Update a Customer Profile V1
+[**update_customer_profile_audiences**](IntegrationApi.md#update_customer_profile_audiences) | **POST** /v2/customer_audiences | Update a Customer Profile Audiences
+[**update_customer_profile_v2**](IntegrationApi.md#update_customer_profile_v2) | **PUT** /v2/customer_profiles/{integrationId} | Update a Customer Profile
+[**update_customer_profiles_v2**](IntegrationApi.md#update_customer_profiles_v2) | **PUT** /v2/customer_profiles | Update multiple Customer Profiles
+[**update_customer_session**](IntegrationApi.md#update_customer_session) | **PUT** /v1/customer_sessions/{customerSessionId} | Update a Customer Session V1
 [**update_customer_session_v2**](IntegrationApi.md#update_customer_session_v2) | **PUT** /v2/customer_sessions/{customerSessionId} | Update a Customer Session
 
 
@@ -287,7 +289,8 @@ integration_id = 'integration_id_example' # String | The custom identifier for t
 opts = {
   profile: true, # Boolean | optional flag to decide if you would like customer profile information in the response
   referrals: true, # Boolean | optional flag to decide if you would like referral information in the response
-  coupons: true # Boolean | optional flag to decide if you would like coupon information in the response
+  coupons: true, # Boolean | optional flag to decide if you would like coupon information in the response
+  loyalty: true # Boolean | optional flag to decide if you would like loyalty information in the response
 }
 
 begin
@@ -308,6 +311,7 @@ Name | Type | Description  | Notes
  **profile** | **Boolean**| optional flag to decide if you would like customer profile information in the response | [optional] 
  **referrals** | **Boolean**| optional flag to decide if you would like referral information in the response | [optional] 
  **coupons** | **Boolean**| optional flag to decide if you would like coupon information in the response | [optional] 
+ **loyalty** | **Boolean**| optional flag to decide if you would like loyalty information in the response | [optional] 
 
 ### Return type
 
@@ -449,9 +453,9 @@ Name | Type | Description  | Notes
 
 > IntegrationState update_customer_profile(integration_id, body, opts)
 
-Update a Customer Profile
+Update a Customer Profile V1
 
-Update (or create) a [Customer Profile][]. This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
+⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, please migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile][]. This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
 
 ### Example
 
@@ -479,7 +483,7 @@ opts = {
 }
 
 begin
-  #Update a Customer Profile
+  #Update a Customer Profile V1
   result = api_instance.update_customer_profile(integration_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
@@ -510,13 +514,13 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## update_customer_profile_v2
+## update_customer_profile_audiences
 
-> CustomerProfileUpdate update_customer_profile_v2(customer_profile_id, body)
+> update_customer_profile_audiences(body)
 
-Update a Customer Profile
+Update a Customer Profile Audiences
 
-Update (or create) a [Customer Profile][].   The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+Update one ore multiple Customer Profiles with the specified Audiences 
 
 ### Example
 
@@ -532,12 +536,69 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-customer_profile_id = 'customer_profile_id_example' # String | The custom identifier for this profile, must be unique within the account.
-body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
+body = TalonOne::CustomerProfileAudienceRequest.new # CustomerProfileAudienceRequest | 
+
+begin
+  #Update a Customer Profile Audiences
+  api_instance.update_customer_profile_audiences(body)
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->update_customer_profile_audiences: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CustomerProfileAudienceRequest**](CustomerProfileAudienceRequest.md)|  | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## update_customer_profile_v2
+
+> IntegrationStateV2 update_customer_profile_v2(integration_id, body, opts)
+
+Update a Customer Profile
+
+Update (or create) a [Customer Profile][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
+body = TalonOne::CustomerProfileIntegrationRequestV2.new # CustomerProfileIntegrationRequestV2 | 
+opts = {
+  run_rule_engine: true, # Boolean | Flag to indicate whether to run the rule engine (Defaults to false).
+  dry: true # Boolean | Flag to indicate whether to skip persisting the changes or not (Will not persist if set to 'true'. Only used when 'runRuleEngine' is set to 'true').
+}
 
 begin
   #Update a Customer Profile
-  result = api_instance.update_customer_profile_v2(customer_profile_id, body)
+  result = api_instance.update_customer_profile_v2(integration_id, body, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile_v2: #{e}"
@@ -549,12 +610,72 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customer_profile_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
- **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
+ **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
+ **body** | [**CustomerProfileIntegrationRequestV2**](CustomerProfileIntegrationRequestV2.md)|  | 
+ **run_rule_engine** | **Boolean**| Flag to indicate whether to run the rule engine (Defaults to false). | [optional] 
+ **dry** | **Boolean**| Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;. Only used when &#39;runRuleEngine&#39; is set to &#39;true&#39;). | [optional] 
 
 ### Return type
 
-[**CustomerProfileUpdate**](CustomerProfileUpdate.md)
+[**IntegrationStateV2**](IntegrationStateV2.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_customer_profiles_v2
+
+> MultipleCustomerProfileIntegrationResponseV2 update_customer_profiles_v2(body, opts)
+
+Update multiple Customer Profiles
+
+Update (or create) up to 1000 [Customer Profiles][] in 1 request.  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profiles]: /Getting-Started/entities#customer-profile 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+body = TalonOne::MultipleCustomerProfileIntegrationRequest.new # MultipleCustomerProfileIntegrationRequest | 
+opts = {
+  silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the IntegrationStateV2  generated.
+}
+
+begin
+  #Update multiple Customer Profiles
+  result = api_instance.update_customer_profiles_v2(body, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->update_customer_profiles_v2: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**MultipleCustomerProfileIntegrationRequest**](MultipleCustomerProfileIntegrationRequest.md)|  | 
+ **silent** | **String**| If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the IntegrationStateV2  generated. | [optional] 
+
+### Return type
+
+[**MultipleCustomerProfileIntegrationResponseV2**](MultipleCustomerProfileIntegrationResponseV2.md)
 
 ### Authorization
 
@@ -570,9 +691,9 @@ Name | Type | Description  | Notes
 
 > IntegrationState update_customer_session(customer_session_id, body, opts)
 
-Update a Customer Session
+Update a Customer Session V1
 
-Update (or create) a [Customer Session][]. For example, the items in a customers cart are part of a session.  The Talon.One platform supports multiple simultaneous sessions for the same profile, so if you have multiple ways of accessing the same application you have the option of either tracking multiple independent sessions or using the same session across all of them. You should share sessions when application access points share other state, such as the users cart. If two points of access to the application have independent state (e.g. a user can have different items in their cart across the two) they should use independent customer session ID's.  The `profileId` parameter in the request body should correspond to an `integrationId` for a customer profile, to track an anonymous session use the empty string (`\"\"`) as the `profileId`. Note that you do **not** need to create a customer profile first: if the specified profile does not yet exist, an empty profile will be created automatically.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated.  [Customer Session]: /Getting-Started/entities#customer-session 
+⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, please migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Session][]. For example, the items in a customers cart are part of a session.  The Talon.One platform supports multiple simultaneous sessions for the same profile, so if you have multiple ways of accessing the same application you have the option of either tracking multiple independent sessions or using the same session across all of them. You should share sessions when application access points share other state, such as the users cart. If two points of access to the application have independent state (e.g. a user can have different items in their cart across the two) they should use independent customer session ID's.  The `profileId` parameter in the request body should correspond to an `integrationId` for a customer profile, to track an anonymous session use the empty string (`\"\"`) as the `profileId`. Note that you do **not** need to create a customer profile first: if the specified profile does not yet exist, an empty profile will be created automatically.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated.  [Customer Session]: /Getting-Started/entities#customer-session 
 
 ### Example
 
@@ -600,7 +721,7 @@ opts = {
 }
 
 begin
-  #Update a Customer Session
+  #Update a Customer Session V1
   result = api_instance.update_customer_session(customer_session_id, body, opts)
   p result
 rescue TalonOne::ApiError => e

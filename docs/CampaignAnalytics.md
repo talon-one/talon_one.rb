@@ -25,6 +25,10 @@ Name | Type | Description | Notes
 **total_coupons_created** | **Integer** | Number of coupons created in the campaign by the rule engine since it began. | 
 **referrals_created** | **Integer** | Number of referrals created in the campaign by the rule engine. | 
 **total_referrals_created** | **Integer** | Number of referrals created in the campaign by the rule engine since it began. | 
+**added_loyalty_points** | **Float** | Number of added loyalty points in the campaign in a specific interval. | 
+**total_added_loyalty_points** | **Float** | Number of added loyalty points in the campaign since it began. | 
+**deducted_loyalty_points** | **Float** | Number of deducted loyalty points in the campaign in a specific interval. | 
+**total_deducted_loyalty_points** | **Float** | Number of deducted loyalty points in the campaign since it began. | 
 
 ## Code Sample
 
@@ -51,7 +55,11 @@ instance = TalonOne::CampaignAnalytics.new(date: null,
                                  coupons_created: null,
                                  total_coupons_created: null,
                                  referrals_created: null,
-                                 total_referrals_created: null)
+                                 total_referrals_created: null,
+                                 added_loyalty_points: null,
+                                 total_added_loyalty_points: null,
+                                 deducted_loyalty_points: null,
+                                 total_deducted_loyalty_points: null)
 ```
 
 

@@ -13,20 +13,27 @@ OpenAPI Generator version: 4.2.3
 require 'date'
 
 module TalonOne
-  class CustomerProfileUpdate
-    attr_accessor :customer_profile
+  # 
+  class MultipleCustomerProfileIntegrationRequestItem
+    # Arbitrary properties associated with this item
+    attr_accessor :attributes
+
+    # The custom identifier for this profile, must be unique within the account.
+    attr_accessor :integration_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_profile' => :'customerProfile'
+        :'attributes' => :'attributes',
+        :'integration_id' => :'integrationId'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'customer_profile' => :'CustomerProfile'
+        :'attributes' => :'Object',
+        :'integration_id' => :'String'
       }
     end
 
@@ -40,19 +47,23 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::CustomerProfileUpdate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::MultipleCustomerProfileIntegrationRequestItem` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::CustomerProfileUpdate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::MultipleCustomerProfileIntegrationRequestItem`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'customer_profile')
-        self.customer_profile = attributes[:'customer_profile']
+      if attributes.key?(:'attributes')
+        self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'integration_id')
+        self.integration_id = attributes[:'integration_id']
       end
     end
 
@@ -60,8 +71,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @customer_profile.nil?
-        invalid_properties.push('invalid value for "customer_profile", customer_profile cannot be nil.')
+      if @integration_id.nil?
+        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
       end
 
       invalid_properties
@@ -70,7 +81,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @customer_profile.nil?
+      return false if @integration_id.nil?
       true
     end
 
@@ -79,7 +90,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_profile == o.customer_profile
+          attributes == o.attributes &&
+          integration_id == o.integration_id
     end
 
     # @see the `==` method
@@ -91,7 +103,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_profile].hash
+      [attributes, integration_id].hash
     end
 
     # Builds the object from hash

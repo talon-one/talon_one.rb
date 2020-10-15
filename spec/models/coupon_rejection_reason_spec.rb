@@ -47,7 +47,7 @@ describe 'CouponRejectionReason' do
   describe 'test attribute "reason"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CouponNotFound", "CouponPartOfNotRunningCampaign", "CouponValidConditionMissing", "CouponLimitReached", "CampaignLimitReached", "ProfileLimitReached", "CouponRecipientDoesNotMatch", "CouponExpired", "CouponStartDateInFuture", "CouponRejectedByCondition", "EffectCouldNotBeApplied"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CouponNotFound", "CouponPartOfNotRunningCampaign", "CouponLimitReached", "CampaignLimitReached", "ProfileLimitReached", "CouponRecipientDoesNotMatch", "CouponExpired", "CouponStartDateInFuture", "CouponRejectedByCondition", "EffectCouldNotBeApplied"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.reason = value }.not_to raise_error
       # end

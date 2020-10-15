@@ -35,10 +35,22 @@ module TalonOne
     # Default limits for campaigns created in this application
     attr_accessor :limits
 
-    # Default priority for campaigns created in this application, can be one of (universal, stackable, exclusive)
+    # Default priority for campaigns created in this application, can be one of (universal, stackable, exclusive). If no value is provided, this is set to \"universal\"
     attr_accessor :campaign_priority
 
+    # The strategy used when choosing exclusive campaigns for evaluation, can be one of (listOrder, lowestDiscount, highestDiscount). If no value is provided, this is set to \"listOrder\"
+    attr_accessor :exclusive_campaigns_strategy
+
+    # Flag indicating if discounts should cascade for this application
+    attr_accessor :enable_cascading_discounts
+
+    # Flag indicating if cart items of quantity larger than one should be separated into different items of quantity one
+    attr_accessor :enable_flattened_cart_items
+
     attr_accessor :attributes_settings
+
+    # Flag indicating if this is a live or sandbox application
+    attr_accessor :sandbox
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -73,7 +85,11 @@ module TalonOne
         :'attributes' => :'attributes',
         :'limits' => :'limits',
         :'campaign_priority' => :'campaignPriority',
-        :'attributes_settings' => :'attributesSettings'
+        :'exclusive_campaigns_strategy' => :'exclusiveCampaignsStrategy',
+        :'enable_cascading_discounts' => :'enableCascadingDiscounts',
+        :'enable_flattened_cart_items' => :'enableFlattenedCartItems',
+        :'attributes_settings' => :'attributesSettings',
+        :'sandbox' => :'sandbox'
       }
     end
 
@@ -88,7 +104,11 @@ module TalonOne
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
         :'campaign_priority' => :'String',
-        :'attributes_settings' => :'AttributesSettings'
+        :'exclusive_campaigns_strategy' => :'String',
+        :'enable_cascading_discounts' => :'Boolean',
+        :'enable_flattened_cart_items' => :'Boolean',
+        :'attributes_settings' => :'AttributesSettings',
+        :'sandbox' => :'Boolean'
       }
     end
 
@@ -147,8 +167,24 @@ module TalonOne
         self.campaign_priority = attributes[:'campaign_priority']
       end
 
+      if attributes.key?(:'exclusive_campaigns_strategy')
+        self.exclusive_campaigns_strategy = attributes[:'exclusive_campaigns_strategy']
+      end
+
+      if attributes.key?(:'enable_cascading_discounts')
+        self.enable_cascading_discounts = attributes[:'enable_cascading_discounts']
+      end
+
+      if attributes.key?(:'enable_flattened_cart_items')
+        self.enable_flattened_cart_items = attributes[:'enable_flattened_cart_items']
+      end
+
       if attributes.key?(:'attributes_settings')
         self.attributes_settings = attributes[:'attributes_settings']
+      end
+
+      if attributes.key?(:'sandbox')
+        self.sandbox = attributes[:'sandbox']
       end
     end
 
@@ -196,6 +232,8 @@ module TalonOne
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
       campaign_priority_validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
       return false unless campaign_priority_validator.valid?(@campaign_priority)
+      exclusive_campaigns_strategy_validator = EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
+      return false unless exclusive_campaigns_strategy_validator.valid?(@exclusive_campaigns_strategy)
       true
     end
 
@@ -261,6 +299,16 @@ module TalonOne
       @campaign_priority = campaign_priority
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] exclusive_campaigns_strategy Object to be assigned
+    def exclusive_campaigns_strategy=(exclusive_campaigns_strategy)
+      validator = EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
+      unless validator.valid?(exclusive_campaigns_strategy)
+        fail ArgumentError, "invalid value for \"exclusive_campaigns_strategy\", must be one of #{validator.allowable_values}."
+      end
+      @exclusive_campaigns_strategy = exclusive_campaigns_strategy
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -274,7 +322,11 @@ module TalonOne
           attributes == o.attributes &&
           limits == o.limits &&
           campaign_priority == o.campaign_priority &&
-          attributes_settings == o.attributes_settings
+          exclusive_campaigns_strategy == o.exclusive_campaigns_strategy &&
+          enable_cascading_discounts == o.enable_cascading_discounts &&
+          enable_flattened_cart_items == o.enable_flattened_cart_items &&
+          attributes_settings == o.attributes_settings &&
+          sandbox == o.sandbox
     end
 
     # @see the `==` method
@@ -286,7 +338,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, attributes_settings].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox].hash
     end
 
     # Builds the object from hash

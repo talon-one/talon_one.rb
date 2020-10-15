@@ -13,15 +13,22 @@ OpenAPI Generator version: 4.2.3
 require 'date'
 
 module TalonOne
+  # 
   class ApplicationAPIKey
+    # Title for API Key
+    attr_accessor :title
+
+    # The date the API key expired
+    attr_accessor :expires
+
+    # Platform the API key is valid for.
+    attr_accessor :platform
+
     # ID of the API Key
     attr_accessor :id
 
     # ID of user who created
     attr_accessor :created_by
-
-    # Title for API Key
-    attr_accessor :title
 
     # ID of account the key is used for
     attr_accessor :account_id
@@ -32,32 +39,53 @@ module TalonOne
     # The date the API key was created
     attr_accessor :created
 
-    # The date the API key expired
-    attr_accessor :expires
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'title' => :'title',
+        :'expires' => :'expires',
+        :'platform' => :'platform',
         :'id' => :'id',
         :'created_by' => :'createdBy',
-        :'title' => :'title',
         :'account_id' => :'accountID',
         :'application_id' => :'applicationID',
-        :'created' => :'created',
-        :'expires' => :'expires'
+        :'created' => :'created'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'title' => :'String',
+        :'expires' => :'DateTime',
+        :'platform' => :'String',
         :'id' => :'Integer',
         :'created_by' => :'Integer',
-        :'title' => :'String',
         :'account_id' => :'Integer',
         :'application_id' => :'Integer',
-        :'created' => :'DateTime',
-        :'expires' => :'DateTime'
+        :'created' => :'DateTime'
       }
     end
 
@@ -82,16 +110,24 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'expires')
+        self.expires = attributes[:'expires']
+      end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.key?(:'created_by')
         self.created_by = attributes[:'created_by']
-      end
-
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
       end
 
       if attributes.key?(:'account_id')
@@ -105,26 +141,26 @@ module TalonOne
       if attributes.key?(:'created')
         self.created = attributes[:'created']
       end
-
-      if attributes.key?(:'expires')
-        self.expires = attributes[:'expires']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      if @expires.nil?
+        invalid_properties.push('invalid value for "expires", expires cannot be nil.')
+      end
+
       if @id.nil?
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @created_by.nil?
         invalid_properties.push('invalid value for "created_by", created_by cannot be nil.')
-      end
-
-      if @title.nil?
-        invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
       if @account_id.nil?
@@ -139,24 +175,32 @@ module TalonOne
         invalid_properties.push('invalid value for "created", created cannot be nil.')
       end
 
-      if @expires.nil?
-        invalid_properties.push('invalid value for "expires", expires cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @title.nil?
+      return false if @expires.nil?
+      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle"])
+      return false unless platform_validator.valid?(@platform)
       return false if @id.nil?
       return false if @created_by.nil?
-      return false if @title.nil?
       return false if @account_id.nil?
       return false if @application_id.nil?
       return false if @created.nil?
-      return false if @expires.nil?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
+      end
+      @platform = platform
     end
 
     # Checks equality by comparing each attribute.
@@ -164,13 +208,14 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          title == o.title &&
+          expires == o.expires &&
+          platform == o.platform &&
           id == o.id &&
           created_by == o.created_by &&
-          title == o.title &&
           account_id == o.account_id &&
           application_id == o.application_id &&
-          created == o.created &&
-          expires == o.expires
+          created == o.created
     end
 
     # @see the `==` method
@@ -182,7 +227,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_by, title, account_id, application_id, created, expires].hash
+      [title, expires, platform, id, created_by, account_id, application_id, created].hash
     end
 
     # Builds the object from hash

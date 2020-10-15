@@ -21,8 +21,11 @@ module TalonOne
     # Allows to specify a name for the addition or deduction
     attr_accessor :name
 
-    # Indicates the duration after which the added loyalty points should expire. The format is a number followed by one letter indicating the unit, like '1h' or '40m' or '30d'.
-    attr_accessor :expiry_duration
+    # Indicates the duration after which the added loyalty points should expire. The format is a number followed by one letter indicating the time unit, like '1h' or '40m' (defined by Go time package).
+    attr_accessor :validity_duration
+
+    # Indicates the amount of time before the points are considered valid. The format is a number followed by one letter indicating the time unit, like '1h' or '40m' (defined by Go time package).
+    attr_accessor :pending_duration
 
     # This specifies if we are adding loyalty points to the main ledger or a subledger
     attr_accessor :sub_ledger_id
@@ -32,7 +35,8 @@ module TalonOne
       {
         :'points' => :'points',
         :'name' => :'name',
-        :'expiry_duration' => :'expiryDuration',
+        :'validity_duration' => :'validityDuration',
+        :'pending_duration' => :'pendingDuration',
         :'sub_ledger_id' => :'subLedgerID'
       }
     end
@@ -42,7 +46,8 @@ module TalonOne
       {
         :'points' => :'Float',
         :'name' => :'String',
-        :'expiry_duration' => :'String',
+        :'validity_duration' => :'String',
+        :'pending_duration' => :'String',
         :'sub_ledger_id' => :'String'
       }
     end
@@ -76,8 +81,12 @@ module TalonOne
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'expiry_duration')
-        self.expiry_duration = attributes[:'expiry_duration']
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
+      end
+
+      if attributes.key?(:'pending_duration')
+        self.pending_duration = attributes[:'pending_duration']
       end
 
       if attributes.key?(:'sub_ledger_id')
@@ -110,7 +119,8 @@ module TalonOne
       self.class == o.class &&
           points == o.points &&
           name == o.name &&
-          expiry_duration == o.expiry_duration &&
+          validity_duration == o.validity_duration &&
+          pending_duration == o.pending_duration &&
           sub_ledger_id == o.sub_ledger_id
     end
 
@@ -123,7 +133,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points, name, expiry_duration, sub_ledger_id].hash
+      [points, name, validity_duration, pending_duration, sub_ledger_id].hash
     end
 
     # Builds the object from hash

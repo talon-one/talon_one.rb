@@ -13,20 +13,20 @@ OpenAPI Generator version: 4.2.3
 require 'date'
 
 module TalonOne
-  class MiscUpdateUserLatestFeature
-    attr_accessor :latest_feature
+  class MultipleCustomerProfileIntegrationRequest
+    attr_accessor :customer_profiles
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'latest_feature' => :'latestFeature'
+        :'customer_profiles' => :'customerProfiles'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'latest_feature' => :'String'
+        :'customer_profiles' => :'Array<MultipleCustomerProfileIntegrationRequestItem>'
       }
     end
 
@@ -40,19 +40,21 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::MiscUpdateUserLatestFeature` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::MultipleCustomerProfileIntegrationRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::MiscUpdateUserLatestFeature`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::MultipleCustomerProfileIntegrationRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'latest_feature')
-        self.latest_feature = attributes[:'latest_feature']
+      if attributes.key?(:'customer_profiles')
+        if (value = attributes[:'customer_profiles']).is_a?(Array)
+          self.customer_profiles = value
+        end
       end
     end
 
@@ -74,7 +76,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          latest_feature == o.latest_feature
+          customer_profiles == o.customer_profiles
     end
 
     # @see the `==` method
@@ -86,7 +88,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [latest_feature].hash
+      [customer_profiles].hash
     end
 
     # Builds the object from hash

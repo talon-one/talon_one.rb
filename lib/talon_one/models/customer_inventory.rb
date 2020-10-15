@@ -16,6 +16,8 @@ module TalonOne
   class CustomerInventory
     attr_accessor :profile
 
+    attr_accessor :loyalty
+
     attr_accessor :referrals
 
     attr_accessor :coupons
@@ -24,6 +26,7 @@ module TalonOne
     def self.attribute_map
       {
         :'profile' => :'profile',
+        :'loyalty' => :'loyalty',
         :'referrals' => :'referrals',
         :'coupons' => :'coupons'
       }
@@ -33,6 +36,7 @@ module TalonOne
     def self.openapi_types
       {
         :'profile' => :'CustomerProfile',
+        :'loyalty' => :'Loyalty',
         :'referrals' => :'Array<Referral>',
         :'coupons' => :'Array<Coupon>'
       }
@@ -61,6 +65,10 @@ module TalonOne
 
       if attributes.key?(:'profile')
         self.profile = attributes[:'profile']
+      end
+
+      if attributes.key?(:'loyalty')
+        self.loyalty = attributes[:'loyalty']
       end
 
       if attributes.key?(:'referrals')
@@ -95,6 +103,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           profile == o.profile &&
+          loyalty == o.loyalty &&
           referrals == o.referrals &&
           coupons == o.coupons
     end
@@ -108,7 +117,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile, referrals, coupons].hash
+      [profile, loyalty, referrals, coupons].hash
     end
 
     # Builds the object from hash

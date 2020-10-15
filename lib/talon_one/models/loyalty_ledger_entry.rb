@@ -30,6 +30,8 @@ module TalonOne
 
     attr_accessor :amount
 
+    attr_accessor :start_date
+
     attr_accessor :expiry_date
 
     # A name referencing the condition or effect that added this entry, or the specific name provided in an API call.
@@ -51,6 +53,7 @@ module TalonOne
         :'event_id' => :'eventID',
         :'type' => :'type',
         :'amount' => :'amount',
+        :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
         :'name' => :'name',
         :'sub_ledger_id' => :'subLedgerID',
@@ -68,6 +71,7 @@ module TalonOne
         :'event_id' => :'Integer',
         :'type' => :'String',
         :'amount' => :'Float',
+        :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
         :'name' => :'String',
         :'sub_ledger_id' => :'String',
@@ -122,6 +126,10 @@ module TalonOne
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
       if attributes.key?(:'expiry_date')
@@ -201,6 +209,7 @@ module TalonOne
           event_id == o.event_id &&
           type == o.type &&
           amount == o.amount &&
+          start_date == o.start_date &&
           expiry_date == o.expiry_date &&
           name == o.name &&
           sub_ledger_id == o.sub_ledger_id &&
@@ -216,7 +225,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, expiry_date, name, sub_ledger_id, user_id].hash
+      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id].hash
     end
 
     # Builds the object from hash

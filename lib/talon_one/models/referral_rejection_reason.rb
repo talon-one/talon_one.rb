@@ -120,7 +120,7 @@ module TalonOne
       return false if @campaign_id.nil?
       return false if @referral_id.nil?
       return false if @reason.nil?
-      reason_validator = EnumAttributeValidator.new('String', ["ReferralNotFound", "ReferralRecipientIdSameAsAdvocate", "ReferralPartOfNotRunningCampaign", "ReferralValidConditionMissing", "ReferralLimitReached", "CampaignLimitReached", "ProfileLimitReached", "ReferralRecipientDoesNotMatch", "ReferralExpired", "ReferralStartDateInFuture", "ReferralRejectedByCondition", "EffectCouldNotBeApplied"])
+      reason_validator = EnumAttributeValidator.new('String', ["ReferralNotFound", "ReferralRecipientIdSameAsAdvocate", "ReferralPartOfNotRunningCampaign", "ReferralLimitReached", "CampaignLimitReached", "ProfileLimitReached", "ReferralRecipientDoesNotMatch", "ReferralExpired", "ReferralStartDateInFuture", "ReferralRejectedByCondition", "EffectCouldNotBeApplied"])
       return false unless reason_validator.valid?(@reason)
       true
     end
@@ -128,7 +128,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason)
-      validator = EnumAttributeValidator.new('String', ["ReferralNotFound", "ReferralRecipientIdSameAsAdvocate", "ReferralPartOfNotRunningCampaign", "ReferralValidConditionMissing", "ReferralLimitReached", "CampaignLimitReached", "ProfileLimitReached", "ReferralRecipientDoesNotMatch", "ReferralExpired", "ReferralStartDateInFuture", "ReferralRejectedByCondition", "EffectCouldNotBeApplied"])
+      validator = EnumAttributeValidator.new('String', ["ReferralNotFound", "ReferralRecipientIdSameAsAdvocate", "ReferralPartOfNotRunningCampaign", "ReferralLimitReached", "CampaignLimitReached", "ProfileLimitReached", "ReferralRecipientDoesNotMatch", "ReferralExpired", "ReferralStartDateInFuture", "ReferralRejectedByCondition", "EffectCouldNotBeApplied"])
       unless validator.valid?(reason)
         fail ArgumentError, "invalid value for \"reason\", must be one of #{validator.allowable_values}."
       end
