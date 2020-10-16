@@ -61,6 +61,7 @@ Method | HTTP request | Description
 [**get_loyalty_points**](ManagementApi.md#get_loyalty_points) | **GET** /v1/loyalty_programs/{programID}/profile/{integrationID} | get the Loyalty Ledger for this integrationID
 [**get_loyalty_program**](ManagementApi.md#get_loyalty_program) | **GET** /v1/loyalty_programs/{programID} | Get a loyalty program
 [**get_loyalty_programs**](ManagementApi.md#get_loyalty_programs) | **GET** /v1/loyalty_programs | List all loyalty Programs
+[**get_loyalty_statistics**](ManagementApi.md#get_loyalty_statistics) | **GET** /v1/loyalty_programs/{programID}/statistics | Get loyalty program statistics by loyalty program ID
 [**get_referrals**](ManagementApi.md#get_referrals) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals | List Referrals (with total count)
 [**get_referrals_without_total_count**](ManagementApi.md#get_referrals_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/no_total | List Referrals
 [**get_role**](ManagementApi.md#get_role) | **GET** /v1/roles/{roleId} | Get information for the specified role.
@@ -1527,7 +1528,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20012 get_application_customers(application_id)
+> InlineResponse20012 get_application_customers(application_id, opts)
 
 List Application Customers
 
@@ -1546,10 +1547,16 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | 
+opts = {
+  integration_id: 'integration_id_example', # String | Filter results performing an exact matching against the profile integration identifier.
+  page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  skip: 56, # Integer | Skips the given number of items when paging through large result sets.
+  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+}
 
 begin
   #List Application Customers
-  result = api_instance.get_application_customers(application_id)
+  result = api_instance.get_application_customers(application_id, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_application_customers: #{e}"
@@ -1562,6 +1569,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**|  | 
+ **integration_id** | **String**| Filter results performing an exact matching against the profile integration identifier. | [optional] 
+ **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
+ **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
 
 ### Return type
 
@@ -1942,10 +1953,11 @@ opts = {
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   profile: 'profile_example', # String | Profile integration ID filter for sessions. Must be exact match.
   state: 'state_example', # String | Filter by sessions with this state. Must be exact match.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date
   coupon: 'coupon_example', # String | Filter by sessions with this coupon. Must be exact match.
   referral: 'referral_example', # String | Filter by sessions with this referral. Must be exact match.
-  integration_id: 'integration_id_example', # String | Filter by sessions with this integrationId. Must be exact match.
-  customer_id: 'customer_id_example' # String | Filter by integration ID of the customer for the session
+  integration_id: 'integration_id_example' # String | Filter by sessions with this integrationId. Must be exact match.
 }
 
 begin
@@ -1968,10 +1980,11 @@ Name | Type | Description  | Notes
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **profile** | **String**| Profile integration ID filter for sessions. Must be exact match. | [optional] 
  **state** | **String**| Filter by sessions with this state. Must be exact match. | [optional] 
+ **created_before** | **DateTime**| Only return events created before this date | [optional] 
+ **created_after** | **DateTime**| Only return events created after this date | [optional] 
  **coupon** | **String**| Filter by sessions with this coupon. Must be exact match. | [optional] 
  **referral** | **String**| Filter by sessions with this referral. Must be exact match. | [optional] 
  **integration_id** | **String**| Filter by sessions with this integrationId. Must be exact match. | [optional] 
- **customer_id** | **String**| Filter by integration ID of the customer for the session | [optional] 
 
 ### Return type
 
@@ -2372,7 +2385,8 @@ opts = {
   name: 'name_example', # String | Filter results performing case-insensitive matching against the name of the campaign.
   tags: 'tags_example', # String | Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \"name\" query parameter, a logical OR will be performed to search both tags and name for the provided values 
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
+  campaign_group_id: 56 # Integer | Filter results to campaigns owned by the specified campaign group ID.
 }
 
 begin
@@ -2398,6 +2412,7 @@ Name | Type | Description  | Notes
  **tags** | **String**| Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values  | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. | [optional] 
+ **campaign_group_id** | **Integer**| Filter results to campaigns owned by the specified campaign group ID. | [optional] 
 
 ### Return type
 
@@ -3099,7 +3114,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile
 
-> ApplicationCustomer get_customer_profile(application_id, customer_id)
+> ApplicationCustomer get_customer_profile(customer_id)
 
 Get Customer Profile
 
@@ -3117,12 +3132,11 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-application_id = 56 # Integer | 
 customer_id = 56 # Integer | 
 
 begin
   #Get Customer Profile
-  result = api_instance.get_customer_profile(application_id, customer_id)
+  result = api_instance.get_customer_profile(customer_id)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling ManagementApi->get_customer_profile: #{e}"
@@ -3134,7 +3148,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **application_id** | **Integer**|  | 
  **customer_id** | **Integer**|  | 
 
 ### Return type
@@ -3600,6 +3613,58 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**InlineResponse2008**](InlineResponse2008.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_loyalty_statistics
+
+> LoyaltyStatistics get_loyalty_statistics(program_id)
+
+Get loyalty program statistics by loyalty program ID
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+program_id = 'program_id_example' # String | 
+
+begin
+  #Get loyalty program statistics by loyalty program ID
+  result = api_instance.get_loyalty_statistics(program_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_loyalty_statistics: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **program_id** | **String**|  | 
+
+### Return type
+
+[**LoyaltyStatistics**](LoyaltyStatistics.md)
 
 ### Authorization
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | The name/description of this discount | 
 **value** | **Float** | The total monetary value of the discount | 
+**scope** | **String** | The scope which the discount was applied on, can be one of (cartItems,additionalCosts,sessionTotal) | [optional] 
 
 ## Code Sample
 
@@ -13,7 +14,8 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::SetDiscountEffectProps.new(name: null,
-                                 value: null)
+                                 value: null,
+                                 scope: null)
 ```
 
 

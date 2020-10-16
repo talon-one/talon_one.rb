@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **sub_ledger_id** | **String** | The ID of the subledger within the loyalty program where these points were added | 
 **value** | **Float** | The amount of points that were added | 
 **recipient_integration_id** | **String** | The user for whom these points were added | 
-**expiry_condition** | **String** | The amount of time (in days) these points are valid | 
+**start_date** | **DateTime** | Date after which points will be valid | [optional] 
+**expiry_date** | **DateTime** | Date after which points will expire | [optional] 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = TalonOne::AddLoyaltyPointsEffectProps.new(name: null,
                                  sub_ledger_id: null,
                                  value: null,
                                  recipient_integration_id: null,
-                                 expiry_condition: null)
+                                 start_date: null,
+                                 expiry_date: null)
 ```
 
 

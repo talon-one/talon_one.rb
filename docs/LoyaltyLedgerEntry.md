@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **event_id** | **Integer** |  | [optional] 
 **type** | **String** | The type of the ledger transaction. Possible values are addition, subtraction, expire or expiring (for expiring points ledgers)  | 
 **amount** | **Float** |  | 
+**start_date** | **DateTime** |  | [optional] 
 **expiry_date** | **DateTime** |  | [optional] 
 **name** | **String** | A name referencing the condition or effect that added this entry, or the specific name provided in an API call. | 
 **sub_ledger_id** | **String** | This specifies if we are adding loyalty points to the main ledger or a subledger | 
@@ -28,6 +29,7 @@ instance = TalonOne::LoyaltyLedgerEntry.new(created: null,
                                  event_id: null,
                                  type: null,
                                  amount: null,
+                                 start_date: null,
                                  expiry_date: null,
                                  name: null,
                                  sub_ledger_id: null,

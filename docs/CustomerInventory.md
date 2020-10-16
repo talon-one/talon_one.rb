@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **profile** | [**CustomerProfile**](CustomerProfile.md) |  | [optional] 
+**loyalty** | [**Loyalty**](Loyalty.md) |  | [optional] 
 **referrals** | [**Array&lt;Referral&gt;**](Referral.md) |  | [optional] 
 **coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | [optional] 
 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::CustomerInventory.new(profile: null,
+                                 loyalty: null,
                                  referrals: null,
                                  coupons: null)
 ```

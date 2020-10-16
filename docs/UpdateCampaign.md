@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **referral_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | The set of limits that will operate for this campaign | 
+**campaign_groups** | **Array&lt;Integer&gt;** | The IDs of the campaign groups that own this entity. | [optional] 
 
 ## Code Sample
 
@@ -33,7 +34,8 @@ instance = TalonOne::UpdateCampaign.new(name: null,
                                  features: null,
                                  coupon_settings: null,
                                  referral_settings: null,
-                                 limits: null)
+                                 limits: null,
+                                 campaign_groups: null)
 ```
 
 

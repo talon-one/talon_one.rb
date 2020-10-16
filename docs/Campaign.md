@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **referral_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | The set of limits that will operate for this campaign | 
+**campaign_groups** | **Array&lt;Integer&gt;** | The IDs of the campaign groups that own this entity. | [optional] 
 **coupon_redemption_count** | **Integer** | Number of coupons redeemed in the campaign. | [optional] 
 **referral_redemption_count** | **Integer** | Number of referral codes redeemed in the campaign. | [optional] 
 **discount_count** | **Integer** | Total amount of discounts redeemed in the campaign. | [optional] 
@@ -51,6 +52,7 @@ instance = TalonOne::Campaign.new(id: null,
                                  coupon_settings: null,
                                  referral_settings: null,
                                  limits: null,
+                                 campaign_groups: null,
                                  coupon_redemption_count: null,
                                  referral_redemption_count: null,
                                  discount_count: null,
