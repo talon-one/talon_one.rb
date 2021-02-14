@@ -80,6 +80,12 @@ describe 'IntegrationStateV2' do
     end
   end
 
+  describe 'test attribute "rule_failure_reasons"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "created_coupons"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

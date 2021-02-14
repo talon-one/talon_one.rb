@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **created** | **DateTime** | The exact moment this entity was created. | 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 
 **user_id** | **Integer** | The ID of the account that owns this entity. | 
-**entity** | **String** | The name of the entity that was imported. | 
+**entity** | **String** | The name of the entity that was imported. Possible values are Coupons and LoyaltyPoints. | 
 **amount** | **Integer** | The number of members that imported. | 
 
 ## Code Sample

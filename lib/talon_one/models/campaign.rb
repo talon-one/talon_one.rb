@@ -79,6 +79,21 @@ module TalonOne
     # Total number of coupons created by rules in this campaign.
     attr_accessor :coupon_creation_count
 
+    # Total number of referrals created by rules in this campaign.
+    attr_accessor :referral_creation_count
+
+    # Total number of loyalty points created by rules in this campaign.
+    attr_accessor :created_loyalty_points_count
+
+    # Total number of loyalty point creation effects triggered by rules in this campaign.
+    attr_accessor :created_loyalty_points_effect_count
+
+    # Total number of loyalty points redeemed by rules in this campaign.
+    attr_accessor :redeemed_loyalty_points_count
+
+    # Total number of loyalty point redemption effects triggered by rules in this campaign.
+    attr_accessor :redeemed_loyalty_points_effect_count
+
     # Timestamp of the most recent event received by this campaign.
     attr_accessor :last_activity
 
@@ -138,6 +153,11 @@ module TalonOne
         :'discount_count' => :'discountCount',
         :'discount_effect_count' => :'discountEffectCount',
         :'coupon_creation_count' => :'couponCreationCount',
+        :'referral_creation_count' => :'referralCreationCount',
+        :'created_loyalty_points_count' => :'createdLoyaltyPointsCount',
+        :'created_loyalty_points_effect_count' => :'createdLoyaltyPointsEffectCount',
+        :'redeemed_loyalty_points_count' => :'redeemedLoyaltyPointsCount',
+        :'redeemed_loyalty_points_effect_count' => :'redeemedLoyaltyPointsEffectCount',
         :'last_activity' => :'lastActivity',
         :'updated' => :'updated',
         :'created_by' => :'createdBy',
@@ -167,9 +187,14 @@ module TalonOne
         :'campaign_groups' => :'Array<Integer>',
         :'coupon_redemption_count' => :'Integer',
         :'referral_redemption_count' => :'Integer',
-        :'discount_count' => :'Integer',
+        :'discount_count' => :'Float',
         :'discount_effect_count' => :'Integer',
         :'coupon_creation_count' => :'Integer',
+        :'referral_creation_count' => :'Integer',
+        :'created_loyalty_points_count' => :'Float',
+        :'created_loyalty_points_effect_count' => :'Integer',
+        :'redeemed_loyalty_points_count' => :'Float',
+        :'redeemed_loyalty_points_effect_count' => :'Integer',
         :'last_activity' => :'DateTime',
         :'updated' => :'DateTime',
         :'created_by' => :'String',
@@ -294,6 +319,26 @@ module TalonOne
 
       if attributes.key?(:'coupon_creation_count')
         self.coupon_creation_count = attributes[:'coupon_creation_count']
+      end
+
+      if attributes.key?(:'referral_creation_count')
+        self.referral_creation_count = attributes[:'referral_creation_count']
+      end
+
+      if attributes.key?(:'created_loyalty_points_count')
+        self.created_loyalty_points_count = attributes[:'created_loyalty_points_count']
+      end
+
+      if attributes.key?(:'created_loyalty_points_effect_count')
+        self.created_loyalty_points_effect_count = attributes[:'created_loyalty_points_effect_count']
+      end
+
+      if attributes.key?(:'redeemed_loyalty_points_count')
+        self.redeemed_loyalty_points_count = attributes[:'redeemed_loyalty_points_count']
+      end
+
+      if attributes.key?(:'redeemed_loyalty_points_effect_count')
+        self.redeemed_loyalty_points_effect_count = attributes[:'redeemed_loyalty_points_effect_count']
       end
 
       if attributes.key?(:'last_activity')
@@ -434,6 +479,11 @@ module TalonOne
           discount_count == o.discount_count &&
           discount_effect_count == o.discount_effect_count &&
           coupon_creation_count == o.coupon_creation_count &&
+          referral_creation_count == o.referral_creation_count &&
+          created_loyalty_points_count == o.created_loyalty_points_count &&
+          created_loyalty_points_effect_count == o.created_loyalty_points_effect_count &&
+          redeemed_loyalty_points_count == o.redeemed_loyalty_points_count &&
+          redeemed_loyalty_points_effect_count == o.redeemed_loyalty_points_effect_count &&
           last_activity == o.last_activity &&
           updated == o.updated &&
           created_by == o.created_by &&
@@ -449,7 +499,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, last_activity, updated, created_by, updated_by].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, referral_creation_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, last_activity, updated, created_by, updated_by].hash
     end
 
     # Builds the object from hash

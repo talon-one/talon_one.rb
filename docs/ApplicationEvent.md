@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **type** | **String** | A string representing the event. Must not be a reserved event name. | 
 **attributes** | [**Object**](.md) | Additional JSON serialized data associated with the event. | 
 **effects** | **Array&lt;Object&gt;** | An array containing the effects that were applied as a result of this event. | 
+**rule_failure_reasons** | [**Array&lt;RuleFailureReason&gt;**](RuleFailureReason.md) | An array containing the rule failure reasons which happened during this event. | [optional] 
 
 ## Code Sample
 
@@ -25,7 +26,8 @@ instance = TalonOne::ApplicationEvent.new(id: null,
                                  session_id: null,
                                  type: null,
                                  attributes: null,
-                                 effects: null)
+                                 effects: null,
+                                 rule_failure_reasons: null)
 ```
 
 

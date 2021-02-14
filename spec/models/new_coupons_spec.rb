@@ -56,18 +56,6 @@ describe 'NewCoupons' do
     end
   end
 
-  describe 'test attribute "valid_characters"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "coupon_pattern"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "number_of_coupons"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -87,6 +75,18 @@ describe 'NewCoupons' do
   end
 
   describe 'test attribute "recipient_integration_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "valid_characters"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "coupon_pattern"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

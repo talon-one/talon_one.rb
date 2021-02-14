@@ -110,6 +110,21 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for create_coupons_for_multiple_recipients
+  # Create Coupons for Multiple Recipients
+  # Create coupons according to some pattern for up to 1000 recipients.
+  # @param application_id 
+  # @param campaign_id 
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :silent If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
+  # @return [InlineResponse2004]
+  describe 'create_coupons_for_multiple_recipients test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_password_recovery_email
   # Request a password reset
   # Sends an email with a password recovery link to the email of an existing account. 
@@ -177,12 +192,12 @@ describe 'ManagementApi' do
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
@@ -217,6 +232,102 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_ruleset test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for destroy_session
+  # Destroy a Session
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'destroy_session test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_coupons
+  # Export Coupons to a CSV file
+  # Download a file with the coupons that match the given attributes.
+  # @param application_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Float] :campaign_id Filter results by campaign.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
+  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
+  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
+  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
+  # @option opts [String] :batch_id Filter results by batches of coupons
+  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
+  # @option opts [String] :date_format Determines the format of dates in the export document.
+  # @option opts [String] :campaign_state Filter results by the state of the campaign.
+  # @return [String]
+  describe 'export_coupons test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_customer_sessions
+  # Export Customer Sessions to a CSV file
+  # Download a file with the customer sessions that match the request.
+  # @param application_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
+  # @option opts [String] :profile_integration_id Only return sessions for the customer that matches this customer integration ID.
+  # @option opts [String] :date_format Determines the format of dates in the export document.
+  # @option opts [String] :customer_session_state Filter results by state.
+  # @return [String]
+  describe 'export_customer_sessions test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_effects
+  # Export triggered Effects to a CSV file
+  # Download a file with the triggered effects that match the given attributes.
+  # @param application_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Float] :campaign_id Filter results by campaign.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [String] :date_format Determines the format of dates in the export document.
+  # @return [String]
+  describe 'export_effects test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_loyalty_balance
+  # Export customer loyalty balance to a CSV file
+  # Download a file with the balance of each customer in the loyalty program
+  # @param program_id 
+  # @param [Hash] opts the optional parameters
+  # @return [String]
+  describe 'export_loyalty_balance test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_loyalty_ledger
+  # Export a customer&#39;s loyalty ledger log to a CSV file
+  # Download a file with a customer&#39;s ledger log in the loyalty program
+  # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
+  # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
+  # @param program_id 
+  # @param integration_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :date_format Determines the format of dates in the export document.
+  # @return [String]
+  describe 'export_loyalty_ledger test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -303,7 +414,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20021]
+  # @return [InlineResponse20022]
   describe 'get_additional_costs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -330,7 +441,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_all_roles
-  # Get all roles.
+  # Get all roles
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse20030]
   describe 'get_all_roles test' do
@@ -425,8 +536,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
-  # @option opts [DateTime] :created_before Only return events created before this date
-  # @option opts [DateTime] :created_after Only return events created after this date
+  # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :session Session integration ID filter for events. Must be exact match.
   # @option opts [String] :profile Profile integration ID filter for events. Must be exact match.
   # @option opts [String] :customer_name Customer name filter for events. Will match substrings case-insensitively.
@@ -451,8 +562,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
-  # @option opts [DateTime] :created_before Only return events created before this date
-  # @option opts [DateTime] :created_after Only return events created after this date
+  # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :session Session integration ID filter for events. Must be exact match.
   # @option opts [String] :profile Profile integration ID filter for events. Must be exact match.
   # @option opts [String] :customer_name Customer name filter for events. Will match substrings case-insensitively.
@@ -489,8 +600,8 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :profile Profile integration ID filter for sessions. Must be exact match.
   # @option opts [String] :state Filter by sessions with this state. Must be exact match.
-  # @option opts [DateTime] :created_before Only return events created before this date
-  # @option opts [DateTime] :created_after Only return events created after this date
+  # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
   # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
   # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
@@ -534,8 +645,23 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20020]
+  # @return [InlineResponse20021]
   describe 'get_attributes test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_audiences
+  # Get all audiences
+  # Get All audiences created in the account. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+  # @return [InlineResponse20020]
+  describe 'get_audiences test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -595,8 +721,8 @@ describe 'ManagementApi' do
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
   # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
   # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
   # @return [InlineResponse2002]
   describe 'get_campaigns test' do
@@ -613,11 +739,13 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [Integer] :application_id 
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+  # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
+  # @option opts [Integer] :user_id 
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-  # @return [InlineResponse20027]
+  # @return [InlineResponse20028]
   describe 'get_changes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -633,12 +761,12 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
@@ -663,8 +791,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -688,8 +816,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -713,8 +841,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -850,7 +978,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20025]
+  # @return [InlineResponse20026]
   describe 'get_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -866,21 +994,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :application_id 
   # @option opts [Integer] :campaign_id 
   # @option opts [String] :entity The name of the entity type that was exported.
-  # @return [InlineResponse20028]
-  describe 'get_exports test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_imports
-  # Get Imports
-  # Get a list of all past imports 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @return [InlineResponse20029]
-  describe 'get_imports test' do
+  describe 'get_exports test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -940,8 +1055,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
@@ -961,8 +1076,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
@@ -974,7 +1089,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_role
-  # Get information for the specified role.
+  # Get information for the specified role
   # @param role_id 
   # @param [Hash] opts the optional parameters
   # @return [Role]
@@ -1031,7 +1146,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20026]
+  # @return [InlineResponse20027]
   describe 'get_users test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1061,9 +1176,9 @@ describe 'ManagementApi' do
   # @option opts [Float] :webhook_id Filter results by Webhook.
   # @option opts [Float] :application_id 
   # @option opts [Float] :campaign_id Filter results by campaign.
-  # @option opts [DateTime] :created_before Only return events created before this date.
-  # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-  # @return [InlineResponse20023]
+  # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
+  # @return [InlineResponse20024]
   describe 'get_webhook_activation_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1081,9 +1196,9 @@ describe 'ManagementApi' do
   # @option opts [Float] :application_id 
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [String] :request_uuid Filter results by request UUID.
-  # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
-  # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
-  # @return [InlineResponse20024]
+  # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
+  # @return [InlineResponse20025]
   describe 'get_webhook_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1097,7 +1212,7 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20023]
   describe 'get_webhooks test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1140,8 +1255,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -1165,8 +1280,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -1191,8 +1306,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -1218,8 +1333,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.

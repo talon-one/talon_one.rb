@@ -157,15 +157,30 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@referral_code.nil? && @referral_code.to_s.length > 100
+        invalid_properties.push('invalid value for "referral_code", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@referral_code.nil? && @referral_code.to_s.length > 100
       state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
       return false unless state_validator.valid?(@state)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] referral_code Value to be assigned
+    def referral_code=(referral_code)
+      if !referral_code.nil? && referral_code.to_s.length > 100
+        fail ArgumentError, 'invalid value for "referral_code", the character length must be smaller than or equal to 100.'
+      end
+
+      @referral_code = referral_code
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -42,6 +42,9 @@ module TalonOne
     # The strategy used when choosing exclusive campaigns for evaluation, can be one of (listOrder, lowestDiscount, highestDiscount). If no value is provided, this is set to \"listOrder\"
     attr_accessor :exclusive_campaigns_strategy
 
+    # The default scope to apply \"setDiscount\" effects on if no scope was provided with the effect.
+    attr_accessor :default_discount_scope
+
     # Flag indicating if discounts should cascade for this application
     attr_accessor :enable_cascading_discounts
 
@@ -90,6 +93,7 @@ module TalonOne
         :'limits' => :'limits',
         :'campaign_priority' => :'campaignPriority',
         :'exclusive_campaigns_strategy' => :'exclusiveCampaignsStrategy',
+        :'default_discount_scope' => :'defaultDiscountScope',
         :'enable_cascading_discounts' => :'enableCascadingDiscounts',
         :'enable_flattened_cart_items' => :'enableFlattenedCartItems',
         :'attributes_settings' => :'attributesSettings',
@@ -110,6 +114,7 @@ module TalonOne
         :'limits' => :'Array<LimitConfig>',
         :'campaign_priority' => :'String',
         :'exclusive_campaigns_strategy' => :'String',
+        :'default_discount_scope' => :'String',
         :'enable_cascading_discounts' => :'Boolean',
         :'enable_flattened_cart_items' => :'Boolean',
         :'attributes_settings' => :'AttributesSettings',
@@ -175,6 +180,10 @@ module TalonOne
 
       if attributes.key?(:'exclusive_campaigns_strategy')
         self.exclusive_campaigns_strategy = attributes[:'exclusive_campaigns_strategy']
+      end
+
+      if attributes.key?(:'default_discount_scope')
+        self.default_discount_scope = attributes[:'default_discount_scope']
       end
 
       if attributes.key?(:'enable_cascading_discounts')
@@ -249,6 +258,8 @@ module TalonOne
       return false unless campaign_priority_validator.valid?(@campaign_priority)
       exclusive_campaigns_strategy_validator = EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
       return false unless exclusive_campaigns_strategy_validator.valid?(@exclusive_campaigns_strategy)
+      default_discount_scope_validator = EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
+      return false unless default_discount_scope_validator.valid?(@default_discount_scope)
       return false if !@key.nil? && @key !~ Regexp.new(/^[a-fA-F0-9]{16}$/)
       true
     end
@@ -325,6 +336,16 @@ module TalonOne
       @exclusive_campaigns_strategy = exclusive_campaigns_strategy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] default_discount_scope Object to be assigned
+    def default_discount_scope=(default_discount_scope)
+      validator = EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
+      unless validator.valid?(default_discount_scope)
+        fail ArgumentError, "invalid value for \"default_discount_scope\", must be one of #{validator.allowable_values}."
+      end
+      @default_discount_scope = default_discount_scope
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] key Value to be assigned
     def key=(key)
@@ -350,6 +371,7 @@ module TalonOne
           limits == o.limits &&
           campaign_priority == o.campaign_priority &&
           exclusive_campaigns_strategy == o.exclusive_campaigns_strategy &&
+          default_discount_scope == o.default_discount_scope &&
           enable_cascading_discounts == o.enable_cascading_discounts &&
           enable_flattened_cart_items == o.enable_flattened_cart_items &&
           attributes_settings == o.attributes_settings &&
@@ -366,7 +388,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, key].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, key].hash
     end
 
     # Builds the object from hash

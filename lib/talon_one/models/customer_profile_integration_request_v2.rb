@@ -18,7 +18,9 @@ module TalonOne
     # Arbitrary properties associated with this item
     attr_accessor :attributes
 
-    # Optional list of requested information to be present on the response related to the customer profile update. Currently supported: \"customerProfile\", \"triggeredCampaigns\", \"loyalty\" and \"event\". 
+    attr_accessor :audiences_changes
+
+    # Optional list of requested information to be present on the response related to the customer profile update. Currently supported: \"customerProfile\", \"triggeredCampaigns\", \"loyalty\", \"event\" and \"ruleFailureReasons\". 
     attr_accessor :response_content
 
     class EnumAttributeValidator
@@ -47,6 +49,7 @@ module TalonOne
     def self.attribute_map
       {
         :'attributes' => :'attributes',
+        :'audiences_changes' => :'audiencesChanges',
         :'response_content' => :'responseContent'
       }
     end
@@ -55,6 +58,7 @@ module TalonOne
     def self.openapi_types
       {
         :'attributes' => :'Object',
+        :'audiences_changes' => :'ProfileAudiencesChanges',
         :'response_content' => :'Array<String>'
       }
     end
@@ -84,6 +88,10 @@ module TalonOne
         self.attributes = attributes[:'attributes']
       end
 
+      if attributes.key?(:'audiences_changes')
+        self.audiences_changes = attributes[:'audiences_changes']
+      end
+
       if attributes.key?(:'response_content')
         if (value = attributes[:'response_content']).is_a?(Array)
           self.response_content = value
@@ -110,6 +118,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           attributes == o.attributes &&
+          audiences_changes == o.audiences_changes &&
           response_content == o.response_content
     end
 
@@ -122,7 +131,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [attributes, response_content].hash
+      [attributes, audiences_changes, response_content].hash
     end
 
     # Builds the object from hash

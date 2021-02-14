@@ -31,6 +31,8 @@ module TalonOne
 
     attr_accessor :effects
 
+    attr_accessor :rule_failure_reasons
+
     attr_accessor :created_coupons
 
     attr_accessor :created_referrals
@@ -46,6 +48,7 @@ module TalonOne
         :'coupons' => :'coupons',
         :'triggered_campaigns' => :'triggeredCampaigns',
         :'effects' => :'effects',
+        :'rule_failure_reasons' => :'ruleFailureReasons',
         :'created_coupons' => :'createdCoupons',
         :'created_referrals' => :'createdReferrals'
       }
@@ -62,6 +65,7 @@ module TalonOne
         :'coupons' => :'Array<Coupon>',
         :'triggered_campaigns' => :'Array<Campaign>',
         :'effects' => :'Array<Effect>',
+        :'rule_failure_reasons' => :'Array<RuleFailureReason>',
         :'created_coupons' => :'Array<Coupon>',
         :'created_referrals' => :'Array<Referral>'
       }
@@ -126,6 +130,12 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'rule_failure_reasons')
+        if (value = attributes[:'rule_failure_reasons']).is_a?(Array)
+          self.rule_failure_reasons = value
+        end
+      end
+
       if attributes.key?(:'created_coupons')
         if (value = attributes[:'created_coupons']).is_a?(Array)
           self.created_coupons = value
@@ -180,6 +190,7 @@ module TalonOne
           coupons == o.coupons &&
           triggered_campaigns == o.triggered_campaigns &&
           effects == o.effects &&
+          rule_failure_reasons == o.rule_failure_reasons &&
           created_coupons == o.created_coupons &&
           created_referrals == o.created_referrals
     end
@@ -193,7 +204,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_session, customer_profile, event, loyalty, referral, coupons, triggered_campaigns, effects, created_coupons, created_referrals].hash
+      [customer_session, customer_profile, event, loyalty, referral, coupons, triggered_campaigns, effects, rule_failure_reasons, created_coupons, created_referrals].hash
     end
 
     # Builds the object from hash

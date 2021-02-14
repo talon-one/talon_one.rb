@@ -42,8 +42,6 @@ module TalonOne
     # Arbitrary properties associated with this item
     attr_accessor :attributes
 
-    attr_accessor :adjustment
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,8 +55,7 @@ module TalonOne
         :'width' => :'width',
         :'length' => :'length',
         :'position' => :'position',
-        :'attributes' => :'attributes',
-        :'adjustment' => :'adjustment'
+        :'attributes' => :'attributes'
       }
     end
 
@@ -75,8 +72,7 @@ module TalonOne
         :'width' => :'Float',
         :'length' => :'Float',
         :'position' => :'Float',
-        :'attributes' => :'Object',
-        :'adjustment' => :'CartItemAdjustment'
+        :'attributes' => :'Object'
       }
     end
 
@@ -143,10 +139,6 @@ module TalonOne
 
       if attributes.key?(:'attributes')
         self.attributes = attributes[:'attributes']
-      end
-
-      if attributes.key?(:'adjustment')
-        self.adjustment = attributes[:'adjustment']
       end
     end
 
@@ -255,8 +247,7 @@ module TalonOne
           width == o.width &&
           length == o.length &&
           position == o.position &&
-          attributes == o.attributes &&
-          adjustment == o.adjustment
+          attributes == o.attributes
     end
 
     # @see the `==` method
@@ -268,7 +259,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sku, quantity, price, category, weight, height, width, length, position, attributes, adjustment].hash
+      [name, sku, quantity, price, category, weight, height, width, length, position, attributes].hash
     end
 
     # Builds the object from hash

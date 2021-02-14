@@ -13,20 +13,77 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  class ImportCoupons
-    attr_accessor :coupons
+  # Details about why a rule failed
+  class RuleFailureReason
+    # The ID of the campaign that contains the rule that failed
+    attr_accessor :campaign_id
+
+    # The name of the campaign that contains the rule that failed
+    attr_accessor :campaign_name
+
+    # The ID of the ruleset that contains the rule that failed
+    attr_accessor :ruleset_id
+
+    # The ID of the coupon that was being evaluated at the time of the rule failure
+    attr_accessor :coupon_id
+
+    # The value of the coupon that was being evaluated at the time of the rule failure
+    attr_accessor :coupon_value
+
+    # The ID of the referral that was being evaluated at the time of the rule failure
+    attr_accessor :referral_id
+
+    # The value of the referral that was being evaluated at the time of the rule failure
+    attr_accessor :referral_value
+
+    # The index of the rule that failed within the ruleset
+    attr_accessor :rule_index
+
+    # The name of the rule that failed within the ruleset
+    attr_accessor :rule_name
+
+    # The index of the condition that failed
+    attr_accessor :condition_index
+
+    # The index of the effect that failed
+    attr_accessor :effect_index
+
+    # More details about the failure
+    attr_accessor :details
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'coupons' => :'coupons'
+        :'campaign_id' => :'campaignID',
+        :'campaign_name' => :'campaignName',
+        :'ruleset_id' => :'rulesetID',
+        :'coupon_id' => :'couponID',
+        :'coupon_value' => :'couponValue',
+        :'referral_id' => :'referralID',
+        :'referral_value' => :'referralValue',
+        :'rule_index' => :'ruleIndex',
+        :'rule_name' => :'ruleName',
+        :'condition_index' => :'conditionIndex',
+        :'effect_index' => :'effectIndex',
+        :'details' => :'details'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'coupons' => :'String'
+        :'campaign_id' => :'Integer',
+        :'campaign_name' => :'String',
+        :'ruleset_id' => :'Integer',
+        :'coupon_id' => :'Integer',
+        :'coupon_value' => :'String',
+        :'referral_id' => :'Integer',
+        :'referral_value' => :'String',
+        :'rule_index' => :'Integer',
+        :'rule_name' => :'String',
+        :'condition_index' => :'Integer',
+        :'effect_index' => :'Integer',
+        :'details' => :'String'
       }
     end
 
@@ -40,19 +97,63 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::ImportCoupons` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::RuleFailureReason` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::ImportCoupons`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::RuleFailureReason`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'coupons')
-        self.coupons = attributes[:'coupons']
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
+      end
+
+      if attributes.key?(:'campaign_name')
+        self.campaign_name = attributes[:'campaign_name']
+      end
+
+      if attributes.key?(:'ruleset_id')
+        self.ruleset_id = attributes[:'ruleset_id']
+      end
+
+      if attributes.key?(:'coupon_id')
+        self.coupon_id = attributes[:'coupon_id']
+      end
+
+      if attributes.key?(:'coupon_value')
+        self.coupon_value = attributes[:'coupon_value']
+      end
+
+      if attributes.key?(:'referral_id')
+        self.referral_id = attributes[:'referral_id']
+      end
+
+      if attributes.key?(:'referral_value')
+        self.referral_value = attributes[:'referral_value']
+      end
+
+      if attributes.key?(:'rule_index')
+        self.rule_index = attributes[:'rule_index']
+      end
+
+      if attributes.key?(:'rule_name')
+        self.rule_name = attributes[:'rule_name']
+      end
+
+      if attributes.key?(:'condition_index')
+        self.condition_index = attributes[:'condition_index']
+      end
+
+      if attributes.key?(:'effect_index')
+        self.effect_index = attributes[:'effect_index']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
       end
     end
 
@@ -60,8 +161,24 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @coupons.nil?
-        invalid_properties.push('invalid value for "coupons", coupons cannot be nil.')
+      if @campaign_id.nil?
+        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
+      end
+
+      if @campaign_name.nil?
+        invalid_properties.push('invalid value for "campaign_name", campaign_name cannot be nil.')
+      end
+
+      if @ruleset_id.nil?
+        invalid_properties.push('invalid value for "ruleset_id", ruleset_id cannot be nil.')
+      end
+
+      if @rule_index.nil?
+        invalid_properties.push('invalid value for "rule_index", rule_index cannot be nil.')
+      end
+
+      if @rule_name.nil?
+        invalid_properties.push('invalid value for "rule_name", rule_name cannot be nil.')
       end
 
       invalid_properties
@@ -70,7 +187,11 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @coupons.nil?
+      return false if @campaign_id.nil?
+      return false if @campaign_name.nil?
+      return false if @ruleset_id.nil?
+      return false if @rule_index.nil?
+      return false if @rule_name.nil?
       true
     end
 
@@ -79,7 +200,18 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          coupons == o.coupons
+          campaign_id == o.campaign_id &&
+          campaign_name == o.campaign_name &&
+          ruleset_id == o.ruleset_id &&
+          coupon_id == o.coupon_id &&
+          coupon_value == o.coupon_value &&
+          referral_id == o.referral_id &&
+          referral_value == o.referral_value &&
+          rule_index == o.rule_index &&
+          rule_name == o.rule_name &&
+          condition_index == o.condition_index &&
+          effect_index == o.effect_index &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -91,7 +223,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [coupons].hash
+      [campaign_id, campaign_name, ruleset_id, coupon_id, coupon_value, referral_id, referral_value, rule_index, rule_name, condition_index, effect_index, details].hash
     end
 
     # Builds the object from hash

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**create_attribute**](ManagementApi.md#create_attribute) | **POST** /v1/attributes | Define a new custom attribute
 [**create_campaign**](ManagementApi.md#create_campaign) | **POST** /v1/applications/{applicationId}/campaigns | Create a Campaign
 [**create_coupons**](ManagementApi.md#create_coupons) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Create Coupons
+[**create_coupons_for_multiple_recipients**](ManagementApi.md#create_coupons_for_multiple_recipients) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_with_recipients | Create Coupons for Multiple Recipients
 [**create_password_recovery_email**](ManagementApi.md#create_password_recovery_email) | **POST** /v1/password_recovery_emails | Request a password reset
 [**create_ruleset**](ManagementApi.md#create_ruleset) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets | Create a Ruleset
 [**create_session**](ManagementApi.md#create_session) | **POST** /v1/sessions | Create a Session
@@ -18,6 +19,12 @@ Method | HTTP request | Description
 [**delete_coupons**](ManagementApi.md#delete_coupons) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Delete Coupons
 [**delete_referral**](ManagementApi.md#delete_referral) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/{referralId} | Delete one Referral
 [**delete_ruleset**](ManagementApi.md#delete_ruleset) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Delete a Ruleset
+[**destroy_session**](ManagementApi.md#destroy_session) | **DELETE** /v1/sessions | Destroy a Session
+[**export_coupons**](ManagementApi.md#export_coupons) | **GET** /v1/applications/{applicationId}/export_coupons | Export Coupons to a CSV file
+[**export_customer_sessions**](ManagementApi.md#export_customer_sessions) | **GET** /v1/applications/{applicationId}/export_customer_sessions | Export Customer Sessions to a CSV file
+[**export_effects**](ManagementApi.md#export_effects) | **GET** /v1/applications/{applicationId}/export_effects | Export triggered Effects to a CSV file
+[**export_loyalty_balance**](ManagementApi.md#export_loyalty_balance) | **GET** /v1/loyalty_programs/{programID}/export_customer_balance | Export customer loyalty balance to a CSV file
+[**export_loyalty_ledger**](ManagementApi.md#export_loyalty_ledger) | **GET** /v1/loyalty_programs/{programID}/profile/{integrationID}/export_log | Export a customer&#39;s loyalty ledger log to a CSV file
 [**get_access_logs**](ManagementApi.md#get_access_logs) | **GET** /v1/applications/{applicationId}/access_logs | Get access logs for application (with total count)
 [**get_access_logs_without_total_count**](ManagementApi.md#get_access_logs_without_total_count) | **GET** /v1/applications/{applicationId}/access_logs/no_total | Get access logs for application
 [**get_account**](ManagementApi.md#get_account) | **GET** /v1/accounts/{accountId} | Get Account Details
@@ -25,7 +32,7 @@ Method | HTTP request | Description
 [**get_additional_cost**](ManagementApi.md#get_additional_cost) | **GET** /v1/additional_costs/{additionalCostId} | Get an additional cost
 [**get_additional_costs**](ManagementApi.md#get_additional_costs) | **GET** /v1/additional_costs | List additional costs
 [**get_all_access_logs**](ManagementApi.md#get_all_access_logs) | **GET** /v1/access_logs | Get all access logs
-[**get_all_roles**](ManagementApi.md#get_all_roles) | **GET** /v1/roles | Get all roles.
+[**get_all_roles**](ManagementApi.md#get_all_roles) | **GET** /v1/roles | Get all roles
 [**get_application**](ManagementApi.md#get_application) | **GET** /v1/applications/{applicationId} | Get Application
 [**get_application_api_health**](ManagementApi.md#get_application_api_health) | **GET** /v1/applications/{applicationId}/health_report | Get report of health of application API
 [**get_application_customer**](ManagementApi.md#get_application_customer) | **GET** /v1/applications/{applicationId}/customers/{customerId} | Get Application Customer
@@ -39,6 +46,7 @@ Method | HTTP request | Description
 [**get_applications**](ManagementApi.md#get_applications) | **GET** /v1/applications | List Applications
 [**get_attribute**](ManagementApi.md#get_attribute) | **GET** /v1/attributes/{attributeId} | Get a custom attribute
 [**get_attributes**](ManagementApi.md#get_attributes) | **GET** /v1/attributes | List custom attributes
+[**get_audiences**](ManagementApi.md#get_audiences) | **GET** /v1/audiences | Get all audiences
 [**get_campaign**](ManagementApi.md#get_campaign) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId} | Get a Campaign
 [**get_campaign_analytics**](ManagementApi.md#get_campaign_analytics) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/analytics | Get analytics of campaigns
 [**get_campaign_by_attributes**](ManagementApi.md#get_campaign_by_attributes) | **POST** /v1/applications/{applicationId}/campaigns_search | Get a list of all campaigns that match the given attributes
@@ -57,14 +65,13 @@ Method | HTTP request | Description
 [**get_customers_by_attributes**](ManagementApi.md#get_customers_by_attributes) | **POST** /v1/customer_search/no_total | Get a list of the customer profiles that match the given attributes
 [**get_event_types**](ManagementApi.md#get_event_types) | **GET** /v1/event_types | List Event Types
 [**get_exports**](ManagementApi.md#get_exports) | **GET** /v1/exports | Get Exports
-[**get_imports**](ManagementApi.md#get_imports) | **GET** /v1/imports | Get Imports
 [**get_loyalty_points**](ManagementApi.md#get_loyalty_points) | **GET** /v1/loyalty_programs/{programID}/profile/{integrationID} | get the Loyalty Ledger for this integrationID
 [**get_loyalty_program**](ManagementApi.md#get_loyalty_program) | **GET** /v1/loyalty_programs/{programID} | Get a loyalty program
 [**get_loyalty_programs**](ManagementApi.md#get_loyalty_programs) | **GET** /v1/loyalty_programs | List all loyalty Programs
 [**get_loyalty_statistics**](ManagementApi.md#get_loyalty_statistics) | **GET** /v1/loyalty_programs/{programID}/statistics | Get loyalty program statistics by loyalty program ID
 [**get_referrals**](ManagementApi.md#get_referrals) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals | List Referrals (with total count)
 [**get_referrals_without_total_count**](ManagementApi.md#get_referrals_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/no_total | List Referrals
-[**get_role**](ManagementApi.md#get_role) | **GET** /v1/roles/{roleId} | Get information for the specified role.
+[**get_role**](ManagementApi.md#get_role) | **GET** /v1/roles/{roleId} | Get information for the specified role
 [**get_ruleset**](ManagementApi.md#get_ruleset) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Get a Ruleset
 [**get_rulesets**](ManagementApi.md#get_rulesets) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets | List Campaign Rulesets
 [**get_user**](ManagementApi.md#get_user) | **GET** /v1/users/{userId} | Get a single User
@@ -425,6 +432,68 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## create_coupons_for_multiple_recipients
+
+> InlineResponse2004 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
+
+Create Coupons for Multiple Recipients
+
+Create coupons according to some pattern for up to 1000 recipients.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+campaign_id = 56 # Integer | 
+body = TalonOne::NewCouponsForMultipleRecipients.new # NewCouponsForMultipleRecipients | 
+opts = {
+  silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
+}
+
+begin
+  #Create Coupons for Multiple Recipients
+  result = api_instance.create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->create_coupons_for_multiple_recipients: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Integer**|  | 
+ **body** | [**NewCouponsForMultipleRecipients**](NewCouponsForMultipleRecipients.md)|  | 
+ **silent** | **String**| If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000). | [optional] 
+
+### Return type
+
+[**InlineResponse2004**](InlineResponse2004.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_password_recovery_email
 
 > NewPasswordEmail create_password_recovery_email(body)
@@ -719,12 +788,12 @@ application_id = 56 # Integer |
 campaign_id = 56 # Integer | 
 opts = {
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  starts_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  starts_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  expires_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  expires_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  starts_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  starts_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  expires_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  expires_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
@@ -749,12 +818,12 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **starts_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **starts_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **expires_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **expires_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **starts_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **starts_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **expires_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **expires_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
@@ -884,6 +953,383 @@ nil (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+
+## destroy_session
+
+> destroy_session
+
+Destroy a Session
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+
+begin
+  #Destroy a Session
+  api_instance.destroy_session
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->destroy_session: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+## export_coupons
+
+> String export_coupons(application_id, opts)
+
+Export Coupons to a CSV file
+
+Download a file with the coupons that match the given attributes.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+opts = {
+  campaign_id: 3.4, # Float | Filter results by campaign.
+  sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+  value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
+  usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
+  referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
+  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
+  batch_id: 'batch_id_example', # String | Filter results by batches of coupons
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
+  date_format: 'date_format_example', # String | Determines the format of dates in the export document.
+  campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.
+}
+
+begin
+  #Export Coupons to a CSV file
+  result = api_instance.export_coupons(application_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_coupons: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+ **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
+ **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
+ **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
+ **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
+ **batch_id** | **String**| Filter results by batches of coupons | [optional] 
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
+ **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
+## export_customer_sessions
+
+> String export_customer_sessions(application_id, opts)
+
+Export Customer Sessions to a CSV file
+
+Download a file with the customer sessions that match the request.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+opts = {
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
+  profile_integration_id: 'profile_integration_id_example', # String | Only return sessions for the customer that matches this customer integration ID.
+  date_format: 'date_format_example', # String | Determines the format of dates in the export document.
+  customer_session_state: 'customer_session_state_example' # String | Filter results by state.
+}
+
+begin
+  #Export Customer Sessions to a CSV file
+  result = api_instance.export_customer_sessions(application_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_customer_sessions: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. | [optional] 
+ **profile_integration_id** | **String**| Only return sessions for the customer that matches this customer integration ID. | [optional] 
+ **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
+ **customer_session_state** | **String**| Filter results by state. | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
+## export_effects
+
+> String export_effects(application_id, opts)
+
+Export triggered Effects to a CSV file
+
+Download a file with the triggered effects that match the given attributes.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+opts = {
+  campaign_id: 3.4, # Float | Filter results by campaign.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  date_format: 'date_format_example' # String | Determines the format of dates in the export document.
+}
+
+begin
+  #Export triggered Effects to a CSV file
+  result = api_instance.export_effects(application_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_effects: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
+## export_loyalty_balance
+
+> String export_loyalty_balance(program_id)
+
+Export customer loyalty balance to a CSV file
+
+Download a file with the balance of each customer in the loyalty program
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+program_id = 'program_id_example' # String | 
+
+begin
+  #Export customer loyalty balance to a CSV file
+  result = api_instance.export_loyalty_balance(program_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_loyalty_balance: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **program_id** | **String**|  | 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
+## export_loyalty_ledger
+
+> String export_loyalty_ledger(range_start, range_end, program_id, integration_id, opts)
+
+Export a customer's loyalty ledger log to a CSV file
+
+Download a file with a customer's ledger log in the loyalty program
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp, must be an RFC3339 timestamp string
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp, must be an RFC3339 timestamp string
+program_id = 'program_id_example' # String | 
+integration_id = 'integration_id_example' # String | 
+opts = {
+  date_format: 'date_format_example' # String | Determines the format of dates in the export document.
+}
+
+begin
+  #Export a customer's loyalty ledger log to a CSV file
+  result = api_instance.export_loyalty_ledger(range_start, range_end, program_id, integration_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_loyalty_ledger: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **range_start** | **DateTime**| Only return results from after this timestamp, must be an RFC3339 timestamp string | 
+ **range_end** | **DateTime**| Only return results from before this timestamp, must be an RFC3339 timestamp string | 
+ **program_id** | **String**|  | 
+ **integration_id** | **String**|  | 
+ **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
 
 
 ## get_access_logs
@@ -1190,7 +1636,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20021 get_additional_costs(opts)
+> InlineResponse20022 get_additional_costs(opts)
 
 List additional costs
 
@@ -1236,7 +1682,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -1322,7 +1768,7 @@ Name | Type | Description  | Notes
 
 > InlineResponse20030 get_all_roles
 
-Get all roles.
+Get all roles
 
 ### Example
 
@@ -1340,7 +1786,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 
 begin
-  #Get all roles.
+  #Get all roles
   result = api_instance.get_all_roles
   p result
 rescue TalonOne::ApiError => e
@@ -1732,8 +2178,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   type: 'type_example', # String | Comma-separated list of types by which to filter events. Must be exact match(es).
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   session: 'session_example', # String | Session integration ID filter for events. Must be exact match.
   profile: 'profile_example', # String | Profile integration ID filter for events. Must be exact match.
   customer_name: 'customer_name_example', # String | Customer name filter for events. Will match substrings case-insensitively.
@@ -1763,8 +2209,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **type** | **String**| Comma-separated list of types by which to filter events. Must be exact match(es). | [optional] 
- **created_before** | **DateTime**| Only return events created before this date | [optional] 
- **created_after** | **DateTime**| Only return events created after this date | [optional] 
+ **created_before** | **DateTime**| Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **session** | **String**| Session integration ID filter for events. Must be exact match. | [optional] 
  **profile** | **String**| Profile integration ID filter for events. Must be exact match. | [optional] 
  **customer_name** | **String**| Customer name filter for events. Will match substrings case-insensitively. | [optional] 
@@ -1816,8 +2262,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   type: 'type_example', # String | Comma-separated list of types by which to filter events. Must be exact match(es).
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   session: 'session_example', # String | Session integration ID filter for events. Must be exact match.
   profile: 'profile_example', # String | Profile integration ID filter for events. Must be exact match.
   customer_name: 'customer_name_example', # String | Customer name filter for events. Will match substrings case-insensitively.
@@ -1847,8 +2293,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **type** | **String**| Comma-separated list of types by which to filter events. Must be exact match(es). | [optional] 
- **created_before** | **DateTime**| Only return events created before this date | [optional] 
- **created_after** | **DateTime**| Only return events created after this date | [optional] 
+ **created_before** | **DateTime**| Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **session** | **String**| Session integration ID filter for events. Must be exact match. | [optional] 
  **profile** | **String**| Profile integration ID filter for events. Must be exact match. | [optional] 
  **customer_name** | **String**| Customer name filter for events. Will match substrings case-insensitively. | [optional] 
@@ -1953,8 +2399,8 @@ opts = {
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   profile: 'profile_example', # String | Profile integration ID filter for sessions. Must be exact match.
   state: 'state_example', # String | Filter by sessions with this state. Must be exact match.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
   coupon: 'coupon_example', # String | Filter by sessions with this coupon. Must be exact match.
   referral: 'referral_example', # String | Filter by sessions with this referral. Must be exact match.
   integration_id: 'integration_id_example' # String | Filter by sessions with this integrationId. Must be exact match.
@@ -1980,8 +2426,8 @@ Name | Type | Description  | Notes
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **profile** | **String**| Profile integration ID filter for sessions. Must be exact match. | [optional] 
  **state** | **String**| Filter by sessions with this state. Must be exact match. | [optional] 
- **created_before** | **DateTime**| Only return events created before this date | [optional] 
- **created_after** | **DateTime**| Only return events created after this date | [optional] 
+ **created_before** | **DateTime**| Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **coupon** | **String**| Filter by sessions with this coupon. Must be exact match. | [optional] 
  **referral** | **String**| Filter by sessions with this referral. Must be exact match. | [optional] 
  **integration_id** | **String**| Filter by sessions with this integrationId. Must be exact match. | [optional] 
@@ -2116,7 +2562,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20020 get_attributes(opts)
+> InlineResponse20021 get_attributes(opts)
 
 List custom attributes
 
@@ -2159,6 +2605,68 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+
+### Return type
+
+[**InlineResponse20021**](InlineResponse20021.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_audiences
+
+> InlineResponse20020 get_audiences(opts)
+
+Get all audiences
+
+Get All audiences created in the account. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+opts = {
+  page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  skip: 56, # Integer | Skips the given number of items when paging through large result sets.
+  sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+}
+
+begin
+  #Get all audiences
+  result = api_instance.get_audiences(opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_audiences: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
+ **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
 
 ### Return type
 
@@ -2384,8 +2892,8 @@ opts = {
   campaign_state: 'campaign_state_example', # String | Filter results by the state of the campaign.
   name: 'name_example', # String | Filter results performing case-insensitive matching against the name of the campaign.
   tags: 'tags_example', # String | Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \"name\" query parameter, a logical OR will be performed to search both tags and name for the provided values 
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   campaign_group_id: 56 # Integer | Filter results to campaigns owned by the specified campaign group ID.
 }
 
@@ -2410,8 +2918,8 @@ Name | Type | Description  | Notes
  **campaign_state** | **String**| Filter results by the state of the campaign. | [optional] 
  **name** | **String**| Filter results performing case-insensitive matching against the name of the campaign. | [optional] 
  **tags** | **String**| Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values  | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **campaign_group_id** | **Integer**| Filter results to campaigns owned by the specified campaign group ID. | [optional] 
 
 ### Return type
@@ -2430,7 +2938,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20027 get_changes(opts)
+> InlineResponse20028 get_changes(opts)
 
 Get audit log for an account
 
@@ -2455,8 +2963,10 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   application_id: 56, # Integer | 
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp.
+  entity_path: 'entity_path_example', # String | Filter results on a case insensitive matching of the url path of the entity
+  user_id: 56, # Integer | 
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   with_total_result_size: true, # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   include_old: true # Boolean | When this flag is set to false, the state without the change will not be returned. The default value is true.
 }
@@ -2479,14 +2989,16 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **application_id** | **Integer**|  | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. | [optional] 
+ **entity_path** | **String**| Filter results on a case insensitive matching of the url path of the entity | [optional] 
+ **user_id** | **Integer**|  | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
  **include_old** | **Boolean**| When this flag is set to false, the state without the change will not be returned. The default value is true. | [optional] 
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -2525,12 +3037,12 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  starts_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  starts_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  expires_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  expires_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  starts_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  starts_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  expires_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  expires_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
@@ -2559,12 +3071,12 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **starts_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **starts_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **expires_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **expires_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **starts_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **starts_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **expires_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **expires_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
@@ -2616,8 +3128,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -2647,8 +3159,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -2699,8 +3211,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -2730,8 +3242,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -2781,8 +3293,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -2811,8 +3323,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -3282,7 +3794,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20025 get_event_types(opts)
+> InlineResponse20026 get_event_types(opts)
 
 List Event Types
 
@@ -3334,7 +3846,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -3348,7 +3860,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20028 get_exports(opts)
+> InlineResponse20029 get_exports(opts)
 
 Get Exports
 
@@ -3395,64 +3907,6 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | [optional] 
  **campaign_id** | **Integer**|  | [optional] 
  **entity** | **String**| The name of the entity type that was exported. | [optional] 
-
-### Return type
-
-[**InlineResponse20028**](InlineResponse20028.md)
-
-### Authorization
-
-[manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_imports
-
-> InlineResponse20029 get_imports(opts)
-
-Get Imports
-
-Get a list of all past imports 
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-opts = {
-  page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  skip: 56 # Integer | Skips the given number of items when paging through large result sets.
-}
-
-begin
-  #Get Imports
-  result = api_instance.get_imports(opts)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_imports: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
- **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
 
 ### Return type
 
@@ -3703,8 +4157,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   code: 'code_example', # String | Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only referrals where `usageCounter < usageLimit` will be returned, \"false\" will return only referrals where `usageCounter >= usageLimit`. 
   advocate: 'advocate_example' # String | Filter results by match with a profile id specified in the referral's AdvocateProfileIntegrationId field
@@ -3730,8 +4184,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **code** | **String**| Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **advocate** | **String**| Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field | [optional] 
@@ -3777,8 +4231,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   code: 'code_example', # String | Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only referrals where `usageCounter < usageLimit` will be returned, \"false\" will return only referrals where `usageCounter >= usageLimit`. 
   advocate: 'advocate_example' # String | Filter results by match with a profile id specified in the referral's AdvocateProfileIntegrationId field
@@ -3804,8 +4258,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **code** | **String**| Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **advocate** | **String**| Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field | [optional] 
@@ -3828,7 +4282,7 @@ Name | Type | Description  | Notes
 
 > Role get_role(role_id)
 
-Get information for the specified role.
+Get information for the specified role
 
 ### Example
 
@@ -3847,7 +4301,7 @@ api_instance = TalonOne::ManagementApi.new
 role_id = 56 # Integer | 
 
 begin
-  #Get information for the specified role.
+  #Get information for the specified role
   result = api_instance.get_role(role_id)
   p result
 rescue TalonOne::ApiError => e
@@ -4050,7 +4504,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20026 get_users(opts)
+> InlineResponse20027 get_users(opts)
 
 List Users in your account
 
@@ -4096,7 +4550,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -4164,7 +4618,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_activation_logs
 
-> InlineResponse20023 get_webhook_activation_logs(opts)
+> InlineResponse20024 get_webhook_activation_logs(opts)
 
 List Webhook activation Log Entries
 
@@ -4192,8 +4646,8 @@ opts = {
   webhook_id: 3.4, # Float | Filter results by Webhook.
   application_id: 3.4, # Float | 
   campaign_id: 3.4, # Float | Filter results by campaign.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
 }
 
 begin
@@ -4217,12 +4671,12 @@ Name | Type | Description  | Notes
  **webhook_id** | **Float**| Filter results by Webhook. | [optional] 
  **application_id** | **Float**|  | [optional] 
  **campaign_id** | **Float**| Filter results by campaign. | [optional] 
- **created_before** | **DateTime**| Only return events created before this date. | [optional] 
- **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. | [optional] 
+ **created_before** | **DateTime**| Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -4236,7 +4690,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_logs
 
-> InlineResponse20024 get_webhook_logs(opts)
+> InlineResponse20025 get_webhook_logs(opts)
 
 List Webhook Log Entries
 
@@ -4263,8 +4717,8 @@ opts = {
   application_id: 3.4, # Float | 
   campaign_id: 3.4, # Float | Filter results by campaign.
   request_uuid: 'request_uuid_example', # String | Filter results by request UUID.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
 }
 
 begin
@@ -4289,12 +4743,12 @@ Name | Type | Description  | Notes
  **application_id** | **Float**|  | [optional] 
  **campaign_id** | **Float**| Filter results by campaign. | [optional] 
  **request_uuid** | **String**| Filter results by request UUID. | [optional] 
- **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. | [optional] 
- **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. | [optional] 
+ **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -4308,7 +4762,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20022 get_webhooks(opts)
+> InlineResponse20023 get_webhooks(opts)
 
 List Webhooks
 
@@ -4354,7 +4808,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -4505,8 +4959,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -4536,8 +4990,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -4588,8 +5042,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -4619,8 +5073,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -4672,8 +5126,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -4703,8 +5157,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 
@@ -4757,8 +5211,8 @@ opts = {
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
@@ -4788,8 +5242,8 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
- **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
- **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. | [optional] 
+ **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
+ **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code. | [optional] 

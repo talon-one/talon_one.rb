@@ -27,13 +27,17 @@ module TalonOne
     # The amount of points that were deducted
     attr_accessor :value
 
+    # The identifier of this deduction in the loyalty ledger
+    attr_accessor :transaction_uuid
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'rule_title' => :'ruleTitle',
         :'program_id' => :'programId',
         :'sub_ledger_id' => :'subLedgerId',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'transaction_uuid' => :'transactionUUID'
       }
     end
 
@@ -43,7 +47,8 @@ module TalonOne
         :'rule_title' => :'String',
         :'program_id' => :'Integer',
         :'sub_ledger_id' => :'String',
-        :'value' => :'Float'
+        :'value' => :'Float',
+        :'transaction_uuid' => :'String'
       }
     end
 
@@ -83,6 +88,10 @@ module TalonOne
       if attributes.key?(:'value')
         self.value = attributes[:'value']
       end
+
+      if attributes.key?(:'transaction_uuid')
+        self.transaction_uuid = attributes[:'transaction_uuid']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,6 +114,10 @@ module TalonOne
         invalid_properties.push('invalid value for "value", value cannot be nil.')
       end
 
+      if @transaction_uuid.nil?
+        invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -115,6 +128,7 @@ module TalonOne
       return false if @program_id.nil?
       return false if @sub_ledger_id.nil?
       return false if @value.nil?
+      return false if @transaction_uuid.nil?
       true
     end
 
@@ -126,7 +140,8 @@ module TalonOne
           rule_title == o.rule_title &&
           program_id == o.program_id &&
           sub_ledger_id == o.sub_ledger_id &&
-          value == o.value
+          value == o.value &&
+          transaction_uuid == o.transaction_uuid
     end
 
     # @see the `==` method
@@ -138,7 +153,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [rule_title, program_id, sub_ledger_id, value].hash
+      [rule_title, program_id, sub_ledger_id, value, transaction_uuid].hash
     end
 
     # Builds the object from hash

@@ -24,6 +24,9 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :user_id
 
+    # ID of application associated with change
+    attr_accessor :application_id
+
     # API endpoint on which the change was initiated.
     attr_accessor :entity
 
@@ -39,6 +42,7 @@ module TalonOne
         :'id' => :'id',
         :'created' => :'created',
         :'user_id' => :'userId',
+        :'application_id' => :'applicationId',
         :'entity' => :'entity',
         :'old' => :'old',
         :'new' => :'new'
@@ -51,6 +55,7 @@ module TalonOne
         :'id' => :'Integer',
         :'created' => :'DateTime',
         :'user_id' => :'Integer',
+        :'application_id' => :'Integer',
         :'entity' => :'String',
         :'old' => :'Object',
         :'new' => :'Object'
@@ -88,6 +93,10 @@ module TalonOne
 
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
+      end
+
+      if attributes.key?(:'application_id')
+        self.application_id = attributes[:'application_id']
       end
 
       if attributes.key?(:'entity')
@@ -144,6 +153,7 @@ module TalonOne
           id == o.id &&
           created == o.created &&
           user_id == o.user_id &&
+          application_id == o.application_id &&
           entity == o.entity &&
           old == o.old &&
           new == o.new
@@ -158,7 +168,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, user_id, entity, old, new].hash
+      [id, created, user_id, application_id, entity, old, new].hash
     end
 
     # Builds the object from hash

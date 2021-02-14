@@ -80,6 +80,10 @@ module TalonOne
         invalid_properties.push('invalid value for "coupon_pattern", coupon_pattern cannot be nil.')
       end
 
+      if @coupon_pattern.to_s.length > 100
+        invalid_properties.push('invalid value for "coupon_pattern", the character length must be smaller than or equal to 100.')
+      end
+
       if @coupon_pattern.to_s.length < 3
         invalid_properties.push('invalid value for "coupon_pattern", the character length must be great than or equal to 3.')
       end
@@ -92,6 +96,7 @@ module TalonOne
     def valid?
       return false if @valid_characters.nil?
       return false if @coupon_pattern.nil?
+      return false if @coupon_pattern.to_s.length > 100
       return false if @coupon_pattern.to_s.length < 3
       true
     end
@@ -101,6 +106,10 @@ module TalonOne
     def coupon_pattern=(coupon_pattern)
       if coupon_pattern.nil?
         fail ArgumentError, 'coupon_pattern cannot be nil'
+      end
+
+      if coupon_pattern.to_s.length > 100
+        fail ArgumentError, 'invalid value for "coupon_pattern", the character length must be smaller than or equal to 100.'
       end
 
       if coupon_pattern.to_s.length < 3

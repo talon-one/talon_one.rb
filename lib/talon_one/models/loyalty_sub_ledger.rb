@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # Ledger of Balance in Loyalty Program for a Customer
   class LoyaltySubLedger
-    # ⚠️ Deprecated: Please use 'totalActivePoints' property instead. Total amount of currently active and available points in the customer's balance 
+    # ⚠️ Deprecated: Use 'totalActivePoints' property instead. Total amount of currently active and available points in the customer's balance 
     attr_accessor :total
 
     # Total amount of currently active and available points in the customer's balance

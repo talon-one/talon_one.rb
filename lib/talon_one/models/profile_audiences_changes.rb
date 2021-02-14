@@ -13,31 +13,26 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  class CartItemAdjustment
-    # Loyalty Program to be used for payment
-    attr_accessor :pay_from_loyalty_program
+  class ProfileAudiencesChanges
+    # The IDs of the audiences for the customer to join.
+    attr_accessor :adds
 
-    # Amount of points to be spend
-    attr_accessor :point_payment
-
-    # Remaining price in currency after payment in points has been made
-    attr_accessor :remaining_price
+    # The IDs of the audiences for the customer to leave.
+    attr_accessor :deletes
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'pay_from_loyalty_program' => :'payFromLoyaltyProgram',
-        :'point_payment' => :'pointPayment',
-        :'remaining_price' => :'remainingPrice'
+        :'adds' => :'adds',
+        :'deletes' => :'deletes'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'pay_from_loyalty_program' => :'Integer',
-        :'point_payment' => :'Integer',
-        :'remaining_price' => :'Float'
+        :'adds' => :'Array<Integer>',
+        :'deletes' => :'Array<Integer>'
       }
     end
 
@@ -51,27 +46,27 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::CartItemAdjustment` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::ProfileAudiencesChanges` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::CartItemAdjustment`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::ProfileAudiencesChanges`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'pay_from_loyalty_program')
-        self.pay_from_loyalty_program = attributes[:'pay_from_loyalty_program']
+      if attributes.key?(:'adds')
+        if (value = attributes[:'adds']).is_a?(Array)
+          self.adds = value
+        end
       end
 
-      if attributes.key?(:'point_payment')
-        self.point_payment = attributes[:'point_payment']
-      end
-
-      if attributes.key?(:'remaining_price')
-        self.remaining_price = attributes[:'remaining_price']
+      if attributes.key?(:'deletes')
+        if (value = attributes[:'deletes']).is_a?(Array)
+          self.deletes = value
+        end
       end
     end
 
@@ -79,20 +74,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @pay_from_loyalty_program.nil?
-        invalid_properties.push('invalid value for "pay_from_loyalty_program", pay_from_loyalty_program cannot be nil.')
+      if @adds.nil?
+        invalid_properties.push('invalid value for "adds", adds cannot be nil.')
       end
 
-      if @point_payment.nil?
-        invalid_properties.push('invalid value for "point_payment", point_payment cannot be nil.')
-      end
-
-      if @point_payment < 1
-        invalid_properties.push('invalid value for "point_payment", must be greater than or equal to 1.')
-      end
-
-      if !@remaining_price.nil? && @remaining_price < 0
-        invalid_properties.push('invalid value for "remaining_price", must be greater than or equal to 0.')
+      if @deletes.nil?
+        invalid_properties.push('invalid value for "deletes", deletes cannot be nil.')
       end
 
       invalid_properties
@@ -101,35 +88,9 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @pay_from_loyalty_program.nil?
-      return false if @point_payment.nil?
-      return false if @point_payment < 1
-      return false if !@remaining_price.nil? && @remaining_price < 0
+      return false if @adds.nil?
+      return false if @deletes.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] point_payment Value to be assigned
-    def point_payment=(point_payment)
-      if point_payment.nil?
-        fail ArgumentError, 'point_payment cannot be nil'
-      end
-
-      if point_payment < 1
-        fail ArgumentError, 'invalid value for "point_payment", must be greater than or equal to 1.'
-      end
-
-      @point_payment = point_payment
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] remaining_price Value to be assigned
-    def remaining_price=(remaining_price)
-      if !remaining_price.nil? && remaining_price < 0
-        fail ArgumentError, 'invalid value for "remaining_price", must be greater than or equal to 0.'
-      end
-
-      @remaining_price = remaining_price
     end
 
     # Checks equality by comparing each attribute.
@@ -137,9 +98,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          pay_from_loyalty_program == o.pay_from_loyalty_program &&
-          point_payment == o.point_payment &&
-          remaining_price == o.remaining_price
+          adds == o.adds &&
+          deletes == o.deletes
     end
 
     # @see the `==` method
@@ -151,7 +111,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [pay_from_loyalty_program, point_payment, remaining_price].hash
+      [adds, deletes].hash
     end
 
     # Builds the object from hash

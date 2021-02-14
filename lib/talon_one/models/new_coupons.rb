@@ -27,12 +27,6 @@ module TalonOne
     # Expiry date of the coupon. Coupon never expires if this is omitted, zero, or negative.
     attr_accessor :expiry_date
 
-    # Set of characters to be used when generating random part of code. Defaults to [A-Z, 0-9] (in terms of RegExp).
-    attr_accessor :valid_characters
-
-    # The pattern that will be used to generate coupon codes. The character `#` acts as a placeholder and will be replaced by a random character from the `validCharacters` set. 
-    attr_accessor :coupon_pattern
-
     # The number of new coupon codes to generate for the campaign. Must be at least 1.
     attr_accessor :number_of_coupons
 
@@ -45,6 +39,12 @@ module TalonOne
     # The integration ID for this coupon's beneficiary's profile
     attr_accessor :recipient_integration_id
 
+    # Set of characters to be used when generating random part of code. Defaults to [A-Z, 0-9] (in terms of RegExp).
+    attr_accessor :valid_characters
+
+    # The pattern that will be used to generate coupon codes. The character `#` acts as a placeholder and will be replaced by a random character from the `validCharacters` set. 
+    attr_accessor :coupon_pattern
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -52,12 +52,12 @@ module TalonOne
         :'discount_limit' => :'discountLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
-        :'valid_characters' => :'validCharacters',
-        :'coupon_pattern' => :'couponPattern',
         :'number_of_coupons' => :'numberOfCoupons',
         :'unique_prefix' => :'uniquePrefix',
         :'attributes' => :'attributes',
-        :'recipient_integration_id' => :'recipientIntegrationId'
+        :'recipient_integration_id' => :'recipientIntegrationId',
+        :'valid_characters' => :'validCharacters',
+        :'coupon_pattern' => :'couponPattern'
       }
     end
 
@@ -68,12 +68,12 @@ module TalonOne
         :'discount_limit' => :'Float',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
-        :'valid_characters' => :'Array<String>',
-        :'coupon_pattern' => :'String',
         :'number_of_coupons' => :'Integer',
         :'unique_prefix' => :'String',
         :'attributes' => :'Object',
-        :'recipient_integration_id' => :'String'
+        :'recipient_integration_id' => :'String',
+        :'valid_characters' => :'Array<String>',
+        :'coupon_pattern' => :'String'
       }
     end
 
@@ -114,16 +114,6 @@ module TalonOne
         self.expiry_date = attributes[:'expiry_date']
       end
 
-      if attributes.key?(:'valid_characters')
-        if (value = attributes[:'valid_characters']).is_a?(Array)
-          self.valid_characters = value
-        end
-      end
-
-      if attributes.key?(:'coupon_pattern')
-        self.coupon_pattern = attributes[:'coupon_pattern']
-      end
-
       if attributes.key?(:'number_of_coupons')
         self.number_of_coupons = attributes[:'number_of_coupons']
       end
@@ -138,6 +128,16 @@ module TalonOne
 
       if attributes.key?(:'recipient_integration_id')
         self.recipient_integration_id = attributes[:'recipient_integration_id']
+      end
+
+      if attributes.key?(:'valid_characters')
+        if (value = attributes[:'valid_characters']).is_a?(Array)
+          self.valid_characters = value
+        end
+      end
+
+      if attributes.key?(:'coupon_pattern')
+        self.coupon_pattern = attributes[:'coupon_pattern']
       end
     end
 
@@ -165,20 +165,16 @@ module TalonOne
         invalid_properties.push('invalid value for "discount_limit", must be greater than or equal to 0.')
       end
 
-      if @valid_characters.nil?
-        invalid_properties.push('invalid value for "valid_characters", valid_characters cannot be nil.')
-      end
-
-      if @coupon_pattern.nil?
-        invalid_properties.push('invalid value for "coupon_pattern", coupon_pattern cannot be nil.')
-      end
-
-      if @coupon_pattern.to_s.length < 3
-        invalid_properties.push('invalid value for "coupon_pattern", the character length must be great than or equal to 3.')
-      end
-
       if @number_of_coupons.nil?
         invalid_properties.push('invalid value for "number_of_coupons", number_of_coupons cannot be nil.')
+      end
+
+      if !@coupon_pattern.nil? && @coupon_pattern.to_s.length > 100
+        invalid_properties.push('invalid value for "coupon_pattern", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@coupon_pattern.nil? && @coupon_pattern.to_s.length < 3
+        invalid_properties.push('invalid value for "coupon_pattern", the character length must be great than or equal to 3.')
       end
 
       invalid_properties
@@ -192,10 +188,9 @@ module TalonOne
       return false if @usage_limit < 0
       return false if !@discount_limit.nil? && @discount_limit > 999999
       return false if !@discount_limit.nil? && @discount_limit < 0
-      return false if @valid_characters.nil?
-      return false if @coupon_pattern.nil?
-      return false if @coupon_pattern.to_s.length < 3
       return false if @number_of_coupons.nil?
+      return false if !@coupon_pattern.nil? && @coupon_pattern.to_s.length > 100
+      return false if !@coupon_pattern.nil? && @coupon_pattern.to_s.length < 3
       true
     end
 
@@ -234,11 +229,11 @@ module TalonOne
     # Custom attribute writer method with validation
     # @param [Object] coupon_pattern Value to be assigned
     def coupon_pattern=(coupon_pattern)
-      if coupon_pattern.nil?
-        fail ArgumentError, 'coupon_pattern cannot be nil'
+      if !coupon_pattern.nil? && coupon_pattern.to_s.length > 100
+        fail ArgumentError, 'invalid value for "coupon_pattern", the character length must be smaller than or equal to 100.'
       end
 
-      if coupon_pattern.to_s.length < 3
+      if !coupon_pattern.nil? && coupon_pattern.to_s.length < 3
         fail ArgumentError, 'invalid value for "coupon_pattern", the character length must be great than or equal to 3.'
       end
 
@@ -254,12 +249,12 @@ module TalonOne
           discount_limit == o.discount_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
-          valid_characters == o.valid_characters &&
-          coupon_pattern == o.coupon_pattern &&
           number_of_coupons == o.number_of_coupons &&
           unique_prefix == o.unique_prefix &&
           attributes == o.attributes &&
-          recipient_integration_id == o.recipient_integration_id
+          recipient_integration_id == o.recipient_integration_id &&
+          valid_characters == o.valid_characters &&
+          coupon_pattern == o.coupon_pattern
     end
 
     # @see the `==` method
@@ -271,7 +266,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, discount_limit, start_date, expiry_date, valid_characters, coupon_pattern, number_of_coupons, unique_prefix, attributes, recipient_integration_id].hash
+      [usage_limit, discount_limit, start_date, expiry_date, number_of_coupons, unique_prefix, attributes, recipient_integration_id, valid_characters, coupon_pattern].hash
     end
 
     # Builds the object from hash
