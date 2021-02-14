@@ -71,7 +71,7 @@ describe 'IntegrationApi' do
   end
 
   # unit tests for delete_customer_data
-  # Delete the personal data of a customer.
+  # Delete the personal data of a customer
   # Delete all attributes on the customer profile and on entities that reference that customer profile. 
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param [Hash] opts the optional parameters
@@ -83,7 +83,7 @@ describe 'IntegrationApi' do
   end
 
   # unit tests for get_customer_inventory
-  # Get an inventory of all data associated with a specific customer profile.
+  # Get an inventory of all data associated with a specific customer profile
   # Get information regarding entities referencing this customer profile&#39;s integrationId. Currently we support customer profile information, referral codes and reserved coupons. In the future, this will be expanded with loyalty points.
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param [Hash] opts the optional parameters
@@ -115,7 +115,7 @@ describe 'IntegrationApi' do
   # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'track_event test' do
     it 'should work' do
@@ -125,11 +125,11 @@ describe 'IntegrationApi' do
 
   # unit tests for update_customer_profile
   # Update a Customer Profile V1
-  # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, please migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile][]. This profile information can then be matched and/or updated by campaign [Rules][].  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
+  # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'update_customer_profile test' do
     it 'should work' do
@@ -151,12 +151,12 @@ describe 'IntegrationApi' do
 
   # unit tests for update_customer_profile_v2
   # Update a Customer Profile
-  # Update (or create) a [Customer Profile][].  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profile]: /Getting-Started/entities#customer-profile 
-  # @param integration_id The custom identifier for this profile, must be unique within the account.
+  # Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile).  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter. 
+  # @param integration_id The custom identifier for this profile. Must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :run_rule_engine Flag to indicate whether to run the rule engine (Defaults to false).
-  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;. Only used when &#39;runRuleEngine&#39; is set to &#39;true&#39;).
+  # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine.
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are persisted with &#x60;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
   # @return [IntegrationStateV2]
   describe 'update_customer_profile_v2 test' do
     it 'should work' do
@@ -166,10 +166,10 @@ describe 'IntegrationApi' do
 
   # unit tests for update_customer_profiles_v2
   # Update multiple Customer Profiles
-  # Update (or create) up to 1000 [Customer Profiles][] in 1 request.  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  [Customer Profiles]: /Getting-Started/entities#customer-profile 
+  # Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#customer-profile) in 1 request.  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the IntegrationStateV2  generated.
+  # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
   # @return [MultipleCustomerProfileIntegrationResponseV2]
   describe 'update_customer_profiles_v2 test' do
     it 'should work' do
@@ -179,11 +179,11 @@ describe 'IntegrationApi' do
 
   # unit tests for update_customer_session
   # Update a Customer Session V1
-  # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, please migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Session][]. For example, the items in a customers cart are part of a session.  The Talon.One platform supports multiple simultaneous sessions for the same profile, so if you have multiple ways of accessing the same application you have the option of either tracking multiple independent sessions or using the same session across all of them. You should share sessions when application access points share other state, such as the users cart. If two points of access to the application have independent state (e.g. a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  The &#x60;profileId&#x60; parameter in the request body should correspond to an &#x60;integrationId&#x60; for a customer profile, to track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. Note that you do **not** need to create a customer profile first: if the specified profile does not yet exist, an empty profile will be created automatically.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated.  [Customer Session]: /Getting-Started/entities#customer-session 
+  # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationState]
   describe 'update_customer_session test' do
     it 'should work' do
@@ -193,11 +193,11 @@ describe 'IntegrationApi' do
 
   # unit tests for update_customer_session_v2
   # Update a Customer Session
-  # Update (or create) a [Customer Session][]. For example, the items in a customers cart are part of a session.  The Talon.One platform supports multiple simultaneous sessions for the same profile, so if you have multiple ways of accessing the same application you have the option of either tracking multiple independent sessions or using the same session across all of them. You should share sessions when application access points share other state, such as the users cart. If two points of access to the application have independent state (e.g. a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  The &#x60;profileId&#x60; parameter in the request body should correspond to an &#x60;integrationId&#x60; for a customer profile, to track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. Note that you do **not** need to create a customer profile first: if the specified profile does not yet exist, an empty profile will be created automatically.  Updating a customer profile will return a response with the requested integration state. This includes the effects that were generated due to triggered campaigns, the created coupons and referral objects, as well as any entity that was requested in the request parameter \&quot;responseContent\&quot;.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated.  [Customer Session]: /Getting-Started/entities#customer-session 
+  # Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Flag to indicate whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
   # @return [IntegrationStateV2]
   describe 'update_customer_session_v2 test' do
     it 'should work' do

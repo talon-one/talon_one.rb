@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | [optional] 
 **triggered_campaigns** | [**Array&lt;Campaign&gt;**](Campaign.md) |  | [optional] 
 **effects** | [**Array&lt;Effect&gt;**](Effect.md) |  | 
+**rule_failure_reasons** | [**Array&lt;RuleFailureReason&gt;**](RuleFailureReason.md) |  | [optional] 
 **created_coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | 
 **created_referrals** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
 
@@ -28,6 +29,7 @@ instance = TalonOne::IntegrationStateV2.new(customer_session: null,
                                  coupons: null,
                                  triggered_campaigns: null,
                                  effects: null,
+                                 rule_failure_reasons: null,
                                  created_coupons: null,
                                  created_referrals: null)
 ```

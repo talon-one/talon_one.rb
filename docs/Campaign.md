@@ -23,9 +23,14 @@ Name | Type | Description | Notes
 **campaign_groups** | **Array&lt;Integer&gt;** | The IDs of the campaign groups that own this entity. | [optional] 
 **coupon_redemption_count** | **Integer** | Number of coupons redeemed in the campaign. | [optional] 
 **referral_redemption_count** | **Integer** | Number of referral codes redeemed in the campaign. | [optional] 
-**discount_count** | **Integer** | Total amount of discounts redeemed in the campaign. | [optional] 
+**discount_count** | **Float** | Total amount of discounts redeemed in the campaign. | [optional] 
 **discount_effect_count** | **Integer** | Total number of times discounts were redeemed in this campaign. | [optional] 
 **coupon_creation_count** | **Integer** | Total number of coupons created by rules in this campaign. | [optional] 
+**referral_creation_count** | **Integer** | Total number of referrals created by rules in this campaign. | [optional] 
+**created_loyalty_points_count** | **Float** | Total number of loyalty points created by rules in this campaign. | [optional] 
+**created_loyalty_points_effect_count** | **Integer** | Total number of loyalty point creation effects triggered by rules in this campaign. | [optional] 
+**redeemed_loyalty_points_count** | **Float** | Total number of loyalty points redeemed by rules in this campaign. | [optional] 
+**redeemed_loyalty_points_effect_count** | **Integer** | Total number of loyalty point redemption effects triggered by rules in this campaign. | [optional] 
 **last_activity** | **DateTime** | Timestamp of the most recent event received by this campaign. | [optional] 
 **updated** | **DateTime** | Timestamp of the most recent update to the campaign or any of its elements. | [optional] 
 **created_by** | **String** | Name of the user who created this campaign if available. | [optional] 
@@ -58,6 +63,11 @@ instance = TalonOne::Campaign.new(id: null,
                                  discount_count: null,
                                  discount_effect_count: null,
                                  coupon_creation_count: null,
+                                 referral_creation_count: null,
+                                 created_loyalty_points_count: null,
+                                 created_loyalty_points_effect_count: null,
+                                 redeemed_loyalty_points_count: null,
+                                 redeemed_loyalty_points_effect_count: null,
                                  last_activity: null,
                                  updated: null,
                                  created_by: null,

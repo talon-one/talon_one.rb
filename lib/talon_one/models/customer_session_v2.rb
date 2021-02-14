@@ -236,6 +236,10 @@ module TalonOne
         invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
       end
 
+      if !@referral_code.nil? && @referral_code.to_s.length > 100
+        invalid_properties.push('invalid value for "referral_code", the character length must be smaller than or equal to 100.')
+      end
+
       if @state.nil?
         invalid_properties.push('invalid value for "state", state cannot be nil.')
       end
@@ -274,6 +278,7 @@ module TalonOne
       return false if @created.nil?
       return false if @application_id.nil?
       return false if @profile_id.nil?
+      return false if !@referral_code.nil? && @referral_code.to_s.length > 100
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
       return false unless state_validator.valid?(@state)
@@ -284,6 +289,16 @@ module TalonOne
       return false if @cart_item_total.nil?
       return false if @additional_cost_total.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] referral_code Value to be assigned
+    def referral_code=(referral_code)
+      if !referral_code.nil? && referral_code.to_s.length > 100
+        fail ArgumentError, 'invalid value for "referral_code", the character length must be smaller than or equal to 100.'
+      end
+
+      @referral_code = referral_code
     end
 
     # Custom attribute writer method checking allowed values (enum).

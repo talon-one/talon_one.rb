@@ -13,44 +13,22 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
-  class NewImport
-    # The name of the entity that was imported.
-    attr_accessor :entity
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  # The properties specific to the \"rollbackReferral\" effect. This gets triggered whenever previously closed session is now cancelled and a referral redemption was cancelled on our internal usage limit counters.
+  class RollbackReferralEffectProps
+    # The referral code whose usage has been rolled back
+    attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'entity' => :'entity'
+        :'value' => :'value'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'entity' => :'String'
+        :'value' => :'String'
       }
     end
 
@@ -64,19 +42,19 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::NewImport` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::RollbackReferralEffectProps` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::NewImport`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::RollbackReferralEffectProps`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'entity')
-        self.entity = attributes[:'entity']
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
     end
 
@@ -84,8 +62,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @entity.nil?
-        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
+      if @value.nil?
+        invalid_properties.push('invalid value for "value", value cannot be nil.')
       end
 
       invalid_properties
@@ -94,20 +72,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @entity.nil?
-      entity_validator = EnumAttributeValidator.new('String', ["Coupon"])
-      return false unless entity_validator.valid?(@entity)
+      return false if @value.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] entity Object to be assigned
-    def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ["Coupon"])
-      unless validator.valid?(entity)
-        fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
-      end
-      @entity = entity
     end
 
     # Checks equality by comparing each attribute.
@@ -115,7 +81,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          entity == o.entity
+          value == o.value
     end
 
     # @see the `==` method
@@ -127,7 +93,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [entity].hash
+      [value].hash
     end
 
     # Builds the object from hash

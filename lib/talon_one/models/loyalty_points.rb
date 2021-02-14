@@ -102,6 +102,14 @@ module TalonOne
         invalid_properties.push('invalid value for "points", points cannot be nil.')
       end
 
+      if @points >= 1E+8
+        invalid_properties.push('invalid value for "points", must be smaller than 1E+8.')
+      end
+
+      if @points <= 0
+        invalid_properties.push('invalid value for "points", must be greater than 0.')
+      end
+
       invalid_properties
     end
 
@@ -109,7 +117,27 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @points.nil?
+      return false if @points >= 1E+8
+      return false if @points <= 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] points Value to be assigned
+    def points=(points)
+      if points.nil?
+        fail ArgumentError, 'points cannot be nil'
+      end
+
+      if points >= 1E+8
+        fail ArgumentError, 'invalid value for "points", must be smaller than 1E+8.'
+      end
+
+      if points <= 0
+        fail ArgumentError, 'invalid value for "points", must be greater than 0.'
+      end
+
+      @points = points
     end
 
     # Checks equality by comparing each attribute.

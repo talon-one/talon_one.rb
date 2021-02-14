@@ -15,19 +15,40 @@ require 'date'
 module TalonOne
   # The balance in a Loyalty Program for some Customer.
   class LoyaltyProgramBalance
+    # Sum of current active points amounts
     attr_accessor :current_balance
+
+    # Sum of pending points amounts
+    attr_accessor :pending_balance
+
+    # Sum of expired points amounts
+    attr_accessor :expired_balance
+
+    # Sum of spent points amounts
+    attr_accessor :spent_balance
+
+    # Sum of current active points amounts, including additions and deductions on open sessions
+    attr_accessor :tentative_current_balance
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'current_balance' => :'currentBalance'
+        :'current_balance' => :'currentBalance',
+        :'pending_balance' => :'pendingBalance',
+        :'expired_balance' => :'expiredBalance',
+        :'spent_balance' => :'spentBalance',
+        :'tentative_current_balance' => :'tentativeCurrentBalance'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'current_balance' => :'Float'
+        :'current_balance' => :'Float',
+        :'pending_balance' => :'Float',
+        :'expired_balance' => :'Float',
+        :'spent_balance' => :'Float',
+        :'tentative_current_balance' => :'Float'
       }
     end
 
@@ -55,6 +76,22 @@ module TalonOne
       if attributes.key?(:'current_balance')
         self.current_balance = attributes[:'current_balance']
       end
+
+      if attributes.key?(:'pending_balance')
+        self.pending_balance = attributes[:'pending_balance']
+      end
+
+      if attributes.key?(:'expired_balance')
+        self.expired_balance = attributes[:'expired_balance']
+      end
+
+      if attributes.key?(:'spent_balance')
+        self.spent_balance = attributes[:'spent_balance']
+      end
+
+      if attributes.key?(:'tentative_current_balance')
+        self.tentative_current_balance = attributes[:'tentative_current_balance']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +102,22 @@ module TalonOne
         invalid_properties.push('invalid value for "current_balance", current_balance cannot be nil.')
       end
 
+      if @pending_balance.nil?
+        invalid_properties.push('invalid value for "pending_balance", pending_balance cannot be nil.')
+      end
+
+      if @expired_balance.nil?
+        invalid_properties.push('invalid value for "expired_balance", expired_balance cannot be nil.')
+      end
+
+      if @spent_balance.nil?
+        invalid_properties.push('invalid value for "spent_balance", spent_balance cannot be nil.')
+      end
+
+      if @tentative_current_balance.nil?
+        invalid_properties.push('invalid value for "tentative_current_balance", tentative_current_balance cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -72,6 +125,10 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @current_balance.nil?
+      return false if @pending_balance.nil?
+      return false if @expired_balance.nil?
+      return false if @spent_balance.nil?
+      return false if @tentative_current_balance.nil?
       true
     end
 
@@ -80,7 +137,11 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          current_balance == o.current_balance
+          current_balance == o.current_balance &&
+          pending_balance == o.pending_balance &&
+          expired_balance == o.expired_balance &&
+          spent_balance == o.spent_balance &&
+          tentative_current_balance == o.tentative_current_balance
     end
 
     # @see the `==` method
@@ -92,7 +153,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [current_balance].hash
+      [current_balance, pending_balance, expired_balance, spent_balance, tentative_current_balance].hash
     end
 
     # Builds the object from hash

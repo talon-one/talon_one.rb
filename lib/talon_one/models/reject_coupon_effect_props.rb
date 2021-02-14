@@ -21,11 +21,23 @@ module TalonOne
     # The reason why this coupon was rejected
     attr_accessor :rejection_reason
 
+    # The index of the condition that caused the rejection of the coupon
+    attr_accessor :condition_index
+
+    # The index of the effect that caused the rejection of the coupon
+    attr_accessor :effect_index
+
+    # More details about the failure
+    attr_accessor :details
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'value' => :'value',
-        :'rejection_reason' => :'rejectionReason'
+        :'rejection_reason' => :'rejectionReason',
+        :'condition_index' => :'conditionIndex',
+        :'effect_index' => :'effectIndex',
+        :'details' => :'details'
       }
     end
 
@@ -33,7 +45,10 @@ module TalonOne
     def self.openapi_types
       {
         :'value' => :'String',
-        :'rejection_reason' => :'String'
+        :'rejection_reason' => :'String',
+        :'condition_index' => :'Integer',
+        :'effect_index' => :'Integer',
+        :'details' => :'String'
       }
     end
 
@@ -64,6 +79,18 @@ module TalonOne
 
       if attributes.key?(:'rejection_reason')
         self.rejection_reason = attributes[:'rejection_reason']
+      end
+
+      if attributes.key?(:'condition_index')
+        self.condition_index = attributes[:'condition_index']
+      end
+
+      if attributes.key?(:'effect_index')
+        self.effect_index = attributes[:'effect_index']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
       end
     end
 
@@ -96,7 +123,10 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           value == o.value &&
-          rejection_reason == o.rejection_reason
+          rejection_reason == o.rejection_reason &&
+          condition_index == o.condition_index &&
+          effect_index == o.effect_index &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -108,7 +138,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, rejection_reason].hash
+      [value, rejection_reason, condition_index, effect_index, details].hash
     end
 
     # Builds the object from hash

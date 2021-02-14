@@ -39,6 +39,9 @@ module TalonOne
     # An array containing the effects that were applied as a result of this event.
     attr_accessor :effects
 
+    # An array containing the rule failure reasons which happened during this event.
+    attr_accessor :rule_failure_reasons
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -49,7 +52,8 @@ module TalonOne
         :'session_id' => :'sessionId',
         :'type' => :'type',
         :'attributes' => :'attributes',
-        :'effects' => :'effects'
+        :'effects' => :'effects',
+        :'rule_failure_reasons' => :'ruleFailureReasons'
       }
     end
 
@@ -63,7 +67,8 @@ module TalonOne
         :'session_id' => :'Integer',
         :'type' => :'String',
         :'attributes' => :'Object',
-        :'effects' => :'Array<Object>'
+        :'effects' => :'Array<Object>',
+        :'rule_failure_reasons' => :'Array<RuleFailureReason>'
       }
     end
 
@@ -119,6 +124,12 @@ module TalonOne
       if attributes.key?(:'effects')
         if (value = attributes[:'effects']).is_a?(Array)
           self.effects = value
+        end
+      end
+
+      if attributes.key?(:'rule_failure_reasons')
+        if (value = attributes[:'rule_failure_reasons']).is_a?(Array)
+          self.rule_failure_reasons = value
         end
       end
     end
@@ -178,7 +189,8 @@ module TalonOne
           session_id == o.session_id &&
           type == o.type &&
           attributes == o.attributes &&
-          effects == o.effects
+          effects == o.effects &&
+          rule_failure_reasons == o.rule_failure_reasons
     end
 
     # @see the `==` method
@@ -190,7 +202,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, profile_id, session_id, type, attributes, effects].hash
+      [id, created, application_id, profile_id, session_id, type, attributes, effects, rule_failure_reasons].hash
     end
 
     # Builds the object from hash

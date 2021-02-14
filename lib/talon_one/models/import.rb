@@ -27,33 +27,11 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :user_id
 
-    # The name of the entity that was imported.
+    # The name of the entity that was imported. Possible values are Coupons and LoyaltyPoints.
     attr_accessor :entity
 
     # The number of members that imported.
     attr_accessor :amount
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -168,21 +146,9 @@ module TalonOne
       return false if @account_id.nil?
       return false if @user_id.nil?
       return false if @entity.nil?
-      entity_validator = EnumAttributeValidator.new('String', ["Coupon"])
-      return false unless entity_validator.valid?(@entity)
       return false if @amount.nil?
       return false if @amount < 0
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] entity Object to be assigned
-    def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ["Coupon"])
-      unless validator.valid?(entity)
-        fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
-      end
-      @entity = entity
     end
 
     # Custom attribute writer method with validation

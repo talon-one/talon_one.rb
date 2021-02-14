@@ -38,10 +38,16 @@ describe 'CustomerProfileIntegrationRequestV2' do
     end
   end
 
+  describe 'test attribute "audiences_changes"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "response_content"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["customerProfile", "triggeredCampaigns", "loyalty", "event"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["customerProfile", "triggeredCampaigns", "loyalty", "event", "ruleFailureReasons"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.response_content = value }.not_to raise_error
       # end

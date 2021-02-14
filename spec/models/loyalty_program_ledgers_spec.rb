@@ -32,6 +32,12 @@ describe 'LoyaltyProgramLedgers' do
       expect(@instance).to be_instance_of(TalonOne::LoyaltyProgramLedgers)
     end
   end
+  describe 'test attribute "id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "title"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

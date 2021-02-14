@@ -98,6 +98,16 @@ describe 'UpdateApplication' do
     end
   end
 
+  describe 'test attribute "default_discount_scope"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.default_discount_scope = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "enable_cascading_discounts"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

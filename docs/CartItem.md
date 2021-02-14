@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **length** | **Float** | Length of item in mm | [optional] 
 **position** | **Float** | Position of the Cart Item in the Cart (calculated internally) | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this item | [optional] 
-**adjustment** | [**CartItemAdjustment**](CartItemAdjustment.md) |  | [optional] 
 
 ## Code Sample
 
@@ -32,8 +31,7 @@ instance = TalonOne::CartItem.new(name: null,
                                  width: null,
                                  length: null,
                                  position: null,
-                                 attributes: null,
-                                 adjustment: null)
+                                 attributes: null)
 ```
 
 

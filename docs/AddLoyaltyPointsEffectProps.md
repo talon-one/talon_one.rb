@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **recipient_integration_id** | **String** | The user for whom these points were added | 
 **start_date** | **DateTime** | Date after which points will be valid | [optional] 
 **expiry_date** | **DateTime** | Date after which points will expire | [optional] 
+**transaction_uuid** | **String** | The identifier of this addition in the loyalty ledger | 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::AddLoyaltyPointsEffectProps.new(name: null,
                                  value: null,
                                  recipient_integration_id: null,
                                  start_date: null,
-                                 expiry_date: null)
+                                 expiry_date: null,
+                                 transaction_uuid: null)
 ```
 
 

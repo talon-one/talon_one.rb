@@ -30,6 +30,9 @@ module TalonOne
     # The type of effect that was triggered
     attr_accessor :effect_type
 
+    # The ID of the coupon that was being evaluated when this effect was triggered
+    attr_accessor :triggered_by_coupon
+
     attr_accessor :props
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -40,6 +43,7 @@ module TalonOne
         :'rule_index' => :'ruleIndex',
         :'rule_name' => :'ruleName',
         :'effect_type' => :'effectType',
+        :'triggered_by_coupon' => :'triggeredByCoupon',
         :'props' => :'props'
       }
     end
@@ -52,6 +56,7 @@ module TalonOne
         :'rule_index' => :'Integer',
         :'rule_name' => :'String',
         :'effect_type' => :'String',
+        :'triggered_by_coupon' => :'Integer',
         :'props' => :'Object'
       }
     end
@@ -95,6 +100,10 @@ module TalonOne
 
       if attributes.key?(:'effect_type')
         self.effect_type = attributes[:'effect_type']
+      end
+
+      if attributes.key?(:'triggered_by_coupon')
+        self.triggered_by_coupon = attributes[:'triggered_by_coupon']
       end
 
       if attributes.key?(:'props')
@@ -155,6 +164,7 @@ module TalonOne
           rule_index == o.rule_index &&
           rule_name == o.rule_name &&
           effect_type == o.effect_type &&
+          triggered_by_coupon == o.triggered_by_coupon &&
           props == o.props
     end
 
@@ -167,7 +177,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, props].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, props].hash
     end
 
     # Builds the object from hash

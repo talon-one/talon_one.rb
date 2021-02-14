@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **Integer** | The internal ID of loyalty program | 
 **title** | **String** | Visible name of loyalty program | 
 **name** | **String** | Internal name of loyalty program | 
 **ledger** | [**LoyaltyProgramBalance**](LoyaltyProgramBalance.md) |  | 
@@ -14,7 +15,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyProgramLedgers.new(title: null,
+instance = TalonOne::LoyaltyProgramLedgers.new(id: null,
+                                 title: null,
                                  name: null,
                                  ledger: null,
                                  sub_ledgers: null)

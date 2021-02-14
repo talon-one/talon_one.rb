@@ -15,6 +15,9 @@ require 'date'
 module TalonOne
   # Customer specific information about loyalty points.
   class LoyaltyProgramLedgers
+    # The internal ID of loyalty program
+    attr_accessor :id
+
     # Visible name of loyalty program
     attr_accessor :title
 
@@ -29,6 +32,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'title' => :'title',
         :'name' => :'name',
         :'ledger' => :'ledger',
@@ -39,6 +43,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'Integer',
         :'title' => :'String',
         :'name' => :'String',
         :'ledger' => :'LoyaltyProgramBalance',
@@ -67,6 +72,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'title')
         self.title = attributes[:'title']
       end
@@ -90,6 +99,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
@@ -108,6 +121,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
       return false if @title.nil?
       return false if @name.nil?
       return false if @ledger.nil?
@@ -119,6 +133,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           title == o.title &&
           name == o.name &&
           ledger == o.ledger &&
@@ -134,7 +149,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, name, ledger, sub_ledgers].hash
+      [id, title, name, ledger, sub_ledgers].hash
     end
 
     # Builds the object from hash

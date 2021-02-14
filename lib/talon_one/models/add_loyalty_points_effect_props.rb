@@ -36,6 +36,9 @@ module TalonOne
     # Date after which points will expire
     attr_accessor :expiry_date
 
+    # The identifier of this addition in the loyalty ledger
+    attr_accessor :transaction_uuid
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +48,8 @@ module TalonOne
         :'value' => :'value',
         :'recipient_integration_id' => :'recipientIntegrationId',
         :'start_date' => :'startDate',
-        :'expiry_date' => :'expiryDate'
+        :'expiry_date' => :'expiryDate',
+        :'transaction_uuid' => :'transactionUUID'
       }
     end
 
@@ -58,7 +62,8 @@ module TalonOne
         :'value' => :'Float',
         :'recipient_integration_id' => :'String',
         :'start_date' => :'DateTime',
-        :'expiry_date' => :'DateTime'
+        :'expiry_date' => :'DateTime',
+        :'transaction_uuid' => :'String'
       }
     end
 
@@ -110,6 +115,10 @@ module TalonOne
       if attributes.key?(:'expiry_date')
         self.expiry_date = attributes[:'expiry_date']
       end
+
+      if attributes.key?(:'transaction_uuid')
+        self.transaction_uuid = attributes[:'transaction_uuid']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -136,6 +145,10 @@ module TalonOne
         invalid_properties.push('invalid value for "recipient_integration_id", recipient_integration_id cannot be nil.')
       end
 
+      if @transaction_uuid.nil?
+        invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -147,6 +160,7 @@ module TalonOne
       return false if @sub_ledger_id.nil?
       return false if @value.nil?
       return false if @recipient_integration_id.nil?
+      return false if @transaction_uuid.nil?
       true
     end
 
@@ -161,7 +175,8 @@ module TalonOne
           value == o.value &&
           recipient_integration_id == o.recipient_integration_id &&
           start_date == o.start_date &&
-          expiry_date == o.expiry_date
+          expiry_date == o.expiry_date &&
+          transaction_uuid == o.transaction_uuid
     end
 
     # @see the `==` method
@@ -173,7 +188,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, program_id, sub_ledger_id, value, recipient_integration_id, start_date, expiry_date].hash
+      [name, program_id, sub_ledger_id, value, recipient_integration_id, start_date, expiry_date, transaction_uuid].hash
     end
 
     # Builds the object from hash

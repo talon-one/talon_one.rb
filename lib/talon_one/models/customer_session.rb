@@ -220,8 +220,16 @@ module TalonOne
         invalid_properties.push('invalid value for "coupon", coupon cannot be nil.')
       end
 
+      if @coupon.to_s.length > 100
+        invalid_properties.push('invalid value for "coupon", the character length must be smaller than or equal to 100.')
+      end
+
       if @referral.nil?
         invalid_properties.push('invalid value for "referral", referral cannot be nil.')
+      end
+
+      if @referral.to_s.length > 100
+        invalid_properties.push('invalid value for "referral", the character length must be smaller than or equal to 100.')
       end
 
       if @state.nil?
@@ -259,7 +267,9 @@ module TalonOne
       return false if @application_id.nil?
       return false if @profile_id.nil?
       return false if @coupon.nil?
+      return false if @coupon.to_s.length > 100
       return false if @referral.nil?
+      return false if @referral.to_s.length > 100
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
       return false unless state_validator.valid?(@state)
@@ -269,6 +279,34 @@ module TalonOne
       return false if @first_session.nil?
       return false if @discounts.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] coupon Value to be assigned
+    def coupon=(coupon)
+      if coupon.nil?
+        fail ArgumentError, 'coupon cannot be nil'
+      end
+
+      if coupon.to_s.length > 100
+        fail ArgumentError, 'invalid value for "coupon", the character length must be smaller than or equal to 100.'
+      end
+
+      @coupon = coupon
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] referral Value to be assigned
+    def referral=(referral)
+      if referral.nil?
+        fail ArgumentError, 'referral cannot be nil'
+      end
+
+      if referral.to_s.length > 100
+        fail ArgumentError, 'invalid value for "referral", the character length must be smaller than or equal to 100.'
+      end
+
+      @referral = referral
     end
 
     # Custom attribute writer method checking allowed values (enum).
