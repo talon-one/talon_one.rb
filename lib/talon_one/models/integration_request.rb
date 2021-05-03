@@ -17,7 +17,7 @@ module TalonOne
   class IntegrationRequest
     attr_accessor :customer_session
 
-    # Optional list of requested information to be present on the response related to the customer session update. Currently supported: \"customerSession\", \"customerProfile\", \"coupons\", \"triggeredCampaigns\", \"referral\", \"loyalty\", \"event\" and \"ruleFailureReasons\". 
+    # Optional list of requested information to be present on the response related to the customer session update. Currently supported: \"customerSession\", \"customerProfile\", \"coupons\", \"triggeredCampaigns\", \"referral\", \"loyalty\", \"event\", \"awardedGiveaways\" and \"ruleFailureReasons\". 
     attr_accessor :response_content
 
     class EnumAttributeValidator

@@ -13,24 +13,31 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  class InlineResponse20030
-    attr_accessor :total_result_size
+  class ReferralConstraints
+    # Timestamp at which point the referral code becomes valid.
+    attr_accessor :start_date
 
-    attr_accessor :data
+    # Expiry date of the referral code. Referral never expires if this is omitted, zero, or negative.
+    attr_accessor :expiry_date
+
+    # The number of times a referral code can be used. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
+    attr_accessor :usage_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total_result_size' => :'totalResultSize',
-        :'data' => :'data'
+        :'start_date' => :'startDate',
+        :'expiry_date' => :'expiryDate',
+        :'usage_limit' => :'usageLimit'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total_result_size' => :'Integer',
-        :'data' => :'Array<Role>'
+        :'start_date' => :'DateTime',
+        :'expiry_date' => :'DateTime',
+        :'usage_limit' => :'Integer'
       }
     end
 
@@ -44,25 +51,27 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::InlineResponse20030` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::ReferralConstraints` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::InlineResponse20030`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::ReferralConstraints`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total_result_size')
-        self.total_result_size = attributes[:'total_result_size']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'usage_limit')
+        self.usage_limit = attributes[:'usage_limit']
       end
     end
 
@@ -70,12 +79,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @total_result_size.nil?
-        invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
+      if !@usage_limit.nil? && @usage_limit > 999999
+        invalid_properties.push('invalid value for "usage_limit", must be smaller than or equal to 999999.')
       end
 
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
+      if !@usage_limit.nil? && @usage_limit < 0
+        invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
       end
 
       invalid_properties
@@ -84,9 +93,23 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @total_result_size.nil?
-      return false if @data.nil?
+      return false if !@usage_limit.nil? && @usage_limit > 999999
+      return false if !@usage_limit.nil? && @usage_limit < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] usage_limit Value to be assigned
+    def usage_limit=(usage_limit)
+      if !usage_limit.nil? && usage_limit > 999999
+        fail ArgumentError, 'invalid value for "usage_limit", must be smaller than or equal to 999999.'
+      end
+
+      if !usage_limit.nil? && usage_limit < 0
+        fail ArgumentError, 'invalid value for "usage_limit", must be greater than or equal to 0.'
+      end
+
+      @usage_limit = usage_limit
     end
 
     # Checks equality by comparing each attribute.
@@ -94,8 +117,9 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total_result_size == o.total_result_size &&
-          data == o.data
+          start_date == o.start_date &&
+          expiry_date == o.expiry_date &&
+          usage_limit == o.usage_limit
     end
 
     # @see the `==` method
@@ -107,7 +131,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_result_size, data].hash
+      [start_date, expiry_date, usage_limit].hash
     end
 
     # Builds the object from hash

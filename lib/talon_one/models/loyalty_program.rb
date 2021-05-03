@@ -42,6 +42,9 @@ module TalonOne
     # Indicates if this program supports subledgers inside the program
     attr_accessor :allow_subledger
 
+    # The tiers in this loyalty program
+    attr_accessor :tiers
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -53,7 +56,8 @@ module TalonOne
         :'subscribed_applications' => :'subscribedApplications',
         :'default_validity' => :'defaultValidity',
         :'default_pending' => :'defaultPending',
-        :'allow_subledger' => :'allowSubledger'
+        :'allow_subledger' => :'allowSubledger',
+        :'tiers' => :'tiers'
       }
     end
 
@@ -68,7 +72,8 @@ module TalonOne
         :'subscribed_applications' => :'Array<Integer>',
         :'default_validity' => :'String',
         :'default_pending' => :'String',
-        :'allow_subledger' => :'Boolean'
+        :'allow_subledger' => :'Boolean',
+        :'tiers' => :'Array<LoyaltyTier>'
       }
     end
 
@@ -129,6 +134,12 @@ module TalonOne
 
       if attributes.key?(:'allow_subledger')
         self.allow_subledger = attributes[:'allow_subledger']
+      end
+
+      if attributes.key?(:'tiers')
+        if (value = attributes[:'tiers']).is_a?(Array)
+          self.tiers = value
+        end
       end
     end
 
@@ -203,7 +214,8 @@ module TalonOne
           subscribed_applications == o.subscribed_applications &&
           default_validity == o.default_validity &&
           default_pending == o.default_pending &&
-          allow_subledger == o.allow_subledger
+          allow_subledger == o.allow_subledger &&
+          tiers == o.tiers
     end
 
     # @see the `==` method
@@ -215,7 +227,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, name, title, description, subscribed_applications, default_validity, default_pending, allow_subledger].hash
+      [id, account_id, name, title, description, subscribed_applications, default_validity, default_pending, allow_subledger, tiers].hash
     end
 
     # Builds the object from hash

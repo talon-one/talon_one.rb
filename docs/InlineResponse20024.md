@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;WebhookActivationLogEntry&gt;**](WebhookActivationLogEntry.md) |  | 
+**data** | [**Array&lt;WebhookLogEntry&gt;**](WebhookLogEntry.md) |  | 
 
 ## Code Sample
 

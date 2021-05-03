@@ -35,7 +35,7 @@ describe 'NewAttribute' do
   describe 'test attribute "entity"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["Account", "Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["Account", "Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.entity = value }.not_to raise_error
       # end

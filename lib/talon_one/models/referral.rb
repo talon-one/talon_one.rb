@@ -21,20 +21,29 @@ module TalonOne
     # The exact moment this entity was created.
     attr_accessor :created
 
-    # ID of the campaign from which the referral received the referral code.
-    attr_accessor :campaign_id
-
-    # The Integration Id of the Advocate's Profile
-    attr_accessor :advocate_profile_integration_id
-
-    # An optional Integration ID of the Friend's Profile
-    attr_accessor :friend_profile_integration_id
-
     # Timestamp at which point the referral code becomes valid.
     attr_accessor :start_date
 
     # Expiry date of the referral code. Referral never expires if this is omitted, zero, or negative.
     attr_accessor :expiry_date
+
+    # The number of times a referral code can be used. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
+    attr_accessor :usage_limit
+
+    # ID of the campaign from which the referral received the referral code.
+    attr_accessor :campaign_id
+
+    # The Integration ID of the Advocate's Profile.
+    attr_accessor :advocate_profile_integration_id
+
+    # An optional Integration ID of the Friend's Profile
+    attr_accessor :friend_profile_integration_id
+
+    # Arbitrary properties associated with this item.
+    attr_accessor :attributes
+
+    # The ID of the Import which created this referral.
+    attr_accessor :import_id
 
     # The actual referral code.
     attr_accessor :code
@@ -42,22 +51,25 @@ module TalonOne
     # The number of times this referral code has been successfully used.
     attr_accessor :usage_counter
 
-    # The number of times a referral code can be used. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
-    attr_accessor :usage_limit
+    # The ID of the batch the referrals belong to.
+    attr_accessor :batch_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'created' => :'created',
+        :'start_date' => :'startDate',
+        :'expiry_date' => :'expiryDate',
+        :'usage_limit' => :'usageLimit',
         :'campaign_id' => :'campaignId',
         :'advocate_profile_integration_id' => :'advocateProfileIntegrationId',
         :'friend_profile_integration_id' => :'friendProfileIntegrationId',
-        :'start_date' => :'startDate',
-        :'expiry_date' => :'expiryDate',
+        :'attributes' => :'attributes',
+        :'import_id' => :'importId',
         :'code' => :'code',
         :'usage_counter' => :'usageCounter',
-        :'usage_limit' => :'usageLimit'
+        :'batch_id' => :'batchId'
       }
     end
 
@@ -66,14 +78,17 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'created' => :'DateTime',
+        :'start_date' => :'DateTime',
+        :'expiry_date' => :'DateTime',
+        :'usage_limit' => :'Integer',
         :'campaign_id' => :'Integer',
         :'advocate_profile_integration_id' => :'String',
         :'friend_profile_integration_id' => :'String',
-        :'start_date' => :'DateTime',
-        :'expiry_date' => :'DateTime',
+        :'attributes' => :'Object',
+        :'import_id' => :'Integer',
         :'code' => :'String',
         :'usage_counter' => :'Integer',
-        :'usage_limit' => :'Integer'
+        :'batch_id' => :'String'
       }
     end
 
@@ -106,6 +121,18 @@ module TalonOne
         self.created = attributes[:'created']
       end
 
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'usage_limit')
+        self.usage_limit = attributes[:'usage_limit']
+      end
+
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
       end
@@ -118,12 +145,12 @@ module TalonOne
         self.friend_profile_integration_id = attributes[:'friend_profile_integration_id']
       end
 
-      if attributes.key?(:'start_date')
-        self.start_date = attributes[:'start_date']
+      if attributes.key?(:'attributes')
+        self.attributes = attributes[:'attributes']
       end
 
-      if attributes.key?(:'expiry_date')
-        self.expiry_date = attributes[:'expiry_date']
+      if attributes.key?(:'import_id')
+        self.import_id = attributes[:'import_id']
       end
 
       if attributes.key?(:'code')
@@ -134,8 +161,8 @@ module TalonOne
         self.usage_counter = attributes[:'usage_counter']
       end
 
-      if attributes.key?(:'usage_limit')
-        self.usage_limit = attributes[:'usage_limit']
+      if attributes.key?(:'batch_id')
+        self.batch_id = attributes[:'batch_id']
       end
     end
 
@@ -149,6 +176,18 @@ module TalonOne
 
       if @created.nil?
         invalid_properties.push('invalid value for "created", created cannot be nil.')
+      end
+
+      if @usage_limit.nil?
+        invalid_properties.push('invalid value for "usage_limit", usage_limit cannot be nil.')
+      end
+
+      if @usage_limit > 999999
+        invalid_properties.push('invalid value for "usage_limit", must be smaller than or equal to 999999.')
+      end
+
+      if @usage_limit < 0
+        invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
       end
 
       if @campaign_id.nil?
@@ -171,14 +210,6 @@ module TalonOne
         invalid_properties.push('invalid value for "usage_counter", usage_counter cannot be nil.')
       end
 
-      if @usage_limit.nil?
-        invalid_properties.push('invalid value for "usage_limit", usage_limit cannot be nil.')
-      end
-
-      if @usage_limit < 0
-        invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
-      end
-
       invalid_properties
     end
 
@@ -187,14 +218,33 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @created.nil?
+      return false if @usage_limit.nil?
+      return false if @usage_limit > 999999
+      return false if @usage_limit < 0
       return false if @campaign_id.nil?
       return false if @advocate_profile_integration_id.nil?
       return false if @code.nil?
       return false if @code.to_s.length < 4
       return false if @usage_counter.nil?
-      return false if @usage_limit.nil?
-      return false if @usage_limit < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] usage_limit Value to be assigned
+    def usage_limit=(usage_limit)
+      if usage_limit.nil?
+        fail ArgumentError, 'usage_limit cannot be nil'
+      end
+
+      if usage_limit > 999999
+        fail ArgumentError, 'invalid value for "usage_limit", must be smaller than or equal to 999999.'
+      end
+
+      if usage_limit < 0
+        fail ArgumentError, 'invalid value for "usage_limit", must be greater than or equal to 0.'
+      end
+
+      @usage_limit = usage_limit
     end
 
     # Custom attribute writer method with validation
@@ -211,20 +261,6 @@ module TalonOne
       @code = code
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] usage_limit Value to be assigned
-    def usage_limit=(usage_limit)
-      if usage_limit.nil?
-        fail ArgumentError, 'usage_limit cannot be nil'
-      end
-
-      if usage_limit < 0
-        fail ArgumentError, 'invalid value for "usage_limit", must be greater than or equal to 0.'
-      end
-
-      @usage_limit = usage_limit
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -232,14 +268,17 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           created == o.created &&
+          start_date == o.start_date &&
+          expiry_date == o.expiry_date &&
+          usage_limit == o.usage_limit &&
           campaign_id == o.campaign_id &&
           advocate_profile_integration_id == o.advocate_profile_integration_id &&
           friend_profile_integration_id == o.friend_profile_integration_id &&
-          start_date == o.start_date &&
-          expiry_date == o.expiry_date &&
+          attributes == o.attributes &&
+          import_id == o.import_id &&
           code == o.code &&
           usage_counter == o.usage_counter &&
-          usage_limit == o.usage_limit
+          batch_id == o.batch_id
     end
 
     # @see the `==` method
@@ -251,7 +290,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, campaign_id, advocate_profile_integration_id, friend_profile_integration_id, start_date, expiry_date, code, usage_counter, usage_limit].hash
+      [id, created, start_date, expiry_date, usage_limit, campaign_id, advocate_profile_integration_id, friend_profile_integration_id, attributes, import_id, code, usage_counter, batch_id].hash
     end
 
     # Builds the object from hash

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **rule_failure_reasons** | [**Array&lt;RuleFailureReason&gt;**](RuleFailureReason.md) |  | [optional] 
 **created_coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | 
 **created_referrals** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
+**awarded_giveaways** | [**Array&lt;Giveaway&gt;**](Giveaway.md) |  | [optional] 
 
 ## Code Sample
 
@@ -31,7 +32,8 @@ instance = TalonOne::IntegrationStateV2.new(customer_session: null,
                                  effects: null,
                                  rule_failure_reasons: null,
                                  created_coupons: null,
-                                 created_referrals: null)
+                                 created_referrals: null,
+                                 awarded_giveaways: null)
 ```
 
 

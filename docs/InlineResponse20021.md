@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Attribute&gt;**](Attribute.md) |  | 
+**data** | [**Array&lt;AccountAdditionalCost&gt;**](AccountAdditionalCost.md) |  | 
 
 ## Code Sample
 

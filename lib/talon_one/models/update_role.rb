@@ -23,7 +23,7 @@ module TalonOne
     # Role Policy this should be a stringified blob of json
     attr_accessor :acl
 
-    # an array of user identifiers
+    # An array of user identifiers
     attr_accessor :users
 
     # Attribute mapping from ruby-style variable name to JSON key.

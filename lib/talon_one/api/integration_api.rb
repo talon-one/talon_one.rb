@@ -153,6 +153,73 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # Create referral codes for multiple advocates
+    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the `campaignId` parameter, and one referral code will be associated with one advocate using the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
+    # @param body [NewReferralsForMultipleAdvocates] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @return [InlineResponse201]
+    def create_referrals_for_multiple_advocates(body, opts = {})
+      data, _status_code, _headers = create_referrals_for_multiple_advocates_with_http_info(body, opts)
+      data
+    end
+
+    # Create referral codes for multiple advocates
+    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+    # @param body [NewReferralsForMultipleAdvocates] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @return [Array<(InlineResponse201, Integer, Hash)>] InlineResponse201 data, response status code and response headers
+    def create_referrals_for_multiple_advocates_with_http_info(body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.create_referrals_for_multiple_advocates ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.create_referrals_for_multiple_advocates"
+      end
+      # resource path
+      local_var_path = '/v1/referrals_for_multiple_advocates'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'silent'] = opts[:'silent'] if !opts[:'silent'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse201' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#create_referrals_for_multiple_advocates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete coupon reservations
     # Removes all passed customer profiles reservation from this coupon 
     # @param coupon_value [String] The value of a coupon
@@ -289,6 +356,7 @@ module TalonOne
     # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
     # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
     # @option opts [Boolean] :loyalty optional flag to decide if you would like loyalty information in the response
+    # @option opts [Boolean] :giveaways optional flag to decide if you would like giveaways information in the response
     # @return [CustomerInventory]
     def get_customer_inventory(integration_id, opts = {})
       data, _status_code, _headers = get_customer_inventory_with_http_info(integration_id, opts)
@@ -303,6 +371,7 @@ module TalonOne
     # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
     # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
     # @option opts [Boolean] :loyalty optional flag to decide if you would like loyalty information in the response
+    # @option opts [Boolean] :giveaways optional flag to decide if you would like giveaways information in the response
     # @return [Array<(CustomerInventory, Integer, Hash)>] CustomerInventory data, response status code and response headers
     def get_customer_inventory_with_http_info(integration_id, opts = {})
       if @api_client.config.debugging
@@ -321,6 +390,7 @@ module TalonOne
       query_params[:'referrals'] = opts[:'referrals'] if !opts[:'referrals'].nil?
       query_params[:'coupons'] = opts[:'coupons'] if !opts[:'coupons'].nil?
       query_params[:'loyalty'] = opts[:'loyalty'] if !opts[:'loyalty'].nil?
+      query_params[:'giveaways'] = opts[:'giveaways'] if !opts[:'giveaways'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -421,7 +491,7 @@ module TalonOne
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The `sessionId` body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same `profileId` or an error will be returned.  As with customer sessions, you can use an empty string for `profileId` to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
     # @param body [NewEvent] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
     def track_event(body, opts = {})
       data, _status_code, _headers = track_event_with_http_info(body, opts)
@@ -432,7 +502,7 @@ module TalonOne
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
     # @param body [NewEvent] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def track_event_with_http_info(body, opts = {})
       if @api_client.config.debugging
@@ -489,7 +559,7 @@ module TalonOne
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param body [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
     def update_customer_profile(integration_id, body, opts = {})
       data, _status_code, _headers = update_customer_profile_with_http_info(integration_id, body, opts)
@@ -501,7 +571,7 @@ module TalonOne
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
     # @param body [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def update_customer_profile_with_http_info(integration_id, body, opts = {})
       if @api_client.config.debugging
@@ -625,7 +695,7 @@ module TalonOne
     # @param body [CustomerProfileIntegrationRequestV2] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine. (default to false)
-    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are persisted with &#x60;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
     # @return [IntegrationStateV2]
     def update_customer_profile_v2(integration_id, body, opts = {})
       data, _status_code, _headers = update_customer_profile_v2_with_http_info(integration_id, body, opts)
@@ -638,7 +708,7 @@ module TalonOne
     # @param body [CustomerProfileIntegrationRequestV2] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine.
-    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are persisted with &#x60;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
     # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
     def update_customer_profile_v2_with_http_info(integration_id, body, opts = {})
       if @api_client.config.debugging
@@ -767,7 +837,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
     def update_customer_session(customer_session_id, body, opts = {})
       data, _status_code, _headers = update_customer_session_with_http_info(customer_session_id, body, opts)
@@ -779,7 +849,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
     def update_customer_session_with_http_info(customer_session_id, body, opts = {})
       if @api_client.config.debugging
@@ -840,7 +910,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationStateV2]
     def update_customer_session_v2(customer_session_id, body, opts = {})
       data, _status_code, _headers = update_customer_session_v2_with_http_info(customer_session_id, body, opts)
@@ -852,7 +922,7 @@ module TalonOne
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
     # @param body [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+    # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
     def update_customer_session_v2_with_http_info(customer_session_id, body, opts = {})
       if @api_client.config.debugging

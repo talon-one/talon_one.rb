@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **discount_effect_count** | **Integer** | Total number of times discounts were redeemed in this campaign. | [optional] 
 **coupon_creation_count** | **Integer** | Total number of coupons created by rules in this campaign. | [optional] 
 **referral_creation_count** | **Integer** | Total number of referrals created by rules in this campaign. | [optional] 
+**awarded_giveaways_count** | **Integer** | Total number of giveaways awarded by rules in this campaign. | [optional] 
 **created_loyalty_points_count** | **Float** | Total number of loyalty points created by rules in this campaign. | [optional] 
 **created_loyalty_points_effect_count** | **Integer** | Total number of loyalty point creation effects triggered by rules in this campaign. | [optional] 
 **redeemed_loyalty_points_count** | **Float** | Total number of loyalty points redeemed by rules in this campaign. | [optional] 
@@ -64,6 +65,7 @@ instance = TalonOne::Campaign.new(id: null,
                                  discount_effect_count: null,
                                  coupon_creation_count: null,
                                  referral_creation_count: null,
+                                 awarded_giveaways_count: null,
                                  created_loyalty_points_count: null,
                                  created_loyalty_points_effect_count: null,
                                  redeemed_loyalty_points_count: null,

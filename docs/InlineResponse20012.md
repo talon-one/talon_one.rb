@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | [optional] 
-**has_more** | **Boolean** |  | [optional] 
+**has_more** | **Boolean** |  | 
 **data** | [**Array&lt;ApplicationCustomer&gt;**](ApplicationCustomer.md) |  | 
 
 ## Code Sample
@@ -13,8 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20012.new(total_result_size: null,
-                                 has_more: null,
+instance = TalonOne::InlineResponse20012.new(has_more: null,
                                  data: null)
 ```
 

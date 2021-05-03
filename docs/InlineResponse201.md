@@ -1,18 +1,18 @@
-# TalonOne::InlineResponse20030
+# TalonOne::InlineResponse201
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Role&gt;**](Role.md) |  | 
+**data** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20030.new(total_result_size: null,
+instance = TalonOne::InlineResponse201.new(total_result_size: null,
                                  data: null)
 ```
 

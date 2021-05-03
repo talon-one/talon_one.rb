@@ -164,7 +164,7 @@ module TalonOne
       return false if @account_id.nil?
       return false if @user_id.nil?
       return false if @entity.nil?
-      entity_validator = EnumAttributeValidator.new('String', ["Coupon", "Effect", "CustomerSession"])
+      entity_validator = EnumAttributeValidator.new('String', ["Coupon", "Effect", "CustomerSession", "LoyaltyLedger", "LoyaltyLedgerLog"])
       return false unless entity_validator.valid?(@entity)
       return false if @filter.nil?
       true
@@ -173,7 +173,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity Object to be assigned
     def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ["Coupon", "Effect", "CustomerSession"])
+      validator = EnumAttributeValidator.new('String', ["Coupon", "Effect", "CustomerSession", "LoyaltyLedger", "LoyaltyLedgerLog"])
       unless validator.valid?(entity)
         fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
       end
