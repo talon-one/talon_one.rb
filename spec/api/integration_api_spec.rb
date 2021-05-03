@@ -57,6 +57,19 @@ describe 'IntegrationApi' do
     end
   end
 
+  # unit tests for create_referrals_for_multiple_advocates
+  # Create referral codes for multiple advocates
+  # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+  # @return [InlineResponse201]
+  describe 'create_referrals_for_multiple_advocates test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_coupon_reservation
   # Delete coupon reservations
   # Removes all passed customer profiles reservation from this coupon 
@@ -91,6 +104,7 @@ describe 'IntegrationApi' do
   # @option opts [Boolean] :referrals optional flag to decide if you would like referral information in the response
   # @option opts [Boolean] :coupons optional flag to decide if you would like coupon information in the response
   # @option opts [Boolean] :loyalty optional flag to decide if you would like loyalty information in the response
+  # @option opts [Boolean] :giveaways optional flag to decide if you would like giveaways information in the response
   # @return [CustomerInventory]
   describe 'get_customer_inventory test' do
     it 'should work' do
@@ -115,7 +129,7 @@ describe 'IntegrationApi' do
   # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
   # @return [IntegrationState]
   describe 'track_event test' do
     it 'should work' do
@@ -129,7 +143,7 @@ describe 'IntegrationApi' do
   # @param integration_id The custom identifier for this profile, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
   # @return [IntegrationState]
   describe 'update_customer_profile test' do
     it 'should work' do
@@ -156,7 +170,7 @@ describe 'IntegrationApi' do
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine.
-  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are persisted with &#x60;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
   # @return [IntegrationStateV2]
   describe 'update_customer_profile_v2 test' do
     it 'should work' do
@@ -183,7 +197,7 @@ describe 'IntegrationApi' do
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
   # @return [IntegrationState]
   describe 'update_customer_session test' do
     it 'should work' do
@@ -197,7 +211,7 @@ describe 'IntegrationApi' do
   # @param customer_session_id The custom identifier for this session, must be unique within the account.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :dry Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;).
+  # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
   # @return [IntegrationStateV2]
   describe 'update_customer_session_v2 test' do
     it 'should work' do

@@ -87,7 +87,7 @@ describe 'NewCampaign' do
   describe 'test attribute "features"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.features = value }.not_to raise_error
       # end

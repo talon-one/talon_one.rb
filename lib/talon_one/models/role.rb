@@ -15,10 +15,16 @@ require 'date'
 module TalonOne
   # 
   class Role
-    # The ID of the role corresponding to the DB row
+    # Unique ID for this entity.
     attr_accessor :id
 
-    # The ID of the Talon.One account that owns this role.
+    # The exact moment this entity was created.
+    attr_accessor :created
+
+    # The exact moment this entity was last modified.
+    attr_accessor :modified
+
+    # The ID of the account that owns this entity.
     attr_accessor :account_id
 
     # The ID of the Campaign Group this role was created for.
@@ -40,7 +46,9 @@ module TalonOne
     def self.attribute_map
       {
         :'id' => :'id',
-        :'account_id' => :'accountID',
+        :'created' => :'created',
+        :'modified' => :'modified',
+        :'account_id' => :'accountId',
         :'campaign_group_id' => :'campaignGroupID',
         :'name' => :'name',
         :'description' => :'description',
@@ -53,6 +61,8 @@ module TalonOne
     def self.openapi_types
       {
         :'id' => :'Integer',
+        :'created' => :'DateTime',
+        :'modified' => :'DateTime',
         :'account_id' => :'Integer',
         :'campaign_group_id' => :'Integer',
         :'name' => :'String',
@@ -85,6 +95,14 @@ module TalonOne
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'modified')
+        self.modified = attributes[:'modified']
       end
 
       if attributes.key?(:'account_id')
@@ -122,8 +140,24 @@ module TalonOne
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
+      if @created.nil?
+        invalid_properties.push('invalid value for "created", created cannot be nil.')
+      end
+
+      if @modified.nil?
+        invalid_properties.push('invalid value for "modified", modified cannot be nil.')
+      end
+
       if @account_id.nil?
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @acl.nil?
+        invalid_properties.push('invalid value for "acl", acl cannot be nil.')
       end
 
       invalid_properties
@@ -133,7 +167,11 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
+      return false if @created.nil?
+      return false if @modified.nil?
       return false if @account_id.nil?
+      return false if @name.nil?
+      return false if @acl.nil?
       true
     end
 
@@ -143,6 +181,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          created == o.created &&
+          modified == o.modified &&
           account_id == o.account_id &&
           campaign_group_id == o.campaign_group_id &&
           name == o.name &&
@@ -160,7 +200,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, campaign_group_id, name, description, members, acl].hash
+      [id, created, modified, account_id, campaign_group_id, name, description, members, acl].hash
     end
 
     # Builds the object from hash

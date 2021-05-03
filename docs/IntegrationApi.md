@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_coupon_reservation**](IntegrationApi.md#create_coupon_reservation) | **POST** /v1/coupon_reservations/{couponValue} | Create a new coupon reservation
 [**create_referral**](IntegrationApi.md#create_referral) | **POST** /v1/referrals | Create a referral code for an advocate
+[**create_referrals_for_multiple_advocates**](IntegrationApi.md#create_referrals_for_multiple_advocates) | **POST** /v1/referrals_for_multiple_advocates | Create referral codes for multiple advocates
 [**delete_coupon_reservation**](IntegrationApi.md#delete_coupon_reservation) | **DELETE** /v1/coupon_reservations/{couponValue} | Delete coupon reservations
 [**delete_customer_data**](IntegrationApi.md#delete_customer_data) | **DELETE** /v1/customer_data/{integrationId} | Delete the personal data of a customer
 [**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | Get an inventory of all data associated with a specific customer profile
@@ -129,6 +130,69 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Referral**](Referral.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_referrals_for_multiple_advocates
+
+> InlineResponse201 create_referrals_for_multiple_advocates(body, opts)
+
+Create referral codes for multiple advocates
+
+Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the `campaignId` parameter, and one referral code will be associated with one advocate using the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: integration_auth
+  config.api_key['Content-Signature'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Content-Signature'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+body = TalonOne::NewReferralsForMultipleAdvocates.new # NewReferralsForMultipleAdvocates | 
+opts = {
+  silent: 'silent_example' # String | If set to `yes`, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+}
+
+begin
+  #Create referral codes for multiple advocates
+  result = api_instance.create_referrals_for_multiple_advocates(body, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->create_referrals_for_multiple_advocates: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**NewReferralsForMultipleAdvocates**](NewReferralsForMultipleAdvocates.md)|  | 
+ **silent** | **String**| If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000). | [optional] 
+
+### Return type
+
+[**InlineResponse201**](InlineResponse201.md)
 
 ### Authorization
 
@@ -290,7 +354,8 @@ opts = {
   profile: true, # Boolean | optional flag to decide if you would like customer profile information in the response
   referrals: true, # Boolean | optional flag to decide if you would like referral information in the response
   coupons: true, # Boolean | optional flag to decide if you would like coupon information in the response
-  loyalty: true # Boolean | optional flag to decide if you would like loyalty information in the response
+  loyalty: true, # Boolean | optional flag to decide if you would like loyalty information in the response
+  giveaways: true # Boolean | optional flag to decide if you would like giveaways information in the response
 }
 
 begin
@@ -312,6 +377,7 @@ Name | Type | Description  | Notes
  **referrals** | **Boolean**| optional flag to decide if you would like referral information in the response | [optional] 
  **coupons** | **Boolean**| optional flag to decide if you would like coupon information in the response | [optional] 
  **loyalty** | **Boolean**| optional flag to decide if you would like loyalty information in the response | [optional] 
+ **giveaways** | **Boolean**| optional flag to decide if you would like giveaways information in the response | [optional] 
 
 ### Return type
 
@@ -415,7 +481,7 @@ end
 api_instance = TalonOne::IntegrationApi.new
 body = TalonOne::NewEvent.new # NewEvent | 
 opts = {
-  dry: true # Boolean | Indicates whether to skip persisting the changes or not (Will not persist if set to 'true').
+  dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
@@ -433,7 +499,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**NewEvent**](NewEvent.md)|  | 
- **dry** | **Boolean**| Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
 
@@ -479,7 +545,7 @@ api_instance = TalonOne::IntegrationApi.new
 integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
 body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
 opts = {
-  dry: true # Boolean | Indicates whether to skip persisting the changes or not (Will not persist if set to 'true').
+  dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
@@ -498,7 +564,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
  **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
- **dry** | **Boolean**| Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
 
@@ -593,7 +659,7 @@ integration_id = 'integration_id_example' # String | The custom identifier for t
 body = TalonOne::CustomerProfileIntegrationRequestV2.new # CustomerProfileIntegrationRequestV2 | 
 opts = {
   run_rule_engine: false, # Boolean | Indicates whether to run the rule engine.
-  dry: true # Boolean | Indicates whether to persist the changes. Changes are persisted with `true`. Only used when `runRuleEngine` is set to `true`. 
+  dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`. Only used when `runRuleEngine` is set to `true`. 
 }
 
 begin
@@ -613,7 +679,7 @@ Name | Type | Description  | Notes
  **integration_id** | **String**| The custom identifier for this profile. Must be unique within the account. | 
  **body** | [**CustomerProfileIntegrationRequestV2**](CustomerProfileIntegrationRequestV2.md)|  | 
  **run_rule_engine** | **Boolean**| Indicates whether to run the rule engine. | [optional] [default to false]
- **dry** | **Boolean**| Indicates whether to persist the changes. Changes are persisted with &#x60;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;.  | [optional] 
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;.  | [optional] 
 
 ### Return type
 
@@ -717,7 +783,7 @@ api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
 body = TalonOne::NewCustomerSession.new # NewCustomerSession | 
 opts = {
-  dry: true # Boolean | Indicates whether to skip persisting the changes or not (Will not persist if set to 'true').
+  dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
@@ -736,7 +802,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
  **body** | [**NewCustomerSession**](NewCustomerSession.md)|  | 
- **dry** | **Boolean**| Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
 
@@ -777,7 +843,7 @@ api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
 body = TalonOne::IntegrationRequest.new # IntegrationRequest | 
 opts = {
-  dry: true # Boolean | Indicates whether to skip persisting the changes or not (Will not persist if set to 'true').
+  dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
@@ -796,7 +862,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
  **body** | [**IntegrationRequest**](IntegrationRequest.md)|  | 
- **dry** | **Boolean**| Indicates whether to skip persisting the changes or not (Will not persist if set to &#39;true&#39;). | [optional] 
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) |  | 
+**data** | [**Array&lt;AccessLogEntry&gt;**](AccessLogEntry.md) |  | 
 
 ## Code Sample
 

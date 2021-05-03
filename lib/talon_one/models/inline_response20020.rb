@@ -30,7 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'total_result_size' => :'Integer',
-        :'data' => :'Array<Audience>'
+        :'data' => :'Array<Attribute>'
       }
     end
 
@@ -70,6 +70,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @total_result_size.nil?
+        invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
+      end
+
       if @data.nil?
         invalid_properties.push('invalid value for "data", data cannot be nil.')
       end
@@ -80,6 +84,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @total_result_size.nil?
       return false if @data.nil?
       true
     end

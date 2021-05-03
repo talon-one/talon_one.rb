@@ -80,6 +80,10 @@ Method | HTTP request | Description
 [**get_webhook_activation_logs**](ManagementApi.md#get_webhook_activation_logs) | **GET** /v1/webhook_activation_logs | List Webhook activation Log Entries
 [**get_webhook_logs**](ManagementApi.md#get_webhook_logs) | **GET** /v1/webhook_logs | List Webhook Log Entries
 [**get_webhooks**](ManagementApi.md#get_webhooks) | **GET** /v1/webhooks | List Webhooks
+[**import_coupons**](ManagementApi.md#import_coupons) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/import_coupons | Import coupons via CSV file
+[**import_loyalty_points**](ManagementApi.md#import_loyalty_points) | **POST** /v1/loyalty_programs/{programID}/import_points | Import loyalty points via CSV file
+[**import_pool_giveaways**](ManagementApi.md#import_pool_giveaways) | **POST** /v1/giveaways/pools/{poolId}/import | Import giveaways codes into a giveaways pool
+[**import_referrals**](ManagementApi.md#import_referrals) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/import_referrals | Import referrals via CSV file
 [**remove_loyalty_points**](ManagementApi.md#remove_loyalty_points) | **PUT** /v1/loyalty_programs/{programID}/profile/{integrationID}/deduct_points | Deduct points in a certain loyalty program for the specified customer
 [**reset_password**](ManagementApi.md#reset_password) | **POST** /v1/reset_password | Reset password
 [**search_coupons_advanced**](ManagementApi.md#search_coupons_advanced) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced | Get a list of the coupons that match the given attributes (with total count)
@@ -91,6 +95,7 @@ Method | HTTP request | Description
 [**update_campaign**](ManagementApi.md#update_campaign) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId} | Update a Campaign
 [**update_coupon**](ManagementApi.md#update_coupon) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/{couponId} | Update a Coupon
 [**update_coupon_batch**](ManagementApi.md#update_coupon_batch) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Update a Batch of Coupons
+[**update_referral**](ManagementApi.md#update_referral) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/{referralId} | Update one Referral
 [**update_ruleset**](ManagementApi.md#update_ruleset) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Update a Ruleset
 
 
@@ -396,7 +401,7 @@ application_id = 56 # Integer |
 campaign_id = 56 # Integer | 
 body = TalonOne::NewCoupons.new # NewCoupons | 
 opts = {
-  silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
+  silent: 'silent_example' # String | If set to `yes`, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
 }
 
 begin
@@ -416,7 +421,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **body** | [**NewCoupons**](NewCoupons.md)|  | 
- **silent** | **String**| If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000). | [optional] 
+ **silent** | **String**| If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000). | [optional] 
 
 ### Return type
 
@@ -458,7 +463,7 @@ application_id = 56 # Integer |
 campaign_id = 56 # Integer | 
 body = TalonOne::NewCouponsForMultipleRecipients.new # NewCouponsForMultipleRecipients | 
 opts = {
-  silent: 'silent_example' # String | If set to 'yes', response will be an empty 204, otherwise a list of the coupons generated (to to 1000).
+  silent: 'silent_example' # String | If set to `yes`, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
 }
 
 begin
@@ -478,7 +483,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**|  | 
  **campaign_id** | **Integer**|  | 
  **body** | [**NewCouponsForMultipleRecipients**](NewCouponsForMultipleRecipients.md)|  | 
- **silent** | **String**| If set to &#39;yes&#39;, response will be an empty 204, otherwise a list of the coupons generated (to to 1000). | [optional] 
+ **silent** | **String**| If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000). | [optional] 
 
 ### Return type
 
@@ -1334,7 +1339,7 @@ Name | Type | Description  | Notes
 
 ## get_access_logs
 
-> InlineResponse2009 get_access_logs(application_id, range_start, range_end, opts)
+> InlineResponse2008 get_access_logs(application_id, range_start, range_end, opts)
 
 Get access logs for application (with total count)
 
@@ -1390,7 +1395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -1404,7 +1409,7 @@ Name | Type | Description  | Notes
 
 ## get_access_logs_without_total_count
 
-> InlineResponse20010 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
+> InlineResponse2009 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
 
 Get access logs for application
 
@@ -1460,7 +1465,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -1636,7 +1641,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20022 get_additional_costs(opts)
+> InlineResponse20021 get_additional_costs(opts)
 
 List additional costs
 
@@ -1682,7 +1687,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -1696,7 +1701,7 @@ Name | Type | Description  | Notes
 
 ## get_all_access_logs
 
-> InlineResponse2009 get_all_access_logs(range_start, range_end, opts)
+> InlineResponse2008 get_all_access_logs(range_start, range_end, opts)
 
 Get all access logs
 
@@ -1752,7 +1757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -1766,7 +1771,7 @@ Name | Type | Description  | Notes
 
 ## get_all_roles
 
-> InlineResponse20030 get_all_roles
+> InlineResponse20029 get_all_roles
 
 Get all roles
 
@@ -1800,7 +1805,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -1974,7 +1979,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20012 get_application_customers(application_id, opts)
+> InlineResponse20011 get_application_customers(application_id, opts)
 
 List Application Customers
 
@@ -1997,7 +2002,7 @@ opts = {
   integration_id: 'integration_id_example', # String | Filter results performing an exact matching against the profile integration identifier.
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
-  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, `hasMore` will be true whenever there is a next page. `totalResultSize` will always be zero. With this flag set to false, `hasMore` will always be set to false. `totalResultSize` will contain the total number of results for this query. 
 }
 
 begin
@@ -2018,11 +2023,11 @@ Name | Type | Description  | Notes
  **integration_id** | **String**| Filter results performing an exact matching against the profile integration identifier. | [optional] 
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -2036,7 +2041,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers_by_attributes
 
-> InlineResponse20013 get_application_customers_by_attributes(body)
+> InlineResponse20012 get_application_customers_by_attributes(body)
 
 Get a list of the customer profiles that match the given attributes (with total count)
 
@@ -2076,7 +2081,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -2090,7 +2095,7 @@ Name | Type | Description  | Notes
 
 ## get_application_event_types
 
-> InlineResponse20019 get_application_event_types(application_id, opts)
+> InlineResponse20018 get_application_event_types(application_id, opts)
 
 List Applications Event Types
 
@@ -2138,7 +2143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**InlineResponse20018**](InlineResponse20018.md)
 
 ### Authorization
 
@@ -2152,7 +2157,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events
 
-> InlineResponse20017 get_application_events(application_id, opts)
+> InlineResponse20016 get_application_events(application_id, opts)
 
 List Applications Events (with total count)
 
@@ -2222,7 +2227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20016**](InlineResponse20016.md)
 
 ### Authorization
 
@@ -2236,7 +2241,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events_without_total_count
 
-> InlineResponse20018 get_application_events_without_total_count(application_id, opts)
+> InlineResponse20017 get_application_events_without_total_count(application_id, opts)
 
 List Applications Events
 
@@ -2306,7 +2311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
@@ -2374,7 +2379,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions
 
-> InlineResponse20016 get_application_sessions(application_id, opts)
+> InlineResponse20015 get_application_sessions(application_id, opts)
 
 List Application Sessions
 
@@ -2434,7 +2439,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**InlineResponse20015**](InlineResponse20015.md)
 
 ### Authorization
 
@@ -2562,7 +2567,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20021 get_attributes(opts)
+> InlineResponse20020 get_attributes(opts)
 
 List custom attributes
 
@@ -2585,7 +2590,8 @@ api_instance = TalonOne::ManagementApi.new
 opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
-  sort: 'sort_example' # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+  sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
+  entity: 'entity_example' # String | Returned attributes will be filtered by supplied entity
 }
 
 begin
@@ -2605,10 +2611,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
+ **entity** | **String**| Returned attributes will be filtered by supplied entity | [optional] 
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -2622,7 +2629,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences
 
-> InlineResponse20020 get_audiences(opts)
+> InlineResponse20019 get_audiences(opts)
 
 Get all audiences
 
@@ -2646,7 +2653,7 @@ opts = {
   page_size: 56, # Integer | The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   skip: 56, # Integer | Skips the given number of items when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with `-` to sort in descending order.
-  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, `hasMore` will be true whenever there is a next page. `totalResultSize` will always be zero. With this flag set to false, `hasMore` will always be set to false. `totalResultSize` will contain the total number of results for this query. 
 }
 
 begin
@@ -2666,11 +2673,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items to include in this response. When omitted, the maximum value of 1000 will be used. | [optional] 
  **skip** | **Integer**| Skips the given number of items when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20019**](InlineResponse20019.md)
 
 ### Authorization
 
@@ -2738,7 +2745,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_analytics
 
-> InlineResponse20011 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
+> InlineResponse20010 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
@@ -2786,7 +2793,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -2938,7 +2945,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20028 get_changes(opts)
+> InlineResponse20027 get_changes(opts)
 
 Get audit log for an account
 
@@ -2967,7 +2974,7 @@ opts = {
   user_id: 56, # Integer | 
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  with_total_result_size: true, # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, `hasMore` will be true whenever there is a next page. `totalResultSize` will always be zero. With this flag set to false, `hasMore` will always be set to false. `totalResultSize` will contain the total number of results for this query. 
   include_old: true # Boolean | When this flag is set to false, the state without the change will not be returned. The default value is true.
 }
 
@@ -2993,12 +3000,12 @@ Name | Type | Description  | Notes
  **user_id** | **Integer**|  | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query.  | [optional] 
  **include_old** | **Boolean**| When this flag is set to false, the state without the change will not be returned. The default value is true. | [optional] 
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -3414,7 +3421,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports
 
-> InlineResponse20014 get_customer_activity_reports(range_start, range_end, application_id, opts)
+> InlineResponse20013 get_customer_activity_reports(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers (with total count)
 
@@ -3474,7 +3481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -3488,7 +3495,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports_without_total_count
 
-> InlineResponse20015 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
+> InlineResponse20014 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
 
@@ -3548,7 +3555,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -3678,7 +3685,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profiles
 
-> InlineResponse20013 get_customer_profiles(opts)
+> InlineResponse20012 get_customer_profiles(opts)
 
 List Customer Profiles
 
@@ -3720,7 +3727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -3734,7 +3741,7 @@ Name | Type | Description  | Notes
 
 ## get_customers_by_attributes
 
-> InlineResponse20013 get_customers_by_attributes(body, opts)
+> InlineResponse20012 get_customers_by_attributes(body, opts)
 
 Get a list of the customer profiles that match the given attributes
 
@@ -3780,7 +3787,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -3794,7 +3801,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20026 get_event_types(opts)
+> InlineResponse20025 get_event_types(opts)
 
 List Event Types
 
@@ -3846,7 +3853,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -3860,7 +3867,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20029 get_exports(opts)
+> InlineResponse20028 get_exports(opts)
 
 Get Exports
 
@@ -3910,7 +3917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -3998,7 +4005,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-program_id = 'program_id_example' # String | 
+program_id = 56 # Integer | 
 
 begin
   #Get a loyalty program
@@ -4014,7 +4021,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **program_id** | **String**|  | 
+ **program_id** | **Integer**|  | 
 
 ### Return type
 
@@ -4032,7 +4039,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_programs
 
-> InlineResponse2008 get_loyalty_programs
+> InlineResponse2007 get_loyalty_programs
 
 List all loyalty Programs
 
@@ -4066,7 +4073,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -4132,7 +4139,7 @@ Name | Type | Description  | Notes
 
 ## get_referrals
 
-> InlineResponse2006 get_referrals(application_id, campaign_id, opts)
+> InlineResponse201 get_referrals(application_id, campaign_id, opts)
 
 List Referrals (with total count)
 
@@ -4192,7 +4199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse201**](InlineResponse201.md)
 
 ### Authorization
 
@@ -4206,7 +4213,7 @@ Name | Type | Description  | Notes
 
 ## get_referrals_without_total_count
 
-> InlineResponse2007 get_referrals_without_total_count(application_id, campaign_id, opts)
+> InlineResponse2006 get_referrals_without_total_count(application_id, campaign_id, opts)
 
 List Referrals
 
@@ -4266,7 +4273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**InlineResponse2006**](InlineResponse2006.md)
 
 ### Authorization
 
@@ -4504,7 +4511,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20027 get_users(opts)
+> InlineResponse20026 get_users(opts)
 
 List Users in your account
 
@@ -4550,7 +4557,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -4618,7 +4625,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_activation_logs
 
-> InlineResponse20024 get_webhook_activation_logs(opts)
+> InlineResponse20023 get_webhook_activation_logs(opts)
 
 List Webhook activation Log Entries
 
@@ -4676,7 +4683,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -4690,7 +4697,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_logs
 
-> InlineResponse20025 get_webhook_logs(opts)
+> InlineResponse20024 get_webhook_logs(opts)
 
 List Webhook Log Entries
 
@@ -4748,7 +4755,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -4762,7 +4769,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20023 get_webhooks(opts)
+> InlineResponse20022 get_webhooks(opts)
 
 List Webhooks
 
@@ -4808,7 +4815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -4817,6 +4824,242 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## import_coupons
+
+> Import import_coupons(application_id, campaign_id, opts)
+
+Import coupons via CSV file
+
+Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+campaign_id = 56 # Integer | 
+opts = {
+  up_file: 'up_file_example' # String | The file with the information about the data that should be imported.
+}
+
+begin
+  #Import coupons via CSV file
+  result = api_instance.import_coupons(application_id, campaign_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->import_coupons: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Integer**|  | 
+ **up_file** | **String**| The file with the information about the data that should be imported. | [optional] 
+
+### Return type
+
+[**Import**](Import.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+
+## import_loyalty_points
+
+> Import import_loyalty_points(program_id, opts)
+
+Import loyalty points via CSV file
+
+Upload a CSV file containing the loyalty points that should be created. The file should be sent as multipart data.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+program_id = 56 # Integer | 
+opts = {
+  up_file: 'up_file_example' # String | The file with the information about the data that should be imported.
+}
+
+begin
+  #Import loyalty points via CSV file
+  result = api_instance.import_loyalty_points(program_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->import_loyalty_points: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **program_id** | **Integer**|  | 
+ **up_file** | **String**| The file with the information about the data that should be imported. | [optional] 
+
+### Return type
+
+[**Import**](Import.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+
+## import_pool_giveaways
+
+> Import import_pool_giveaways(pool_id, opts)
+
+Import giveaways codes into a giveaways pool
+
+Upload a CSV file containing the giveaways codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - `code` (required): the code of your giveaway, for instance, a gift card redemption code. - `startdate`:  the start date in RFC3339 of the code redemption period. - `enddate`: the last date in RFC3339 of the code redemption period. - `attributes`: A json object describing _custom_ giveaways attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called `provider`, set it with `\"{\"\"provider\"\": \"\"myPartnerCompany\"\"}\"`.  The `startdate` and `enddate` have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+pool_id = 56 # Integer | 
+opts = {
+  up_file: 'up_file_example' # String | The file with the information about the data that should be imported.
+}
+
+begin
+  #Import giveaways codes into a giveaways pool
+  result = api_instance.import_pool_giveaways(pool_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->import_pool_giveaways: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pool_id** | **Integer**|  | 
+ **up_file** | **String**| The file with the information about the data that should be imported. | [optional] 
+
+### Return type
+
+[**Import**](Import.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+
+## import_referrals
+
+> Import import_referrals(application_id, campaign_id, opts)
+
+Import referrals via CSV file
+
+Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following colums:  - `code` (required): the referral code. - `advocateprofileintegrationid` (required): The profile ID of the advocate. - `startdate`: the start date in RFC3339 of the code redemption period. - `expirydate`: the end date in RFC3339 of the code redemption period. - `limitval`: The maximum amount of redemptions of this code. Unlimited (0) when blank. - `attributes`: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called `category`, set it with `\"{\"\"category\"\": \"\"10_off\"\"}\"`.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+campaign_id = 56 # Integer | 
+opts = {
+  up_file: 'up_file_example' # String | The file with the information about the data that should be imported.
+}
+
+begin
+  #Import referrals via CSV file
+  result = api_instance.import_referrals(application_id, campaign_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->import_referrals: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Integer**|  | 
+ **up_file** | **String**| The file with the information about the data that should be imported. | [optional] 
+
+### Return type
+
+[**Import**](Import.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 
@@ -5544,6 +5787,64 @@ nil (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
+
+
+## update_referral
+
+> Referral update_referral(application_id, campaign_id, referral_id, body)
+
+Update one Referral
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | 
+campaign_id = 56 # Integer | 
+referral_id = 'referral_id_example' # String | The ID of the referral code to delete
+body = TalonOne::UpdateReferral.new # UpdateReferral | 
+
+begin
+  #Update one Referral
+  result = api_instance.update_referral(application_id, campaign_id, referral_id, body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->update_referral: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**|  | 
+ **campaign_id** | **Integer**|  | 
+ **referral_id** | **String**| The ID of the referral code to delete | 
+ **body** | [**UpdateReferral**](UpdateReferral.md)|  | 
+
+### Return type
+
+[**Referral**](Referral.md)
+
+### Authorization
+
+[manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## update_ruleset

@@ -82,6 +82,9 @@ module TalonOne
     # Total number of referrals created by rules in this campaign.
     attr_accessor :referral_creation_count
 
+    # Total number of giveaways awarded by rules in this campaign.
+    attr_accessor :awarded_giveaways_count
+
     # Total number of loyalty points created by rules in this campaign.
     attr_accessor :created_loyalty_points_count
 
@@ -154,6 +157,7 @@ module TalonOne
         :'discount_effect_count' => :'discountEffectCount',
         :'coupon_creation_count' => :'couponCreationCount',
         :'referral_creation_count' => :'referralCreationCount',
+        :'awarded_giveaways_count' => :'awardedGiveawaysCount',
         :'created_loyalty_points_count' => :'createdLoyaltyPointsCount',
         :'created_loyalty_points_effect_count' => :'createdLoyaltyPointsEffectCount',
         :'redeemed_loyalty_points_count' => :'redeemedLoyaltyPointsCount',
@@ -191,6 +195,7 @@ module TalonOne
         :'discount_effect_count' => :'Integer',
         :'coupon_creation_count' => :'Integer',
         :'referral_creation_count' => :'Integer',
+        :'awarded_giveaways_count' => :'Integer',
         :'created_loyalty_points_count' => :'Float',
         :'created_loyalty_points_effect_count' => :'Integer',
         :'redeemed_loyalty_points_count' => :'Float',
@@ -323,6 +328,10 @@ module TalonOne
 
       if attributes.key?(:'referral_creation_count')
         self.referral_creation_count = attributes[:'referral_creation_count']
+      end
+
+      if attributes.key?(:'awarded_giveaways_count')
+        self.awarded_giveaways_count = attributes[:'awarded_giveaways_count']
       end
 
       if attributes.key?(:'created_loyalty_points_count')
@@ -480,6 +489,7 @@ module TalonOne
           discount_effect_count == o.discount_effect_count &&
           coupon_creation_count == o.coupon_creation_count &&
           referral_creation_count == o.referral_creation_count &&
+          awarded_giveaways_count == o.awarded_giveaways_count &&
           created_loyalty_points_count == o.created_loyalty_points_count &&
           created_loyalty_points_effect_count == o.created_loyalty_points_effect_count &&
           redeemed_loyalty_points_count == o.redeemed_loyalty_points_count &&
@@ -499,7 +509,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, referral_creation_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, last_activity, updated, created_by, updated_by].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, referral_creation_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, last_activity, updated, created_by, updated_by].hash
     end
 
     # Builds the object from hash

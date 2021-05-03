@@ -20,7 +20,7 @@ module TalonOne
 
     attr_accessor :audiences_changes
 
-    # Optional list of requested information to be present on the response related to the customer profile update. Currently supported: \"customerProfile\", \"triggeredCampaigns\", \"loyalty\", \"event\" and \"ruleFailureReasons\". 
+    # Optional list of requested information to be present on the response related to the customer profile update. Currently supported: \"customerProfile\", \"triggeredCampaigns\", \"loyalty\", \"event\", \"awardedGiveaways\", \"ruleFailureReasons\". 
     attr_accessor :response_content
 
     class EnumAttributeValidator
