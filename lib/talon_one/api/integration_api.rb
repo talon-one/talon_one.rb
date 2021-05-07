@@ -22,21 +22,21 @@ module TalonOne
     # Create a new coupon reservation
     # Creates a coupon reservation for all passed customer profiles on this couponID 
     # @param coupon_value [String] The value of a coupon
-    # @param body [CouponReservations] 
+    # @param coupon_reservations [CouponReservations] 
     # @param [Hash] opts the optional parameters
     # @return [Coupon]
-    def create_coupon_reservation(coupon_value, body, opts = {})
-      data, _status_code, _headers = create_coupon_reservation_with_http_info(coupon_value, body, opts)
+    def create_coupon_reservation(coupon_value, coupon_reservations, opts = {})
+      data, _status_code, _headers = create_coupon_reservation_with_http_info(coupon_value, coupon_reservations, opts)
       data
     end
 
     # Create a new coupon reservation
     # Creates a coupon reservation for all passed customer profiles on this couponID 
     # @param coupon_value [String] The value of a coupon
-    # @param body [CouponReservations] 
+    # @param coupon_reservations [CouponReservations] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Coupon, Integer, Hash)>] Coupon data, response status code and response headers
-    def create_coupon_reservation_with_http_info(coupon_value, body, opts = {})
+    def create_coupon_reservation_with_http_info(coupon_value, coupon_reservations, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.create_coupon_reservation ...'
       end
@@ -44,9 +44,9 @@ module TalonOne
       if @api_client.config.client_side_validation && coupon_value.nil?
         fail ArgumentError, "Missing the required parameter 'coupon_value' when calling IntegrationApi.create_coupon_reservation"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.create_coupon_reservation"
+      # verify the required parameter 'coupon_reservations' is set
+      if @api_client.config.client_side_validation && coupon_reservations.nil?
+        fail ArgumentError, "Missing the required parameter 'coupon_reservations' when calling IntegrationApi.create_coupon_reservation"
       end
       # resource path
       local_var_path = '/v1/coupon_reservations/{couponValue}'.sub('{' + 'couponValue' + '}', CGI.escape(coupon_value.to_s))
@@ -65,13 +65,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(coupon_reservations) 
 
       # return_type
       return_type = opts[:return_type] || 'Coupon' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -91,26 +91,26 @@ module TalonOne
 
     # Create a referral code for an advocate
     # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the `campaignId` parameter, and will be associated with the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
-    # @param body [NewReferral] 
+    # @param new_referral [NewReferral] 
     # @param [Hash] opts the optional parameters
     # @return [Referral]
-    def create_referral(body, opts = {})
-      data, _status_code, _headers = create_referral_with_http_info(body, opts)
+    def create_referral(new_referral, opts = {})
+      data, _status_code, _headers = create_referral_with_http_info(new_referral, opts)
       data
     end
 
     # Create a referral code for an advocate
     # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the &#x60;campaignId&#x60; parameter, and will be associated with the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
-    # @param body [NewReferral] 
+    # @param new_referral [NewReferral] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Referral, Integer, Hash)>] Referral data, response status code and response headers
-    def create_referral_with_http_info(body, opts = {})
+    def create_referral_with_http_info(new_referral, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.create_referral ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.create_referral"
+      # verify the required parameter 'new_referral' is set
+      if @api_client.config.client_side_validation && new_referral.nil?
+        fail ArgumentError, "Missing the required parameter 'new_referral' when calling IntegrationApi.create_referral"
       end
       # resource path
       local_var_path = '/v1/referrals'
@@ -129,13 +129,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(new_referral) 
 
       # return_type
       return_type = opts[:return_type] || 'Referral' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -155,28 +155,28 @@ module TalonOne
 
     # Create referral codes for multiple advocates
     # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the `campaignId` parameter, and one referral code will be associated with one advocate using the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
-    # @param body [NewReferralsForMultipleAdvocates] 
+    # @param new_referrals_for_multiple_advocates [NewReferralsForMultipleAdvocates] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
     # @return [InlineResponse201]
-    def create_referrals_for_multiple_advocates(body, opts = {})
-      data, _status_code, _headers = create_referrals_for_multiple_advocates_with_http_info(body, opts)
+    def create_referrals_for_multiple_advocates(new_referrals_for_multiple_advocates, opts = {})
+      data, _status_code, _headers = create_referrals_for_multiple_advocates_with_http_info(new_referrals_for_multiple_advocates, opts)
       data
     end
 
     # Create referral codes for multiple advocates
     # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
-    # @param body [NewReferralsForMultipleAdvocates] 
+    # @param new_referrals_for_multiple_advocates [NewReferralsForMultipleAdvocates] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
     # @return [Array<(InlineResponse201, Integer, Hash)>] InlineResponse201 data, response status code and response headers
-    def create_referrals_for_multiple_advocates_with_http_info(body, opts = {})
+    def create_referrals_for_multiple_advocates_with_http_info(new_referrals_for_multiple_advocates, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.create_referrals_for_multiple_advocates ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.create_referrals_for_multiple_advocates"
+      # verify the required parameter 'new_referrals_for_multiple_advocates' is set
+      if @api_client.config.client_side_validation && new_referrals_for_multiple_advocates.nil?
+        fail ArgumentError, "Missing the required parameter 'new_referrals_for_multiple_advocates' when calling IntegrationApi.create_referrals_for_multiple_advocates"
       end
       # resource path
       local_var_path = '/v1/referrals_for_multiple_advocates'
@@ -196,13 +196,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(new_referrals_for_multiple_advocates) 
 
       # return_type
       return_type = opts[:return_type] || 'InlineResponse201' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -223,21 +223,21 @@ module TalonOne
     # Delete coupon reservations
     # Removes all passed customer profiles reservation from this coupon 
     # @param coupon_value [String] The value of a coupon
-    # @param body [CouponReservations] 
+    # @param coupon_reservations [CouponReservations] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def delete_coupon_reservation(coupon_value, body, opts = {})
-      delete_coupon_reservation_with_http_info(coupon_value, body, opts)
+    def delete_coupon_reservation(coupon_value, coupon_reservations, opts = {})
+      delete_coupon_reservation_with_http_info(coupon_value, coupon_reservations, opts)
       nil
     end
 
     # Delete coupon reservations
     # Removes all passed customer profiles reservation from this coupon 
     # @param coupon_value [String] The value of a coupon
-    # @param body [CouponReservations] 
+    # @param coupon_reservations [CouponReservations] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_coupon_reservation_with_http_info(coupon_value, body, opts = {})
+    def delete_coupon_reservation_with_http_info(coupon_value, coupon_reservations, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.delete_coupon_reservation ...'
       end
@@ -245,9 +245,9 @@ module TalonOne
       if @api_client.config.client_side_validation && coupon_value.nil?
         fail ArgumentError, "Missing the required parameter 'coupon_value' when calling IntegrationApi.delete_coupon_reservation"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.delete_coupon_reservation"
+      # verify the required parameter 'coupon_reservations' is set
+      if @api_client.config.client_side_validation && coupon_reservations.nil?
+        fail ArgumentError, "Missing the required parameter 'coupon_reservations' when calling IntegrationApi.delete_coupon_reservation"
       end
       # resource path
       local_var_path = '/v1/coupon_reservations/{couponValue}'.sub('{' + 'couponValue' + '}', CGI.escape(coupon_value.to_s))
@@ -264,13 +264,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(coupon_reservations) 
 
       # return_type
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -330,7 +330,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -407,7 +407,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CustomerInventory' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -469,7 +469,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse200' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -489,28 +489,28 @@ module TalonOne
 
     # Track an Event
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The `sessionId` body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same `profileId` or an error will be returned.  As with customer sessions, you can use an empty string for `profileId` to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
-    # @param body [NewEvent] 
+    # @param new_event [NewEvent] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
-    def track_event(body, opts = {})
-      data, _status_code, _headers = track_event_with_http_info(body, opts)
+    def track_event(new_event, opts = {})
+      data, _status_code, _headers = track_event_with_http_info(new_event, opts)
       data
     end
 
     # Track an Event
     # Records an arbitrary event in a customer session. For example, an integration might record an event when a user updates their payment information.  The &#x60;sessionId&#x60; body parameter is required, an event is always part of a session. Much like updating a customer session, if either the profile or the session do not exist, a new empty one will be created. Note that if the specified session already exists, it must belong to the same &#x60;profileId&#x60; or an error will be returned.  As with customer sessions, you can use an empty string for &#x60;profileId&#x60; to indicate that this is an anonymous session.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place. 
-    # @param body [NewEvent] 
+    # @param new_event [NewEvent] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
-    def track_event_with_http_info(body, opts = {})
+    def track_event_with_http_info(new_event, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.track_event ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.track_event"
+      # verify the required parameter 'new_event' is set
+      if @api_client.config.client_side_validation && new_event.nil?
+        fail ArgumentError, "Missing the required parameter 'new_event' when calling IntegrationApi.track_event"
       end
       # resource path
       local_var_path = '/v1/events'
@@ -530,13 +530,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(new_event) 
 
       # return_type
       return_type = opts[:return_type] || 'IntegrationState' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -555,25 +555,25 @@ module TalonOne
     end
 
     # Update a Customer Profile V1
-    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
+    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#/customer-profile [Rules]: /Getting-Started/entities#/campaigns-rulesets-and-coupons 
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
-    # @param body [NewCustomerProfile] 
+    # @param new_customer_profile [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
-    def update_customer_profile(integration_id, body, opts = {})
-      data, _status_code, _headers = update_customer_profile_with_http_info(integration_id, body, opts)
+    def update_customer_profile(integration_id, new_customer_profile, opts = {})
+      data, _status_code, _headers = update_customer_profile_with_http_info(integration_id, new_customer_profile, opts)
       data
     end
 
     # Update a Customer Profile V1
-    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
+    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The &#x60;integrationId&#x60; may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the &#x60;integrationId&#x60;. It is vital that this ID **not** change over time, so **don&#39;t** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#/customer-profile [Rules]: /Getting-Started/entities#/campaigns-rulesets-and-coupons 
     # @param integration_id [String] The custom identifier for this profile, must be unique within the account.
-    # @param body [NewCustomerProfile] 
+    # @param new_customer_profile [NewCustomerProfile] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
-    def update_customer_profile_with_http_info(integration_id, body, opts = {})
+    def update_customer_profile_with_http_info(integration_id, new_customer_profile, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_profile ...'
       end
@@ -581,9 +581,9 @@ module TalonOne
       if @api_client.config.client_side_validation && integration_id.nil?
         fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.update_customer_profile"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_profile"
+      # verify the required parameter 'new_customer_profile' is set
+      if @api_client.config.client_side_validation && new_customer_profile.nil?
+        fail ArgumentError, "Missing the required parameter 'new_customer_profile' when calling IntegrationApi.update_customer_profile"
       end
       # resource path
       local_var_path = '/v1/customer_profiles/{integrationId}'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
@@ -603,13 +603,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(new_customer_profile) 
 
       # return_type
       return_type = opts[:return_type] || 'IntegrationState' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -629,26 +629,26 @@ module TalonOne
 
     # Update a Customer Profile Audiences
     # Update one ore multiple Customer Profiles with the specified Audiences 
-    # @param body [CustomerProfileAudienceRequest] 
+    # @param customer_profile_audience_request [CustomerProfileAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update_customer_profile_audiences(body, opts = {})
-      update_customer_profile_audiences_with_http_info(body, opts)
+    def update_customer_profile_audiences(customer_profile_audience_request, opts = {})
+      update_customer_profile_audiences_with_http_info(customer_profile_audience_request, opts)
       nil
     end
 
     # Update a Customer Profile Audiences
     # Update one ore multiple Customer Profiles with the specified Audiences 
-    # @param body [CustomerProfileAudienceRequest] 
+    # @param customer_profile_audience_request [CustomerProfileAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def update_customer_profile_audiences_with_http_info(body, opts = {})
+    def update_customer_profile_audiences_with_http_info(customer_profile_audience_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_profile_audiences ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_profile_audiences"
+      # verify the required parameter 'customer_profile_audience_request' is set
+      if @api_client.config.client_side_validation && customer_profile_audience_request.nil?
+        fail ArgumentError, "Missing the required parameter 'customer_profile_audience_request' when calling IntegrationApi.update_customer_profile_audiences"
       end
       # resource path
       local_var_path = '/v2/customer_audiences'
@@ -665,13 +665,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(customer_profile_audience_request) 
 
       # return_type
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1']
+      auth_names = opts[:auth_names] || ['manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -690,27 +690,27 @@ module TalonOne
     end
 
     # Update a Customer Profile
-    # Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile).  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter. 
+    # Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile).  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter. 
     # @param integration_id [String] The custom identifier for this profile. Must be unique within the account.
-    # @param body [CustomerProfileIntegrationRequestV2] 
+    # @param customer_profile_integration_request_v2 [CustomerProfileIntegrationRequestV2] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine. (default to false)
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
     # @return [IntegrationStateV2]
-    def update_customer_profile_v2(integration_id, body, opts = {})
-      data, _status_code, _headers = update_customer_profile_v2_with_http_info(integration_id, body, opts)
+    def update_customer_profile_v2(integration_id, customer_profile_integration_request_v2, opts = {})
+      data, _status_code, _headers = update_customer_profile_v2_with_http_info(integration_id, customer_profile_integration_request_v2, opts)
       data
     end
 
     # Update a Customer Profile
-    # Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile).  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter. 
+    # Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile).  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter. 
     # @param integration_id [String] The custom identifier for this profile. Must be unique within the account.
-    # @param body [CustomerProfileIntegrationRequestV2] 
+    # @param customer_profile_integration_request_v2 [CustomerProfileIntegrationRequestV2] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :run_rule_engine Indicates whether to run the rule engine.
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;. 
     # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
-    def update_customer_profile_v2_with_http_info(integration_id, body, opts = {})
+    def update_customer_profile_v2_with_http_info(integration_id, customer_profile_integration_request_v2, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_profile_v2 ...'
       end
@@ -718,9 +718,9 @@ module TalonOne
       if @api_client.config.client_side_validation && integration_id.nil?
         fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.update_customer_profile_v2"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_profile_v2"
+      # verify the required parameter 'customer_profile_integration_request_v2' is set
+      if @api_client.config.client_side_validation && customer_profile_integration_request_v2.nil?
+        fail ArgumentError, "Missing the required parameter 'customer_profile_integration_request_v2' when calling IntegrationApi.update_customer_profile_v2"
       end
       # resource path
       local_var_path = '/v2/customer_profiles/{integrationId}'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
@@ -741,7 +741,7 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(customer_profile_integration_request_v2) 
 
       # return_type
       return_type = opts[:return_type] || 'IntegrationStateV2' 
@@ -766,29 +766,29 @@ module TalonOne
     end
 
     # Update multiple Customer Profiles
-    # Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#customer-profile) in 1 request.  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
-    # @param body [MultipleCustomerProfileIntegrationRequest] 
+    # Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#/customer-profile) in 1 request.  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
+    # @param multiple_customer_profile_integration_request [MultipleCustomerProfileIntegrationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
     # @return [MultipleCustomerProfileIntegrationResponseV2]
-    def update_customer_profiles_v2(body, opts = {})
-      data, _status_code, _headers = update_customer_profiles_v2_with_http_info(body, opts)
+    def update_customer_profiles_v2(multiple_customer_profile_integration_request, opts = {})
+      data, _status_code, _headers = update_customer_profiles_v2_with_http_info(multiple_customer_profile_integration_request, opts)
       data
     end
 
     # Update multiple Customer Profiles
-    # Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#customer-profile) in 1 request.  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
-    # @param body [MultipleCustomerProfileIntegrationRequest] 
+    # Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#/customer-profile) in 1 request.  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
+    # @param multiple_customer_profile_integration_request [MultipleCustomerProfileIntegrationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
     # @return [Array<(MultipleCustomerProfileIntegrationResponseV2, Integer, Hash)>] MultipleCustomerProfileIntegrationResponseV2 data, response status code and response headers
-    def update_customer_profiles_v2_with_http_info(body, opts = {})
+    def update_customer_profiles_v2_with_http_info(multiple_customer_profile_integration_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_profiles_v2 ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_profiles_v2"
+      # verify the required parameter 'multiple_customer_profile_integration_request' is set
+      if @api_client.config.client_side_validation && multiple_customer_profile_integration_request.nil?
+        fail ArgumentError, "Missing the required parameter 'multiple_customer_profile_integration_request' when calling IntegrationApi.update_customer_profiles_v2"
       end
       # resource path
       local_var_path = '/v2/customer_profiles'
@@ -808,7 +808,7 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(multiple_customer_profile_integration_request) 
 
       # return_type
       return_type = opts[:return_type] || 'MultipleCustomerProfileIntegrationResponseV2' 
@@ -833,25 +833,25 @@ module TalonOne
     end
 
     # Update a Customer Session V1
-    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
-    # @param body [NewCustomerSession] 
+    # @param new_customer_session [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationState]
-    def update_customer_session(customer_session_id, body, opts = {})
-      data, _status_code, _headers = update_customer_session_with_http_info(customer_session_id, body, opts)
+    def update_customer_session(customer_session_id, new_customer_session, opts = {})
+      data, _status_code, _headers = update_customer_session_with_http_info(customer_session_id, new_customer_session, opts)
       data
     end
 
     # Update a Customer Session V1
-    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+    # ⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
-    # @param body [NewCustomerSession] 
+    # @param new_customer_session [NewCustomerSession] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationState, Integer, Hash)>] IntegrationState data, response status code and response headers
-    def update_customer_session_with_http_info(customer_session_id, body, opts = {})
+    def update_customer_session_with_http_info(customer_session_id, new_customer_session, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_session ...'
       end
@@ -859,9 +859,9 @@ module TalonOne
       if @api_client.config.client_side_validation && customer_session_id.nil?
         fail ArgumentError, "Missing the required parameter 'customer_session_id' when calling IntegrationApi.update_customer_session"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_session"
+      # verify the required parameter 'new_customer_session' is set
+      if @api_client.config.client_side_validation && new_customer_session.nil?
+        fail ArgumentError, "Missing the required parameter 'new_customer_session' when calling IntegrationApi.update_customer_session"
       end
       # resource path
       local_var_path = '/v1/customer_sessions/{customerSessionId}'.sub('{' + 'customerSessionId' + '}', CGI.escape(customer_session_id.to_s))
@@ -881,13 +881,13 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(new_customer_session) 
 
       # return_type
       return_type = opts[:return_type] || 'IntegrationState' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['api_key_v1', 'integration_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -906,25 +906,25 @@ module TalonOne
     end
 
     # Update a Customer Session
-    # Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+    # Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
-    # @param body [IntegrationRequest] 
+    # @param integration_request [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [IntegrationStateV2]
-    def update_customer_session_v2(customer_session_id, body, opts = {})
-      data, _status_code, _headers = update_customer_session_v2_with_http_info(customer_session_id, body, opts)
+    def update_customer_session_v2(customer_session_id, integration_request, opts = {})
+      data, _status_code, _headers = update_customer_session_v2_with_http_info(customer_session_id, integration_request, opts)
       data
     end
 
     # Update a Customer Session
-    # Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+    # Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer&#39;s cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user&#39;s cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID&#39;s.  To link a session to a customer profile, set the &#x60;profileId&#x60; parameter in the request body to a customer profile&#39;s &#x60;integrationId&#x60;. To track an anonymous session use the empty string (&#x60;\&quot;\&quot;&#x60;) as the &#x60;profileId&#x60;. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the &#x60;responseContent&#x60; request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
     # @param customer_session_id [String] The custom identifier for this session, must be unique within the account.
-    # @param body [IntegrationRequest] 
+    # @param integration_request [IntegrationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.
     # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
-    def update_customer_session_v2_with_http_info(customer_session_id, body, opts = {})
+    def update_customer_session_v2_with_http_info(customer_session_id, integration_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.update_customer_session_v2 ...'
       end
@@ -932,9 +932,9 @@ module TalonOne
       if @api_client.config.client_side_validation && customer_session_id.nil?
         fail ArgumentError, "Missing the required parameter 'customer_session_id' when calling IntegrationApi.update_customer_session_v2"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.update_customer_session_v2"
+      # verify the required parameter 'integration_request' is set
+      if @api_client.config.client_side_validation && integration_request.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_request' when calling IntegrationApi.update_customer_session_v2"
       end
       # resource path
       local_var_path = '/v2/customer_sessions/{customerSessionId}'.sub('{' + 'customerSessionId' + '}', CGI.escape(customer_session_id.to_s))
@@ -954,7 +954,7 @@ module TalonOne
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+      post_body = opts[:body] || @api_client.object_to_http_body(integration_request) 
 
       # return_type
       return_type = opts[:return_type] || 'IntegrationStateV2' 

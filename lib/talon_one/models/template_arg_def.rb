@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class TemplateArgDef
     # The type of value this argument expects.
     attr_accessor :type

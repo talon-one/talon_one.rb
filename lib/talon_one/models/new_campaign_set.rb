@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewCampaignSet
     # The ID of the application that owns this entity.
     attr_accessor :application_id

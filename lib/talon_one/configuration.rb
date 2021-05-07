@@ -127,7 +127,7 @@ module TalonOne
 
     def initialize
       @scheme = 'http'
-      @host = 'localhost'
+      @host = 'your_domain.your_region.talon.one'
       @base_path = ''
       @api_key = {}
       @api_key_prefix = {}
@@ -200,19 +200,12 @@ module TalonOne
             key: 'Authorization',
             value: api_key_with_prefix('Authorization')
           },
-        'integration_auth' =>
-          {
-            type: 'api_key',
-            in: 'header',
-            key: 'Content-Signature',
-            value: api_key_with_prefix('Content-Signature')
-          },
         'manager_auth' =>
           {
-            type: 'api_key',
+            type: 'bearer',
             in: 'header',
             key: 'Authorization',
-            value: api_key_with_prefix('Authorization')
+            value: "Bearer #{access_token}"
           },
       }
     end
@@ -221,7 +214,7 @@ module TalonOne
     def server_settings
       [
         {
-          url: "/",
+          url: "your_domain.your_region.talon.one",
           description: "No description provided",
         }
       ]

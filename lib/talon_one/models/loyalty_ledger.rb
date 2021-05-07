@@ -76,6 +76,10 @@ module TalonOne
         invalid_properties.push('invalid value for "ledger", ledger cannot be nil.')
       end
 
+      if @sub_ledgers.nil?
+        invalid_properties.push('invalid value for "sub_ledgers", sub_ledgers cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -83,6 +87,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @ledger.nil?
+      return false if @sub_ledgers.nil?
       true
     end
 

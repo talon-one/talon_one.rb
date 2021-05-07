@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class MultipleCustomerProfileIntegrationRequestItem
     # Arbitrary properties associated with this item
     attr_accessor :attributes

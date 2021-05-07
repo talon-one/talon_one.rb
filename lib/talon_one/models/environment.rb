@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class Environment
     # Unique ID for this entity.
     attr_accessor :id
@@ -36,6 +35,8 @@ module TalonOne
     # The giveaways pools that the application is subscribed to.
     attr_accessor :giveaways_pools
 
+    attr_accessor :variables
+
     # The loyalty programs that the application is subscribed to.
     attr_accessor :loyalty_programs
 
@@ -48,8 +49,6 @@ module TalonOne
     # The audiences contained in the account which the application belongs to.
     attr_accessor :audiences
 
-    attr_accessor :variables
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,11 +59,11 @@ module TalonOne
         :'functions' => :'functions',
         :'templates' => :'templates',
         :'giveaways_pools' => :'giveawaysPools',
+        :'variables' => :'variables',
         :'loyalty_programs' => :'loyaltyPrograms',
         :'attributes' => :'attributes',
         :'additional_costs' => :'additionalCosts',
-        :'audiences' => :'audiences',
-        :'variables' => :'variables'
+        :'audiences' => :'audiences'
       }
     end
 
@@ -78,11 +77,11 @@ module TalonOne
         :'functions' => :'Array<FunctionDef>',
         :'templates' => :'Array<TemplateDef>',
         :'giveaways_pools' => :'Array<GiveawaysPool>',
+        :'variables' => :'String',
         :'loyalty_programs' => :'Array<LoyaltyProgram>',
         :'attributes' => :'Array<Attribute>',
         :'additional_costs' => :'Array<AccountAdditionalCost>',
-        :'audiences' => :'Array<Audience>',
-        :'variables' => :'String'
+        :'audiences' => :'Array<Audience>'
       }
     end
 
@@ -143,6 +142,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'variables')
+        self.variables = attributes[:'variables']
+      end
+
       if attributes.key?(:'loyalty_programs')
         if (value = attributes[:'loyalty_programs']).is_a?(Array)
           self.loyalty_programs = value
@@ -165,10 +168,6 @@ module TalonOne
         if (value = attributes[:'audiences']).is_a?(Array)
           self.audiences = value
         end
-      end
-
-      if attributes.key?(:'variables')
-        self.variables = attributes[:'variables']
       end
     end
 
@@ -232,11 +231,11 @@ module TalonOne
           functions == o.functions &&
           templates == o.templates &&
           giveaways_pools == o.giveaways_pools &&
+          variables == o.variables &&
           loyalty_programs == o.loyalty_programs &&
           attributes == o.attributes &&
           additional_costs == o.additional_costs &&
-          audiences == o.audiences &&
-          variables == o.variables
+          audiences == o.audiences
     end
 
     # @see the `==` method
@@ -248,7 +247,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, slots, functions, templates, giveaways_pools, loyalty_programs, attributes, additional_costs, audiences, variables].hash
+      [id, created, application_id, slots, functions, templates, giveaways_pools, variables, loyalty_programs, attributes, additional_costs, audiences].hash
     end
 
     # Builds the object from hash

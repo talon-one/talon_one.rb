@@ -11,11 +11,11 @@ Name | Type | Description | Notes
 **functions** | [**Array&lt;FunctionDef&gt;**](FunctionDef.md) | The functions defined for this application. | 
 **templates** | [**Array&lt;TemplateDef&gt;**](TemplateDef.md) | The templates defined for this application. | 
 **giveaways_pools** | [**Array&lt;GiveawaysPool&gt;**](GiveawaysPool.md) | The giveaways pools that the application is subscribed to. | [optional] 
+**variables** | **String** |  | 
 **loyalty_programs** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) | The loyalty programs that the application is subscribed to. | [optional] 
 **attributes** | [**Array&lt;Attribute&gt;**](Attribute.md) | The attributes that the application is subscribed to. | [optional] 
 **additional_costs** | [**Array&lt;AccountAdditionalCost&gt;**](AccountAdditionalCost.md) | The additional costs that the application is subscribed to. | [optional] 
 **audiences** | [**Array&lt;Audience&gt;**](Audience.md) | The audiences contained in the account which the application belongs to. | [optional] 
-**variables** | **String** |  | 
 
 ## Code Sample
 
@@ -29,11 +29,11 @@ instance = TalonOne::Environment.new(id: null,
                                  functions: null,
                                  templates: null,
                                  giveaways_pools: null,
+                                 variables: null,
                                  loyalty_programs: null,
                                  attributes: null,
                                  additional_costs: null,
-                                 audiences: null,
-                                 variables: null)
+                                 audiences: null)
 ```
 
 

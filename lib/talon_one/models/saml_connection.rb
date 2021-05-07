@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class SamlConnection
     # The location where the SAML assertion is sent with a HTTP POST.
     attr_accessor :assertion_consumer_service_url

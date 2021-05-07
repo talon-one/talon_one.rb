@@ -102,8 +102,8 @@ module TalonOne
         invalid_properties.push('invalid value for "points", points cannot be nil.')
       end
 
-      if @points >= 1E+8
-        invalid_properties.push('invalid value for "points", must be smaller than 1E+8.')
+      if @points >= 100000000
+        invalid_properties.push('invalid value for "points", must be smaller than 100000000.')
       end
 
       if @points <= 0
@@ -117,7 +117,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @points.nil?
-      return false if @points >= 1E+8
+      return false if @points >= 100000000
       return false if @points <= 0
       true
     end
@@ -129,8 +129,8 @@ module TalonOne
         fail ArgumentError, 'points cannot be nil'
       end
 
-      if points >= 1E+8
-        fail ArgumentError, 'invalid value for "points", must be smaller than 1E+8.'
+      if points >= 100000000
+        fail ArgumentError, 'invalid value for "points", must be smaller than 100000000.'
       end
 
       if points <= 0

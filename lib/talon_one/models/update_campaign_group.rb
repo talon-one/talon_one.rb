@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class UpdateCampaignGroup
     # The name of this campaign group.
     attr_accessor :name

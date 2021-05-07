@@ -33,10 +33,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for add_loyalty_points
-  # Add points in a certain loyalty program for the specified customer
-  # @param program_id 
+  # Add points in a loyalty program for the specified customer
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param integration_id 
-  # @param body 
+  # @param loyalty_points 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'add_loyalty_points test' do
@@ -50,7 +50,7 @@ describe 'ManagementApi' do
   # Copy the campaign into every specified application.
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param campaign_copy 
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse2002]
   describe 'copy_campaign_to_applications test' do
@@ -62,7 +62,7 @@ describe 'ManagementApi' do
   # unit tests for create_additional_cost
   # Define a new additional cost
   # Defines a new _additional cost_ in this account.  These additional costs are shared across all applications in your account, and are never required. 
-  # @param body 
+  # @param new_additional_cost 
   # @param [Hash] opts the optional parameters
   # @return [AccountAdditionalCost]
   describe 'create_additional_cost test' do
@@ -74,7 +74,7 @@ describe 'ManagementApi' do
   # unit tests for create_attribute
   # Define a new custom attribute
   # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
-  # @param body 
+  # @param new_attribute 
   # @param [Hash] opts the optional parameters
   # @return [Attribute]
   describe 'create_attribute test' do
@@ -84,9 +84,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_campaign
-  # Create a Campaign
+  # Create campaign
   # @param application_id 
-  # @param body 
+  # @param new_campaign 
   # @param [Hash] opts the optional parameters
   # @return [Campaign]
   describe 'create_campaign test' do
@@ -96,11 +96,11 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_coupons
-  # Create Coupons
+  # Create coupons
   # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param new_coupons 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
   # @return [InlineResponse2004]
@@ -111,11 +111,11 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_coupons_for_multiple_recipients
-  # Create Coupons for Multiple Recipients
-  # Create coupons according to some pattern for up to 1000 recipients.
+  # Create coupons for multiple recipients
+  # Create coupons according to the specified pattern for up to 1000 recipients.
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param new_coupons_for_multiple_recipients 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
   # @return [InlineResponse2004]
@@ -128,7 +128,7 @@ describe 'ManagementApi' do
   # unit tests for create_password_recovery_email
   # Request a password reset
   # Sends an email with a password recovery link to the email of an existing account. 
-  # @param body 
+  # @param new_password_email 
   # @param [Hash] opts the optional parameters
   # @return [NewPasswordEmail]
   describe 'create_password_recovery_email test' do
@@ -138,10 +138,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_ruleset
-  # Create a Ruleset
+  # Create ruleset
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param new_ruleset 
   # @param [Hash] opts the optional parameters
   # @return [Ruleset]
   describe 'create_ruleset test' do
@@ -151,8 +151,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_session
-  # Create a Session
-  # @param body 
+  # Create session
+  # Create a session to use the other Management API endpoints. Use the &#x60;token&#x60; property of the response as bearer token.
+  # @param login_params 
   # @param [Hash] opts the optional parameters
   # @return [Session]
   describe 'create_session test' do
@@ -162,7 +163,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_campaign
-  # Delete a Campaign
+  # Delete campaign
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
@@ -174,7 +175,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_coupon
-  # Delete one Coupon
+  # Delete coupon
   # @param application_id 
   # @param campaign_id 
   # @param coupon_id The ID of the coupon code to delete
@@ -187,7 +188,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_coupons
-  # Delete Coupons
+  # Delete coupons
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
@@ -212,7 +213,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_referral
-  # Delete one Referral
+  # Delete referral
   # @param application_id 
   # @param campaign_id 
   # @param referral_id The ID of the referral code to delete
@@ -225,7 +226,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_ruleset
-  # Delete a Ruleset
+  # Delete ruleset
   # @param application_id 
   # @param campaign_id 
   # @param ruleset_id 
@@ -237,23 +238,13 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for destroy_session
-  # Destroy a Session
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'destroy_session test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for export_coupons
-  # Export Coupons to a CSV file
+  # Export coupons to a CSV file
   # Download a file with the coupons that match the given attributes.
   # @param application_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Float] :campaign_id Filter results by campaign.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -308,7 +299,7 @@ describe 'ManagementApi' do
   # unit tests for export_loyalty_balance
   # Export customer loyalty balance to a CSV file
   # Download a file with the balance of each customer in the loyalty program
-  # @param program_id 
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'export_loyalty_balance test' do
@@ -320,10 +311,10 @@ describe 'ManagementApi' do
   # unit tests for export_loyalty_ledger
   # Export a customer&#39;s loyalty ledger log to a CSV file
   # Download a file with a customer&#39;s ledger log in the loyalty program
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
+  # @param integration_id 
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
-  # @param program_id 
-  # @param integration_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :date_format Determines the format of dates in the export document.
   # @return [String]
@@ -344,7 +335,7 @@ describe 'ManagementApi' do
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse2008]
   describe 'get_access_logs test' do
     it 'should work' do
@@ -363,7 +354,7 @@ describe 'ManagementApi' do
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse2009]
   describe 'get_access_logs_without_total_count test' do
     it 'should work' do
@@ -413,7 +404,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse20021]
   describe 'get_additional_costs test' do
     it 'should work' do
@@ -422,7 +413,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_all_access_logs
-  # Get all access logs
+  # List access logs
   # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -432,7 +423,7 @@ describe 'ManagementApi' do
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse2008]
   describe 'get_all_access_logs test' do
     it 'should work' do
@@ -441,7 +432,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_all_roles
-  # Get all roles
+  # List roles
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse20029]
   describe 'get_all_roles test' do
@@ -492,7 +483,7 @@ describe 'ManagementApi' do
   # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   # @return [InlineResponse20011]
   describe 'get_application_customers test' do
     it 'should work' do
@@ -502,8 +493,8 @@ describe 'ManagementApi' do
 
   # unit tests for get_application_customers_by_attributes
   # Get a list of the customer profiles that match the given attributes (with total count)
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-  # @param body 
+  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#/customerProfile 
+  # @param application_customer_search 
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse20012]
   describe 'get_application_customers_by_attributes test' do
@@ -519,7 +510,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse20018]
   describe 'get_application_event_types test' do
     it 'should work' do
@@ -534,7 +525,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
   # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
@@ -560,7 +551,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
   # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
@@ -597,7 +588,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :profile Profile integration ID filter for sessions. Must be exact match.
   # @option opts [String] :state Filter by sessions with this state. Must be exact match.
   # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
@@ -618,7 +609,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse2001]
   describe 'get_applications test' do
     it 'should work' do
@@ -644,8 +635,8 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :entity Returned attributes will be filtered by supplied entity
+  # @option opts [String] :sort 
+  # @option opts [String] :entity 
   # @return [InlineResponse20020]
   describe 'get_attributes test' do
     it 'should work' do
@@ -654,13 +645,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_audiences
-  # Get all audiences
+  # List audiences
   # Get All audiences created in the account. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+  # @option opts [String] :sort 
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   # @return [InlineResponse20019]
   describe 'get_audiences test' do
     it 'should work' do
@@ -669,7 +660,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaign
-  # Get a Campaign
+  # Get campaign
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
@@ -696,14 +687,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaign_by_attributes
-  # Get a list of all campaigns that match the given attributes
+  # List campaigns that match the given attributes
   # Gets a list of all the campaigns that exactly match a set of attributes. 
   # @param application_id 
-  # @param body 
+  # @param campaign_search 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
   # @return [InlineResponse2002]
   describe 'get_campaign_by_attributes test' do
@@ -713,12 +704,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaigns
-  # List your Campaigns
+  # List campaigns
   # @param application_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :campaign_state Filter results by the state of the campaign.
   # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
   # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
@@ -738,13 +729,13 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [Integer] :application_id 
   # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
   # @option opts [Integer] :user_id 
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, hasMore will be be true whenever there is a next page. totalResultSize will always be zero. With this flag set to false, hasMore will always be set to false. totalResultSize will contain the total number of results for this query. 
   # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
   # @return [InlineResponse20027]
   describe 'get_changes test' do
@@ -754,13 +745,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_coupons
-  # List Coupons (with total count)
+  # List coupons (with total count)
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -782,15 +773,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_coupons_by_attributes
-  # Get a list of the coupons that match the given attributes
+  # List coupons that match the given attributes
   # Gets a list of all the coupons that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request. 
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param coupon_search 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -808,14 +799,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_coupons_by_attributes_application_wide
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
+  # List coupons that match the given attributes in all active campaigns of an application (with total count)
   # Gets a list of all the coupons with attributes matching the query criteria Application wide 
   # @param application_id 
-  # @param body 
+  # @param coupon_search 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -834,13 +825,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_coupons_without_total_count
-  # List Coupons
+  # List coupons
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -883,7 +874,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :name Only return reports matching the customer name
   # @option opts [String] :integration_id Only return reports matching the integrationId
   # @option opts [String] :campaign_name Only return reports matching the campaignName
@@ -904,7 +895,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :name Only return reports matching the customer name
   # @option opts [String] :integration_id Only return reports matching the integrationId
   # @option opts [String] :campaign_name Only return reports matching the campaignName
@@ -924,7 +915,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [CustomerAnalytics]
   describe 'get_customer_analytics test' do
     it 'should work' do
@@ -956,9 +947,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customers_by_attributes
-  # Get a list of the customer profiles that match the given attributes
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-  # @param body 
+  # List customer profiles that match the given attributes
+  # Get a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#/customerProfile 
+  # @param application_customer_search 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -970,15 +961,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_event_types
-  # List Event Types
-  # Fetch all event type definitions for your account. Each event type can be 
+  # List event types
+  # Fetch all event type definitions for your account. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :application_ids Filter by one or more application ids separated by comma
   # @option opts [String] :name Filter results to event types with the given name. This parameter implies &#x60;includeOldVersions&#x60;.
   # @option opts [Boolean] :include_old_versions Include all versions of every event type.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse20025]
   describe 'get_event_types test' do
     it 'should work' do
@@ -987,7 +978,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_exports
-  # Get Exports
+  # Get exports
   # Get a list of all past exports 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -1003,9 +994,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_loyalty_points
-  # get the Loyalty Ledger for this integrationID
+  # Get integration&#39;s Loyalty Ledger
   # Get the Loyalty Ledger for this profile integration ID.
-  # @param program_id The identifier for the application, must be unique within the account.
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param integration_id The identifier for the application, must be unique within the account.
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyLedger]
@@ -1017,7 +1008,8 @@ describe 'ManagementApi' do
 
   # unit tests for get_loyalty_program
   # Get a loyalty program
-  # @param program_id 
+  # Get a loyalty program.
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyProgram]
   describe 'get_loyalty_program test' do
@@ -1027,7 +1019,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_loyalty_programs
-  # List all loyalty Programs
+  # List loyalty programs
+  # List all the loyalty programs.
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse2007]
   describe 'get_loyalty_programs test' do
@@ -1038,7 +1031,7 @@ describe 'ManagementApi' do
 
   # unit tests for get_loyalty_statistics
   # Get loyalty program statistics by loyalty program ID
-  # @param program_id 
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyStatistics]
   describe 'get_loyalty_statistics test' do
@@ -1048,13 +1041,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_referrals
-  # List Referrals (with total count)
+  # List referrals (with total count)
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1069,13 +1062,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_referrals_without_total_count
-  # List Referrals
+  # List referrals
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1101,7 +1094,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_ruleset
-  # Get a Ruleset
+  # Get ruleset
+  # Retrieve the details of a ruleset.
   # @param application_id 
   # @param campaign_id 
   # @param ruleset_id 
@@ -1114,13 +1108,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_rulesets
-  # List Campaign Rulesets
+  # List rulesets
+  # List all rulesets in the given campaign.
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse2003]
   describe 'get_rulesets test' do
     it 'should work' do
@@ -1141,12 +1136,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_users
-  # List Users in your account
+  # List users
   # Retrieve all users in your account. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @return [InlineResponse20026]
   describe 'get_users test' do
     it 'should work' do
@@ -1172,7 +1167,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
   # @option opts [Float] :webhook_id Filter results by Webhook.
   # @option opts [Float] :application_id 
@@ -1191,7 +1186,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Float] :webhook_id Filter results by Webhook.
   # @option opts [Float] :application_id 
@@ -1210,7 +1205,7 @@ describe 'ManagementApi' do
   # List Webhooks
   # @param [Hash] opts the optional parameters
   # @option opts [String] :application_ids Filter by one or more application ids separated by comma
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @return [InlineResponse20022]
@@ -1226,7 +1221,7 @@ describe 'ManagementApi' do
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @option opts [String] :upfile The file with the information about the loyalty points that should be imported.
   # @return [Import]
   describe 'import_coupons test' do
     it 'should work' do
@@ -1237,9 +1232,9 @@ describe 'ManagementApi' do
   # unit tests for import_loyalty_points
   # Import loyalty points via CSV file
   # Upload a CSV file containing the loyalty points that should be created. The file should be sent as multipart data.
-  # @param program_id 
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @option opts [String] :up_file The file with the information about the loyalty points that should be imported.
   # @return [Import]
   describe 'import_loyalty_points test' do
     it 'should work' do
@@ -1252,7 +1247,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing the giveaways codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - &#x60;code&#x60; (required): the code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  the start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: the last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A json object describing _custom_ giveaways attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called &#x60;provider&#x60;, set it with &#x60;\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;myPartnerCompany\&quot;\&quot;}\&quot;&#x60;.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
   # @param pool_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @option opts [String] :upfile The file with the information about the loyalty points that should be imported.
   # @return [Import]
   describe 'import_pool_giveaways test' do
     it 'should work' do
@@ -1266,7 +1261,7 @@ describe 'ManagementApi' do
   # @param application_id 
   # @param campaign_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @option opts [String] :up_file The file with the information about the loyalty points that should be imported.
   # @return [Import]
   describe 'import_referrals test' do
     it 'should work' do
@@ -1275,10 +1270,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for remove_loyalty_points
-  # Deduct points in a certain loyalty program for the specified customer
-  # @param program_id 
+  # Deduct points in a loyalty program for the specified customer
+  # @param program_id The identifier for the loyalty program, must be unique within the account.
   # @param integration_id 
-  # @param body 
+  # @param loyalty_points 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'remove_loyalty_points test' do
@@ -1290,7 +1285,7 @@ describe 'ManagementApi' do
   # unit tests for reset_password
   # Reset password
   # Consumes the supplied password reset token and updates the password for the associated account. 
-  # @param body 
+  # @param new_password 
   # @param [Hash] opts the optional parameters
   # @return [NewPassword]
   describe 'reset_password test' do
@@ -1300,7 +1295,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for search_coupons_advanced
-  # Get a list of the coupons that match the given attributes (with total count)
+  # List coupons that match the given attributes (with total count)
   # Gets a list of all the coupons with attributes matching the query criteria 
   # @param application_id 
   # @param campaign_id 
@@ -1308,7 +1303,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1326,14 +1321,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for search_coupons_advanced_application_wide
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-  # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
+  # List coupons that match the given attributes in all active campaigns of an application (with total count)
+  # Get a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
   # @param application_id 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1352,14 +1347,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for search_coupons_advanced_application_wide_without_total_count
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application
-  # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
+  # List coupons that match the given attributes in all active campaigns of an application
+  # List of all the coupons with attributes matching the query criteria in all active campaigns of an application. 
   # @param application_id 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1378,15 +1373,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for search_coupons_advanced_without_total_count
-  # Get a list of the coupons that match the given attributes
-  # Gets a list of all the coupons with attributes matching the query criteria 
+  # List coupons that match the given attributes
+  # List of all the coupons with attributes matching the query criteria. 
   # @param application_id 
   # @param campaign_id 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [String] :sort 
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1407,7 +1402,7 @@ describe 'ManagementApi' do
   # Update an additional cost
   # Updates an existing additional cost. Once created, the only property of an additional cost that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. 
   # @param additional_cost_id 
-  # @param body 
+  # @param new_additional_cost 
   # @param [Hash] opts the optional parameters
   # @return [AccountAdditionalCost]
   describe 'update_additional_cost test' do
@@ -1420,7 +1415,7 @@ describe 'ManagementApi' do
   # Update a custom attribute
   # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name &#x60;region&#x60;, and your integration is sending &#x60;attributes.region&#x60; with customer profile updates, changing the name to &#x60;locale&#x60; would cause the integration requests to begin failing.  If you **really** need to change the &#x60;type&#x60; or &#x60;name&#x60; property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
   # @param attribute_id 
-  # @param body 
+  # @param new_attribute 
   # @param [Hash] opts the optional parameters
   # @return [Attribute]
   describe 'update_attribute test' do
@@ -1430,10 +1425,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_campaign
-  # Update a Campaign
+  # Update campaign
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param update_campaign 
   # @param [Hash] opts the optional parameters
   # @return [Campaign]
   describe 'update_campaign test' do
@@ -1443,11 +1438,11 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_coupon
-  # Update a Coupon
+  # Update coupon
   # @param application_id 
   # @param campaign_id 
   # @param coupon_id The ID of the coupon code to update
-  # @param body 
+  # @param update_coupon 
   # @param [Hash] opts the optional parameters
   # @return [Coupon]
   describe 'update_coupon test' do
@@ -1457,10 +1452,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_coupon_batch
-  # Update a Batch of Coupons
+  # Update a batch of coupons
   # @param application_id 
   # @param campaign_id 
-  # @param body 
+  # @param update_coupon_batch 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'update_coupon_batch test' do
@@ -1470,11 +1465,11 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_referral
-  # Update one Referral
+  # Update referral
   # @param application_id 
   # @param campaign_id 
   # @param referral_id The ID of the referral code to delete
-  # @param body 
+  # @param update_referral 
   # @param [Hash] opts the optional parameters
   # @return [Referral]
   describe 'update_referral test' do
@@ -1484,11 +1479,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_ruleset
-  # Update a Ruleset
+  # Update ruleset
+  # Update the specified ruleset.
   # @param application_id 
   # @param campaign_id 
   # @param ruleset_id 
-  # @param body 
+  # @param new_ruleset 
   # @param [Hash] opts the optional parameters
   # @return [Ruleset]
   describe 'update_ruleset test' do

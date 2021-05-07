@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class CustomerAnalytics
     # Total accepted coupons for this customer
     attr_accessor :accepted_coupons

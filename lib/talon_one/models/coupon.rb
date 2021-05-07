@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class Coupon
     # Unique ID for this entity.
     attr_accessor :id
@@ -60,7 +59,7 @@ module TalonOne
     # The ID of the Import which created this coupon.
     attr_accessor :import_id
 
-    # This value controls what reservations mean to a coupon. If set to true the coupon reservation is used to mark it as a favorite, if set to false the coupon reservation is used as a requirement of usage. This value defaults to true if not specified.
+    # This value controls what reservations mean to a coupon. If set to true the coupon reservation is used to mark it as a favourite, if set to false the coupon reservation is used as a requirement of usage. This value defaults to true if not specified.
     attr_accessor :reservation
 
     # The id of the batch the coupon belongs to.
