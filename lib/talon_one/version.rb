@@ -11,5 +11,5 @@ OpenAPI Generator version: 4.3.1
 =end
 
 module TalonOne
-  VERSION = '2.4.0'
+  VERSION = '10.0.0'
 end

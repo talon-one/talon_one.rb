@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class Effect
     # The ID of the campaign that triggered this effect
     attr_accessor :campaign_id

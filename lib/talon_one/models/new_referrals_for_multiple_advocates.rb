@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewReferralsForMultipleAdvocates
     # Timestamp at which point the referral code becomes valid.
     attr_accessor :start_date

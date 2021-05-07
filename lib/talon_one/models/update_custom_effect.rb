@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class UpdateCustomEffect
     # The name of this effect.
     attr_accessor :name

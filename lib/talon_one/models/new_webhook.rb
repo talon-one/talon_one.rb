@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewWebhook
     # The IDs of the applications that are related to this entity.
     attr_accessor :application_ids

@@ -1,6 +1,6 @@
 # TalonOne::IntegrationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://your_domain.your_region.talon.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## create_coupon_reservation
 
-> Coupon create_coupon_reservation(coupon_value, body)
+> Coupon create_coupon_reservation(coupon_value, coupon_reservations)
 
 Create a new coupon reservation
 
@@ -40,20 +40,15 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
 coupon_value = 'coupon_value_example' # String | The value of a coupon
-body = TalonOne::CouponReservations.new # CouponReservations | 
+coupon_reservations = TalonOne::CouponReservations.new # CouponReservations | 
 
 begin
   #Create a new coupon reservation
-  result = api_instance.create_coupon_reservation(coupon_value, body)
+  result = api_instance.create_coupon_reservation(coupon_value, coupon_reservations)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->create_coupon_reservation: #{e}"
@@ -66,7 +61,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **coupon_value** | **String**| The value of a coupon | 
- **body** | [**CouponReservations**](CouponReservations.md)|  | 
+ **coupon_reservations** | [**CouponReservations**](CouponReservations.md)|  | 
 
 ### Return type
 
@@ -74,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -84,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## create_referral
 
-> Referral create_referral(body)
+> Referral create_referral(new_referral)
 
 Create a referral code for an advocate
 
@@ -101,19 +96,14 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
-body = TalonOne::NewReferral.new # NewReferral | 
+new_referral = TalonOne::NewReferral.new # NewReferral | 
 
 begin
   #Create a referral code for an advocate
-  result = api_instance.create_referral(body)
+  result = api_instance.create_referral(new_referral)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->create_referral: #{e}"
@@ -125,7 +115,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewReferral**](NewReferral.md)|  | 
+ **new_referral** | [**NewReferral**](NewReferral.md)|  | 
 
 ### Return type
 
@@ -133,7 +123,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -143,7 +133,7 @@ Name | Type | Description  | Notes
 
 ## create_referrals_for_multiple_advocates
 
-> InlineResponse201 create_referrals_for_multiple_advocates(body, opts)
+> InlineResponse201 create_referrals_for_multiple_advocates(new_referrals_for_multiple_advocates, opts)
 
 Create referral codes for multiple advocates
 
@@ -160,22 +150,17 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
-body = TalonOne::NewReferralsForMultipleAdvocates.new # NewReferralsForMultipleAdvocates | 
+new_referrals_for_multiple_advocates = TalonOne::NewReferralsForMultipleAdvocates.new # NewReferralsForMultipleAdvocates | 
 opts = {
   silent: 'silent_example' # String | If set to `yes`, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
 }
 
 begin
   #Create referral codes for multiple advocates
-  result = api_instance.create_referrals_for_multiple_advocates(body, opts)
+  result = api_instance.create_referrals_for_multiple_advocates(new_referrals_for_multiple_advocates, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->create_referrals_for_multiple_advocates: #{e}"
@@ -187,7 +172,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewReferralsForMultipleAdvocates**](NewReferralsForMultipleAdvocates.md)|  | 
+ **new_referrals_for_multiple_advocates** | [**NewReferralsForMultipleAdvocates**](NewReferralsForMultipleAdvocates.md)|  | 
  **silent** | **String**| If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000). | [optional] 
 
 ### Return type
@@ -196,7 +181,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -206,7 +191,7 @@ Name | Type | Description  | Notes
 
 ## delete_coupon_reservation
 
-> delete_coupon_reservation(coupon_value, body)
+> delete_coupon_reservation(coupon_value, coupon_reservations)
 
 Delete coupon reservations
 
@@ -223,20 +208,15 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
 coupon_value = 'coupon_value_example' # String | The value of a coupon
-body = TalonOne::CouponReservations.new # CouponReservations | 
+coupon_reservations = TalonOne::CouponReservations.new # CouponReservations | 
 
 begin
   #Delete coupon reservations
-  api_instance.delete_coupon_reservation(coupon_value, body)
+  api_instance.delete_coupon_reservation(coupon_value, coupon_reservations)
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->delete_coupon_reservation: #{e}"
 end
@@ -248,7 +228,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **coupon_value** | **String**| The value of a coupon | 
- **body** | [**CouponReservations**](CouponReservations.md)|  | 
+ **coupon_reservations** | [**CouponReservations**](CouponReservations.md)|  | 
 
 ### Return type
 
@@ -256,7 +236,7 @@ nil (empty response body)
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -283,11 +263,6 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
@@ -314,7 +289,7 @@ nil (empty response body)
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -341,11 +316,6 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
@@ -385,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -412,11 +382,6 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
@@ -444,7 +409,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -454,7 +419,7 @@ Name | Type | Description  | Notes
 
 ## track_event
 
-> IntegrationState track_event(body, opts)
+> IntegrationState track_event(new_event, opts)
 
 Track an Event
 
@@ -471,22 +436,17 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
-body = TalonOne::NewEvent.new # NewEvent | 
+new_event = TalonOne::NewEvent.new # NewEvent | 
 opts = {
   dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
   #Track an Event
-  result = api_instance.track_event(body, opts)
+  result = api_instance.track_event(new_event, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->track_event: #{e}"
@@ -498,7 +458,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewEvent**](NewEvent.md)|  | 
+ **new_event** | [**NewEvent**](NewEvent.md)|  | 
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
@@ -507,7 +467,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -517,11 +477,11 @@ Name | Type | Description  | Notes
 
 ## update_customer_profile
 
-> IntegrationState update_customer_profile(integration_id, body, opts)
+> IntegrationState update_customer_profile(integration_id, new_customer_profile, opts)
 
 Update a Customer Profile V1
 
-⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#customer-profile [Rules]: /Getting-Started/entities#campaigns-rulesets-and-coupons 
+⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](/Getting-Started/APIV2).  Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile). This profile information can then be matched and/or updated by campaign [Rules][].  The `integrationId` may be any identifier that will remain stable for the customer. For example, you might use a database ID, an email, or a phone number as the `integrationId`. It is vital that this ID **not** change over time, so **don't** use any identifier that the customer can update themselves. E.g. if your application allows a customer to update their e-mail address, you should instead use a database ID.  Updating a customer profile will return a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  [Customer Profile]: /Getting-Started/entities#/customer-profile [Rules]: /Getting-Started/entities#/campaigns-rulesets-and-coupons 
 
 ### Example
 
@@ -534,23 +494,18 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
 integration_id = 'integration_id_example' # String | The custom identifier for this profile, must be unique within the account.
-body = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
+new_customer_profile = TalonOne::NewCustomerProfile.new # NewCustomerProfile | 
 opts = {
   dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
   #Update a Customer Profile V1
-  result = api_instance.update_customer_profile(integration_id, body, opts)
+  result = api_instance.update_customer_profile(integration_id, new_customer_profile, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile: #{e}"
@@ -563,7 +518,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **integration_id** | **String**| The custom identifier for this profile, must be unique within the account. | 
- **body** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
+ **new_customer_profile** | [**NewCustomerProfile**](NewCustomerProfile.md)|  | 
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
@@ -572,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -582,7 +537,7 @@ Name | Type | Description  | Notes
 
 ## update_customer_profile_audiences
 
-> update_customer_profile_audiences(body)
+> update_customer_profile_audiences(customer_profile_audience_request)
 
 Update a Customer Profile Audiences
 
@@ -595,18 +550,16 @@ Update one ore multiple Customer Profiles with the specified Audiences
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
-  # Configure API key authorization: api_key_v1
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
+  # Configure Bearer authorization: manager_auth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = TalonOne::IntegrationApi.new
-body = TalonOne::CustomerProfileAudienceRequest.new # CustomerProfileAudienceRequest | 
+customer_profile_audience_request = TalonOne::CustomerProfileAudienceRequest.new # CustomerProfileAudienceRequest | 
 
 begin
   #Update a Customer Profile Audiences
-  api_instance.update_customer_profile_audiences(body)
+  api_instance.update_customer_profile_audiences(customer_profile_audience_request)
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile_audiences: #{e}"
 end
@@ -617,7 +570,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**CustomerProfileAudienceRequest**](CustomerProfileAudienceRequest.md)|  | 
+ **customer_profile_audience_request** | [**CustomerProfileAudienceRequest**](CustomerProfileAudienceRequest.md)|  | 
 
 ### Return type
 
@@ -625,7 +578,7 @@ nil (empty response body)
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1)
+[manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -635,11 +588,11 @@ nil (empty response body)
 
 ## update_customer_profile_v2
 
-> IntegrationStateV2 update_customer_profile_v2(integration_id, body, opts)
+> IntegrationStateV2 update_customer_profile_v2(integration_id, customer_profile_integration_request_v2, opts)
 
 Update a Customer Profile
 
-Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#customer-profile).  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter. 
+Update (or create) a [Customer Profile](https://developers.talon.one/Getting-Started/entities#/customer-profile).  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Updating a customer profile returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter. 
 
 ### Example
 
@@ -656,7 +609,7 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 integration_id = 'integration_id_example' # String | The custom identifier for this profile. Must be unique within the account.
-body = TalonOne::CustomerProfileIntegrationRequestV2.new # CustomerProfileIntegrationRequestV2 | 
+customer_profile_integration_request_v2 = TalonOne::CustomerProfileIntegrationRequestV2.new # CustomerProfileIntegrationRequestV2 | 
 opts = {
   run_rule_engine: false, # Boolean | Indicates whether to run the rule engine.
   dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`. Only used when `runRuleEngine` is set to `true`. 
@@ -664,7 +617,7 @@ opts = {
 
 begin
   #Update a Customer Profile
-  result = api_instance.update_customer_profile_v2(integration_id, body, opts)
+  result = api_instance.update_customer_profile_v2(integration_id, customer_profile_integration_request_v2, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profile_v2: #{e}"
@@ -677,7 +630,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **integration_id** | **String**| The custom identifier for this profile. Must be unique within the account. | 
- **body** | [**CustomerProfileIntegrationRequestV2**](CustomerProfileIntegrationRequestV2.md)|  | 
+ **customer_profile_integration_request_v2** | [**CustomerProfileIntegrationRequestV2**](CustomerProfileIntegrationRequestV2.md)|  | 
  **run_rule_engine** | **Boolean**| Indicates whether to run the rule engine. | [optional] [default to false]
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. Only used when &#x60;runRuleEngine&#x60; is set to &#x60;true&#x60;.  | [optional] 
 
@@ -697,11 +650,11 @@ Name | Type | Description  | Notes
 
 ## update_customer_profiles_v2
 
-> MultipleCustomerProfileIntegrationResponseV2 update_customer_profiles_v2(body, opts)
+> MultipleCustomerProfileIntegrationResponseV2 update_customer_profiles_v2(multiple_customer_profile_integration_request, opts)
 
 Update multiple Customer Profiles
 
-Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#customer-profile) in 1 request.  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
+Update (or create) up to 1000 [Customer Profiles](https://developers.talon.one/Getting-Started/entities#/customer-profile) in 1 request.  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://developers.talon.one/Integration-API/API-Reference#updateCustomerSessionV2). 
 
 ### Example
 
@@ -717,14 +670,14 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-body = TalonOne::MultipleCustomerProfileIntegrationRequest.new # MultipleCustomerProfileIntegrationRequest | 
+multiple_customer_profile_integration_request = TalonOne::MultipleCustomerProfileIntegrationRequest.new # MultipleCustomerProfileIntegrationRequest | 
 opts = {
   silent: 'silent_example' # String | If set to `yes`, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
 }
 
 begin
   #Update multiple Customer Profiles
-  result = api_instance.update_customer_profiles_v2(body, opts)
+  result = api_instance.update_customer_profiles_v2(multiple_customer_profile_integration_request, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_profiles_v2: #{e}"
@@ -736,7 +689,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**MultipleCustomerProfileIntegrationRequest**](MultipleCustomerProfileIntegrationRequest.md)|  | 
+ **multiple_customer_profile_integration_request** | [**MultipleCustomerProfileIntegrationRequest**](MultipleCustomerProfileIntegrationRequest.md)|  | 
  **silent** | **String**| If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000). | [optional] 
 
 ### Return type
@@ -755,11 +708,11 @@ Name | Type | Description  | Notes
 
 ## update_customer_session
 
-> IntegrationState update_customer_session(customer_session_id, body, opts)
+> IntegrationState update_customer_session(customer_session_id, new_customer_session, opts)
 
 Update a Customer Session V1
 
-⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+⚠️ Deprecation Notice: Support for requests to this endpoint will end on 15.07.2021. We will not remove the endpoint, and it will still be accessible for you to use. For new features support, migrate to [API V2.0](https://developers.talon.one/Getting-Started/APIV2).  Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer profile returns a response with the full integration state. This includes the current state of the customer profile, the customer session, the event that was recorded, and an array of effects that took place.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
 
 ### Example
 
@@ -772,23 +725,18 @@ TalonOne.configure do |config|
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: integration_auth
-  config.api_key['Content-Signature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Content-Signature'] = 'Bearer'
 end
 
 api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
-body = TalonOne::NewCustomerSession.new # NewCustomerSession | 
+new_customer_session = TalonOne::NewCustomerSession.new # NewCustomerSession | 
 opts = {
   dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
   #Update a Customer Session V1
-  result = api_instance.update_customer_session(customer_session_id, body, opts)
+  result = api_instance.update_customer_session(customer_session_id, new_customer_session, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_session: #{e}"
@@ -801,7 +749,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
- **body** | [**NewCustomerSession**](NewCustomerSession.md)|  | 
+ **new_customer_session** | [**NewCustomerSession**](NewCustomerSession.md)|  | 
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type
@@ -810,7 +758,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key_v1](../README.md#api_key_v1), [integration_auth](../README.md#integration_auth)
+[api_key_v1](../README.md#api_key_v1)
 
 ### HTTP request headers
 
@@ -820,11 +768,11 @@ Name | Type | Description  | Notes
 
 ## update_customer_session_v2
 
-> IntegrationStateV2 update_customer_session_v2(customer_session_id, body, opts)
+> IntegrationStateV2 update_customer_session_v2(customer_session_id, integration_request, opts)
 
 Update a Customer Session
 
-Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
+Update (or create) a [Customer Session](https://developers.talon.one/Getting-Started/entities#/customer-session). For example, use this endpoint to represent which items are in the customer's cart.  The Talon.One platform supports multiple simultaneous sessions for the same profile. If you have multiple ways of accessing the same application you can either:  - Track multiple independent sessions or, - Use the same session across all of them.  You should share sessions when application access points share other state, such as the user's cart. If two points of access to the application have independent states, for example a user can have different items in their cart across the two) they should use independent customer session ID's.  To link a session to a customer profile, set the `profileId` parameter in the request body to a customer profile's `integrationId`. To track an anonymous session use the empty string (`\"\"`) as the `profileId`. **Note:** You do **not** have to create a customer profile first. If the specified profile does not exist, an empty profile is created automatically.  Updating a customer session returns a response with the requested integration state. If `runRuleEngine` is set to `true`, the response includes:  - The effects generated by the triggered campaigns. - The created coupons and referral objects. - Any entity that was requested in the `responseContent` request parameter.  The currency for the session and the cart items in the session is the same as that of the application with which the session is associated. 
 
 ### Example
 
@@ -841,14 +789,14 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 customer_session_id = 'customer_session_id_example' # String | The custom identifier for this session, must be unique within the account.
-body = TalonOne::IntegrationRequest.new # IntegrationRequest | 
+integration_request = TalonOne::IntegrationRequest.new # IntegrationRequest | 
 opts = {
   dry: true # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.
 }
 
 begin
   #Update a Customer Session
-  result = api_instance.update_customer_session_v2(customer_session_id, body, opts)
+  result = api_instance.update_customer_session_v2(customer_session_id, integration_request, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->update_customer_session_v2: #{e}"
@@ -861,7 +809,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customer_session_id** | **String**| The custom identifier for this session, must be unique within the account. | 
- **body** | [**IntegrationRequest**](IntegrationRequest.md)|  | 
+ **integration_request** | [**IntegrationRequest**](IntegrationRequest.md)|  | 
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. | [optional] 
 
 ### Return type

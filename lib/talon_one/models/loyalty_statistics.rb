@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class LoyaltyStatistics
     # Total of active points for this loyalty program
     attr_accessor :total_active_points

@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class CustomerSessionV2
     # The integration ID for this entity sent to and used in the Talon.One system.
     attr_accessor :integration_id
