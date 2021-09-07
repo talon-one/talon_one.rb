@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewAttribute
     # The name of the entity that can have this attribute. When creating or updating the entities of a given type, you can include an `attributes` object with keys corresponding to the `name` of the custom attributes for that type.
     attr_accessor :entity

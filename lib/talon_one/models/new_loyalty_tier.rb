@@ -79,8 +79,8 @@ module TalonOne
         invalid_properties.push('invalid value for "min_points", min_points cannot be nil.')
       end
 
-      if @min_points >= 1E+8
-        invalid_properties.push('invalid value for "min_points", must be smaller than 1E+8.')
+      if @min_points >= 100000000
+        invalid_properties.push('invalid value for "min_points", must be smaller than 100000000.')
       end
 
       if @min_points < 0
@@ -95,7 +95,7 @@ module TalonOne
     def valid?
       return false if @name.nil?
       return false if @min_points.nil?
-      return false if @min_points >= 1E+8
+      return false if @min_points >= 100000000
       return false if @min_points < 0
       true
     end
@@ -107,8 +107,8 @@ module TalonOne
         fail ArgumentError, 'min_points cannot be nil'
       end
 
-      if min_points >= 1E+8
-        fail ArgumentError, 'invalid value for "min_points", must be smaller than 1E+8.'
+      if min_points >= 100000000
+        fail ArgumentError, 'invalid value for "min_points", must be smaller than 100000000.'
       end
 
       if min_points < 0

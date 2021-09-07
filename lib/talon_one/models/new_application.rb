@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewApplication
     # The name of this application.
     attr_accessor :name

@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewAdditionalCost
     # The additional cost name that will be used in API requests and Talang. E.g. if `name == \"shipping\"` then you would set the shipping additional cost by including an `additionalCosts.shipping` property in your request payload.
     attr_accessor :name
