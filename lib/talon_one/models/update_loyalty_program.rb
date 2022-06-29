@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Update Loyalty Program
+  # 
   class UpdateLoyaltyProgram
     # The display title for the Loyalty Program.
     attr_accessor :title
@@ -33,6 +33,12 @@ module TalonOne
     # Indicates if this program supports subledgers inside the program
     attr_accessor :allow_subledger
 
+    # The max amount of user profiles with whom a card can be shared. This can be set to 0 for no limit. This property is only used when `cardBased` is `true`. 
+    attr_accessor :users_per_card_limit
+
+    # The tiers in this loyalty program
+    attr_accessor :tiers
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -41,7 +47,9 @@ module TalonOne
         :'subscribed_applications' => :'subscribedApplications',
         :'default_validity' => :'defaultValidity',
         :'default_pending' => :'defaultPending',
-        :'allow_subledger' => :'allowSubledger'
+        :'allow_subledger' => :'allowSubledger',
+        :'users_per_card_limit' => :'usersPerCardLimit',
+        :'tiers' => :'tiers'
       }
     end
 
@@ -53,7 +61,9 @@ module TalonOne
         :'subscribed_applications' => :'Array<Integer>',
         :'default_validity' => :'String',
         :'default_pending' => :'String',
-        :'allow_subledger' => :'Boolean'
+        :'allow_subledger' => :'Boolean',
+        :'users_per_card_limit' => :'Integer',
+        :'tiers' => :'Array<NewLoyaltyTier>'
       }
     end
 
@@ -103,19 +113,44 @@ module TalonOne
       if attributes.key?(:'allow_subledger')
         self.allow_subledger = attributes[:'allow_subledger']
       end
+
+      if attributes.key?(:'users_per_card_limit')
+        self.users_per_card_limit = attributes[:'users_per_card_limit']
+      end
+
+      if attributes.key?(:'tiers')
+        if (value = attributes[:'tiers']).is_a?(Array)
+          self.tiers = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@users_per_card_limit.nil? && @users_per_card_limit < 0
+        invalid_properties.push('invalid value for "users_per_card_limit", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@users_per_card_limit.nil? && @users_per_card_limit < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] users_per_card_limit Value to be assigned
+    def users_per_card_limit=(users_per_card_limit)
+      if !users_per_card_limit.nil? && users_per_card_limit < 0
+        fail ArgumentError, 'invalid value for "users_per_card_limit", must be greater than or equal to 0.'
+      end
+
+      @users_per_card_limit = users_per_card_limit
     end
 
     # Checks equality by comparing each attribute.
@@ -128,7 +163,9 @@ module TalonOne
           subscribed_applications == o.subscribed_applications &&
           default_validity == o.default_validity &&
           default_pending == o.default_pending &&
-          allow_subledger == o.allow_subledger
+          allow_subledger == o.allow_subledger &&
+          users_per_card_limit == o.users_per_card_limit &&
+          tiers == o.tiers
     end
 
     # @see the `==` method
@@ -140,7 +177,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger].hash
+      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, tiers].hash
     end
 
     # Builds the object from hash

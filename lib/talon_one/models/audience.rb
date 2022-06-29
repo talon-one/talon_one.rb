@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -24,36 +24,14 @@ module TalonOne
     # The exact moment this entity was created.
     attr_accessor :created
 
-    # The human-friendly display name for this Audience.
+    # The human-friendly display name for this audience.
     attr_accessor :name
 
-    # Integration that this audience was created in.
+    # The 3rd-party platform that this audience was created in. For example, mParticle.
     attr_accessor :integration
 
-    # The ID of this Audience in the third-party integration
+    # The ID of this audience in the third-party integration.
     attr_accessor :integration_id
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -149,15 +127,11 @@ module TalonOne
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
-      if @integration.nil?
-        invalid_properties.push('invalid value for "integration", integration cannot be nil.')
+      if !@integration_id.nil? && @integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "integration_id", the character length must be smaller than or equal to 1000.')
       end
 
-      if @integration_id.nil?
-        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
-      end
-
-      if @integration_id.to_s.length < 1
+      if !@integration_id.nil? && @integration_id.to_s.length < 1
         invalid_properties.push('invalid value for "integration_id", the character length must be great than or equal to 1.')
       end
 
@@ -172,11 +146,8 @@ module TalonOne
       return false if @created.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @integration.nil?
-      integration_validator = EnumAttributeValidator.new('String', ["mparticle"])
-      return false unless integration_validator.valid?(@integration)
-      return false if @integration_id.nil?
-      return false if @integration_id.to_s.length < 1
+      return false if !@integration_id.nil? && @integration_id.to_s.length > 1000
+      return false if !@integration_id.nil? && @integration_id.to_s.length < 1
       true
     end
 
@@ -194,24 +165,14 @@ module TalonOne
       @name = name
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] integration Object to be assigned
-    def integration=(integration)
-      validator = EnumAttributeValidator.new('String', ["mparticle"])
-      unless validator.valid?(integration)
-        fail ArgumentError, "invalid value for \"integration\", must be one of #{validator.allowable_values}."
-      end
-      @integration = integration
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] integration_id Value to be assigned
     def integration_id=(integration_id)
-      if integration_id.nil?
-        fail ArgumentError, 'integration_id cannot be nil'
+      if !integration_id.nil? && integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "integration_id", the character length must be smaller than or equal to 1000.'
       end
 
-      if integration_id.to_s.length < 1
+      if !integration_id.nil? && integration_id.to_s.length < 1
         fail ArgumentError, 'invalid value for "integration_id", the character length must be great than or equal to 1.'
       end
 

@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Export.new(id: null,
-                                 created: null,
-                                 account_id: null,
+instance = TalonOne::Export.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 account_id: 3886,
                                  user_id: null,
                                  entity: null,
                                  filter: null)

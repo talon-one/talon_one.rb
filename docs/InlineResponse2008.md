@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;AccessLogEntry&gt;**](AccessLogEntry.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;CollectionWithoutPayload&gt;**](CollectionWithoutPayload.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse2008.new(total_result_size: null,
+instance = TalonOne::InlineResponse2008.new(has_more: null,
+                                 total_result_size: null,
                                  data: null)
 ```
 

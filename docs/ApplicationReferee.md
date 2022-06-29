@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ApplicationReferee.new(application_id: null,
+instance = TalonOne::ApplicationReferee.new(application_id: 322,
                                  session_id: null,
                                  advocate_integration_id: null,
                                  friend_integration_id: null,

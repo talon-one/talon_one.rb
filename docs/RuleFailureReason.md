@@ -25,7 +25,7 @@ require 'TalonOne'
 instance = TalonOne::RuleFailureReason.new(campaign_id: null,
                                  campaign_name: null,
                                  ruleset_id: null,
-                                 coupon_id: null,
+                                 coupon_id: 4928,
                                  coupon_value: null,
                                  referral_id: null,
                                  referral_value: null,

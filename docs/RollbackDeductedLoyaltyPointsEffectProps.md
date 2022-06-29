@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **start_date** | **DateTime** | Date after which the reimbursed points will be valid | [optional] 
 **expiry_date** | **DateTime** | Date after which the reimbursed points will expire | [optional] 
 **transaction_uuid** | **String** | The identifier of &#39;addition&#39; entries added to the ledger as the &#x60;deductLoyaltyPoints&#x60; effect is rolled back | 
+**card_identifier** | **String** | The card on which these points were added. | [optional] 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::RollbackDeductedLoyaltyPointsEffectProps.new(program_id: nu
                                  recipient_integration_id: null,
                                  start_date: null,
                                  expiry_date: null,
-                                 transaction_uuid: null)
+                                 transaction_uuid: null,
+                                 card_identifier: null)
 ```
 
 

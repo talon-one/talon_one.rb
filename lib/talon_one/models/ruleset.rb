@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -21,9 +21,6 @@ module TalonOne
     # The exact moment this entity was created.
     attr_accessor :created
 
-    # The ID of the campaign that owns this entity.
-    attr_accessor :campaign_id
-
     # The ID of the account that owns this entity.
     attr_accessor :user_id
 
@@ -33,11 +30,17 @@ module TalonOne
     # An array that provides objects with variable names (name) and talang expressions to whose result they are bound (expression) during rule evaluation. The order of the evaluation is decided by the position in the array.
     attr_accessor :bindings
 
-    # A string indicating which version of the rulebuilder was used to create this ruleset.
+    # The version of the rulebuilder used to create this ruleset.
     attr_accessor :rb_version
 
-    # A boolean indicating whether this newly created ruleset should also be activated for the campaign owns it
+    # Indicates whether this created ruleset should be activated for the campaign that owns it.
     attr_accessor :activate
+
+    # The ID of the campaign that owns this entity.
+    attr_accessor :campaign_id
+
+    # The ID of the campaign template that owns this entity.
+    attr_accessor :template_id
 
     # Timestamp indicating when this Ruleset was activated.
     attr_accessor :activated_at
@@ -47,12 +50,13 @@ module TalonOne
       {
         :'id' => :'id',
         :'created' => :'created',
-        :'campaign_id' => :'campaignId',
         :'user_id' => :'userId',
         :'rules' => :'rules',
         :'bindings' => :'bindings',
         :'rb_version' => :'rbVersion',
         :'activate' => :'activate',
+        :'campaign_id' => :'campaignId',
+        :'template_id' => :'templateId',
         :'activated_at' => :'activatedAt'
       }
     end
@@ -62,12 +66,13 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'created' => :'DateTime',
-        :'campaign_id' => :'Integer',
         :'user_id' => :'Integer',
         :'rules' => :'Array<Rule>',
         :'bindings' => :'Array<Binding>',
         :'rb_version' => :'String',
         :'activate' => :'Boolean',
+        :'campaign_id' => :'Integer',
+        :'template_id' => :'Integer',
         :'activated_at' => :'DateTime'
       }
     end
@@ -101,10 +106,6 @@ module TalonOne
         self.created = attributes[:'created']
       end
 
-      if attributes.key?(:'campaign_id')
-        self.campaign_id = attributes[:'campaign_id']
-      end
-
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
       end
@@ -129,6 +130,14 @@ module TalonOne
         self.activate = attributes[:'activate']
       end
 
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
+      end
+
+      if attributes.key?(:'template_id')
+        self.template_id = attributes[:'template_id']
+      end
+
       if attributes.key?(:'activated_at')
         self.activated_at = attributes[:'activated_at']
       end
@@ -144,10 +153,6 @@ module TalonOne
 
       if @created.nil?
         invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
       end
 
       if @user_id.nil?
@@ -170,7 +175,6 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @created.nil?
-      return false if @campaign_id.nil?
       return false if @user_id.nil?
       return false if @rules.nil?
       return false if @bindings.nil?
@@ -184,12 +188,13 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           created == o.created &&
-          campaign_id == o.campaign_id &&
           user_id == o.user_id &&
           rules == o.rules &&
           bindings == o.bindings &&
           rb_version == o.rb_version &&
           activate == o.activate &&
+          campaign_id == o.campaign_id &&
+          template_id == o.template_id &&
           activated_at == o.activated_at
     end
 
@@ -202,7 +207,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, campaign_id, user_id, rules, bindings, rb_version, activate, activated_at].hash
+      [id, created, user_id, rules, bindings, rb_version, activate, campaign_id, template_id, activated_at].hash
     end
 
     # Builds the object from hash

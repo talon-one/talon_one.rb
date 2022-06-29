@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,28 +15,31 @@ require 'date'
 module TalonOne
   # 
   class NewCustomerSessionV2
-    # ID of the customers profile as used within this Talon.One account. May be omitted or set to the empty string if the customer does not yet have a known profile ID.
+    # ID of the customers profile as used within this Talon.One account.  **Note:** If the customer does not yet have a known profileId, we recommend you use a guest profileId. 
     attr_accessor :profile_id
 
-    # Any coupon codes entered.
+    # Any coupon codes entered.  **Important**: If you [create a coupon budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a coupon code by the time you close it. 
     attr_accessor :coupon_codes
 
-    # Any referral code entered.
+    # Any referral code entered.  **Important**: If you [create a referral budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a referral code by the time you close it. 
     attr_accessor :referral_code
 
-    # Indicates the current state of the session. All sessions must start in the \"open\" state, after which valid transitions are...  1. open -> closed 2. open -> cancelled 3. closed -> cancelled 
+    # Any loyalty cards used.
+    attr_accessor :loyalty_cards
+
+    # Indicates the current state of the session. Sessions can be created as `open` or `closed`, after which valid transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. `closed` → `cancelled`  For more information, see [Entites](/docs/dev/concepts/entities#customer-session). 
     attr_accessor :state
 
-    # All items the customer will be purchasing in this session
+    # The items to add to this sessions. - If cart item flattening is disabled: **Do not exceed 1000 items** (regardless of their `quantity`) per request. - If cart item flattening is enabled: **Do not exceed 1000 items** and ensure the sum of all cart item's `quantity` **does not exceed 10.000** per request. 
     attr_accessor :cart_items
 
-    # Any costs associated with the session that can not be explicitly attributed to cart items. Examples include shipping costs and service fees.
+    # Any costs associated with the session that can not be explicitly attributed to cart items. Examples include shipping costs and service fees. [Create them in the Campaign Manager](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs/#creating-additional-costs) before setting them with this property. 
     attr_accessor :additional_costs
 
-    # Identifiers for the customer, this can be used for limits on values such as device ID.
+    # Session custom identifiers that you can set limits on or use inside your rules.  For example, you can use IP addresses as identifiers to potentially identify devices and limit discounts abuse in case of customers creating multiple accounts. See the [tutorial](https://docs.talon.one/docs/dev/tutorials/using-identifiers/).  **Important**: If you [create a unique identifier budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains an identifier by the time you close it. 
     attr_accessor :identifiers
 
-    # A key-value map of the sessions attributes. The potentially valid attributes are configured in your accounts developer settings. 
+    # A key-value map of the sessions attributes. If you use custom attributes, they must be created in the Campaign Manager before you set them with this property. For more information, see [Attributes](https://docs.talon.one/docs/dev/concepts/attributes). 
     attr_accessor :attributes
 
     class EnumAttributeValidator
@@ -67,6 +70,7 @@ module TalonOne
         :'profile_id' => :'profileId',
         :'coupon_codes' => :'couponCodes',
         :'referral_code' => :'referralCode',
+        :'loyalty_cards' => :'loyaltyCards',
         :'state' => :'state',
         :'cart_items' => :'cartItems',
         :'additional_costs' => :'additionalCosts',
@@ -81,6 +85,7 @@ module TalonOne
         :'profile_id' => :'String',
         :'coupon_codes' => :'Array<String>',
         :'referral_code' => :'String',
+        :'loyalty_cards' => :'Array<String>',
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
         :'additional_costs' => :'Hash<String, AdditionalCost>',
@@ -122,6 +127,12 @@ module TalonOne
 
       if attributes.key?(:'referral_code')
         self.referral_code = attributes[:'referral_code']
+      end
+
+      if attributes.key?(:'loyalty_cards')
+        if (value = attributes[:'loyalty_cards']).is_a?(Array)
+          self.loyalty_cards = value
+        end
       end
 
       if attributes.key?(:'state')
@@ -168,7 +179,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if !@referral_code.nil? && @referral_code.to_s.length > 100
-      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       return false unless state_validator.valid?(@state)
       true
     end
@@ -186,7 +197,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       unless validator.valid?(state)
         fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
       end
@@ -201,6 +212,7 @@ module TalonOne
           profile_id == o.profile_id &&
           coupon_codes == o.coupon_codes &&
           referral_code == o.referral_code &&
+          loyalty_cards == o.loyalty_cards &&
           state == o.state &&
           cart_items == o.cart_items &&
           additional_costs == o.additional_costs &&
@@ -217,7 +229,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, coupon_codes, referral_code, state, cart_items, additional_costs, identifiers, attributes].hash
+      [profile_id, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes].hash
     end
 
     # Builds the object from hash

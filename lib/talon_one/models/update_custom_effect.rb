@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,6 +15,9 @@ require 'date'
 module TalonOne
   # 
   class UpdateCustomEffect
+    # The IDs of the applications that are related to this entity.
+    attr_accessor :application_ids
+
     # The name of this effect.
     attr_accessor :name
 
@@ -30,21 +33,18 @@ module TalonOne
     # Determines if this effect is active.
     attr_accessor :enabled
 
-    # A list of the IDs of the applications that this effect is enabled for
-    attr_accessor :subscribed_applications_ids
-
     # Array of template argument definitions
     attr_accessor :params
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'application_ids' => :'applicationIds',
         :'name' => :'name',
         :'title' => :'title',
         :'payload' => :'payload',
         :'description' => :'description',
         :'enabled' => :'enabled',
-        :'subscribed_applications_ids' => :'subscribedApplicationsIds',
         :'params' => :'params'
       }
     end
@@ -52,12 +52,12 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'application_ids' => :'Array<Integer>',
         :'name' => :'String',
         :'title' => :'String',
         :'payload' => :'String',
         :'description' => :'String',
         :'enabled' => :'Boolean',
-        :'subscribed_applications_ids' => :'Array<Integer>',
         :'params' => :'Array<TemplateArgDef>'
       }
     end
@@ -83,6 +83,12 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'application_ids')
+        if (value = attributes[:'application_ids']).is_a?(Array)
+          self.application_ids = value
+        end
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
@@ -103,12 +109,6 @@ module TalonOne
         self.enabled = attributes[:'enabled']
       end
 
-      if attributes.key?(:'subscribed_applications_ids')
-        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
-          self.subscribed_applications_ids = value
-        end
-      end
-
       if attributes.key?(:'params')
         if (value = attributes[:'params']).is_a?(Array)
           self.params = value
@@ -120,12 +120,26 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @application_ids.nil?
+        invalid_properties.push('invalid value for "application_ids", application_ids cannot be nil.')
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      if @name !~ pattern
+        invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
+      end
+
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^[^[:cntrl:]\s][^[:cntrl:]]*$/)
+      if @title !~ pattern
+        invalid_properties.push("invalid value for \"title\", must conform to the pattern #{pattern}.")
       end
 
       if @payload.nil?
@@ -142,11 +156,44 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @application_ids.nil?
       return false if @name.nil?
+      return false if @name !~ Regexp.new(/^[A-Za-z](\w|\s)*$/)
       return false if @title.nil?
+      return false if @title !~ Regexp.new(/^[^[:cntrl:]\s][^[:cntrl:]]*$/)
       return false if @payload.nil?
       return false if @enabled.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      if name !~ pattern
+        fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[^[:cntrl:]\s][^[:cntrl:]]*$/)
+      if title !~ pattern
+        fail ArgumentError, "invalid value for \"title\", must conform to the pattern #{pattern}."
+      end
+
+      @title = title
     end
 
     # Checks equality by comparing each attribute.
@@ -154,12 +201,12 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          application_ids == o.application_ids &&
           name == o.name &&
           title == o.title &&
           payload == o.payload &&
           description == o.description &&
           enabled == o.enabled &&
-          subscribed_applications_ids == o.subscribed_applications_ids &&
           params == o.params
     end
 
@@ -172,7 +219,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, title, payload, description, enabled, subscribed_applications_ids, params].hash
+      [application_ids, name, title, payload, description, enabled, params].hash
     end
 
     # Builds the object from hash

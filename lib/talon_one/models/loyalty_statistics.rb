@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,35 +15,58 @@ require 'date'
 module TalonOne
   # 
   class LoyaltyStatistics
-    # Total of active points for this loyalty program
+    # Date at which data point was collected.
+    attr_accessor :date
+
+    # Total of active points for this loyalty program.
     attr_accessor :total_active_points
 
-    # Total of pending points for this loyalty program
+    # Total of pending points for this loyalty program.
     attr_accessor :total_pending_points
 
-    # Total of spent points for this loyalty program
+    # Total of spent points for this loyalty program.
     attr_accessor :total_spent_points
 
-    # Total of expired points for this loyalty program
+    # Total of expired points for this loyalty program.
     attr_accessor :total_expired_points
+
+    # Number of loyalty program members.
+    attr_accessor :total_members
+
+    # Number of members who joined on this day.
+    attr_accessor :new_members
+
+    attr_accessor :spent_points
+
+    attr_accessor :earned_points
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'date' => :'date',
         :'total_active_points' => :'totalActivePoints',
         :'total_pending_points' => :'totalPendingPoints',
         :'total_spent_points' => :'totalSpentPoints',
-        :'total_expired_points' => :'totalExpiredPoints'
+        :'total_expired_points' => :'totalExpiredPoints',
+        :'total_members' => :'totalMembers',
+        :'new_members' => :'newMembers',
+        :'spent_points' => :'spentPoints',
+        :'earned_points' => :'earnedPoints'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'date' => :'DateTime',
         :'total_active_points' => :'Float',
         :'total_pending_points' => :'Float',
         :'total_spent_points' => :'Float',
-        :'total_expired_points' => :'Float'
+        :'total_expired_points' => :'Float',
+        :'total_members' => :'Float',
+        :'new_members' => :'Float',
+        :'spent_points' => :'LoyaltyDashboardPointsBreakdown',
+        :'earned_points' => :'LoyaltyDashboardPointsBreakdown'
       }
     end
 
@@ -68,6 +91,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'date')
+        self.date = attributes[:'date']
+      end
+
       if attributes.key?(:'total_active_points')
         self.total_active_points = attributes[:'total_active_points']
       end
@@ -83,12 +110,32 @@ module TalonOne
       if attributes.key?(:'total_expired_points')
         self.total_expired_points = attributes[:'total_expired_points']
       end
+
+      if attributes.key?(:'total_members')
+        self.total_members = attributes[:'total_members']
+      end
+
+      if attributes.key?(:'new_members')
+        self.new_members = attributes[:'new_members']
+      end
+
+      if attributes.key?(:'spent_points')
+        self.spent_points = attributes[:'spent_points']
+      end
+
+      if attributes.key?(:'earned_points')
+        self.earned_points = attributes[:'earned_points']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @date.nil?
+        invalid_properties.push('invalid value for "date", date cannot be nil.')
+      end
+
       if @total_active_points.nil?
         invalid_properties.push('invalid value for "total_active_points", total_active_points cannot be nil.')
       end
@@ -105,16 +152,37 @@ module TalonOne
         invalid_properties.push('invalid value for "total_expired_points", total_expired_points cannot be nil.')
       end
 
+      if @total_members.nil?
+        invalid_properties.push('invalid value for "total_members", total_members cannot be nil.')
+      end
+
+      if @new_members.nil?
+        invalid_properties.push('invalid value for "new_members", new_members cannot be nil.')
+      end
+
+      if @spent_points.nil?
+        invalid_properties.push('invalid value for "spent_points", spent_points cannot be nil.')
+      end
+
+      if @earned_points.nil?
+        invalid_properties.push('invalid value for "earned_points", earned_points cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @date.nil?
       return false if @total_active_points.nil?
       return false if @total_pending_points.nil?
       return false if @total_spent_points.nil?
       return false if @total_expired_points.nil?
+      return false if @total_members.nil?
+      return false if @new_members.nil?
+      return false if @spent_points.nil?
+      return false if @earned_points.nil?
       true
     end
 
@@ -123,10 +191,15 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          date == o.date &&
           total_active_points == o.total_active_points &&
           total_pending_points == o.total_pending_points &&
           total_spent_points == o.total_spent_points &&
-          total_expired_points == o.total_expired_points
+          total_expired_points == o.total_expired_points &&
+          total_members == o.total_members &&
+          new_members == o.new_members &&
+          spent_points == o.spent_points &&
+          earned_points == o.earned_points
     end
 
     # @see the `==` method
@@ -138,7 +211,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_active_points, total_pending_points, total_spent_points, total_expired_points].hash
+      [date, total_active_points, total_pending_points, total_spent_points, total_expired_points, total_members, new_members, spent_points, earned_points].hash
     end
 
     # Builds the object from hash

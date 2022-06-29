@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this item | [optional] 
-**integration_id** | **String** | The custom identifier for this profile, must be unique within the account. | 
+**integration_id** | **String** | The custom identifier for this profile, must be unique within the account.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2).  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::MultipleCustomerProfileIntegrationRequestItem.new(attributes: null,
-                                 integration_id: null)
+instance = TalonOne::MultipleCustomerProfileIntegrationRequestItem.new(attributes: {&quot;Language&quot;:&quot;english&quot;,&quot;ShippingCountry&quot;:&quot;DE&quot;},
+                                 integration_id: R195412)
 ```
 
 

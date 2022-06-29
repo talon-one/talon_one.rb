@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -30,6 +30,12 @@ module TalonOne
     # The identifier of this deduction in the loyalty ledger
     attr_accessor :transaction_uuid
 
+    # The name property gets one of the following two values. It can be the loyalty program name or it can represent a reason for the respective deduction of loyalty points. The latter is an optional value defined in a deduction rule. 
+    attr_accessor :name
+
+    # The card on which these points were added.
+    attr_accessor :card_identifier
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +43,9 @@ module TalonOne
         :'program_id' => :'programId',
         :'sub_ledger_id' => :'subLedgerId',
         :'value' => :'value',
-        :'transaction_uuid' => :'transactionUUID'
+        :'transaction_uuid' => :'transactionUUID',
+        :'name' => :'name',
+        :'card_identifier' => :'cardIdentifier'
       }
     end
 
@@ -48,7 +56,9 @@ module TalonOne
         :'program_id' => :'Integer',
         :'sub_ledger_id' => :'String',
         :'value' => :'Float',
-        :'transaction_uuid' => :'String'
+        :'transaction_uuid' => :'String',
+        :'name' => :'String',
+        :'card_identifier' => :'String'
       }
     end
 
@@ -92,6 +102,14 @@ module TalonOne
       if attributes.key?(:'transaction_uuid')
         self.transaction_uuid = attributes[:'transaction_uuid']
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'card_identifier')
+        self.card_identifier = attributes[:'card_identifier']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -118,6 +136,10 @@ module TalonOne
         invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
       end
 
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -129,6 +151,7 @@ module TalonOne
       return false if @sub_ledger_id.nil?
       return false if @value.nil?
       return false if @transaction_uuid.nil?
+      return false if @name.nil?
       true
     end
 
@@ -141,7 +164,9 @@ module TalonOne
           program_id == o.program_id &&
           sub_ledger_id == o.sub_ledger_id &&
           value == o.value &&
-          transaction_uuid == o.transaction_uuid
+          transaction_uuid == o.transaction_uuid &&
+          name == o.name &&
+          card_identifier == o.card_identifier
     end
 
     # @see the `==` method
@@ -153,7 +178,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [rule_title, program_id, sub_ledger_id, value, transaction_uuid].hash
+      [rule_title, program_id, sub_ledger_id, value, transaction_uuid, name, card_identifier].hash
     end
 
     # Builds the object from hash

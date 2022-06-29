@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. | 
 **created** | **DateTime** | The exact moment this entity was created. | 
-**campaign_id** | **Integer** | The ID of the campaign that owns this entity. | 
 **user_id** | **Integer** | The ID of the account that owns this entity. | 
 **rules** | [**Array&lt;Rule&gt;**](Rule.md) | Set of rules to apply. | 
 **bindings** | [**Array&lt;Binding&gt;**](Binding.md) | An array that provides objects with variable names (name) and talang expressions to whose result they are bound (expression) during rule evaluation. The order of the evaluation is decided by the position in the array. | 
-**rb_version** | **String** | A string indicating which version of the rulebuilder was used to create this ruleset. | [optional] 
-**activate** | **Boolean** | A boolean indicating whether this newly created ruleset should also be activated for the campaign owns it | [optional] 
+**rb_version** | **String** | The version of the rulebuilder used to create this ruleset. | [optional] 
+**activate** | **Boolean** | Indicates whether this created ruleset should be activated for the campaign that owns it. | [optional] 
+**campaign_id** | **Integer** | The ID of the campaign that owns this entity. | [optional] 
+**template_id** | **Integer** | The ID of the campaign template that owns this entity. | [optional] 
 **activated_at** | **DateTime** | Timestamp indicating when this Ruleset was activated. | [optional] 
 
 ## Code Sample
@@ -19,14 +20,15 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Ruleset.new(id: null,
-                                 created: null,
-                                 campaign_id: null,
+instance = TalonOne::Ruleset.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
                                  user_id: null,
                                  rules: null,
-                                 bindings: null,
-                                 rb_version: null,
+                                 bindings: [],
+                                 rb_version: v2,
                                  activate: null,
+                                 campaign_id: 320,
+                                 template_id: 3,
                                  activated_at: null)
 ```
 

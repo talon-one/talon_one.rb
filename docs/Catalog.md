@@ -1,0 +1,33 @@
+# TalonOne::Catalog
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **Integer** | Unique ID for this entity. | 
+**created** | **DateTime** | The exact moment this entity was created. | 
+**account_id** | **Integer** | The ID of the account that owns this entity. | 
+**modified** | **DateTime** | The exact moment this entity was last modified. | 
+**name** | **String** | The cart items catalog name. | 
+**description** | **String** | A description of this cart items catalog. | 
+**subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the applications that are subscribed to this catalog. | [optional] 
+**version** | **Integer** | The current version of this catalog. | 
+**created_by** | **Integer** | The ID of user who created this catalog. | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::Catalog.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 account_id: 3886,
+                                 modified: 2021-09-12T10:12:42Z,
+                                 name: null,
+                                 description: null,
+                                 subscribed_applications_ids: null,
+                                 version: 6,
+                                 created_by: 6)
+```
+
+

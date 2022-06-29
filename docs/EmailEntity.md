@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::EmailEntity.new(email: null)
+instance = TalonOne::EmailEntity.new(email: john.doe@example.com)
 ```
 
 

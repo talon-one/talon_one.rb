@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -17,18 +17,22 @@ module TalonOne
     # A descriptive name for the value to be bound.
     attr_accessor :name
 
-    # The kind of binding. Possible values are cartItemFilter, subledgerBalance.
+    # The kind of binding. Possible values are: - `bundle` - `cartItemFilter` - `subledgerBalance` - `templateParameter` 
     attr_accessor :type
 
     # A Talang expression that will be evaluated and its result attached to the name of the binding.
     attr_accessor :expression
+
+    # Can be one of the following: - `string` - `number` - `boolean` 
+    attr_accessor :value_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'type' => :'type',
-        :'expression' => :'expression'
+        :'expression' => :'expression',
+        :'value_type' => :'valueType'
       }
     end
 
@@ -37,7 +41,8 @@ module TalonOne
       {
         :'name' => :'String',
         :'type' => :'String',
-        :'expression' => :'Array<Object>'
+        :'expression' => :'Array<Object>',
+        :'value_type' => :'String'
       }
     end
 
@@ -75,6 +80,10 @@ module TalonOne
           self.expression = value
         end
       end
+
+      if attributes.key?(:'value_type')
+        self.value_type = attributes[:'value_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +116,8 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           type == o.type &&
-          expression == o.expression
+          expression == o.expression &&
+          value_type == o.value_type
     end
 
     # @see the `==` method
@@ -119,7 +129,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, type, expression].hash
+      [name, type, expression, value_type].hash
     end
 
     # Builds the object from hash

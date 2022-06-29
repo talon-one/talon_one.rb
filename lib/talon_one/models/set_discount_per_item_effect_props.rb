@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,19 +13,31 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"setDiscountPerItem\" effect. This gets triggered whenever a validated rule contained a \"set per item discount\" effect. This is a discount that should be applied on a specific item.
+  # The properties specific to the `setDiscountPerItem` effect, triggered whenever a validated rule contained a \"set per item discount\" effect. This is a discount that will be applied either on a specific item, on a specific item + additional cost or on all additional costs per item. This depends on the chosen scope. 
   class SetDiscountPerItemEffectProps
-    # The name/description of this discount
+    # The name of the discount. Contains a hashtag character indicating the index of the position of the item the discount applies to. It is identical to the value of the `position` property. 
     attr_accessor :name
 
-    # The total monetary value of the discount
+    # The total monetary value of the discount.
     attr_accessor :value
 
-    # The index of the item in the cart items list on which this discount should be applied
+    # The index of the item in the cart items list on which this discount should be applied.
     attr_accessor :position
 
-    # The sub-index of the item in an item stack on which this discount should be applied
+    # Only used when [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation/#flattened-cart-items) is enabled. Indicates which item the discount applies to for cart items with `quantity` > 1. 
     attr_accessor :sub_position
+
+    # The original value of the discount
+    attr_accessor :desired_value
+
+    # The scope of the discount: - `additionalCosts`: The discount applies to all the additional costs of the item. - `itemTotal`: The discount applies to the price of the item + the additional costs of the item. - `price`: The discount applies to the price of the item. 
+    attr_accessor :scope
+
+    # The total discount given if this effect is a result of a prorated discount
+    attr_accessor :total_discount
+
+    # The original total discount to give if this effect is a result of a prorated discount
+    attr_accessor :desired_total_discount
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -33,7 +45,11 @@ module TalonOne
         :'name' => :'name',
         :'value' => :'value',
         :'position' => :'position',
-        :'sub_position' => :'subPosition'
+        :'sub_position' => :'subPosition',
+        :'desired_value' => :'desiredValue',
+        :'scope' => :'scope',
+        :'total_discount' => :'totalDiscount',
+        :'desired_total_discount' => :'desiredTotalDiscount'
       }
     end
 
@@ -43,7 +59,11 @@ module TalonOne
         :'name' => :'String',
         :'value' => :'Float',
         :'position' => :'Float',
-        :'sub_position' => :'Float'
+        :'sub_position' => :'Float',
+        :'desired_value' => :'Float',
+        :'scope' => :'String',
+        :'total_discount' => :'Float',
+        :'desired_total_discount' => :'Float'
       }
     end
 
@@ -83,6 +103,22 @@ module TalonOne
       if attributes.key?(:'sub_position')
         self.sub_position = attributes[:'sub_position']
       end
+
+      if attributes.key?(:'desired_value')
+        self.desired_value = attributes[:'desired_value']
+      end
+
+      if attributes.key?(:'scope')
+        self.scope = attributes[:'scope']
+      end
+
+      if attributes.key?(:'total_discount')
+        self.total_discount = attributes[:'total_discount']
+      end
+
+      if attributes.key?(:'desired_total_discount')
+        self.desired_total_discount = attributes[:'desired_total_discount']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -121,7 +157,11 @@ module TalonOne
           name == o.name &&
           value == o.value &&
           position == o.position &&
-          sub_position == o.sub_position
+          sub_position == o.sub_position &&
+          desired_value == o.desired_value &&
+          scope == o.scope &&
+          total_discount == o.total_discount &&
+          desired_total_discount == o.desired_total_discount
     end
 
     # @see the `==` method
@@ -133,7 +173,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value, position, sub_position].hash
+      [name, value, position, sub_position, desired_value, scope, total_discount, desired_total_discount].hash
     end
 
     # Builds the object from hash

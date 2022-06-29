@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,8 +15,11 @@ require 'date'
 module TalonOne
   # Effect containing custom payload.
   class CustomEffectProps
+    # The ID of the custom effect that was triggered
+    attr_accessor :effect_id
+
     # The type of the custom effect.
-    attr_accessor :type
+    attr_accessor :name
 
     # The JSON payload of the custom effect.
     attr_accessor :payload
@@ -24,7 +27,8 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
+        :'effect_id' => :'effectId',
+        :'name' => :'name',
         :'payload' => :'payload'
       }
     end
@@ -32,7 +36,8 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
+        :'effect_id' => :'Integer',
+        :'name' => :'String',
         :'payload' => :'Object'
       }
     end
@@ -58,8 +63,12 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'effect_id')
+        self.effect_id = attributes[:'effect_id']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'payload')
@@ -71,8 +80,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      if @effect_id.nil?
+        invalid_properties.push('invalid value for "effect_id", effect_id cannot be nil.')
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       if @payload.nil?
@@ -85,7 +98,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @type.nil?
+      return false if @effect_id.nil?
+      return false if @name.nil?
       return false if @payload.nil?
       true
     end
@@ -95,7 +109,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
+          effect_id == o.effect_id &&
+          name == o.name &&
           payload == o.payload
     end
 
@@ -108,7 +123,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, payload].hash
+      [effect_id, name, payload].hash
     end
 
     # Builds the object from hash

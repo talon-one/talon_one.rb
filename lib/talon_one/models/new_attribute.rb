@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -34,6 +34,12 @@ module TalonOne
 
     # A list of suggestions for the attribute.
     attr_accessor :suggestions
+
+    # Whether or not this attribute has an allowed list of values associated with it.
+    attr_accessor :has_allowed_list
+
+    # Whether or not this attribute's value is restricted by suggestions (`suggestions` property) or by an allowed list of value (`hasAllowedList` property). 
+    attr_accessor :restricted_by_suggestions
 
     # Whether or not this attribute can be edited.
     attr_accessor :editable
@@ -73,6 +79,8 @@ module TalonOne
         :'type' => :'type',
         :'description' => :'description',
         :'suggestions' => :'suggestions',
+        :'has_allowed_list' => :'hasAllowedList',
+        :'restricted_by_suggestions' => :'restrictedBySuggestions',
         :'editable' => :'editable',
         :'subscribed_applications_ids' => :'subscribedApplicationsIds'
       }
@@ -88,6 +96,8 @@ module TalonOne
         :'type' => :'String',
         :'description' => :'String',
         :'suggestions' => :'Array<String>',
+        :'has_allowed_list' => :'Boolean',
+        :'restricted_by_suggestions' => :'Boolean',
         :'editable' => :'Boolean',
         :'subscribed_applications_ids' => :'Array<Integer>'
       }
@@ -144,6 +154,18 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'has_allowed_list')
+        self.has_allowed_list = attributes[:'has_allowed_list']
+      else
+        self.has_allowed_list = false
+      end
+
+      if attributes.key?(:'restricted_by_suggestions')
+        self.restricted_by_suggestions = attributes[:'restricted_by_suggestions']
+      else
+        self.restricted_by_suggestions = false
+      end
+
       if attributes.key?(:'editable')
         self.editable = attributes[:'editable']
       end
@@ -167,8 +189,18 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z]\w*$/)
+      if @name !~ pattern
+        invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
+      end
+
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
+      if @title !~ pattern
+        invalid_properties.push("invalid value for \"title\", must conform to the pattern #{pattern}.")
       end
 
       if @type.nil?
@@ -197,7 +229,9 @@ module TalonOne
       entity_validator = EnumAttributeValidator.new('String', ["Account", "Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral"])
       return false unless entity_validator.valid?(@entity)
       return false if @name.nil?
+      return false if @name !~ Regexp.new(/^[A-Za-z]\w*$/)
       return false if @title.nil?
+      return false if @title !~ Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["string", "number", "boolean", "time", "(list string)", "(list number)", "(list time)", "location", "(list location)"])
       return false unless type_validator.valid?(@type)
@@ -215,6 +249,36 @@ module TalonOne
         fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
       end
       @entity = entity
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z]\w*$/)
+      if name !~ pattern
+        fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
+      if title !~ pattern
+        fail ArgumentError, "invalid value for \"title\", must conform to the pattern #{pattern}."
+      end
+
+      @title = title
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -239,6 +303,8 @@ module TalonOne
           type == o.type &&
           description == o.description &&
           suggestions == o.suggestions &&
+          has_allowed_list == o.has_allowed_list &&
+          restricted_by_suggestions == o.restricted_by_suggestions &&
           editable == o.editable &&
           subscribed_applications_ids == o.subscribed_applications_ids
     end
@@ -252,7 +318,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [entity, event_type, name, title, type, description, suggestions, editable, subscribed_applications_ids].hash
+      [entity, event_type, name, title, type, description, suggestions, has_allowed_list, restricted_by_suggestions, editable, subscribed_applications_ids].hash
     end
 
     # Builds the object from hash

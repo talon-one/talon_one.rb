@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyTier.new(id: null,
-                                 created: null,
-                                 program_id: null,
-                                 name: null,
-                                 min_points: null)
+instance = TalonOne::LoyaltyTier.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 program_id: 125,
+                                 name: Gold,
+                                 min_points: 300.0)
 ```
 
 

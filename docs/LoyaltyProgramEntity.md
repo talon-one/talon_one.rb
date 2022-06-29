@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyProgramEntity.new(program_id: null)
+instance = TalonOne::LoyaltyProgramEntity.new(program_id: 125)
 ```
 
 

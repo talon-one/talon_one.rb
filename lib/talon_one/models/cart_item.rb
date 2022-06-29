@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -14,17 +14,28 @@ require 'date'
 
 module TalonOne
   class CartItem
+    # Name of item
     attr_accessor :name
 
+    # Stock keeping unit of item
     attr_accessor :sku
 
+    # Quantity of item. **Important:** If you enabled [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation/#flattened-cart-items), the quantity is always one and the same cart item might receive multiple per-item discounts. Ensure you can process multiple discounts on one cart item correctly. 
     attr_accessor :quantity
 
+    # Number of returned items, calculated internally based on returns of this item.
+    attr_accessor :returned_quantity
+
+    # Remaining quantity of the item, calculated internally based on returns of this item.
+    attr_accessor :remaining_quantity
+
+    # Price of item
     attr_accessor :price
 
+    # Type, group or model of the item
     attr_accessor :category
 
-    # Weight of item in mm
+    # Weight of item in grams
     attr_accessor :weight
 
     # Height of item in mm
@@ -39,8 +50,11 @@ module TalonOne
     # Position of the Cart Item in the Cart (calculated internally)
     attr_accessor :position
 
-    # Arbitrary properties associated with this item
+    # Arbitrary properties associated with this item. You can use built-in attributes or create your own. See [Attributes](https://docs.talon.one/docs/dev/concepts/attributes). 
     attr_accessor :attributes
+
+    # Any additional costs associated with the cart item 
+    attr_accessor :additional_costs
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -48,6 +62,8 @@ module TalonOne
         :'name' => :'name',
         :'sku' => :'sku',
         :'quantity' => :'quantity',
+        :'returned_quantity' => :'returnedQuantity',
+        :'remaining_quantity' => :'remainingQuantity',
         :'price' => :'price',
         :'category' => :'category',
         :'weight' => :'weight',
@@ -55,7 +71,8 @@ module TalonOne
         :'width' => :'width',
         :'length' => :'length',
         :'position' => :'position',
-        :'attributes' => :'attributes'
+        :'attributes' => :'attributes',
+        :'additional_costs' => :'additionalCosts'
       }
     end
 
@@ -65,6 +82,8 @@ module TalonOne
         :'name' => :'String',
         :'sku' => :'String',
         :'quantity' => :'Integer',
+        :'returned_quantity' => :'Integer',
+        :'remaining_quantity' => :'Integer',
         :'price' => :'Float',
         :'category' => :'String',
         :'weight' => :'Float',
@@ -72,7 +91,8 @@ module TalonOne
         :'width' => :'Float',
         :'length' => :'Float',
         :'position' => :'Float',
-        :'attributes' => :'Object'
+        :'attributes' => :'Object',
+        :'additional_costs' => :'Hash<String, AdditionalCost>'
       }
     end
 
@@ -109,6 +129,14 @@ module TalonOne
         self.quantity = attributes[:'quantity']
       end
 
+      if attributes.key?(:'returned_quantity')
+        self.returned_quantity = attributes[:'returned_quantity']
+      end
+
+      if attributes.key?(:'remaining_quantity')
+        self.remaining_quantity = attributes[:'remaining_quantity']
+      end
+
       if attributes.key?(:'price')
         self.price = attributes[:'price']
       end
@@ -139,6 +167,12 @@ module TalonOne
 
       if attributes.key?(:'attributes')
         self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'additional_costs')
+        if (value = attributes[:'additional_costs']).is_a?(Hash)
+          self.additional_costs = value
+        end
       end
     end
 
@@ -240,6 +274,8 @@ module TalonOne
           name == o.name &&
           sku == o.sku &&
           quantity == o.quantity &&
+          returned_quantity == o.returned_quantity &&
+          remaining_quantity == o.remaining_quantity &&
           price == o.price &&
           category == o.category &&
           weight == o.weight &&
@@ -247,7 +283,8 @@ module TalonOne
           width == o.width &&
           length == o.length &&
           position == o.position &&
-          attributes == o.attributes
+          attributes == o.attributes &&
+          additional_costs == o.additional_costs
     end
 
     # @see the `==` method
@@ -259,7 +296,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sku, quantity, price, category, weight, height, width, length, position, attributes].hash
+      [name, sku, quantity, returned_quantity, remaining_quantity, price, category, weight, height, width, length, position, attributes, additional_costs].hash
     end
 
     # Builds the object from hash

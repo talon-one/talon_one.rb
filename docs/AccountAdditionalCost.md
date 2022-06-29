@@ -11,19 +11,21 @@ Name | Type | Description | Notes
 **title** | **String** | The human-readable name for the additional cost that will be shown in the Campaign Manager. Like &#x60;name&#x60;, the combination of entity and title must also be unique. | 
 **description** | **String** | A description of this additional cost. | 
 **subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the applications that are subscribed to this additional cost | [optional] 
+**type** | **String** | The type of additional cost. The following options can be chosen: - &#x60;session&#x60;: Additional cost will be added per session, - &#x60;item&#x60;: Additional cost will be added per item, - &#x60;both&#x60;: Additional cost will be added per item and session.  | [optional] [default to &#39;session&#39;]
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AccountAdditionalCost.new(id: null,
-                                 created: null,
-                                 account_id: null,
+instance = TalonOne::AccountAdditionalCost.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 account_id: 3886,
                                  name: null,
                                  title: null,
                                  description: null,
-                                 subscribed_applications_ids: null)
+                                 subscribed_applications_ids: null,
+                                 type: null)
 ```
 
 

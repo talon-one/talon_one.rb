@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -36,37 +36,43 @@ module TalonOne
     # A string containing an IANA timezone descriptor.
     attr_accessor :timezone
 
-    # A string describing a default currency for new customer sessions.
+    # The default currency for new customer sessions.
     attr_accessor :currency
 
-    # A string indicating how should campaigns in this application deal with case sensitivity on coupon codes.
+    # The case sensitivity behavior to check coupon codes in the campaigns of this Application.
     attr_accessor :case_sensitivity
 
-    # Arbitrary properties associated with this campaign
+    # Arbitrary properties associated with this campaign.
     attr_accessor :attributes
 
-    # Default limits for campaigns created in this application
+    # Default limits for campaigns created in this application.
     attr_accessor :limits
 
-    # Default priority for campaigns created in this application, can be one of (universal, stackable, exclusive). If no value is provided, this is set to \"universal\"
+    # Default [priority](https://docs.talon.one/docs/product/applications/setting-up-campaign-priorities) for campaigns created in this Application. 
     attr_accessor :campaign_priority
 
-    # The strategy used when choosing exclusive campaigns for evaluation, can be one of (listOrder, lowestDiscount, highestDiscount). If no value is provided, this is set to \"listOrder\"
+    # The strategy used when choosing exclusive campaigns for evaluation.
     attr_accessor :exclusive_campaigns_strategy
 
-    # The default scope to apply \"setDiscount\" effects on if no scope was provided with the effect.
+    # The default scope to apply `setDiscount` effects on if no scope was provided with the effect. 
     attr_accessor :default_discount_scope
 
-    # Flag indicating if discounts should cascade for this application
+    # Indicates if discounts should cascade for this Application.
     attr_accessor :enable_cascading_discounts
 
-    # Flag indicating if cart items of quantity larger than one should be separated into different items of quantity one
+    # Indicates if cart items of quantity larger than one should be separated into different items of quantity one. See [the docs](https://docs.talon.one/docs/product/campaigns/campaign-evaluation/#flattened-cart-items). 
     attr_accessor :enable_flattened_cart_items
 
     attr_accessor :attributes_settings
 
-    # Flag indicating if this is a live or sandbox application
+    # Indicates if this is a live or sandbox Application.
     attr_accessor :sandbox
+
+    # Indicates if this Application supports partial discounts.
+    attr_accessor :enable_partial_discounts
+
+    # The default scope to apply `setDiscountPerItem` effects on if no scope was provided with the effect. 
+    attr_accessor :default_discount_additional_cost_per_item_scope
 
     # An array containing all the loyalty programs to which this application is subscribed
     attr_accessor :loyalty_programs
@@ -114,6 +120,8 @@ module TalonOne
         :'enable_flattened_cart_items' => :'enableFlattenedCartItems',
         :'attributes_settings' => :'attributesSettings',
         :'sandbox' => :'sandbox',
+        :'enable_partial_discounts' => :'enablePartialDiscounts',
+        :'default_discount_additional_cost_per_item_scope' => :'defaultDiscountAdditionalCostPerItemScope',
         :'loyalty_programs' => :'loyaltyPrograms'
       }
     end
@@ -139,6 +147,8 @@ module TalonOne
         :'enable_flattened_cart_items' => :'Boolean',
         :'attributes_settings' => :'AttributesSettings',
         :'sandbox' => :'Boolean',
+        :'enable_partial_discounts' => :'Boolean',
+        :'default_discount_additional_cost_per_item_scope' => :'String',
         :'loyalty_programs' => :'Array<LoyaltyProgram>'
       }
     end
@@ -212,10 +222,14 @@ module TalonOne
 
       if attributes.key?(:'campaign_priority')
         self.campaign_priority = attributes[:'campaign_priority']
+      else
+        self.campaign_priority = 'universal'
       end
 
       if attributes.key?(:'exclusive_campaigns_strategy')
         self.exclusive_campaigns_strategy = attributes[:'exclusive_campaigns_strategy']
+      else
+        self.exclusive_campaigns_strategy = 'listOrder'
       end
 
       if attributes.key?(:'default_discount_scope')
@@ -236,6 +250,14 @@ module TalonOne
 
       if attributes.key?(:'sandbox')
         self.sandbox = attributes[:'sandbox']
+      end
+
+      if attributes.key?(:'enable_partial_discounts')
+        self.enable_partial_discounts = attributes[:'enable_partial_discounts']
+      end
+
+      if attributes.key?(:'default_discount_additional_cost_per_item_scope')
+        self.default_discount_additional_cost_per_item_scope = attributes[:'default_discount_additional_cost_per_item_scope']
       end
 
       if attributes.key?(:'loyalty_programs')
@@ -317,6 +339,8 @@ module TalonOne
       return false unless exclusive_campaigns_strategy_validator.valid?(@exclusive_campaigns_strategy)
       default_discount_scope_validator = EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
       return false unless default_discount_scope_validator.valid?(@default_discount_scope)
+      default_discount_additional_cost_per_item_scope_validator = EnumAttributeValidator.new('String', ["price", "itemTotal", "additionalCosts"])
+      return false unless default_discount_additional_cost_per_item_scope_validator.valid?(@default_discount_additional_cost_per_item_scope)
       return false if @loyalty_programs.nil?
       true
     end
@@ -403,6 +427,16 @@ module TalonOne
       @default_discount_scope = default_discount_scope
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] default_discount_additional_cost_per_item_scope Object to be assigned
+    def default_discount_additional_cost_per_item_scope=(default_discount_additional_cost_per_item_scope)
+      validator = EnumAttributeValidator.new('String', ["price", "itemTotal", "additionalCosts"])
+      unless validator.valid?(default_discount_additional_cost_per_item_scope)
+        fail ArgumentError, "invalid value for \"default_discount_additional_cost_per_item_scope\", must be one of #{validator.allowable_values}."
+      end
+      @default_discount_additional_cost_per_item_scope = default_discount_additional_cost_per_item_scope
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -426,6 +460,8 @@ module TalonOne
           enable_flattened_cart_items == o.enable_flattened_cart_items &&
           attributes_settings == o.attributes_settings &&
           sandbox == o.sandbox &&
+          enable_partial_discounts == o.enable_partial_discounts &&
+          default_discount_additional_cost_per_item_scope == o.default_discount_additional_cost_per_item_scope &&
           loyalty_programs == o.loyalty_programs
     end
 
@@ -438,7 +474,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, loyalty_programs].hash
+      [id, created, modified, account_id, name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, loyalty_programs].hash
     end
 
     # Builds the object from hash

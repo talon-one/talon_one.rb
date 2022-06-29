@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignGroup.new(id: null,
-                                 created: null,
-                                 modified: null,
-                                 account_id: null,
+instance = TalonOne::CampaignGroup.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 modified: 2021-09-12T10:12:42Z,
+                                 account_id: 3886,
                                  name: null,
                                  description: null,
                                  subscribed_applications_ids: null,

@@ -28,9 +28,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Account.new(id: null,
-                                 created: null,
-                                 modified: null,
+instance = TalonOne::Account.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 modified: 2021-09-12T10:12:42Z,
                                  company_name: null,
                                  domain_name: null,
                                  state: null,

@@ -14,17 +14,20 @@ Name | Type | Description | Notes
 **type** | **String** | The data type of the attribute, a &#x60;time&#x60; attribute must be sent as a string that conforms to the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) timestamp format. | 
 **description** | **String** | A description of this attribute. | 
 **suggestions** | **Array&lt;String&gt;** | A list of suggestions for the attribute. | 
+**has_allowed_list** | **Boolean** | Whether or not this attribute has an allowed list of values associated with it. | [optional] [default to false]
+**restricted_by_suggestions** | **Boolean** | Whether or not this attribute&#39;s value is restricted by suggestions (&#x60;suggestions&#x60; property) or by an allowed list of value (&#x60;hasAllowedList&#x60; property).  | [optional] [default to false]
 **editable** | **Boolean** | Whether or not this attribute can be edited. | 
 **subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the applications that are subscribed to this attribute | [optional] 
+**event_type_id** | **Integer** |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Attribute.new(id: null,
-                                 created: null,
-                                 account_id: null,
+instance = TalonOne::Attribute.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 account_id: 3886,
                                  entity: null,
                                  event_type: null,
                                  name: null,
@@ -32,8 +35,11 @@ instance = TalonOne::Attribute.new(id: null,
                                  type: null,
                                  description: null,
                                  suggestions: null,
+                                 has_allowed_list: null,
+                                 restricted_by_suggestions: null,
                                  editable: null,
-                                 subscribed_applications_ids: null)
+                                 subscribed_applications_ids: null,
+                                 event_type_id: 22)
 ```
 
 

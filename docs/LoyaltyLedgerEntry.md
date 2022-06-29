@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created** | **DateTime** |  | 
 **program_id** | **Integer** |  | 
-**customer_profile_id** | **String** |  | 
+**customer_profile_id** | **String** |  | [optional] 
+**card_id** | **Integer** |  | [optional] 
 **customer_session_id** | **String** |  | [optional] 
 **event_id** | **Integer** |  | [optional] 
 **type** | **String** | The type of the ledger transaction. Possible values are addition, subtraction, expire or expiring (for expiring points ledgers)  | 
@@ -25,6 +26,7 @@ require 'TalonOne'
 instance = TalonOne::LoyaltyLedgerEntry.new(created: null,
                                  program_id: null,
                                  customer_profile_id: null,
+                                 card_id: null,
                                  customer_session_id: null,
                                  event_id: null,
                                  type: null,

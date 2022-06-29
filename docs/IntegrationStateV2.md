@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **customer_profile** | [**CustomerProfile**](CustomerProfile.md) |  | [optional] 
 **event** | [**Event**](Event.md) |  | [optional] 
 **loyalty** | [**Loyalty**](Loyalty.md) |  | [optional] 
-**referral** | [**Referral**](Referral.md) |  | [optional] 
+**referral** | [**InventoryReferral**](InventoryReferral.md) |  | [optional] 
 **coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | [optional] 
 **triggered_campaigns** | [**Array&lt;Campaign&gt;**](Campaign.md) |  | [optional] 
 **effects** | [**Array&lt;Effect&gt;**](Effect.md) |  | 
@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **created_coupons** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | 
 **created_referrals** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
 **awarded_giveaways** | [**Array&lt;Giveaway&gt;**](Giveaway.md) |  | [optional] 
+**_return** | [**ModelReturn**](ModelReturn.md) |  | [optional] 
+**previous_returns** | [**Array&lt;ModelReturn&gt;**](ModelReturn.md) |  | [optional] 
 
 ## Code Sample
 
@@ -33,7 +35,9 @@ instance = TalonOne::IntegrationStateV2.new(customer_session: null,
                                  rule_failure_reasons: null,
                                  created_coupons: null,
                                  created_referrals: null,
-                                 awarded_giveaways: null)
+                                 awarded_giveaways: null,
+                                 _return: null,
+                                 previous_returns: null)
 ```
 
 
