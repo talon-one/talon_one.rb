@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -118,8 +118,8 @@ module TalonOne
         invalid_properties.push('invalid value for "min_points", min_points cannot be nil.')
       end
 
-      if @min_points >= 1E+8
-        invalid_properties.push('invalid value for "min_points", must be smaller than 1E+8.')
+      if @min_points > 999999999999.99
+        invalid_properties.push('invalid value for "min_points", must be smaller than or equal to 999999999999.99.')
       end
 
       if @min_points < 0
@@ -137,7 +137,7 @@ module TalonOne
       return false if @program_id.nil?
       return false if @name.nil?
       return false if @min_points.nil?
-      return false if @min_points >= 1E+8
+      return false if @min_points > 999999999999.99
       return false if @min_points < 0
       true
     end
@@ -149,8 +149,8 @@ module TalonOne
         fail ArgumentError, 'min_points cannot be nil'
       end
 
-      if min_points >= 1E+8
-        fail ArgumentError, 'invalid value for "min_points", must be smaller than 1E+8.'
+      if min_points > 999999999999.99
+        fail ArgumentError, 'invalid value for "min_points", must be smaller than or equal to 999999999999.99.'
       end
 
       if min_points < 0

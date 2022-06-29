@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # 
   class NewCustomerSession
-    # ID of the customers profile as used within this Talon.One account. May be omitted or set to the empty string if the customer does not yet have a known profile ID.
+    # ID of the customers profile as used within this Talon.One account.  **Note:** If the customer does not yet have a known profileId, we recommend you use a guest profileId. 
     attr_accessor :profile_id
 
     # Any coupon code entered.
@@ -24,13 +24,13 @@ module TalonOne
     # Any referral code entered.
     attr_accessor :referral
 
-    # Indicates the current state of the session. All sessions must start in the \"open\" state, after which valid transitions are...  1. open -> closed 2. open -> cancelled 3. closed -> cancelled 
+    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. `closed` → `cancelled` or `partially_returned` 4. `partially_returned` → `cancelled`  For more information, see [Entities](/docs/dev/concepts/entities#customer-session). 
     attr_accessor :state
 
     # Serialized JSON representation.
     attr_accessor :cart_items
 
-    # Identifiers for the customer, this can be used for limits on values such as device ID.
+    # Session custom identifiers that you can set limits on or use inside your rules.  For example, you can use IP addresses as identifiers to potentially identify devices and limit discounts abuse in case of customers creating multiple accounts. See the [tutorial](https://docs.talon.one/docs/dev/tutorials/using-identifiers/). 
     attr_accessor :identifiers
 
     # The total sum of the cart in one session.
@@ -169,7 +169,7 @@ module TalonOne
     def valid?
       return false if !@coupon.nil? && @coupon.to_s.length > 100
       return false if !@referral.nil? && @referral.to_s.length > 100
-      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       return false unless state_validator.valid?(@state)
       true
     end
@@ -197,7 +197,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       unless validator.valid?(state)
         fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
       end

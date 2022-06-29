@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -14,16 +14,16 @@ require 'date'
 
 module TalonOne
   class NewCampaign
-    # A friendly name for this campaign.
+    # A user-facing name for this campaign.
     attr_accessor :name
 
     # A detailed description of the campaign.
     attr_accessor :description
 
-    # Datetime when the campaign will become active.
+    # Timestamp when the campaign will become active.
     attr_accessor :start_time
 
-    # Datetime when the campaign will become in-active.
+    # Timestamp the campaign will become inactive.
     attr_accessor :end_time
 
     # Arbitrary properties associated with this campaign
@@ -32,23 +32,23 @@ module TalonOne
     # A disabled or archived campaign is not evaluated for rules or coupons. 
     attr_accessor :state
 
-    # ID of Ruleset this campaign applies on customer session evaluation.
+    # [ID of Ruleset](https://docs.talon.one/management-api/#operation/getRulesets) this campaign applies on customer session evaluation. 
     attr_accessor :active_ruleset_id
 
     # A list of tags for the campaign.
     attr_accessor :tags
 
-    # A list of features for the campaign.
+    # The features enabled in this campaign.
     attr_accessor :features
 
     attr_accessor :coupon_settings
 
     attr_accessor :referral_settings
 
-    # The set of limits that will operate for this campaign
+    # The set of [budget limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/) for this campaign. 
     attr_accessor :limits
 
-    # The IDs of the campaign groups that own this entity.
+    # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups/) this campaign belongs to. 
     attr_accessor :campaign_groups
 
     class EnumAttributeValidator

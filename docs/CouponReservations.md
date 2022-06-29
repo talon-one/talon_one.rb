@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CouponReservations.new(integration_i_ds: null)
+instance = TalonOne::CouponReservations.new(integration_i_ds: [ty238-32fke9, 3gy32-008ye9])
 ```
 
 

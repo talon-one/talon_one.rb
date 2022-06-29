@@ -21,31 +21,33 @@ Name | Type | Description | Notes
 **roles** | **Integer** | Total number of roles in the account | 
 **custom_attributes** | **Integer** | Total number of custom attributes in the account | 
 **webhooks** | **Integer** | Total number of webhooks in the account | 
-**loyalty_programs** | **Integer** | Total number of loyalty programs in the account | 
+**loyalty_programs** | **Integer** | Total number of all loyalty programs in the account | 
+**live_loyalty_programs** | **Integer** | Total number of live loyalty programs in the account | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AccountAnalytics.new(applications: null,
-                                 live_applications: null,
-                                 sandbox_applications: null,
-                                 campaigns: null,
-                                 active_campaigns: null,
-                                 live_active_campaigns: null,
-                                 coupons: null,
-                                 active_coupons: null,
-                                 expired_coupons: null,
-                                 referral_codes: null,
-                                 active_referral_codes: null,
-                                 expired_referral_codes: null,
-                                 active_rules: null,
+instance = TalonOne::AccountAnalytics.new(applications: 11,
+                                 live_applications: 6,
+                                 sandbox_applications: 2,
+                                 campaigns: 35,
+                                 active_campaigns: 15,
+                                 live_active_campaigns: 10,
+                                 coupons: 850,
+                                 active_coupons: 650,
+                                 expired_coupons: 200,
+                                 referral_codes: 500,
+                                 active_referral_codes: 100,
+                                 expired_referral_codes: 400,
+                                 active_rules: 35,
                                  users: null,
-                                 roles: null,
-                                 custom_attributes: null,
-                                 webhooks: null,
-                                 loyalty_programs: null)
+                                 roles: 10,
+                                 custom_attributes: 18,
+                                 webhooks: 2,
+                                 loyalty_programs: 5,
+                                 live_loyalty_programs: 5)
 ```
 
 

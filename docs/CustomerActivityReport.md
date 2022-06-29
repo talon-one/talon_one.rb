@@ -23,8 +23,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CustomerActivityReport.new(integration_id: null,
-                                 created: null,
+instance = TalonOne::CustomerActivityReport.new(integration_id: URNGV8294NV,
+                                 created: 2020-02-07T08:15:22Z,
                                  name: null,
                                  customer_id: null,
                                  last_activity: null,

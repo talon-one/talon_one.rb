@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Rule.new(title: null,
-                                 description: null,
+instance = TalonOne::Rule.new(title: Give discount via coupon,
+                                 description: Creates a discount when a coupon is valid,
                                  bindings: null,
-                                 condition: null,
-                                 effects: null)
+                                 condition: [and, [couponValid]],
+                                 effects: [catch, [noop], [setDiscount, 10% off, [*, [., Session, Total], [/, 10, 100]]]])
 ```
 
 

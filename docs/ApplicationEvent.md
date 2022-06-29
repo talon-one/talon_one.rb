@@ -19,10 +19,10 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ApplicationEvent.new(id: null,
-                                 created: null,
-                                 application_id: null,
-                                 profile_id: null,
+instance = TalonOne::ApplicationEvent.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 application_id: 322,
+                                 profile_id: 138,
                                  session_id: null,
                                  type: null,
                                  attributes: null,

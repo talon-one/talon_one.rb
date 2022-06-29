@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -39,14 +39,17 @@ module TalonOne
     # Any referral code entered.
     attr_accessor :referral
 
-    # Indicating if the customer session is in progress (\"open\"), \"closed\", or \"cancelled\".
+    # Indicating if the customer session is in progress (`open`), `closed`, or `cancelled`. For more information about customer sessions, see [Customer sessions](/docs/dev/concepts/entities#customer-session-states) in the docs. 
     attr_accessor :state
 
     # Serialized JSON representation.
     attr_accessor :cart_items
 
-    # A map of labelled discount values, in the same currency as the session.
+    # **API V1 only.** A map of labeled discount values, in the same currency as the session.  If you are using the V2 endpoints, refer to the `totalDiscounts` property instead. 
     attr_accessor :discounts
+
+    # The total sum of the discounts applied to this session.
+    attr_accessor :total_discounts
 
     # The total sum of the session before any discounts applied.
     attr_accessor :total
@@ -90,6 +93,7 @@ module TalonOne
         :'state' => :'state',
         :'cart_items' => :'cartItems',
         :'discounts' => :'discounts',
+        :'total_discounts' => :'totalDiscounts',
         :'total' => :'total',
         :'attributes' => :'attributes'
       }
@@ -109,6 +113,7 @@ module TalonOne
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
         :'discounts' => :'Hash<String, Float>',
+        :'total_discounts' => :'Float',
         :'total' => :'Float',
         :'attributes' => :'Object'
       }
@@ -183,6 +188,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'total_discounts')
+        self.total_discounts = attributes[:'total_discounts']
+      end
+
       if attributes.key?(:'total')
         self.total = attributes[:'total']
       end
@@ -212,6 +221,14 @@ module TalonOne
         invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
       end
 
+      if @integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@profileintegrationid.nil? && @profileintegrationid.to_s.length > 1000
+        invalid_properties.push('invalid value for "profileintegrationid", the character length must be smaller than or equal to 1000.')
+      end
+
       if @coupon.nil?
         invalid_properties.push('invalid value for "coupon", coupon cannot be nil.')
       end
@@ -232,6 +249,10 @@ module TalonOne
         invalid_properties.push('invalid value for "discounts", discounts cannot be nil.')
       end
 
+      if @total_discounts.nil?
+        invalid_properties.push('invalid value for "total_discounts", total_discounts cannot be nil.')
+      end
+
       if @total.nil?
         invalid_properties.push('invalid value for "total", total cannot be nil.')
       end
@@ -246,21 +267,48 @@ module TalonOne
       return false if @created.nil?
       return false if @application_id.nil?
       return false if @integration_id.nil?
+      return false if @integration_id.to_s.length > 1000
+      return false if !@profileintegrationid.nil? && @profileintegrationid.to_s.length > 1000
       return false if @coupon.nil?
       return false if @referral.nil?
       return false if @state.nil?
-      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      state_validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       return false unless state_validator.valid?(@state)
       return false if @cart_items.nil?
       return false if @discounts.nil?
+      return false if @total_discounts.nil?
       return false if @total.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] integration_id Value to be assigned
+    def integration_id=(integration_id)
+      if integration_id.nil?
+        fail ArgumentError, 'integration_id cannot be nil'
+      end
+
+      if integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @integration_id = integration_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profileintegrationid Value to be assigned
+    def profileintegrationid=(profileintegrationid)
+      if !profileintegrationid.nil? && profileintegrationid.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "profileintegrationid", the character length must be smaller than or equal to 1000.'
+      end
+
+      @profileintegrationid = profileintegrationid
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ["open", "closed", "cancelled"])
+      validator = EnumAttributeValidator.new('String', ["open", "closed", "partially_returned", "cancelled"])
       unless validator.valid?(state)
         fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
       end
@@ -283,6 +331,7 @@ module TalonOne
           state == o.state &&
           cart_items == o.cart_items &&
           discounts == o.discounts &&
+          total_discounts == o.total_discounts &&
           total == o.total &&
           attributes == o.attributes
     end
@@ -296,7 +345,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, profile_id, integration_id, profileintegrationid, coupon, referral, state, cart_items, discounts, total, attributes].hash
+      [id, created, application_id, profile_id, integration_id, profileintegrationid, coupon, referral, state, cart_items, discounts, total_discounts, total, attributes].hash
     end
 
     # Builds the object from hash

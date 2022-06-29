@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,19 +13,39 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"rollbackDiscount\" effect. This gets triggered whenever previously closed session is now cancelled and a setDiscount effect was cancelled on our internal discount limit counters.
+  # The properties specific to the \"rollbackDiscount\" effect. This gets triggered whenever previously closed session is now cancelled or partially returned and a setDiscount effect was cancelled on our internal discount limit counters.
   class RollbackDiscountEffectProps
     # The name of the \"setDiscount\" effect that was rolled back
     attr_accessor :name
 
-    # The value of the discount that was rolled back
+    # The value of the discount that was rolled back.
     attr_accessor :value
+
+    # The index of the item in the cart items for which the discount was rolled back.
+    attr_accessor :cart_item_position
+
+    # The index of the item unit in its line item. It is only used for cart items with `quantity` > 1 and is only returned when cart item flattening is enabled. 
+    attr_accessor :cart_item_sub_position
+
+    # The ID of the additional cost that was rolled back
+    attr_accessor :additional_cost_id
+
+    # The name of the additional cost that was rolled back
+    attr_accessor :additional_cost
+
+    # The scope of the rolled back discount - For a discount per session, it can be one of `cartItems`, `additionalCosts` or `sessionTotal` - For a discount per item, it can be one of `price`, `additionalCosts` or `itemTotal` 
+    attr_accessor :scope
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'cart_item_position' => :'cartItemPosition',
+        :'cart_item_sub_position' => :'cartItemSubPosition',
+        :'additional_cost_id' => :'additionalCostId',
+        :'additional_cost' => :'additionalCost',
+        :'scope' => :'scope'
       }
     end
 
@@ -33,7 +53,12 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'value' => :'Float'
+        :'value' => :'Float',
+        :'cart_item_position' => :'Float',
+        :'cart_item_sub_position' => :'Float',
+        :'additional_cost_id' => :'Integer',
+        :'additional_cost' => :'String',
+        :'scope' => :'String'
       }
     end
 
@@ -64,6 +89,26 @@ module TalonOne
 
       if attributes.key?(:'value')
         self.value = attributes[:'value']
+      end
+
+      if attributes.key?(:'cart_item_position')
+        self.cart_item_position = attributes[:'cart_item_position']
+      end
+
+      if attributes.key?(:'cart_item_sub_position')
+        self.cart_item_sub_position = attributes[:'cart_item_sub_position']
+      end
+
+      if attributes.key?(:'additional_cost_id')
+        self.additional_cost_id = attributes[:'additional_cost_id']
+      end
+
+      if attributes.key?(:'additional_cost')
+        self.additional_cost = attributes[:'additional_cost']
+      end
+
+      if attributes.key?(:'scope')
+        self.scope = attributes[:'scope']
       end
     end
 
@@ -96,7 +141,12 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          value == o.value
+          value == o.value &&
+          cart_item_position == o.cart_item_position &&
+          cart_item_sub_position == o.cart_item_sub_position &&
+          additional_cost_id == o.additional_cost_id &&
+          additional_cost == o.additional_cost &&
+          scope == o.scope
     end
 
     # @see the `==` method
@@ -108,7 +158,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value].hash
+      [name, value, cart_item_position, cart_item_sub_position, additional_cost_id, additional_cost, scope].hash
     end
 
     # Builds the object from hash

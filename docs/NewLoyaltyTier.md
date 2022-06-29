@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewLoyaltyTier.new(name: null,
-                                 min_points: null)
+instance = TalonOne::NewLoyaltyTier.new(name: Gold,
+                                 min_points: 300.0)
 ```
 
 

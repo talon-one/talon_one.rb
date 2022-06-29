@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,11 +15,14 @@ require 'date'
 module TalonOne
   # 
   class CustomerProfile
+    # Unique ID for this entity.
+    attr_accessor :id
+
+    # The exact moment this entity was created. The exact moment this entity was created.
+    attr_accessor :created
+
     # The integration ID for this entity sent to and used in the Talon.One system.
     attr_accessor :integration_id
-
-    # The exact moment this entity was created.
-    attr_accessor :created
 
     # Arbitrary properties associated with this item
     attr_accessor :attributes
@@ -33,20 +36,21 @@ module TalonOne
     # Sum of all purchases made by this customer
     attr_accessor :total_sales
 
-    # A list of loyalty programs joined by the customer
+    # **DEPRECATED** A list of loyalty programs joined by the customer. 
     attr_accessor :loyalty_memberships
 
     # A list of audiences the customer belongs to
     attr_accessor :audience_memberships
 
-    # Timestamp of the most recent event received from this customer
+    # Timestamp of the most recent event received from this customer. This field is updated on calls that trigger the rule-engine and that are not [dry requests](https://docs.talon.one/docs/dev/integration-api/dry-requests/#overlay).  For example, [reserving a coupon](https://docs.talon.one/integration-api/#operation/createCouponReservation) for a customer doesn't impact this field. 
     attr_accessor :last_activity
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'integration_id' => :'integrationId',
+        :'id' => :'id',
         :'created' => :'created',
+        :'integration_id' => :'integrationId',
         :'attributes' => :'attributes',
         :'account_id' => :'accountId',
         :'closed_sessions' => :'closedSessions',
@@ -60,8 +64,9 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'integration_id' => :'String',
+        :'id' => :'Integer',
         :'created' => :'DateTime',
+        :'integration_id' => :'String',
         :'attributes' => :'Object',
         :'account_id' => :'Integer',
         :'closed_sessions' => :'Integer',
@@ -93,12 +98,16 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'integration_id')
-        self.integration_id = attributes[:'integration_id']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'created')
         self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'integration_id')
+        self.integration_id = attributes[:'integration_id']
       end
 
       if attributes.key?(:'attributes')
@@ -138,12 +147,20 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @integration_id.nil?
-        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @created.nil?
         invalid_properties.push('invalid value for "created", created cannot be nil.')
+      end
+
+      if @integration_id.nil?
+        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
+      end
+
+      if @integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "integration_id", the character length must be smaller than or equal to 1000.')
       end
 
       if @attributes.nil?
@@ -172,8 +189,10 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @integration_id.nil?
+      return false if @id.nil?
       return false if @created.nil?
+      return false if @integration_id.nil?
+      return false if @integration_id.to_s.length > 1000
       return false if @attributes.nil?
       return false if @account_id.nil?
       return false if @closed_sessions.nil?
@@ -182,13 +201,28 @@ module TalonOne
       true
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] integration_id Value to be assigned
+    def integration_id=(integration_id)
+      if integration_id.nil?
+        fail ArgumentError, 'integration_id cannot be nil'
+      end
+
+      if integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @integration_id = integration_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          integration_id == o.integration_id &&
+          id == o.id &&
           created == o.created &&
+          integration_id == o.integration_id &&
           attributes == o.attributes &&
           account_id == o.account_id &&
           closed_sessions == o.closed_sessions &&
@@ -207,7 +241,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [integration_id, created, attributes, account_id, closed_sessions, total_sales, loyalty_memberships, audience_memberships, last_activity].hash
+      [id, created, integration_id, attributes, account_id, closed_sessions, total_sales, loyalty_memberships, audience_memberships, last_activity].hash
     end
 
     # Builds the object from hash

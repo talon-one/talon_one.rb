@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **String** | The type of the custom effect. | 
+**effect_id** | **Integer** | The ID of the custom effect that was triggered | 
+**name** | **String** | The type of the custom effect. | 
 **payload** | [**Object**](.md) | The JSON payload of the custom effect. | 
 
 ## Code Sample
@@ -12,7 +13,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CustomEffectProps.new(type: null,
+instance = TalonOne::CustomEffectProps.new(effect_id: null,
+                                 name: null,
                                  payload: null)
 ```
 

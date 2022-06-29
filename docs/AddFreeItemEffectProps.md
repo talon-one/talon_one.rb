@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AddFreeItemEffectProps.new(sku: null,
+instance = TalonOne::AddFreeItemEffectProps.new(sku: SKU1241028,
                                  name: null)
 ```
 

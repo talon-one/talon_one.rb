@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AccountEntity.new(account_id: null)
+instance = TalonOne::AccountEntity.new(account_id: 3886)
 ```
 
 

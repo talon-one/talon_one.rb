@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Entity.new(id: null,
-                                 created: null)
+instance = TalonOne::Entity.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z)
 ```
 
 

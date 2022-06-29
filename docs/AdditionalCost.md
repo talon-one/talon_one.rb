@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AdditionalCost.new(price: null)
+instance = TalonOne::AdditionalCost.new(price: 4.5)
 ```
 
 

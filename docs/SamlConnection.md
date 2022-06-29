@@ -30,8 +30,8 @@ instance = TalonOne::SamlConnection.new(assertion_consumer_service_url: null,
                                  sign_out_url: null,
                                  metadata_url: null,
                                  audience_uri: null,
-                                 id: null,
-                                 created: null)
+                                 id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z)
 ```
 
 

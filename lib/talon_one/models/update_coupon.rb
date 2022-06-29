@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # 
   class UpdateCoupon
-    # The number of times a coupon code can be redeemed. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
+    # The number of times the coupon code can be redeemed. `0` means unlimited redemptions but any campaign usage limits will still apply. 
     attr_accessor :usage_limit
 
     # The amount of discounts that can be given with this coupon code. 
@@ -26,6 +26,9 @@ module TalonOne
 
     # Expiry date of the coupon. Coupon never expires if this is omitted, zero, or negative.
     attr_accessor :expiry_date
+
+    # Limits configuration for a coupon. These limits will override the limits set from the campaign.  **Note:** Only usable when creating a single coupon which is not tied to a specific recipient. Only per-profile limits are allowed to be configured. 
+    attr_accessor :limits
 
     # The integration ID for this coupon's beneficiary's profile
     attr_accessor :recipient_integration_id
@@ -40,6 +43,7 @@ module TalonOne
         :'discount_limit' => :'discountLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
+        :'limits' => :'limits',
         :'recipient_integration_id' => :'recipientIntegrationId',
         :'attributes' => :'attributes'
       }
@@ -52,6 +56,7 @@ module TalonOne
         :'discount_limit' => :'Float',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
+        :'limits' => :'Array<LimitConfig>',
         :'recipient_integration_id' => :'String',
         :'attributes' => :'Object'
       }
@@ -94,6 +99,12 @@ module TalonOne
         self.expiry_date = attributes[:'expiry_date']
       end
 
+      if attributes.key?(:'limits')
+        if (value = attributes[:'limits']).is_a?(Array)
+          self.limits = value
+        end
+      end
+
       if attributes.key?(:'recipient_integration_id')
         self.recipient_integration_id = attributes[:'recipient_integration_id']
       end
@@ -123,6 +134,10 @@ module TalonOne
         invalid_properties.push('invalid value for "discount_limit", must be greater than or equal to 0.')
       end
 
+      if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
       invalid_properties
     end
 
@@ -133,6 +148,7 @@ module TalonOne
       return false if !@usage_limit.nil? && @usage_limit < 0
       return false if !@discount_limit.nil? && @discount_limit > 999999
       return false if !@discount_limit.nil? && @discount_limit < 0
+      return false if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
       true
     end
 
@@ -164,6 +180,16 @@ module TalonOne
       @discount_limit = discount_limit
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] recipient_integration_id Value to be assigned
+    def recipient_integration_id=(recipient_integration_id)
+      if !recipient_integration_id.nil? && recipient_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @recipient_integration_id = recipient_integration_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -173,6 +199,7 @@ module TalonOne
           discount_limit == o.discount_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
+          limits == o.limits &&
           recipient_integration_id == o.recipient_integration_id &&
           attributes == o.attributes
     end
@@ -186,7 +213,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, discount_limit, start_date, expiry_date, recipient_integration_id, attributes].hash
+      [usage_limit, discount_limit, start_date, expiry_date, limits, recipient_integration_id, attributes].hash
     end
 
     # Builds the object from hash

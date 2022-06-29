@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoginParams.new(email: null,
-                                 password: null)
+instance = TalonOne::LoginParams.new(email: john.doe@example.com,
+                                 password: admin123456)
 ```
 
 

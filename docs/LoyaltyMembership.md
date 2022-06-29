@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::LoyaltyMembership.new(joined: null,
-                                 loyalty_program_id: null)
+                                 loyalty_program_id: 323414846)
 ```
 
 

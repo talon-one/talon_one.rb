@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -14,10 +14,13 @@ require 'date'
 
 module TalonOne
   class CustomerProfileAudienceRequestItem
+    # Defines the action to perform: - `add`: Adds the customer profile to the audience. - `delete`: Removes the customer profile from the audience. 
     attr_accessor :action
 
+    # The ID of this customer profile in the third-party integration.
     attr_accessor :profile_integration_id
 
+    # The ID of the audience. You get it via the `id` property when [creating an audience](#operation/createAudienceV2).
     attr_accessor :audience_id
 
     class EnumAttributeValidator
@@ -106,6 +109,10 @@ module TalonOne
         invalid_properties.push('invalid value for "profile_integration_id", profile_integration_id cannot be nil.')
       end
 
+      if @profile_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "profile_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
       if @audience_id.nil?
         invalid_properties.push('invalid value for "audience_id", audience_id cannot be nil.')
       end
@@ -120,6 +127,7 @@ module TalonOne
       action_validator = EnumAttributeValidator.new('String', ["add", "delete"])
       return false unless action_validator.valid?(@action)
       return false if @profile_integration_id.nil?
+      return false if @profile_integration_id.to_s.length > 1000
       return false if @audience_id.nil?
       true
     end
@@ -132,6 +140,20 @@ module TalonOne
         fail ArgumentError, "invalid value for \"action\", must be one of #{validator.allowable_values}."
       end
       @action = action
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_integration_id Value to be assigned
+    def profile_integration_id=(profile_integration_id)
+      if profile_integration_id.nil?
+        fail ArgumentError, 'profile_integration_id cannot be nil'
+      end
+
+      if profile_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "profile_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @profile_integration_id = profile_integration_id
     end
 
     # Checks equality by comparing each attribute.

@@ -23,19 +23,19 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::User.new(id: null,
-                                 created: null,
-                                 modified: null,
-                                 email: null,
-                                 account_id: null,
-                                 invite_token: null,
-                                 state: null,
-                                 name: null,
-                                 policy: null,
-                                 latest_feed_timestamp: null,
-                                 roles: null,
+instance = TalonOne::User.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 modified: 2021-09-12T10:12:42Z,
+                                 email: john.doe@example.com,
+                                 account_id: 3886,
+                                 invite_token: Gy9b8w1irmQtEPo5RmbMmSPheL5h4,
+                                 state: invited,
+                                 name: John Doe,
+                                 policy: {&quot;Role&quot;:127},
+                                 latest_feed_timestamp: 2020-06-01T00:00Z,
+                                 roles: [71],
                                  application_notification_subscriptions: null,
-                                 auth_method: null)
+                                 auth_method: basic_auth)
 ```
 
 
