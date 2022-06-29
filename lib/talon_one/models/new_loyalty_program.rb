@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,11 +13,8 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # A new loyalty program
+  # 
   class NewLoyaltyProgram
-    # The internal name for the Loyalty Program. This is an immutable value.
-    attr_accessor :name
-
     # The display title for the Loyalty Program.
     attr_accessor :title
 
@@ -36,29 +33,52 @@ module TalonOne
     # Indicates if this program supports subledgers inside the program
     attr_accessor :allow_subledger
 
+    # The max amount of user profiles with whom a card can be shared. This can be set to 0 for no limit. This property is only used when `cardBased` is `true`. 
+    attr_accessor :users_per_card_limit
+
+    # The internal name for the Loyalty Program. This is an immutable value.
+    attr_accessor :name
+
+    # The tiers in this loyalty program
+    attr_accessor :tiers
+
+    # A string containing an IANA timezone descriptor.
+    attr_accessor :timezone
+
+    # Defines the type of loyalty program: - `true`: the program is a card-based. - `false`: the program is profile-based. 
+    attr_accessor :card_based
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
         :'title' => :'title',
         :'description' => :'description',
         :'subscribed_applications' => :'subscribedApplications',
         :'default_validity' => :'defaultValidity',
         :'default_pending' => :'defaultPending',
-        :'allow_subledger' => :'allowSubledger'
+        :'allow_subledger' => :'allowSubledger',
+        :'users_per_card_limit' => :'usersPerCardLimit',
+        :'name' => :'name',
+        :'tiers' => :'tiers',
+        :'timezone' => :'timezone',
+        :'card_based' => :'cardBased'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
         :'title' => :'String',
         :'description' => :'String',
         :'subscribed_applications' => :'Array<Integer>',
         :'default_validity' => :'String',
         :'default_pending' => :'String',
-        :'allow_subledger' => :'Boolean'
+        :'allow_subledger' => :'Boolean',
+        :'users_per_card_limit' => :'Integer',
+        :'name' => :'String',
+        :'tiers' => :'Array<NewLoyaltyTier>',
+        :'timezone' => :'String',
+        :'card_based' => :'Boolean'
       }
     end
 
@@ -82,10 +102,6 @@ module TalonOne
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
 
       if attributes.key?(:'title')
         self.title = attributes[:'title']
@@ -112,16 +128,36 @@ module TalonOne
       if attributes.key?(:'allow_subledger')
         self.allow_subledger = attributes[:'allow_subledger']
       end
+
+      if attributes.key?(:'users_per_card_limit')
+        self.users_per_card_limit = attributes[:'users_per_card_limit']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'tiers')
+        if (value = attributes[:'tiers']).is_a?(Array)
+          self.tiers = value
+        end
+      end
+
+      if attributes.key?(:'timezone')
+        self.timezone = attributes[:'timezone']
+      end
+
+      if attributes.key?(:'card_based')
+        self.card_based = attributes[:'card_based']
+      else
+        self.card_based = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
@@ -138,18 +174,66 @@ module TalonOne
         invalid_properties.push('invalid value for "allow_subledger", allow_subledger cannot be nil.')
       end
 
+      if !@users_per_card_limit.nil? && @users_per_card_limit < 0
+        invalid_properties.push('invalid value for "users_per_card_limit", must be greater than or equal to 0.')
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @timezone.nil?
+        invalid_properties.push('invalid value for "timezone", timezone cannot be nil.')
+      end
+
+      if @timezone.to_s.length < 1
+        invalid_properties.push('invalid value for "timezone", the character length must be great than or equal to 1.')
+      end
+
+      if @card_based.nil?
+        invalid_properties.push('invalid value for "card_based", card_based cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
       return false if @title.nil?
       return false if @default_validity.nil?
       return false if @default_pending.nil?
       return false if @allow_subledger.nil?
+      return false if !@users_per_card_limit.nil? && @users_per_card_limit < 0
+      return false if @name.nil?
+      return false if @timezone.nil?
+      return false if @timezone.to_s.length < 1
+      return false if @card_based.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] users_per_card_limit Value to be assigned
+    def users_per_card_limit=(users_per_card_limit)
+      if !users_per_card_limit.nil? && users_per_card_limit < 0
+        fail ArgumentError, 'invalid value for "users_per_card_limit", must be greater than or equal to 0.'
+      end
+
+      @users_per_card_limit = users_per_card_limit
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] timezone Value to be assigned
+    def timezone=(timezone)
+      if timezone.nil?
+        fail ArgumentError, 'timezone cannot be nil'
+      end
+
+      if timezone.to_s.length < 1
+        fail ArgumentError, 'invalid value for "timezone", the character length must be great than or equal to 1.'
+      end
+
+      @timezone = timezone
     end
 
     # Checks equality by comparing each attribute.
@@ -157,13 +241,17 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
           title == o.title &&
           description == o.description &&
           subscribed_applications == o.subscribed_applications &&
           default_validity == o.default_validity &&
           default_pending == o.default_pending &&
-          allow_subledger == o.allow_subledger
+          allow_subledger == o.allow_subledger &&
+          users_per_card_limit == o.users_per_card_limit &&
+          name == o.name &&
+          tiers == o.tiers &&
+          timezone == o.timezone &&
+          card_based == o.card_based
     end
 
     # @see the `==` method
@@ -175,7 +263,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, title, description, subscribed_applications, default_validity, default_pending, allow_subledger].hash
+      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, name, tiers, timezone, card_based].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -33,6 +33,9 @@ module TalonOne
     # The templates defined for this application.
     attr_accessor :templates
 
+    # A stringified version of the environment's Talang variables scope
+    attr_accessor :variables
+
     # The giveaways pools that the application is subscribed to.
     attr_accessor :giveaways_pools
 
@@ -48,7 +51,8 @@ module TalonOne
     # The audiences contained in the account which the application belongs to.
     attr_accessor :audiences
 
-    attr_accessor :variables
+    # The account-level collections that the application is subscribed to.
+    attr_accessor :collections
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -59,12 +63,13 @@ module TalonOne
         :'slots' => :'slots',
         :'functions' => :'functions',
         :'templates' => :'templates',
+        :'variables' => :'variables',
         :'giveaways_pools' => :'giveawaysPools',
         :'loyalty_programs' => :'loyaltyPrograms',
         :'attributes' => :'attributes',
         :'additional_costs' => :'additionalCosts',
         :'audiences' => :'audiences',
-        :'variables' => :'variables'
+        :'collections' => :'collections'
       }
     end
 
@@ -77,12 +82,13 @@ module TalonOne
         :'slots' => :'Array<SlotDef>',
         :'functions' => :'Array<FunctionDef>',
         :'templates' => :'Array<TemplateDef>',
+        :'variables' => :'String',
         :'giveaways_pools' => :'Array<GiveawaysPool>',
         :'loyalty_programs' => :'Array<LoyaltyProgram>',
         :'attributes' => :'Array<Attribute>',
         :'additional_costs' => :'Array<AccountAdditionalCost>',
         :'audiences' => :'Array<Audience>',
-        :'variables' => :'String'
+        :'collections' => :'Array<Collection>'
       }
     end
 
@@ -137,6 +143,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'variables')
+        self.variables = attributes[:'variables']
+      end
+
       if attributes.key?(:'giveaways_pools')
         if (value = attributes[:'giveaways_pools']).is_a?(Array)
           self.giveaways_pools = value
@@ -167,8 +177,10 @@ module TalonOne
         end
       end
 
-      if attributes.key?(:'variables')
-        self.variables = attributes[:'variables']
+      if attributes.key?(:'collections')
+        if (value = attributes[:'collections']).is_a?(Array)
+          self.collections = value
+        end
       end
     end
 
@@ -231,12 +243,13 @@ module TalonOne
           slots == o.slots &&
           functions == o.functions &&
           templates == o.templates &&
+          variables == o.variables &&
           giveaways_pools == o.giveaways_pools &&
           loyalty_programs == o.loyalty_programs &&
           attributes == o.attributes &&
           additional_costs == o.additional_costs &&
           audiences == o.audiences &&
-          variables == o.variables
+          collections == o.collections
     end
 
     # @see the `==` method
@@ -248,7 +261,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, slots, functions, templates, giveaways_pools, loyalty_programs, attributes, additional_costs, audiences, variables].hash
+      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, attributes, additional_costs, audiences, collections].hash
     end
 
     # Builds the object from hash

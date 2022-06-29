@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewCampaignSet.new(application_id: null,
+instance = TalonOne::NewCampaignSet.new(application_id: 322,
                                  version: null,
                                  set: null)
 ```

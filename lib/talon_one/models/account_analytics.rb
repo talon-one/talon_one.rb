@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -65,8 +65,11 @@ module TalonOne
     # Total number of webhooks in the account
     attr_accessor :webhooks
 
-    # Total number of loyalty programs in the account
+    # Total number of all loyalty programs in the account
     attr_accessor :loyalty_programs
+
+    # Total number of live loyalty programs in the account
+    attr_accessor :live_loyalty_programs
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -88,7 +91,8 @@ module TalonOne
         :'roles' => :'roles',
         :'custom_attributes' => :'customAttributes',
         :'webhooks' => :'webhooks',
-        :'loyalty_programs' => :'loyaltyPrograms'
+        :'loyalty_programs' => :'loyaltyPrograms',
+        :'live_loyalty_programs' => :'liveLoyaltyPrograms'
       }
     end
 
@@ -112,7 +116,8 @@ module TalonOne
         :'roles' => :'Integer',
         :'custom_attributes' => :'Integer',
         :'webhooks' => :'Integer',
-        :'loyalty_programs' => :'Integer'
+        :'loyalty_programs' => :'Integer',
+        :'live_loyalty_programs' => :'Integer'
       }
     end
 
@@ -208,6 +213,10 @@ module TalonOne
       if attributes.key?(:'loyalty_programs')
         self.loyalty_programs = attributes[:'loyalty_programs']
       end
+
+      if attributes.key?(:'live_loyalty_programs')
+        self.live_loyalty_programs = attributes[:'live_loyalty_programs']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -286,6 +295,10 @@ module TalonOne
         invalid_properties.push('invalid value for "loyalty_programs", loyalty_programs cannot be nil.')
       end
 
+      if @live_loyalty_programs.nil?
+        invalid_properties.push('invalid value for "live_loyalty_programs", live_loyalty_programs cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -310,6 +323,7 @@ module TalonOne
       return false if @custom_attributes.nil?
       return false if @webhooks.nil?
       return false if @loyalty_programs.nil?
+      return false if @live_loyalty_programs.nil?
       true
     end
 
@@ -335,7 +349,8 @@ module TalonOne
           roles == o.roles &&
           custom_attributes == o.custom_attributes &&
           webhooks == o.webhooks &&
-          loyalty_programs == o.loyalty_programs
+          loyalty_programs == o.loyalty_programs &&
+          live_loyalty_programs == o.live_loyalty_programs
     end
 
     # @see the `==` method
@@ -347,7 +362,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [applications, live_applications, sandbox_applications, campaigns, active_campaigns, live_active_campaigns, coupons, active_coupons, expired_coupons, referral_codes, active_referral_codes, expired_referral_codes, active_rules, users, roles, custom_attributes, webhooks, loyalty_programs].hash
+      [applications, live_applications, sandbox_applications, campaigns, active_campaigns, live_active_campaigns, coupons, active_coupons, expired_coupons, referral_codes, active_referral_codes, expired_referral_codes, active_rules, users, roles, custom_attributes, webhooks, loyalty_programs, live_loyalty_programs].hash
     end
 
     # Builds the object from hash

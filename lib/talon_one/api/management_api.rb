@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -19,30 +19,32 @@ module TalonOne
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add points in a certain loyalty program for the specified customer
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # Add points in loyalty program for given customer
+    # Add points in the specified loyalty program for the given customer.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param body [LoyaltyPoints] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def add_loyalty_points(program_id, integration_id, body, opts = {})
-      add_loyalty_points_with_http_info(program_id, integration_id, body, opts)
+    def add_loyalty_points(loyalty_program_id, integration_id, body, opts = {})
+      add_loyalty_points_with_http_info(loyalty_program_id, integration_id, body, opts)
       nil
     end
 
-    # Add points in a certain loyalty program for the specified customer
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # Add points in loyalty program for given customer
+    # Add points in the specified loyalty program for the given customer.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param body [LoyaltyPoints] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def add_loyalty_points_with_http_info(program_id, integration_id, body, opts = {})
+    def add_loyalty_points_with_http_info(loyalty_program_id, integration_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.add_loyalty_points ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.add_loyalty_points"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.add_loyalty_points"
       end
       # verify the required parameter 'integration_id' is set
       if @api_client.config.client_side_validation && integration_id.nil?
@@ -53,7 +55,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.add_loyalty_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/profile/{integrationID}/add_points'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s)).sub('{' + 'integrationID' + '}', CGI.escape(integration_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/add_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -91,10 +93,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Copy the campaign into every specified application
-    # Copy the campaign into every specified application.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Copy the campaign into the specified application
+    # Copy the campaign into all specified application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignCopy] 
     # @param [Hash] opts the optional parameters
     # @return [InlineResponse2002]
@@ -103,10 +105,10 @@ module TalonOne
       data
     end
 
-    # Copy the campaign into every specified application
-    # Copy the campaign into every specified application.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Copy the campaign into the specified application
+    # Copy the campaign into all specified application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignCopy] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
@@ -167,8 +169,72 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Define a new additional cost
-    # Defines a new _additional cost_ in this account.  These additional costs are shared across all applications in your account, and are never required. 
+    # Create account-level collection
+    # Create account-level collection.
+    # @param body [NewCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Collection]
+    def create_account_collection(body, opts = {})
+      data, _status_code, _headers = create_account_collection_with_http_info(body, opts)
+      data
+    end
+
+    # Create account-level collection
+    # Create account-level collection.
+    # @param body [NewCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def create_account_collection_with_http_info(body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.create_account_collection ...'
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_account_collection"
+      end
+      # resource path
+      local_var_path = '/v1/collections'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'Collection' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#create_account_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create additional cost
+    # Create an [additional cost](/docs/product/account/dev-tools/managing-additional-costs/).  These additional costs are shared across all applications in your account, and are never required. 
     # @param body [NewAdditionalCost] 
     # @param [Hash] opts the optional parameters
     # @return [AccountAdditionalCost]
@@ -177,8 +243,8 @@ module TalonOne
       data
     end
 
-    # Define a new additional cost
-    # Defines a new _additional cost_ in this account.  These additional costs are shared across all applications in your account, and are never required. 
+    # Create additional cost
+    # Create an [additional cost](/docs/product/account/dev-tools/managing-additional-costs/).  These additional costs are shared across all applications in your account, and are never required. 
     # @param body [NewAdditionalCost] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountAdditionalCost, Integer, Hash)>] AccountAdditionalCost data, response status code and response headers
@@ -231,8 +297,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Define a new custom attribute
-    # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+    # Create custom attribute
+    # Create a _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on.  These attributes can then be given values when creating/updating these objects, and these values can be used in your campaign rules. For example, you could define a `zipCode` field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
     # @param body [NewAttribute] 
     # @param [Hash] opts the optional parameters
     # @return [Attribute]
@@ -241,8 +307,8 @@ module TalonOne
       data
     end
 
-    # Define a new custom attribute
-    # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+    # Create custom attribute
+    # Create a _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on.  These attributes can then be given values when creating/updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
     # @param body [NewAttribute] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Attribute, Integer, Hash)>] Attribute data, response status code and response headers
@@ -295,35 +361,37 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Create a Campaign
-    # @param application_id [Integer] 
-    # @param body [NewCampaign] 
+    # Create campaign from campaign template
+    # Use the campaign template referenced in the request body to create a new campaign in one of the connected Applications.  If the template was created from a campaign with rules referencing [campaign collections](https://docs.talon.one/docs/product/campaigns/managing-collections), the corresponding collections for the new campaign are created automatically. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param body [CreateTemplateCampaign] 
     # @param [Hash] opts the optional parameters
-    # @return [Campaign]
-    def create_campaign(application_id, body, opts = {})
-      data, _status_code, _headers = create_campaign_with_http_info(application_id, body, opts)
+    # @return [CreateTemplateCampaignResponse]
+    def create_campaign_from_template(application_id, body, opts = {})
+      data, _status_code, _headers = create_campaign_from_template_with_http_info(application_id, body, opts)
       data
     end
 
-    # Create a Campaign
-    # @param application_id [Integer] 
-    # @param body [NewCampaign] 
+    # Create campaign from campaign template
+    # Use the campaign template referenced in the request body to create a new campaign in one of the connected Applications.  If the template was created from a campaign with rules referencing [campaign collections](https://docs.talon.one/docs/product/campaigns/managing-collections), the corresponding collections for the new campaign are created automatically. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param body [CreateTemplateCampaign] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Campaign, Integer, Hash)>] Campaign data, response status code and response headers
-    def create_campaign_with_http_info(application_id, body, opts = {})
+    # @return [Array<(CreateTemplateCampaignResponse, Integer, Hash)>] CreateTemplateCampaignResponse data, response status code and response headers
+    def create_campaign_from_template_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.create_campaign ...'
+        @api_client.config.logger.debug 'Calling API: ManagementApi.create_campaign_from_template ...'
       end
       # verify the required parameter 'application_id' is set
       if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.create_campaign"
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.create_campaign_from_template"
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_campaign"
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_campaign_from_template"
       end
       # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
+      local_var_path = '/v1/applications/{applicationId}/create_campaign_from_template'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -342,7 +410,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'Campaign' 
+      return_type = opts[:return_type] || 'CreateTemplateCampaignResponse' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -358,31 +426,107 @@ module TalonOne
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#create_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ManagementApi#create_campaign_from_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Create Coupons
+    # Create collection
+    # Create a collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param body [NewCampaignCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Collection]
+    def create_collection(application_id, campaign_id, body, opts = {})
+      data, _status_code, _headers = create_collection_with_http_info(application_id, campaign_id, body, opts)
+      data
+    end
+
+    # Create collection
+    # Create a collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param body [NewCampaignCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def create_collection_with_http_info(application_id, campaign_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.create_collection ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.create_collection"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.create_collection"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_collection"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'Collection' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#create_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create coupons
     # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [NewCoupons] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information.  (default to 'yes')
     # @return [InlineResponse2004]
     def create_coupons(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = create_coupons_with_http_info(application_id, campaign_id, body, opts)
       data
     end
 
-    # Create Coupons
+    # Create coupons
     # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [NewCoupons] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information. 
     # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def create_coupons_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
@@ -442,26 +586,102 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Create Coupons for Multiple Recipients
+    # Create coupons asynchronously
+    # Create any number of coupons from 20,001 to 5,000,000.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param body [NewCouponCreationJob] 
+    # @param [Hash] opts the optional parameters
+    # @return [AsyncCouponCreationResponse]
+    def create_coupons_async(application_id, campaign_id, body, opts = {})
+      data, _status_code, _headers = create_coupons_async_with_http_info(application_id, campaign_id, body, opts)
+      data
+    end
+
+    # Create coupons asynchronously
+    # Create any number of coupons from 20,001 to 5,000,000.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param body [NewCouponCreationJob] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AsyncCouponCreationResponse, Integer, Hash)>] AsyncCouponCreationResponse data, response status code and response headers
+    def create_coupons_async_with_http_info(application_id, campaign_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.create_coupons_async ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.create_coupons_async"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.create_coupons_async"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_coupons_async"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/coupons_async'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'AsyncCouponCreationResponse' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#create_coupons_async\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create coupons for multiple recipients
     # Create coupons according to some pattern for up to 1000 recipients.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [NewCouponsForMultipleRecipients] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information.  (default to 'yes')
     # @return [InlineResponse2004]
     def create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = create_coupons_for_multiple_recipients_with_http_info(application_id, campaign_id, body, opts)
       data
     end
 
-    # Create Coupons for Multiple Recipients
+    # Create coupons for multiple recipients
     # Create coupons according to some pattern for up to 1000 recipients.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [NewCouponsForMultipleRecipients] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information. 
     # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def create_coupons_for_multiple_recipients_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
@@ -522,7 +742,7 @@ module TalonOne
     end
 
     # Request a password reset
-    # Sends an email with a password recovery link to the email of an existing account. 
+    # Send an email with a password recovery link to the email address of an existing account. 
     # @param body [NewPasswordEmail] 
     # @param [Hash] opts the optional parameters
     # @return [NewPasswordEmail]
@@ -532,7 +752,7 @@ module TalonOne
     end
 
     # Request a password reset
-    # Sends an email with a password recovery link to the email of an existing account. 
+    # Send an email with a password recovery link to the email address of an existing account. 
     # @param body [NewPasswordEmail] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(NewPasswordEmail, Integer, Hash)>] NewPasswordEmail data, response status code and response headers
@@ -585,81 +805,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Create a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [NewRuleset] 
-    # @param [Hash] opts the optional parameters
-    # @return [Ruleset]
-    def create_ruleset(application_id, campaign_id, body, opts = {})
-      data, _status_code, _headers = create_ruleset_with_http_info(application_id, campaign_id, body, opts)
-      data
-    end
-
-    # Create a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [NewRuleset] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(Ruleset, Integer, Hash)>] Ruleset data, response status code and response headers
-    def create_ruleset_with_http_info(application_id, campaign_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.create_ruleset ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.create_ruleset"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.create_ruleset"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.create_ruleset"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/rulesets'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'Ruleset' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#create_ruleset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Create a Session
+    # Create session
+    # Create a session to use the Management API endpoints. Use the value of the `token` property provided in the response as bearer token in other API calls.  A token is valid for 3 months. In accordance with best pratices, use your generated token for all your API requests. Do **not** regenerate a token for each request.  This endpoint has a rate limit of 3 to 6 requests per second per account, depending on your setup.  **Note:** You can also use your browser's developer's console to [display your token](https://docs.talon.one/docs/dev/tutorials/receiving-loyalty-ledger-braze/#extracting-the-session-token) when you log into the Campaign Manager.  In this case, keep in mind that logging out destroys the token. 
     # @param body [LoginParams] 
     # @param [Hash] opts the optional parameters
     # @return [Session]
@@ -668,7 +815,8 @@ module TalonOne
       data
     end
 
-    # Create a Session
+    # Create session
+    # Create a session to use the Management API endpoints. Use the value of the &#x60;token&#x60; property provided in the response as bearer token in other API calls.  A token is valid for 3 months. In accordance with best pratices, use your generated token for all your API requests. Do **not** regenerate a token for each request.  This endpoint has a rate limit of 3 to 6 requests per second per account, depending on your setup.  **Note:** You can also use your browser&#39;s developer&#39;s console to [display your token](https://docs.talon.one/docs/dev/tutorials/receiving-loyalty-ledger-braze/#extracting-the-session-token) when you log into the Campaign Manager.  In this case, keep in mind that logging out destroys the token. 
     # @param body [LoginParams] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Session, Integer, Hash)>] Session data, response status code and response headers
@@ -721,9 +869,72 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Delete a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete account-level collection
+    # Delete the given account-level collection
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_account_collection(collection_id, opts = {})
+      delete_account_collection_with_http_info(collection_id, opts)
+      nil
+    end
+
+    # Delete account-level collection
+    # Delete the given account-level collection
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_account_collection_with_http_info(collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.delete_account_collection ...'
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.delete_account_collection"
+      end
+      # resource path
+      local_var_path = '/v1/collections/{collectionId}'.sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#delete_account_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete campaign
+    # Delete the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_campaign(application_id, campaign_id, opts = {})
@@ -731,9 +942,10 @@ module TalonOne
       nil
     end
 
-    # Delete a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete campaign
+    # Delete the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_campaign_with_http_info(application_id, campaign_id, opts = {})
@@ -785,10 +997,85 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Delete one Coupon
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param coupon_id [String] The ID of the coupon code to delete
+    # Delete collection
+    # Delete the given collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_collection(application_id, campaign_id, collection_id, opts = {})
+      delete_collection_with_http_info(application_id, campaign_id, collection_id, opts)
+      nil
+    end
+
+    # Delete collection
+    # Delete the given collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_collection_with_http_info(application_id, campaign_id, collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.delete_collection ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.delete_collection"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.delete_collection"
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.delete_collection"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#delete_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete coupon
+    # Delete the specified coupon.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param coupon_id [String] The ID of the coupon code to update
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_coupon(application_id, campaign_id, coupon_id, opts = {})
@@ -796,10 +1083,11 @@ module TalonOne
       nil
     end
 
-    # Delete one Coupon
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param coupon_id [String] The ID of the coupon code to delete
+    # Delete coupon
+    # Delete the specified coupon.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param coupon_id [String] The ID of the coupon code to update
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_coupon_with_http_info(application_id, campaign_id, coupon_id, opts = {})
@@ -855,9 +1143,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Delete Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete coupons
+    # Deletes all the coupons matching the specified criteria.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -866,11 +1155,11 @@ module TalonOne
     # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
+    # @option opts [String] :valid - &#x60;expired&#x60;: Matches coupons in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches coupons in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches coupons in which start date is set and in the future. 
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
+    # @option opts [String] :usable - &#x60;true&#x60;: only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;: only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
     # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
+    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s &#x60;RecipientIntegrationId&#x60; field. 
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @return [nil]
     def delete_coupons(application_id, campaign_id, opts = {})
@@ -878,9 +1167,10 @@ module TalonOne
       nil
     end
 
-    # Delete Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete coupons
+    # Deletes all the coupons matching the specified criteria.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -889,11 +1179,11 @@ module TalonOne
     # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
+    # @option opts [String] :valid - &#x60;expired&#x60;: Matches coupons in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches coupons in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches coupons in which start date is set and in the future. 
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
+    # @option opts [String] :usable - &#x60;true&#x60;: only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;: only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
     # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
+    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s &#x60;RecipientIntegrationId&#x60; field. 
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_coupons_with_http_info(application_id, campaign_id, opts = {})
@@ -966,9 +1256,78 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Delete one Referral
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete loyalty card
+    # Delete the specified loyalty card.
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
+    # @param loyalty_card_identifier [String] Identifier of the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_loyalty_card(loyalty_program_id, loyalty_card_identifier, opts = {})
+      delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+      nil
+    end
+
+    # Delete loyalty card
+    # Delete the specified loyalty card.
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
+    # @param loyalty_card_identifier [String] Identifier of the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.delete_loyalty_card ...'
+      end
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.delete_loyalty_card"
+      end
+      # verify the required parameter 'loyalty_card_identifier' is set
+      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.delete_loyalty_card"
+      end
+      # resource path
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#delete_loyalty_card\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete referral
+    # Delete the specified referral.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param referral_id [String] The ID of the referral code to delete
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -977,9 +1336,10 @@ module TalonOne
       nil
     end
 
-    # Delete one Referral
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Delete referral
+    # Delete the specified referral.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param referral_id [String] The ID of the referral code to delete
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -1036,77 +1396,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Delete a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param ruleset_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def delete_ruleset(application_id, campaign_id, ruleset_id, opts = {})
-      delete_ruleset_with_http_info(application_id, campaign_id, ruleset_id, opts)
-      nil
-    end
-
-    # Delete a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param ruleset_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_ruleset_with_http_info(application_id, campaign_id, ruleset_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.delete_ruleset ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.delete_ruleset"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.delete_ruleset"
-      end
-      # verify the required parameter 'ruleset_id' is set
-      if @api_client.config.client_side_validation && ruleset_id.nil?
-        fail ArgumentError, "Missing the required parameter 'ruleset_id' when calling ManagementApi.delete_ruleset"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'rulesetId' + '}', CGI.escape(ruleset_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#delete_ruleset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Destroy a Session
+    # Destroy session
+    # Destroys the session.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def destroy_session(opts = {})
@@ -1114,7 +1405,8 @@ module TalonOne
       nil
     end
 
-    # Destroy a Session
+    # Destroy session
+    # Destroys the session.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def destroy_session_with_http_info(opts = {})
@@ -1158,9 +1450,145 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export Coupons to a CSV file
-    # Download a file with the coupons that match the given attributes.
-    # @param application_id [Integer] 
+    # Export account-level collection items to CSV file
+    # Download a file containing an account-level collection's items.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def export_account_collection_items(collection_id, opts = {})
+      data, _status_code, _headers = export_account_collection_items_with_http_info(collection_id, opts)
+      data
+    end
+
+    # Export account-level collection items to CSV file
+    # Download a file containing an account-level collection&#39;s items.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+    def export_account_collection_items_with_http_info(collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.export_account_collection_items ...'
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.export_account_collection_items"
+      end
+      # resource path
+      local_var_path = '/v1/collections/{collectionId}/export'.sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/csv'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'String' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#export_account_collection_items\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Export a collection's items to CSV file
+    # Download a file containing a collection's items.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def export_collection_items(application_id, campaign_id, collection_id, opts = {})
+      data, _status_code, _headers = export_collection_items_with_http_info(application_id, campaign_id, collection_id, opts)
+      data
+    end
+
+    # Export a collection&#39;s items to CSV file
+    # Download a file containing a collection&#39;s items.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+    def export_collection_items_with_http_info(application_id, campaign_id, collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.export_collection_items ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.export_collection_items"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.export_collection_items"
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.export_collection_items"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}/export'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/csv'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'String' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#export_collection_items\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Export coupons to CSV file
+    # Download a file containing the coupons that match the given properties.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
@@ -1174,16 +1602,16 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :date_format Determines the format of dates in the export document.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [String]
     def export_coupons(application_id, opts = {})
       data, _status_code, _headers = export_coupons_with_http_info(application_id, opts)
       data
     end
 
-    # Export Coupons to a CSV file
-    # Download a file with the coupons that match the given attributes.
-    # @param application_id [Integer] 
+    # Export coupons to CSV file
+    # Download a file containing the coupons that match the given properties.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
@@ -1197,7 +1625,7 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :date_format Determines the format of dates in the export document.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
     def export_coupons_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
@@ -1275,9 +1703,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export Customer Sessions to a CSV file
-    # Download a file with the customer sessions that match the request.
-    # @param application_id [Integer] 
+    # Export customer sessions to CSV file
+    # Download a file containing the customer sessions that match the request.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
@@ -1290,9 +1718,9 @@ module TalonOne
       data
     end
 
-    # Export Customer Sessions to a CSV file
-    # Download a file with the customer sessions that match the request.
-    # @param application_id [Integer] 
+    # Export customer sessions to CSV file
+    # Download a file containing the customer sessions that match the request.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
@@ -1312,7 +1740,7 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'date_format'] && !allowable_values.include?(opts[:'date_format'])
         fail ArgumentError, "invalid value for \"date_format\", must be one of #{allowable_values}"
       end
-      allowable_values = ["open", "closed", "cancelled"]
+      allowable_values = ["open", "closed", "partially_returned", "cancelled"]
       if @api_client.config.client_side_validation && opts[:'customer_session_state'] && !allowable_values.include?(opts[:'customer_session_state'])
         fail ArgumentError, "invalid value for \"customer_session_state\", must be one of #{allowable_values}"
       end
@@ -1360,9 +1788,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export triggered Effects to a CSV file
-    # Download a file with the triggered effects that match the given attributes.
-    # @param application_id [Integer] 
+    # Export triggered effects to CSV file
+    # Download a file containing the triggered effects that match the given attributes.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1374,9 +1802,9 @@ module TalonOne
       data
     end
 
-    # Export triggered Effects to a CSV file
-    # Download a file with the triggered effects that match the given attributes.
-    # @param application_id [Integer] 
+    # Export triggered effects to CSV file
+    # Download a file containing the triggered effects that match the given attributes.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -1439,30 +1867,30 @@ module TalonOne
     end
 
     # Export customer loyalty balance to a CSV file
-    # Download a file with the balance of each customer in the loyalty program
-    # @param program_id [String] 
+    # Download a file with the balance of each customer in the loyalty program.
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
     # @param [Hash] opts the optional parameters
     # @return [String]
-    def export_loyalty_balance(program_id, opts = {})
-      data, _status_code, _headers = export_loyalty_balance_with_http_info(program_id, opts)
+    def export_loyalty_balance(loyalty_program_id, opts = {})
+      data, _status_code, _headers = export_loyalty_balance_with_http_info(loyalty_program_id, opts)
       data
     end
 
     # Export customer loyalty balance to a CSV file
-    # Download a file with the balance of each customer in the loyalty program
-    # @param program_id [String] 
+    # Download a file with the balance of each customer in the loyalty program.
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
-    def export_loyalty_balance_with_http_info(program_id, opts = {})
+    def export_loyalty_balance_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.export_loyalty_balance ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.export_loyalty_balance"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.export_loyalty_balance"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/export_customer_balance'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/export_customer_balance'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1500,30 +1928,30 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export a customer's loyalty ledger log to a CSV file
+    # Export a customer's loyalty ledger log to CSV file
     # Download a file with a customer's ledger log in the loyalty program
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :date_format Determines the format of dates in the export document.
     # @return [String]
-    def export_loyalty_ledger(range_start, range_end, program_id, integration_id, opts = {})
-      data, _status_code, _headers = export_loyalty_ledger_with_http_info(range_start, range_end, program_id, integration_id, opts)
+    def export_loyalty_ledger(range_start, range_end, loyalty_program_id, integration_id, opts = {})
+      data, _status_code, _headers = export_loyalty_ledger_with_http_info(range_start, range_end, loyalty_program_id, integration_id, opts)
       data
     end
 
-    # Export a customer&#39;s loyalty ledger log to a CSV file
+    # Export a customer&#39;s loyalty ledger log to CSV file
     # Download a file with a customer&#39;s ledger log in the loyalty program
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :date_format Determines the format of dates in the export document.
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
-    def export_loyalty_ledger_with_http_info(range_start, range_end, program_id, integration_id, opts = {})
+    def export_loyalty_ledger_with_http_info(range_start, range_end, loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.export_loyalty_ledger ...'
       end
@@ -1535,9 +1963,9 @@ module TalonOne
       if @api_client.config.client_side_validation && range_end.nil?
         fail ArgumentError, "Missing the required parameter 'range_end' when calling ManagementApi.export_loyalty_ledger"
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.export_loyalty_ledger"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.export_loyalty_ledger"
       end
       # verify the required parameter 'integration_id' is set
       if @api_client.config.client_side_validation && integration_id.nil?
@@ -1548,7 +1976,7 @@ module TalonOne
         fail ArgumentError, "invalid value for \"date_format\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/profile/{integrationID}/export_log'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s)).sub('{' + 'integrationID' + '}', CGI.escape(integration_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/export_log'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1589,77 +2017,72 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get access logs for application (with total count)
-    # @param application_id [Integer] 
-    # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
-    # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
+    # Export referrals to CSV file
+    # Download a file containing the referrals that match the given parameters.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expression.
-    # @option opts [String] :method Only return results where the request method matches the given regular expression.
-    # @option opts [String] :status Filter results by HTTP status codes.
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse2008]
-    def get_access_logs(application_id, range_start, range_end, opts = {})
-      data, _status_code, _headers = get_access_logs_with_http_info(application_id, range_start, range_end, opts)
+    # @option opts [Float] :campaign_id Filter results by campaign.
+    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+    # @option opts [String] :valid - &#x60;expired&#x60;: Matches referrals in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches referrals in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches referrals in which start date is set and in the future. 
+    # @option opts [String] :usable - &#x60;true&#x60;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;, only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
+    # @option opts [String] :batch_id Filter results by batches of referrals
+    # @option opts [String] :date_format Determines the format of dates in the export document.
+    # @return [String]
+    def export_referrals(application_id, opts = {})
+      data, _status_code, _headers = export_referrals_with_http_info(application_id, opts)
       data
     end
 
-    # Get access logs for application (with total count)
-    # @param application_id [Integer] 
-    # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
-    # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
+    # Export referrals to CSV file
+    # Download a file containing the referrals that match the given parameters.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :path Only return results where the request path matches the given regular expression.
-    # @option opts [String] :method Only return results where the request method matches the given regular expression.
-    # @option opts [String] :status Filter results by HTTP status codes.
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
-    def get_access_logs_with_http_info(application_id, range_start, range_end, opts = {})
+    # @option opts [Float] :campaign_id Filter results by campaign.
+    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+    # @option opts [String] :valid - &#x60;expired&#x60;: Matches referrals in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches referrals in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches referrals in which start date is set and in the future. 
+    # @option opts [String] :usable - &#x60;true&#x60;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;, only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
+    # @option opts [String] :batch_id Filter results by batches of referrals
+    # @option opts [String] :date_format Determines the format of dates in the export document.
+    # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+    def export_referrals_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_access_logs ...'
+        @api_client.config.logger.debug 'Calling API: ManagementApi.export_referrals ...'
       end
       # verify the required parameter 'application_id' is set
       if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_access_logs"
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.export_referrals"
       end
-      # verify the required parameter 'range_start' is set
-      if @api_client.config.client_side_validation && range_start.nil?
-        fail ArgumentError, "Missing the required parameter 'range_start' when calling ManagementApi.get_access_logs"
+      allowable_values = ["expired", "validNow", "validFuture"]
+      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
+        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
       end
-      # verify the required parameter 'range_end' is set
-      if @api_client.config.client_side_validation && range_end.nil?
-        fail ArgumentError, "Missing the required parameter 'range_end' when calling ManagementApi.get_access_logs"
+      allowable_values = ["true", "false"]
+      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
+        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
       end
-      allowable_values = ["get", "put", "post", "delete", "patch"]
-      if @api_client.config.client_side_validation && opts[:'method'] && !allowable_values.include?(opts[:'method'])
-        fail ArgumentError, "invalid value for \"method\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["success", "error"]
-      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
-        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      allowable_values = ["excel", "ISO8601"]
+      if @api_client.config.client_side_validation && opts[:'date_format'] && !allowable_values.include?(opts[:'date_format'])
+        fail ArgumentError, "invalid value for \"date_format\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/v1/applications/{applicationId}/access_logs'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
+      local_var_path = '/v1/applications/{applicationId}/export_referrals'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'rangeStart'] = range_start
-      query_params[:'rangeEnd'] = range_end
-      query_params[:'path'] = opts[:'path'] if !opts[:'path'].nil?
-      query_params[:'method'] = opts[:'method'] if !opts[:'method'].nil?
-      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
+      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
+      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
+      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
+      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
+      query_params[:'dateFormat'] = opts[:'date_format'] if !opts[:'date_format'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/csv'])
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -1668,7 +2091,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2008' 
+      return_type = opts[:return_type] || 'String' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -1684,13 +2107,14 @@ module TalonOne
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_access_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ManagementApi#export_referrals\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get access logs for application
-    # @param application_id [Integer] 
+    # Get access logs for Application
+    # Retrieve the list of API calls to this Application matching the specified criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
@@ -1700,14 +2124,15 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse2009]
+    # @return [InlineResponse20010]
     def get_access_logs_without_total_count(application_id, range_start, range_end, opts = {})
       data, _status_code, _headers = get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts)
       data
     end
 
-    # Get access logs for application
-    # @param application_id [Integer] 
+    # Get access logs for Application
+    # Retrieve the list of API calls to this Application matching the specified criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
@@ -1717,7 +2142,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
+    # @return [Array<(InlineResponse20010, Integer, Hash)>] InlineResponse20010 data, response status code and response headers
     def get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_access_logs_without_total_count ...'
@@ -1742,6 +2167,14 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_access_logs_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_access_logs_without_total_count, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/access_logs/no_total'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
@@ -1768,7 +2201,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2009' 
+      return_type = opts[:return_type] || 'InlineResponse20010' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -1789,9 +2222,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Account Details
+    # Get account details
     # Return the details of your companies Talon.One account. 
-    # @param account_id [Integer] 
+    # @param account_id [Integer] The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
     # @param [Hash] opts the optional parameters
     # @return [Account]
     def get_account(account_id, opts = {})
@@ -1799,9 +2232,9 @@ module TalonOne
       data
     end
 
-    # Get Account Details
+    # Get account details
     # Return the details of your companies Talon.One account. 
-    # @param account_id [Integer] 
+    # @param account_id [Integer] The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
     def get_account_with_http_info(account_id, opts = {})
@@ -1851,9 +2284,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Account Analytics
-    # Return the analytics of your companies Talon.One account. 
-    # @param account_id [Integer] 
+    # Get account analytics
+    # Return the analytics of your Talon.One account. 
+    # @param account_id [Integer] The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
     # @param [Hash] opts the optional parameters
     # @return [AccountAnalytics]
     def get_account_analytics(account_id, opts = {})
@@ -1861,9 +2294,9 @@ module TalonOne
       data
     end
 
-    # Get Account Analytics
-    # Return the analytics of your companies Talon.One account. 
-    # @param account_id [Integer] 
+    # Get account analytics
+    # Return the analytics of your Talon.One account. 
+    # @param account_id [Integer] The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountAnalytics, Integer, Hash)>] AccountAnalytics data, response status code and response headers
     def get_account_analytics_with_http_info(account_id, opts = {})
@@ -1913,8 +2346,70 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get an additional cost
-    # Returns additional cost for the account by its id. 
+    # Get account-level collection
+    # Retrieve the given account-level collection
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Collection]
+    def get_account_collection(collection_id, opts = {})
+      data, _status_code, _headers = get_account_collection_with_http_info(collection_id, opts)
+      data
+    end
+
+    # Get account-level collection
+    # Retrieve the given account-level collection
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def get_account_collection_with_http_info(collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_account_collection ...'
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.get_account_collection"
+      end
+      # resource path
+      local_var_path = '/v1/collections/{collectionId}'.sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Collection' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_account_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get additional cost
+    # Returns the additional cost. 
     # @param additional_cost_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [AccountAdditionalCost]
@@ -1923,8 +2418,8 @@ module TalonOne
       data
     end
 
-    # Get an additional cost
-    # Returns additional cost for the account by its id. 
+    # Get additional cost
+    # Returns the additional cost. 
     # @param additional_cost_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountAdditionalCost, Integer, Hash)>] AccountAdditionalCost data, response status code and response headers
@@ -1981,7 +2476,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20021]
+    # @return [InlineResponse20023]
     def get_additional_costs(opts = {})
       data, _status_code, _headers = get_additional_costs_with_http_info(opts)
       data
@@ -1993,11 +2488,19 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20021, Integer, Hash)>] InlineResponse20021 data, response status code and response headers
+    # @return [Array<(InlineResponse20023, Integer, Hash)>] InlineResponse20023 data, response status code and response headers
     def get_additional_costs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_additional_costs ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_additional_costs, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_additional_costs, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/additional_costs'
 
@@ -2019,7 +2522,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20021' 
+      return_type = opts[:return_type] || 'InlineResponse20023' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2040,7 +2543,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get all access logs
+    # List access logs
     # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -2051,13 +2554,13 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse2008]
+    # @return [InlineResponse20011]
     def get_all_access_logs(range_start, range_end, opts = {})
       data, _status_code, _headers = get_all_access_logs_with_http_info(range_start, range_end, opts)
       data
     end
 
-    # Get all access logs
+    # List access logs
     # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -2068,7 +2571,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
+    # @return [Array<(InlineResponse20011, Integer, Hash)>] InlineResponse20011 data, response status code and response headers
     def get_all_access_logs_with_http_info(range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_all_access_logs ...'
@@ -2089,6 +2592,14 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_all_access_logs, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_all_access_logs, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/access_logs'
 
@@ -2115,7 +2626,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2008' 
+      return_type = opts[:return_type] || 'InlineResponse20011' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2136,17 +2647,19 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get all roles
+    # List roles
+    # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20029]
+    # @return [InlineResponse20031]
     def get_all_roles(opts = {})
       data, _status_code, _headers = get_all_roles_with_http_info(opts)
       data
     end
 
-    # Get all roles
+    # List roles
+    # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20029, Integer, Hash)>] InlineResponse20029 data, response status code and response headers
+    # @return [Array<(InlineResponse20031, Integer, Hash)>] InlineResponse20031 data, response status code and response headers
     def get_all_roles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_all_roles ...'
@@ -2169,7 +2682,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20029' 
+      return_type = opts[:return_type] || 'InlineResponse20031' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2190,9 +2703,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Application
+    # Get application
     # Get the application specified by the ID.
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Application]
     def get_application(application_id, opts = {})
@@ -2200,9 +2713,9 @@ module TalonOne
       data
     end
 
-    # Get Application
+    # Get application
     # Get the application specified by the ID.
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Application, Integer, Hash)>] Application data, response status code and response headers
     def get_application_with_http_info(application_id, opts = {})
@@ -2253,7 +2766,8 @@ module TalonOne
     end
 
     # Get report of health of application API
-    # @param application_id [Integer] 
+    # Display the health of the application and show the last time the Application was used. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [ApplicationApiHealth]
     def get_application_api_health(application_id, opts = {})
@@ -2262,7 +2776,8 @@ module TalonOne
     end
 
     # Get report of health of application API
-    # @param application_id [Integer] 
+    # Display the health of the application and show the last time the Application was used. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationApiHealth, Integer, Hash)>] ApplicationApiHealth data, response status code and response headers
     def get_application_api_health_with_http_info(application_id, opts = {})
@@ -2312,9 +2827,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Application Customer
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # Get application's customer
+    # Retrieve the customers of the specified application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [ApplicationCustomer]
     def get_application_customer(application_id, customer_id, opts = {})
@@ -2322,9 +2838,10 @@ module TalonOne
       data
     end
 
-    # Get Application Customer
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # Get application&#39;s customer
+    # Retrieve the customers of the specified application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationCustomer, Integer, Hash)>] ApplicationCustomer data, response status code and response headers
     def get_application_customer_with_http_info(application_id, customer_id, opts = {})
@@ -2378,27 +2895,117 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Application Customers
-    # @param application_id [Integer] 
+    # List friends referred by customer profile
+    # List the friends referred by the specified customer profile in this Application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param integration_id [String] The Integration ID of the Advocate&#39;s Profile.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [InlineResponse20021]
+    def get_application_customer_friends(application_id, integration_id, opts = {})
+      data, _status_code, _headers = get_application_customer_friends_with_http_info(application_id, integration_id, opts)
+      data
+    end
+
+    # List friends referred by customer profile
+    # List the friends referred by the specified customer profile in this Application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param integration_id [String] The Integration ID of the Advocate&#39;s Profile.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [Array<(InlineResponse20021, Integer, Hash)>] InlineResponse20021 data, response status code and response headers
+    def get_application_customer_friends_with_http_info(application_id, integration_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customer_friends ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_customer_friends"
+      end
+      # verify the required parameter 'integration_id' is set
+      if @api_client.config.client_side_validation && integration_id.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_id' when calling ManagementApi.get_application_customer_friends"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customer_friends, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customer_friends, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/profile/{integrationId}/friends'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse20021' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_application_customer_friends\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List application's customers
+    # List all the customers of the specified application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-    # @return [InlineResponse20011]
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [InlineResponse20013]
     def get_application_customers(application_id, opts = {})
       data, _status_code, _headers = get_application_customers_with_http_info(application_id, opts)
       data
     end
 
-    # List Application Customers
-    # @param application_id [Integer] 
+    # List application&#39;s customers
+    # List all the customers of the specified application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-    # @return [Array<(InlineResponse20011, Integer, Hash)>] InlineResponse20011 data, response status code and response headers
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [Array<(InlineResponse20013, Integer, Hash)>] InlineResponse20013 data, response status code and response headers
     def get_application_customers_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customers ...'
@@ -2407,6 +3014,14 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_customers"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customers, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customers, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/customers'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
@@ -2429,7 +3044,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20011' 
+      return_type = opts[:return_type] || 'InlineResponse20013' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2450,34 +3065,57 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the customer profiles that match the given attributes (with total count)
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-    # @param body [ApplicationCustomerSearch] 
+    # List application customers matching the given attributes
+    # Get a list of the application customers matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param body [CustomerProfileSearchQuery] 
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20012]
-    def get_application_customers_by_attributes(body, opts = {})
-      data, _status_code, _headers = get_application_customers_by_attributes_with_http_info(body, opts)
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [InlineResponse20014]
+    def get_application_customers_by_attributes(application_id, body, opts = {})
+      data, _status_code, _headers = get_application_customers_by_attributes_with_http_info(application_id, body, opts)
       data
     end
 
-    # Get a list of the customer profiles that match the given attributes (with total count)
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-    # @param body [ApplicationCustomerSearch] 
+    # List application customers matching the given attributes
+    # Get a list of the application customers matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param body [CustomerProfileSearchQuery] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
-    def get_application_customers_by_attributes_with_http_info(body, opts = {})
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [Array<(InlineResponse20014, Integer, Hash)>] InlineResponse20014 data, response status code and response headers
+    def get_application_customers_by_attributes_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customers_by_attributes ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_customers_by_attributes"
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.get_application_customers_by_attributes"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customers_by_attributes, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_customers_by_attributes, must be greater than or equal to 1.'
+      end
+
       # resource path
-      local_var_path = '/v1/application_customer_search'
+      local_var_path = '/v1/applications/{applicationId}/customer_search'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -2493,10 +3131,10 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20012' 
+      return_type = opts[:return_type] || 'InlineResponse20014' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['integration_auth']
+      auth_names = opts[:auth_names] || ['manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2514,27 +3152,27 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Applications Event Types
-    # Get all of the distinct values of the Event `type` property for events recorded in the application.  See also: [Track an event](/integration-api/reference/#trackEvent) 
-    # @param application_id [Integer] 
+    # List Applications event types
+    # Get all of the distinct values of the Event `type` property for events recorded in the application.  See also: [Track an event](/integration-api/#operation/trackEvent) 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20018]
+    # @return [InlineResponse20019]
     def get_application_event_types(application_id, opts = {})
       data, _status_code, _headers = get_application_event_types_with_http_info(application_id, opts)
       data
     end
 
-    # List Applications Event Types
-    # Get all of the distinct values of the Event &#x60;type&#x60; property for events recorded in the application.  See also: [Track an event](/integration-api/reference/#trackEvent) 
-    # @param application_id [Integer] 
+    # List Applications event types
+    # Get all of the distinct values of the Event &#x60;type&#x60; property for events recorded in the application.  See also: [Track an event](/integration-api/#operation/trackEvent) 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20018, Integer, Hash)>] InlineResponse20018 data, response status code and response headers
+    # @return [Array<(InlineResponse20019, Integer, Hash)>] InlineResponse20019 data, response status code and response headers
     def get_application_event_types_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_event_types ...'
@@ -2543,6 +3181,14 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_event_types"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_event_types, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_event_types, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/event_types'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
@@ -2564,7 +3210,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20018' 
+      return_type = opts[:return_type] || 'InlineResponse20019' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2585,121 +3231,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Applications Events (with total count)
-    # Lists all events recorded for an application. 
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
-    # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :session Session integration ID filter for events. Must be exact match.
-    # @option opts [String] :profile Profile integration ID filter for events. Must be exact match.
-    # @option opts [String] :customer_name Customer name filter for events. Will match substrings case-insensitively.
-    # @option opts [String] :customer_email Customer e-mail address filter for events. Will match substrings case-insensitively.
-    # @option opts [String] :coupon_code Coupon code
-    # @option opts [String] :referral_code Referral code
-    # @option opts [String] :rule_query Rule name filter for events
-    # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [InlineResponse20016]
-    def get_application_events(application_id, opts = {})
-      data, _status_code, _headers = get_application_events_with_http_info(application_id, opts)
-      data
-    end
-
-    # List Applications Events (with total count)
-    # Lists all events recorded for an application. 
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
-    # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :session Session integration ID filter for events. Must be exact match.
-    # @option opts [String] :profile Profile integration ID filter for events. Must be exact match.
-    # @option opts [String] :customer_name Customer name filter for events. Will match substrings case-insensitively.
-    # @option opts [String] :customer_email Customer e-mail address filter for events. Will match substrings case-insensitively.
-    # @option opts [String] :coupon_code Coupon code
-    # @option opts [String] :referral_code Referral code
-    # @option opts [String] :rule_query Rule name filter for events
-    # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [Array<(InlineResponse20016, Integer, Hash)>] InlineResponse20016 data, response status code and response headers
-    def get_application_events_with_http_info(application_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_events ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_events"
-      end
-      if @api_client.config.client_side_validation && !opts[:'customer_name'].nil? && opts[:'customer_name'].to_s.length < 2
-        fail ArgumentError, 'invalid value for "opts[:"customer_name"]" when calling ManagementApi.get_application_events, the character length must be great than or equal to 2.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'customer_email'].nil? && opts[:'customer_email'].to_s.length < 2
-        fail ArgumentError, 'invalid value for "opts[:"customer_email"]" when calling ManagementApi.get_application_events, the character length must be great than or equal to 2.'
-      end
-
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/events'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'session'] = opts[:'session'] if !opts[:'session'].nil?
-      query_params[:'profile'] = opts[:'profile'] if !opts[:'profile'].nil?
-      query_params[:'customerName'] = opts[:'customer_name'] if !opts[:'customer_name'].nil?
-      query_params[:'customerEmail'] = opts[:'customer_email'] if !opts[:'customer_email'].nil?
-      query_params[:'couponCode'] = opts[:'coupon_code'] if !opts[:'coupon_code'].nil?
-      query_params[:'referralCode'] = opts[:'referral_code'] if !opts[:'referral_code'].nil?
-      query_params[:'ruleQuery'] = opts[:'rule_query'] if !opts[:'rule_query'].nil?
-      query_params[:'campaignQuery'] = opts[:'campaign_query'] if !opts[:'campaign_query'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse20016' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_application_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # List Applications Events
+    # List Applications events
     # Lists all events recorded for an application. Instead of having the total number of results in the response, this endpoint only if there are more results. 
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2715,15 +3249,15 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [InlineResponse20017]
+    # @return [InlineResponse20018]
     def get_application_events_without_total_count(application_id, opts = {})
       data, _status_code, _headers = get_application_events_without_total_count_with_http_info(application_id, opts)
       data
     end
 
-    # List Applications Events
+    # List Applications events
     # Lists all events recorded for an application. Instead of having the total number of results in the response, this endpoint only if there are more results. 
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2739,7 +3273,7 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [Array<(InlineResponse20017, Integer, Hash)>] InlineResponse20017 data, response status code and response headers
+    # @return [Array<(InlineResponse20018, Integer, Hash)>] InlineResponse20018 data, response status code and response headers
     def get_application_events_without_total_count_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_events_without_total_count ...'
@@ -2748,6 +3282,14 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_events_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_events_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_events_without_total_count, must be greater than or equal to 1.'
+      end
+
       if @api_client.config.client_side_validation && !opts[:'customer_name'].nil? && opts[:'customer_name'].to_s.length < 2
         fail ArgumentError, 'invalid value for "opts[:"customer_name"]" when calling ManagementApi.get_application_events_without_total_count, the character length must be great than or equal to 2.'
       end
@@ -2788,7 +3330,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20017' 
+      return_type = opts[:return_type] || 'InlineResponse20018' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2809,9 +3351,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Application Session
-    # @param application_id [Integer] 
-    # @param session_id [Integer] 
+    # Get Application session
+    # Get the details of the given session. You can list the sessions with the [List Application sessions](#operation/getApplicationSessions) endpoint. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param session_id [Integer] The **internal** ID of the session. You can get the ID with the [List Application sessions endpoint](#operation/getApplicationSessions). 
     # @param [Hash] opts the optional parameters
     # @return [ApplicationSession]
     def get_application_session(application_id, session_id, opts = {})
@@ -2819,9 +3362,10 @@ module TalonOne
       data
     end
 
-    # Get Application Session
-    # @param application_id [Integer] 
-    # @param session_id [Integer] 
+    # Get Application session
+    # Get the details of the given session. You can list the sessions with the [List Application sessions](#operation/getApplicationSessions) endpoint. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param session_id [Integer] The **internal** ID of the session. You can get the ID with the [List Application sessions endpoint](#operation/getApplicationSessions). 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationSession, Integer, Hash)>] ApplicationSession data, response status code and response headers
     def get_application_session_with_http_info(application_id, session_id, opts = {})
@@ -2875,8 +3419,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Application Sessions
-    # @param application_id [Integer] 
+    # List Application sessions
+    # List all the sessions of the specified Application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2888,14 +3433,15 @@ module TalonOne
     # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
     # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
     # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
-    # @return [InlineResponse20015]
+    # @return [InlineResponse20017]
     def get_application_sessions(application_id, opts = {})
       data, _status_code, _headers = get_application_sessions_with_http_info(application_id, opts)
       data
     end
 
-    # List Application Sessions
-    # @param application_id [Integer] 
+    # List Application sessions
+    # List all the sessions of the specified Application. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2907,7 +3453,7 @@ module TalonOne
     # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
     # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
     # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
-    # @return [Array<(InlineResponse20015, Integer, Hash)>] InlineResponse20015 data, response status code and response headers
+    # @return [Array<(InlineResponse20017, Integer, Hash)>] InlineResponse20017 data, response status code and response headers
     def get_application_sessions_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_sessions ...'
@@ -2916,7 +3462,15 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_application_sessions"
       end
-      allowable_values = ["open", "closed", "cancelled"]
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_sessions, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_application_sessions, must be greater than or equal to 1.'
+      end
+
+      allowable_values = ["open", "closed", "partially_returned", "cancelled"]
       if @api_client.config.client_side_validation && opts[:'state'] && !allowable_values.include?(opts[:'state'])
         fail ArgumentError, "invalid value for \"state\", must be one of #{allowable_values}"
       end
@@ -2948,7 +3502,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20015' 
+      return_type = opts[:return_type] || 'InlineResponse20017' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -2969,8 +3523,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Applications
-    # List all application in the current account.
+    # List applications
+    # List all applications in the current account.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2981,8 +3535,8 @@ module TalonOne
       data
     end
 
-    # List Applications
-    # List all application in the current account.
+    # List applications
+    # List all applications in the current account.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -2992,6 +3546,14 @@ module TalonOne
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_applications ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_applications, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_applications, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications'
 
@@ -3034,7 +3596,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a custom attribute
+    # Get custom attribute
     # Returns custom attribute for the account by its id. 
     # @param attribute_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3044,7 +3606,7 @@ module TalonOne
       data
     end
 
-    # Get a custom attribute
+    # Get custom attribute
     # Returns custom attribute for the account by its id. 
     # @param attribute_id [Integer] 
     # @param [Hash] opts the optional parameters
@@ -3103,7 +3665,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity
-    # @return [InlineResponse20020]
+    # @return [InlineResponse20022]
     def get_attributes(opts = {})
       data, _status_code, _headers = get_attributes_with_http_info(opts)
       data
@@ -3116,11 +3678,19 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity
-    # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
+    # @return [Array<(InlineResponse20022, Integer, Hash)>] InlineResponse20022 data, response status code and response headers
     def get_attributes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_attributes ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_attributes, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_attributes, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/attributes'
 
@@ -3130,6 +3700,82 @@ module TalonOne
       query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
       query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
       query_params[:'entity'] = opts[:'entity'] if !opts[:'entity'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse20022' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_attributes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List audiences
+    # Get All audiences created in the account. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [InlineResponse20020]
+    def get_audiences(opts = {})
+      data, _status_code, _headers = get_audiences_with_http_info(opts)
+      data
+    end
+
+    # List audiences
+    # Get All audiences created in the account. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
+    def get_audiences_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_audiences ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_audiences, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_audiences, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/audiences'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -3159,82 +3805,15 @@ module TalonOne
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_attributes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get all audiences
-    # Get All audiences created in the account. 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-    # @return [InlineResponse20019]
-    def get_audiences(opts = {})
-      data, _status_code, _headers = get_audiences_with_http_info(opts)
-      data
-    end
-
-    # Get all audiences
-    # Get All audiences created in the account. 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-    # @return [Array<(InlineResponse20019, Integer, Hash)>] InlineResponse20019 data, response status code and response headers
-    def get_audiences_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_audiences ...'
-      end
-      # resource path
-      local_var_path = '/v1/audiences'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse20019' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_audiences\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get campaign
+    # Retrieve the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Campaign]
     def get_campaign(application_id, campaign_id, opts = {})
@@ -3242,9 +3821,10 @@ module TalonOne
       data
     end
 
-    # Get a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get campaign
+    # Retrieve the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Campaign, Integer, Hash)>] Campaign data, response status code and response headers
     def get_campaign_with_http_info(application_id, campaign_id, opts = {})
@@ -3299,26 +3879,28 @@ module TalonOne
     end
 
     # Get analytics of campaigns
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Retrieve statistical data about the performance of the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
     # @option opts [String] :granularity The time interval between the results in the returned time-series.
-    # @return [InlineResponse20010]
+    # @return [InlineResponse20012]
     def get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts = {})
       data, _status_code, _headers = get_campaign_analytics_with_http_info(application_id, campaign_id, range_start, range_end, opts)
       data
     end
 
     # Get analytics of campaigns
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Retrieve statistical data about the performance of the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
     # @param [Hash] opts the optional parameters
     # @option opts [String] :granularity The time interval between the results in the returned time-series.
-    # @return [Array<(InlineResponse20010, Integer, Hash)>] InlineResponse20010 data, response status code and response headers
+    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
     def get_campaign_analytics_with_http_info(application_id, campaign_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_analytics ...'
@@ -3364,7 +3946,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20010' 
+      return_type = opts[:return_type] || 'InlineResponse20012' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3385,30 +3967,30 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of all campaigns that match the given attributes
-    # Gets a list of all the campaigns that exactly match a set of attributes. 
-    # @param application_id [Integer] 
+    # List campaigns that match the given attributes
+    # Get a list of all the campaigns that match a set of attributes. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignSearch] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [InlineResponse2002]
     def get_campaign_by_attributes(application_id, body, opts = {})
       data, _status_code, _headers = get_campaign_by_attributes_with_http_info(application_id, body, opts)
       data
     end
 
-    # Get a list of all campaigns that match the given attributes
-    # Gets a list of all the campaigns that exactly match a set of attributes. 
-    # @param application_id [Integer] 
+    # List campaigns that match the given attributes
+    # Get a list of all the campaigns that match a set of attributes. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignSearch] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def get_campaign_by_attributes_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
@@ -3422,6 +4004,14 @@ module TalonOne
       if @api_client.config.client_side_validation && body.nil?
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.get_campaign_by_attributes"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_campaign_by_attributes, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_campaign_by_attributes, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["enabled", "disabled", "archived", "draft", "scheduled", "running", "expired"]
       if @api_client.config.client_side_validation && opts[:'campaign_state'] && !allowable_values.include?(opts[:'campaign_state'])
         fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{allowable_values}"
@@ -3471,36 +4061,40 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List your Campaigns
-    # @param application_id [Integer] 
+    # List campaigns
+    # List the campaigns of the specified application that match your filter criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
+    # @option opts [Integer] :template_id The ID of the Campaign Template this Campaign was created from.
     # @return [InlineResponse2002]
     def get_campaigns(application_id, opts = {})
       data, _status_code, _headers = get_campaigns_with_http_info(application_id, opts)
       data
     end
 
-    # List your Campaigns
-    # @param application_id [Integer] 
+    # List campaigns
+    # List the campaigns of the specified application that match your filter criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
+    # @option opts [Integer] :template_id The ID of the Campaign Template this Campaign was created from.
     # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def get_campaigns_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
@@ -3510,6 +4104,14 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_campaigns"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_campaigns, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_campaigns, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["enabled", "disabled", "archived", "draft", "scheduled", "running", "expired"]
       if @api_client.config.client_side_validation && opts[:'campaign_state'] && !allowable_values.include?(opts[:'campaign_state'])
         fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{allowable_values}"
@@ -3528,6 +4130,7 @@ module TalonOne
       query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
       query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
       query_params[:'campaignGroupId'] = opts[:'campaign_group_id'] if !opts[:'campaign_group_id'].nil?
+      query_params[:'templateId'] = opts[:'template_id'] if !opts[:'template_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -3568,14 +4171,14 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [Integer] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
-    # @option opts [Integer] :user_id 
+    # @option opts [Integer] :user_id Filter results that match the given user ID.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [InlineResponse20027]
+    # @return [InlineResponse20029]
     def get_changes(opts = {})
       data, _status_code, _headers = get_changes_with_http_info(opts)
       data
@@ -3587,18 +4190,26 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [Integer] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
-    # @option opts [Integer] :user_id 
+    # @option opts [Integer] :user_id Filter results that match the given user ID.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [Array<(InlineResponse20027, Integer, Hash)>] InlineResponse20027 data, response status code and response headers
+    # @return [Array<(InlineResponse20029, Integer, Hash)>] InlineResponse20029 data, response status code and response headers
     def get_changes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_changes ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_changes, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_changes, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/changes'
 
@@ -3627,7 +4238,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20027' 
+      return_type = opts[:return_type] || 'InlineResponse20029' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3648,94 +4259,46 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Coupons (with total count)
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get collection
+    # Retrieve the given collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @return [InlineResponse2004]
-    def get_coupons(application_id, campaign_id, opts = {})
-      data, _status_code, _headers = get_coupons_with_http_info(application_id, campaign_id, opts)
+    # @return [Collection]
+    def get_collection(application_id, campaign_id, collection_id, opts = {})
+      data, _status_code, _headers = get_collection_with_http_info(application_id, campaign_id, collection_id, opts)
       data
     end
 
-    # List Coupons (with total count)
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get collection
+    # Retrieve the given collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
-    def get_coupons_with_http_info(application_id, campaign_id, opts = {})
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def get_collection_with_http_info(application_id, campaign_id, collection_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons ...'
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_collection ...'
       end
       # verify the required parameter 'application_id' is set
       if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_coupons"
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_collection"
       end
       # verify the required parameter 'campaign_id' is set
       if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_coupons"
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_collection"
       end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.get_collection"
       end
       # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/coupons'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'value'] = opts[:'value'] if !opts[:'value'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'startsAfter'] = opts[:'starts_after'] if !opts[:'starts_after'].nil?
-      query_params[:'startsBefore'] = opts[:'starts_before'] if !opts[:'starts_before'].nil?
-      query_params[:'expiresAfter'] = opts[:'expires_after'] if !opts[:'expires_after'].nil?
-      query_params[:'expiresBefore'] = opts[:'expires_before'] if !opts[:'expires_before'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'referralId'] = opts[:'referral_id'] if !opts[:'referral_id'].nil?
-      query_params[:'recipientIntegrationId'] = opts[:'recipient_integration_id'] if !opts[:'recipient_integration_id'].nil?
-      query_params[:'exactMatch'] = opts[:'exact_match'] if !opts[:'exact_match'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -3749,7 +4312,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
+      return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -3765,255 +4328,15 @@ module TalonOne
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_coupons\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ManagementApi#get_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes
-    # Gets a list of all the coupons that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request. 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [CouponSearch] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [InlineResponse2004]
-    def get_coupons_by_attributes(application_id, campaign_id, body, opts = {})
-      data, _status_code, _headers = get_coupons_by_attributes_with_http_info(application_id, campaign_id, body, opts)
-      data
-    end
-
-    # Get a list of the coupons that match the given attributes
-    # Gets a list of all the coupons that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request. 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [CouponSearch] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
-    def get_coupons_by_attributes_with_http_info(application_id, campaign_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons_by_attributes ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_coupons_by_attributes"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_coupons_by_attributes"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.get_coupons_by_attributes"
-      end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'value'] = opts[:'value'] if !opts[:'value'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'referralId'] = opts[:'referral_id'] if !opts[:'referral_id'].nil?
-      query_params[:'recipientIntegrationId'] = opts[:'recipient_integration_id'] if !opts[:'recipient_integration_id'].nil?
-      query_params[:'exactMatch'] = opts[:'exact_match'] if !opts[:'exact_match'].nil?
-      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_coupons_by_attributes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria Application wide 
-    # @param application_id [Integer] 
-    # @param body [CouponSearch] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [InlineResponse2004]
-    def get_coupons_by_attributes_application_wide(application_id, body, opts = {})
-      data, _status_code, _headers = get_coupons_by_attributes_application_wide_with_http_info(application_id, body, opts)
-      data
-    end
-
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria Application wide 
-    # @param application_id [Integer] 
-    # @param body [CouponSearch] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
-    def get_coupons_by_attributes_application_wide_with_http_info(application_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons_by_attributes_application_wide ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_coupons_by_attributes_application_wide"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.get_coupons_by_attributes_application_wide"
-      end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["enabled", "disabled", "archived", "draft", "scheduled", "running", "expired"]
-      if @api_client.config.client_side_validation && opts[:'campaign_state'] && !allowable_values.include?(opts[:'campaign_state'])
-        fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/coupons_search'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'value'] = opts[:'value'] if !opts[:'value'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'referralId'] = opts[:'referral_id'] if !opts[:'referral_id'].nil?
-      query_params[:'recipientIntegrationId'] = opts[:'recipient_integration_id'] if !opts[:'recipient_integration_id'].nil?
-      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
-      query_params[:'exactMatch'] = opts[:'exact_match'] if !opts[:'exact_match'].nil?
-      query_params[:'campaignState'] = opts[:'campaign_state'] if !opts[:'campaign_state'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_coupons_by_attributes_application_wide\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # List Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List coupons
+    # List all the coupons matching the specified criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4033,9 +4356,10 @@ module TalonOne
       data
     end
 
-    # List Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List coupons
+    # List all the coupons matching the specified criteria. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4062,6 +4386,14 @@ module TalonOne
       if @api_client.config.client_side_validation && campaign_id.nil?
         fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_coupons_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_coupons_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_coupons_without_total_count, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["expired", "validNow", "validFuture"]
       if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
         fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
@@ -4121,12 +4453,12 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Activity Report for Single Customer
-    # Fetch summary report for single application customer based on a time range
+    # Get customer's activity report
+    # Fetch the summary report of a given customer in the given application, in a time range.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4136,12 +4468,12 @@ module TalonOne
       data
     end
 
-    # Get Activity Report for Single Customer
-    # Fetch summary report for single application customer based on a time range
+    # Get customer&#39;s activity report
+    # Fetch the summary report of a given customer in the given application, in a time range.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4166,6 +4498,14 @@ module TalonOne
       if @api_client.config.client_side_validation && customer_id.nil?
         fail ArgumentError, "Missing the required parameter 'customer_id' when calling ManagementApi.get_customer_activity_report"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_activity_report, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_activity_report, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/customer_activity_reports/{customerId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -4209,117 +4549,20 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Activity Reports for Application Customers (with total count)
-    # Fetch summary reports for all application customers based on a time range
-    # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
-    # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :name Only return reports matching the customer name
-    # @option opts [String] :integration_id Only return reports matching the integrationId
-    # @option opts [String] :campaign_name Only return reports matching the campaignName
-    # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [InlineResponse20013]
-    def get_customer_activity_reports(range_start, range_end, application_id, opts = {})
-      data, _status_code, _headers = get_customer_activity_reports_with_http_info(range_start, range_end, application_id, opts)
-      data
-    end
-
-    # Get Activity Reports for Application Customers (with total count)
-    # Fetch summary reports for all application customers based on a time range
-    # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
-    # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :name Only return reports matching the customer name
-    # @option opts [String] :integration_id Only return reports matching the integrationId
-    # @option opts [String] :campaign_name Only return reports matching the campaignName
-    # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [Array<(InlineResponse20013, Integer, Hash)>] InlineResponse20013 data, response status code and response headers
-    def get_customer_activity_reports_with_http_info(range_start, range_end, application_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_activity_reports ...'
-      end
-      # verify the required parameter 'range_start' is set
-      if @api_client.config.client_side_validation && range_start.nil?
-        fail ArgumentError, "Missing the required parameter 'range_start' when calling ManagementApi.get_customer_activity_reports"
-      end
-      # verify the required parameter 'range_end' is set
-      if @api_client.config.client_side_validation && range_end.nil?
-        fail ArgumentError, "Missing the required parameter 'range_end' when calling ManagementApi.get_customer_activity_reports"
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_customer_activity_reports"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/customer_activity_reports'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'rangeStart'] = range_start
-      query_params[:'rangeEnd'] = range_end
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
-      query_params[:'integrationId'] = opts[:'integration_id'] if !opts[:'integration_id'].nil?
-      query_params[:'campaignName'] = opts[:'campaign_name'] if !opts[:'campaign_name'].nil?
-      query_params[:'advocateName'] = opts[:'advocate_name'] if !opts[:'advocate_name'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse20013' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_customer_activity_reports\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get Activity Reports for Application Customers
     # Fetch summary reports for all application customers based on a time range. Instead of having the total number of results in the response, this endpoint only if there are more results.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :name Only return reports matching the customer name
-    # @option opts [String] :integration_id Only return reports matching the integrationId
+    # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaignName
     # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [InlineResponse20014]
+    # @return [InlineResponse20016]
     def get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts = {})
       data, _status_code, _headers = get_customer_activity_reports_without_total_count_with_http_info(range_start, range_end, application_id, opts)
       data
@@ -4329,16 +4572,16 @@ module TalonOne
     # Fetch summary reports for all application customers based on a time range. Instead of having the total number of results in the response, this endpoint only if there are more results.
     # @param range_start [DateTime] Only return results from after this timestamp, must be an RFC3339 timestamp string
     # @param range_end [DateTime] Only return results from before this timestamp, must be an RFC3339 timestamp string
-    # @param application_id [Integer] 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :name Only return reports matching the customer name
-    # @option opts [String] :integration_id Only return reports matching the integrationId
+    # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaignName
     # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [Array<(InlineResponse20014, Integer, Hash)>] InlineResponse20014 data, response status code and response headers
+    # @return [Array<(InlineResponse20016, Integer, Hash)>] InlineResponse20016 data, response status code and response headers
     def get_customer_activity_reports_without_total_count_with_http_info(range_start, range_end, application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_activity_reports_without_total_count ...'
@@ -4355,6 +4598,14 @@ module TalonOne
       if @api_client.config.client_side_validation && application_id.nil?
         fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_customer_activity_reports_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_activity_reports_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_activity_reports_without_total_count, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/customer_activity_reports/no_total'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
 
@@ -4382,7 +4633,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20014' 
+      return_type = opts[:return_type] || 'InlineResponse20016' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4403,10 +4654,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Analytics Report for a Customer
-    # Fetch analytics for single application customer
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # Get customer's analytics report
+    # Fetch analytics for a given customer in the given application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4417,10 +4668,10 @@ module TalonOne
       data
     end
 
-    # Get Analytics Report for a Customer
-    # Fetch analytics for single application customer
-    # @param application_id [Integer] 
-    # @param customer_id [Integer] 
+    # Get customer&#39;s analytics report
+    # Fetch analytics for a given customer in the given application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -4438,6 +4689,14 @@ module TalonOne
       if @api_client.config.client_side_validation && customer_id.nil?
         fail ArgumentError, "Missing the required parameter 'customer_id' when calling ManagementApi.get_customer_analytics"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_analytics, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_analytics, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/customers/{customerId}/analytics'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -4480,19 +4739,21 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Customer Profile
-    # @param customer_id [Integer] 
+    # Get customer profile
+    # Return the details of the specified customer profile.  **Performance tip:** You can retrieve the same information via the Integration API, which can save you extra API requests. Consider these options: - Request the customer profile to be part of the response content using   [Update Customer Session](/integration-api/operation#updateCustomerSessionV2). - Send an empty update with the [Update Customer Profile](/integration-api/#operation/updateCustomerProfileV2) endpoint with `runRuleEngine=false`. 
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
-    # @return [ApplicationCustomer]
+    # @return [CustomerProfile]
     def get_customer_profile(customer_id, opts = {})
       data, _status_code, _headers = get_customer_profile_with_http_info(customer_id, opts)
       data
     end
 
-    # Get Customer Profile
-    # @param customer_id [Integer] 
+    # Get customer profile
+    # Return the details of the specified customer profile.  **Performance tip:** You can retrieve the same information via the Integration API, which can save you extra API requests. Consider these options: - Request the customer profile to be part of the response content using   [Update Customer Session](/integration-api/operation#updateCustomerSessionV2). - Send an empty update with the [Update Customer Profile](/integration-api/#operation/updateCustomerProfileV2) endpoint with &#x60;runRuleEngine&#x3D;false&#x60;. 
+    # @param customer_id [Integer] The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ApplicationCustomer, Integer, Hash)>] ApplicationCustomer data, response status code and response headers
+    # @return [Array<(CustomerProfile, Integer, Hash)>] CustomerProfile data, response status code and response headers
     def get_customer_profile_with_http_info(customer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_profile ...'
@@ -4519,7 +4780,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'ApplicationCustomer' 
+      return_type = opts[:return_type] || 'CustomerProfile' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4540,25 +4801,35 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Customer Profiles
+    # List customer profiles
+    # List all customer profiles.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20012]
+    # @return [InlineResponse20015]
     def get_customer_profiles(opts = {})
       data, _status_code, _headers = get_customer_profiles_with_http_info(opts)
       data
     end
 
-    # List Customer Profiles
+    # List customer profiles
+    # List all customer profiles.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
+    # @return [Array<(InlineResponse20015, Integer, Hash)>] InlineResponse20015 data, response status code and response headers
     def get_customer_profiles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_profiles ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_profiles, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customer_profiles, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/customers/no_total'
 
@@ -4579,7 +4850,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20012' 
+      return_type = opts[:return_type] || 'InlineResponse20015' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4600,25 +4871,25 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-    # @param body [ApplicationCustomerSearch] 
+    # List customer profiles matching the given attributes
+    # Get a list of the customer profiles matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
+    # @param body [CustomerProfileSearchQuery] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20012]
+    # @return [InlineResponse20015]
     def get_customers_by_attributes(body, opts = {})
       data, _status_code, _headers = get_customers_by_attributes_with_http_info(body, opts)
       data
     end
 
-    # Get a list of the customer profiles that match the given attributes
-    # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
-    # @param body [ApplicationCustomerSearch] 
+    # List customer profiles matching the given attributes
+    # Get a list of the customer profiles matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
+    # @param body [CustomerProfileSearchQuery] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
+    # @return [Array<(InlineResponse20015, Integer, Hash)>] InlineResponse20015 data, response status code and response headers
     def get_customers_by_attributes_with_http_info(body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customers_by_attributes ...'
@@ -4627,6 +4898,14 @@ module TalonOne
       if @api_client.config.client_side_validation && body.nil?
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.get_customers_by_attributes"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customers_by_attributes, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_customers_by_attributes, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/customer_search/no_total'
 
@@ -4649,7 +4928,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20012' 
+      return_type = opts[:return_type] || 'InlineResponse20015' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4670,41 +4949,46 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Event Types
-    # Fetch all event type definitions for your account. Each event type can be 
+    # List event types
+    # Fetch all event type definitions for your account. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :application_ids Filter by one or more application ids separated by comma
     # @option opts [String] :name Filter results to event types with the given name. This parameter implies &#x60;includeOldVersions&#x60;.
     # @option opts [Boolean] :include_old_versions Include all versions of every event type. (default to false)
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20025]
+    # @return [InlineResponse20027]
     def get_event_types(opts = {})
       data, _status_code, _headers = get_event_types_with_http_info(opts)
       data
     end
 
-    # List Event Types
-    # Fetch all event type definitions for your account. Each event type can be 
+    # List event types
+    # Fetch all event type definitions for your account. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :application_ids Filter by one or more application ids separated by comma
     # @option opts [String] :name Filter results to event types with the given name. This parameter implies &#x60;includeOldVersions&#x60;.
     # @option opts [Boolean] :include_old_versions Include all versions of every event type.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20025, Integer, Hash)>] InlineResponse20025 data, response status code and response headers
+    # @return [Array<(InlineResponse20027, Integer, Hash)>] InlineResponse20027 data, response status code and response headers
     def get_event_types_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_event_types ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_event_types, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_event_types, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/event_types'
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'applicationIds'] = opts[:'application_ids'] if !opts[:'application_ids'].nil?
       query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
       query_params[:'includeOldVersions'] = opts[:'include_old_versions'] if !opts[:'include_old_versions'].nil?
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
@@ -4723,7 +5007,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20025' 
+      return_type = opts[:return_type] || 'InlineResponse20027' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4744,34 +5028,42 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Exports
-    # Get a list of all past exports 
+    # Get exports
+    # List all past exports 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [Integer] :application_id 
-    # @option opts [Integer] :campaign_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
+    # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [InlineResponse20028]
+    # @return [InlineResponse20030]
     def get_exports(opts = {})
       data, _status_code, _headers = get_exports_with_http_info(opts)
       data
     end
 
-    # Get Exports
-    # Get a list of all past exports 
+    # Get exports
+    # List all past exports 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [Integer] :application_id 
-    # @option opts [Integer] :campaign_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
+    # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [Array<(InlineResponse20028, Integer, Hash)>] InlineResponse20028 data, response status code and response headers
+    # @return [Array<(InlineResponse20030, Integer, Hash)>] InlineResponse20030 data, response status code and response headers
     def get_exports_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_exports ...'
       end
-      allowable_values = ["Coupon", "Effect", "CustomerSession", "LoyaltyLedger", "LoyaltyLedgerLog"]
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_exports, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_exports, must be greater than or equal to 1.'
+      end
+
+      allowable_values = ["Coupon", "Referral", "Effect", "CustomerSession", "LoyaltyLedger", "LoyaltyLedgerLog", "Collection"]
       if @api_client.config.client_side_validation && opts[:'entity'] && !allowable_values.include?(opts[:'entity'])
         fail ArgumentError, "invalid value for \"entity\", must be one of #{allowable_values}"
       end
@@ -4798,7 +5090,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20028' 
+      return_type = opts[:return_type] || 'InlineResponse20030' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -4819,37 +5111,37 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # get the Loyalty Ledger for this integrationID
-    # Get the Loyalty Ledger for this profile integration ID.
-    # @param program_id [String] The identifier for the application, must be unique within the account.
-    # @param integration_id [String] The identifier for the application, must be unique within the account.
+    # Get the Loyalty Ledger for this integrationID
+    # Get the loyalty ledger for this profile integration ID.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyLedger]
-    def get_loyalty_points(program_id, integration_id, opts = {})
-      data, _status_code, _headers = get_loyalty_points_with_http_info(program_id, integration_id, opts)
+    def get_loyalty_points(loyalty_program_id, integration_id, opts = {})
+      data, _status_code, _headers = get_loyalty_points_with_http_info(loyalty_program_id, integration_id, opts)
       data
     end
 
-    # get the Loyalty Ledger for this integrationID
-    # Get the Loyalty Ledger for this profile integration ID.
-    # @param program_id [String] The identifier for the application, must be unique within the account.
-    # @param integration_id [String] The identifier for the application, must be unique within the account.
+    # Get the Loyalty Ledger for this integrationID
+    # Get the loyalty ledger for this profile integration ID.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyLedger, Integer, Hash)>] LoyaltyLedger data, response status code and response headers
-    def get_loyalty_points_with_http_info(program_id, integration_id, opts = {})
+    def get_loyalty_points_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_points ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.get_loyalty_points"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.get_loyalty_points"
       end
       # verify the required parameter 'integration_id' is set
       if @api_client.config.client_side_validation && integration_id.nil?
         fail ArgumentError, "Missing the required parameter 'integration_id' when calling ManagementApi.get_loyalty_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/profile/{integrationID}'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s)).sub('{' + 'integrationID' + '}', CGI.escape(integration_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -4887,29 +5179,31 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a loyalty program
-    # @param program_id [Integer] 
+    # Get loyalty program
+    # Get the specified [loyalty program](https://www.talon.one/glossary/loyalty). To list all loyalty programs in your Application, use [List loyalty programs](#operation/getLoyaltyPrograms).  To list the loyalty programs that a customer profile is part of, use the [List customer profile data](/integration-api/#operation/getCustomerInventory) 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyProgram]
-    def get_loyalty_program(program_id, opts = {})
-      data, _status_code, _headers = get_loyalty_program_with_http_info(program_id, opts)
+    def get_loyalty_program(loyalty_program_id, opts = {})
+      data, _status_code, _headers = get_loyalty_program_with_http_info(loyalty_program_id, opts)
       data
     end
 
-    # Get a loyalty program
-    # @param program_id [Integer] 
+    # Get loyalty program
+    # Get the specified [loyalty program](https://www.talon.one/glossary/loyalty). To list all loyalty programs in your Application, use [List loyalty programs](#operation/getLoyaltyPrograms).  To list the loyalty programs that a customer profile is part of, use the [List customer profile data](/integration-api/#operation/getCustomerInventory) 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyProgram, Integer, Hash)>] LoyaltyProgram data, response status code and response headers
-    def get_loyalty_program_with_http_info(program_id, opts = {})
+    def get_loyalty_program_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_program ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.get_loyalty_program"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.get_loyalty_program"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -4947,7 +5241,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List all loyalty Programs
+    # List loyalty programs
+    # List the loyalty programs of the account.
     # @param [Hash] opts the optional parameters
     # @return [InlineResponse2007]
     def get_loyalty_programs(opts = {})
@@ -4955,7 +5250,8 @@ module TalonOne
       data
     end
 
-    # List all loyalty Programs
+    # List loyalty programs
+    # List the loyalty programs of the account.
     # @param [Hash] opts the optional parameters
     # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
     def get_loyalty_programs_with_http_info(opts = {})
@@ -5002,28 +5298,30 @@ module TalonOne
     end
 
     # Get loyalty program statistics by loyalty program ID
-    # @param program_id [String] 
+    # Retrieve the statistics of the specified loyalty program such as the total active points, pending points, spent points and expired points. 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyStatistics]
-    def get_loyalty_statistics(program_id, opts = {})
-      data, _status_code, _headers = get_loyalty_statistics_with_http_info(program_id, opts)
+    def get_loyalty_statistics(loyalty_program_id, opts = {})
+      data, _status_code, _headers = get_loyalty_statistics_with_http_info(loyalty_program_id, opts)
       data
     end
 
     # Get loyalty program statistics by loyalty program ID
-    # @param program_id [String] 
+    # Retrieve the statistics of the specified loyalty program such as the total active points, pending points, spent points and expired points. 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyStatistics, Integer, Hash)>] LoyaltyStatistics data, response status code and response headers
-    def get_loyalty_statistics_with_http_info(program_id, opts = {})
+    def get_loyalty_statistics_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_statistics ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.get_loyalty_statistics"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.get_loyalty_statistics"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/statistics'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/statistics'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -5061,110 +5359,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Referrals (with total count)
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
-    # @return [InlineResponse201]
-    def get_referrals(application_id, campaign_id, opts = {})
-      data, _status_code, _headers = get_referrals_with_http_info(application_id, campaign_id, opts)
-      data
-    end
-
-    # List Referrals (with total count)
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
-    # @return [Array<(InlineResponse201, Integer, Hash)>] InlineResponse201 data, response status code and response headers
-    def get_referrals_with_http_info(application_id, campaign_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_referrals ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.get_referrals"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_referrals"
-      end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/referrals'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'code'] = opts[:'code'] if !opts[:'code'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'advocate'] = opts[:'advocate'] if !opts[:'advocate'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse201' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_referrals\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # List Referrals
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List referrals
+    # List all referrals of the specified campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -5181,9 +5379,10 @@ module TalonOne
       data
     end
 
-    # List Referrals
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List referrals
+    # List all referrals of the specified campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -5207,6 +5406,14 @@ module TalonOne
       if @api_client.config.client_side_validation && campaign_id.nil?
         fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_referrals_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_referrals_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_referrals_without_total_count, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["expired", "validNow", "validFuture"]
       if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
         fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
@@ -5263,8 +5470,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get information for the specified role
-    # @param role_id [Integer] 
+    # Get role
+    # Get the details of the specified role. To see all the roles, use [List roles](#operation/getAllRoles). 
+    # @param role_id [Integer] The Id of role. 
     # @param [Hash] opts the optional parameters
     # @return [Role]
     def get_role(role_id, opts = {})
@@ -5272,8 +5480,9 @@ module TalonOne
       data
     end
 
-    # Get information for the specified role
-    # @param role_id [Integer] 
+    # Get role
+    # Get the details of the specified role. To see all the roles, use [List roles](#operation/getAllRoles). 
+    # @param role_id [Integer] The Id of role. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Role, Integer, Hash)>] Role data, response status code and response headers
     def get_role_with_http_info(role_id, opts = {})
@@ -5323,9 +5532,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get ruleset
+    # Retrieve the specified ruleset.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param ruleset_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Ruleset]
@@ -5334,9 +5544,10 @@ module TalonOne
       data
     end
 
-    # Get a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Get ruleset
+    # Retrieve the specified ruleset.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param ruleset_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Ruleset, Integer, Hash)>] Ruleset data, response status code and response headers
@@ -5395,9 +5606,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Campaign Rulesets
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List campaign rulesets
+    # List all rulesets of this campaign. A ruleset is a revision of the rules of a campaign. **Important:** The response also includes deleted rules. You should only consider the latest revision of the returned rulesets. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -5408,9 +5620,10 @@ module TalonOne
       data
     end
 
-    # List Campaign Rulesets
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List campaign rulesets
+    # List all rulesets of this campaign. A ruleset is a revision of the rules of a campaign. **Important:** The response also includes deleted rules. You should only consider the latest revision of the returned rulesets. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -5428,6 +5641,14 @@ module TalonOne
       if @api_client.config.client_side_validation && campaign_id.nil?
         fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.get_rulesets"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_rulesets, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_rulesets, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/rulesets'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -5470,9 +5691,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a single User
-    # Retrieves the data (including an invitation code) for a user. Non-admin users can only get themselves. 
-    # @param user_id [Integer] 
+    # Get user
+    # Retrieve the data (including an invitation code) for a user. Non-admin users can only get their own profile. 
+    # @param user_id [Integer] The ID of the user.
     # @param [Hash] opts the optional parameters
     # @return [User]
     def get_user(user_id, opts = {})
@@ -5480,9 +5701,9 @@ module TalonOne
       data
     end
 
-    # Get a single User
-    # Retrieves the data (including an invitation code) for a user. Non-admin users can only get themselves. 
-    # @param user_id [Integer] 
+    # Get user
+    # Retrieve the data (including an invitation code) for a user. Non-admin users can only get their own profile. 
+    # @param user_id [Integer] The ID of the user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(User, Integer, Hash)>] User data, response status code and response headers
     def get_user_with_http_info(user_id, opts = {})
@@ -5532,29 +5753,37 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Users in your account
+    # List users in account
     # Retrieve all users in your account. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [InlineResponse20026]
+    # @return [InlineResponse20028]
     def get_users(opts = {})
       data, _status_code, _headers = get_users_with_http_info(opts)
       data
     end
 
-    # List Users in your account
+    # List users in account
     # Retrieve all users in your account. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @return [Array<(InlineResponse20026, Integer, Hash)>] InlineResponse20026 data, response status code and response headers
+    # @return [Array<(InlineResponse20028, Integer, Hash)>] InlineResponse20028 data, response status code and response headers
     def get_users_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_users ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_users, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_users, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/users'
 
@@ -5576,7 +5805,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20026' 
+      return_type = opts[:return_type] || 'InlineResponse20028' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5597,8 +5826,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get Webhook
-    # Returns an webhook by its id.
+    # Get webhook
+    # Returns a webhook by its id.
     # @param webhook_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Webhook]
@@ -5607,8 +5836,8 @@ module TalonOne
       data
     end
 
-    # Get Webhook
-    # Returns an webhook by its id.
+    # Get webhook
+    # Returns a webhook by its id.
     # @param webhook_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Webhook, Integer, Hash)>] Webhook data, response status code and response headers
@@ -5659,7 +5888,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Webhook activation Log Entries
+    # List webhook activation log entries
     # Webhook activation log entries would be created as soon as an integration request triggered an effect with a webhook
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -5667,17 +5896,17 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
     # @option opts [Float] :webhook_id Filter results by Webhook.
-    # @option opts [Float] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20023]
+    # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
+    # @return [InlineResponse20025]
     def get_webhook_activation_logs(opts = {})
       data, _status_code, _headers = get_webhook_activation_logs_with_http_info(opts)
       data
     end
 
-    # List Webhook activation Log Entries
+    # List webhook activation log entries
     # Webhook activation log entries would be created as soon as an integration request triggered an effect with a webhook
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -5685,15 +5914,23 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
     # @option opts [Float] :webhook_id Filter results by Webhook.
-    # @option opts [Float] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20023, Integer, Hash)>] InlineResponse20023 data, response status code and response headers
+    # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
+    # @return [Array<(InlineResponse20025, Integer, Hash)>] InlineResponse20025 data, response status code and response headers
     def get_webhook_activation_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_activation_logs ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_activation_logs, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_activation_logs, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/webhook_activation_logs'
 
@@ -5721,7 +5958,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20023' 
+      return_type = opts[:return_type] || 'InlineResponse20025' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5742,41 +5979,51 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Webhook Log Entries
+    # List webhook log entries
+    # Retrieve all webhook log entries.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Float] :webhook_id Filter results by Webhook.
-    # @option opts [Float] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20024]
+    # @return [InlineResponse20026]
     def get_webhook_logs(opts = {})
       data, _status_code, _headers = get_webhook_logs_with_http_info(opts)
       data
     end
 
-    # List Webhook Log Entries
+    # List webhook log entries
+    # Retrieve all webhook log entries.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Float] :webhook_id Filter results by Webhook.
-    # @option opts [Float] :application_id 
+    # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20024, Integer, Hash)>] InlineResponse20024 data, response status code and response headers
+    # @return [Array<(InlineResponse20026, Integer, Hash)>] InlineResponse20026 data, response status code and response headers
     def get_webhook_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_logs ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_logs, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_logs, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["success", "error"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
@@ -5809,7 +6056,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20024' 
+      return_type = opts[:return_type] || 'InlineResponse20026' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5830,29 +6077,39 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # List Webhooks
+    # List webhooks
+    # List all webhooks.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :application_ids Filter by one or more application ids separated by comma
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20022]
+    # @return [InlineResponse20024]
     def get_webhooks(opts = {})
       data, _status_code, _headers = get_webhooks_with_http_info(opts)
       data
     end
 
-    # List Webhooks
+    # List webhooks
+    # List all webhooks.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :application_ids Filter by one or more application ids separated by comma
     # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20022, Integer, Hash)>] InlineResponse20022 data, response status code and response headers
+    # @return [Array<(InlineResponse20024, Integer, Hash)>] InlineResponse20024 data, response status code and response headers
     def get_webhooks_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhooks ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhooks, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhooks, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/webhooks'
 
@@ -5875,7 +6132,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20022' 
+      return_type = opts[:return_type] || 'InlineResponse20024' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['manager_auth']
@@ -5896,10 +6153,223 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # Import data in existing account-level collection via CSV file
+    # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  Example:  ``` item Addidas Nike Asics ```  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Import]
+    def import_account_collection(collection_id, opts = {})
+      data, _status_code, _headers = import_account_collection_with_http_info(collection_id, opts)
+      data
+    end
+
+    # Import data in existing account-level collection via CSV file
+    # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: the values in your collection.  A collection is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60; item Addidas Nike Asics &#x60;&#x60;&#x60;  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
+    def import_account_collection_with_http_info(collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.import_account_collection ...'
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.import_account_collection"
+      end
+      # resource path
+      local_var_path = '/v1/collections/{collectionId}/import'.sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['upFile'] = opts[:'up_file'] if !opts[:'up_file'].nil?
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Import' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#import_account_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Import allowed values for attribute
+    # Upload a CSV file containing a list of allowed values for the specified attribute. These values are also called [picklist values](/docs/product/account/dev-tools/managing-attributes/#picklist-values).  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column: - `item` (required): the values in your allowed list, for example a list of SKU's.  An allowed list is limited to 500,000 items.  Example:  ```text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 ``` 
+    # @param attribute_id [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Import]
+    def import_allowed_list(attribute_id, opts = {})
+      data, _status_code, _headers = import_allowed_list_with_http_info(attribute_id, opts)
+      data
+    end
+
+    # Import allowed values for attribute
+    # Upload a CSV file containing a list of allowed values for the specified attribute. These values are also called [picklist values](/docs/product/account/dev-tools/managing-attributes/#picklist-values).  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column: - &#x60;item&#x60; (required): the values in your allowed list, for example a list of SKU&#39;s.  An allowed list is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60;text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 &#x60;&#x60;&#x60; 
+    # @param attribute_id [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
+    def import_allowed_list_with_http_info(attribute_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.import_allowed_list ...'
+      end
+      # verify the required parameter 'attribute_id' is set
+      if @api_client.config.client_side_validation && attribute_id.nil?
+        fail ArgumentError, "Missing the required parameter 'attribute_id' when calling ManagementApi.import_allowed_list"
+      end
+      # resource path
+      local_var_path = '/v1/attributes/{attributeId}/allowed_list/import'.sub('{' + 'attributeId' + '}', CGI.escape(attribute_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['upFile'] = opts[:'up_file'] if !opts[:'up_file'].nil?
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Import' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#import_allowed_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Import data in existing collection via CSV file
+    # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  Example:  ``` item Addidas Nike Asics ```  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Import]
+    def import_collection(application_id, campaign_id, collection_id, opts = {})
+      data, _status_code, _headers = import_collection_with_http_info(application_id, campaign_id, collection_id, opts)
+      data
+    end
+
+    # Import data in existing collection via CSV file
+    # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: the values in your collection.  A collection is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60; item Addidas Nike Asics &#x60;&#x60;&#x60;  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :up_file The file with the information about the data that should be imported.
+    # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
+    def import_collection_with_http_info(application_id, campaign_id, collection_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.import_collection ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.import_collection"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.import_collection"
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.import_collection"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}/import'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['upFile'] = opts[:'up_file'] if !opts[:'up_file'].nil?
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Import' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#import_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Import coupons via CSV file
-    # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - `value` (required): The coupon code. - `expirydate`: The end date in RFC3339 of the code redemption period. - `startdate`: The start date in RFC3339 of the code redemption period. - `limitval`: The maximum amount of redemptions of this code. For unlimited redemptions, use `0`. Defaults to `1` when not provided. - `attributes`: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object. - `discountlimit`: The amount of discounts that can be given with this coupon code.   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated to the coupon entity, set it with `\"{\"\"category\"\": \"\"10_off\"\"}\"`.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  ```text \"value\",\"expirydate\",\"startdate\",\"recipientintegrationid\",\"limitval\",\"attributes\",\"discountlimit\" COUP1,2018-07-01T04:00:00Z,2018-05-01T04:00:00Z,cust123,1,\"{\"\"Category\"\": \"\"10_off\"\"}\",2.4 ```  Once imported, you can find the `batchId` in the Campaign Manager or by using [List coupons](#operation/getReservedCustomers). 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Import]
@@ -5909,9 +6379,9 @@ module TalonOne
     end
 
     # Import coupons via CSV file
-    # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - &#x60;value&#x60; (required): The coupon code. - &#x60;expirydate&#x60;: The end date in RFC3339 of the code redemption period. - &#x60;startdate&#x60;: The start date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. For unlimited redemptions, use &#x60;0&#x60;. Defaults to &#x60;1&#x60; when not provided. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object. - &#x60;discountlimit&#x60;: The amount of discounts that can be given with this coupon code.   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;category&#x60; associated to the coupon entity, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text \&quot;value\&quot;,\&quot;expirydate\&quot;,\&quot;startdate\&quot;,\&quot;recipientintegrationid\&quot;,\&quot;limitval\&quot;,\&quot;attributes\&quot;,\&quot;discountlimit\&quot; COUP1,2018-07-01T04:00:00Z,2018-05-01T04:00:00Z,cust123,1,\&quot;{\&quot;\&quot;Category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;,2.4 &#x60;&#x60;&#x60;  Once imported, you can find the &#x60;batchId&#x60; in the Campaign Manager or by using [List coupons](#operation/getReservedCustomers). 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
@@ -5970,32 +6440,32 @@ module TalonOne
     end
 
     # Import loyalty points via CSV file
-    # Upload a CSV file containing the loyalty points that should be created. The file should be sent as multipart data.
-    # @param program_id [Integer] 
+    # Upload a CSV file containing the [loyalty](https://www.talon.one/pillar-pages/loyalty) points that should be created. The file should be sent as multipart data.  **Important**: For existing customer profiles, the imported points are _added_ to their active points. Learn more about [Loyalty programs](https://docs.talon.one/docs/product/loyalty-programs/overview).  The CSV file can contain the following columns:  - `customerprofileid`: The integration ID of the customer profile that should receive the loyalty points. - `amount`: The amount of points to award to the customer profile. - `startdate`: The earliest date when the points can be redeemed. On this date and until the expiry date, the points are `active`. - `expirydate`: The latest date when the points can be redeemed. After this date, the points are `expired`. - `subledgerid` (optional): The ID of the subledger that should received the points. - `reason` (optional): A reason why these points were awarded.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  ```text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ``` 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Import]
-    def import_loyalty_points(program_id, opts = {})
-      data, _status_code, _headers = import_loyalty_points_with_http_info(program_id, opts)
+    def import_loyalty_points(loyalty_program_id, opts = {})
+      data, _status_code, _headers = import_loyalty_points_with_http_info(loyalty_program_id, opts)
       data
     end
 
     # Import loyalty points via CSV file
-    # Upload a CSV file containing the loyalty points that should be created. The file should be sent as multipart data.
-    # @param program_id [Integer] 
+    # Upload a CSV file containing the [loyalty](https://www.talon.one/pillar-pages/loyalty) points that should be created. The file should be sent as multipart data.  **Important**: For existing customer profiles, the imported points are _added_ to their active points. Learn more about [Loyalty programs](https://docs.talon.one/docs/product/loyalty-programs/overview).  The CSV file can contain the following columns:  - &#x60;customerprofileid&#x60;: The integration ID of the customer profile that should receive the loyalty points. - &#x60;amount&#x60;: The amount of points to award to the customer profile. - &#x60;startdate&#x60;: The earliest date when the points can be redeemed. On this date and until the expiry date, the points are &#x60;active&#x60;. - &#x60;expirydate&#x60;: The latest date when the points can be redeemed. After this date, the points are &#x60;expired&#x60;. - &#x60;subledgerid&#x60; (optional): The ID of the subledger that should received the points. - &#x60;reason&#x60; (optional): A reason why these points were awarded.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement &#x60;&#x60;&#x60; 
+    # @param loyalty_program_id [Integer] Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
-    def import_loyalty_points_with_http_info(program_id, opts = {})
+    def import_loyalty_points_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.import_loyalty_points ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.import_loyalty_points"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.import_loyalty_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/import_points'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/import_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -6036,8 +6506,8 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Import giveaways codes into a giveaways pool
-    # Upload a CSV file containing the giveaways codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - `code` (required): the code of your giveaway, for instance, a gift card redemption code. - `startdate`:  the start date in RFC3339 of the code redemption period. - `enddate`: the last date in RFC3339 of the code redemption period. - `attributes`: A json object describing _custom_ giveaways attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called `provider`, set it with `\"{\"\"provider\"\": \"\"myPartnerCompany\"\"}\"`.  The `startdate` and `enddate` have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
+    # Import giveaway codes into a giveaway pool
+    # Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - `code` (required): the code of your giveaway, for instance, a gift card redemption code. - `startdate`:  the start date in RFC3339 of the code redemption period. - `enddate`: the last date in RFC3339 of the code redemption period. - `attributes`: A json object describing _custom_ giveaway attribute names and their values. Double the double-quotes in the object.   For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `provider` associated to the giveaway entity, set it with `\"{\"\"provider\"\": \"\"myPartnerCompany\"\"}\"`.  **Important:** Do not leave empty columns in the file.  The `startdate` and `enddate` have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  ```text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Aliexpress\"\"}\" ``` 
     # @param pool_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
@@ -6047,8 +6517,8 @@ module TalonOne
       data
     end
 
-    # Import giveaways codes into a giveaways pool
-    # Upload a CSV file containing the giveaways codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - &#x60;code&#x60; (required): the code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  the start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: the last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A json object describing _custom_ giveaways attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called &#x60;provider&#x60;, set it with &#x60;\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;myPartnerCompany\&quot;\&quot;}\&quot;&#x60;.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
+    # Import giveaway codes into a giveaway pool
+    # Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - &#x60;code&#x60; (required): the code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  the start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: the last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A json object describing _custom_ giveaway attribute names and their values. Double the double-quotes in the object.   For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;provider&#x60; associated to the giveaway entity, set it with &#x60;\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;myPartnerCompany\&quot;\&quot;}\&quot;&#x60;.  **Important:** Do not leave empty columns in the file.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Aliexpress\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
     # @param pool_id [Integer] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
@@ -6104,9 +6574,9 @@ module TalonOne
     end
 
     # Import referrals via CSV file
-    # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following colums:  - `code` (required): the referral code. - `advocateprofileintegrationid` (required): The profile ID of the advocate. - `startdate`: the start date in RFC3339 of the code redemption period. - `expirydate`: the end date in RFC3339 of the code redemption period. - `limitval`: The maximum amount of redemptions of this code. Unlimited (0) when blank. - `attributes`: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called `category`, set it with `\"{\"\"category\"\": \"\"10_off\"\"}\"`.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - `code` (required): The referral code. - `advocateprofileintegrationid` (required): The profile ID of the advocate. - `startdate`: The start date in RFC3339 of the code redemption period. - `expirydate`: The end date in RFC3339 of the code redemption period. - `limitval`: The maximum amount of redemptions of this code. Defaults to `1` when left blank. - `attributes`: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.    For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated to the referral entity, set it with `\"{\"\"category\"\": \"\"10_off\"\"}\"`.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  ```text code,startdate,expirydate,advocateprofileintegrationid,limitval,attributes REFERRAL_CODE1,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid_4,1,\"{\"\"my_attribute\"\": \"\"10_off\"\"}\" REFERRAL_CODE2,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid1,1,\"{\"\"my_attribute\"\": \"\"20_off\"\"}\" ``` 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Import]
@@ -6116,9 +6586,9 @@ module TalonOne
     end
 
     # Import referrals via CSV file
-    # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following colums:  - &#x60;code&#x60; (required): the referral code. - &#x60;advocateprofileintegrationid&#x60; (required): The profile ID of the advocate. - &#x60;startdate&#x60;: the start date in RFC3339 of the code redemption period. - &#x60;expirydate&#x60;: the end date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. Unlimited (0) when blank. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called &#x60;category&#x60;, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - &#x60;code&#x60; (required): The referral code. - &#x60;advocateprofileintegrationid&#x60; (required): The profile ID of the advocate. - &#x60;startdate&#x60;: The start date in RFC3339 of the code redemption period. - &#x60;expirydate&#x60;: The end date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. Defaults to &#x60;1&#x60; when left blank. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.    For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;category&#x60; associated to the referral entity, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text code,startdate,expirydate,advocateprofileintegrationid,limitval,attributes REFERRAL_CODE1,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid_4,1,\&quot;{\&quot;\&quot;my_attribute\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot; REFERRAL_CODE2,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid1,1,\&quot;{\&quot;\&quot;my_attribute\&quot;\&quot;: \&quot;\&quot;20_off\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :up_file The file with the information about the data that should be imported.
     # @return [Array<(Import, Integer, Hash)>] Import data, response status code and response headers
@@ -6176,30 +6646,287 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Deduct points in a certain loyalty program for the specified customer
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # List collections in account
+    # List collections in account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [InlineResponse2008]
+    def list_account_collections(opts = {})
+      data, _status_code, _headers = list_account_collections_with_http_info(opts)
+      data
+    end
+
+    # List collections in account
+    # List collections in account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
+    def list_account_collections_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.list_account_collections ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_account_collections, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_account_collections, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/collections'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2008' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#list_account_collections\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List collections
+    # List collections in the campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [InlineResponse2009]
+    def list_collections(application_id, campaign_id, opts = {})
+      data, _status_code, _headers = list_collections_with_http_info(application_id, campaign_id, opts)
+      data
+    end
+
+    # List collections
+    # List collections in the campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
+    def list_collections_with_http_info(application_id, campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.list_collections ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.list_collections"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.list_collections"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_collections, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_collections, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2009' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#list_collections\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List collections in application
+    # List collections from all campaigns in the Application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [InlineResponse2009]
+    def list_collections_in_application(application_id, opts = {})
+      data, _status_code, _headers = list_collections_in_application_with_http_info(application_id, opts)
+      data
+    end
+
+    # List collections in application
+    # List collections from all campaigns in the Application.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+    # @option opts [String] :name Filter by the name of the Collection.
+    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
+    def list_collections_in_application_with_http_info(application_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.list_collections_in_application ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.list_collections_in_application"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_collections_in_application, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.list_collections_in_application, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/collections'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2009' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#list_collections_in_application\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Deduct points in loyalty program for given customer
+    # Remove points from the specified loyalty program and specified customer profile.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param body [LoyaltyPoints] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def remove_loyalty_points(program_id, integration_id, body, opts = {})
-      remove_loyalty_points_with_http_info(program_id, integration_id, body, opts)
+    def remove_loyalty_points(loyalty_program_id, integration_id, body, opts = {})
+      remove_loyalty_points_with_http_info(loyalty_program_id, integration_id, body, opts)
       nil
     end
 
-    # Deduct points in a certain loyalty program for the specified customer
-    # @param program_id [String] 
-    # @param integration_id [String] 
+    # Deduct points in loyalty program for given customer
+    # Remove points from the specified loyalty program and specified customer profile.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+    # @param loyalty_program_id [String] The identifier for the loyalty program.
+    # @param integration_id [String] The identifier of the profile.
     # @param body [LoyaltyPoints] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def remove_loyalty_points_with_http_info(program_id, integration_id, body, opts = {})
+    def remove_loyalty_points_with_http_info(loyalty_program_id, integration_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.remove_loyalty_points ...'
       end
-      # verify the required parameter 'program_id' is set
-      if @api_client.config.client_side_validation && program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'program_id' when calling ManagementApi.remove_loyalty_points"
+      # verify the required parameter 'loyalty_program_id' is set
+      if @api_client.config.client_side_validation && loyalty_program_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.remove_loyalty_points"
       end
       # verify the required parameter 'integration_id' is set
       if @api_client.config.client_side_validation && integration_id.nil?
@@ -6210,7 +6937,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.remove_loyalty_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{programID}/profile/{integrationID}/deduct_points'.sub('{' + 'programID' + '}', CGI.escape(program_id.to_s)).sub('{' + 'integrationID' + '}', CGI.escape(integration_id.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/deduct_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -6312,129 +7039,9 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [Object] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [InlineResponse2004]
-    def search_coupons_advanced(application_id, campaign_id, body, opts = {})
-      data, _status_code, _headers = search_coupons_advanced_with_http_info(application_id, campaign_id, body, opts)
-      data
-    end
-
-    # Get a list of the coupons that match the given attributes (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param body [Object] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
-    def search_coupons_advanced_with_http_info(application_id, campaign_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.search_coupons_advanced"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.search_coupons_advanced"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.search_coupons_advanced"
-      end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/coupons_search_advanced'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'value'] = opts[:'value'] if !opts[:'value'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'referralId'] = opts[:'referral_id'] if !opts[:'referral_id'].nil?
-      query_params[:'recipientIntegrationId'] = opts[:'recipient_integration_id'] if !opts[:'recipient_integration_id'].nil?
-      query_params[:'exactMatch'] = opts[:'exact_match'] if !opts[:'exact_match'].nil?
-      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#search_coupons_advanced\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-    # @param application_id [Integer] 
+    # List coupons that match the given attributes (without total count)
+    # List the coupons whose attributes match the query criteria in all **active** campaigns of the given Application.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -6449,137 +7056,16 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [InlineResponse2004]
-    def search_coupons_advanced_application_wide(application_id, body, opts = {})
-      data, _status_code, _headers = search_coupons_advanced_application_wide_with_http_info(application_id, body, opts)
-      data
-    end
-
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-    # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-    # @param application_id [Integer] 
-    # @param body [Object] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
-    def search_coupons_advanced_application_wide_with_http_info(application_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced_application_wide ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.search_coupons_advanced_application_wide"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.search_coupons_advanced_application_wide"
-      end
-      allowable_values = ["expired", "validNow", "validFuture"]
-      if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
-        fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["true", "false"]
-      if @api_client.config.client_side_validation && opts[:'usable'] && !allowable_values.include?(opts[:'usable'])
-        fail ArgumentError, "invalid value for \"usable\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["enabled", "disabled", "archived", "draft", "scheduled", "running", "expired"]
-      if @api_client.config.client_side_validation && opts[:'campaign_state'] && !allowable_values.include?(opts[:'campaign_state'])
-        fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/coupons_search_advanced'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'value'] = opts[:'value'] if !opts[:'value'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-      query_params[:'valid'] = opts[:'valid'] if !opts[:'valid'].nil?
-      query_params[:'usable'] = opts[:'usable'] if !opts[:'usable'].nil?
-      query_params[:'referralId'] = opts[:'referral_id'] if !opts[:'referral_id'].nil?
-      query_params[:'recipientIntegrationId'] = opts[:'recipient_integration_id'] if !opts[:'recipient_integration_id'].nil?
-      query_params[:'batchId'] = opts[:'batch_id'] if !opts[:'batch_id'].nil?
-      query_params[:'exactMatch'] = opts[:'exact_match'] if !opts[:'exact_match'].nil?
-      query_params[:'campaignState'] = opts[:'campaign_state'] if !opts[:'campaign_state'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#search_coupons_advanced_application_wide\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
-    # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-    # @param application_id [Integer] 
-    # @param body [Object] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-    # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-    # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-    # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-    # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-    # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-    # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-    # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-    # @option opts [String] :batch_id Filter results by batches of coupons
-    # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [InlineResponse2005]
     def search_coupons_advanced_application_wide_without_total_count(application_id, body, opts = {})
       data, _status_code, _headers = search_coupons_advanced_application_wide_without_total_count_with_http_info(application_id, body, opts)
       data
     end
 
-    # Get a list of the coupons that match the given attributes in all active campaigns of an application
-    # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-    # @param application_id [Integer] 
+    # List coupons that match the given attributes (without total count)
+    # List the coupons whose attributes match the query criteria in all **active** campaigns of the given Application.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -6594,7 +7080,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @option opts [String] :campaign_state Filter results by the state of the campaign.
+    # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
     # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
     def search_coupons_advanced_application_wide_without_total_count_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
@@ -6608,6 +7094,14 @@ module TalonOne
       if @api_client.config.client_side_validation && body.nil?
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.search_coupons_advanced_application_wide_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.search_coupons_advanced_application_wide_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.search_coupons_advanced_application_wide_without_total_count, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["expired", "validNow", "validFuture"]
       if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
         fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
@@ -6674,10 +7168,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get a list of the coupons that match the given attributes
-    # Gets a list of all the coupons with attributes matching the query criteria 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List coupons that match the given attributes in campaign (without total count)
+    # List the coupons whose attributes match the query criteria in the given campaign.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -6698,10 +7192,10 @@ module TalonOne
       data
     end
 
-    # Get a list of the coupons that match the given attributes
-    # Gets a list of all the coupons with attributes matching the query criteria 
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # List coupons that match the given attributes in campaign (without total count)
+    # List the coupons whose attributes match the query criteria in the given campaign.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -6733,6 +7227,14 @@ module TalonOne
       if @api_client.config.client_side_validation && body.nil?
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.search_coupons_advanced_without_total_count"
       end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.search_coupons_advanced_without_total_count, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.search_coupons_advanced_without_total_count, must be greater than or equal to 1.'
+      end
+
       allowable_values = ["expired", "validNow", "validFuture"]
       if @api_client.config.client_side_validation && opts[:'valid'] && !allowable_values.include?(opts[:'valid'])
         fail ArgumentError, "invalid value for \"valid\", must be one of #{allowable_values}"
@@ -6794,7 +7296,77 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update an additional cost
+    # Update account-level collection description and connected Applications
+    # Edit the description of the account-level collection and enable or disable the collection in different Applications.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param body [UpdateCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Collection]
+    def update_account_collection(collection_id, body, opts = {})
+      data, _status_code, _headers = update_account_collection_with_http_info(collection_id, body, opts)
+      data
+    end
+
+    # Update account-level collection description and connected Applications
+    # Edit the description of the account-level collection and enable or disable the collection in different Applications.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param body [UpdateCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def update_account_collection_with_http_info(collection_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.update_account_collection ...'
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.update_account_collection"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_account_collection"
+      end
+      # resource path
+      local_var_path = '/v1/collections/{collectionId}'.sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'Collection' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#update_account_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update additional cost
     # Updates an existing additional cost. Once created, the only property of an additional cost that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. 
     # @param additional_cost_id [Integer] 
     # @param body [NewAdditionalCost] 
@@ -6805,7 +7377,7 @@ module TalonOne
       data
     end
 
-    # Update an additional cost
+    # Update additional cost
     # Updates an existing additional cost. Once created, the only property of an additional cost that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. 
     # @param additional_cost_id [Integer] 
     # @param body [NewAdditionalCost] 
@@ -6864,7 +7436,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update a custom attribute
+    # Update custom attribute
     # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name `region`, and your integration is sending `attributes.region` with customer profile updates, changing the name to `locale` would cause the integration requests to begin failing.  If you **really** need to change the `type` or `name` property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
     # @param attribute_id [Integer] 
     # @param body [NewAttribute] 
@@ -6875,7 +7447,7 @@ module TalonOne
       data
     end
 
-    # Update a custom attribute
+    # Update custom attribute
     # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name &#x60;region&#x60;, and your integration is sending &#x60;attributes.region&#x60; with customer profile updates, changing the name to &#x60;locale&#x60; would cause the integration requests to begin failing.  If you **really** need to change the &#x60;type&#x60; or &#x60;name&#x60; property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
     # @param attribute_id [Integer] 
     # @param body [NewAttribute] 
@@ -6934,9 +7506,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update campaign
+    # Update the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [UpdateCampaign] 
     # @param [Hash] opts the optional parameters
     # @return [Campaign]
@@ -6945,9 +7518,10 @@ module TalonOne
       data
     end
 
-    # Update a Campaign
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update campaign
+    # Update the given campaign.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [UpdateCampaign] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Campaign, Integer, Hash)>] Campaign data, response status code and response headers
@@ -7008,9 +7582,92 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update a Coupon
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update collection description
+    # Edit the description of the collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param body [UpdateCampaignCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Collection]
+    def update_collection(application_id, campaign_id, collection_id, body, opts = {})
+      data, _status_code, _headers = update_collection_with_http_info(application_id, campaign_id, collection_id, body, opts)
+      data
+    end
+
+    # Update collection description
+    # Edit the description of the collection.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
+    # @param collection_id [Integer] The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+    # @param body [UpdateCampaignCollection] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Collection, Integer, Hash)>] Collection data, response status code and response headers
+    def update_collection_with_http_info(application_id, campaign_id, collection_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.update_collection ...'
+      end
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.update_collection"
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.update_collection"
+      end
+      # verify the required parameter 'collection_id' is set
+      if @api_client.config.client_side_validation && collection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'collection_id' when calling ManagementApi.update_collection"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_collection"
+      end
+      # resource path
+      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'collectionId' + '}', CGI.escape(collection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] || @api_client.object_to_http_body(body) 
+
+      # return_type
+      return_type = opts[:return_type] || 'Collection' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#update_collection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update coupon
+    # Update the specified coupon.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param coupon_id [String] The ID of the coupon code to update
     # @param body [UpdateCoupon] 
     # @param [Hash] opts the optional parameters
@@ -7020,9 +7677,10 @@ module TalonOne
       data
     end
 
-    # Update a Coupon
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update coupon
+    # Update the specified coupon.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param coupon_id [String] The ID of the coupon code to update
     # @param body [UpdateCoupon] 
     # @param [Hash] opts the optional parameters
@@ -7088,9 +7746,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update a Batch of Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update coupons
+    # Update all coupons of an campaign, or a specific batch of coupons. You can find the `batchId` in the **Coupons** view of your Application in the Campaign Manager or by using [List coupons](#operation/getCouponsWithoutTotalCount).  **Important**: - Only send sequential requests to this endpoint. - Requests to this endpoint timeout after 30 minutes. If you hit a timeout, reach out to our support team.  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [UpdateCouponBatch] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -7099,9 +7758,10 @@ module TalonOne
       nil
     end
 
-    # Update a Batch of Coupons
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update coupons
+    # Update all coupons of an campaign, or a specific batch of coupons. You can find the &#x60;batchId&#x60; in the **Coupons** view of your Application in the Campaign Manager or by using [List coupons](#operation/getCouponsWithoutTotalCount).  **Important**: - Only send sequential requests to this endpoint. - Requests to this endpoint timeout after 30 minutes. If you hit a timeout, reach out to our support team.  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [UpdateCouponBatch] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -7160,9 +7820,10 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Update one Referral
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update referral
+    # Update the specified referral.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param referral_id [String] The ID of the referral code to delete
     # @param body [UpdateReferral] 
     # @param [Hash] opts the optional parameters
@@ -7172,9 +7833,10 @@ module TalonOne
       data
     end
 
-    # Update one Referral
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
+    # Update referral
+    # Update the specified referral.
+    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
+    # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param referral_id [String] The ID of the referral code to delete
     # @param body [UpdateReferral] 
     # @param [Hash] opts the optional parameters
@@ -7236,86 +7898,6 @@ module TalonOne
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#update_referral\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Update a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param ruleset_id [Integer] 
-    # @param body [NewRuleset] 
-    # @param [Hash] opts the optional parameters
-    # @return [Ruleset]
-    def update_ruleset(application_id, campaign_id, ruleset_id, body, opts = {})
-      data, _status_code, _headers = update_ruleset_with_http_info(application_id, campaign_id, ruleset_id, body, opts)
-      data
-    end
-
-    # Update a Ruleset
-    # @param application_id [Integer] 
-    # @param campaign_id [Integer] 
-    # @param ruleset_id [Integer] 
-    # @param body [NewRuleset] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(Ruleset, Integer, Hash)>] Ruleset data, response status code and response headers
-    def update_ruleset_with_http_info(application_id, campaign_id, ruleset_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.update_ruleset ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.update_ruleset"
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling ManagementApi.update_ruleset"
-      end
-      # verify the required parameter 'ruleset_id' is set
-      if @api_client.config.client_side_validation && ruleset_id.nil?
-        fail ArgumentError, "Missing the required parameter 'ruleset_id' when calling ManagementApi.update_ruleset"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_ruleset"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId}'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s)).sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'rulesetId' + '}', CGI.escape(ruleset_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'Ruleset' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#update_ruleset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

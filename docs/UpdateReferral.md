@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::UpdateReferral.new(friend_profile_integration_id: null,
-                                 start_date: null,
-                                 expiry_date: null,
-                                 usage_limit: null,
+instance = TalonOne::UpdateReferral.new(friend_profile_integration_id: BZGGC2454PA,
+                                 start_date: 2020-11-10T23:00Z,
+                                 expiry_date: 2021-11-10T23:00Z,
+                                 usage_limit: 1,
                                  attributes: null)
 ```
 

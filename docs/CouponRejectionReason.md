@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CouponRejectionReason.new(campaign_id: null,
-                                 coupon_id: null,
-                                 reason: null)
+instance = TalonOne::CouponRejectionReason.new(campaign_id: 244,
+                                 coupon_id: 4928,
+                                 reason: CouponNotFound)
 ```
 
 

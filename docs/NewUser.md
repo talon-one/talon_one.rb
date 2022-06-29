@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewUser.new(email: null,
-                                 password: null,
+instance = TalonOne::NewUser.new(email: john.doe@example.com,
+                                 password: admin123456,
                                  name: null,
-                                 invite_token: null)
+                                 invite_token: Gy9b8w1irmQtEPo5RmbMmSPheL5h4)
 ```
 
 

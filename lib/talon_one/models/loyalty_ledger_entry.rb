@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -20,6 +20,8 @@ module TalonOne
     attr_accessor :program_id
 
     attr_accessor :customer_profile_id
+
+    attr_accessor :card_id
 
     attr_accessor :customer_session_id
 
@@ -49,6 +51,7 @@ module TalonOne
         :'created' => :'created',
         :'program_id' => :'programID',
         :'customer_profile_id' => :'customerProfileID',
+        :'card_id' => :'cardID',
         :'customer_session_id' => :'customerSessionID',
         :'event_id' => :'eventID',
         :'type' => :'type',
@@ -67,6 +70,7 @@ module TalonOne
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
         :'customer_profile_id' => :'String',
+        :'card_id' => :'Integer',
         :'customer_session_id' => :'String',
         :'event_id' => :'Integer',
         :'type' => :'String',
@@ -110,6 +114,10 @@ module TalonOne
 
       if attributes.key?(:'customer_profile_id')
         self.customer_profile_id = attributes[:'customer_profile_id']
+      end
+
+      if attributes.key?(:'card_id')
+        self.card_id = attributes[:'card_id']
       end
 
       if attributes.key?(:'customer_session_id')
@@ -161,10 +169,6 @@ module TalonOne
         invalid_properties.push('invalid value for "program_id", program_id cannot be nil.')
       end
 
-      if @customer_profile_id.nil?
-        invalid_properties.push('invalid value for "customer_profile_id", customer_profile_id cannot be nil.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -189,7 +193,6 @@ module TalonOne
     def valid?
       return false if @created.nil?
       return false if @program_id.nil?
-      return false if @customer_profile_id.nil?
       return false if @type.nil?
       return false if @amount.nil?
       return false if @name.nil?
@@ -205,6 +208,7 @@ module TalonOne
           created == o.created &&
           program_id == o.program_id &&
           customer_profile_id == o.customer_profile_id &&
+          card_id == o.card_id &&
           customer_session_id == o.customer_session_id &&
           event_id == o.event_id &&
           type == o.type &&
@@ -225,7 +229,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_profile_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id].hash
+      [created, program_id, customer_profile_id, card_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -21,9 +21,6 @@ module TalonOne
     # The exact moment this entity was created.
     attr_accessor :created
 
-    # The IDs of the applications that are related to this entity.
-    attr_accessor :application_ids
-
     # The human-friendly display name for this event type. Use a short, past-tense, description of the event.
     attr_accessor :title
 
@@ -33,61 +30,14 @@ module TalonOne
     # An explanation of when the event type is triggered. Write this with a campaign manager in mind. For example:  > The \"Payment Accepted\" event is triggered after successful processing of a payment by our payment gateway. 
     attr_accessor :description
 
-    # This defines how the request payload will be parsed before your handler code is run.
-    attr_accessor :mime_type
-
-    # It is often helpful to include an example payload with the event type definition for documentation purposes.
-    attr_accessor :example_payload
-
-    # It is strongly recommended to define a JSON schema that will be used to perform structural validation of request payloads after parsing. 
-    attr_accessor :schema
-
-    # The language of the handler code. Currently only `\"talang\"` is supported.
-    attr_accessor :handler_language
-
-    # Code that will be run after successful parsing & validation of the payload for this event. This code _may_ choose to evaluate campaign rules. 
-    attr_accessor :handler
-
-    # The version of this event type. When updating an existing event type this must be **exactly** `currentVersion + 1`. 
-    attr_accessor :version
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'created' => :'created',
-        :'application_ids' => :'applicationIds',
         :'title' => :'title',
         :'name' => :'name',
-        :'description' => :'description',
-        :'mime_type' => :'mimeType',
-        :'example_payload' => :'examplePayload',
-        :'schema' => :'schema',
-        :'handler_language' => :'handlerLanguage',
-        :'handler' => :'handler',
-        :'version' => :'version'
+        :'description' => :'description'
       }
     end
 
@@ -96,16 +46,9 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'created' => :'DateTime',
-        :'application_ids' => :'Array<Integer>',
         :'title' => :'String',
         :'name' => :'String',
-        :'description' => :'String',
-        :'mime_type' => :'String',
-        :'example_payload' => :'String',
-        :'schema' => :'Object',
-        :'handler_language' => :'String',
-        :'handler' => :'String',
-        :'version' => :'Integer'
+        :'description' => :'String'
       }
     end
 
@@ -138,12 +81,6 @@ module TalonOne
         self.created = attributes[:'created']
       end
 
-      if attributes.key?(:'application_ids')
-        if (value = attributes[:'application_ids']).is_a?(Array)
-          self.application_ids = value
-        end
-      end
-
       if attributes.key?(:'title')
         self.title = attributes[:'title']
       end
@@ -154,30 +91,6 @@ module TalonOne
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'mime_type')
-        self.mime_type = attributes[:'mime_type']
-      end
-
-      if attributes.key?(:'example_payload')
-        self.example_payload = attributes[:'example_payload']
-      end
-
-      if attributes.key?(:'schema')
-        self.schema = attributes[:'schema']
-      end
-
-      if attributes.key?(:'handler_language')
-        self.handler_language = attributes[:'handler_language']
-      end
-
-      if attributes.key?(:'handler')
-        self.handler = attributes[:'handler']
-      end
-
-      if attributes.key?(:'version')
-        self.version = attributes[:'version']
       end
     end
 
@@ -191,10 +104,6 @@ module TalonOne
 
       if @created.nil?
         invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
-      if @application_ids.nil?
-        invalid_properties.push('invalid value for "application_ids", application_ids cannot be nil.')
       end
 
       if @title.nil?
@@ -213,22 +122,6 @@ module TalonOne
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
-      if @description.nil?
-        invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
-      if @mime_type.nil?
-        invalid_properties.push('invalid value for "mime_type", mime_type cannot be nil.')
-      end
-
-      if @handler.nil?
-        invalid_properties.push('invalid value for "handler", handler cannot be nil.')
-      end
-
-      if @version.nil?
-        invalid_properties.push('invalid value for "version", version cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -237,19 +130,10 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @created.nil?
-      return false if @application_ids.nil?
       return false if @title.nil?
       return false if @title.to_s.length < 1
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @description.nil?
-      return false if @mime_type.nil?
-      mime_type_validator = EnumAttributeValidator.new('String', ["application/json", "application/x-www-form-urlencoded", "none"])
-      return false unless mime_type_validator.valid?(@mime_type)
-      handler_language_validator = EnumAttributeValidator.new('String', ["talang"])
-      return false unless handler_language_validator.valid?(@handler_language)
-      return false if @handler.nil?
-      return false if @version.nil?
       true
     end
 
@@ -281,26 +165,6 @@ module TalonOne
       @name = name
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type)
-      validator = EnumAttributeValidator.new('String', ["application/json", "application/x-www-form-urlencoded", "none"])
-      unless validator.valid?(mime_type)
-        fail ArgumentError, "invalid value for \"mime_type\", must be one of #{validator.allowable_values}."
-      end
-      @mime_type = mime_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] handler_language Object to be assigned
-    def handler_language=(handler_language)
-      validator = EnumAttributeValidator.new('String', ["talang"])
-      unless validator.valid?(handler_language)
-        fail ArgumentError, "invalid value for \"handler_language\", must be one of #{validator.allowable_values}."
-      end
-      @handler_language = handler_language
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -308,16 +172,9 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           created == o.created &&
-          application_ids == o.application_ids &&
           title == o.title &&
           name == o.name &&
-          description == o.description &&
-          mime_type == o.mime_type &&
-          example_payload == o.example_payload &&
-          schema == o.schema &&
-          handler_language == o.handler_language &&
-          handler == o.handler &&
-          version == o.version
+          description == o.description
     end
 
     # @see the `==` method
@@ -329,7 +186,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_ids, title, name, description, mime_type, example_payload, schema, handler_language, handler, version].hash
+      [id, created, title, name, description].hash
     end
 
     # Builds the object from hash

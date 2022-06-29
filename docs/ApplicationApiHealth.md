@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::ApplicationApiHealth.new(summary: null,
-                                 last_used: null)
+                                 last_used: 2021-09-12T10:12:42Z)
 ```
 
 

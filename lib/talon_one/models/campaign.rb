@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -27,16 +27,16 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :user_id
 
-    # A friendly name for this campaign.
+    # A user-facing name for this campaign.
     attr_accessor :name
 
     # A detailed description of the campaign.
     attr_accessor :description
 
-    # Datetime when the campaign will become active.
+    # Timestamp when the campaign will become active.
     attr_accessor :start_time
 
-    # Datetime when the campaign will become in-active.
+    # Timestamp the campaign will become inactive.
     attr_accessor :end_time
 
     # Arbitrary properties associated with this campaign
@@ -45,23 +45,23 @@ module TalonOne
     # A disabled or archived campaign is not evaluated for rules or coupons. 
     attr_accessor :state
 
-    # ID of Ruleset this campaign applies on customer session evaluation.
+    # [ID of Ruleset](https://docs.talon.one/management-api/#operation/getRulesets) this campaign applies on customer session evaluation. 
     attr_accessor :active_ruleset_id
 
     # A list of tags for the campaign.
     attr_accessor :tags
 
-    # A list of features for the campaign.
+    # The features enabled in this campaign.
     attr_accessor :features
 
     attr_accessor :coupon_settings
 
     attr_accessor :referral_settings
 
-    # The set of limits that will operate for this campaign
+    # The set of [budget limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/) for this campaign. 
     attr_accessor :limits
 
-    # The IDs of the campaign groups that own this entity.
+    # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups/) this campaign belongs to. 
     attr_accessor :campaign_groups
 
     # Number of coupons redeemed in the campaign.
@@ -79,8 +79,14 @@ module TalonOne
     # Total number of coupons created by rules in this campaign.
     attr_accessor :coupon_creation_count
 
+    # Total number of custom effects triggered by rules in this campaign.
+    attr_accessor :custom_effect_count
+
     # Total number of referrals created by rules in this campaign.
     attr_accessor :referral_creation_count
+
+    # Total number of times triggering add free item effext is allowed in this campaign.
+    attr_accessor :add_free_item_effect_count
 
     # Total number of giveaways awarded by rules in this campaign.
     attr_accessor :awarded_giveaways_count
@@ -97,10 +103,13 @@ module TalonOne
     # Total number of loyalty point redemption effects triggered by rules in this campaign.
     attr_accessor :redeemed_loyalty_points_effect_count
 
+    # Total number of webhook triggered by rules in this campaign.
+    attr_accessor :call_api_effect_count
+
     # Timestamp of the most recent event received by this campaign.
     attr_accessor :last_activity
 
-    # Timestamp of the most recent update to the campaign or any of its elements.
+    # Timestamp of the most recent update to the campaign's property. Updates to external entities used in this campaign are **not** registered by this property, such as collection or coupon updates. 
     attr_accessor :updated
 
     # Name of the user who created this campaign if available.
@@ -108,6 +117,9 @@ module TalonOne
 
     # Name of the user who last updated this campaign if available.
     attr_accessor :updated_by
+
+    # The ID of the Campaign Template this Campaign was created from.
+    attr_accessor :template_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -156,16 +168,20 @@ module TalonOne
         :'discount_count' => :'discountCount',
         :'discount_effect_count' => :'discountEffectCount',
         :'coupon_creation_count' => :'couponCreationCount',
+        :'custom_effect_count' => :'customEffectCount',
         :'referral_creation_count' => :'referralCreationCount',
+        :'add_free_item_effect_count' => :'addFreeItemEffectCount',
         :'awarded_giveaways_count' => :'awardedGiveawaysCount',
         :'created_loyalty_points_count' => :'createdLoyaltyPointsCount',
         :'created_loyalty_points_effect_count' => :'createdLoyaltyPointsEffectCount',
         :'redeemed_loyalty_points_count' => :'redeemedLoyaltyPointsCount',
         :'redeemed_loyalty_points_effect_count' => :'redeemedLoyaltyPointsEffectCount',
+        :'call_api_effect_count' => :'callApiEffectCount',
         :'last_activity' => :'lastActivity',
         :'updated' => :'updated',
         :'created_by' => :'createdBy',
-        :'updated_by' => :'updatedBy'
+        :'updated_by' => :'updatedBy',
+        :'template_id' => :'templateId'
       }
     end
 
@@ -194,16 +210,20 @@ module TalonOne
         :'discount_count' => :'Float',
         :'discount_effect_count' => :'Integer',
         :'coupon_creation_count' => :'Integer',
+        :'custom_effect_count' => :'Integer',
         :'referral_creation_count' => :'Integer',
+        :'add_free_item_effect_count' => :'Integer',
         :'awarded_giveaways_count' => :'Integer',
         :'created_loyalty_points_count' => :'Float',
         :'created_loyalty_points_effect_count' => :'Integer',
         :'redeemed_loyalty_points_count' => :'Float',
         :'redeemed_loyalty_points_effect_count' => :'Integer',
+        :'call_api_effect_count' => :'Integer',
         :'last_activity' => :'DateTime',
         :'updated' => :'DateTime',
         :'created_by' => :'String',
-        :'updated_by' => :'String'
+        :'updated_by' => :'String',
+        :'template_id' => :'Integer'
       }
     end
 
@@ -326,8 +346,16 @@ module TalonOne
         self.coupon_creation_count = attributes[:'coupon_creation_count']
       end
 
+      if attributes.key?(:'custom_effect_count')
+        self.custom_effect_count = attributes[:'custom_effect_count']
+      end
+
       if attributes.key?(:'referral_creation_count')
         self.referral_creation_count = attributes[:'referral_creation_count']
+      end
+
+      if attributes.key?(:'add_free_item_effect_count')
+        self.add_free_item_effect_count = attributes[:'add_free_item_effect_count']
       end
 
       if attributes.key?(:'awarded_giveaways_count')
@@ -350,6 +378,10 @@ module TalonOne
         self.redeemed_loyalty_points_effect_count = attributes[:'redeemed_loyalty_points_effect_count']
       end
 
+      if attributes.key?(:'call_api_effect_count')
+        self.call_api_effect_count = attributes[:'call_api_effect_count']
+      end
+
       if attributes.key?(:'last_activity')
         self.last_activity = attributes[:'last_activity']
       end
@@ -364,6 +396,10 @@ module TalonOne
 
       if attributes.key?(:'updated_by')
         self.updated_by = attributes[:'updated_by']
+      end
+
+      if attributes.key?(:'template_id')
+        self.template_id = attributes[:'template_id']
       end
     end
 
@@ -488,16 +524,20 @@ module TalonOne
           discount_count == o.discount_count &&
           discount_effect_count == o.discount_effect_count &&
           coupon_creation_count == o.coupon_creation_count &&
+          custom_effect_count == o.custom_effect_count &&
           referral_creation_count == o.referral_creation_count &&
+          add_free_item_effect_count == o.add_free_item_effect_count &&
           awarded_giveaways_count == o.awarded_giveaways_count &&
           created_loyalty_points_count == o.created_loyalty_points_count &&
           created_loyalty_points_effect_count == o.created_loyalty_points_effect_count &&
           redeemed_loyalty_points_count == o.redeemed_loyalty_points_count &&
           redeemed_loyalty_points_effect_count == o.redeemed_loyalty_points_effect_count &&
+          call_api_effect_count == o.call_api_effect_count &&
           last_activity == o.last_activity &&
           updated == o.updated &&
           created_by == o.created_by &&
-          updated_by == o.updated_by
+          updated_by == o.updated_by &&
+          template_id == o.template_id
     end
 
     # @see the `==` method
@@ -509,7 +549,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, referral_creation_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, last_activity, updated, created_by, updated_by].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, last_activity, updated, created_by, updated_by, template_id].hash
     end
 
     # Builds the object from hash

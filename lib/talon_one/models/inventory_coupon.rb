@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -24,10 +24,10 @@ module TalonOne
     # The ID of the campaign that owns this entity.
     attr_accessor :campaign_id
 
-    # The actual coupon code.
+    # The coupon code.
     attr_accessor :value
 
-    # The number of times a coupon code can be redeemed. This can be set to 0 for no limit, but any campaign usage limits will still apply. 
+    # The number of times the coupon code can be redeemed. `0` means unlimited redemptions but any campaign usage limits will still apply. 
     attr_accessor :usage_limit
 
     # The amount of discounts that can be given with this coupon code. 
@@ -39,6 +39,9 @@ module TalonOne
     # Expiry date of the coupon. Coupon never expires if this is omitted, zero, or negative.
     attr_accessor :expiry_date
 
+    # Limits configuration for a coupon. These limits will override the limits set from the campaign.  **Note:** Only usable when creating a single coupon which is not tied to a specific recipient. Only per-profile limits are allowed to be configured. 
+    attr_accessor :limits
+
     # The number of times this coupon has been successfully used.
     attr_accessor :usage_counter
 
@@ -48,7 +51,7 @@ module TalonOne
     # The remaining discount this coupon can give.
     attr_accessor :discount_remainder
 
-    # Arbitrary properties associated with this item
+    # Custom attributes associated with this coupon.
     attr_accessor :attributes
 
     # The integration ID of the referring customer (if any) for whom this coupon was created as an effect.
@@ -60,7 +63,7 @@ module TalonOne
     # The ID of the Import which created this coupon.
     attr_accessor :import_id
 
-    # This value controls what reservations mean to a coupon. If set to true the coupon reservation is used to mark it as a favorite, if set to false the coupon reservation is used as a requirement of usage. This value defaults to true if not specified.
+    # Defines the type of reservation: - `true`: The reservation is a soft reservation. Any customer can use the coupon. This is done via the [Create coupon reservation endpoint](/integration-api/#operation/createCouponReservation). - `false`: The reservation is a hard reservation. Only the associated customer (`recipientIntegrationId`) can use the coupon. This is done via the Campaign Manager when you create a coupon for a given `recipientIntegrationId`, the [Create coupons endpoint](/management-api/#operation/createCoupons) or [Create coupons for multiple recipients endpoint](/management-api/#operation/createCouponsForMultipleRecipients). 
     attr_accessor :reservation
 
     # The id of the batch the coupon belongs to.
@@ -69,7 +72,7 @@ module TalonOne
     # The number of times the coupon was redeemed by the profile.
     attr_accessor :profile_redemption_count
 
-    # Can be either active, used, expired, or pending. active: reserved coupons that are neither pending nor used nor expired, and have a non-exhausted limit counter. used: coupons that are not pending, and have reached their redemption limit or were redeemed by the profile before expiration. expired: all non-pending, non-active, non-used coupons that were not redeemed by the profile. pending: coupons that have a start date in the future. 
+    # Can be:  - `active`: The coupon can be used. It is a reserved coupon that is neither pending, used nor expired, and has a non-exhausted limit counter. - `used`: The coupon has been redeemed and cannot be used again. It is not pending and has reached its redemption limit or was redeemed by the profile before expiration. - `expired`: The coupon was never redeemed and it is now expired. It is non-pending, non-active and non-used by the profile. - `pending`: The coupon will be usable in the future. - `disabled`: The coupon is part of a non-active campaign. 
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -83,6 +86,7 @@ module TalonOne
         :'discount_limit' => :'discountLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
+        :'limits' => :'limits',
         :'usage_counter' => :'usageCounter',
         :'discount_counter' => :'discountCounter',
         :'discount_remainder' => :'discountRemainder',
@@ -108,6 +112,7 @@ module TalonOne
         :'discount_limit' => :'Float',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
+        :'limits' => :'Array<LimitConfig>',
         :'usage_counter' => :'Integer',
         :'discount_counter' => :'Float',
         :'discount_remainder' => :'Float',
@@ -175,6 +180,12 @@ module TalonOne
         self.expiry_date = attributes[:'expiry_date']
       end
 
+      if attributes.key?(:'limits')
+        if (value = attributes[:'limits']).is_a?(Array)
+          self.limits = value
+        end
+      end
+
       if attributes.key?(:'usage_counter')
         self.usage_counter = attributes[:'usage_counter']
       end
@@ -205,6 +216,8 @@ module TalonOne
 
       if attributes.key?(:'reservation')
         self.reservation = attributes[:'reservation']
+      else
+        self.reservation = true
       end
 
       if attributes.key?(:'batch_id')
@@ -268,6 +281,10 @@ module TalonOne
         invalid_properties.push('invalid value for "usage_counter", usage_counter cannot be nil.')
       end
 
+      if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
       if @profile_redemption_count.nil?
         invalid_properties.push('invalid value for "profile_redemption_count", profile_redemption_count cannot be nil.')
       end
@@ -293,6 +310,7 @@ module TalonOne
       return false if !@discount_limit.nil? && @discount_limit > 999999
       return false if !@discount_limit.nil? && @discount_limit < 0
       return false if @usage_counter.nil?
+      return false if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
       return false if @profile_redemption_count.nil?
       return false if @state.nil?
       true
@@ -344,6 +362,16 @@ module TalonOne
       @discount_limit = discount_limit
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] recipient_integration_id Value to be assigned
+    def recipient_integration_id=(recipient_integration_id)
+      if !recipient_integration_id.nil? && recipient_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @recipient_integration_id = recipient_integration_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -357,6 +385,7 @@ module TalonOne
           discount_limit == o.discount_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
+          limits == o.limits &&
           usage_counter == o.usage_counter &&
           discount_counter == o.discount_counter &&
           discount_remainder == o.discount_remainder &&
@@ -379,7 +408,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, campaign_id, value, usage_limit, discount_limit, start_date, expiry_date, usage_counter, discount_counter, discount_remainder, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id, profile_redemption_count, state].hash
+      [id, created, campaign_id, value, usage_limit, discount_limit, start_date, expiry_date, limits, usage_counter, discount_counter, discount_remainder, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id, profile_redemption_count, state].hash
     end
 
     # Builds the object from hash

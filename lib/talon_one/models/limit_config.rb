@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -14,13 +14,16 @@ require 'date'
 
 module TalonOne
   class LimitConfig
-    # The limitable action to which this limit will be applied
+    # The limitable action to which this limit applies. For example: - `setDiscount` - `setDiscountEffect` - `redeemCoupon` - `createCoupon` 
     attr_accessor :action
 
-    # The value to set for the limit
+    # The value to set for the limit.
     attr_accessor :limit
 
-    # The entities that make the address of this limit
+    # The period on which the budget limit recurs.
+    attr_accessor :period
+
+    # The entity that this limit applies to.
     attr_accessor :entities
 
     class EnumAttributeValidator
@@ -50,6 +53,7 @@ module TalonOne
       {
         :'action' => :'action',
         :'limit' => :'limit',
+        :'period' => :'period',
         :'entities' => :'entities'
       }
     end
@@ -59,6 +63,7 @@ module TalonOne
       {
         :'action' => :'String',
         :'limit' => :'Float',
+        :'period' => :'String',
         :'entities' => :'Array<String>'
       }
     end
@@ -90,6 +95,10 @@ module TalonOne
 
       if attributes.key?(:'limit')
         self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'period')
+        self.period = attributes[:'period']
       end
 
       if attributes.key?(:'entities')
@@ -128,6 +137,8 @@ module TalonOne
       return false if @action.nil?
       return false if @limit.nil?
       return false if @limit < 0
+      period_validator = EnumAttributeValidator.new('String', ["daily", "weekly", "monthly", "yearly"])
+      return false unless period_validator.valid?(@period)
       return false if @entities.nil?
       true
     end
@@ -146,6 +157,16 @@ module TalonOne
       @limit = limit
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] period Object to be assigned
+    def period=(period)
+      validator = EnumAttributeValidator.new('String', ["daily", "weekly", "monthly", "yearly"])
+      unless validator.valid?(period)
+        fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
+      end
+      @period = period
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -153,6 +174,7 @@ module TalonOne
       self.class == o.class &&
           action == o.action &&
           limit == o.limit &&
+          period == o.period &&
           entities == o.entities
     end
 
@@ -165,7 +187,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action, limit, entities].hash
+      [action, limit, period, entities].hash
     end
 
     # Builds the object from hash

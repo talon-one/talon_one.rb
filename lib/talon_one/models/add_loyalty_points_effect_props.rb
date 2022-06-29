@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,31 +13,43 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"addLoyaltyPoints\" effect. This gets triggered whenever a validated rule contained an \"add loyalty\" effect. These points are automatically stored and managed inside Talon.One.
+  # The properties specific to the \"addLoyaltyPoints\" effect. This gets triggered whenever a validated rule contained an \"add loyalty\" effect. These points are automatically stored and managed inside Talon.One. 
   class AddLoyaltyPointsEffectProps
-    # The name/description of this loyalty point addition
+    # The name/description of this loyalty point addition.
     attr_accessor :name
 
-    # The ID of the loyalty program where these points were added
+    # The ID of the loyalty program where these points were added.
     attr_accessor :program_id
 
-    # The ID of the subledger within the loyalty program where these points were added
+    # The ID of the subledger within the loyalty program where these points were added.
     attr_accessor :sub_ledger_id
 
-    # The amount of points that were added
+    # The amount of points that were added.
     attr_accessor :value
 
-    # The user for whom these points were added
+    # The original amount of loyalty points to be awarded.
+    attr_accessor :desired_value
+
+    # The user for whom these points were added.
     attr_accessor :recipient_integration_id
 
-    # Date after which points will be valid
+    # Date after which points will be valid.
     attr_accessor :start_date
 
-    # Date after which points will expire
+    # Date after which points will expire.
     attr_accessor :expiry_date
 
-    # The identifier of this addition in the loyalty ledger
+    # The identifier of this addition in the loyalty ledger.
     attr_accessor :transaction_uuid
+
+    # The index of the item in the cart items list on which the loyal points addition should be applied.
+    attr_accessor :cart_item_position
+
+    # The sub position is triggered when application flattening is enabled. It indicates to which item the loyalty points addition applies, for cart items with `quantity` > 1. 
+    attr_accessor :cart_item_sub_position
+
+    # The card on which these points were added.
+    attr_accessor :card_identifier
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -46,10 +58,14 @@ module TalonOne
         :'program_id' => :'programId',
         :'sub_ledger_id' => :'subLedgerId',
         :'value' => :'value',
+        :'desired_value' => :'desiredValue',
         :'recipient_integration_id' => :'recipientIntegrationId',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
-        :'transaction_uuid' => :'transactionUUID'
+        :'transaction_uuid' => :'transactionUUID',
+        :'cart_item_position' => :'cartItemPosition',
+        :'cart_item_sub_position' => :'cartItemSubPosition',
+        :'card_identifier' => :'cardIdentifier'
       }
     end
 
@@ -60,10 +76,14 @@ module TalonOne
         :'program_id' => :'Integer',
         :'sub_ledger_id' => :'String',
         :'value' => :'Float',
+        :'desired_value' => :'Float',
         :'recipient_integration_id' => :'String',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
-        :'transaction_uuid' => :'String'
+        :'transaction_uuid' => :'String',
+        :'cart_item_position' => :'Float',
+        :'cart_item_sub_position' => :'Float',
+        :'card_identifier' => :'String'
       }
     end
 
@@ -104,6 +124,10 @@ module TalonOne
         self.value = attributes[:'value']
       end
 
+      if attributes.key?(:'desired_value')
+        self.desired_value = attributes[:'desired_value']
+      end
+
       if attributes.key?(:'recipient_integration_id')
         self.recipient_integration_id = attributes[:'recipient_integration_id']
       end
@@ -118,6 +142,18 @@ module TalonOne
 
       if attributes.key?(:'transaction_uuid')
         self.transaction_uuid = attributes[:'transaction_uuid']
+      end
+
+      if attributes.key?(:'cart_item_position')
+        self.cart_item_position = attributes[:'cart_item_position']
+      end
+
+      if attributes.key?(:'cart_item_sub_position')
+        self.cart_item_sub_position = attributes[:'cart_item_sub_position']
+      end
+
+      if attributes.key?(:'card_identifier')
+        self.card_identifier = attributes[:'card_identifier']
       end
     end
 
@@ -145,6 +181,10 @@ module TalonOne
         invalid_properties.push('invalid value for "recipient_integration_id", recipient_integration_id cannot be nil.')
       end
 
+      if @recipient_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
       if @transaction_uuid.nil?
         invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
       end
@@ -160,8 +200,23 @@ module TalonOne
       return false if @sub_ledger_id.nil?
       return false if @value.nil?
       return false if @recipient_integration_id.nil?
+      return false if @recipient_integration_id.to_s.length > 1000
       return false if @transaction_uuid.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] recipient_integration_id Value to be assigned
+    def recipient_integration_id=(recipient_integration_id)
+      if recipient_integration_id.nil?
+        fail ArgumentError, 'recipient_integration_id cannot be nil'
+      end
+
+      if recipient_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      @recipient_integration_id = recipient_integration_id
     end
 
     # Checks equality by comparing each attribute.
@@ -173,10 +228,14 @@ module TalonOne
           program_id == o.program_id &&
           sub_ledger_id == o.sub_ledger_id &&
           value == o.value &&
+          desired_value == o.desired_value &&
           recipient_integration_id == o.recipient_integration_id &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
-          transaction_uuid == o.transaction_uuid
+          transaction_uuid == o.transaction_uuid &&
+          cart_item_position == o.cart_item_position &&
+          cart_item_sub_position == o.cart_item_sub_position &&
+          card_identifier == o.card_identifier
     end
 
     # @see the `==` method
@@ -188,7 +247,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, program_id, sub_ledger_id, value, recipient_integration_id, start_date, expiry_date, transaction_uuid].hash
+      [name, program_id, sub_ledger_id, value, desired_value, recipient_integration_id, start_date, expiry_date, transaction_uuid, cart_item_position, cart_item_sub_position, card_identifier].hash
     end
 
     # Builds the object from hash

@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewAccountSignUp.new(email: null,
-                                 password: null,
+instance = TalonOne::NewAccountSignUp.new(email: john.doe@example.com,
+                                 password: admin123456,
                                  company_name: null)
 ```
 

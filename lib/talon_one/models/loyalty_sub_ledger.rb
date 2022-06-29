@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -13,37 +13,39 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Ledger of Balance in Loyalty Program for a Customer
+  # Ledger of Balance in Loyalty Program for a Customer.
   class LoyaltySubLedger
-    # ⚠️ Deprecated: Use 'totalActivePoints' property instead. Total amount of currently active and available points in the customer's balance 
+    # **DEPRECATED** Use `totalActivePoints`` property instead. Total amount of currently active and available points in the customer's balance. 
     attr_accessor :total
 
-    # Total amount of currently active and available points in the customer's balance
+    # Total amount of currently active and available points in the customer's balance.
     attr_accessor :total_active_points
 
-    # Total amount of pending points, which are not active yet but will become active in the future
+    # Total amount of pending points, which are not active yet but will become active in the future.
     attr_accessor :total_pending_points
 
-    # Total amount of points already spent by this customer
+    # Total amount of points already spent by this customer.
     attr_accessor :total_spent_points
 
-    # Total amount of points, that expired without ever being spent
+    # Total amount of points, that expired without ever being spent.
     attr_accessor :total_expired_points
 
-    # List of all events that have happened such as additions, subtractions and expiries
+    # List of all events that have happened such as additions, subtractions and expiries.
     attr_accessor :transactions
 
-    # List of all points that will expire
+    # List of all points that will expire.
     attr_accessor :expiring_points
 
-    # List of all currently active points
+    # List of all currently active points.
     attr_accessor :active_points
 
-    # List of all points pending activation
+    # List of all points pending activation.
     attr_accessor :pending_points
 
-    # List of expired points
+    # List of expired points.
     attr_accessor :expired_points
+
+    attr_accessor :current_tier
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -57,7 +59,8 @@ module TalonOne
         :'expiring_points' => :'expiringPoints',
         :'active_points' => :'activePoints',
         :'pending_points' => :'pendingPoints',
-        :'expired_points' => :'expiredPoints'
+        :'expired_points' => :'expiredPoints',
+        :'current_tier' => :'currentTier'
       }
     end
 
@@ -73,7 +76,8 @@ module TalonOne
         :'expiring_points' => :'Array<LoyaltyLedgerEntry>',
         :'active_points' => :'Array<LoyaltyLedgerEntry>',
         :'pending_points' => :'Array<LoyaltyLedgerEntry>',
-        :'expired_points' => :'Array<LoyaltyLedgerEntry>'
+        :'expired_points' => :'Array<LoyaltyLedgerEntry>',
+        :'current_tier' => :'Tier'
       }
     end
 
@@ -147,6 +151,10 @@ module TalonOne
           self.expired_points = value
         end
       end
+
+      if attributes.key?(:'current_tier')
+        self.current_tier = attributes[:'current_tier']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -201,7 +209,8 @@ module TalonOne
           expiring_points == o.expiring_points &&
           active_points == o.active_points &&
           pending_points == o.pending_points &&
-          expired_points == o.expired_points
+          expired_points == o.expired_points &&
+          current_tier == o.current_tier
     end
 
     # @see the `==` method
@@ -213,7 +222,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total, total_active_points, total_pending_points, total_spent_points, total_expired_points, transactions, expiring_points, active_points, pending_points, expired_points].hash
+      [total, total_active_points, total_pending_points, total_spent_points, total_expired_points, transactions, expiring_points, active_points, pending_points, expired_points, current_tier].hash
     end
 
     # Builds the object from hash

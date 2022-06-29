@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -33,9 +33,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for add_loyalty_points
-  # Add points in a certain loyalty program for the specified customer
-  # @param program_id 
-  # @param integration_id 
+  # Add points in loyalty program for given customer
+  # Add points in the specified loyalty program for the given customer.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+  # @param loyalty_program_id The identifier for the loyalty program.
+  # @param integration_id The identifier of the profile.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -46,10 +47,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for copy_campaign_to_applications
-  # Copy the campaign into every specified application
-  # Copy the campaign into every specified application.
-  # @param application_id 
-  # @param campaign_id 
+  # Copy the campaign into the specified application
+  # Copy the campaign into all specified application.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse2002]
@@ -59,9 +60,21 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for create_account_collection
+  # Create account-level collection
+  # Create account-level collection.
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [Collection]
+  describe 'create_account_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_additional_cost
-  # Define a new additional cost
-  # Defines a new _additional cost_ in this account.  These additional costs are shared across all applications in your account, and are never required. 
+  # Create additional cost
+  # Create an [additional cost](/docs/product/account/dev-tools/managing-additional-costs/).  These additional costs are shared across all applications in your account, and are never required. 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [AccountAdditionalCost]
@@ -72,8 +85,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for create_attribute
-  # Define a new custom attribute
-  # Defines a new _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on. These attributes can then be given values when creating / updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
+  # Create custom attribute
+  # Create a _custom attribute_ in this account. Custom attributes allow you to attach new fields to Talon.One domain objects like campaigns, coupons, customers and so on.  These attributes can then be given values when creating/updating these objects, and these values can be used in your campaign rules. For example, you could define a &#x60;zipCode&#x60; field for customer sessions, and add a rule to your campaign that only allows certain ZIP codes.  These attributes are shared across all applications in your account, and are never required. 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [Attribute]
@@ -83,26 +96,41 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for create_campaign
-  # Create a Campaign
-  # @param application_id 
+  # unit tests for create_campaign_from_template
+  # Create campaign from campaign template
+  # Use the campaign template referenced in the request body to create a new campaign in one of the connected Applications.  If the template was created from a campaign with rules referencing [campaign collections](https://docs.talon.one/docs/product/campaigns/managing-collections), the corresponding collections for the new campaign are created automatically. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @return [Campaign]
-  describe 'create_campaign test' do
+  # @return [CreateTemplateCampaignResponse]
+  describe 'create_campaign_from_template test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create_collection
+  # Create collection
+  # Create a collection.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [Collection]
+  describe 'create_collection test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for create_coupons
-  # Create Coupons
+  # Create coupons
   # Create coupons according to some pattern. Up to 20.000 coupons can be created without a unique prefix. When a unique prefix is provided, up to 200.000 coupons can be created.
-  # @param application_id 
-  # @param campaign_id 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information. 
   # @return [InlineResponse2004]
   describe 'create_coupons test' do
     it 'should work' do
@@ -110,14 +138,28 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for create_coupons_for_multiple_recipients
-  # Create Coupons for Multiple Recipients
-  # Create coupons according to some pattern for up to 1000 recipients.
-  # @param application_id 
-  # @param campaign_id 
+  # unit tests for create_coupons_async
+  # Create coupons asynchronously
+  # Create any number of coupons from 20,001 to 5,000,000.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent If set to &#x60;yes&#x60;, response will be an empty 204, otherwise a list of integration states will be generated (up to 1000).
+  # @return [AsyncCouponCreationResponse]
+  describe 'create_coupons_async test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create_coupons_for_multiple_recipients
+  # Create coupons for multiple recipients
+  # Create coupons according to some pattern for up to 1000 recipients.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains essential data such as the updated customer profiles and session-related information. 
   # @return [InlineResponse2004]
   describe 'create_coupons_for_multiple_recipients test' do
     it 'should work' do
@@ -127,7 +169,7 @@ describe 'ManagementApi' do
 
   # unit tests for create_password_recovery_email
   # Request a password reset
-  # Sends an email with a password recovery link to the email of an existing account. 
+  # Send an email with a password recovery link to the email address of an existing account. 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [NewPasswordEmail]
@@ -137,21 +179,9 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for create_ruleset
-  # Create a Ruleset
-  # @param application_id 
-  # @param campaign_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @return [Ruleset]
-  describe 'create_ruleset test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for create_session
-  # Create a Session
+  # Create session
+  # Create a session to use the Management API endpoints. Use the value of the &#x60;token&#x60; property provided in the response as bearer token in other API calls.  A token is valid for 3 months. In accordance with best pratices, use your generated token for all your API requests. Do **not** regenerate a token for each request.  This endpoint has a rate limit of 3 to 6 requests per second per account, depending on your setup.  **Note:** You can also use your browser&#39;s developer&#39;s console to [display your token](https://docs.talon.one/docs/dev/tutorials/receiving-loyalty-ledger-braze/#extracting-the-session-token) when you log into the Campaign Manager.  In this case, keep in mind that logging out destroys the token. 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [Session]
@@ -161,10 +191,23 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for delete_account_collection
+  # Delete account-level collection
+  # Delete the given account-level collection
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'delete_account_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_campaign
-  # Delete a Campaign
-  # @param application_id 
-  # @param campaign_id 
+  # Delete campaign
+  # Delete the given campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_campaign test' do
@@ -173,11 +216,26 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for delete_collection
+  # Delete collection
+  # Delete the given collection.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'delete_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_coupon
-  # Delete one Coupon
-  # @param application_id 
-  # @param campaign_id 
-  # @param coupon_id The ID of the coupon code to delete
+  # Delete coupon
+  # Delete the specified coupon.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param coupon_id The ID of the coupon code to update
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_coupon test' do
@@ -187,9 +245,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for delete_coupons
-  # Delete Coupons
-  # @param application_id 
-  # @param campaign_id 
+  # Delete coupons
+  # Deletes all the coupons matching the specified criteria.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -198,11 +257,11 @@ describe 'ManagementApi' do
   # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
+  # @option opts [String] :valid - &#x60;expired&#x60;: Matches coupons in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches coupons in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches coupons in which start date is set and in the future. 
   # @option opts [String] :batch_id Filter results by batches of coupons
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
+  # @option opts [String] :usable - &#x60;true&#x60;: only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;: only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
   # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
+  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s &#x60;RecipientIntegrationId&#x60; field. 
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @return [nil]
   describe 'delete_coupons test' do
@@ -211,10 +270,24 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for delete_loyalty_card
+  # Delete loyalty card
+  # Delete the specified loyalty card.
+  # @param loyalty_program_id Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
+  # @param loyalty_card_identifier Identifier of the loyalty card.
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'delete_loyalty_card test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_referral
-  # Delete one Referral
-  # @param application_id 
-  # @param campaign_id 
+  # Delete referral
+  # Delete the specified referral.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param referral_id The ID of the referral code to delete
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -224,21 +297,9 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for delete_ruleset
-  # Delete a Ruleset
-  # @param application_id 
-  # @param campaign_id 
-  # @param ruleset_id 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'delete_ruleset test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for destroy_session
-  # Destroy a Session
+  # Destroy session
+  # Destroys the session.
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'destroy_session test' do
@@ -247,10 +308,36 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for export_account_collection_items
+  # Export account-level collection items to CSV file
+  # Download a file containing an account-level collection&#39;s items.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @return [String]
+  describe 'export_account_collection_items test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for export_collection_items
+  # Export a collection&#39;s items to CSV file
+  # Download a file containing a collection&#39;s items.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @return [String]
+  describe 'export_collection_items test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for export_coupons
-  # Export Coupons to a CSV file
-  # Download a file with the coupons that match the given attributes.
-  # @param application_id 
+  # Export coupons to CSV file
+  # Download a file containing the coupons that match the given properties.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
@@ -264,7 +351,7 @@ describe 'ManagementApi' do
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
   # @option opts [String] :date_format Determines the format of dates in the export document.
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
+  # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
   # @return [String]
   describe 'export_coupons test' do
     it 'should work' do
@@ -273,9 +360,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for export_customer_sessions
-  # Export Customer Sessions to a CSV file
-  # Download a file with the customer sessions that match the request.
-  # @param application_id 
+  # Export customer sessions to CSV file
+  # Download a file containing the customer sessions that match the request.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string.
@@ -290,9 +377,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for export_effects
-  # Export triggered Effects to a CSV file
-  # Download a file with the triggered effects that match the given attributes.
-  # @param application_id 
+  # Export triggered effects to CSV file
+  # Download a file containing the triggered effects that match the given attributes.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
@@ -307,8 +394,8 @@ describe 'ManagementApi' do
 
   # unit tests for export_loyalty_balance
   # Export customer loyalty balance to a CSV file
-  # Download a file with the balance of each customer in the loyalty program
-  # @param program_id 
+  # Download a file with the balance of each customer in the loyalty program.
+  # @param loyalty_program_id The identifier for the loyalty program.
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'export_loyalty_balance test' do
@@ -318,12 +405,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for export_loyalty_ledger
-  # Export a customer&#39;s loyalty ledger log to a CSV file
+  # Export a customer&#39;s loyalty ledger log to CSV file
   # Download a file with a customer&#39;s ledger log in the loyalty program
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
-  # @param program_id 
-  # @param integration_id 
+  # @param loyalty_program_id The identifier for the loyalty program.
+  # @param integration_id The identifier of the profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :date_format Determines the format of dates in the export document.
   # @return [String]
@@ -333,28 +420,29 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for get_access_logs
-  # Get access logs for application (with total count)
-  # @param application_id 
-  # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
-  # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
+  # unit tests for export_referrals
+  # Export referrals to CSV file
+  # Download a file containing the referrals that match the given parameters.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :path Only return results where the request path matches the given regular expression.
-  # @option opts [String] :method Only return results where the request method matches the given regular expression.
-  # @option opts [String] :status Filter results by HTTP status codes.
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse2008]
-  describe 'get_access_logs test' do
+  # @option opts [Float] :campaign_id Filter results by campaign.
+  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
+  # @option opts [String] :valid - &#x60;expired&#x60;: Matches referrals in which the expiry date is set and in the past. - &#x60;validNow&#x60;: Matches referrals in which start date is null or in the past and expiry date is null or in the future. - &#x60;validFuture&#x60;: Matches referrals in which start date is set and in the future. 
+  # @option opts [String] :usable - &#x60;true&#x60;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;, only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned. 
+  # @option opts [String] :batch_id Filter results by batches of referrals
+  # @option opts [String] :date_format Determines the format of dates in the export document.
+  # @return [String]
+  describe 'export_referrals test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for get_access_logs_without_total_count
-  # Get access logs for application
-  # @param application_id 
+  # Get access logs for Application
+  # Retrieve the list of API calls to this Application matching the specified criteria. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
   # @param [Hash] opts the optional parameters
@@ -364,7 +452,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse2009]
+  # @return [InlineResponse20010]
   describe 'get_access_logs_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -372,9 +460,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_account
-  # Get Account Details
+  # Get account details
   # Return the details of your companies Talon.One account. 
-  # @param account_id 
+  # @param account_id The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
   # @param [Hash] opts the optional parameters
   # @return [Account]
   describe 'get_account test' do
@@ -384,9 +472,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_account_analytics
-  # Get Account Analytics
-  # Return the analytics of your companies Talon.One account. 
-  # @param account_id 
+  # Get account analytics
+  # Return the analytics of your Talon.One account. 
+  # @param account_id The identifier of the account. Retrieve it via the [List users in account endpoint](https://docs.talon.one/management-api#operation/getUsers), in the &#x60;accountId&#x60; property. 
   # @param [Hash] opts the optional parameters
   # @return [AccountAnalytics]
   describe 'get_account_analytics test' do
@@ -395,9 +483,21 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for get_account_collection
+  # Get account-level collection
+  # Retrieve the given account-level collection
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @return [Collection]
+  describe 'get_account_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_additional_cost
-  # Get an additional cost
-  # Returns additional cost for the account by its id. 
+  # Get additional cost
+  # Returns the additional cost. 
   # @param additional_cost_id 
   # @param [Hash] opts the optional parameters
   # @return [AccountAdditionalCost]
@@ -414,7 +514,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20021]
+  # @return [InlineResponse20023]
   describe 'get_additional_costs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -422,7 +522,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_all_access_logs
-  # Get all access logs
+  # List access logs
   # Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
@@ -433,7 +533,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse2008]
+  # @return [InlineResponse20011]
   describe 'get_all_access_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -441,9 +541,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_all_roles
-  # Get all roles
+  # List roles
+  # List all roles.
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20029]
+  # @return [InlineResponse20031]
   describe 'get_all_roles test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -451,9 +552,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application
-  # Get Application
+  # Get application
   # Get the application specified by the ID.
-  # @param application_id 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @return [Application]
   describe 'get_application test' do
@@ -464,7 +565,8 @@ describe 'ManagementApi' do
 
   # unit tests for get_application_api_health
   # Get report of health of application API
-  # @param application_id 
+  # Display the health of the application and show the last time the Application was used. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @return [ApplicationApiHealth]
   describe 'get_application_api_health test' do
@@ -474,9 +576,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application_customer
-  # Get Application Customer
-  # @param application_id 
-  # @param customer_id 
+  # Get application&#39;s customer
+  # Retrieve the customers of the specified application. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param customer_id The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
   # @param [Hash] opts the optional parameters
   # @return [ApplicationCustomer]
   describe 'get_application_customer test' do
@@ -485,15 +588,33 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for get_application_customer_friends
+  # List friends referred by customer profile
+  # List the friends referred by the specified customer profile in this Application. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param integration_id The Integration ID of the Advocate&#39;s Profile.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @return [InlineResponse20021]
+  describe 'get_application_customer_friends test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_application_customers
-  # List Application Customers
-  # @param application_id 
+  # List application&#39;s customers
+  # List all the customers of the specified application.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-  # @return [InlineResponse20011]
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @return [InlineResponse20013]
   describe 'get_application_customers test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -501,11 +622,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application_customers_by_attributes
-  # Get a list of the customer profiles that match the given attributes (with total count)
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
+  # List application customers matching the given attributes
+  # Get a list of the application customers matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20012]
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @return [InlineResponse20014]
   describe 'get_application_customers_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -513,50 +638,24 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application_event_types
-  # List Applications Event Types
-  # Get all of the distinct values of the Event &#x60;type&#x60; property for events recorded in the application.  See also: [Track an event](/integration-api/reference/#trackEvent) 
-  # @param application_id 
+  # List Applications event types
+  # Get all of the distinct values of the Event &#x60;type&#x60; property for events recorded in the application.  See also: [Track an event](/integration-api/#operation/trackEvent) 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20018]
+  # @return [InlineResponse20019]
   describe 'get_application_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  # unit tests for get_application_events
-  # List Applications Events (with total count)
-  # Lists all events recorded for an application. 
-  # @param application_id 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
-  # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :session Session integration ID filter for events. Must be exact match.
-  # @option opts [String] :profile Profile integration ID filter for events. Must be exact match.
-  # @option opts [String] :customer_name Customer name filter for events. Will match substrings case-insensitively.
-  # @option opts [String] :customer_email Customer e-mail address filter for events. Will match substrings case-insensitively.
-  # @option opts [String] :coupon_code Coupon code
-  # @option opts [String] :referral_code Referral code
-  # @option opts [String] :rule_query Rule name filter for events
-  # @option opts [String] :campaign_query Campaign name filter for events
-  # @return [InlineResponse20016]
-  describe 'get_application_events test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_application_events_without_total_count
-  # List Applications Events
+  # List Applications events
   # Lists all events recorded for an application. Instead of having the total number of results in the response, this endpoint only if there are more results. 
-  # @param application_id 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -572,7 +671,7 @@ describe 'ManagementApi' do
   # @option opts [String] :referral_code Referral code
   # @option opts [String] :rule_query Rule name filter for events
   # @option opts [String] :campaign_query Campaign name filter for events
-  # @return [InlineResponse20017]
+  # @return [InlineResponse20018]
   describe 'get_application_events_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -580,9 +679,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application_session
-  # Get Application Session
-  # @param application_id 
-  # @param session_id 
+  # Get Application session
+  # Get the details of the given session. You can list the sessions with the [List Application sessions](#operation/getApplicationSessions) endpoint. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param session_id The **internal** ID of the session. You can get the ID with the [List Application sessions endpoint](#operation/getApplicationSessions). 
   # @param [Hash] opts the optional parameters
   # @return [ApplicationSession]
   describe 'get_application_session test' do
@@ -592,8 +692,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_application_sessions
-  # List Application Sessions
-  # @param application_id 
+  # List Application sessions
+  # List all the sessions of the specified Application. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -605,7 +706,7 @@ describe 'ManagementApi' do
   # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
   # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
   # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
-  # @return [InlineResponse20015]
+  # @return [InlineResponse20017]
   describe 'get_application_sessions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -613,8 +714,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_applications
-  # List Applications
-  # List all application in the current account.
+  # List applications
+  # List all applications in the current account.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -627,7 +728,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_attribute
-  # Get a custom attribute
+  # Get custom attribute
   # Returns custom attribute for the account by its id. 
   # @param attribute_id 
   # @param [Hash] opts the optional parameters
@@ -646,7 +747,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :entity Returned attributes will be filtered by supplied entity
-  # @return [InlineResponse20020]
+  # @return [InlineResponse20022]
   describe 'get_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -654,14 +755,14 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_audiences
-  # Get all audiences
+  # List audiences
   # Get All audiences created in the account. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
-  # @return [InlineResponse20019]
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @return [InlineResponse20020]
   describe 'get_audiences test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -669,9 +770,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaign
-  # Get a Campaign
-  # @param application_id 
-  # @param campaign_id 
+  # Get campaign
+  # Retrieve the given campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @return [Campaign]
   describe 'get_campaign test' do
@@ -682,13 +784,14 @@ describe 'ManagementApi' do
 
   # unit tests for get_campaign_analytics
   # Get analytics of campaigns
-  # @param application_id 
-  # @param campaign_id 
+  # Retrieve statistical data about the performance of the given campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
   # @param [Hash] opts the optional parameters
   # @option opts [String] :granularity The time interval between the results in the returned time-series.
-  # @return [InlineResponse20010]
+  # @return [InlineResponse20012]
   describe 'get_campaign_analytics test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -696,15 +799,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaign_by_attributes
-  # Get a list of all campaigns that match the given attributes
-  # Gets a list of all the campaigns that exactly match a set of attributes. 
-  # @param application_id 
+  # List campaigns that match the given attributes
+  # Get a list of all the campaigns that match a set of attributes. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
+  # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
   # @return [InlineResponse2002]
   describe 'get_campaign_by_attributes test' do
     it 'should work' do
@@ -713,18 +816,20 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_campaigns
-  # List your Campaigns
-  # @param application_id 
+  # List campaigns
+  # List the campaigns of the specified application that match your filter criteria. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
+  # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
   # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
   # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
+  # @option opts [Integer] :template_id The ID of the Campaign Template this Campaign was created from.
   # @return [InlineResponse2002]
   describe 'get_campaigns test' do
     it 'should work' do
@@ -739,104 +844,39 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [Integer] :application_id 
+  # @option opts [Float] :application_id Filter results by Application ID.
   # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
-  # @option opts [Integer] :user_id 
+  # @option opts [Integer] :user_id Filter results that match the given user ID.
   # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [Boolean] :with_total_result_size When this flag is set, the result will include the total size of the result, across all pages. This might decrease performance on large data sets. With this flag set to true, &#x60;hasMore&#x60; will be true whenever there is a next page. &#x60;totalResultSize&#x60; will always be zero. With this flag set to false, &#x60;hasMore&#x60; will always be set to false. &#x60;totalResultSize&#x60; will contain the total number of results for this query. 
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
   # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-  # @return [InlineResponse20027]
+  # @return [InlineResponse20029]
   describe 'get_changes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  # unit tests for get_coupons
-  # List Coupons (with total count)
-  # @param application_id 
-  # @param campaign_id 
+  # unit tests for get_collection
+  # Get collection
+  # Retrieve the given collection.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
   # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :expires_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :expires_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-  # @option opts [String] :batch_id Filter results by batches of coupons
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @return [InlineResponse2004]
-  describe 'get_coupons test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_coupons_by_attributes
-  # Get a list of the coupons that match the given attributes
-  # Gets a list of all the coupons that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request. 
-  # @param application_id 
-  # @param campaign_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @option opts [String] :batch_id Filter results by batches of coupons
-  # @return [InlineResponse2004]
-  describe 'get_coupons_by_attributes test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_coupons_by_attributes_application_wide
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-  # Gets a list of all the coupons with attributes matching the query criteria Application wide 
-  # @param application_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-  # @option opts [String] :batch_id Filter results by batches of coupons
-  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
-  # @return [InlineResponse2004]
-  describe 'get_coupons_by_attributes_application_wide test' do
+  # @return [Collection]
+  describe 'get_collection test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for get_coupons_without_total_count
-  # List Coupons
-  # @param application_id 
-  # @param campaign_id 
+  # List coupons
+  # List all the coupons matching the specified criteria. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -858,12 +898,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customer_activity_report
-  # Get Activity Report for Single Customer
-  # Fetch summary report for single application customer based on a time range
+  # Get customer&#39;s activity report
+  # Fetch the summary report of a given customer in the given application, in a time range.
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
-  # @param application_id 
-  # @param customer_id 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param customer_id The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -874,42 +914,21 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for get_customer_activity_reports
-  # Get Activity Reports for Application Customers (with total count)
-  # Fetch summary reports for all application customers based on a time range
-  # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
-  # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
-  # @param application_id 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :name Only return reports matching the customer name
-  # @option opts [String] :integration_id Only return reports matching the integrationId
-  # @option opts [String] :campaign_name Only return reports matching the campaignName
-  # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-  # @return [InlineResponse20013]
-  describe 'get_customer_activity_reports test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_customer_activity_reports_without_total_count
   # Get Activity Reports for Application Customers
   # Fetch summary reports for all application customers based on a time range. Instead of having the total number of results in the response, this endpoint only if there are more results.
   # @param range_start Only return results from after this timestamp, must be an RFC3339 timestamp string
   # @param range_end Only return results from before this timestamp, must be an RFC3339 timestamp string
-  # @param application_id 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :name Only return reports matching the customer name
-  # @option opts [String] :integration_id Only return reports matching the integrationId
+  # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
   # @option opts [String] :campaign_name Only return reports matching the campaignName
   # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-  # @return [InlineResponse20014]
+  # @return [InlineResponse20016]
   describe 'get_customer_activity_reports_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -917,10 +936,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customer_analytics
-  # Get Analytics Report for a Customer
-  # Fetch analytics for single application customer
-  # @param application_id 
-  # @param customer_id 
+  # Get customer&#39;s analytics report
+  # Fetch analytics for a given customer in the given application.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param customer_id The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -933,10 +952,11 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customer_profile
-  # Get Customer Profile
-  # @param customer_id 
+  # Get customer profile
+  # Return the details of the specified customer profile.  **Performance tip:** You can retrieve the same information via the Integration API, which can save you extra API requests. Consider these options: - Request the customer profile to be part of the response content using   [Update Customer Session](/integration-api/operation#updateCustomerSessionV2). - Send an empty update with the [Update Customer Profile](/integration-api/#operation/updateCustomerProfileV2) endpoint with &#x60;runRuleEngine&#x3D;false&#x60;. 
+  # @param customer_id The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List application&#39;s customers](#operation/getApplicationCustomers) endpoint. 
   # @param [Hash] opts the optional parameters
-  # @return [ApplicationCustomer]
+  # @return [CustomerProfile]
   describe 'get_customer_profile test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -944,11 +964,12 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customer_profiles
-  # List Customer Profiles
+  # List customer profiles
+  # List all customer profiles.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20012]
+  # @return [InlineResponse20015]
   describe 'get_customer_profiles test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -956,13 +977,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_customers_by_attributes
-  # Get a list of the customer profiles that match the given attributes
-  # Gets a list of all the customer profiles for the account that exactly match a set of attributes.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request.  [Customer Profile]: https://help.talon.one/hc/en-us/articles/360005130739-Data-Model#CustomerProfile 
+  # List customer profiles matching the given attributes
+  # Get a list of the customer profiles matching the provided criteria.  The match is successful if all the attributes of the request are found in a profile, even if the profile has more attributes that are not present on the request. 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20012]
+  # @return [InlineResponse20015]
   describe 'get_customers_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -970,16 +991,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_event_types
-  # List Event Types
-  # Fetch all event type definitions for your account. Each event type can be 
+  # List event types
+  # Fetch all event type definitions for your account. 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :application_ids Filter by one or more application ids separated by comma
   # @option opts [String] :name Filter results to event types with the given name. This parameter implies &#x60;includeOldVersions&#x60;.
   # @option opts [Boolean] :include_old_versions Include all versions of every event type.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20025]
+  # @return [InlineResponse20027]
   describe 'get_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -987,15 +1007,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_exports
-  # Get Exports
-  # Get a list of all past exports 
+  # Get exports
+  # List all past exports 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [Integer] :application_id 
-  # @option opts [Integer] :campaign_id 
+  # @option opts [Float] :application_id Filter results by Application ID.
+  # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
   # @option opts [String] :entity The name of the entity type that was exported.
-  # @return [InlineResponse20028]
+  # @return [InlineResponse20030]
   describe 'get_exports test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1003,10 +1023,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_loyalty_points
-  # get the Loyalty Ledger for this integrationID
-  # Get the Loyalty Ledger for this profile integration ID.
-  # @param program_id The identifier for the application, must be unique within the account.
-  # @param integration_id The identifier for the application, must be unique within the account.
+  # Get the Loyalty Ledger for this integrationID
+  # Get the loyalty ledger for this profile integration ID.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+  # @param loyalty_program_id The identifier for the loyalty program.
+  # @param integration_id The identifier of the profile.
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyLedger]
   describe 'get_loyalty_points test' do
@@ -1016,8 +1036,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_loyalty_program
-  # Get a loyalty program
-  # @param program_id 
+  # Get loyalty program
+  # Get the specified [loyalty program](https://www.talon.one/glossary/loyalty). To list all loyalty programs in your Application, use [List loyalty programs](#operation/getLoyaltyPrograms).  To list the loyalty programs that a customer profile is part of, use the [List customer profile data](/integration-api/#operation/getCustomerInventory) 
+  # @param loyalty_program_id Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyProgram]
   describe 'get_loyalty_program test' do
@@ -1027,7 +1048,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_loyalty_programs
-  # List all loyalty Programs
+  # List loyalty programs
+  # List the loyalty programs of the account.
   # @param [Hash] opts the optional parameters
   # @return [InlineResponse2007]
   describe 'get_loyalty_programs test' do
@@ -1038,7 +1060,8 @@ describe 'ManagementApi' do
 
   # unit tests for get_loyalty_statistics
   # Get loyalty program statistics by loyalty program ID
-  # @param program_id 
+  # Retrieve the statistics of the specified loyalty program such as the total active points, pending points, spent points and expired points. 
+  # @param loyalty_program_id Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyStatistics]
   describe 'get_loyalty_statistics test' do
@@ -1047,31 +1070,11 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for get_referrals
-  # List Referrals (with total count)
-  # @param application_id 
-  # @param campaign_id 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiry date is set and in the past. The second matches referrals in which start date is null or in the past and expiry date is null or in the future, the third matches referrals in which start date is set and in the future. 
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
-  # @return [InlineResponse201]
-  describe 'get_referrals test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_referrals_without_total_count
-  # List Referrals
-  # @param application_id 
-  # @param campaign_id 
+  # List referrals
+  # List all referrals of the specified campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -1090,8 +1093,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_role
-  # Get information for the specified role
-  # @param role_id 
+  # Get role
+  # Get the details of the specified role. To see all the roles, use [List roles](#operation/getAllRoles). 
+  # @param role_id The Id of role. 
   # @param [Hash] opts the optional parameters
   # @return [Role]
   describe 'get_role test' do
@@ -1101,9 +1105,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_ruleset
-  # Get a Ruleset
-  # @param application_id 
-  # @param campaign_id 
+  # Get ruleset
+  # Retrieve the specified ruleset.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param ruleset_id 
   # @param [Hash] opts the optional parameters
   # @return [Ruleset]
@@ -1114,9 +1119,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_rulesets
-  # List Campaign Rulesets
-  # @param application_id 
-  # @param campaign_id 
+  # List campaign rulesets
+  # List all rulesets of this campaign. A ruleset is a revision of the rules of a campaign. **Important:** The response also includes deleted rules. You should only consider the latest revision of the returned rulesets. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
@@ -1129,9 +1135,9 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_user
-  # Get a single User
-  # Retrieves the data (including an invitation code) for a user. Non-admin users can only get themselves. 
-  # @param user_id 
+  # Get user
+  # Retrieve the data (including an invitation code) for a user. Non-admin users can only get their own profile. 
+  # @param user_id The ID of the user.
   # @param [Hash] opts the optional parameters
   # @return [User]
   describe 'get_user test' do
@@ -1141,13 +1147,13 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_users
-  # List Users in your account
+  # List users in account
   # Retrieve all users in your account. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @return [InlineResponse20026]
+  # @return [InlineResponse20028]
   describe 'get_users test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1155,8 +1161,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_webhook
-  # Get Webhook
-  # Returns an webhook by its id.
+  # Get webhook
+  # Returns a webhook by its id.
   # @param webhook_id 
   # @param [Hash] opts the optional parameters
   # @return [Webhook]
@@ -1167,7 +1173,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_webhook_activation_logs
-  # List Webhook activation Log Entries
+  # List webhook activation log entries
   # Webhook activation log entries would be created as soon as an integration request triggered an effect with a webhook
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -1175,11 +1181,11 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
   # @option opts [Float] :webhook_id Filter results by Webhook.
-  # @option opts [Float] :application_id 
+  # @option opts [Float] :application_id Filter results by Application ID.
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-  # @return [InlineResponse20023]
+  # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
+  # @return [InlineResponse20025]
   describe 'get_webhook_activation_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1187,19 +1193,20 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_webhook_logs
-  # List Webhook Log Entries
+  # List webhook log entries
+  # Retrieve all webhook log entries.
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [String] :status Filter results by HTTP status codes.
   # @option opts [Float] :webhook_id Filter results by Webhook.
-  # @option opts [Float] :application_id 
+  # @option opts [Float] :application_id Filter results by Application ID.
   # @option opts [Float] :campaign_id Filter results by campaign.
   # @option opts [String] :request_uuid Filter results by request UUID.
   # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-  # @return [InlineResponse20024]
+  # @return [InlineResponse20026]
   describe 'get_webhook_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1207,14 +1214,56 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_webhooks
-  # List Webhooks
+  # List webhooks
+  # List all webhooks.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :application_ids Filter by one or more application ids separated by comma
   # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
   # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20024]
   describe 'get_webhooks test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for import_account_collection
+  # Import data in existing account-level collection via CSV file
+  # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: the values in your collection.  A collection is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60; item Addidas Nike Asics &#x60;&#x60;&#x60;  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @return [Import]
+  describe 'import_account_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for import_allowed_list
+  # Import allowed values for attribute
+  # Upload a CSV file containing a list of allowed values for the specified attribute. These values are also called [picklist values](/docs/product/account/dev-tools/managing-attributes/#picklist-values).  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column: - &#x60;item&#x60; (required): the values in your allowed list, for example a list of SKU&#39;s.  An allowed list is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60;text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 &#x60;&#x60;&#x60; 
+  # @param attribute_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @return [Import]
+  describe 'import_allowed_list test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for import_collection
+  # Import data in existing collection via CSV file
+  # Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: the values in your collection.  A collection is limited to 500,000 items.  Example:  &#x60;&#x60;&#x60; item Addidas Nike Asics &#x60;&#x60;&#x60;  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :up_file The file with the information about the data that should be imported.
+  # @return [Import]
+  describe 'import_collection test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -1222,9 +1271,9 @@ describe 'ManagementApi' do
 
   # unit tests for import_coupons
   # Import coupons via CSV file
-  # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.
-  # @param application_id 
-  # @param campaign_id 
+  # Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - &#x60;value&#x60; (required): The coupon code. - &#x60;expirydate&#x60;: The end date in RFC3339 of the code redemption period. - &#x60;startdate&#x60;: The start date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. For unlimited redemptions, use &#x60;0&#x60;. Defaults to &#x60;1&#x60; when not provided. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object. - &#x60;discountlimit&#x60;: The amount of discounts that can be given with this coupon code.   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;category&#x60; associated to the coupon entity, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text \&quot;value\&quot;,\&quot;expirydate\&quot;,\&quot;startdate\&quot;,\&quot;recipientintegrationid\&quot;,\&quot;limitval\&quot;,\&quot;attributes\&quot;,\&quot;discountlimit\&quot; COUP1,2018-07-01T04:00:00Z,2018-05-01T04:00:00Z,cust123,1,\&quot;{\&quot;\&quot;Category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;,2.4 &#x60;&#x60;&#x60;  Once imported, you can find the &#x60;batchId&#x60; in the Campaign Manager or by using [List coupons](#operation/getReservedCustomers). 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :up_file The file with the information about the data that should be imported.
   # @return [Import]
@@ -1236,8 +1285,8 @@ describe 'ManagementApi' do
 
   # unit tests for import_loyalty_points
   # Import loyalty points via CSV file
-  # Upload a CSV file containing the loyalty points that should be created. The file should be sent as multipart data.
-  # @param program_id 
+  # Upload a CSV file containing the [loyalty](https://www.talon.one/pillar-pages/loyalty) points that should be created. The file should be sent as multipart data.  **Important**: For existing customer profiles, the imported points are _added_ to their active points. Learn more about [Loyalty programs](https://docs.talon.one/docs/product/loyalty-programs/overview).  The CSV file can contain the following columns:  - &#x60;customerprofileid&#x60;: The integration ID of the customer profile that should receive the loyalty points. - &#x60;amount&#x60;: The amount of points to award to the customer profile. - &#x60;startdate&#x60;: The earliest date when the points can be redeemed. On this date and until the expiry date, the points are &#x60;active&#x60;. - &#x60;expirydate&#x60;: The latest date when the points can be redeemed. After this date, the points are &#x60;expired&#x60;. - &#x60;subledgerid&#x60; (optional): The ID of the subledger that should received the points. - &#x60;reason&#x60; (optional): A reason why these points were awarded.  **Important:** Do not leave empty columns in the file.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement &#x60;&#x60;&#x60; 
+  # @param loyalty_program_id Identifier of the loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs endpoint](https://docs.talon.one/management-api/#operation/getLoyaltyPrograms). 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :up_file The file with the information about the data that should be imported.
   # @return [Import]
@@ -1248,8 +1297,8 @@ describe 'ManagementApi' do
   end
 
   # unit tests for import_pool_giveaways
-  # Import giveaways codes into a giveaways pool
-  # Upload a CSV file containing the giveaways codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - &#x60;code&#x60; (required): the code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  the start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: the last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A json object describing _custom_ giveaways attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called &#x60;provider&#x60;, set it with &#x60;\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;myPartnerCompany\&quot;\&quot;}\&quot;&#x60;.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
+  # Import giveaway codes into a giveaway pool
+  # Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file can contain the following columns: - &#x60;code&#x60; (required): the code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  the start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: the last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A json object describing _custom_ giveaway attribute names and their values. Double the double-quotes in the object.   For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;provider&#x60; associated to the giveaway entity, set it with &#x60;\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;myPartnerCompany\&quot;\&quot;}\&quot;&#x60;.  **Important:** Do not leave empty columns in the file.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Aliexpress\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
   # @param pool_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :up_file The file with the information about the data that should be imported.
@@ -1262,9 +1311,9 @@ describe 'ManagementApi' do
 
   # unit tests for import_referrals
   # Import referrals via CSV file
-  # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following colums:  - &#x60;code&#x60; (required): the referral code. - &#x60;advocateprofileintegrationid&#x60; (required): The profile ID of the advocate. - &#x60;startdate&#x60;: the start date in RFC3339 of the code redemption period. - &#x60;expirydate&#x60;: the end date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. Unlimited (0) when blank. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.   For example, if you created a custom attribute called &#x60;category&#x60;, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One. 
-  # @param application_id 
-  # @param campaign_id 
+  # Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file can contain the following columns:  - &#x60;code&#x60; (required): The referral code. - &#x60;advocateprofileintegrationid&#x60; (required): The profile ID of the advocate. - &#x60;startdate&#x60;: The start date in RFC3339 of the code redemption period. - &#x60;expirydate&#x60;: The end date in RFC3339 of the code redemption period. - &#x60;limitval&#x60;: The maximum amount of redemptions of this code. Defaults to &#x60;1&#x60; when left blank. - &#x60;attributes&#x60;: A json object describing _custom_ referral attribute names and their values. Double the double-quotes in the object.    For example, if you [created a custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;category&#x60; associated to the referral entity, set it with &#x60;\&quot;{\&quot;\&quot;category\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot;&#x60;.  You can use the timezone of your choice. It is converted to UTC internally by Talon.One.  **Example:**  &#x60;&#x60;&#x60;text code,startdate,expirydate,advocateprofileintegrationid,limitval,attributes REFERRAL_CODE1,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid_4,1,\&quot;{\&quot;\&quot;my_attribute\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot; REFERRAL_CODE2,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid1,1,\&quot;{\&quot;\&quot;my_attribute\&quot;\&quot;: \&quot;\&quot;20_off\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :up_file The file with the information about the data that should be imported.
   # @return [Import]
@@ -1274,10 +1323,62 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for list_account_collections
+  # List collections in account
+  # List collections in account.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @option opts [String] :name Filter by the name of the Collection.
+  # @return [InlineResponse2008]
+  describe 'list_account_collections test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for list_collections
+  # List collections
+  # List collections in the campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @option opts [String] :name Filter by the name of the Collection.
+  # @return [InlineResponse2009]
+  describe 'list_collections test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for list_collections_in_application
+  # List collections in application
+  # List collections from all campaigns in the Application.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
+  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
+  # @option opts [String] :name Filter by the name of the Collection.
+  # @return [InlineResponse2009]
+  describe 'list_collections_in_application test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for remove_loyalty_points
-  # Deduct points in a certain loyalty program for the specified customer
-  # @param program_id 
-  # @param integration_id 
+  # Deduct points in loyalty program for given customer
+  # Remove points from the specified loyalty program and specified customer profile.  To get the &#x60;integrationId&#x60; of the profile from a &#x60;sessionId&#x60;, use the [Update customer session](/integration-api/#operation/updateCustomerSessionV2). 
+  # @param loyalty_program_id The identifier for the loyalty program.
+  # @param integration_id The identifier of the profile.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -1299,62 +1400,10 @@ describe 'ManagementApi' do
     end
   end
 
-  # unit tests for search_coupons_advanced
-  # Get a list of the coupons that match the given attributes (with total count)
-  # Gets a list of all the coupons with attributes matching the query criteria 
-  # @param application_id 
-  # @param campaign_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @option opts [String] :batch_id Filter results by batches of coupons
-  # @return [InlineResponse2004]
-  describe 'search_coupons_advanced test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for search_coupons_advanced_application_wide
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application (with total count)
-  # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-  # @param application_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
-  # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-  # @option opts [String] :sort The field by which results should be sorted. Sorting defaults to ascending order, prefix the field name with &#x60;-&#x60; to sort in descending order.
-  # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
-  # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
-  # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiry date is set and in the past. The second matches coupons in which start date is null or in the past and expiry date is null or in the future, the third matches coupons in which start date is set and in the future. 
-  # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
-  # @option opts [Integer] :referral_id Filter the results by matching them with the Id of a referral, that meaning the coupons that had been created as an effect of the usage of a referral code.
-  # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
-  # @option opts [String] :batch_id Filter results by batches of coupons
-  # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
-  # @return [InlineResponse2004]
-  describe 'search_coupons_advanced_application_wide test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for search_coupons_advanced_application_wide_without_total_count
-  # Get a list of the coupons that match the given attributes in all active campaigns of an application
-  # Gets a list of all the coupons with attributes matching the query criteria in all active campaigns of an application 
-  # @param application_id 
+  # List coupons that match the given attributes (without total count)
+  # List the coupons whose attributes match the query criteria in all **active** campaigns of the given Application.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -1369,7 +1418,7 @@ describe 'ManagementApi' do
   # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-  # @option opts [String] :campaign_state Filter results by the state of the campaign.
+  # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
   # @return [InlineResponse2005]
   describe 'search_coupons_advanced_application_wide_without_total_count test' do
     it 'should work' do
@@ -1378,10 +1427,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for search_coupons_advanced_without_total_count
-  # Get a list of the coupons that match the given attributes
-  # Gets a list of all the coupons with attributes matching the query criteria 
-  # @param application_id 
-  # @param campaign_id 
+  # List coupons that match the given attributes in campaign (without total count)
+  # List the coupons whose attributes match the query criteria in the given campaign.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items to include in this response. When omitted, the maximum value of 1000 will be used.
@@ -1403,8 +1452,21 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for update_account_collection
+  # Update account-level collection description and connected Applications
+  # Edit the description of the account-level collection and enable or disable the collection in different Applications.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [Collection]
+  describe 'update_account_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for update_additional_cost
-  # Update an additional cost
+  # Update additional cost
   # Updates an existing additional cost. Once created, the only property of an additional cost that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. 
   # @param additional_cost_id 
   # @param body 
@@ -1417,7 +1479,7 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_attribute
-  # Update a custom attribute
+  # Update custom attribute
   # Updates an existing custom attribute. Once created, the only property of a custom attribute that can be changed is the title (human readable description). This restriction is in place to prevent accidentally breaking live integrations. E.g. if you have a customer profile attribute with the name &#x60;region&#x60;, and your integration is sending &#x60;attributes.region&#x60; with customer profile updates, changing the name to &#x60;locale&#x60; would cause the integration requests to begin failing.  If you **really** need to change the &#x60;type&#x60; or &#x60;name&#x60; property of a custom attribute, create a new attribute and update any relevant integrations and rules to use the new attribute. Then delete the old attribute when you are confident you have migrated any needed data from the old attribute to the new one. 
   # @param attribute_id 
   # @param body 
@@ -1430,9 +1492,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_campaign
-  # Update a Campaign
-  # @param application_id 
-  # @param campaign_id 
+  # Update campaign
+  # Update the given campaign.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [Campaign]
@@ -1442,10 +1505,26 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for update_collection
+  # Update collection description
+  # Edit the description of the collection.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param collection_id The ID of the collection. You can get it with the [List collection in account endpoint](#operation/listCollectionsInApplication).
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [Collection]
+  describe 'update_collection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for update_coupon
-  # Update a Coupon
-  # @param application_id 
-  # @param campaign_id 
+  # Update coupon
+  # Update the specified coupon.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param coupon_id The ID of the coupon code to update
   # @param body 
   # @param [Hash] opts the optional parameters
@@ -1457,9 +1536,10 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_coupon_batch
-  # Update a Batch of Coupons
-  # @param application_id 
-  # @param campaign_id 
+  # Update coupons
+  # Update all coupons of an campaign, or a specific batch of coupons. You can find the &#x60;batchId&#x60; in the **Coupons** view of your Application in the Campaign Manager or by using [List coupons](#operation/getCouponsWithoutTotalCount).  **Important**: - Only send sequential requests to this endpoint. - Requests to this endpoint timeout after 30 minutes. If you hit a timeout, reach out to our support team.  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -1470,28 +1550,15 @@ describe 'ManagementApi' do
   end
 
   # unit tests for update_referral
-  # Update one Referral
-  # @param application_id 
-  # @param campaign_id 
+  # Update referral
+  # Update the specified referral.
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param referral_id The ID of the referral code to delete
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [Referral]
   describe 'update_referral test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for update_ruleset
-  # Update a Ruleset
-  # @param application_id 
-  # @param campaign_id 
-  # @param ruleset_id 
-  # @param body 
-  # @param [Hash] opts the optional parameters
-  # @return [Ruleset]
-  describe 'update_ruleset test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

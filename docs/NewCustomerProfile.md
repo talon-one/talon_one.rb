@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewCustomerProfile.new(attributes: null)
+instance = TalonOne::NewCustomerProfile.new(attributes: {&quot;Language&quot;:&quot;english&quot;,&quot;ShippingCountry&quot;:&quot;DE&quot;})
 ```
 
 

@@ -19,9 +19,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::GiveawaysPool.new(id: null,
-                                 created: null,
-                                 account_id: null,
+instance = TalonOne::GiveawaysPool.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 account_id: 3886,
                                  name: null,
                                  description: null,
                                  subscribed_applications_ids: null,

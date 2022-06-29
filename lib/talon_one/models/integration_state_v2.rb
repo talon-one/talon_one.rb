@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -39,6 +39,10 @@ module TalonOne
 
     attr_accessor :awarded_giveaways
 
+    attr_accessor :_return
+
+    attr_accessor :previous_returns
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -53,7 +57,9 @@ module TalonOne
         :'rule_failure_reasons' => :'ruleFailureReasons',
         :'created_coupons' => :'createdCoupons',
         :'created_referrals' => :'createdReferrals',
-        :'awarded_giveaways' => :'awardedGiveaways'
+        :'awarded_giveaways' => :'awardedGiveaways',
+        :'_return' => :'return',
+        :'previous_returns' => :'previousReturns'
       }
     end
 
@@ -64,14 +70,16 @@ module TalonOne
         :'customer_profile' => :'CustomerProfile',
         :'event' => :'Event',
         :'loyalty' => :'Loyalty',
-        :'referral' => :'Referral',
+        :'referral' => :'InventoryReferral',
         :'coupons' => :'Array<Coupon>',
         :'triggered_campaigns' => :'Array<Campaign>',
         :'effects' => :'Array<Effect>',
         :'rule_failure_reasons' => :'Array<RuleFailureReason>',
         :'created_coupons' => :'Array<Coupon>',
         :'created_referrals' => :'Array<Referral>',
-        :'awarded_giveaways' => :'Array<Giveaway>'
+        :'awarded_giveaways' => :'Array<Giveaway>',
+        :'_return' => :'ModelReturn',
+        :'previous_returns' => :'Array<ModelReturn>'
       }
     end
 
@@ -157,6 +165,16 @@ module TalonOne
           self.awarded_giveaways = value
         end
       end
+
+      if attributes.key?(:'_return')
+        self._return = attributes[:'_return']
+      end
+
+      if attributes.key?(:'previous_returns')
+        if (value = attributes[:'previous_returns']).is_a?(Array)
+          self.previous_returns = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -203,7 +221,9 @@ module TalonOne
           rule_failure_reasons == o.rule_failure_reasons &&
           created_coupons == o.created_coupons &&
           created_referrals == o.created_referrals &&
-          awarded_giveaways == o.awarded_giveaways
+          awarded_giveaways == o.awarded_giveaways &&
+          _return == o._return &&
+          previous_returns == o.previous_returns
     end
 
     # @see the `==` method
@@ -215,7 +235,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_session, customer_profile, event, loyalty, referral, coupons, triggered_campaigns, effects, rule_failure_reasons, created_coupons, created_referrals, awarded_giveaways].hash
+      [customer_session, customer_profile, event, loyalty, referral, coupons, triggered_campaigns, effects, rule_failure_reasons, created_coupons, created_referrals, awarded_giveaways, _return, previous_returns].hash
     end
 
     # Builds the object from hash

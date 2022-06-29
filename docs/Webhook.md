@@ -21,9 +21,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Webhook.new(id: null,
-                                 created: null,
-                                 modified: null,
+instance = TalonOne::Webhook.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
+                                 modified: 2021-09-12T10:12:42Z,
                                  application_ids: null,
                                  title: null,
                                  verb: null,

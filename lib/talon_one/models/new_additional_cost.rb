@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -27,13 +27,39 @@ module TalonOne
     # A list of the IDs of the applications that are subscribed to this additional cost
     attr_accessor :subscribed_applications_ids
 
+    # The type of additional cost. The following options can be chosen: - `session`: Additional cost will be added per session, - `item`: Additional cost will be added per item, - `both`: Additional cost will be added per item and session. 
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'title' => :'title',
         :'description' => :'description',
-        :'subscribed_applications_ids' => :'subscribedApplicationsIds'
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds',
+        :'type' => :'type'
       }
     end
 
@@ -43,7 +69,8 @@ module TalonOne
         :'name' => :'String',
         :'title' => :'String',
         :'description' => :'String',
-        :'subscribed_applications_ids' => :'Array<Integer>'
+        :'subscribed_applications_ids' => :'Array<Integer>',
+        :'type' => :'String'
       }
     end
 
@@ -85,6 +112,12 @@ module TalonOne
           self.subscribed_applications_ids = value
         end
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = 'session'
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -95,8 +128,18 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      if @name !~ pattern
+        invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
+      end
+
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
+      if @title !~ pattern
+        invalid_properties.push("invalid value for \"title\", must conform to the pattern #{pattern}.")
       end
 
       if @description.nil?
@@ -110,9 +153,53 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @name.nil?
+      return false if @name !~ Regexp.new(/^[A-Za-z](\w|\s)*$/)
       return false if @title.nil?
+      return false if @title !~ Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
       return false if @description.nil?
+      type_validator = EnumAttributeValidator.new('String', ["session", "item", "both"])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      if name !~ pattern
+        fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
+      if title !~ pattern
+        fail ArgumentError, "invalid value for \"title\", must conform to the pattern #{pattern}."
+      end
+
+      @title = title
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["session", "item", "both"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -123,7 +210,8 @@ module TalonOne
           name == o.name &&
           title == o.title &&
           description == o.description &&
-          subscribed_applications_ids == o.subscribed_applications_ids
+          subscribed_applications_ids == o.subscribed_applications_ids &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -135,7 +223,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, title, description, subscribed_applications_ids].hash
+      [name, title, description, subscribed_applications_ids, type].hash
     end
 
     # Builds the object from hash

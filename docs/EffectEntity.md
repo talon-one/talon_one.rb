@@ -16,12 +16,12 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::EffectEntity.new(campaign_id: null,
-                                 ruleset_id: null,
-                                 rule_index: null,
-                                 rule_name: null,
-                                 effect_type: null,
-                                 triggered_by_coupon: null)
+instance = TalonOne::EffectEntity.new(campaign_id: 244,
+                                 ruleset_id: 73,
+                                 rule_index: 2,
+                                 rule_name: Give 20% discount,
+                                 effect_type: rejectCoupon,
+                                 triggered_by_coupon: 4928)
 ```
 
 

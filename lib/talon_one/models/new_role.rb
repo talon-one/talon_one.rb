@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#The Talon.One API is used to manage applications and campaigns, as well as to integrate with your application. The operations in the _Integration API_ section are used to integrate with our platform, while the other operations are used to manage applications and campaigns.  ### Where is the API?  The API is available at the same hostname as these docs. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerProfile][] operation is `https://mycompany.talon.one/v1/customer_profiles/id`  [updateCustomerProfile]: #operation--v1-customer_profiles--integrationId--put 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you are reading this page at `https://mycompany.talon.one/docs/api/`, the URL for the [updateCustomerSession](https://docs.talon.one/integration-api/#operation/updateCustomerSessionV2) endpoint is `https://mycompany.talon.one/v2/customer_sessions/{Id}` 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -25,7 +25,7 @@ module TalonOne
     attr_accessor :acl
 
     # An array of user identifiers
-    attr_accessor :users
+    attr_accessor :members
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -33,7 +33,7 @@ module TalonOne
         :'name' => :'name',
         :'description' => :'description',
         :'acl' => :'acl',
-        :'users' => :'users'
+        :'members' => :'members'
       }
     end
 
@@ -43,7 +43,7 @@ module TalonOne
         :'name' => :'String',
         :'description' => :'String',
         :'acl' => :'String',
-        :'users' => :'Array<Integer>'
+        :'members' => :'Array<Integer>'
       }
     end
 
@@ -80,9 +80,9 @@ module TalonOne
         self.acl = attributes[:'acl']
       end
 
-      if attributes.key?(:'users')
-        if (value = attributes[:'users']).is_a?(Array)
-          self.users = value
+      if attributes.key?(:'members')
+        if (value = attributes[:'members']).is_a?(Array)
+          self.members = value
         end
       end
     end
@@ -99,8 +99,8 @@ module TalonOne
         invalid_properties.push('invalid value for "acl", acl cannot be nil.')
       end
 
-      if @users.nil?
-        invalid_properties.push('invalid value for "users", users cannot be nil.')
+      if @members.nil?
+        invalid_properties.push('invalid value for "members", members cannot be nil.')
       end
 
       invalid_properties
@@ -111,7 +111,7 @@ module TalonOne
     def valid?
       return false if @name.nil?
       return false if @acl.nil?
-      return false if @users.nil?
+      return false if @members.nil?
       true
     end
 
@@ -123,7 +123,7 @@ module TalonOne
           name == o.name &&
           description == o.description &&
           acl == o.acl &&
-          users == o.users
+          members == o.members
     end
 
     # @see the `==` method
@@ -135,7 +135,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, acl, users].hash
+      [name, description, acl, members].hash
     end
 
     # Builds the object from hash

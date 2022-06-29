@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **start_date** | **DateTime** | Timestamp at which point the giveaway becomes valid. | [optional] 
 **end_date** | **DateTime** | Timestamp at which point the giveaway becomes invalid. | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this giveaway. | [optional] 
-**used** | **Boolean** | Flag indicating whether this giveaway code was given before. | [optional] 
+**used** | **Boolean** | Indicates whether this giveaway code was given before. | [optional] 
 **import_id** | **Integer** | The ID of the Import which created this giveaway. | [optional] 
 
 ## Code Sample
@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::Giveaway.new(id: null,
-                                 created: null,
+instance = TalonOne::Giveaway.new(id: 6,
+                                 created: 2020-06-10T09:05:27.993483Z,
                                  code: null,
                                  pool_id: null,
                                  start_date: null,
