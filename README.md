@@ -78,7 +78,7 @@ require 'talon_one'
 TalonOne.configure do |config|
   # Configure the API host destination
   config.host = 'mycompany.talon.one'
-
+  config.scheme = 'https'
   # Configure API key authorization: api_key_v1
   config.api_key['Authorization'] = 'ca1890f0ec3bfa8ed4be04e2aec0c606c0df8ad464f17d3ea8b51df12ba60e5d'
   config.api_key_prefix['Authorization'] = 'ApiKey-v1'
@@ -169,6 +169,7 @@ require 'talon_one'
 TalonOne.configure do |config|
   # Configure the API host destination
   config.host = 'mycompany.talon.one'
+  config.scheme = 'https'
 end
 
 # Management API example to load application with id 7
