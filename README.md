@@ -167,7 +167,7 @@ require 'talon_one'
 
 # Setup authorization
 TalonOne.configure do |config|
-  # Configure the API host destination
+  # Configure the API host destination and set scheme to HTTPS
   config.host = 'mycompany.talon.one'
   config.scheme = 'https'
 end
