@@ -76,7 +76,8 @@ require 'talon_one'
 
 # Setup authorization
 TalonOne.configure do |config|
-  # Configure the API host destination
+  # Configure the API host destination while explicitly using HTTPS as the default is HTTP.
+  config.scheme = 'https'
   config.host = 'yourbaseurl.talon.one'
 
   # Configure API key authorization: api_key_v1
@@ -167,7 +168,8 @@ require 'talon_one'
 
 # Setup authorization
 TalonOne.configure do |config|
-  # Configure the API host destination
+  # Configure the API host destination and set scheme to HTTPS
+  config.scheme = 'https'
   config.host = 'yourbaseurl.talon.one'
 
   # Configure API key authorization: management_key
