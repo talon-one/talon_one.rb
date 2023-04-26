@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attributes** | [**Object**](.md) | Arbitrary properties associated with this item | [optional] 
+**attributes** | [**Object**](.md) | Arbitrary properties associated with this item. | [optional] 
 **batch_id** | **String** | The id of the batch the referral belongs to. | 
 **start_date** | **DateTime** | Timestamp at which point the referral code becomes valid. | [optional] 
-**expiry_date** | **DateTime** | Expiry date of the referral code. Referral never expires if this is omitted, zero, or negative. | [optional] 
+**expiry_date** | **DateTime** | Expiration date of the referral code. Referral never expires if this is omitted, zero, or negative. | [optional] 
 **usage_limit** | **Integer** | The number of times a referral code can be used. This can be set to 0 for no limit, but any campaign usage limits will still apply.  | [optional] 
 
 ## Code Sample

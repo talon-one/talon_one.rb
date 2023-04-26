@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **Integer** | The ID of the account that owns this entity. | 
+**user_id** | **Integer** | The ID of the user associated with this entity. | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::UserEntity.new(user_id: null)
+instance = TalonOne::UserEntity.new(user_id: 388)
 ```
 
 

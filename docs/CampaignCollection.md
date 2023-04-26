@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 
-**modified** | **DateTime** | The exact moment this entity was last modified. | 
+**modified** | **DateTime** | The time this entity was last modified. | 
 **description** | **String** | A short description of the purpose of this collection. | [optional] 
 **name** | **String** | The name of this collection. | 
 **modified_by** | **Integer** | ID of the user who last updated this effect if available. | [optional] 

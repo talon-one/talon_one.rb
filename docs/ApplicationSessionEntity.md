@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ApplicationSessionEntity.new(session_id: null)
+instance = TalonOne::ApplicationSessionEntity.new(session_id: 2)
 ```
 
 

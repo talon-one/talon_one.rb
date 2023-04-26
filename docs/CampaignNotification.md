@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignNotification.new(event: null)
+instance = TalonOne::CampaignNotification.new(event: campaign_state_changed)
 ```
 
 

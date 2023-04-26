@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | **Array&lt;String&gt;** |  | 
+**data** | [**Array&lt;CampaignAnalytics&gt;**](CampaignAnalytics.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20019.new(total_result_size: null,
+instance = TalonOne::InlineResponse20019.new(total_result_size: 1,
                                  data: null)
 ```
 

@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ProfileAudiencesChanges.new(adds: null,
-                                 deletes: null)
+instance = TalonOne::ProfileAudiencesChanges.new(adds: [2, 4],
+                                 deletes: [7])
 ```
 
 

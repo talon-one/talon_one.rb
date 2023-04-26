@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyDashboardPointsBreakdown.new(created_manually: null,
-                                 created_via_rule_engine: null)
+instance = TalonOne::LoyaltyDashboardPointsBreakdown.new(created_manually: 125.0,
+                                 created_via_rule_engine: 9631.0)
 ```
 
 

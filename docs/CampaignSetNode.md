@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignSetNode.new(type: null)
+instance = TalonOne::CampaignSetNode.new(type: type)
 ```
 
 

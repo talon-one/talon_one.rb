@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 
-**modified** | **DateTime** | The exact moment this entity was last modified. | 
+**modified** | **DateTime** | The time this entity was last modified. | 
 **description** | **String** | A short description of the purpose of this collection. | [optional] 
 **subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the Applications where this collection is enabled. | [optional] 
 **name** | **String** | The name of this collection. | 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | [optional] 
 **has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;Change&gt;**](Change.md) |  | 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;ApplicationReferee&gt;**](ApplicationReferee.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20029.new(total_result_size: null,
-                                 has_more: null,
+instance = TalonOne::InlineResponse20029.new(has_more: null,
+                                 total_result_size: 1,
                                  data: null)
 ```
 

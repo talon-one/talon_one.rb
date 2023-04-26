@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **campaign** | [**Campaign**](Campaign.md) |  | 
 **old_ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
-**ruleset** | [**Ruleset**](Ruleset.md) |  | 
+**ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
 
 ## Code Sample
 

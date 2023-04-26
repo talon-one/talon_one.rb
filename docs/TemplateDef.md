@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 **application_id** | **Integer** | The ID of the application that owns this entity. | 
 **title** | **String** | Campaigner-friendly name for the template that will be shown in the rule editor. | 
 **description** | **String** | A short description of the template that will be shown in the rule editor. | 

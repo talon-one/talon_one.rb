@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 
 ## Code Sample
 

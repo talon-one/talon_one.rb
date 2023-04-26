@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**integration_states** | [**Array&lt;IntegrationStateV2&gt;**](IntegrationStateV2.md) |  | [optional] 
+**integration_states** | [**Array&lt;CustomerProfileUpdateV2Response&gt;**](CustomerProfileUpdateV2Response.md) |  | [optional] 
 
 ## Code Sample
 

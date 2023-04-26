@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application** | [**Application**](Application.md) |  | 
-**old_priorities** | **Hash&lt;String, Array&lt;Integer&gt;&gt;** | Campaign IDs for each priority. The priority can be one of: [&#39;universal&#39;, &#39;stackable&#39;, &#39;exclusive&#39;]  | [optional] 
-**priorities** | **Hash&lt;String, Array&lt;Integer&gt;&gt;** | Campaign IDs for each priority. The priority can be one of: [&#39;universal&#39;, &#39;stackable&#39;, &#39;exclusive&#39;]  | 
+**application_id** | **Integer** | The ID of the Application whose campaigns&#39; priorities changed. | 
+**old_priorities** | [**CampaignSet**](CampaignSet.md) |  | [optional] 
+**priorities** | [**CampaignSet**](CampaignSet.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignPrioritiesChangedNotification.new(application: null,
+instance = TalonOne::CampaignPrioritiesChangedNotification.new(application_id: 78,
                                  old_priorities: null,
                                  priorities: null)
 ```

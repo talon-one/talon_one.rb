@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | 
-**total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;ApplicationReferee&gt;**](ApplicationReferee.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;ApplicationCustomer&gt;**](ApplicationCustomer.md) |  | 
 
 ## Code Sample
 

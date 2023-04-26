@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyCardRegistration.new(integration_id: my_customer_profile)
+instance = TalonOne::LoyaltyCardRegistration.new(integration_id: R195412)
 ```
 
 

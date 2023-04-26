@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;WebhookActivationLogEntry&gt;**](WebhookActivationLogEntry.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**data** | [**Array&lt;ApplicationSession&gt;**](ApplicationSession.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20025.new(total_result_size: null,
+instance = TalonOne::InlineResponse20025.new(has_more: null,
                                  data: null)
 ```
 

@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AwardGiveawayEffectProps.new(pool_id: null,
-                                 pool_name: null,
-                                 recipient_integration_id: null,
-                                 giveaway_id: null,
-                                 code: null)
+instance = TalonOne::AwardGiveawayEffectProps.new(pool_id: 2,
+                                 pool_name: My pool,
+                                 recipient_integration_id: URNGV8294NV,
+                                 giveaway_id: 5,
+                                 code: 57638t-67439hty)
 ```
 
 

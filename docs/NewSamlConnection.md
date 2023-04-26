@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::NewSamlConnection.new(x509certificate: null,
-                                 account_id: null,
+                                 account_id: 3885,
                                  name: null,
                                  enabled: null,
                                  issuer: null,

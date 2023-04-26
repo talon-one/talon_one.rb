@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewPassword.new(password: null,
-                                 reset_token: null)
+instance = TalonOne::NewPassword.new(password: Admin&amp;12943!7,
+                                 reset_token: Z2VgacVNkexLKBUIzsRDDZSGxnIkC53y)
 ```
 
 

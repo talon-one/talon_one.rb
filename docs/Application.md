@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
-**modified** | **DateTime** | The exact moment this entity was last modified. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
+**modified** | **DateTime** | The time this entity was last modified. | 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 
 **name** | **String** | The name of this application. | 
 **description** | **String** | A longer description of the application. | [optional] 
@@ -19,12 +19,12 @@ Name | Type | Description | Notes
 **exclusive_campaigns_strategy** | **String** | The strategy used when choosing exclusive campaigns for evaluation. | [optional] [default to &#39;listOrder&#39;]
 **default_discount_scope** | **String** | The default scope to apply &#x60;setDiscount&#x60; effects on if no scope was provided with the effect.  | [optional] 
 **enable_cascading_discounts** | **Boolean** | Indicates if discounts should cascade for this Application. | [optional] 
-**enable_flattened_cart_items** | **Boolean** | Indicates if cart items of quantity larger than one should be separated into different items of quantity one. See [the docs](https://docs.talon.one/docs/product/campaigns/campaign-evaluation/#flattened-cart-items).  | [optional] 
+**enable_flattened_cart_items** | **Boolean** | Indicates if cart items of quantity larger than one should be separated into different items of quantity one. See the [docs](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening).  | [optional] 
 **attributes_settings** | [**AttributesSettings**](AttributesSettings.md) |  | [optional] 
 **sandbox** | **Boolean** | Indicates if this is a live or sandbox Application. | [optional] 
 **enable_partial_discounts** | **Boolean** | Indicates if this Application supports partial discounts. | [optional] 
 **default_discount_additional_cost_per_item_scope** | **String** | The default scope to apply &#x60;setDiscountPerItem&#x60; effects on if no scope was provided with the effect.  | [optional] 
-**loyalty_programs** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) | An array containing all the loyalty programs to which this application is subscribed | 
+**loyalty_programs** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) | An array containing all the loyalty programs to which this application is subscribed. | 
 
 ## Code Sample
 
@@ -39,18 +39,18 @@ instance = TalonOne::Application.new(id: 6,
                                  description: A test Application,
                                  timezone: Europe/Berlin,
                                  currency: EUR,
-                                 case_sensitivity: null,
+                                 case_sensitivity: sensitive,
                                  attributes: null,
                                  limits: null,
-                                 campaign_priority: null,
-                                 exclusive_campaigns_strategy: null,
-                                 default_discount_scope: null,
-                                 enable_cascading_discounts: null,
-                                 enable_flattened_cart_items: null,
+                                 campaign_priority: universal,
+                                 exclusive_campaigns_strategy: listOrder,
+                                 default_discount_scope: sessionTotal,
+                                 enable_cascading_discounts: true,
+                                 enable_flattened_cart_items: true,
                                  attributes_settings: null,
-                                 sandbox: null,
+                                 sandbox: true,
                                  enable_partial_discounts: false,
-                                 default_discount_additional_cost_per_item_scope: null,
+                                 default_discount_additional_cost_per_item_scope: price,
                                  loyalty_programs: null)
 ```
 

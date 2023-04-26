@@ -14,24 +14,28 @@ Name | Type | Description | Notes
 **has_allowed_list** | **Boolean** | Whether or not this attribute has an allowed list of values associated with it. | [optional] [default to false]
 **restricted_by_suggestions** | **Boolean** | Whether or not this attribute&#39;s value is restricted by suggestions (&#x60;suggestions&#x60; property) or by an allowed list of value (&#x60;hasAllowedList&#x60; property).  | [optional] [default to false]
 **editable** | **Boolean** | Whether or not this attribute can be edited. | 
-**subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the applications that are subscribed to this attribute | [optional] 
+**subscribed_applications_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the applications where this attribute is available. | [optional] 
+**subscribed_catalogs_ids** | **Array&lt;Integer&gt;** | A list of the IDs of the catalogs where this attribute is available. | [optional] 
+**allowed_subscriptions** | **Array&lt;String&gt;** | A list of allowed subscription types for this attribute.  **Note:** This only applies to attributes associated with the &#x60;CartItem&#x60; entity.  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewAttribute.new(entity: null,
-                                 event_type: null,
-                                 name: null,
-                                 title: null,
-                                 type: null,
-                                 description: null,
+instance = TalonOne::NewAttribute.new(entity: Event,
+                                 event_type: pageViewed,
+                                 name: pageViewed,
+                                 title: Page view event,
+                                 type: string,
+                                 description: Event triggered when a customer displays a page.,
                                  suggestions: null,
-                                 has_allowed_list: null,
-                                 restricted_by_suggestions: null,
-                                 editable: null,
-                                 subscribed_applications_ids: null)
+                                 has_allowed_list: false,
+                                 restricted_by_suggestions: false,
+                                 editable: true,
+                                 subscribed_applications_ids: [1, 4, 9],
+                                 subscribed_catalogs_ids: [2, 5],
+                                 allowed_subscriptions: [application, catalog])
 ```
 
 

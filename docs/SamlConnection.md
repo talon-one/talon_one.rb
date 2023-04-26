@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **sign_out_url** | **String** | Single Sign-Out URL. | [optional] 
 **metadata_url** | **String** | Metadata URL. | [optional] 
 **audience_uri** | **String** | The application-defined unique identifier that is the intended audience of the SAML assertion. This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used.  | 
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 
 ## Code Sample
 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::SamlConnection.new(assertion_consumer_service_url: null,
-                                 account_id: null,
+                                 account_id: 3885,
                                  name: null,
                                  enabled: null,
                                  issuer: null,

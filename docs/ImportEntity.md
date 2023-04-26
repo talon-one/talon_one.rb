@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ImportEntity.new(import_id: null)
+instance = TalonOne::ImportEntity.new(import_id: 4)
 ```
 
 
