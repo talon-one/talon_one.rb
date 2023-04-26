@@ -20,12 +20,12 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::LoyaltyStatistics.new(date: null,
-                                 total_active_points: null,
-                                 total_pending_points: null,
-                                 total_spent_points: null,
-                                 total_expired_points: null,
-                                 total_members: null,
-                                 new_members: null,
+                                 total_active_points: 9756.0,
+                                 total_pending_points: 548.0,
+                                 total_spent_points: 25668.0,
+                                 total_expired_points: 1156.0,
+                                 total_members: 2582.0,
+                                 new_members: 3.0,
                                  spent_points: null,
                                  earned_points: null)
 ```

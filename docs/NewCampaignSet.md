@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **application_id** | **Integer** | The ID of the application that owns this entity. | 
-**version** | **Integer** | Version of the campaign set | 
+**version** | **Integer** | Version of the campaign set. | 
 **set** | [**CampaignSetBranchNode**](CampaignSetBranchNode.md) |  | 
 
 ## Code Sample
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::NewCampaignSet.new(application_id: 322,
-                                 version: null,
+                                 version: 2,
                                  set: null)
 ```
 

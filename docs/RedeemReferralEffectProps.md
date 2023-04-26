@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | The id of the referral code that was redeemed | 
-**value** | **String** | The referral code that was redeemed | 
+**id** | **Integer** | The id of the referral code that was redeemed. | 
+**value** | **String** | The referral code that was redeemed. | 
 
 ## Code Sample
 

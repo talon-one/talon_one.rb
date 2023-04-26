@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **String** | API url for this notification webhook | 
-**headers** | **Array&lt;String&gt;** | List of API HTTP headers for this notification webhook | 
+**url** | **String** | API URL for the given webhook-based notification. | 
+**headers** | **Array&lt;String&gt;** | List of API HTTP headers for the given webhook-based notification. | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewNotificationWebhook.new(url: null,
-                                 headers: null)
+instance = TalonOne::NewNotificationWebhook.new(url: www.my-company.com/my-endpoint-name,
+                                 headers: content-type: application/json)
 ```
 
 

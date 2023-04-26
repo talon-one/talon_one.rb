@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::WillAwardGiveawayEffectProps.new(pool_id: null,
-                                 pool_name: null,
-                                 recipient_integration_id: null)
+instance = TalonOne::WillAwardGiveawayEffectProps.new(pool_id: 2,
+                                 pool_name: My pool,
+                                 recipient_integration_id: URNGV8294NV)
 ```
 
 

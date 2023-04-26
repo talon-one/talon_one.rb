@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role_id** | **Integer** | ID of role | 
-**user_id** | **Integer** | ID of User | 
+**role_id** | **Integer** | ID of role. | 
+**user_id** | **Integer** | ID of User. | 
 
 ## Code Sample
 

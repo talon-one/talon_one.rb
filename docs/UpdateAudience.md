@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::UpdateAudience.new(name: mPTravel)
+instance = TalonOne::UpdateAudience.new(name: Travel audience)
 ```
 
 

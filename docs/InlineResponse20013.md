@@ -4,17 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | [optional] 
-**has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;ApplicationCustomer&gt;**](ApplicationCustomer.md) |  | 
+**has_more** | **Boolean** | true means there is more data in the source collection to request.. | 
+**data** | [**Array&lt;CardLedgerTransactionLogEntry&gt;**](CardLedgerTransactionLogEntry.md) | List of loyalty card transaction logs. | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20013.new(total_result_size: null,
-                                 has_more: null,
+instance = TalonOne::InlineResponse20013.new(has_more: true,
                                  data: null)
 ```
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Unique ID for this entity. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**id** | **Integer** | Internal ID of this entity. | 
+**created** | **DateTime** | The time this entity was created. | 
 **program_id** | **Integer** | The ID of the loyalty program that owns this entity. | 
 **name** | **String** | The name of the tier | 
-**min_points** | **Float** | The minimum amount of points required to be eligible for the tier | 
+**min_points** | **Float** | The minimum amount of points required to be eligible for the tier. | 
 
 ## Code Sample
 

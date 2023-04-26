@@ -15,7 +15,7 @@ require 'TalonOne'
 
 instance = TalonOne::ReferralRejectionReason.new(campaign_id: null,
                                  referral_id: null,
-                                 reason: null)
+                                 reason: ReferralNotFound)
 ```
 
 

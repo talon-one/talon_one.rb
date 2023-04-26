@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**modified** | **DateTime** | The exact moment this entity was last modified. | 
+**modified** | **DateTime** | The time this entity was last modified. | 
 
 ## Code Sample
 

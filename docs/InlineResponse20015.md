@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;CustomerProfile&gt;**](CustomerProfile.md) |  | 
+**data** | [**Array&lt;CollectionItem&gt;**](CollectionItem.md) |  | 
 
 ## Code Sample
 

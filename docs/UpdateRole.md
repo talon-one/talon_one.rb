@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | Name of the role | [optional] 
-**description** | **String** | Description of the role | [optional] 
-**acl** | **String** | Role Policy this should be a stringified blob of json | [optional] 
-**members** | **Array&lt;Integer&gt;** | An array of user identifiers | [optional] 
+**name** | **String** | Name of the role. | [optional] 
+**description** | **String** | Description of the role. | [optional] 
+**acl** | **String** | The &#x60;Access Control List&#x60; json defining the role of the user. This represents the access control on the user level. | [optional] 
+**members** | **Array&lt;Integer&gt;** | An array of user identifiers. | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::UpdateRole.new(name: null,
-                                 description: null,
-                                 acl: null,
-                                 members: null)
+instance = TalonOne::UpdateRole.new(name: Campaign Manager,
+                                 description: Manages the campaigns,
+                                 acl: ,
+                                 members: [48, 562, 475, 18])
 ```
 
 

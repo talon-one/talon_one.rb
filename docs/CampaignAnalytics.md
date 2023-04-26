@@ -35,9 +35,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignAnalytics.new(date: null,
-                                 campaign_revenue: null,
-                                 total_campaign_revenue: null,
+instance = TalonOne::CampaignAnalytics.new(date: 2021-10-12T10:12:42Z,
+                                 campaign_revenue: 3539.76,
+                                 total_campaign_revenue: 5784.63,
                                  campaign_refund: null,
                                  total_campaign_refund: null,
                                  campaign_discount_costs: null,
@@ -45,7 +45,7 @@ instance = TalonOne::CampaignAnalytics.new(date: null,
                                  campaign_refunded_discounts: null,
                                  total_campaign_refunded_discounts: null,
                                  campaign_free_items: null,
-                                 total_campaign_free_items: null,
+                                 total_campaign_free_items: 86,
                                  coupon_redemptions: null,
                                  total_coupon_redemptions: null,
                                  coupon_rolledback_redemptions: null,
@@ -56,10 +56,10 @@ instance = TalonOne::CampaignAnalytics.new(date: null,
                                  total_coupons_created: null,
                                  referrals_created: null,
                                  total_referrals_created: null,
-                                 added_loyalty_points: null,
-                                 total_added_loyalty_points: null,
-                                 deducted_loyalty_points: null,
-                                 total_deducted_loyalty_points: null)
+                                 added_loyalty_points: 250.0,
+                                 total_added_loyalty_points: 340.0,
+                                 deducted_loyalty_points: 120.0,
+                                 total_deducted_loyalty_points: 220.0)
 ```
 
 

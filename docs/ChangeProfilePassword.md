@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::ChangeProfilePassword.new(password: null,
-                                 new_password: null)
+instance = TalonOne::ChangeProfilePassword.new(password: Admin&amp;12943!7,
+                                 new_password: Admin*4552$70)
 ```
 
 

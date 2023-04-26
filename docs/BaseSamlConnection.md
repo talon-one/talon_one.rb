@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::BaseSamlConnection.new(account_id: null,
+instance = TalonOne::BaseSamlConnection.new(account_id: 3885,
                                  name: null,
                                  enabled: null,
                                  issuer: null,

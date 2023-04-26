@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse201.new(total_result_size: null,
+instance = TalonOne::InlineResponse201.new(total_result_size: 1,
                                  data: null)
 ```
 

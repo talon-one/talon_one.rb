@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::AudienceMembership.new(id: null,
-                                 name: null)
+instance = TalonOne::AudienceMembership.new(id: 2,
+                                 name: Travel audience)
 ```
 
 

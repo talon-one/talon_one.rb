@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The name/description of this discount | 
-**additional_cost_id** | **Integer** | The ID of the additional cost | 
-**additional_cost** | **String** | The name of the additional cost | 
-**value** | **Float** | The total monetary value of the discount | 
-**desired_value** | **Float** | The original value of the discount | [optional] 
+**name** | **String** | The name / description of this discount | 
+**additional_cost_id** | **Integer** | The ID of the additional cost. | 
+**additional_cost** | **String** | The name of the additional cost. | 
+**value** | **Float** | The total monetary value of the discount. | 
+**desired_value** | **Float** | The original value of the discount. | [optional] 
 
 ## Code Sample
 

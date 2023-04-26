@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**returned_cart_items** | [**Array&lt;ReturnedCartItem&gt;**](ReturnedCartItem.md) | List of cart items to be returned | 
+**returned_cart_items** | [**Array&lt;ReturnedCartItem&gt;**](ReturnedCartItem.md) | List of cart items to be returned. | 
 
 ## Code Sample
 

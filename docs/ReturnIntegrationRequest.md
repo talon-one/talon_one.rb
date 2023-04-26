@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_return** | [**NewReturn**](NewReturn.md) |  | 
-**response_content** | **Array&lt;String&gt;** | Optional list of requested information to be present on the response related to the return request.  | [optional] 
+**response_content** | **Array&lt;String&gt;** | Extends the response with the chosen data entities. Use this property to get as much data as you need in one _Update customer session_ request instead of sending extra requests to other endpoints.  | [optional] 
 
 ## Code Sample
 

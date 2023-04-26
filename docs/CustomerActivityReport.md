@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**integration_id** | **String** | The integration ID for this entity sent to and used in the Talon.One system. | 
-**created** | **DateTime** | The exact moment this entity was created. | 
+**integration_id** | **String** | The integration ID set by your integration layer. | 
+**created** | **DateTime** | The time this entity was created. | 
 **name** | **String** | The name for this customer profile. | 
 **customer_id** | **Integer** | The internal Talon.One ID of the customer. | 
 **last_activity** | **DateTime** | The last activity of the customer. | [optional] 
