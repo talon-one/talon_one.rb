@@ -13,7 +13,7 @@ manage applications and campaigns.
 ## Determining the base URL of the endpoints
 
 The API is available at the same hostname as your Campaign Manager deployment.
-For example, if you are reading this page at `https://yourbaseurl.talon.one/docs/api/`,
+For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`,
 the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint
 is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`
 
