@@ -30,7 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'has_more' => :'Boolean',
-        :'data' => :'Array<CampaignTemplate>'
+        :'data' => :'Array<Referral>'
       }
     end
 

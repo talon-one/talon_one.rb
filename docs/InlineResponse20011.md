@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | 
-**data** | [**Array&lt;LoyaltyProgramTransaction&gt;**](LoyaltyProgramTransaction.md) |  | 
+**total_result_size** | **Integer** |  | 
+**data** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20011.new(has_more: true,
+instance = TalonOne::InlineResponse20011.new(total_result_size: 1,
                                  data: null)
 ```
 

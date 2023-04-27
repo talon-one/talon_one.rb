@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;NotificationWebhook&gt;**](NotificationWebhook.md) |  | 
+**data** | [**Array&lt;Campaign&gt;**](Campaign.md) |  | 
 
 ## Code Sample
 

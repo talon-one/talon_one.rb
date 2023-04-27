@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
+**data** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | 
 
 ## Code Sample
 

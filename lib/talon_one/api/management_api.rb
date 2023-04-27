@@ -19,26 +19,26 @@ module TalonOne
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add points to card in a given loyalty program
+    # Add points to card
     # Add points to the given loyalty card in the specified card-based loyalty program. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [AddLoyaltyPoints] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def add_loyalty_card_points(loyalty_program_id, loyalty_card_identifier, body, opts = {})
-      add_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts)
+    def add_loyalty_card_points(loyalty_program_id, loyalty_card_id, body, opts = {})
+      add_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, body, opts)
       nil
     end
 
-    # Add points to card in a given loyalty program
+    # Add points to card
     # Add points to the given loyalty card in the specified card-based loyalty program. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [AddLoyaltyPoints] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def add_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts = {})
+    def add_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.add_loyalty_card_points ...'
       end
@@ -46,12 +46,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.add_loyalty_card_points"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.add_loyalty_card_points"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.add_loyalty_card_points"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.add_loyalty_card_points, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.add_loyalty_card_points, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'body' is set
@@ -59,7 +59,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.add_loyalty_card_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/add_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/add_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -181,7 +181,7 @@ module TalonOne
     # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignCopy] body
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2004]
     def copy_campaign_to_applications(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = copy_campaign_to_applications_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -193,7 +193,7 @@ module TalonOne
     # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param body [CampaignCopy] body
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def copy_campaign_to_applications_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.copy_campaign_to_applications ...'
@@ -230,7 +230,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -596,7 +596,7 @@ module TalonOne
     # @param body [NewCoupons] body
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
-    # @return [InlineResponse2006]
+    # @return [InlineResponse2007]
     def create_coupons(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = create_coupons_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -609,7 +609,7 @@ module TalonOne
     # @param body [NewCoupons] body
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
-    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
+    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
     def create_coupons_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.create_coupons ...'
@@ -647,7 +647,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2006' 
+      return_type = opts[:return_type] || 'InlineResponse2007' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -751,7 +751,7 @@ module TalonOne
     # @param body [NewCouponsForMultipleRecipients] body
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
-    # @return [InlineResponse2006]
+    # @return [InlineResponse2007]
     def create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = create_coupons_for_multiple_recipients_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -764,7 +764,7 @@ module TalonOne
     # @param body [NewCouponsForMultipleRecipients] body
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
-    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
+    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
     def create_coupons_for_multiple_recipients_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.create_coupons_for_multiple_recipients ...'
@@ -802,7 +802,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2006' 
+      return_type = opts[:return_type] || 'InlineResponse2007' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -1021,26 +1021,26 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Deduct points from card in a given loyalty program.
+    # Deduct points from card
     # Deduct points from the given loyalty card in the specified card-based loyalty program. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [DeductLoyaltyPoints] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def deduct_loyalty_card_points(loyalty_program_id, loyalty_card_identifier, body, opts = {})
-      deduct_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts)
+    def deduct_loyalty_card_points(loyalty_program_id, loyalty_card_id, body, opts = {})
+      deduct_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, body, opts)
       nil
     end
 
-    # Deduct points from card in a given loyalty program.
+    # Deduct points from card
     # Deduct points from the given loyalty card in the specified card-based loyalty program. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [DeductLoyaltyPoints] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def deduct_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts = {})
+    def deduct_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.deduct_loyalty_card_points ...'
       end
@@ -1048,12 +1048,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.deduct_loyalty_card_points"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.deduct_loyalty_card_points"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.deduct_loyalty_card_points"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.deduct_loyalty_card_points, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.deduct_loyalty_card_points, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'body' is set
@@ -1061,7 +1061,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.deduct_loyalty_card_points"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/deduct_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/deduct_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1491,21 +1491,21 @@ module TalonOne
     # Delete loyalty card
     # Delete the given loyalty card.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def delete_loyalty_card(loyalty_program_id, loyalty_card_identifier, opts = {})
-      delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+    def delete_loyalty_card(loyalty_program_id, loyalty_card_id, opts = {})
+      delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       nil
     end
 
     # Delete loyalty card
     # Delete the given loyalty card.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+    def delete_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.delete_loyalty_card ...'
       end
@@ -1513,16 +1513,16 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.delete_loyalty_card"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.delete_loyalty_card"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.delete_loyalty_card"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.delete_loyalty_card, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.delete_loyalty_card, the character length must be smaller than or equal to 108.'
       end
 
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -2298,7 +2298,7 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export loyalty card transaction logs to CSV
+    # Export all card transaction logs
     # Download a CSV file containing the balances of all cards in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns: - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subdleger, when applicatble. - `cardIdentifier`: The alphanumeric identifier of the loyalty card. - `cardState`:The state of the loyalty card. It can be `active` or `inactive`. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
     # @param [Hash] opts the optional parameters
@@ -2309,7 +2309,7 @@ module TalonOne
       data
     end
 
-    # Export loyalty card transaction logs to CSV
+    # Export all card transaction logs
     # Download a CSV file containing the balances of all cards in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns: - &#x60;loyaltyProgramID&#x60;: The ID of the loyalty program. - &#x60;loyaltySubledger&#x60;: The name of the subdleger, when applicatble. - &#x60;cardIdentifier&#x60;: The alphanumeric identifier of the loyalty card. - &#x60;cardState&#x60;:The state of the loyalty card. It can be &#x60;active&#x60; or &#x60;inactive&#x60;. - &#x60;currentBalance&#x60;: The current point balance. - &#x60;pendingBalance&#x60;: The number of pending points. - &#x60;expiredBalance&#x60;: The number of expired points. - &#x60;spentBalance&#x60;: The number of spent points. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
     # @param [Hash] opts the optional parameters
@@ -2363,30 +2363,30 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Export a loyalty card ledger log
+    # Export card's ledger log
     # Download a CSV file containing a loyalty card ledger log of the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param range_start [DateTime] Only return results from after this timestamp. This must be an RFC3339 timestamp string.
     # @param range_end [DateTime] Only return results from before this timestamp. This must be an RFC3339 timestamp string.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :date_format Determines the format of dates in the export document.
     # @return [String]
-    def export_loyalty_card_ledger(loyalty_program_id, loyalty_card_identifier, range_start, range_end, opts = {})
-      data, _status_code, _headers = export_loyalty_card_ledger_with_http_info(loyalty_program_id, loyalty_card_identifier, range_start, range_end, opts)
+    def export_loyalty_card_ledger(loyalty_program_id, loyalty_card_id, range_start, range_end, opts = {})
+      data, _status_code, _headers = export_loyalty_card_ledger_with_http_info(loyalty_program_id, loyalty_card_id, range_start, range_end, opts)
       data
     end
 
-    # Export a loyalty card ledger log
+    # Export card&#39;s ledger log
     # Download a CSV file containing a loyalty card ledger log of the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param range_start [DateTime] Only return results from after this timestamp. This must be an RFC3339 timestamp string.
     # @param range_end [DateTime] Only return results from before this timestamp. This must be an RFC3339 timestamp string.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :date_format Determines the format of dates in the export document.
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
-    def export_loyalty_card_ledger_with_http_info(loyalty_program_id, loyalty_card_identifier, range_start, range_end, opts = {})
+    def export_loyalty_card_ledger_with_http_info(loyalty_program_id, loyalty_card_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.export_loyalty_card_ledger ...'
       end
@@ -2394,12 +2394,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.export_loyalty_card_ledger"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.export_loyalty_card_ledger"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.export_loyalty_card_ledger"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.export_loyalty_card_ledger, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.export_loyalty_card_ledger, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'range_start' is set
@@ -2415,7 +2415,7 @@ module TalonOne
         fail ArgumentError, "invalid value for \"date_format\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/export_log'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/export_log'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -2652,7 +2652,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20017]
+    # @return [InlineResponse20018]
     def get_access_logs_without_total_count(application_id, range_start, range_end, opts = {})
       data, _status_code, _headers = get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts)
       data
@@ -2670,7 +2670,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20017, Integer, Hash)>] InlineResponse20017 data, response status code and response headers
+    # @return [Array<(InlineResponse20018, Integer, Hash)>] InlineResponse20018 data, response status code and response headers
     def get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_access_logs_without_total_count ...'
@@ -2729,7 +2729,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20017' 
+      return_type = opts[:return_type] || 'InlineResponse20018' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3004,7 +3004,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20031]
+    # @return [InlineResponse20032]
     def get_additional_costs(opts = {})
       data, _status_code, _headers = get_additional_costs_with_http_info(opts)
       data
@@ -3016,7 +3016,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20031, Integer, Hash)>] InlineResponse20031 data, response status code and response headers
+    # @return [Array<(InlineResponse20032, Integer, Hash)>] InlineResponse20032 data, response status code and response headers
     def get_additional_costs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_additional_costs ...'
@@ -3050,7 +3050,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20031' 
+      return_type = opts[:return_type] || 'InlineResponse20032' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3082,7 +3082,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20018]
+    # @return [InlineResponse20019]
     def get_all_access_logs(range_start, range_end, opts = {})
       data, _status_code, _headers = get_all_access_logs_with_http_info(range_start, range_end, opts)
       data
@@ -3099,7 +3099,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20018, Integer, Hash)>] InlineResponse20018 data, response status code and response headers
+    # @return [Array<(InlineResponse20019, Integer, Hash)>] InlineResponse20019 data, response status code and response headers
     def get_all_access_logs_with_http_info(range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_all_access_logs ...'
@@ -3154,7 +3154,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20018' 
+      return_type = opts[:return_type] || 'InlineResponse20019' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3178,7 +3178,7 @@ module TalonOne
     # List roles
     # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20039]
+    # @return [InlineResponse20040]
     def get_all_roles(opts = {})
       data, _status_code, _headers = get_all_roles_with_http_info(opts)
       data
@@ -3187,7 +3187,7 @@ module TalonOne
     # List roles
     # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20039, Integer, Hash)>] InlineResponse20039 data, response status code and response headers
+    # @return [Array<(InlineResponse20040, Integer, Hash)>] InlineResponse20040 data, response status code and response headers
     def get_all_roles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_all_roles ...'
@@ -3210,7 +3210,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20039' 
+      return_type = opts[:return_type] || 'InlineResponse20040' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3432,7 +3432,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [InlineResponse20029]
+    # @return [InlineResponse20030]
     def get_application_customer_friends(application_id, integration_id, opts = {})
       data, _status_code, _headers = get_application_customer_friends_with_http_info(application_id, integration_id, opts)
       data
@@ -3447,7 +3447,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [Array<(InlineResponse20029, Integer, Hash)>] InlineResponse20029 data, response status code and response headers
+    # @return [Array<(InlineResponse20030, Integer, Hash)>] InlineResponse20030 data, response status code and response headers
     def get_application_customer_friends_with_http_info(application_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customer_friends ...'
@@ -3490,7 +3490,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20029' 
+      return_type = opts[:return_type] || 'InlineResponse20030' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3519,7 +3519,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [InlineResponse20020]
+    # @return [InlineResponse20021]
     def get_application_customers(application_id, opts = {})
       data, _status_code, _headers = get_application_customers_with_http_info(application_id, opts)
       data
@@ -3533,7 +3533,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
+    # @return [Array<(InlineResponse20021, Integer, Hash)>] InlineResponse20021 data, response status code and response headers
     def get_application_customers_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customers ...'
@@ -3572,7 +3572,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20020' 
+      return_type = opts[:return_type] || 'InlineResponse20021' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3601,7 +3601,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [InlineResponse20021]
+    # @return [InlineResponse20022]
     def get_application_customers_by_attributes(application_id, body, opts = {})
       data, _status_code, _headers = get_application_customers_by_attributes_with_http_info(application_id, body, opts)
       data
@@ -3615,7 +3615,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [Array<(InlineResponse20021, Integer, Hash)>] InlineResponse20021 data, response status code and response headers
+    # @return [Array<(InlineResponse20022, Integer, Hash)>] InlineResponse20022 data, response status code and response headers
     def get_application_customers_by_attributes_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_customers_by_attributes ...'
@@ -3659,7 +3659,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20021' 
+      return_type = opts[:return_type] || 'InlineResponse20022' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3687,7 +3687,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20027]
+    # @return [InlineResponse20028]
     def get_application_event_types(application_id, opts = {})
       data, _status_code, _headers = get_application_event_types_with_http_info(application_id, opts)
       data
@@ -3700,7 +3700,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20027, Integer, Hash)>] InlineResponse20027 data, response status code and response headers
+    # @return [Array<(InlineResponse20028, Integer, Hash)>] InlineResponse20028 data, response status code and response headers
     def get_application_event_types_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_event_types ...'
@@ -3738,7 +3738,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20027' 
+      return_type = opts[:return_type] || 'InlineResponse20028' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3777,7 +3777,7 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [InlineResponse20026]
+    # @return [InlineResponse20027]
     def get_application_events_without_total_count(application_id, opts = {})
       data, _status_code, _headers = get_application_events_without_total_count_with_http_info(application_id, opts)
       data
@@ -3801,7 +3801,7 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
-    # @return [Array<(InlineResponse20026, Integer, Hash)>] InlineResponse20026 data, response status code and response headers
+    # @return [Array<(InlineResponse20027, Integer, Hash)>] InlineResponse20027 data, response status code and response headers
     def get_application_events_without_total_count_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_events_without_total_count ...'
@@ -3858,7 +3858,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20026' 
+      return_type = opts[:return_type] || 'InlineResponse20027' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -3961,7 +3961,7 @@ module TalonOne
     # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
     # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
     # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
-    # @return [InlineResponse20025]
+    # @return [InlineResponse20026]
     def get_application_sessions(application_id, opts = {})
       data, _status_code, _headers = get_application_sessions_with_http_info(application_id, opts)
       data
@@ -3981,7 +3981,7 @@ module TalonOne
     # @option opts [String] :coupon Filter by sessions with this coupon. Must be exact match.
     # @option opts [String] :referral Filter by sessions with this referral. Must be exact match.
     # @option opts [String] :integration_id Filter by sessions with this integrationId. Must be exact match.
-    # @return [Array<(InlineResponse20025, Integer, Hash)>] InlineResponse20025 data, response status code and response headers
+    # @return [Array<(InlineResponse20026, Integer, Hash)>] InlineResponse20026 data, response status code and response headers
     def get_application_sessions_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_application_sessions ...'
@@ -4030,7 +4030,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20025' 
+      return_type = opts[:return_type] || 'InlineResponse20026' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4057,7 +4057,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse2002]
+    # @return [InlineResponse2003]
     def get_applications(opts = {})
       data, _status_code, _headers = get_applications_with_http_info(opts)
       data
@@ -4069,7 +4069,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
     def get_applications_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_applications ...'
@@ -4103,7 +4103,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2002' 
+      return_type = opts[:return_type] || 'InlineResponse2003' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4193,7 +4193,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity.
-    # @return [InlineResponse20030]
+    # @return [InlineResponse20031]
     def get_attributes(opts = {})
       data, _status_code, _headers = get_attributes_with_http_info(opts)
       data
@@ -4206,7 +4206,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity.
-    # @return [Array<(InlineResponse20030, Integer, Hash)>] InlineResponse20030 data, response status code and response headers
+    # @return [Array<(InlineResponse20031, Integer, Hash)>] InlineResponse20031 data, response status code and response headers
     def get_attributes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_attributes ...'
@@ -4241,7 +4241,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20030' 
+      return_type = opts[:return_type] || 'InlineResponse20031' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4269,7 +4269,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [InlineResponse20028]
+    # @return [InlineResponse20029]
     def get_audiences(opts = {})
       data, _status_code, _headers = get_audiences_with_http_info(opts)
       data
@@ -4282,7 +4282,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
-    # @return [Array<(InlineResponse20028, Integer, Hash)>] InlineResponse20028 data, response status code and response headers
+    # @return [Array<(InlineResponse20029, Integer, Hash)>] InlineResponse20029 data, response status code and response headers
     def get_audiences_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_audiences ...'
@@ -4317,7 +4317,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20028' 
+      return_type = opts[:return_type] || 'InlineResponse20029' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4414,7 +4414,7 @@ module TalonOne
     # @param range_end [DateTime] Only return results from before this timestamp. This must be an RFC3339 timestamp string.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :granularity The time interval between the results in the returned time-series.
-    # @return [InlineResponse20019]
+    # @return [InlineResponse20020]
     def get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts = {})
       data, _status_code, _headers = get_campaign_analytics_with_http_info(application_id, campaign_id, range_start, range_end, opts)
       data
@@ -4428,7 +4428,7 @@ module TalonOne
     # @param range_end [DateTime] Only return results from before this timestamp. This must be an RFC3339 timestamp string.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :granularity The time interval between the results in the returned time-series.
-    # @return [Array<(InlineResponse20019, Integer, Hash)>] InlineResponse20019 data, response status code and response headers
+    # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
     def get_campaign_analytics_with_http_info(application_id, campaign_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_analytics ...'
@@ -4474,7 +4474,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20019' 
+      return_type = opts[:return_type] || 'InlineResponse20020' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4504,7 +4504,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2004]
     def get_campaign_by_attributes(application_id, body, opts = {})
       data, _status_code, _headers = get_campaign_by_attributes_with_http_info(application_id, body, opts)
       data
@@ -4519,7 +4519,7 @@ module TalonOne
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_campaign_by_attributes_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_by_attributes ...'
@@ -4568,7 +4568,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4599,7 +4599,7 @@ module TalonOne
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign template.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign template. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values. 
     # @option opts [Integer] :user_id Filter results by user ID.
-    # @return [InlineResponse2009]
+    # @return [InlineResponse20010]
     def get_campaign_templates(opts = {})
       data, _status_code, _headers = get_campaign_templates_with_http_info(opts)
       data
@@ -4615,7 +4615,7 @@ module TalonOne
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign template.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign template. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values. 
     # @option opts [Integer] :user_id Filter results by user ID.
-    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
+    # @return [Array<(InlineResponse20010, Integer, Hash)>] InlineResponse20010 data, response status code and response headers
     def get_campaign_templates_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaign_templates ...'
@@ -4657,7 +4657,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2009' 
+      return_type = opts[:return_type] || 'InlineResponse20010' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4692,7 +4692,7 @@ module TalonOne
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
     # @option opts [Integer] :template_id The ID of the Campaign Template this Campaign was created from.
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2004]
     def get_campaigns(application_id, opts = {})
       data, _status_code, _headers = get_campaigns_with_http_info(application_id, opts)
       data
@@ -4712,7 +4712,7 @@ module TalonOne
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign group ID.
     # @option opts [Integer] :template_id The ID of the Campaign Template this Campaign was created from.
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_campaigns_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_campaigns ...'
@@ -4761,7 +4761,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4796,7 +4796,7 @@ module TalonOne
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Integer] :management_key_id Filter results that match the given management key ID.
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [InlineResponse20037]
+    # @return [InlineResponse20038]
     def get_changes(opts = {})
       data, _status_code, _headers = get_changes_with_http_info(opts)
       data
@@ -4816,7 +4816,7 @@ module TalonOne
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Integer] :management_key_id Filter results that match the given management key ID.
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [Array<(InlineResponse20037, Integer, Hash)>] InlineResponse20037 data, response status code and response headers
+    # @return [Array<(InlineResponse20038, Integer, Hash)>] InlineResponse20038 data, response status code and response headers
     def get_changes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_changes ...'
@@ -4858,7 +4858,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20037' 
+      return_type = opts[:return_type] || 'InlineResponse20038' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -4959,7 +4959,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20015]
+    # @return [InlineResponse20016]
     def get_collection_items(collection_id, opts = {})
       data, _status_code, _headers = get_collection_items_with_http_info(collection_id, opts)
       data
@@ -4971,7 +4971,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20015, Integer, Hash)>] InlineResponse20015 data, response status code and response headers
+    # @return [Array<(InlineResponse20016, Integer, Hash)>] InlineResponse20016 data, response status code and response headers
     def get_collection_items_with_http_info(collection_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_collection_items ...'
@@ -5008,7 +5008,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20015' 
+      return_type = opts[:return_type] || 'InlineResponse20016' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5046,7 +5046,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
-    # @return [InlineResponse2007]
+    # @return [InlineResponse2008]
     def get_coupons_without_total_count(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_coupons_without_total_count_with_http_info(application_id, campaign_id, opts)
       data
@@ -5069,7 +5069,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
-    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
+    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
     def get_coupons_without_total_count_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_coupons_without_total_count ...'
@@ -5128,7 +5128,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2007' 
+      return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5258,7 +5258,7 @@ module TalonOne
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaignName
     # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [InlineResponse20024]
+    # @return [InlineResponse20025]
     def get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts = {})
       data, _status_code, _headers = get_customer_activity_reports_without_total_count_with_http_info(range_start, range_end, application_id, opts)
       data
@@ -5277,7 +5277,7 @@ module TalonOne
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaignName
     # @option opts [String] :advocate_name Only return reports matching the current customer referrer name
-    # @return [Array<(InlineResponse20024, Integer, Hash)>] InlineResponse20024 data, response status code and response headers
+    # @return [Array<(InlineResponse20025, Integer, Hash)>] InlineResponse20025 data, response status code and response headers
     def get_customer_activity_reports_without_total_count_with_http_info(range_start, range_end, application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_activity_reports_without_total_count ...'
@@ -5329,7 +5329,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20024' 
+      return_type = opts[:return_type] || 'InlineResponse20025' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5503,7 +5503,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or Live customer. (default to false)
-    # @return [InlineResponse20023]
+    # @return [InlineResponse20024]
     def get_customer_profiles(opts = {})
       data, _status_code, _headers = get_customer_profiles_with_http_info(opts)
       data
@@ -5515,7 +5515,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or Live customer.
-    # @return [Array<(InlineResponse20023, Integer, Hash)>] InlineResponse20023 data, response status code and response headers
+    # @return [Array<(InlineResponse20024, Integer, Hash)>] InlineResponse20024 data, response status code and response headers
     def get_customer_profiles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_profiles ...'
@@ -5549,7 +5549,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20023' 
+      return_type = opts[:return_type] || 'InlineResponse20024' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5577,7 +5577,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or Live customer. (default to false)
-    # @return [InlineResponse20022]
+    # @return [InlineResponse20023]
     def get_customers_by_attributes(body, opts = {})
       data, _status_code, _headers = get_customers_by_attributes_with_http_info(body, opts)
       data
@@ -5590,7 +5590,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or Live customer.
-    # @return [Array<(InlineResponse20022, Integer, Hash)>] InlineResponse20022 data, response status code and response headers
+    # @return [Array<(InlineResponse20023, Integer, Hash)>] InlineResponse20023 data, response status code and response headers
     def get_customers_by_attributes_with_http_info(body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customers_by_attributes ...'
@@ -5630,7 +5630,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20022' 
+      return_type = opts[:return_type] || 'InlineResponse20023' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5659,7 +5659,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20035]
+    # @return [InlineResponse20036]
     def get_event_types(opts = {})
       data, _status_code, _headers = get_event_types_with_http_info(opts)
       data
@@ -5673,7 +5673,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20035, Integer, Hash)>] InlineResponse20035 data, response status code and response headers
+    # @return [Array<(InlineResponse20036, Integer, Hash)>] InlineResponse20036 data, response status code and response headers
     def get_event_types_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_event_types ...'
@@ -5709,7 +5709,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20035' 
+      return_type = opts[:return_type] || 'InlineResponse20036' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5738,7 +5738,7 @@ module TalonOne
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [InlineResponse20038]
+    # @return [InlineResponse20039]
     def get_exports(opts = {})
       data, _status_code, _headers = get_exports_with_http_info(opts)
       data
@@ -5752,7 +5752,7 @@ module TalonOne
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [Array<(InlineResponse20038, Integer, Hash)>] InlineResponse20038 data, response status code and response headers
+    # @return [Array<(InlineResponse20039, Integer, Hash)>] InlineResponse20039 data, response status code and response headers
     def get_exports_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_exports ...'
@@ -5792,7 +5792,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20038' 
+      return_type = opts[:return_type] || 'InlineResponse20039' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5816,21 +5816,21 @@ module TalonOne
     # Get loyalty card
     # Get the given loyalty card.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyCard]
-    def get_loyalty_card(loyalty_program_id, loyalty_card_identifier, opts = {})
-      data, _status_code, _headers = get_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+    def get_loyalty_card(loyalty_program_id, loyalty_card_id, opts = {})
+      data, _status_code, _headers = get_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
     end
 
     # Get loyalty card
     # Get the given loyalty card.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyCard, Integer, Hash)>] LoyaltyCard data, response status code and response headers
-    def get_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+    def get_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_card ...'
       end
@@ -5838,16 +5838,16 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.get_loyalty_card"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.get_loyalty_card"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.get_loyalty_card"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.get_loyalty_card, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.get_loyalty_card, the character length must be smaller than or equal to 108.'
       end
 
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -5885,34 +5885,34 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get loyalty card transaction logs
+    # List card's transactions
     # Retrieve the transaction logs for the given [loyalty card](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/loyalty-card-overview) within the specified [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types) with filtering options applied. If no filtering options are applied, the last 50 loyalty transactions for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
-    # @return [InlineResponse20013]
-    def get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_identifier, opts = {})
-      data, _status_code, _headers = get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+    # @return [InlineResponse20014]
+    def get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts = {})
+      data, _status_code, _headers = get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
     end
 
-    # Get loyalty card transaction logs
+    # List card&#39;s transactions
     # Retrieve the transaction logs for the given [loyalty card](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/loyalty-card-overview) within the specified [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types) with filtering options applied. If no filtering options are applied, the last 50 loyalty transactions for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
-    # @return [Array<(InlineResponse20013, Integer, Hash)>] InlineResponse20013 data, response status code and response headers
-    def get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+    # @return [Array<(InlineResponse20014, Integer, Hash)>] InlineResponse20014 data, response status code and response headers
+    def get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_card_transaction_logs ...'
       end
@@ -5920,12 +5920,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.get_loyalty_card_transaction_logs"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.get_loyalty_card_transaction_logs"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.get_loyalty_card_transaction_logs"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.get_loyalty_card_transaction_logs, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.get_loyalty_card_transaction_logs, the character length must be smaller than or equal to 108.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
@@ -5937,7 +5937,7 @@ module TalonOne
       end
 
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/logs'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/logs'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -5959,7 +5959,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20013' 
+      return_type = opts[:return_type] || 'InlineResponse20014' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -5989,7 +5989,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :identifier Optional query parameter to search cards by identifier.
     # @option opts [Integer] :profile_id Filter by the profile ID.
-    # @return [InlineResponse20012]
+    # @return [InlineResponse20013]
     def get_loyalty_cards(loyalty_program_id, opts = {})
       data, _status_code, _headers = get_loyalty_cards_with_http_info(loyalty_program_id, opts)
       data
@@ -6004,7 +6004,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [String] :identifier Optional query parameter to search cards by identifier.
     # @option opts [Integer] :profile_id Filter by the profile ID.
-    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
+    # @return [Array<(InlineResponse20013, Integer, Hash)>] InlineResponse20013 data, response status code and response headers
     def get_loyalty_cards_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_cards ...'
@@ -6052,7 +6052,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20012' 
+      return_type = opts[:return_type] || 'InlineResponse20013' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6213,7 +6213,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response. (default to 50)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20011]
+    # @return [InlineResponse20012]
     def get_loyalty_program_transactions(loyalty_program_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_transactions_with_http_info(loyalty_program_id, opts)
       data
@@ -6229,7 +6229,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20011, Integer, Hash)>] InlineResponse20011 data, response status code and response headers
+    # @return [Array<(InlineResponse20012, Integer, Hash)>] InlineResponse20012 data, response status code and response headers
     def get_loyalty_program_transactions_with_http_info(loyalty_program_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_program_transactions ...'
@@ -6278,7 +6278,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20011' 
+      return_type = opts[:return_type] || 'InlineResponse20012' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6302,7 +6302,7 @@ module TalonOne
     # List loyalty programs
     # List the loyalty programs of the account.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20010]
+    # @return [InlineResponse20011]
     def get_loyalty_programs(opts = {})
       data, _status_code, _headers = get_loyalty_programs_with_http_info(opts)
       data
@@ -6311,7 +6311,7 @@ module TalonOne
     # List loyalty programs
     # List the loyalty programs of the account.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20010, Integer, Hash)>] InlineResponse20010 data, response status code and response headers
+    # @return [Array<(InlineResponse20011, Integer, Hash)>] InlineResponse20011 data, response status code and response headers
     def get_loyalty_programs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_loyalty_programs ...'
@@ -6334,7 +6334,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20010' 
+      return_type = opts[:return_type] || 'InlineResponse20011' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6489,7 +6489,7 @@ module TalonOne
     # List all [notifications about campaign-related changes](https://docs.talon.one/docs/product/applications/outbound-notifications) for the given Application. 
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2004]
+    # @return [InlineResponse2005]
     def get_notification_webhooks(application_id, opts = {})
       data, _status_code, _headers = get_notification_webhooks_with_http_info(application_id, opts)
       data
@@ -6499,7 +6499,7 @@ module TalonOne
     # List all [notifications about campaign-related changes](https://docs.talon.one/docs/product/applications/outbound-notifications) for the given Application. 
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
+    # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
     def get_notification_webhooks_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_notification_webhooks ...'
@@ -6526,7 +6526,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
+      return_type = opts[:return_type] || 'InlineResponse2005' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6561,7 +6561,7 @@ module TalonOne
     # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiration date is set and in the past. The second matches referrals in which start date is null or in the past and expiration date is null or in the future, the third matches referrals in which start date is set and in the future. 
     # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
     # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
-    # @return [InlineResponse2008]
+    # @return [InlineResponse2009]
     def get_referrals_without_total_count(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_referrals_without_total_count_with_http_info(application_id, campaign_id, opts)
       data
@@ -6581,7 +6581,7 @@ module TalonOne
     # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiration date is set and in the past. The second matches referrals in which start date is null or in the past and expiration date is null or in the future, the third matches referrals in which start date is set and in the future. 
     # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
     # @option opts [String] :advocate Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field
-    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
+    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
     def get_referrals_without_total_count_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_referrals_without_total_count ...'
@@ -6637,7 +6637,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2008' 
+      return_type = opts[:return_type] || 'InlineResponse2009' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6802,7 +6802,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse2005]
+    # @return [InlineResponse2006]
     def get_rulesets(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_rulesets_with_http_info(application_id, campaign_id, opts)
       data
@@ -6816,7 +6816,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
+    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
     def get_rulesets_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_rulesets ...'
@@ -6858,7 +6858,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2005' 
+      return_type = opts[:return_type] || 'InlineResponse2006' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -6947,7 +6947,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [InlineResponse20036]
+    # @return [InlineResponse20037]
     def get_users(opts = {})
       data, _status_code, _headers = get_users_with_http_info(opts)
       data
@@ -6959,7 +6959,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
-    # @return [Array<(InlineResponse20036, Integer, Hash)>] InlineResponse20036 data, response status code and response headers
+    # @return [Array<(InlineResponse20037, Integer, Hash)>] InlineResponse20037 data, response status code and response headers
     def get_users_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_users ...'
@@ -6993,7 +6993,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20036' 
+      return_type = opts[:return_type] || 'InlineResponse20037' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -7088,7 +7088,7 @@ module TalonOne
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20033]
+    # @return [InlineResponse20034]
     def get_webhook_activation_logs(opts = {})
       data, _status_code, _headers = get_webhook_activation_logs_with_http_info(opts)
       data
@@ -7106,7 +7106,7 @@ module TalonOne
     # @option opts [Float] :campaign_id Filter results by campaign.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Only return events created after this date. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20033, Integer, Hash)>] InlineResponse20033 data, response status code and response headers
+    # @return [Array<(InlineResponse20034, Integer, Hash)>] InlineResponse20034 data, response status code and response headers
     def get_webhook_activation_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_activation_logs ...'
@@ -7146,7 +7146,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20033' 
+      return_type = opts[:return_type] || 'InlineResponse20034' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -7180,7 +7180,7 @@ module TalonOne
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20034]
+    # @return [InlineResponse20035]
     def get_webhook_logs(opts = {})
       data, _status_code, _headers = get_webhook_logs_with_http_info(opts)
       data
@@ -7199,7 +7199,7 @@ module TalonOne
     # @option opts [String] :request_uuid Filter results by request UUID.
     # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any timezone. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20034, Integer, Hash)>] InlineResponse20034 data, response status code and response headers
+    # @return [Array<(InlineResponse20035, Integer, Hash)>] InlineResponse20035 data, response status code and response headers
     def get_webhook_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_logs ...'
@@ -7244,7 +7244,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20034' 
+      return_type = opts[:return_type] || 'InlineResponse20035' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -7272,7 +7272,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse20032]
+    # @return [InlineResponse20033]
     def get_webhooks(opts = {})
       data, _status_code, _headers = get_webhooks_with_http_info(opts)
       data
@@ -7285,7 +7285,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse20032, Integer, Hash)>] InlineResponse20032 data, response status code and response headers
+    # @return [Array<(InlineResponse20033, Integer, Hash)>] InlineResponse20033 data, response status code and response headers
     def get_webhooks_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhooks ...'
@@ -7320,7 +7320,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20032' 
+      return_type = opts[:return_type] || 'InlineResponse20033' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -7909,7 +7909,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [InlineResponse20014]
+    # @return [InlineResponse20015]
     def list_account_collections(opts = {})
       data, _status_code, _headers = list_account_collections_with_http_info(opts)
       data
@@ -7923,7 +7923,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [Array<(InlineResponse20014, Integer, Hash)>] InlineResponse20014 data, response status code and response headers
+    # @return [Array<(InlineResponse20015, Integer, Hash)>] InlineResponse20015 data, response status code and response headers
     def list_account_collections_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_account_collections ...'
@@ -7959,7 +7959,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20014' 
+      return_type = opts[:return_type] || 'InlineResponse20015' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -7990,7 +7990,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [InlineResponse20016]
+    # @return [InlineResponse20017]
     def list_collections(application_id, campaign_id, opts = {})
       data, _status_code, _headers = list_collections_with_http_info(application_id, campaign_id, opts)
       data
@@ -8006,7 +8006,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [Array<(InlineResponse20016, Integer, Hash)>] InlineResponse20016 data, response status code and response headers
+    # @return [Array<(InlineResponse20017, Integer, Hash)>] InlineResponse20017 data, response status code and response headers
     def list_collections_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_collections ...'
@@ -8050,7 +8050,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20016' 
+      return_type = opts[:return_type] || 'InlineResponse20017' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -8080,7 +8080,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [InlineResponse20016]
+    # @return [InlineResponse20017]
     def list_collections_in_application(application_id, opts = {})
       data, _status_code, _headers = list_collections_in_application_with_http_info(application_id, opts)
       data
@@ -8095,7 +8095,7 @@ module TalonOne
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by the name of the Collection.
-    # @return [Array<(InlineResponse20016, Integer, Hash)>] InlineResponse20016 data, response status code and response headers
+    # @return [Array<(InlineResponse20017, Integer, Hash)>] InlineResponse20017 data, response status code and response headers
     def list_collections_in_application_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_collections_in_application ...'
@@ -8135,7 +8135,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20016' 
+      return_type = opts[:return_type] || 'InlineResponse20017' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -8454,7 +8454,7 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
-    # @return [InlineResponse2007]
+    # @return [InlineResponse2008]
     def search_coupons_advanced_application_wide_without_total_count(application_id, body, opts = {})
       data, _status_code, _headers = search_coupons_advanced_application_wide_without_total_count_with_http_info(application_id, body, opts)
       data
@@ -8478,7 +8478,7 @@ module TalonOne
     # @option opts [String] :batch_id Filter results by batches of coupons
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. - &#x60;draft&#x60;: Campaigns that are drafts. 
-    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
+    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
     def search_coupons_advanced_application_wide_without_total_count_with_http_info(application_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced_application_wide_without_total_count ...'
@@ -8544,7 +8544,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2007' 
+      return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -8583,7 +8583,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code (default to false)
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [InlineResponse2007]
+    # @return [InlineResponse2008]
     def search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts = {})
       data, _status_code, _headers = search_coupons_advanced_without_total_count_with_http_info(application_id, campaign_id, body, opts)
       data
@@ -8607,7 +8607,7 @@ module TalonOne
     # @option opts [String] :recipient_integration_id Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field
     # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code
     # @option opts [String] :batch_id Filter results by batches of coupons
-    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
+    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
     def search_coupons_advanced_without_total_count_with_http_info(application_id, campaign_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.search_coupons_advanced_without_total_count ...'
@@ -8672,7 +8672,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2007' 
+      return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
@@ -8693,26 +8693,26 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Transfer loyalty card data
-    # Transfer card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  **Important:**  - The original card is automatically blocked once the new card is created, and it cannot be activated again. - The default status of the new card is _active_. 
+    # Transfer card data
+    # Transfer loyalty card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  **Important:**  - The original card is automatically blocked once the new card is created, and it cannot be activated again. - The default status of the new card is _active_. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [TransferLoyaltyCard] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def transfer_loyalty_card(loyalty_program_id, loyalty_card_identifier, body, opts = {})
-      transfer_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts)
+    def transfer_loyalty_card(loyalty_program_id, loyalty_card_id, body, opts = {})
+      transfer_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, body, opts)
       nil
     end
 
-    # Transfer loyalty card data
-    # Transfer card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  **Important:**  - The original card is automatically blocked once the new card is created, and it cannot be activated again. - The default status of the new card is _active_. 
+    # Transfer card data
+    # Transfer loyalty card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  **Important:**  - The original card is automatically blocked once the new card is created, and it cannot be activated again. - The default status of the new card is _active_. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [TransferLoyaltyCard] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def transfer_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts = {})
+    def transfer_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.transfer_loyalty_card ...'
       end
@@ -8720,12 +8720,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.transfer_loyalty_card"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.transfer_loyalty_card"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.transfer_loyalty_card"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.transfer_loyalty_card, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.transfer_loyalty_card, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'body' is set
@@ -8733,7 +8733,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.transfer_loyalty_card"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/transfer'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/transfer'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -9300,23 +9300,23 @@ module TalonOne
     # Update loyalty card status
     # Update the status of the given loyalty card. A card can be _active_ or _inactive_.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [UpdateLoyaltyCard] body
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyCard]
-    def update_loyalty_card(loyalty_program_id, loyalty_card_identifier, body, opts = {})
-      data, _status_code, _headers = update_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts)
+    def update_loyalty_card(loyalty_program_id, loyalty_card_id, body, opts = {})
+      data, _status_code, _headers = update_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, body, opts)
       data
     end
 
     # Update loyalty card status
     # Update the status of the given loyalty card. A card can be _active_ or _inactive_.
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [UpdateLoyaltyCard] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyCard, Integer, Hash)>] LoyaltyCard data, response status code and response headers
-    def update_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts = {})
+    def update_loyalty_card_with_http_info(loyalty_program_id, loyalty_card_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.update_loyalty_card ...'
       end
@@ -9324,12 +9324,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.update_loyalty_card"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling ManagementApi.update_loyalty_card"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling ManagementApi.update_loyalty_card"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling ManagementApi.update_loyalty_card, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling ManagementApi.update_loyalty_card, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'body' is set
@@ -9337,7 +9337,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.update_loyalty_card"
       end
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

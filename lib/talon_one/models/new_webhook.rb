@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # 
   class NewWebhook
-    # The IDs of the applications that are related to this entity.
+    # The IDs of the Applications that are related to this entity.
     attr_accessor :application_ids
 
     # Name or title for this webhook.
@@ -24,7 +24,7 @@ module TalonOne
     # API method for this webhook.
     attr_accessor :verb
 
-    # API url (supports templating using parameters) for this webhook.
+    # API URL (supports templating using parameters) for this webhook.
     attr_accessor :url
 
     # List of API HTTP headers for this webhook.
@@ -36,7 +36,7 @@ module TalonOne
     # Array of template argument definitions.
     attr_accessor :params
 
-    # Enables or disables webhook from showing in rule builder.
+    # Enables or disables webhook from showing in the Rule Builder.
     attr_accessor :enabled
 
     class EnumAttributeValidator

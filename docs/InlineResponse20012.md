@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;LoyaltyCard&gt;**](LoyaltyCard.md) |  | 
+**data** | [**Array&lt;LoyaltyProgramTransaction&gt;**](LoyaltyProgramTransaction.md) |  | 
 
 ## Code Sample
 

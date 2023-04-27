@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class MultiApplicationEntity
-    # The IDs of the applications that are related to this entity.
+    # The IDs of the Applications that are related to this entity.
     attr_accessor :application_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.

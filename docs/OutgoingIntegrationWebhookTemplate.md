@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **title** | **String** | Title of the webhook template. | 
 **description** | **String** | General description for the specific outgoing integration webhook template. | 
 **payload** | **String** | API payload (supports templating using parameters) for this webhook template. | 
+**method** | **String** | API method for this webhook. | 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = TalonOne::OutgoingIntegrationWebhookTemplate.new(id: 6,
                                  description: Waiting for docs team,
                                  payload: {
 	&quot;message&quot;: &quot;${message}&quot;
-})
+},
+                                 method: POST)
 ```
 
 

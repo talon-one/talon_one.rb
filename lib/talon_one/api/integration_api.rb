@@ -750,26 +750,26 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get loyalty balances for a loyalty card
+    # Get card's point balances
     # Retrieve loyalty balances for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, all loyalty balances for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :end_date Used to return balances only for entries older than this timestamp. The expired, active, and pending points are relative to this timestamp.  **Note:** It must be an RFC3339 timestamp string. 
     # @return [LoyaltyBalances]
-    def get_loyalty_card_balances(loyalty_program_id, loyalty_card_identifier, opts = {})
-      data, _status_code, _headers = get_loyalty_card_balances_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+    def get_loyalty_card_balances(loyalty_program_id, loyalty_card_id, opts = {})
+      data, _status_code, _headers = get_loyalty_card_balances_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
     end
 
-    # Get loyalty balances for a loyalty card
+    # Get card&#39;s point balances
     # Retrieve loyalty balances for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, all loyalty balances for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [DateTime] :end_date Used to return balances only for entries older than this timestamp. The expired, active, and pending points are relative to this timestamp.  **Note:** It must be an RFC3339 timestamp string. 
     # @return [Array<(LoyaltyBalances, Integer, Hash)>] LoyaltyBalances data, response status code and response headers
-    def get_loyalty_card_balances_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+    def get_loyalty_card_balances_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_balances ...'
       end
@@ -777,16 +777,16 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling IntegrationApi.get_loyalty_card_balances"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling IntegrationApi.get_loyalty_card_balances"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling IntegrationApi.get_loyalty_card_balances"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling IntegrationApi.get_loyalty_card_balances, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling IntegrationApi.get_loyalty_card_balances, the character length must be smaller than or equal to 108.'
       end
 
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/balances'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/balances'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -825,34 +825,34 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Get loyalty card transaction logs
+    # List card's transactions
     # Retrieve loyalty transaction logs for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, the last 50 loyalty transactions for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response. (default to 1000)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [CardLedgerTransactionLogEntryIntegrationAPI]
-    def get_loyalty_card_transactions(loyalty_program_id, loyalty_card_identifier, opts = {})
-      data, _status_code, _headers = get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_identifier, opts)
+    # @return [InlineResponse2001]
+    def get_loyalty_card_transactions(loyalty_program_id, loyalty_card_id, opts = {})
+      data, _status_code, _headers = get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
     end
 
-    # Get loyalty card transaction logs
+    # List card&#39;s transactions
     # Retrieve loyalty transaction logs for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, the last 50 loyalty transactions for the given loyalty card are returned. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(CardLedgerTransactionLogEntryIntegrationAPI, Integer, Hash)>] CardLedgerTransactionLogEntryIntegrationAPI data, response status code and response headers
-    def get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_identifier, opts = {})
+    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    def get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_transactions ...'
       end
@@ -860,12 +860,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling IntegrationApi.get_loyalty_card_transactions"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling IntegrationApi.get_loyalty_card_transactions"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling IntegrationApi.get_loyalty_card_transactions"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling IntegrationApi.get_loyalty_card_transactions, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling IntegrationApi.get_loyalty_card_transactions, the character length must be smaller than or equal to 108.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
@@ -877,7 +877,7 @@ module TalonOne
       end
 
       # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/transactions'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/transactions'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -899,7 +899,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'CardLedgerTransactionLogEntryIntegrationAPI' 
+      return_type = opts[:return_type] || 'InlineResponse2001' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -930,7 +930,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response. (default to 50)
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2002]
     def get_loyalty_program_profile_transactions(loyalty_program_id, integration_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts)
       data
@@ -946,7 +946,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
     # @option opts [Integer] :page_size The number of items in this response.
     # @option opts [Integer] :skip Skips the given number of items when paging through large result sets.
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
     def get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_program_profile_transactions ...'
@@ -990,7 +990,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2002' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1073,26 +1073,26 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Link customer profile to loyalty card
+    # Link customer profile to card
     # [Loyalty cards](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/loyalty-card-overview) allow customers to collect and spend loyalty points within a [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types). They are useful to gamify loyalty programs and can be used with or without customer profiles linked to them.  Link a customer profile to a given loyalty card for the card to be set as **Registered**. This affects how it can be used. See the [docs](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/managing-loyalty-cards#linking-customer-profiles-to-a-loyalty-card).  **Note:** You can link as many customer profiles to a given loyalty card as the [**card user limit**](https://docs.talon.one/docs/product/loyalty-programs/creating-loyalty-programs#creating-card-based-loyalty-programs) allows. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [LoyaltyCardRegistration] body
     # @param [Hash] opts the optional parameters
     # @return [LoyaltyCard]
-    def link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_identifier, body, opts = {})
-      data, _status_code, _headers = link_loyalty_card_to_profile_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts)
+    def link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_id, body, opts = {})
+      data, _status_code, _headers = link_loyalty_card_to_profile_with_http_info(loyalty_program_id, loyalty_card_id, body, opts)
       data
     end
 
-    # Link customer profile to loyalty card
+    # Link customer profile to card
     # [Loyalty cards](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/loyalty-card-overview) allow customers to collect and spend loyalty points within a [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types). They are useful to gamify loyalty programs and can be used with or without customer profiles linked to them.  Link a customer profile to a given loyalty card for the card to be set as **Registered**. This affects how it can be used. See the [docs](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/managing-loyalty-cards#linking-customer-profiles-to-a-loyalty-card).  **Note:** You can link as many customer profiles to a given loyalty card as the [**card user limit**](https://docs.talon.one/docs/product/loyalty-programs/creating-loyalty-programs#creating-card-based-loyalty-programs) allows. 
     # @param loyalty_program_id [Integer] Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param loyalty_card_identifier [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+    # @param loyalty_card_id [String] Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
     # @param body [LoyaltyCardRegistration] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltyCard, Integer, Hash)>] LoyaltyCard data, response status code and response headers
-    def link_loyalty_card_to_profile_with_http_info(loyalty_program_id, loyalty_card_identifier, body, opts = {})
+    def link_loyalty_card_to_profile_with_http_info(loyalty_program_id, loyalty_card_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.link_loyalty_card_to_profile ...'
       end
@@ -1100,12 +1100,12 @@ module TalonOne
       if @api_client.config.client_side_validation && loyalty_program_id.nil?
         fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling IntegrationApi.link_loyalty_card_to_profile"
       end
-      # verify the required parameter 'loyalty_card_identifier' is set
-      if @api_client.config.client_side_validation && loyalty_card_identifier.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_card_identifier' when calling IntegrationApi.link_loyalty_card_to_profile"
+      # verify the required parameter 'loyalty_card_id' is set
+      if @api_client.config.client_side_validation && loyalty_card_id.nil?
+        fail ArgumentError, "Missing the required parameter 'loyalty_card_id' when calling IntegrationApi.link_loyalty_card_to_profile"
       end
-      if @api_client.config.client_side_validation && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier" when calling IntegrationApi.link_loyalty_card_to_profile, the character length must be smaller than or equal to 108.'
+      if @api_client.config.client_side_validation && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id" when calling IntegrationApi.link_loyalty_card_to_profile, the character length must be smaller than or equal to 108.'
       end
 
       # verify the required parameter 'body' is set
@@ -1113,7 +1113,7 @@ module TalonOne
         fail ArgumentError, "Missing the required parameter 'body' when calling IntegrationApi.link_loyalty_card_to_profile"
       end
       # resource path
-      local_var_path = '/v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/link_profile'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardIdentifier' + '}', CGI.escape(loyalty_card_identifier.to_s))
+      local_var_path = '/v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/link_profile'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s)).sub('{' + 'loyaltyCardId' + '}', CGI.escape(loyalty_card_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1157,7 +1157,7 @@ module TalonOne
     # Reopen a closed [customer session](https://docs.talon.one/docs/dev/concepts/entities#customer-session). For example, if a session has been completed but still needs to be edited, you can reopen it with this endpoint. A reopen session is treated like a standard open session.  When reopening a session: - The `talon_session_reopened` event is triggered. You can see it in the **Events** view in the Campaign Manager. - The session state is updated to `open`. - Modified budgets and triggered effects when the session was closed are rolled back except for the list below.  <details>   <summary><strong>Effects and budgets unimpacted by a session reopening</strong></summary>   <div>     <p>The following effects and budgets are left the way they were once the session was originally closed:</p>     <ul>       <li>Add free item effect</li>       <li>Any <strong>not pending</strong> pending loyalty points.</li>       <li>Award giveaway</li>       <li>Coupon and referral creation</li>       <li>Coupon reservation</li>       <li>Custom effect</li>       <li>Update attribute value</li>       <li>Update cart item attribute value</li>     </ul>   </div> <p>To see an example of roll back, see the <a href=\"https://docs.talon.one/docs/dev/tutorials/rolling-back-effects\">Cancelling a session with campaign budgets tutorial</a>.</p> </details>  **Note:** If your order workflow requires you to create a new session instead of reopening a session, use the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint to cancel a closed session and create a new one. 
     # @param customer_session_id [String] The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#operation/getApplicationSessions) endpoint. 
     # @param [Hash] opts the optional parameters
-    # @return [IntegrationStateV2]
+    # @return [ReopenSessionResponse]
     def reopen_customer_session(customer_session_id, opts = {})
       data, _status_code, _headers = reopen_customer_session_with_http_info(customer_session_id, opts)
       data
@@ -1167,7 +1167,7 @@ module TalonOne
     # Reopen a closed [customer session](https://docs.talon.one/docs/dev/concepts/entities#customer-session). For example, if a session has been completed but still needs to be edited, you can reopen it with this endpoint. A reopen session is treated like a standard open session.  When reopening a session: - The &#x60;talon_session_reopened&#x60; event is triggered. You can see it in the **Events** view in the Campaign Manager. - The session state is updated to &#x60;open&#x60;. - Modified budgets and triggered effects when the session was closed are rolled back except for the list below.  &lt;details&gt;   &lt;summary&gt;&lt;strong&gt;Effects and budgets unimpacted by a session reopening&lt;/strong&gt;&lt;/summary&gt;   &lt;div&gt;     &lt;p&gt;The following effects and budgets are left the way they were once the session was originally closed:&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;Add free item effect&lt;/li&gt;       &lt;li&gt;Any &lt;strong&gt;not pending&lt;/strong&gt; pending loyalty points.&lt;/li&gt;       &lt;li&gt;Award giveaway&lt;/li&gt;       &lt;li&gt;Coupon and referral creation&lt;/li&gt;       &lt;li&gt;Coupon reservation&lt;/li&gt;       &lt;li&gt;Custom effect&lt;/li&gt;       &lt;li&gt;Update attribute value&lt;/li&gt;       &lt;li&gt;Update cart item attribute value&lt;/li&gt;     &lt;/ul&gt;   &lt;/div&gt; &lt;p&gt;To see an example of roll back, see the &lt;a href&#x3D;\&quot;https://docs.talon.one/docs/dev/tutorials/rolling-back-effects\&quot;&gt;Cancelling a session with campaign budgets tutorial&lt;/a&gt;.&lt;/p&gt; &lt;/details&gt;  **Note:** If your order workflow requires you to create a new session instead of reopening a session, use the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint to cancel a closed session and create a new one. 
     # @param customer_session_id [String] The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#operation/getApplicationSessions) endpoint. 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
+    # @return [Array<(ReopenSessionResponse, Integer, Hash)>] ReopenSessionResponse data, response status code and response headers
     def reopen_customer_session_with_http_info(customer_session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.reopen_customer_session ...'
@@ -1194,7 +1194,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'IntegrationStateV2' 
+      return_type = opts[:return_type] || 'ReopenSessionResponse' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']

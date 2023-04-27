@@ -30,7 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'has_more' => :'Boolean',
-        :'data' => :'Array<Referral>'
+        :'data' => :'Array<Coupon>'
       }
     end
 
