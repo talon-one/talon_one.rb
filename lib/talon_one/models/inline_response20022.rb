@@ -34,7 +34,7 @@ module TalonOne
       {
         :'has_more' => :'Boolean',
         :'total_result_size' => :'Integer',
-        :'data' => :'Array<CustomerProfile>'
+        :'data' => :'Array<ApplicationCustomer>'
       }
     end
 

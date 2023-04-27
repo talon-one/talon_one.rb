@@ -29,6 +29,31 @@ module TalonOne
     # API payload (supports templating using parameters) for this webhook template.
     attr_accessor :payload
 
+    # API method for this webhook.
+    attr_accessor :method
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +61,8 @@ module TalonOne
         :'integration_type' => :'integrationType',
         :'title' => :'title',
         :'description' => :'description',
-        :'payload' => :'payload'
+        :'payload' => :'payload',
+        :'method' => :'method'
       }
     end
 
@@ -47,7 +73,8 @@ module TalonOne
         :'integration_type' => :'Integer',
         :'title' => :'String',
         :'description' => :'String',
-        :'payload' => :'String'
+        :'payload' => :'String',
+        :'method' => :'String'
       }
     end
 
@@ -91,6 +118,10 @@ module TalonOne
       if attributes.key?(:'payload')
         self.payload = attributes[:'payload']
       end
+
+      if attributes.key?(:'method')
+        self.method = attributes[:'method']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,6 +164,10 @@ module TalonOne
         invalid_properties.push('invalid value for "payload", payload cannot be nil.')
       end
 
+      if @method.nil?
+        invalid_properties.push('invalid value for "method", method cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -148,6 +183,9 @@ module TalonOne
       return false if @description.to_s.length > 1000
       return false if @description.to_s.length < 1
       return false if @payload.nil?
+      return false if @method.nil?
+      method_validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
+      return false unless method_validator.valid?(@method)
       true
     end
 
@@ -187,6 +225,16 @@ module TalonOne
       @description = description
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] method Object to be assigned
+    def method=(method)
+      validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
+      unless validator.valid?(method)
+        fail ArgumentError, "invalid value for \"method\", must be one of #{validator.allowable_values}."
+      end
+      @method = method
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -196,7 +244,8 @@ module TalonOne
           integration_type == o.integration_type &&
           title == o.title &&
           description == o.description &&
-          payload == o.payload
+          payload == o.payload &&
+          method == o.method
     end
 
     # @see the `==` method
@@ -208,7 +257,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, integration_type, title, description, payload].hash
+      [id, integration_type, title, description, payload, method].hash
     end
 
     # Builds the object from hash

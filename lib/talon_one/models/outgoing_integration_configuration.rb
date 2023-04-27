@@ -14,6 +14,9 @@ require 'date'
 
 module TalonOne
   class OutgoingIntegrationConfiguration
+    # Unique ID for this entity.
+    attr_accessor :id
+
     # The ID of the account to which this configuration belongs.
     attr_accessor :account_id
 
@@ -25,6 +28,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'account_id' => :'accountId',
         :'type_id' => :'typeId',
         :'policy' => :'policy'
@@ -34,6 +38,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'Integer',
         :'account_id' => :'Integer',
         :'type_id' => :'Integer',
         :'policy' => :'Object'
@@ -61,6 +66,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
       end
@@ -78,6 +87,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
       if @account_id.nil?
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
@@ -96,6 +109,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
       return false if @account_id.nil?
       return false if @type_id.nil?
       return false if @policy.nil?
@@ -107,6 +121,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           account_id == o.account_id &&
           type_id == o.type_id &&
           policy == o.policy
@@ -121,7 +136,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, type_id, policy].hash
+      [id, account_id, type_id, policy].hash
     end
 
     # Builds the object from hash

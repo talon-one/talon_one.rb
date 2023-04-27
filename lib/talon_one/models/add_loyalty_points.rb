@@ -21,13 +21,13 @@ module TalonOne
     # Name / reason for the point addition.
     attr_accessor :name
 
-    # The duration after which the added loyalty points should expire. The time format is an integer followed by one letter indicating the time unit, like '30s', '40m', '1h', '5D', '7W', or 10M'. These rounding suffixes are also supported:   - '_D' for rounding down. Can be used as a suffix after 'D', and signifies the start of the day.   - '_U' for rounding up. Can be used as a suffix after 'D', 'W', and 'M', and signifies the end of the day, week, and month.   If passed, `validUntil` should be omitted. 
+    # The time format is either: - `immediate` or, - an **integer** followed by one letter indicating the time unit.  Examples: `immediate`, `30s`, `40m`, `1h`, `5D`, `7W`, `10M`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks and months. Signifies the end of the day, week, or month.  If passed, `validUntil` should be omitted. 
     attr_accessor :validity_duration
 
     # Date and time when points should expire. The value should be provided in RFC 3339 format. If passed, `validityDuration` should be omitted. 
     attr_accessor :valid_until
 
-    # The amount of time before the points are considered valid. The time format is an integer followed by one letter indicating the time unit, like '30s', '40m', '1h', '5D', '7W', or 10M'. These rounding suffixes are also supported:   - '_D' for rounding down. Can be used as a suffix after 'D', and signifies the start of the day.   - '_U' for rounding up. Can be used as a suffix after 'D', 'W', and 'M', and signifies the end of the day, week, and month. If passed, `pendingUntil` should be omitted. 
+    # The amount of time before the points are considered valid.  The time format is either: - `immediate` or, - an **integer** followed by one letter indicating the time unit.  Examples: `immediate`, `30s`, `40m`, `1h`, `5D`, `7W`, `10M`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks and months. Signifies the end of the day, week, or month. 
     attr_accessor :pending_duration
 
     # Date and time after the points are considered valid. The value should be provided in RFC 3339 format. If passed, `pendingDuration` should be omitted. 

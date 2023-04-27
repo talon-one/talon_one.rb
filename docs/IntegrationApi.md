@@ -15,11 +15,11 @@ Method | HTTP request | Description
 [**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | List customer data
 [**get_customer_session**](IntegrationApi.md#get_customer_session) | **GET** /v2/customer_sessions/{customerSessionId} | Get customer session
 [**get_loyalty_balances**](IntegrationApi.md#get_loyalty_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/balances | Get customer&#39;s loyalty points
-[**get_loyalty_card_balances**](IntegrationApi.md#get_loyalty_card_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/balances | Get loyalty balances for a loyalty card
-[**get_loyalty_card_transactions**](IntegrationApi.md#get_loyalty_card_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/transactions | Get loyalty card transaction logs
+[**get_loyalty_card_balances**](IntegrationApi.md#get_loyalty_card_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/balances | Get card&#39;s point balances
+[**get_loyalty_card_transactions**](IntegrationApi.md#get_loyalty_card_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/transactions | List card&#39;s transactions
 [**get_loyalty_program_profile_transactions**](IntegrationApi.md#get_loyalty_program_profile_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/transactions | List customer&#39;s loyalty transactions
 [**get_reserved_customers**](IntegrationApi.md#get_reserved_customers) | **GET** /v1/coupon_reservations/customerprofiles/{couponValue} | List customers that have this coupon reserved
-[**link_loyalty_card_to_profile**](IntegrationApi.md#link_loyalty_card_to_profile) | **POST** /v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardIdentifier}/link_profile | Link customer profile to loyalty card
+[**link_loyalty_card_to_profile**](IntegrationApi.md#link_loyalty_card_to_profile) | **POST** /v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/link_profile | Link customer profile to card
 [**reopen_customer_session**](IntegrationApi.md#reopen_customer_session) | **PUT** /v2/customer_sessions/{customerSessionId}/reopen | Reopen customer session
 [**return_cart_items**](IntegrationApi.md#return_cart_items) | **POST** /v2/customer_sessions/{customerSessionId}/returns | Return cart items
 [**sync_catalog**](IntegrationApi.md#sync_catalog) | **PUT** /v1/catalogs/{catalogId}/sync | Sync cart item catalog
@@ -652,9 +652,9 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_card_balances
 
-> LoyaltyBalances get_loyalty_card_balances(loyalty_program_id, loyalty_card_identifier, opts)
+> LoyaltyBalances get_loyalty_card_balances(loyalty_program_id, loyalty_card_id, opts)
 
-Get loyalty balances for a loyalty card
+Get card's point balances
 
 Retrieve loyalty balances for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, all loyalty balances for the given loyalty card are returned. 
 
@@ -673,14 +673,14 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_identifier = 'loyalty_card_identifier_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
 opts = {
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return balances only for entries older than this timestamp. The expired, active, and pending points are relative to this timestamp.  **Note:** It must be an RFC3339 timestamp string. 
 }
 
 begin
-  #Get loyalty balances for a loyalty card
-  result = api_instance.get_loyalty_card_balances(loyalty_program_id, loyalty_card_identifier, opts)
+  #Get card's point balances
+  result = api_instance.get_loyalty_card_balances(loyalty_program_id, loyalty_card_id, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->get_loyalty_card_balances: #{e}"
@@ -693,7 +693,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_identifier** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
  **end_date** | **DateTime**| Used to return balances only for entries older than this timestamp. The expired, active, and pending points are relative to this timestamp.  **Note:** It must be an RFC3339 timestamp string.  | [optional] 
 
 ### Return type
@@ -712,9 +712,9 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_card_transactions
 
-> CardLedgerTransactionLogEntryIntegrationAPI get_loyalty_card_transactions(loyalty_program_id, loyalty_card_identifier, opts)
+> InlineResponse2001 get_loyalty_card_transactions(loyalty_program_id, loyalty_card_id, opts)
 
-Get loyalty card transaction logs
+List card's transactions
 
 Retrieve loyalty transaction logs for the given loyalty card in the specified loyalty program with filtering options applied. If no filtering options are applied, the last 50 loyalty transactions for the given loyalty card are returned. 
 
@@ -733,7 +733,7 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_identifier = 'loyalty_card_identifier_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
 opts = {
   subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
   start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string. 
@@ -743,8 +743,8 @@ opts = {
 }
 
 begin
-  #Get loyalty card transaction logs
-  result = api_instance.get_loyalty_card_transactions(loyalty_program_id, loyalty_card_identifier, opts)
+  #List card's transactions
+  result = api_instance.get_loyalty_card_transactions(loyalty_program_id, loyalty_card_id, opts)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->get_loyalty_card_transactions: #{e}"
@@ -757,7 +757,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_identifier** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
  **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string.  | [optional] 
  **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:** It must be an RFC3339 timestamp string.  | [optional] 
@@ -766,7 +766,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CardLedgerTransactionLogEntryIntegrationAPI**](CardLedgerTransactionLogEntryIntegrationAPI.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -780,7 +780,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_program_profile_transactions
 
-> InlineResponse2001 get_loyalty_program_profile_transactions(loyalty_program_id, integration_id, opts)
+> InlineResponse2002 get_loyalty_program_profile_transactions(loyalty_program_id, integration_id, opts)
 
 List customer's loyalty transactions
 
@@ -834,7 +834,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -902,9 +902,9 @@ Name | Type | Description  | Notes
 
 ## link_loyalty_card_to_profile
 
-> LoyaltyCard link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_identifier, body)
+> LoyaltyCard link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_id, body)
 
-Link customer profile to loyalty card
+Link customer profile to card
 
 [Loyalty cards](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/loyalty-card-overview) allow customers to collect and spend loyalty points within a [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types). They are useful to gamify loyalty programs and can be used with or without customer profiles linked to them.  Link a customer profile to a given loyalty card for the card to be set as **Registered**. This affects how it can be used. See the [docs](https://docs.talon.one/docs/product/loyalty-programs/loyalty-cards/managing-loyalty-cards#linking-customer-profiles-to-a-loyalty-card).  **Note:** You can link as many customer profiles to a given loyalty card as the [**card user limit**](https://docs.talon.one/docs/product/loyalty-programs/creating-loyalty-programs#creating-card-based-loyalty-programs) allows. 
 
@@ -923,12 +923,12 @@ end
 
 api_instance = TalonOne::IntegrationApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_identifier = 'loyalty_card_identifier_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
 body = TalonOne::LoyaltyCardRegistration.new # LoyaltyCardRegistration | body
 
 begin
-  #Link customer profile to loyalty card
-  result = api_instance.link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_identifier, body)
+  #Link customer profile to card
+  result = api_instance.link_loyalty_card_to_profile(loyalty_program_id, loyalty_card_id, body)
   p result
 rescue TalonOne::ApiError => e
   puts "Exception when calling IntegrationApi->link_loyalty_card_to_profile: #{e}"
@@ -941,7 +941,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_identifier** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
  **body** | [**LoyaltyCardRegistration**](LoyaltyCardRegistration.md)| body | 
 
 ### Return type
@@ -960,7 +960,7 @@ Name | Type | Description  | Notes
 
 ## reopen_customer_session
 
-> IntegrationStateV2 reopen_customer_session(customer_session_id)
+> ReopenSessionResponse reopen_customer_session(customer_session_id)
 
 Reopen customer session
 
@@ -1000,7 +1000,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IntegrationStateV2**](IntegrationStateV2.md)
+[**ReopenSessionResponse**](ReopenSessionResponse.md)
 
 ### Authorization
 

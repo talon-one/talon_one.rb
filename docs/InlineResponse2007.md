@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | 
+**total_result_size** | **Integer** |  | 
 **data** | [**Array&lt;Coupon&gt;**](Coupon.md) |  | 
 
 ## Code Sample
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse2007.new(has_more: true,
+instance = TalonOne::InlineResponse2007.new(total_result_size: 1,
                                  data: null)
 ```
 

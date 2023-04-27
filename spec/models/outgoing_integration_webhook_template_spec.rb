@@ -62,4 +62,14 @@ describe 'OutgoingIntegrationWebhookTemplate' do
     end
   end
 
+  describe 'test attribute "method"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.method = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

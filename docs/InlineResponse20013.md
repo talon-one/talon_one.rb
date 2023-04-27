@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** | true means there is more data in the source collection to request.. | 
-**data** | [**Array&lt;CardLedgerTransactionLogEntry&gt;**](CardLedgerTransactionLogEntry.md) | List of loyalty card transaction logs. | 
+**has_more** | **Boolean** |  | 
+**data** | [**Array&lt;LoyaltyCard&gt;**](LoyaltyCard.md) |  | 
 
 ## Code Sample
 
