@@ -12,7 +12,7 @@ OpenAPI Generator version: 4.3.1
 
 module TalonOne
   class ApiError < StandardError
-    attr_reader :code, :response_headers, :response_body
+    attr_reader :code, :response_headers, :response_body, :timeout
 
     # Usage examples:
     #   ApiError.new
