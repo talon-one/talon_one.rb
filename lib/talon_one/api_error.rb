@@ -12,13 +12,14 @@ OpenAPI Generator version: 4.3.1
 
 module TalonOne
   class ApiError < StandardError
-    attr_reader :code, :response_headers, :response_body
+    attr_reader :code, :response_headers, :response_body, :timeout
 
     # Usage examples:
     #   ApiError.new
     #   ApiError.new("message")
     #   ApiError.new(:code => 500, :response_headers => {}, :response_body => "")
     #   ApiError.new(:code => 404, :message => "Not Found")
+    #   ApiError.new(:message => "Connection timed out", :timeout => true)
     def initialize(arg = nil)
       if arg.is_a? Hash
         if arg.key?(:message) || arg.key?('message')
@@ -47,9 +48,15 @@ module TalonOne
         msg = @message
       end
 
+      is_timeout = false
+      unless timeout.nil?
+        is_timeout = timeout
+      end
+
       msg += "\nHTTP status code: #{code}" if code
       msg += "\nResponse headers: #{response_headers}" if response_headers
       msg += "\nResponse body: #{response_body}" if response_body
+      msg += "\nIs timeout: #{is_timeout}"
 
       msg
     end
