@@ -3,6 +3,8 @@ VERSION=$(shell grep -om1 -E "VERSION\s\=\s'[0-9\.]+'" $(PWD)/lib/talon_one/vers
 GEM_CREDENTIALS_LOCATION=~/.gem
 GEM_CREDENTIALS_FILE=$(GEM_CREDENTIALS_LOCATION)/credentials
 
+default: testenv
+
 clean:
 	find -name "talon_one*.gem" -delete
 
@@ -34,6 +36,7 @@ endif
 			 && chmod 0600 $(GEM_CREDENTIALS_FILE) \
 			 && gem push talon_one-$(VERSION).gem"
 
+.PHONY: testenv
 testenv:
 	docker run \
 		--rm -it \
