@@ -1,12 +1,12 @@
 WORKING_DIR=/tmp/talon-client
-VERSION=$(shell grep -om1 -E "VERSION\s\=\s'[0-9\.]+'" $(PWD)/lib/talon_one/version.rb | sed "s/VERSION\s\=\s'\(.*\)'/\1/")
-GEM_CREDENTIALS_LOCATION=~/.gem
-GEM_CREDENTIALS_FILE=$(GEM_CREDENTIALS_LOCATION)/credentials
+VERSION:=$(shell grep -om1 -E "VERSION\s\=\s'[0-9\.]+'" $(PWD)/lib/talon_one/version.rb | sed "s/VERSION\s\=\s'\(.*\)'/\1/")
+GEM_CREDENTIALS_LOCATION:=~/.gem
+GEM_CREDENTIALS_FILE:=$(GEM_CREDENTIALS_LOCATION)/credentials
 
 default: testenv
 
 clean:
-	find -name "talon_one*.gem" -delete
+	find -name "talon_one*.gem" -delete -print
 
 build: clean
 	docker run \
@@ -32,9 +32,9 @@ endif
 		ruby:2.7 \
 		/bin/bash -c \
 			"mkdir -p $(GEM_CREDENTIALS_LOCATION) \
-			 && curl -u 'talon_one:$(apiKey)' https://rubygems.org/api/v1/api_key.yaml > $(GEM_CREDENTIALS_FILE) \
+			 && echo -e '---\n:rubygems_api_key: $(apiKey)\n' > $(GEM_CREDENTIALS_FILE) \
 			 && chmod 0600 $(GEM_CREDENTIALS_FILE) \
-			 && gem push talon_one-$(VERSION).gem"
+			 && gem push talon_one-$(VERSION).gem -k rubygems"
 
 .PHONY: testenv
 testenv:
