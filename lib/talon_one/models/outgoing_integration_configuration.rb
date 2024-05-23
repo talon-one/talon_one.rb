@@ -23,6 +23,7 @@ module TalonOne
     # The outgoing integration type ID.
     attr_accessor :type_id
 
+    # The outgoing integration policy specific to each integration type.
     attr_accessor :policy
 
     # Attribute mapping from ruby-style variable name to JSON key.

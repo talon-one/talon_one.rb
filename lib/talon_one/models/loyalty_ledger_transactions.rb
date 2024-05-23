@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # List of loyalty ledger transactions.
   class LoyaltyLedgerTransactions
-    # true means there is more data in the source collection to request.
+    # If `true`, it means that there is more data to request in the source collection.
     attr_accessor :has_more
 
     # List of transaction entries from a loyalty ledger.

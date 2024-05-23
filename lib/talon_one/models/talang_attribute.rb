@@ -186,7 +186,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      entity_validator = EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "Profile", "Giveaway", "Referral", "Session"])
+      entity_validator = EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "Profile", "Giveaway", "Referral", "Session", "Store", "Achievements"])
       return false unless entity_validator.valid?(@entity)
       return false if @name.nil?
       return false if @type.nil?
@@ -201,7 +201,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity Object to be assigned
     def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "Profile", "Giveaway", "Referral", "Session"])
+      validator = EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "Profile", "Giveaway", "Referral", "Session", "Store", "Achievements"])
       unless validator.valid?(entity)
         fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
       end

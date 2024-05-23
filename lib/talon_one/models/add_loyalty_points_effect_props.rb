@@ -45,7 +45,7 @@ module TalonOne
     # The index of the item in the cart items list on which the loyal points addition should be applied.
     attr_accessor :cart_item_position
 
-    # The sub position is triggered when application flattening is enabled. It indicates to which item the loyalty points addition applies, for cart items with `quantity` > 1. 
+    # For cart items with `quantity` > 1, the sub position indicates to which item the loyalty points addition is applied. 
     attr_accessor :cart_item_sub_position
 
     # The alphanumeric identifier of the loyalty card. 

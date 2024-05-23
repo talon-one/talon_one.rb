@@ -17,13 +17,14 @@ module TalonOne
     # Name of the permission set.
     attr_accessor :name
 
-    attr_accessor :operation_ids
+    # List of logical operations in the permission set. Each logical operation must be shown under the `x-permission` tag on an endpoint level. 
+    attr_accessor :logical_operations
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'operation_ids' => :'operationIds'
+        :'logical_operations' => :'logicalOperations'
       }
     end
 
@@ -31,7 +32,7 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'operation_ids' => :'Array<String>'
+        :'logical_operations' => :'Array<String>'
       }
     end
 
@@ -60,9 +61,9 @@ module TalonOne
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'operation_ids')
-        if (value = attributes[:'operation_ids']).is_a?(Array)
-          self.operation_ids = value
+      if attributes.key?(:'logical_operations')
+        if (value = attributes[:'logical_operations']).is_a?(Array)
+          self.logical_operations = value
         end
       end
     end
@@ -75,8 +76,8 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @operation_ids.nil?
-        invalid_properties.push('invalid value for "operation_ids", operation_ids cannot be nil.')
+      if @logical_operations.nil?
+        invalid_properties.push('invalid value for "logical_operations", logical_operations cannot be nil.')
       end
 
       invalid_properties
@@ -86,7 +87,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @name.nil?
-      return false if @operation_ids.nil?
+      return false if @logical_operations.nil?
       true
     end
 
@@ -96,7 +97,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          operation_ids == o.operation_ids
+          logical_operations == o.logical_operations
     end
 
     # @see the `==` method
@@ -108,7 +109,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, operation_ids].hash
+      [name, logical_operations].hash
     end
 
     # Builds the object from hash

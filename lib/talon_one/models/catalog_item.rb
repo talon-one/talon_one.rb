@@ -35,6 +35,8 @@ module TalonOne
 
     attr_accessor :attributes
 
+    attr_accessor :product
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -44,7 +46,8 @@ module TalonOne
         :'price' => :'price',
         :'catalogid' => :'catalogid',
         :'version' => :'version',
-        :'attributes' => :'attributes'
+        :'attributes' => :'attributes',
+        :'product' => :'product'
       }
     end
 
@@ -57,7 +60,8 @@ module TalonOne
         :'price' => :'Float',
         :'catalogid' => :'Integer',
         :'version' => :'Integer',
-        :'attributes' => :'Array<ItemAttribute>'
+        :'attributes' => :'Array<ItemAttribute>',
+        :'product' => :'Product'
       }
     end
 
@@ -110,6 +114,10 @@ module TalonOne
         if (value = attributes[:'attributes']).is_a?(Array)
           self.attributes = value
         end
+      end
+
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
       end
     end
 
@@ -181,7 +189,8 @@ module TalonOne
           price == o.price &&
           catalogid == o.catalogid &&
           version == o.version &&
-          attributes == o.attributes
+          attributes == o.attributes &&
+          product == o.product
     end
 
     # @see the `==` method
@@ -193,7 +202,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, sku, price, catalogid, version, attributes].hash
+      [id, created, sku, price, catalogid, version, attributes, product].hash
     end
 
     # Builds the object from hash

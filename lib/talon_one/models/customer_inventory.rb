@@ -25,6 +25,8 @@ module TalonOne
 
     attr_accessor :giveaways
 
+    attr_accessor :achievements
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -32,7 +34,8 @@ module TalonOne
         :'loyalty' => :'loyalty',
         :'referrals' => :'referrals',
         :'coupons' => :'coupons',
-        :'giveaways' => :'giveaways'
+        :'giveaways' => :'giveaways',
+        :'achievements' => :'achievements'
       }
     end
 
@@ -43,7 +46,8 @@ module TalonOne
         :'loyalty' => :'Loyalty',
         :'referrals' => :'Array<InventoryReferral>',
         :'coupons' => :'Array<InventoryCoupon>',
-        :'giveaways' => :'Array<Giveaway>'
+        :'giveaways' => :'Array<Giveaway>',
+        :'achievements' => :'Array<AchievementProgress>'
       }
     end
 
@@ -93,6 +97,12 @@ module TalonOne
           self.giveaways = value
         end
       end
+
+      if attributes.key?(:'achievements')
+        if (value = attributes[:'achievements']).is_a?(Array)
+          self.achievements = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +127,8 @@ module TalonOne
           loyalty == o.loyalty &&
           referrals == o.referrals &&
           coupons == o.coupons &&
-          giveaways == o.giveaways
+          giveaways == o.giveaways &&
+          achievements == o.achievements
     end
 
     # @see the `==` method
@@ -129,7 +140,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile, loyalty, referrals, coupons, giveaways].hash
+      [profile, loyalty, referrals, coupons, giveaways, achievements].hash
     end
 
     # Builds the object from hash

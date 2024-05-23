@@ -13,12 +13,12 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The audiences and their members count.
+  # The audiences and their member count.
   class AudienceAnalytics
     # The ID of the audience.
     attr_accessor :audience_id
 
-    # The count of members under a single audience.
+    # The member count of the audience.
     attr_accessor :members_count
 
     # Attribute mapping from ruby-style variable name to JSON key.

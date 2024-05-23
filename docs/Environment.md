@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **variables** | **String** | A stringified version of the environment&#39;s Talang variables scope. | 
 **giveaways_pools** | [**Array&lt;GiveawaysPool&gt;**](GiveawaysPool.md) | The giveaways pools that the application is subscribed to. | [optional] 
 **loyalty_programs** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) | The loyalty programs that the application is subscribed to. | [optional] 
+**achievements** | [**Array&lt;Achievement&gt;**](Achievement.md) | The achievements, linked to the campaigns, belonging to the application. | [optional] 
 **attributes** | [**Array&lt;Attribute&gt;**](Attribute.md) | The attributes that the application is subscribed to. | [optional] 
 **additional_costs** | [**Array&lt;AccountAdditionalCost&gt;**](AccountAdditionalCost.md) | The additional costs that the application is subscribed to. | [optional] 
 **audiences** | [**Array&lt;Audience&gt;**](Audience.md) | The audiences contained in the account which the application belongs to. | [optional] 
@@ -32,6 +33,7 @@ instance = TalonOne::Environment.new(id: 6,
                                  variables: null,
                                  giveaways_pools: null,
                                  loyalty_programs: null,
+                                 achievements: null,
                                  attributes: null,
                                  additional_costs: null,
                                  audiences: null,

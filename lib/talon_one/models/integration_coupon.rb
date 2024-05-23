@@ -78,6 +78,9 @@ module TalonOne
     # Whether the reservation effect actually created a new reservation.
     attr_accessor :is_reservation_mandatory
 
+    # An indication of whether the coupon is implicitly reserved for all customers.
+    attr_accessor :implicitly_reserved
+
     # The number of times the coupon was redeemed by the profile.
     attr_accessor :profile_redemption_count
 
@@ -105,6 +108,7 @@ module TalonOne
         :'reservation' => :'reservation',
         :'batch_id' => :'batchId',
         :'is_reservation_mandatory' => :'isReservationMandatory',
+        :'implicitly_reserved' => :'implicitlyReserved',
         :'profile_redemption_count' => :'profileRedemptionCount'
       }
     end
@@ -133,6 +137,7 @@ module TalonOne
         :'reservation' => :'Boolean',
         :'batch_id' => :'String',
         :'is_reservation_mandatory' => :'Boolean',
+        :'implicitly_reserved' => :'Boolean',
         :'profile_redemption_count' => :'Integer'
       }
     end
@@ -245,7 +250,11 @@ module TalonOne
       if attributes.key?(:'is_reservation_mandatory')
         self.is_reservation_mandatory = attributes[:'is_reservation_mandatory']
       else
-        self.is_reservation_mandatory = true
+        self.is_reservation_mandatory = false
+      end
+
+      if attributes.key?(:'implicitly_reserved')
+        self.implicitly_reserved = attributes[:'implicitly_reserved']
       end
 
       if attributes.key?(:'profile_redemption_count')
@@ -437,6 +446,7 @@ module TalonOne
           reservation == o.reservation &&
           batch_id == o.batch_id &&
           is_reservation_mandatory == o.is_reservation_mandatory &&
+          implicitly_reserved == o.implicitly_reserved &&
           profile_redemption_count == o.profile_redemption_count
     end
 
@@ -449,7 +459,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, campaign_id, value, usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, usage_counter, discount_counter, discount_remainder, reservation_counter, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id, is_reservation_mandatory, profile_redemption_count].hash
+      [id, created, campaign_id, value, usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, usage_counter, discount_counter, discount_remainder, reservation_counter, attributes, referral_id, recipient_integration_id, import_id, reservation, batch_id, is_reservation_mandatory, implicitly_reserved, profile_redemption_count].hash
     end
 
     # Builds the object from hash

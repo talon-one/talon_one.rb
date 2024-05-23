@@ -27,7 +27,7 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :account_id
 
-    # The ID of the [Campaign Group](https://docs.talon.one/docs/product/account/managing-campaign-groups) this role was created for. 
+    # The ID of the [Campaign Group](https://docs.talon.one/docs/product/account/account-settings/managing-campaign-groups) this role was created for. 
     attr_accessor :campaign_group_id
 
     # Name of the role.

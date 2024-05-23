@@ -19,14 +19,14 @@ module TalonOne
 
     attr_accessor :ruleset
 
-    attr_accessor :priority
+    attr_accessor :evaluation_position
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'campaign' => :'campaign',
         :'ruleset' => :'ruleset',
-        :'priority' => :'priority'
+        :'evaluation_position' => :'evaluationPosition'
       }
     end
 
@@ -35,7 +35,7 @@ module TalonOne
       {
         :'campaign' => :'Campaign',
         :'ruleset' => :'Ruleset',
-        :'priority' => :'PriorityPosition'
+        :'evaluation_position' => :'CampaignEvaluationPosition'
       }
     end
 
@@ -68,8 +68,8 @@ module TalonOne
         self.ruleset = attributes[:'ruleset']
       end
 
-      if attributes.key?(:'priority')
-        self.priority = attributes[:'priority']
+      if attributes.key?(:'evaluation_position')
+        self.evaluation_position = attributes[:'evaluation_position']
       end
     end
 
@@ -81,8 +81,8 @@ module TalonOne
         invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
       end
 
-      if @priority.nil?
-        invalid_properties.push('invalid value for "priority", priority cannot be nil.')
+      if @evaluation_position.nil?
+        invalid_properties.push('invalid value for "evaluation_position", evaluation_position cannot be nil.')
       end
 
       invalid_properties
@@ -92,7 +92,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @campaign.nil?
-      return false if @priority.nil?
+      return false if @evaluation_position.nil?
       true
     end
 
@@ -103,7 +103,7 @@ module TalonOne
       self.class == o.class &&
           campaign == o.campaign &&
           ruleset == o.ruleset &&
-          priority == o.priority
+          evaluation_position == o.evaluation_position
     end
 
     # @see the `==` method
@@ -115,7 +115,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign, ruleset, priority].hash
+      [campaign, ruleset, evaluation_position].hash
     end
 
     # Builds the object from hash

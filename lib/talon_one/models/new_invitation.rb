@@ -15,24 +15,29 @@ require 'date'
 module TalonOne
   # Parameters for inviting a new user.
   class NewInvitation
-    # Name of the user being invited.
+    # Name of the user.
     attr_accessor :name
 
+    # Email address of the user.
     attr_accessor :email
 
-    # The `Access Control List` json defining the role of the user.  This represents the access control on the user level. Use one of the following: - normal user: `{\"Role\": 0}` - admin: `{\"Role\": 127}` 
-    attr_accessor :acl
+    # Indicates whether the user is an `admin`.
+    attr_accessor :is_admin
 
-    # An array of roleIDs to assign the new user to.
+    # A list of the IDs of the roles assigned to the user.
     attr_accessor :roles
+
+    # Indicates the access level of the user.
+    attr_accessor :acl
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'email' => :'email',
-        :'acl' => :'acl',
-        :'roles' => :'roles'
+        :'is_admin' => :'isAdmin',
+        :'roles' => :'roles',
+        :'acl' => :'acl'
       }
     end
 
@@ -41,8 +46,9 @@ module TalonOne
       {
         :'name' => :'String',
         :'email' => :'String',
-        :'acl' => :'String',
-        :'roles' => :'Array<Integer>'
+        :'is_admin' => :'Boolean',
+        :'roles' => :'Array<Integer>',
+        :'acl' => :'String'
       }
     end
 
@@ -75,14 +81,18 @@ module TalonOne
         self.email = attributes[:'email']
       end
 
-      if attributes.key?(:'acl')
-        self.acl = attributes[:'acl']
+      if attributes.key?(:'is_admin')
+        self.is_admin = attributes[:'is_admin']
       end
 
       if attributes.key?(:'roles')
         if (value = attributes[:'roles']).is_a?(Array)
           self.roles = value
         end
+      end
+
+      if attributes.key?(:'acl')
+        self.acl = attributes[:'acl']
       end
     end
 
@@ -94,10 +104,6 @@ module TalonOne
         invalid_properties.push('invalid value for "email", email cannot be nil.')
       end
 
-      if @acl.nil?
-        invalid_properties.push('invalid value for "acl", acl cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -105,7 +111,6 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @email.nil?
-      return false if @acl.nil?
       true
     end
 
@@ -116,8 +121,9 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           email == o.email &&
-          acl == o.acl &&
-          roles == o.roles
+          is_admin == o.is_admin &&
+          roles == o.roles &&
+          acl == o.acl
     end
 
     # @see the `==` method
@@ -129,7 +135,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, email, acl, roles].hash
+      [name, email, is_admin, roles, acl].hash
     end
 
     # Builds the object from hash

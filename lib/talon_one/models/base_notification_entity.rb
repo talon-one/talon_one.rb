@@ -16,17 +16,22 @@ module TalonOne
   class BaseNotificationEntity
     attr_accessor :policy
 
+    # Indicates whether the notification is activated.
+    attr_accessor :enabled
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'policy' => :'policy'
+        :'policy' => :'policy',
+        :'enabled' => :'enabled'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'policy' => :'Object'
+        :'policy' => :'Object',
+        :'enabled' => :'Boolean'
       }
     end
 
@@ -54,6 +59,12 @@ module TalonOne
       if attributes.key?(:'policy')
         self.policy = attributes[:'policy']
       end
+
+      if attributes.key?(:'enabled')
+        self.enabled = attributes[:'enabled']
+      else
+        self.enabled = true
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,7 +90,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          policy == o.policy
+          policy == o.policy &&
+          enabled == o.enabled
     end
 
     # @see the `==` method
@@ -91,7 +103,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [policy].hash
+      [policy, enabled].hash
     end
 
     # Builds the object from hash

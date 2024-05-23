@@ -73,6 +73,9 @@ module TalonOne
     # The default campaign group ID.
     attr_accessor :default_campaign_group_id
 
+    # The campaign type. Possible type values:   - `cartItem`: Type of campaign that can apply effects only to cart items.   - `advanced`: Type of campaign that can apply effects to customer sessions and cart items. 
+    attr_accessor :campaign_type
+
     # Timestamp of the most recent update to the campaign template or any of its elements.
     attr_accessor :updated
 
@@ -127,6 +130,7 @@ module TalonOne
         :'applications_ids' => :'applicationsIds',
         :'campaign_collections' => :'campaignCollections',
         :'default_campaign_group_id' => :'defaultCampaignGroupId',
+        :'campaign_type' => :'campaignType',
         :'updated' => :'updated',
         :'updated_by' => :'updatedBy',
         :'valid_application_ids' => :'validApplicationIds'
@@ -156,6 +160,7 @@ module TalonOne
         :'applications_ids' => :'Array<Integer>',
         :'campaign_collections' => :'Array<CampaignTemplateCollection>',
         :'default_campaign_group_id' => :'Integer',
+        :'campaign_type' => :'String',
         :'updated' => :'DateTime',
         :'updated_by' => :'String',
         :'valid_application_ids' => :'Array<Integer>'
@@ -275,6 +280,12 @@ module TalonOne
         self.default_campaign_group_id = attributes[:'default_campaign_group_id']
       end
 
+      if attributes.key?(:'campaign_type')
+        self.campaign_type = attributes[:'campaign_type']
+      else
+        self.campaign_type = 'advanced'
+      end
+
       if attributes.key?(:'updated')
         self.updated = attributes[:'updated']
       end
@@ -334,6 +345,10 @@ module TalonOne
         invalid_properties.push('invalid value for "applications_ids", applications_ids cannot be nil.')
       end
 
+      if @campaign_type.nil?
+        invalid_properties.push('invalid value for "campaign_type", campaign_type cannot be nil.')
+      end
+
       if @valid_application_ids.nil?
         invalid_properties.push('invalid value for "valid_application_ids", valid_application_ids cannot be nil.')
       end
@@ -356,6 +371,9 @@ module TalonOne
       state_validator = EnumAttributeValidator.new('String', ["draft", "enabled", "disabled"])
       return false unless state_validator.valid?(@state)
       return false if @applications_ids.nil?
+      return false if @campaign_type.nil?
+      campaign_type_validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      return false unless campaign_type_validator.valid?(@campaign_type)
       return false if @valid_application_ids.nil?
       true
     end
@@ -384,6 +402,16 @@ module TalonOne
       @state = state
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_type Object to be assigned
+    def campaign_type=(campaign_type)
+      validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      unless validator.valid?(campaign_type)
+        fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_type = campaign_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -409,6 +437,7 @@ module TalonOne
           applications_ids == o.applications_ids &&
           campaign_collections == o.campaign_collections &&
           default_campaign_group_id == o.default_campaign_group_id &&
+          campaign_type == o.campaign_type &&
           updated == o.updated &&
           updated_by == o.updated_by &&
           valid_application_ids == o.valid_application_ids
@@ -423,7 +452,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, updated, updated_by, valid_application_ids].hash
+      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, campaign_type, updated, updated_by, valid_application_ids].hash
     end
 
     # Builds the object from hash

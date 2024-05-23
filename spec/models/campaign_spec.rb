@@ -111,7 +111,7 @@ describe 'Campaign' do
   describe 'test attribute "features"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough", "achievements"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.features = value }.not_to raise_error
       # end
@@ -137,6 +137,28 @@ describe 'Campaign' do
   end
 
   describe 'test attribute "campaign_groups"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "linked_store_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "budgets"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -259,6 +281,16 @@ describe 'Campaign' do
   describe 'test attribute "template_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "frontend_state"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.frontend_state = value }.not_to raise_error
+      # end
     end
   end
 

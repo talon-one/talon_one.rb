@@ -13,6 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # 
   class NewCampaign
     # A user-facing name for this campaign.
     attr_accessor :name
@@ -23,7 +24,7 @@ module TalonOne
     # Timestamp when the campaign will become active.
     attr_accessor :start_time
 
-    # Timestamp the campaign will become inactive.
+    # Timestamp when the campaign will become inactive.
     attr_accessor :end_time
 
     # Arbitrary properties associated with this campaign.
@@ -50,6 +51,15 @@ module TalonOne
 
     # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups) this campaign belongs to. 
     attr_accessor :campaign_groups
+
+    # The campaign type. Possible type values:   - `cartItem`: Type of campaign that can apply effects only to cart items.   - `advanced`: Type of campaign that can apply effects to customer sessions and cart items. 
+    attr_accessor :type
+
+    # A list of store IDs that you want to link to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store. 
+    attr_accessor :linked_store_ids
+
+    # The ID of the campaign evaluation group the campaign belongs to.
+    attr_accessor :evaluation_group_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -88,7 +98,10 @@ module TalonOne
         :'coupon_settings' => :'couponSettings',
         :'referral_settings' => :'referralSettings',
         :'limits' => :'limits',
-        :'campaign_groups' => :'campaignGroups'
+        :'campaign_groups' => :'campaignGroups',
+        :'type' => :'type',
+        :'linked_store_ids' => :'linkedStoreIds',
+        :'evaluation_group_id' => :'evaluationGroupId'
       }
     end
 
@@ -107,7 +120,10 @@ module TalonOne
         :'coupon_settings' => :'CodeGeneratorSettings',
         :'referral_settings' => :'CodeGeneratorSettings',
         :'limits' => :'Array<LimitConfig>',
-        :'campaign_groups' => :'Array<Integer>'
+        :'campaign_groups' => :'Array<Integer>',
+        :'type' => :'String',
+        :'linked_store_ids' => :'Array<Integer>',
+        :'evaluation_group_id' => :'Integer'
       }
     end
 
@@ -193,6 +209,22 @@ module TalonOne
           self.campaign_groups = value
         end
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = 'advanced'
+      end
+
+      if attributes.key?(:'linked_store_ids')
+        if (value = attributes[:'linked_store_ids']).is_a?(Array)
+          self.linked_store_ids = value
+        end
+      end
+
+      if attributes.key?(:'evaluation_group_id')
+        self.evaluation_group_id = attributes[:'evaluation_group_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -237,6 +269,8 @@ module TalonOne
       return false if @tags.nil?
       return false if @features.nil?
       return false if @limits.nil?
+      type_validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -264,6 +298,16 @@ module TalonOne
       @state = state
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -281,7 +325,10 @@ module TalonOne
           coupon_settings == o.coupon_settings &&
           referral_settings == o.referral_settings &&
           limits == o.limits &&
-          campaign_groups == o.campaign_groups
+          campaign_groups == o.campaign_groups &&
+          type == o.type &&
+          linked_store_ids == o.linked_store_ids &&
+          evaluation_group_id == o.evaluation_group_id
     end
 
     # @see the `==` method
@@ -293,7 +340,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups].hash
+      [name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, evaluation_group_id].hash
     end
 
     # Builds the object from hash

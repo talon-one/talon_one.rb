@@ -14,8 +14,10 @@ require 'date'
 
 module TalonOne
   class NewInviteEmail
+    # Email address of the user.
     attr_accessor :email
 
+    # Invitation token of the user.
     attr_accessor :token
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -72,16 +74,8 @@ module TalonOne
         invalid_properties.push('invalid value for "email", email cannot be nil.')
       end
 
-      if @email.to_s.length < 1
-        invalid_properties.push('invalid value for "email", the character length must be great than or equal to 1.')
-      end
-
       if @token.nil?
         invalid_properties.push('invalid value for "token", token cannot be nil.')
-      end
-
-      if @token.to_s.length < 1
-        invalid_properties.push('invalid value for "token", the character length must be great than or equal to 1.')
       end
 
       invalid_properties
@@ -91,38 +85,8 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @email.nil?
-      return false if @email.to_s.length < 1
       return false if @token.nil?
-      return false if @token.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.nil?
-        fail ArgumentError, 'email cannot be nil'
-      end
-
-      if email.to_s.length < 1
-        fail ArgumentError, 'invalid value for "email", the character length must be great than or equal to 1.'
-      end
-
-      @email = email
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] token Value to be assigned
-    def token=(token)
-      if token.nil?
-        fail ArgumentError, 'token cannot be nil'
-      end
-
-      if token.to_s.length < 1
-        fail ArgumentError, 'invalid value for "token", the character length must be great than or equal to 1.'
-      end
-
-      @token = token
     end
 
     # Checks equality by comparing each attribute.

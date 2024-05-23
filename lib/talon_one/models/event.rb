@@ -27,6 +27,9 @@ module TalonOne
     # ID of the customer profile set by your integration layer.  **Note:** If the customer does not yet have a known `profileId`, we recommend you use a guest `profileId`. 
     attr_accessor :profile_id
 
+    # The integration ID of the store. You choose this ID when you create a store.
+    attr_accessor :store_integration_id
+
     # A string representing the event. Must not be a reserved event name.
     attr_accessor :type
 
@@ -51,6 +54,7 @@ module TalonOne
         :'created' => :'created',
         :'application_id' => :'applicationId',
         :'profile_id' => :'profileId',
+        :'store_integration_id' => :'storeIntegrationId',
         :'type' => :'type',
         :'attributes' => :'attributes',
         :'session_id' => :'sessionId',
@@ -67,6 +71,7 @@ module TalonOne
         :'created' => :'DateTime',
         :'application_id' => :'Integer',
         :'profile_id' => :'String',
+        :'store_integration_id' => :'String',
         :'type' => :'String',
         :'attributes' => :'Object',
         :'session_id' => :'String',
@@ -111,6 +116,10 @@ module TalonOne
 
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
+      end
+
+      if attributes.key?(:'store_integration_id')
+        self.store_integration_id = attributes[:'store_integration_id']
       end
 
       if attributes.key?(:'type')
@@ -158,6 +167,14 @@ module TalonOne
         invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
       end
 
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be great than or equal to 1.')
+      end
+
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -187,12 +204,28 @@ module TalonOne
       return false if @id.nil?
       return false if @created.nil?
       return false if @application_id.nil?
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
       return false if @type.nil?
       return false if @type.to_s.length < 1
       return false if @attributes.nil?
       return false if @effects.nil?
       return false if @ledger_entries.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] store_integration_id Value to be assigned
+    def store_integration_id=(store_integration_id)
+      if !store_integration_id.nil? && store_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !store_integration_id.nil? && store_integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @store_integration_id = store_integration_id
     end
 
     # Custom attribute writer method with validation
@@ -218,6 +251,7 @@ module TalonOne
           created == o.created &&
           application_id == o.application_id &&
           profile_id == o.profile_id &&
+          store_integration_id == o.store_integration_id &&
           type == o.type &&
           attributes == o.attributes &&
           session_id == o.session_id &&
@@ -235,7 +269,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, profile_id, type, attributes, session_id, effects, ledger_entries, meta].hash
+      [id, created, application_id, profile_id, store_integration_id, type, attributes, session_id, effects, ledger_entries, meta].hash
     end
 
     # Builds the object from hash

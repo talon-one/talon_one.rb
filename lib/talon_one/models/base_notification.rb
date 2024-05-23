@@ -17,17 +17,47 @@ module TalonOne
   class BaseNotification
     attr_accessor :policy
 
+    # Indicates whether the notification is activated.
+    attr_accessor :enabled
+
     attr_accessor :webhook
 
     # Unique ID for this entity.
     attr_accessor :id
 
+    # The notification type.
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'policy' => :'policy',
+        :'enabled' => :'enabled',
         :'webhook' => :'webhook',
-        :'id' => :'id'
+        :'id' => :'id',
+        :'type' => :'type'
       }
     end
 
@@ -35,8 +65,10 @@ module TalonOne
     def self.openapi_types
       {
         :'policy' => :'Object',
+        :'enabled' => :'Boolean',
         :'webhook' => :'BaseNotificationWebhook',
-        :'id' => :'Integer'
+        :'id' => :'Integer',
+        :'type' => :'String'
       }
     end
 
@@ -65,12 +97,22 @@ module TalonOne
         self.policy = attributes[:'policy']
       end
 
+      if attributes.key?(:'enabled')
+        self.enabled = attributes[:'enabled']
+      else
+        self.enabled = true
+      end
+
       if attributes.key?(:'webhook')
         self.webhook = attributes[:'webhook']
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -94,6 +136,10 @@ module TalonOne
         invalid_properties.push('invalid value for "id", must be greater than or equal to 1.')
       end
 
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -104,6 +150,9 @@ module TalonOne
       return false if @webhook.nil?
       return false if @id.nil?
       return false if @id < 1
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -121,14 +170,26 @@ module TalonOne
       @id = id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           policy == o.policy &&
+          enabled == o.enabled &&
           webhook == o.webhook &&
-          id == o.id
+          id == o.id &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -140,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [policy, webhook, id].hash
+      [policy, enabled, webhook, id, type].hash
     end
 
     # Builds the object from hash

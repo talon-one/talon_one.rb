@@ -32,6 +32,9 @@ module TalonOne
     # A list of tags for the campaign.
     attr_accessor :tags
 
+    # The ID of the campaign evaluation group the campaign belongs to.
+    attr_accessor :evaluation_group_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,7 +43,8 @@ module TalonOne
         :'description' => :'description',
         :'start_time' => :'startTime',
         :'end_time' => :'endTime',
-        :'tags' => :'tags'
+        :'tags' => :'tags',
+        :'evaluation_group_id' => :'evaluationGroupId'
       }
     end
 
@@ -52,7 +56,8 @@ module TalonOne
         :'description' => :'String',
         :'start_time' => :'DateTime',
         :'end_time' => :'DateTime',
-        :'tags' => :'Array<String>'
+        :'tags' => :'Array<String>',
+        :'evaluation_group_id' => :'Integer'
       }
     end
 
@@ -104,6 +109,10 @@ module TalonOne
           self.tags = value
         end
       end
+
+      if attributes.key?(:'evaluation_group_id')
+        self.evaluation_group_id = attributes[:'evaluation_group_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,7 +143,8 @@ module TalonOne
           description == o.description &&
           start_time == o.start_time &&
           end_time == o.end_time &&
-          tags == o.tags
+          tags == o.tags &&
+          evaluation_group_id == o.evaluation_group_id
     end
 
     # @see the `==` method
@@ -146,7 +156,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, application_ids, description, start_time, end_time, tags].hash
+      [name, application_ids, description, start_time, end_time, tags, evaluation_group_id].hash
     end
 
     # Builds the object from hash

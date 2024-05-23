@@ -36,7 +36,7 @@ module TalonOne
     # Timestamp when the campaign will become active.
     attr_accessor :start_time
 
-    # Timestamp the campaign will become inactive.
+    # Timestamp when the campaign will become inactive.
     attr_accessor :end_time
 
     # Arbitrary properties associated with this campaign.
@@ -64,49 +64,58 @@ module TalonOne
     # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups) this campaign belongs to. 
     attr_accessor :campaign_groups
 
-    # Number of coupons redeemed in the campaign.
+    # The campaign type. Possible type values:   - `cartItem`: Type of campaign that can apply effects only to cart items.   - `advanced`: Type of campaign that can apply effects to customer sessions and cart items. 
+    attr_accessor :type
+
+    # A list of store IDs that you want to link to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store. 
+    attr_accessor :linked_store_ids
+
+    # A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined. 
+    attr_accessor :budgets
+
+    # This property is **deprecated**. The count should be available under *budgets* property. Number of coupons redeemed in the campaign. 
     attr_accessor :coupon_redemption_count
 
-    # Number of referral codes redeemed in the campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Number of referral codes redeemed in the campaign. 
     attr_accessor :referral_redemption_count
 
-    # Total amount of discounts redeemed in the campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total amount of discounts redeemed in the campaign. 
     attr_accessor :discount_count
 
-    # Total number of times discounts were redeemed in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of times discounts were redeemed in this campaign. 
     attr_accessor :discount_effect_count
 
-    # Total number of coupons created by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of coupons created by rules in this campaign. 
     attr_accessor :coupon_creation_count
 
-    # Total number of custom effects triggered by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of custom effects triggered by rules in this campaign. 
     attr_accessor :custom_effect_count
 
-    # Total number of referrals created by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of referrals created by rules in this campaign. 
     attr_accessor :referral_creation_count
 
-    # Total number of times triggering add free item effext is allowed in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of times the [add free item effect](https://docs.talon.one/docs/dev/integration-api/api-effects#addfreeitem) can be triggered in this campaign. 
     attr_accessor :add_free_item_effect_count
 
-    # Total number of giveaways awarded by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of giveaways awarded by rules in this campaign. 
     attr_accessor :awarded_giveaways_count
 
-    # Total number of loyalty points created by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of loyalty points created by rules in this campaign. 
     attr_accessor :created_loyalty_points_count
 
-    # Total number of loyalty point creation effects triggered by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of loyalty point creation effects triggered by rules in this campaign. 
     attr_accessor :created_loyalty_points_effect_count
 
-    # Total number of loyalty points redeemed by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of loyalty points redeemed by rules in this campaign. 
     attr_accessor :redeemed_loyalty_points_count
 
-    # Total number of loyalty point redemption effects triggered by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of loyalty point redemption effects triggered by rules in this campaign. 
     attr_accessor :redeemed_loyalty_points_effect_count
 
-    # Total number of webhook triggered by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of webhooks triggered by rules in this campaign. 
     attr_accessor :call_api_effect_count
 
-    # Total number of reserve coupon effects triggered by rules in this campaign.
+    # This property is **deprecated**. The count should be available under *budgets* property. Total number of reserve coupon effects triggered by rules in this campaign. 
     attr_accessor :reservecoupon_effect_count
 
     # Timestamp of the most recent event received by this campaign.
@@ -123,6 +132,9 @@ module TalonOne
 
     # The ID of the Campaign Template this Campaign was created from.
     attr_accessor :template_id
+
+    # A campaign state described exactly as in the Campaign Manager.
+    attr_accessor :frontend_state
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -166,6 +178,9 @@ module TalonOne
         :'referral_settings' => :'referralSettings',
         :'limits' => :'limits',
         :'campaign_groups' => :'campaignGroups',
+        :'type' => :'type',
+        :'linked_store_ids' => :'linkedStoreIds',
+        :'budgets' => :'budgets',
         :'coupon_redemption_count' => :'couponRedemptionCount',
         :'referral_redemption_count' => :'referralRedemptionCount',
         :'discount_count' => :'discountCount',
@@ -185,7 +200,8 @@ module TalonOne
         :'updated' => :'updated',
         :'created_by' => :'createdBy',
         :'updated_by' => :'updatedBy',
-        :'template_id' => :'templateId'
+        :'template_id' => :'templateId',
+        :'frontend_state' => :'frontendState'
       }
     end
 
@@ -209,6 +225,9 @@ module TalonOne
         :'referral_settings' => :'CodeGeneratorSettings',
         :'limits' => :'Array<LimitConfig>',
         :'campaign_groups' => :'Array<Integer>',
+        :'type' => :'String',
+        :'linked_store_ids' => :'Array<Integer>',
+        :'budgets' => :'Array<CampaignBudget>',
         :'coupon_redemption_count' => :'Integer',
         :'referral_redemption_count' => :'Integer',
         :'discount_count' => :'Float',
@@ -228,7 +247,8 @@ module TalonOne
         :'updated' => :'DateTime',
         :'created_by' => :'String',
         :'updated_by' => :'String',
-        :'template_id' => :'Integer'
+        :'template_id' => :'Integer',
+        :'frontend_state' => :'String'
       }
     end
 
@@ -331,6 +351,24 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = 'advanced'
+      end
+
+      if attributes.key?(:'linked_store_ids')
+        if (value = attributes[:'linked_store_ids']).is_a?(Array)
+          self.linked_store_ids = value
+        end
+      end
+
+      if attributes.key?(:'budgets')
+        if (value = attributes[:'budgets']).is_a?(Array)
+          self.budgets = value
+        end
+      end
+
       if attributes.key?(:'coupon_redemption_count')
         self.coupon_redemption_count = attributes[:'coupon_redemption_count']
       end
@@ -410,6 +448,10 @@ module TalonOne
       if attributes.key?(:'template_id')
         self.template_id = attributes[:'template_id']
       end
+
+      if attributes.key?(:'frontend_state')
+        self.frontend_state = attributes[:'frontend_state']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -460,6 +502,18 @@ module TalonOne
         invalid_properties.push('invalid value for "limits", limits cannot be nil.')
       end
 
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @budgets.nil?
+        invalid_properties.push('invalid value for "budgets", budgets cannot be nil.')
+      end
+
+      if @frontend_state.nil?
+        invalid_properties.push('invalid value for "frontend_state", frontend_state cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -479,6 +533,13 @@ module TalonOne
       return false if @tags.nil?
       return false if @features.nil?
       return false if @limits.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      return false unless type_validator.valid?(@type)
+      return false if @budgets.nil?
+      return false if @frontend_state.nil?
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft"])
+      return false unless frontend_state_validator.valid?(@frontend_state)
       true
     end
 
@@ -506,6 +567,26 @@ module TalonOne
       @state = state
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] frontend_state Object to be assigned
+    def frontend_state=(frontend_state)
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft"])
+      unless validator.valid?(frontend_state)
+        fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
+      end
+      @frontend_state = frontend_state
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -528,6 +609,9 @@ module TalonOne
           referral_settings == o.referral_settings &&
           limits == o.limits &&
           campaign_groups == o.campaign_groups &&
+          type == o.type &&
+          linked_store_ids == o.linked_store_ids &&
+          budgets == o.budgets &&
           coupon_redemption_count == o.coupon_redemption_count &&
           referral_redemption_count == o.referral_redemption_count &&
           discount_count == o.discount_count &&
@@ -547,7 +631,8 @@ module TalonOne
           updated == o.updated &&
           created_by == o.created_by &&
           updated_by == o.updated_by &&
-          template_id == o.template_id
+          template_id == o.template_id &&
+          frontend_state == o.frontend_state
     end
 
     # @see the `==` method
@@ -559,7 +644,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state].hash
     end
 
     # Builds the object from hash

@@ -38,7 +38,7 @@ describe 'RoleV2PermissionSet' do
     end
   end
 
-  describe 'test attribute "operation_ids"' do
+  describe 'test attribute "logical_operations"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

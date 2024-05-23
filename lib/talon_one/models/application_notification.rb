@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class ApplicationNotification
-    # Event type. It can be one of the following: ['campaign_priorities_changed'] 
+    # Event type. It can be one of the following: ['campaign_evaluation_tree_changed'] 
     attr_accessor :event
 
     # Attribute mapping from ruby-style variable name to JSON key.

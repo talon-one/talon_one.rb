@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **campaign** | [**Campaign**](Campaign.md) |  | 
 **ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
-**priority** | [**PriorityPosition**](PriorityPosition.md) |  | 
+**evaluation_position** | [**CampaignEvaluationPosition**](CampaignEvaluationPosition.md) |  | 
 
 ## Code Sample
 
@@ -15,7 +15,7 @@ require 'TalonOne'
 
 instance = TalonOne::CampaignCreatedNotification.new(campaign: null,
                                  ruleset: null,
-                                 priority: null)
+                                 evaluation_position: null)
 ```
 
 

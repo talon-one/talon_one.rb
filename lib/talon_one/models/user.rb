@@ -24,34 +24,44 @@ module TalonOne
     # The time this entity was last modified.
     attr_accessor :modified
 
-    # The email address associated with your account.
+    # The email address associated with the user profile.
     attr_accessor :email
 
     # The ID of the account that owns this entity.
     attr_accessor :account_id
 
-    # Invite token, empty if the user as already accepted their invite.
-    attr_accessor :invite_token
-
-    # Current user state.
-    attr_accessor :state
-
-    # Full name
+    # Name of the user.
     attr_accessor :name
 
-    # User ACL Policy
+    # State of the user.
+    attr_accessor :state
+
+    # Invitation token of the user.  **Note**: If the user has already accepted their invitation, this is `null`. 
+    attr_accessor :invite_token
+
+    # Indicates whether the user is an `admin`.
+    attr_accessor :is_admin
+
+    # Access level of the user.
     attr_accessor :policy
 
-    # Latest timestamp the user has been notified for feed.
-    attr_accessor :latest_feed_timestamp
-
-    # Contains a list of all roles the user is a member of.
+    # A list of the IDs of the roles assigned to the user.
     attr_accessor :roles
 
+    # Authentication method for this user.
+    attr_accessor :auth_method
+
+    # Application notifications that the user is subscribed to.
     attr_accessor :application_notification_subscriptions
 
-    # The Authentication method for this user.
-    attr_accessor :auth_method
+    # Timestamp when the user last signed in to Talon.One.
+    attr_accessor :last_signed_in
+
+    # Timestamp of the user's last activity after signing in to Talon.One.
+    attr_accessor :last_accessed
+
+    # Timestamp when the user was notified for feed.
+    attr_accessor :latest_feed_timestamp
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -83,14 +93,17 @@ module TalonOne
         :'modified' => :'modified',
         :'email' => :'email',
         :'account_id' => :'accountId',
-        :'invite_token' => :'inviteToken',
-        :'state' => :'state',
         :'name' => :'name',
+        :'state' => :'state',
+        :'invite_token' => :'inviteToken',
+        :'is_admin' => :'isAdmin',
         :'policy' => :'policy',
-        :'latest_feed_timestamp' => :'latestFeedTimestamp',
         :'roles' => :'roles',
+        :'auth_method' => :'authMethod',
         :'application_notification_subscriptions' => :'applicationNotificationSubscriptions',
-        :'auth_method' => :'authMethod'
+        :'last_signed_in' => :'lastSignedIn',
+        :'last_accessed' => :'lastAccessed',
+        :'latest_feed_timestamp' => :'latestFeedTimestamp'
       }
     end
 
@@ -102,14 +115,17 @@ module TalonOne
         :'modified' => :'DateTime',
         :'email' => :'String',
         :'account_id' => :'Integer',
-        :'invite_token' => :'String',
-        :'state' => :'String',
         :'name' => :'String',
+        :'state' => :'String',
+        :'invite_token' => :'String',
+        :'is_admin' => :'Boolean',
         :'policy' => :'Object',
-        :'latest_feed_timestamp' => :'DateTime',
         :'roles' => :'Array<Integer>',
+        :'auth_method' => :'String',
         :'application_notification_subscriptions' => :'Object',
-        :'auth_method' => :'String'
+        :'last_signed_in' => :'DateTime',
+        :'last_accessed' => :'DateTime',
+        :'latest_feed_timestamp' => :'DateTime'
       }
     end
 
@@ -154,24 +170,24 @@ module TalonOne
         self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'invite_token')
-        self.invite_token = attributes[:'invite_token']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'invite_token')
+        self.invite_token = attributes[:'invite_token']
+      end
+
+      if attributes.key?(:'is_admin')
+        self.is_admin = attributes[:'is_admin']
       end
 
       if attributes.key?(:'policy')
         self.policy = attributes[:'policy']
-      end
-
-      if attributes.key?(:'latest_feed_timestamp')
-        self.latest_feed_timestamp = attributes[:'latest_feed_timestamp']
       end
 
       if attributes.key?(:'roles')
@@ -180,12 +196,24 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'auth_method')
+        self.auth_method = attributes[:'auth_method']
+      end
+
       if attributes.key?(:'application_notification_subscriptions')
         self.application_notification_subscriptions = attributes[:'application_notification_subscriptions']
       end
 
-      if attributes.key?(:'auth_method')
-        self.auth_method = attributes[:'auth_method']
+      if attributes.key?(:'last_signed_in')
+        self.last_signed_in = attributes[:'last_signed_in']
+      end
+
+      if attributes.key?(:'last_accessed')
+        self.last_accessed = attributes[:'last_accessed']
+      end
+
+      if attributes.key?(:'latest_feed_timestamp')
+        self.latest_feed_timestamp = attributes[:'latest_feed_timestamp']
       end
     end
 
@@ -213,16 +241,16 @@ module TalonOne
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
-      if @invite_token.nil?
-        invalid_properties.push('invalid value for "invite_token", invite_token cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       if @state.nil?
         invalid_properties.push('invalid value for "state", state cannot be nil.')
       end
 
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      if @invite_token.nil?
+        invalid_properties.push('invalid value for "invite_token", invite_token cannot be nil.')
       end
 
       if @policy.nil?
@@ -240,11 +268,11 @@ module TalonOne
       return false if @modified.nil?
       return false if @email.nil?
       return false if @account_id.nil?
-      return false if @invite_token.nil?
+      return false if @name.nil?
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["invited", "active", "deactivated"])
       return false unless state_validator.valid?(@state)
-      return false if @name.nil?
+      return false if @invite_token.nil?
       return false if @policy.nil?
       true
     end
@@ -269,14 +297,17 @@ module TalonOne
           modified == o.modified &&
           email == o.email &&
           account_id == o.account_id &&
-          invite_token == o.invite_token &&
-          state == o.state &&
           name == o.name &&
+          state == o.state &&
+          invite_token == o.invite_token &&
+          is_admin == o.is_admin &&
           policy == o.policy &&
-          latest_feed_timestamp == o.latest_feed_timestamp &&
           roles == o.roles &&
+          auth_method == o.auth_method &&
           application_notification_subscriptions == o.application_notification_subscriptions &&
-          auth_method == o.auth_method
+          last_signed_in == o.last_signed_in &&
+          last_accessed == o.last_accessed &&
+          latest_feed_timestamp == o.latest_feed_timestamp
     end
 
     # @see the `==` method
@@ -288,7 +319,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, email, account_id, invite_token, state, name, policy, latest_feed_timestamp, roles, application_notification_subscriptions, auth_method].hash
+      [id, created, modified, email, account_id, name, state, invite_token, is_admin, policy, roles, auth_method, application_notification_subscriptions, last_signed_in, last_accessed, latest_feed_timestamp].hash
     end
 
     # Builds the object from hash

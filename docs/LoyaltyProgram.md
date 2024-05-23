@@ -14,11 +14,18 @@ Name | Type | Description | Notes
 **allow_subledger** | **Boolean** | Indicates if this program supports subledgers inside the program. | 
 **users_per_card_limit** | **Integer** | The max amount of user profiles with whom a card can be shared. This can be set to 0 for no limit. This property is only used when &#x60;cardBased&#x60; is &#x60;true&#x60;.  | [optional] 
 **sandbox** | **Boolean** | Indicates if this program is a live or sandbox program. Programs of a given type can only be connected to Applications of the same type. | 
+**tiers_expiration_policy** | **String** | The policy that defines which date is used to calculate the expiration date of a customer&#39;s current tier.  - &#x60;tier_start_date&#x60;: The tier expiration date is calculated based on when the customer joined the current tier.  - &#x60;program_join_date&#x60;: The tier expiration date is calculated based on when the customer joined the loyalty program.  | [optional] 
+**tiers_expire_in** | **String** | The amount of time after which the tier expires.  The time format is an **integer** followed by one letter indicating the time unit. Examples: &#x60;30s&#x60;, &#x60;40m&#x60;, &#x60;1h&#x60;, &#x60;5D&#x60;, &#x60;7W&#x60;, &#x60;10M&#x60;, &#x60;15Y&#x60;.  Available units:  - &#x60;s&#x60;: seconds - &#x60;m&#x60;: minutes - &#x60;h&#x60;: hours - &#x60;D&#x60;: days - &#x60;W&#x60;: weeks - &#x60;M&#x60;: months - &#x60;Y&#x60;: years  You can round certain units up or down: - &#x60;_D&#x60; for rounding down days only. Signifies the start of the day. - &#x60;_U&#x60; for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year.  | [optional] 
+**tiers_downgrade_policy** | **String** | Customers&#39;s tier downgrade policy.  - &#x60;one_down&#x60;: Once the tier expires and if the user doesn&#39;t have enough points to stay in the tier, the user is downgraded one tier down.  - &#x60;balance_based&#x60;: Once the tier expires, the user&#39;s tier is evaluated based on the amount of active points the user has at this instant.  | [optional] 
+**program_join_policy** | **String** | The policy that defines when the customer joins the loyalty program.   - &#x60;not_join&#x60;: The customer does not join the loyalty program but can still earn and spend loyalty points.       **Note**: The customer does not have a program join date.   - &#x60;points_activated&#x60;: The customer joins the loyalty program only when their earned loyalty points become active for the first time.   - &#x60;points_earned&#x60;: The customer joins the loyalty program when they earn loyalty points for the first time.  | [optional] 
 **account_id** | **Integer** | The ID of the Talon.One account that owns this program. | 
 **name** | **String** | The internal name for the Loyalty Program. This is an immutable value. | 
 **tiers** | [**Array&lt;LoyaltyTier&gt;**](LoyaltyTier.md) | The tiers in this loyalty program. | [optional] 
 **timezone** | **String** | A string containing an IANA timezone descriptor. | 
 **card_based** | **Boolean** | Defines the type of loyalty program: - &#x60;true&#x60;: the program is a card-based. - &#x60;false&#x60;: the program is profile-based.  | [default to false]
+**can_update_tiers** | **Boolean** | &#x60;True&#x60; if the tier definitions can be updated.  | [optional] [default to false]
+**can_update_join_policy** | **Boolean** | Indicates whether the program join policy can be updated. The join policy can be updated when this value is set to &#x60;true&#x60;.  | [optional] 
+**can_upgrade_to_advanced_tiers** | **Boolean** | &#x60;True&#x60; if the program can be upgraded to use the &#x60;tiersExpireIn&#x60; and &#x60;tiersDowngradePolicy&#x60; properties.  | [optional] [default to false]
 
 ## Code Sample
 
@@ -35,11 +42,18 @@ instance = TalonOne::LoyaltyProgram.new(id: null,
                                  allow_subledger: false,
                                  users_per_card_limit: 111,
                                  sandbox: true,
+                                 tiers_expiration_policy: null,
+                                 tiers_expire_in: 27W_U,
+                                 tiers_downgrade_policy: null,
+                                 program_join_policy: null,
                                  account_id: 1,
                                  name: my_program,
                                  tiers: [{name&#x3D;Gold, minPoints&#x3D;300, id&#x3D;3, created&#x3D;2021-06-10T09:05:27.993483Z, programID&#x3D;139}, {name&#x3D;Silver, minPoints&#x3D;200, id&#x3D;2, created&#x3D;2021-06-10T09:04:59.355258Z, programId&#x3D;139}, {name&#x3D;Bronze, minPoints&#x3D;100, id&#x3D;1, created&#x3D;2021-06-10T09:04:39.355258Z, programId&#x3D;139}],
                                  timezone: Europe/Berlin,
-                                 card_based: true)
+                                 card_based: true,
+                                 can_update_tiers: true,
+                                 can_update_join_policy: true,
+                                 can_upgrade_to_advanced_tiers: true)
 ```
 
 

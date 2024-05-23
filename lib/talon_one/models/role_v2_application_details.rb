@@ -14,21 +14,25 @@ require 'date'
 
 module TalonOne
   class RoleV2ApplicationDetails
-    # Name of the Application-level permission set.
+    # Name of the Application-related permission set for the given Application.
     attr_accessor :application
 
-    # Name of the campaign-level permission set.
+    # Name of the campaign-related permission set for the given Application.
     attr_accessor :campaign
 
-    # Name of the draft campaign-level permission set.
+    # Name of the draft campaign-related permission set for the given Application.
     attr_accessor :draft_campaign
+
+    # Name of the tools-related permission set.
+    attr_accessor :tools
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'application' => :'application',
         :'campaign' => :'campaign',
-        :'draft_campaign' => :'draftCampaign'
+        :'draft_campaign' => :'draftCampaign',
+        :'tools' => :'tools'
       }
     end
 
@@ -37,7 +41,8 @@ module TalonOne
       {
         :'application' => :'String',
         :'campaign' => :'String',
-        :'draft_campaign' => :'String'
+        :'draft_campaign' => :'String',
+        :'tools' => :'String'
       }
     end
 
@@ -73,6 +78,10 @@ module TalonOne
       if attributes.key?(:'draft_campaign')
         self.draft_campaign = attributes[:'draft_campaign']
       end
+
+      if attributes.key?(:'tools')
+        self.tools = attributes[:'tools']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -95,7 +104,8 @@ module TalonOne
       self.class == o.class &&
           application == o.application &&
           campaign == o.campaign &&
-          draft_campaign == o.draft_campaign
+          draft_campaign == o.draft_campaign &&
+          tools == o.tools
     end
 
     # @see the `==` method
@@ -107,7 +117,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application, campaign, draft_campaign].hash
+      [application, campaign, draft_campaign, tools].hash
     end
 
     # Builds the object from hash

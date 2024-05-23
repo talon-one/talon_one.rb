@@ -64,4 +64,42 @@ describe 'CampaignSetBranchNode' do
     end
   end
 
+  describe 'test attribute "group_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "locked"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "description"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "evaluation_mode"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["stackable", "listOrder", "lowestDiscount", "highestDiscount"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.evaluation_mode = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "evaluation_scope"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["cartItem", "session"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.evaluation_scope = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

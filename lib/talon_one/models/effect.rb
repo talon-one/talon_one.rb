@@ -36,6 +36,9 @@ module TalonOne
     # The ID of the catalog item that was being evaluated when this effect was triggered.
     attr_accessor :triggered_for_catalog_item
 
+    # The index of the condition that was triggered.
+    attr_accessor :condition_index
+
     # The properties of the effect. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     attr_accessor :props
 
@@ -49,6 +52,7 @@ module TalonOne
         :'effect_type' => :'effectType',
         :'triggered_by_coupon' => :'triggeredByCoupon',
         :'triggered_for_catalog_item' => :'triggeredForCatalogItem',
+        :'condition_index' => :'conditionIndex',
         :'props' => :'props'
       }
     end
@@ -63,6 +67,7 @@ module TalonOne
         :'effect_type' => :'String',
         :'triggered_by_coupon' => :'Integer',
         :'triggered_for_catalog_item' => :'Integer',
+        :'condition_index' => :'Integer',
         :'props' => :'Object'
       }
     end
@@ -114,6 +119,10 @@ module TalonOne
 
       if attributes.key?(:'triggered_for_catalog_item')
         self.triggered_for_catalog_item = attributes[:'triggered_for_catalog_item']
+      end
+
+      if attributes.key?(:'condition_index')
+        self.condition_index = attributes[:'condition_index']
       end
 
       if attributes.key?(:'props')
@@ -176,6 +185,7 @@ module TalonOne
           effect_type == o.effect_type &&
           triggered_by_coupon == o.triggered_by_coupon &&
           triggered_for_catalog_item == o.triggered_for_catalog_item &&
+          condition_index == o.condition_index &&
           props == o.props
     end
 
@@ -188,7 +198,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, props].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, props].hash
     end
 
     # Builds the object from hash

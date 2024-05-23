@@ -36,6 +36,9 @@ module TalonOne
     # The ID of the catalog item that was being evaluated when this effect was triggered.
     attr_accessor :triggered_for_catalog_item
 
+    # The index of the condition that was triggered.
+    attr_accessor :condition_index
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +48,8 @@ module TalonOne
         :'rule_name' => :'ruleName',
         :'effect_type' => :'effectType',
         :'triggered_by_coupon' => :'triggeredByCoupon',
-        :'triggered_for_catalog_item' => :'triggeredForCatalogItem'
+        :'triggered_for_catalog_item' => :'triggeredForCatalogItem',
+        :'condition_index' => :'conditionIndex'
       }
     end
 
@@ -58,7 +62,8 @@ module TalonOne
         :'rule_name' => :'String',
         :'effect_type' => :'String',
         :'triggered_by_coupon' => :'Integer',
-        :'triggered_for_catalog_item' => :'Integer'
+        :'triggered_for_catalog_item' => :'Integer',
+        :'condition_index' => :'Integer'
       }
     end
 
@@ -109,6 +114,10 @@ module TalonOne
 
       if attributes.key?(:'triggered_for_catalog_item')
         self.triggered_for_catalog_item = attributes[:'triggered_for_catalog_item']
+      end
+
+      if attributes.key?(:'condition_index')
+        self.condition_index = attributes[:'condition_index']
       end
     end
 
@@ -161,7 +170,8 @@ module TalonOne
           rule_name == o.rule_name &&
           effect_type == o.effect_type &&
           triggered_by_coupon == o.triggered_by_coupon &&
-          triggered_for_catalog_item == o.triggered_for_catalog_item
+          triggered_for_catalog_item == o.triggered_for_catalog_item &&
+          condition_index == o.condition_index
     end
 
     # @see the `==` method
@@ -173,7 +183,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index].hash
     end
 
     # Builds the object from hash

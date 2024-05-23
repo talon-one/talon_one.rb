@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # 
   class NewAccountSignUp
-    # The email address associated with your account.
+    # The email address associated with the user profile.
     attr_accessor :email
 
     # The password for your account.

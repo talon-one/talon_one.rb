@@ -62,7 +62,7 @@ describe 'User' do
     end
   end
 
-  describe 'test attribute "invite_token"' do
+  describe 'test attribute "name"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -78,7 +78,13 @@ describe 'User' do
     end
   end
 
-  describe 'test attribute "name"' do
+  describe 'test attribute "invite_token"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "is_admin"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -90,13 +96,13 @@ describe 'User' do
     end
   end
 
-  describe 'test attribute "latest_feed_timestamp"' do
+  describe 'test attribute "roles"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "roles"' do
+  describe 'test attribute "auth_method"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -108,7 +114,19 @@ describe 'User' do
     end
   end
 
-  describe 'test attribute "auth_method"' do
+  describe 'test attribute "last_signed_in"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "last_accessed"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "latest_feed_timestamp"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

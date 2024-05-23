@@ -42,6 +42,9 @@ module TalonOne
     # The loyalty programs that the application is subscribed to.
     attr_accessor :loyalty_programs
 
+    # The achievements, linked to the campaigns, belonging to the application.
+    attr_accessor :achievements
+
     # The attributes that the application is subscribed to.
     attr_accessor :attributes
 
@@ -66,6 +69,7 @@ module TalonOne
         :'variables' => :'variables',
         :'giveaways_pools' => :'giveawaysPools',
         :'loyalty_programs' => :'loyaltyPrograms',
+        :'achievements' => :'achievements',
         :'attributes' => :'attributes',
         :'additional_costs' => :'additionalCosts',
         :'audiences' => :'audiences',
@@ -85,6 +89,7 @@ module TalonOne
         :'variables' => :'String',
         :'giveaways_pools' => :'Array<GiveawaysPool>',
         :'loyalty_programs' => :'Array<LoyaltyProgram>',
+        :'achievements' => :'Array<Achievement>',
         :'attributes' => :'Array<Attribute>',
         :'additional_costs' => :'Array<AccountAdditionalCost>',
         :'audiences' => :'Array<Audience>',
@@ -156,6 +161,12 @@ module TalonOne
       if attributes.key?(:'loyalty_programs')
         if (value = attributes[:'loyalty_programs']).is_a?(Array)
           self.loyalty_programs = value
+        end
+      end
+
+      if attributes.key?(:'achievements')
+        if (value = attributes[:'achievements']).is_a?(Array)
+          self.achievements = value
         end
       end
 
@@ -246,6 +257,7 @@ module TalonOne
           variables == o.variables &&
           giveaways_pools == o.giveaways_pools &&
           loyalty_programs == o.loyalty_programs &&
+          achievements == o.achievements &&
           attributes == o.attributes &&
           additional_costs == o.additional_costs &&
           audiences == o.audiences &&
@@ -261,7 +273,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, attributes, additional_costs, audiences, collections].hash
+      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, achievements, attributes, additional_costs, audiences, collections].hash
     end
 
     # Builds the object from hash

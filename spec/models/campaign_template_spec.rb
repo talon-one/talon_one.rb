@@ -111,7 +111,7 @@ describe 'CampaignTemplate' do
   describe 'test attribute "features"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough", "achievements"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.features = value }.not_to raise_error
       # end
@@ -157,6 +157,16 @@ describe 'CampaignTemplate' do
   describe 'test attribute "default_campaign_group_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "campaign_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["cartItem", "advanced"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.campaign_type = value }.not_to raise_error
+      # end
     end
   end
 

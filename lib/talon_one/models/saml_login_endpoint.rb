@@ -14,15 +14,19 @@ require 'date'
 
 module TalonOne
   class SamlLoginEndpoint
+    # ID of the SAML login endpoint.
+    attr_accessor :id
+
     # ID of the SAML service.
     attr_accessor :name
 
-    # Single Sign-On URL.
+    # The single sign-on URL.
     attr_accessor :login_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'name' => :'name',
         :'login_url' => :'loginURL'
       }
@@ -31,6 +35,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'Integer',
         :'name' => :'String',
         :'login_url' => :'String'
       }
@@ -57,6 +62,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
@@ -70,6 +79,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
@@ -92,6 +105,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
       return false if @login_url.nil?
@@ -132,6 +146,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           name == o.name &&
           login_url == o.login_url
     end
@@ -145,7 +160,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, login_url].hash
+      [id, name, login_url].hash
     end
 
     # Builds the object from hash

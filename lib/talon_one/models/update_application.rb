@@ -35,19 +35,13 @@ module TalonOne
     # Default limits for campaigns created in this application.
     attr_accessor :limits
 
-    # Default [priority](https://docs.talon.one/docs/product/applications/setting-up-campaign-priorities) for campaigns created in this Application. 
-    attr_accessor :campaign_priority
-
-    # The strategy used when choosing exclusive campaigns for evaluation.
-    attr_accessor :exclusive_campaigns_strategy
-
     # The default scope to apply `setDiscount` effects on if no scope was provided with the effect. 
     attr_accessor :default_discount_scope
 
     # Indicates if discounts should cascade for this Application.
     attr_accessor :enable_cascading_discounts
 
-    # Indicates if cart items of quantity larger than one should be separated into different items of quantity one. See the [docs](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening). 
+    # Indicates if cart items of quantity larger than one should be separated into different items of quantity one. 
     attr_accessor :enable_flattened_cart_items
 
     attr_accessor :attributes_settings
@@ -60,6 +54,9 @@ module TalonOne
 
     # The default scope to apply `setDiscountPerItem` effects on if no scope was provided with the effect. 
     attr_accessor :default_discount_additional_cost_per_item_scope
+
+    # The ID of the default campaign evaluation group to which new campaigns will be added unless a different group is selected when creating the campaign.
+    attr_accessor :default_evaluation_group_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -93,15 +90,14 @@ module TalonOne
         :'case_sensitivity' => :'caseSensitivity',
         :'attributes' => :'attributes',
         :'limits' => :'limits',
-        :'campaign_priority' => :'campaignPriority',
-        :'exclusive_campaigns_strategy' => :'exclusiveCampaignsStrategy',
         :'default_discount_scope' => :'defaultDiscountScope',
         :'enable_cascading_discounts' => :'enableCascadingDiscounts',
         :'enable_flattened_cart_items' => :'enableFlattenedCartItems',
         :'attributes_settings' => :'attributesSettings',
         :'sandbox' => :'sandbox',
         :'enable_partial_discounts' => :'enablePartialDiscounts',
-        :'default_discount_additional_cost_per_item_scope' => :'defaultDiscountAdditionalCostPerItemScope'
+        :'default_discount_additional_cost_per_item_scope' => :'defaultDiscountAdditionalCostPerItemScope',
+        :'default_evaluation_group_id' => :'defaultEvaluationGroupId'
       }
     end
 
@@ -115,15 +111,14 @@ module TalonOne
         :'case_sensitivity' => :'String',
         :'attributes' => :'Object',
         :'limits' => :'Array<LimitConfig>',
-        :'campaign_priority' => :'String',
-        :'exclusive_campaigns_strategy' => :'String',
         :'default_discount_scope' => :'String',
         :'enable_cascading_discounts' => :'Boolean',
         :'enable_flattened_cart_items' => :'Boolean',
         :'attributes_settings' => :'AttributesSettings',
         :'sandbox' => :'Boolean',
         :'enable_partial_discounts' => :'Boolean',
-        :'default_discount_additional_cost_per_item_scope' => :'String'
+        :'default_discount_additional_cost_per_item_scope' => :'String',
+        :'default_evaluation_group_id' => :'Integer'
       }
     end
 
@@ -178,18 +173,6 @@ module TalonOne
         end
       end
 
-      if attributes.key?(:'campaign_priority')
-        self.campaign_priority = attributes[:'campaign_priority']
-      else
-        self.campaign_priority = 'universal'
-      end
-
-      if attributes.key?(:'exclusive_campaigns_strategy')
-        self.exclusive_campaigns_strategy = attributes[:'exclusive_campaigns_strategy']
-      else
-        self.exclusive_campaigns_strategy = 'listOrder'
-      end
-
       if attributes.key?(:'default_discount_scope')
         self.default_discount_scope = attributes[:'default_discount_scope']
       end
@@ -216,6 +199,10 @@ module TalonOne
 
       if attributes.key?(:'default_discount_additional_cost_per_item_scope')
         self.default_discount_additional_cost_per_item_scope = attributes[:'default_discount_additional_cost_per_item_scope']
+      end
+
+      if attributes.key?(:'default_evaluation_group_id')
+        self.default_evaluation_group_id = attributes[:'default_evaluation_group_id']
       end
     end
 
@@ -261,10 +248,6 @@ module TalonOne
       return false if @currency.to_s.length < 1
       case_sensitivity_validator = EnumAttributeValidator.new('String', ["sensitive", "insensitive-uppercase", "insensitive-lowercase"])
       return false unless case_sensitivity_validator.valid?(@case_sensitivity)
-      campaign_priority_validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
-      return false unless campaign_priority_validator.valid?(@campaign_priority)
-      exclusive_campaigns_strategy_validator = EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
-      return false unless exclusive_campaigns_strategy_validator.valid?(@exclusive_campaigns_strategy)
       default_discount_scope_validator = EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
       return false unless default_discount_scope_validator.valid?(@default_discount_scope)
       default_discount_additional_cost_per_item_scope_validator = EnumAttributeValidator.new('String', ["price", "itemTotal", "additionalCosts"])
@@ -325,26 +308,6 @@ module TalonOne
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] campaign_priority Object to be assigned
-    def campaign_priority=(campaign_priority)
-      validator = EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
-      unless validator.valid?(campaign_priority)
-        fail ArgumentError, "invalid value for \"campaign_priority\", must be one of #{validator.allowable_values}."
-      end
-      @campaign_priority = campaign_priority
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] exclusive_campaigns_strategy Object to be assigned
-    def exclusive_campaigns_strategy=(exclusive_campaigns_strategy)
-      validator = EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
-      unless validator.valid?(exclusive_campaigns_strategy)
-        fail ArgumentError, "invalid value for \"exclusive_campaigns_strategy\", must be one of #{validator.allowable_values}."
-      end
-      @exclusive_campaigns_strategy = exclusive_campaigns_strategy
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_discount_scope Object to be assigned
     def default_discount_scope=(default_discount_scope)
       validator = EnumAttributeValidator.new('String', ["sessionTotal", "cartItems", "additionalCosts"])
@@ -376,15 +339,14 @@ module TalonOne
           case_sensitivity == o.case_sensitivity &&
           attributes == o.attributes &&
           limits == o.limits &&
-          campaign_priority == o.campaign_priority &&
-          exclusive_campaigns_strategy == o.exclusive_campaigns_strategy &&
           default_discount_scope == o.default_discount_scope &&
           enable_cascading_discounts == o.enable_cascading_discounts &&
           enable_flattened_cart_items == o.enable_flattened_cart_items &&
           attributes_settings == o.attributes_settings &&
           sandbox == o.sandbox &&
           enable_partial_discounts == o.enable_partial_discounts &&
-          default_discount_additional_cost_per_item_scope == o.default_discount_additional_cost_per_item_scope
+          default_discount_additional_cost_per_item_scope == o.default_discount_additional_cost_per_item_scope &&
+          default_evaluation_group_id == o.default_evaluation_group_id
     end
 
     # @see the `==` method
@@ -396,7 +358,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, campaign_priority, exclusive_campaigns_strategy, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, default_evaluation_group_id].hash
     end
 
     # Builds the object from hash

@@ -30,10 +30,10 @@ module TalonOne
     # Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative.
     attr_accessor :expiry_date
 
-    # Arbitrary properties associated with this item.
+    # Optional property to set the value of custom coupon attributes. They are defined in the Campaign Manager, see [Managing attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes).  Coupon attributes can also be set to _mandatory_ in your Application [settings](https://docs.talon.one/docs/product/applications/using-attributes#making-attributes-mandatory). If your Application uses mandatory attributes, you must use this property to set their value. 
     attr_accessor :attributes
 
-    # The id of the batch the coupon belongs to.
+    # The ID of the batch the coupon(s) belong to.
     attr_accessor :batch_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -24,9 +24,10 @@ Name | Type | Description | Notes
 **import_id** | **Integer** | The ID of the Import which created this coupon. | [optional] 
 **reservation** | **Boolean** | Defines the type of reservation: - &#x60;true&#x60;: The reservation is a soft reservation. Any customer can use the coupon. This is done via the [Create coupon reservation](https://docs.talon.one/integration-api#operation/createCouponReservation) endpoint. - &#x60;false&#x60;: The reservation is a hard reservation. Only the associated customer (&#x60;recipientIntegrationId&#x60;) can use the coupon. This is done via the Campaign Manager when you create a coupon for a given &#x60;recipientIntegrationId&#x60;, the [Create coupons](https://docs.talon.one/management-api#operation/createCoupons) endpoint or [Create coupons for multiple recipients](https://docs.talon.one/management-api#operation/createCouponsForMultipleRecipients) endpoint.  | [optional] [default to true]
 **batch_id** | **String** | The id of the batch the coupon belongs to. | [optional] 
-**is_reservation_mandatory** | **Boolean** | Whether the reservation effect actually created a new reservation. | [optional] [default to true]
+**is_reservation_mandatory** | **Boolean** | Whether the reservation effect actually created a new reservation. | [optional] [default to false]
+**implicitly_reserved** | **Boolean** | An indication of whether the coupon is implicitly reserved for all customers. | [optional] 
 **profile_redemption_count** | **Integer** | The number of times the coupon was redeemed by the profile. | 
-**state** | **String** | Can be:  - &#x60;active&#x60;: The coupon can be used. It is a reserved coupon that is neither pending, used nor expired, and has a non-exhausted limit counter. - &#x60;used&#x60;: The coupon has been redeemed and cannot be used again. It is not pending and has reached its redemption limit or was redeemed by the profile before expiration. - &#x60;expired&#x60;: The coupon was never redeemed and it is now expired. It is non-pending, non-active and non-used by the profile. - &#x60;pending&#x60;: The coupon will be usable in the future. - &#x60;disabled&#x60;: The coupon is part of a non-active campaign.  | 
+**state** | **String** | Can be:  - &#x60;active&#x60;: The coupon can be used. It is a reserved coupon that is not pending, used, or expired, and it has a non-exhausted limit counter.    **Note:** This coupon state is returned for [scheduled campaigns](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-schedule), but the coupon cannot be used until the campaign is **running**. - &#x60;used&#x60;: The coupon has been redeemed and cannot be used again. It is not pending and has reached its redemption limit or was redeemed by the profile before expiration. - &#x60;expired&#x60;: The coupon was never redeemed, and it is now expired. It is non-pending, non-active, and non-used by the profile. - &#x60;pending&#x60;: The coupon will be usable in the future. - &#x60;disabled&#x60;: The coupon is part of a non-active campaign.  | 
 
 ## Code Sample
 
@@ -54,6 +55,7 @@ instance = TalonOne::InventoryCoupon.new(id: 6,
                                  reservation: false,
                                  batch_id: 32535-43255,
                                  is_reservation_mandatory: false,
+                                 implicitly_reserved: false,
                                  profile_redemption_count: 5,
                                  state: active)
 ```

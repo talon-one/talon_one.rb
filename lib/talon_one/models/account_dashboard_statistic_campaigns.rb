@@ -17,14 +17,18 @@ module TalonOne
     # Number of campaigns that are active and live (across all Applications).
     attr_accessor :live
 
-    # Campaigns with a schedule ending in 7 days or with only 10% of budget left.
+    # Campaigns scheduled to expire sometime in the next 7 days.
     attr_accessor :ending_soon
+
+    # Campaigns with less than 10% of budget left.
+    attr_accessor :low_on_budget
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'live' => :'live',
-        :'ending_soon' => :'endingSoon'
+        :'ending_soon' => :'endingSoon',
+        :'low_on_budget' => :'lowOnBudget'
       }
     end
 
@@ -32,7 +36,8 @@ module TalonOne
     def self.openapi_types
       {
         :'live' => :'Integer',
-        :'ending_soon' => :'Integer'
+        :'ending_soon' => :'Integer',
+        :'low_on_budget' => :'Integer'
       }
     end
 
@@ -64,6 +69,10 @@ module TalonOne
       if attributes.key?(:'ending_soon')
         self.ending_soon = attributes[:'ending_soon']
       end
+
+      if attributes.key?(:'low_on_budget')
+        self.low_on_budget = attributes[:'low_on_budget']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,6 +87,10 @@ module TalonOne
         invalid_properties.push('invalid value for "ending_soon", ending_soon cannot be nil.')
       end
 
+      if @low_on_budget.nil?
+        invalid_properties.push('invalid value for "low_on_budget", low_on_budget cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -86,6 +99,7 @@ module TalonOne
     def valid?
       return false if @live.nil?
       return false if @ending_soon.nil?
+      return false if @low_on_budget.nil?
       true
     end
 
@@ -95,7 +109,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           live == o.live &&
-          ending_soon == o.ending_soon
+          ending_soon == o.ending_soon &&
+          low_on_budget == o.low_on_budget
     end
 
     # @see the `==` method
@@ -107,7 +122,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live, ending_soon].hash
+      [live, ending_soon, low_on_budget].hash
     end
 
     # Builds the object from hash

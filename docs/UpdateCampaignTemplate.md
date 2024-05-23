@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **applications_ids** | **Array&lt;Integer&gt;** | A list of IDs of the Applications that are subscribed to this campaign template. | 
 **campaign_collections** | [**Array&lt;CampaignTemplateCollection&gt;**](CampaignTemplateCollection.md) | The campaign collections from the blueprint campaign for the template. | [optional] 
 **default_campaign_group_id** | **Integer** | The default campaign group ID. | [optional] 
+**campaign_type** | **String** | The campaign type. Possible type values:   - &#x60;cartItem&#x60;: Type of campaign that can apply effects only to cart items.   - &#x60;advanced&#x60;: Type of campaign that can apply effects to customer sessions and cart items.  | [optional] [default to &#39;advanced&#39;]
 
 ## Code Sample
 
@@ -41,7 +42,8 @@ instance = TalonOne::UpdateCampaignTemplate.new(name: Discount campaign,
                                  template_params: null,
                                  applications_ids: [1, 2, 3],
                                  campaign_collections: null,
-                                 default_campaign_group_id: 42)
+                                 default_campaign_group_id: 42,
+                                 campaign_type: advanced)
 ```
 
 

@@ -44,4 +44,20 @@ describe 'Tier' do
     end
   end
 
+  describe 'test attribute "expiry_date"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "downgrade_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["one_down", "balance_based"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.downgrade_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

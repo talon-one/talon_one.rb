@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** | true means there is more data in the source collection to request. | [optional] 
+**has_more** | **Boolean** | If &#x60;true&#x60;, it means that there is more data to request in the source collection. | [optional] 
 **data** | [**Array&lt;LoyaltyLedgerEntry&gt;**](LoyaltyLedgerEntry.md) | List of transaction entries from a loyalty ledger. | [optional] 
 
 ## Code Sample

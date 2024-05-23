@@ -20,7 +20,7 @@ module TalonOne
     # Stock keeping unit of item.
     attr_accessor :sku
 
-    # Quantity of item. **Important:** If you enabled [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening), the quantity is always one and the same cart item might receive multiple per-item discounts. Ensure you can process multiple discounts on one cart item correctly. 
+    # Number of units of this item. Due to [cart item flattening](https://docs.talon.one/docs/product/rules/understanding-cart-item-flattening), if you provide a quantity greater than 1, the item will be split in as many items as the provided quantity. This will impact the number of **per-item** effects triggered from your campaigns. 
     attr_accessor :quantity
 
     # Number of returned items, calculated internally based on returns of this item.
@@ -34,6 +34,8 @@ module TalonOne
 
     # Type, group or model of the item.
     attr_accessor :category
+
+    attr_accessor :product
 
     # Weight of item in grams.
     attr_accessor :weight
@@ -56,7 +58,7 @@ module TalonOne
     # Use this property to set a value for the additional costs of this item, such as a shipping cost. They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs). 
     attr_accessor :additional_costs
 
-    # The [catalog item ID](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs/#synchronizing-cart-item-catalogs).
+    # The [catalog item ID](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs/#synchronizing-a-cart-item-catalog).
     attr_accessor :catalog_item_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -69,6 +71,7 @@ module TalonOne
         :'remaining_quantity' => :'remainingQuantity',
         :'price' => :'price',
         :'category' => :'category',
+        :'product' => :'product',
         :'weight' => :'weight',
         :'height' => :'height',
         :'width' => :'width',
@@ -90,6 +93,7 @@ module TalonOne
         :'remaining_quantity' => :'Integer',
         :'price' => :'Float',
         :'category' => :'String',
+        :'product' => :'Product',
         :'weight' => :'Float',
         :'height' => :'Float',
         :'width' => :'Float',
@@ -148,6 +152,10 @@ module TalonOne
 
       if attributes.key?(:'category')
         self.category = attributes[:'category']
+      end
+
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
       end
 
       if attributes.key?(:'weight')
@@ -258,6 +266,7 @@ module TalonOne
           remaining_quantity == o.remaining_quantity &&
           price == o.price &&
           category == o.category &&
+          product == o.product &&
           weight == o.weight &&
           height == o.height &&
           width == o.width &&
@@ -277,7 +286,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sku, quantity, returned_quantity, remaining_quantity, price, category, weight, height, width, length, position, attributes, additional_costs, catalog_item_id].hash
+      [name, sku, quantity, returned_quantity, remaining_quantity, price, category, product, weight, height, width, length, position, attributes, additional_costs, catalog_item_id].hash
     end
 
     # Builds the object from hash

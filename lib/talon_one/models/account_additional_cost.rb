@@ -167,7 +167,7 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      pattern = Regexp.new(/^[A-Za-z]\w*$/)
       if @name !~ pattern
         invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
       end
@@ -195,7 +195,7 @@ module TalonOne
       return false if @created.nil?
       return false if @account_id.nil?
       return false if @name.nil?
-      return false if @name !~ Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      return false if @name !~ Regexp.new(/^[A-Za-z]\w*$/)
       return false if @title.nil?
       return false if @title !~ Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
       return false if @description.nil?
@@ -211,7 +211,7 @@ module TalonOne
         fail ArgumentError, 'name cannot be nil'
       end
 
-      pattern = Regexp.new(/^[A-Za-z](\w|\s)*$/)
+      pattern = Regexp.new(/^[A-Za-z]\w*$/)
       if name !~ pattern
         fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
       end

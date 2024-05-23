@@ -21,7 +21,7 @@ module TalonOne
     # The time this entity was created.
     attr_accessor :created
 
-    # The type of allowed values in the picklist. If type time is chosen, it must be an RFC3339 timestamp string.
+    # The type of allowed values in the picklist. If the type `time` is chosen, it must be an RFC3339 timestamp string.
     attr_accessor :type
 
     # The list of allowed values provided by this picklist.

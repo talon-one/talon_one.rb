@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;AccessLogEntry&gt;**](AccessLogEntry.md) |  | 
+**data** | [**Array&lt;CollectionItem&gt;**](CollectionItem.md) |  | 
 
 ## Code Sample
 

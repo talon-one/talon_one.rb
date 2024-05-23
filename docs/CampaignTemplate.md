@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **applications_ids** | **Array&lt;Integer&gt;** | A list of IDs of the Applications that are subscribed to this campaign template. | 
 **campaign_collections** | [**Array&lt;CampaignTemplateCollection&gt;**](CampaignTemplateCollection.md) | The campaign collections from the blueprint campaign for the template. | [optional] 
 **default_campaign_group_id** | **Integer** | The default campaign group ID. | [optional] 
+**campaign_type** | **String** | The campaign type. Possible type values:   - &#x60;cartItem&#x60;: Type of campaign that can apply effects only to cart items.   - &#x60;advanced&#x60;: Type of campaign that can apply effects to customer sessions and cart items.  | [default to &#39;advanced&#39;]
 **updated** | **DateTime** | Timestamp of the most recent update to the campaign template or any of its elements. | [optional] 
 **updated_by** | **String** | Name of the user who last updated this campaign template, if available. | [optional] 
 **valid_application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications that are related to this entity. | 
@@ -53,6 +54,7 @@ instance = TalonOne::CampaignTemplate.new(id: 6,
                                  applications_ids: null,
                                  campaign_collections: null,
                                  default_campaign_group_id: 42,
+                                 campaign_type: advanced,
                                  updated: 2022-08-24T14:15:22Z,
                                  updated_by: Jane Doe,
                                  valid_application_ids: [1, 2, 3])

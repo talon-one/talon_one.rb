@@ -38,4 +38,10 @@ describe 'BaseNotificationEntity' do
     end
   end
 
+  describe 'test attribute "enabled"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

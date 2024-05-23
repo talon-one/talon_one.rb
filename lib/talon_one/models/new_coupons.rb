@@ -54,6 +54,9 @@ module TalonOne
     # Whether the reservation effect actually created a new reservation.
     attr_accessor :is_reservation_mandatory
 
+    # An indication of whether the coupon is implicitly reserved for all customers.
+    attr_accessor :implicitly_reserved
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -69,7 +72,8 @@ module TalonOne
         :'recipient_integration_id' => :'recipientIntegrationId',
         :'valid_characters' => :'validCharacters',
         :'coupon_pattern' => :'couponPattern',
-        :'is_reservation_mandatory' => :'isReservationMandatory'
+        :'is_reservation_mandatory' => :'isReservationMandatory',
+        :'implicitly_reserved' => :'implicitlyReserved'
       }
     end
 
@@ -88,7 +92,8 @@ module TalonOne
         :'recipient_integration_id' => :'String',
         :'valid_characters' => :'Array<String>',
         :'coupon_pattern' => :'String',
-        :'is_reservation_mandatory' => :'Boolean'
+        :'is_reservation_mandatory' => :'Boolean',
+        :'implicitly_reserved' => :'Boolean'
       }
     end
 
@@ -168,7 +173,11 @@ module TalonOne
       if attributes.key?(:'is_reservation_mandatory')
         self.is_reservation_mandatory = attributes[:'is_reservation_mandatory']
       else
-        self.is_reservation_mandatory = true
+        self.is_reservation_mandatory = false
+      end
+
+      if attributes.key?(:'implicitly_reserved')
+        self.implicitly_reserved = attributes[:'implicitly_reserved']
       end
     end
 
@@ -327,7 +336,8 @@ module TalonOne
           recipient_integration_id == o.recipient_integration_id &&
           valid_characters == o.valid_characters &&
           coupon_pattern == o.coupon_pattern &&
-          is_reservation_mandatory == o.is_reservation_mandatory
+          is_reservation_mandatory == o.is_reservation_mandatory &&
+          implicitly_reserved == o.implicitly_reserved
     end
 
     # @see the `==` method
@@ -339,7 +349,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, number_of_coupons, unique_prefix, attributes, recipient_integration_id, valid_characters, coupon_pattern, is_reservation_mandatory].hash
+      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, number_of_coupons, unique_prefix, attributes, recipient_integration_id, valid_characters, coupon_pattern, is_reservation_mandatory, implicitly_reserved].hash
     end
 
     # Builds the object from hash

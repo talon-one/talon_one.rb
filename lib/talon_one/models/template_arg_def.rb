@@ -137,10 +137,6 @@ module TalonOne
         invalid_properties.push('invalid value for "type", the character length must be great than or equal to 1.')
       end
 
-      if @description.nil?
-        invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
       if @title.nil?
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
@@ -163,7 +159,6 @@ module TalonOne
       type_validator = EnumAttributeValidator.new('String', ["string", "boolean", "number", "time", "(list string)"])
       return false unless type_validator.valid?(@type)
       return false if @type.to_s.length < 1
-      return false if @description.nil?
       return false if @title.nil?
       return false if @title.to_s.length < 1
       return false if @ui.nil?

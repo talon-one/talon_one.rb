@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | ID of the loyalty ledger transaction. | 
 **program_id** | **Integer** | ID of the loyalty program. | 
+**campaign_id** | **Integer** | ID of the campaign. | [optional] 
 **created** | **DateTime** | Date and time the loyalty transaction occurred. | 
 **type** | **String** | Type of transaction. Possible values:   - &#x60;addition&#x60;: Signifies added points.   - &#x60;subtraction&#x60;: Signifies deducted points.  | 
 **amount** | **Float** | Amount of loyalty points added or deducted in the transaction. | 
@@ -17,8 +18,8 @@ Name | Type | Description | Notes
 **subledger_id** | **String** | ID of the subledger. | 
 **customer_session_id** | **String** | ID of the customer session where the transaction occurred. | [optional] 
 **import_id** | **Integer** | ID of the import where the transaction occurred. | [optional] 
-**user_id** | **Integer** | ID of the user who manually added or deducted points. Applies only for manual transactions. | [optional] 
-**user_email** | **String** | The email of the user who manually added or deducted points. Applies only for manual transactions. | [optional] 
+**user_id** | **Integer** | ID of the user who manually added or deducted points. Applies only to manual transactions. | [optional] 
+**user_email** | **String** | The email of the Campaign Manager account that manually added or deducted points. Applies only to manual transactions. | [optional] 
 **ruleset_id** | **Integer** | ID of the ruleset containing the rule that triggered the effect. Applies only for transactions that resulted from a customer session. | [optional] 
 **rule_name** | **String** | Name of the rule that triggered the effect. Applies only for transactions that resulted from a customer session. | [optional] 
 
@@ -29,6 +30,7 @@ require 'TalonOne'
 
 instance = TalonOne::LoyaltyProgramTransaction.new(id: 123,
                                  program_id: 324,
+                                 campaign_id: 324,
                                  created: null,
                                  type: addition,
                                  amount: 10.25,

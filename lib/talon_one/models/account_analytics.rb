@@ -71,6 +71,9 @@ module TalonOne
     # Total number of live loyalty programs in the account.
     attr_accessor :live_loyalty_programs
 
+    # The point in time when the analytics numbers were updated last.
+    attr_accessor :last_updated_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -92,7 +95,8 @@ module TalonOne
         :'custom_attributes' => :'customAttributes',
         :'webhooks' => :'webhooks',
         :'loyalty_programs' => :'loyaltyPrograms',
-        :'live_loyalty_programs' => :'liveLoyaltyPrograms'
+        :'live_loyalty_programs' => :'liveLoyaltyPrograms',
+        :'last_updated_at' => :'lastUpdatedAt'
       }
     end
 
@@ -117,7 +121,8 @@ module TalonOne
         :'custom_attributes' => :'Integer',
         :'webhooks' => :'Integer',
         :'loyalty_programs' => :'Integer',
-        :'live_loyalty_programs' => :'Integer'
+        :'live_loyalty_programs' => :'Integer',
+        :'last_updated_at' => :'DateTime'
       }
     end
 
@@ -217,6 +222,10 @@ module TalonOne
       if attributes.key?(:'live_loyalty_programs')
         self.live_loyalty_programs = attributes[:'live_loyalty_programs']
       end
+
+      if attributes.key?(:'last_updated_at')
+        self.last_updated_at = attributes[:'last_updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -299,6 +308,10 @@ module TalonOne
         invalid_properties.push('invalid value for "live_loyalty_programs", live_loyalty_programs cannot be nil.')
       end
 
+      if @last_updated_at.nil?
+        invalid_properties.push('invalid value for "last_updated_at", last_updated_at cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -324,6 +337,7 @@ module TalonOne
       return false if @webhooks.nil?
       return false if @loyalty_programs.nil?
       return false if @live_loyalty_programs.nil?
+      return false if @last_updated_at.nil?
       true
     end
 
@@ -350,7 +364,8 @@ module TalonOne
           custom_attributes == o.custom_attributes &&
           webhooks == o.webhooks &&
           loyalty_programs == o.loyalty_programs &&
-          live_loyalty_programs == o.live_loyalty_programs
+          live_loyalty_programs == o.live_loyalty_programs &&
+          last_updated_at == o.last_updated_at
     end
 
     # @see the `==` method
@@ -362,7 +377,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [applications, live_applications, sandbox_applications, campaigns, active_campaigns, live_active_campaigns, coupons, active_coupons, expired_coupons, referral_codes, active_referral_codes, expired_referral_codes, active_rules, users, roles, custom_attributes, webhooks, loyalty_programs, live_loyalty_programs].hash
+      [applications, live_applications, sandbox_applications, campaigns, active_campaigns, live_active_campaigns, coupons, active_coupons, expired_coupons, referral_codes, active_referral_codes, expired_referral_codes, active_rules, users, roles, custom_attributes, webhooks, loyalty_programs, live_loyalty_programs, last_updated_at].hash
     end
 
     # Builds the object from hash

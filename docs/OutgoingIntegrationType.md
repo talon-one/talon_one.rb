@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::OutgoingIntegrationType.new(id: 6,
-                                 name: braze,
+                                 name: Braze,
                                  description: Braze is a customer data platform,
                                  category: customer engagement platform,
                                  documentation_link: https://docs.talon.one/docs/dev/technology-partners/braze)

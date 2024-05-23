@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;LoyaltyProgram&gt;**](LoyaltyProgram.md) |  | 
+**data** | [**Array&lt;CampaignGroup&gt;**](CampaignGroup.md) |  | 
 
 ## Code Sample
 

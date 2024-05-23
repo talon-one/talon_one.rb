@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | 
-**data** | [**Array&lt;ApplicationEvent&gt;**](ApplicationEvent.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**data** | [**Array&lt;ApplicationSession&gt;**](ApplicationSession.md) |  | 
 
 ## Code Sample
 

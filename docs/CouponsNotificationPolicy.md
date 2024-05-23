@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | Notification name. | 
 **scopes** | **Array&lt;String&gt;** |  | 
+**batching_enabled** | **Boolean** | Indicates whether batching is activated. | [optional] [default to true]
 
 ## Code Sample
 
@@ -13,7 +14,8 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::CouponsNotificationPolicy.new(name: Christmas Sale,
-                                 scopes: null)
+                                 scopes: null,
+                                 batching_enabled: true)
 ```
 
 

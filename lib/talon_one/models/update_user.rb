@@ -14,18 +14,22 @@ require 'date'
 
 module TalonOne
   class UpdateUser
-    # The user name.
+    # Name of the user.
     attr_accessor :name
 
-    # The `Access Control List` json defining the role of the user. This represents the access control on the user level.
-    attr_accessor :policy
-
-    # New state (\"deactivated\" or \"active\") for the user. Only usable by admins for the user.
+    # The state of the user.   - `deactivated`: The user has been deactivated.   - `active`: The user is active.  **Note**: Only `admin` users can update the state of another user. 
     attr_accessor :state
 
-    # List of roles to assign to the user.
+    # Indicates whether the user is an `admin`.
+    attr_accessor :is_admin
+
+    # Indicates the access level of the user.
+    attr_accessor :policy
+
+    # A list of the IDs of the roles assigned to the user.  **Note**: Use the [List roles](https://docs.talon.one/management-api#tag/Roles/operation/getAllRoles) endpoint to find the ID of a role. 
     attr_accessor :roles
 
+    # Application notifications that the user is subscribed to.
     attr_accessor :application_notification_subscriptions
 
     class EnumAttributeValidator
@@ -54,8 +58,9 @@ module TalonOne
     def self.attribute_map
       {
         :'name' => :'name',
-        :'policy' => :'policy',
         :'state' => :'state',
+        :'is_admin' => :'isAdmin',
+        :'policy' => :'policy',
         :'roles' => :'roles',
         :'application_notification_subscriptions' => :'applicationNotificationSubscriptions'
       }
@@ -65,8 +70,9 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'policy' => :'String',
         :'state' => :'String',
+        :'is_admin' => :'Boolean',
+        :'policy' => :'String',
         :'roles' => :'Array<Integer>',
         :'application_notification_subscriptions' => :'Object'
       }
@@ -97,12 +103,16 @@ module TalonOne
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'policy')
-        self.policy = attributes[:'policy']
-      end
-
       if attributes.key?(:'state')
         self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'is_admin')
+        self.is_admin = attributes[:'is_admin']
+      end
+
+      if attributes.key?(:'policy')
+        self.policy = attributes[:'policy']
       end
 
       if attributes.key?(:'roles')
@@ -147,8 +157,9 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          policy == o.policy &&
           state == o.state &&
+          is_admin == o.is_admin &&
+          policy == o.policy &&
           roles == o.roles &&
           application_notification_subscriptions == o.application_notification_subscriptions
     end
@@ -162,7 +173,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, policy, state, roles, application_notification_subscriptions].hash
+      [name, state, is_admin, policy, roles, application_notification_subscriptions].hash
     end
 
     # Builds the object from hash

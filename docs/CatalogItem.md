@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **catalogid** | **Integer** | The ID of the catalog the item belongs to. | 
 **version** | **Integer** | The version of the catalog item. | 
 **attributes** | [**Array&lt;ItemAttribute&gt;**](ItemAttribute.md) |  | [optional] 
+**product** | [**Product**](Product.md) |  | [optional] 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::CatalogItem.new(id: 6,
                                  price: 99.99,
                                  catalogid: 6,
                                  version: 5,
-                                 attributes: null)
+                                 attributes: null,
+                                 product: null)
 ```
 
 

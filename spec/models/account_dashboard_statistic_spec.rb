@@ -56,12 +56,6 @@ describe 'AccountDashboardStatistic' do
     end
   end
 
-  describe 'test attribute "api_calls"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "campaigns"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
