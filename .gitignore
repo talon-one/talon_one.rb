@@ -39,3 +39,4 @@ build/
 .rvmrc
 
 .idea
+.DS_Store
