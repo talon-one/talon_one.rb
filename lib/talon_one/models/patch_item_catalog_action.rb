@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The specific properties of the \"PATCH\" catalog sync action.
+  # The specific properties of the \"PATCH\" catalog sync action.  **Note:**   - If you do not provide a new `price` value, the existing `price` value is retained.   - If you do not provide a new `product` value, the `product` value is set to `null`. 
   class PatchItemCatalogAction
     # The unique SKU of the item to patch.
     attr_accessor :sku
@@ -24,6 +24,8 @@ module TalonOne
     # The attributes of the item to patch.
     attr_accessor :attributes
 
+    attr_accessor :product
+
     # Indicates whether to create an item if the SKU does not exist.
     attr_accessor :create_if_not_exists
 
@@ -33,6 +35,7 @@ module TalonOne
         :'sku' => :'sku',
         :'price' => :'price',
         :'attributes' => :'attributes',
+        :'product' => :'product',
         :'create_if_not_exists' => :'createIfNotExists'
       }
     end
@@ -43,6 +46,7 @@ module TalonOne
         :'sku' => :'String',
         :'price' => :'Float',
         :'attributes' => :'Object',
+        :'product' => :'Product',
         :'create_if_not_exists' => :'Boolean'
       }
     end
@@ -80,6 +84,10 @@ module TalonOne
         self.attributes = attributes[:'attributes']
       end
 
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
+      end
+
       if attributes.key?(:'create_if_not_exists')
         self.create_if_not_exists = attributes[:'create_if_not_exists']
       else
@@ -113,6 +121,7 @@ module TalonOne
           sku == o.sku &&
           price == o.price &&
           attributes == o.attributes &&
+          product == o.product &&
           create_if_not_exists == o.create_if_not_exists
     end
 
@@ -125,7 +134,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [sku, price, attributes, create_if_not_exists].hash
+      [sku, price, attributes, product, create_if_not_exists].hash
     end
 
     # Builds the object from hash

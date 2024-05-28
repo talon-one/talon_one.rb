@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Customer specific information about loyalty points.
+  # Customer-specific information about loyalty points.
   class Loyalty
     # Displays information about the balances of the loyalty cards.
     attr_accessor :cards

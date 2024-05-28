@@ -18,13 +18,16 @@ module TalonOne
     # ID of the customer profile set by your integration layer.  **Note:** If the customer does not yet have a known `profileId`, we recommend you use a guest `profileId`. 
     attr_accessor :profile_id
 
+    # The integration ID of the store. You choose this ID when you create a store.
+    attr_accessor :store_integration_id
+
     # When using the `dry` query parameter, use this property to list the campaign to be evaluated by the Rule Engine.  These campaigns will be evaluated, even if they are disabled, allowing you to test specific campaigns before activating them. 
     attr_accessor :evaluable_campaign_ids
 
-    # A string representing the event name. Must not be a reserved event name. You create this value when you [create an attribute](https://docs.talon.one/docs/dev/concepts/events#creating-a-custom-event) of type `event` in the Campaign Manager. 
+    # A string representing the event name. Must not be a reserved event name. You create this value when you [create an attribute](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) of type `event` in the Campaign Manager. 
     attr_accessor :type
 
-    # Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-custom-attributes).
+    # Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-a-custom-attribute).
     attr_accessor :attributes
 
     # Optional list of requested information to be present on the response related to the tracking custom event. 
@@ -56,6 +59,7 @@ module TalonOne
     def self.attribute_map
       {
         :'profile_id' => :'profileId',
+        :'store_integration_id' => :'storeIntegrationId',
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
         :'type' => :'type',
         :'attributes' => :'attributes',
@@ -67,6 +71,7 @@ module TalonOne
     def self.openapi_types
       {
         :'profile_id' => :'String',
+        :'store_integration_id' => :'String',
         :'evaluable_campaign_ids' => :'Array<Integer>',
         :'type' => :'String',
         :'attributes' => :'Object',
@@ -99,6 +104,10 @@ module TalonOne
         self.profile_id = attributes[:'profile_id']
       end
 
+      if attributes.key?(:'store_integration_id')
+        self.store_integration_id = attributes[:'store_integration_id']
+      end
+
       if attributes.key?(:'evaluable_campaign_ids')
         if (value = attributes[:'evaluable_campaign_ids']).is_a?(Array)
           self.evaluable_campaign_ids = value
@@ -124,6 +133,14 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be great than or equal to 1.')
+      end
+
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -138,9 +155,25 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
       return false if @type.nil?
       return false if @type.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] store_integration_id Value to be assigned
+    def store_integration_id=(store_integration_id)
+      if !store_integration_id.nil? && store_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !store_integration_id.nil? && store_integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @store_integration_id = store_integration_id
     end
 
     # Custom attribute writer method with validation
@@ -163,6 +196,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           profile_id == o.profile_id &&
+          store_integration_id == o.store_integration_id &&
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
           type == o.type &&
           attributes == o.attributes &&
@@ -178,7 +212,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, evaluable_campaign_ids, type, attributes, response_content].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, response_content].hash
     end
 
     # Builds the object from hash

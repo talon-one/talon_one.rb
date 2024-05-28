@@ -32,11 +32,17 @@ module TalonOne
     # Limits for this Campaign. If the Campaign Template or Application define default values for the same limits, they will be overridden.
     attr_accessor :limit_overrides
 
-    # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups) this campaign belongs to. 
+    # The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/account-settings/managing-campaign-groups) this campaign belongs to. 
     attr_accessor :campaign_groups
 
     # A list of tags for the campaign. If the campaign template has tags, they will be overridden by this list.
     attr_accessor :tags
+
+    # The ID of the campaign evaluation group the campaign belongs to.
+    attr_accessor :evaluation_group_id
+
+    # A list of store IDs that are linked to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store. 
+    attr_accessor :linked_store_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -48,7 +54,9 @@ module TalonOne
         :'template_param_values' => :'templateParamValues',
         :'limit_overrides' => :'limitOverrides',
         :'campaign_groups' => :'campaignGroups',
-        :'tags' => :'tags'
+        :'tags' => :'tags',
+        :'evaluation_group_id' => :'evaluationGroupId',
+        :'linked_store_ids' => :'linkedStoreIds'
       }
     end
 
@@ -62,7 +70,9 @@ module TalonOne
         :'template_param_values' => :'Array<Binding>',
         :'limit_overrides' => :'Array<LimitConfig>',
         :'campaign_groups' => :'Array<Integer>',
-        :'tags' => :'Array<String>'
+        :'tags' => :'Array<String>',
+        :'evaluation_group_id' => :'Integer',
+        :'linked_store_ids' => :'Array<Integer>'
       }
     end
 
@@ -126,6 +136,16 @@ module TalonOne
           self.tags = value
         end
       end
+
+      if attributes.key?(:'evaluation_group_id')
+        self.evaluation_group_id = attributes[:'evaluation_group_id']
+      end
+
+      if attributes.key?(:'linked_store_ids')
+        if (value = attributes[:'linked_store_ids']).is_a?(Array)
+          self.linked_store_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -182,7 +202,9 @@ module TalonOne
           template_param_values == o.template_param_values &&
           limit_overrides == o.limit_overrides &&
           campaign_groups == o.campaign_groups &&
-          tags == o.tags
+          tags == o.tags &&
+          evaluation_group_id == o.evaluation_group_id &&
+          linked_store_ids == o.linked_store_ids
     end
 
     # @see the `==` method
@@ -194,7 +216,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, template_id, campaign_attributes_overrides, template_param_values, limit_overrides, campaign_groups, tags].hash
+      [name, description, template_id, campaign_attributes_overrides, template_param_values, limit_overrides, campaign_groups, tags, evaluation_group_id, linked_store_ids].hash
     end
 
     # Builds the object from hash

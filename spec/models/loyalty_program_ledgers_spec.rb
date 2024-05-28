@@ -50,6 +50,12 @@ describe 'LoyaltyProgramLedgers' do
     end
   end
 
+  describe 'test attribute "join_date"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "ledger"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

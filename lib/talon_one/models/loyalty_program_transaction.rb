@@ -20,6 +20,9 @@ module TalonOne
     # ID of the loyalty program.
     attr_accessor :program_id
 
+    # ID of the campaign.
+    attr_accessor :campaign_id
+
     # Date and time the loyalty transaction occurred.
     attr_accessor :created
 
@@ -53,10 +56,10 @@ module TalonOne
     # ID of the import where the transaction occurred.
     attr_accessor :import_id
 
-    # ID of the user who manually added or deducted points. Applies only for manual transactions.
+    # ID of the user who manually added or deducted points. Applies only to manual transactions.
     attr_accessor :user_id
 
-    # The email of the user who manually added or deducted points. Applies only for manual transactions.
+    # The email of the Campaign Manager account that manually added or deducted points. Applies only to manual transactions.
     attr_accessor :user_email
 
     # ID of the ruleset containing the rule that triggered the effect. Applies only for transactions that resulted from a customer session.
@@ -92,6 +95,7 @@ module TalonOne
       {
         :'id' => :'id',
         :'program_id' => :'programId',
+        :'campaign_id' => :'campaignId',
         :'created' => :'created',
         :'type' => :'type',
         :'amount' => :'amount',
@@ -115,6 +119,7 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'program_id' => :'Integer',
+        :'campaign_id' => :'Integer',
         :'created' => :'DateTime',
         :'type' => :'String',
         :'amount' => :'Float',
@@ -160,6 +165,10 @@ module TalonOne
 
       if attributes.key?(:'program_id')
         self.program_id = attributes[:'program_id']
+      end
+
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
       end
 
       if attributes.key?(:'created')
@@ -407,6 +416,7 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           program_id == o.program_id &&
+          campaign_id == o.campaign_id &&
           created == o.created &&
           type == o.type &&
           amount == o.amount &&
@@ -433,7 +443,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, program_id, created, type, amount, name, start_date, expiry_date, customer_profile_id, card_identifier, subledger_id, customer_session_id, import_id, user_id, user_email, ruleset_id, rule_name].hash
+      [id, program_id, campaign_id, created, type, amount, name, start_date, expiry_date, customer_profile_id, card_identifier, subledger_id, customer_session_id, import_id, user_id, user_email, ruleset_id, rule_name].hash
     end
 
     # Builds the object from hash

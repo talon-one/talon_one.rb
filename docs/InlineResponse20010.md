@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;CampaignTemplate&gt;**](CampaignTemplate.md) |  | 
+**data** | [**Array&lt;Referral&gt;**](Referral.md) |  | 
 
 ## Code Sample
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **created** | **DateTime** | The time this entity was created. | 
 **application_id** | **Integer** | The ID of the application that owns this entity. | 
 **profile_id** | **String** | ID of the customer profile set by your integration layer.  **Note:** If the customer does not yet have a known &#x60;profileId&#x60;, we recommend you use a guest &#x60;profileId&#x60;.  | [optional] 
+**store_integration_id** | **String** | The integration ID of the store. You choose this ID when you create a store. | [optional] 
 **type** | **String** | A string representing the event. Must not be a reserved event name. | 
 **attributes** | [**Object**](.md) | Arbitrary additional JSON data associated with the event. | 
 **session_id** | **String** | The ID of the session that this event occurred in. | [optional] 
@@ -24,6 +25,7 @@ instance = TalonOne::Event.new(id: 6,
                                  created: 2020-06-10T09:05:27.993483Z,
                                  application_id: 322,
                                  profile_id: URNGV8294NV,
+                                 store_integration_id: STORE-001,
                                  type: pageViewed,
                                  attributes: {&quot;myAttribute&quot;:&quot;myValue&quot;},
                                  session_id: 175KJPS947296,

@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | Limits configuration for a coupon. These limits will override the limits set from the campaign.  **Note:** Only usable when creating a single coupon which is not tied to a specific recipient. Only per-profile limits are allowed to be configured.  | [optional] 
 **recipient_integration_id** | **String** | The integration ID for this coupon&#39;s beneficiary&#39;s profile. | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this item. | [optional] 
-**is_reservation_mandatory** | **Boolean** | Whether the reservation effect actually created a new reservation. | [optional] [default to true]
+**is_reservation_mandatory** | **Boolean** | Whether the reservation effect actually created a new reservation. | [optional] [default to false]
+**implicitly_reserved** | **Boolean** | An indication of whether the coupon is implicitly reserved for all customers. | [optional] 
 
 ## Code Sample
 
@@ -27,7 +28,8 @@ instance = TalonOne::UpdateCoupon.new(usage_limit: 100,
                                  limits: null,
                                  recipient_integration_id: URNGV8294NV,
                                  attributes: null,
-                                 is_reservation_mandatory: false)
+                                 is_reservation_mandatory: false,
+                                 implicitly_reserved: false)
 ```
 
 

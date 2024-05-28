@@ -47,10 +47,26 @@ describe 'ApplicationAPIKey' do
   describe 'test attribute "platform"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.platform = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["staging"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "time_offset"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

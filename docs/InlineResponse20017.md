@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
 **total_result_size** | **Integer** |  | [optional] 
-**data** | [**Array&lt;Collection&gt;**](Collection.md) |  | 
+**data** | [**Array&lt;CollectionWithoutPayload&gt;**](CollectionWithoutPayload.md) |  | 
 
 ## Code Sample
 

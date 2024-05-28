@@ -34,7 +34,7 @@ module TalonOne
       {
         :'has_more' => :'Boolean',
         :'total_result_size' => :'Integer',
-        :'data' => :'Array<Collection>'
+        :'data' => :'Array<CollectionWithoutPayload>'
       }
     end
 

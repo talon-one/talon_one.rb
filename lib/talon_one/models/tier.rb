@@ -20,11 +20,41 @@ module TalonOne
     # The name of the tier.
     attr_accessor :name
 
+    # Date when tier level expires in the RFC3339 format (in the Loyalty Program's timezone).
+    attr_accessor :expiry_date
+
+    # Customers's tier downgrade policy. - `one_down`: Once the tier expires and if the user doesn't have enough points to stay in the tier, the user is downgraded one tier down. - `balance_based`: Once the tier expires, the user's tier is evaluated based on the amount of active points the user has at this instant. 
+    attr_accessor :downgrade_policy
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'expiry_date' => :'expiryDate',
+        :'downgrade_policy' => :'downgradePolicy'
       }
     end
 
@@ -32,7 +62,9 @@ module TalonOne
     def self.openapi_types
       {
         :'id' => :'Integer',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'expiry_date' => :'DateTime',
+        :'downgrade_policy' => :'String'
       }
     end
 
@@ -64,6 +96,14 @@ module TalonOne
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'downgrade_policy')
+        self.downgrade_policy = attributes[:'downgrade_policy']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -86,7 +126,19 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @name.nil?
+      downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
+      return false unless downgrade_policy_validator.valid?(@downgrade_policy)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] downgrade_policy Object to be assigned
+    def downgrade_policy=(downgrade_policy)
+      validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
+      unless validator.valid?(downgrade_policy)
+        fail ArgumentError, "invalid value for \"downgrade_policy\", must be one of #{validator.allowable_values}."
+      end
+      @downgrade_policy = downgrade_policy
     end
 
     # Checks equality by comparing each attribute.
@@ -95,7 +147,9 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          name == o.name
+          name == o.name &&
+          expiry_date == o.expiry_date &&
+          downgrade_policy == o.downgrade_policy
     end
 
     # @see the `==` method
@@ -107,7 +161,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name].hash
+      [id, name, expiry_date, downgrade_policy].hash
     end
 
     # Builds the object from hash

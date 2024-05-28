@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class RoleV2Permissions
-    # List of grouped operation IDs to use as a reference in the roles section. Each group of operation IDs has a name.
+    # List of grouped logical operations referenced by roles.
     attr_accessor :permission_sets
 
     attr_accessor :roles
@@ -31,7 +31,7 @@ module TalonOne
     def self.openapi_types
       {
         :'permission_sets' => :'Array<RoleV2PermissionSet>',
-        :'roles' => :'RoleV2PermissionsRoles'
+        :'roles' => :'RoleV2RolesGroup'
       }
     end
 

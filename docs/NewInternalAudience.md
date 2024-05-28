@@ -15,7 +15,7 @@ require 'TalonOne'
 
 instance = TalonOne::NewInternalAudience.new(name: Travel audience,
                                  sandbox: true,
-                                 description: Travel audience 18-25)
+                                 description: Travel audience 18-27)
 ```
 
 

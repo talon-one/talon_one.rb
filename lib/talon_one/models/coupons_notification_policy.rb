@@ -19,6 +19,9 @@ module TalonOne
 
     attr_accessor :scopes
 
+    # Indicates whether batching is activated.
+    attr_accessor :batching_enabled
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -45,7 +48,8 @@ module TalonOne
     def self.attribute_map
       {
         :'name' => :'name',
-        :'scopes' => :'scopes'
+        :'scopes' => :'scopes',
+        :'batching_enabled' => :'batchingEnabled'
       }
     end
 
@@ -53,7 +57,8 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'scopes' => :'Array<String>'
+        :'scopes' => :'Array<String>',
+        :'batching_enabled' => :'Boolean'
       }
     end
 
@@ -86,6 +91,12 @@ module TalonOne
         if (value = attributes[:'scopes']).is_a?(Array)
           self.scopes = value
         end
+      end
+
+      if attributes.key?(:'batching_enabled')
+        self.batching_enabled = attributes[:'batching_enabled']
+      else
+        self.batching_enabled = true
       end
     end
 
@@ -137,7 +148,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          scopes == o.scopes
+          scopes == o.scopes &&
+          batching_enabled == o.batching_enabled
     end
 
     # @see the `==` method
@@ -149,7 +161,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, scopes].hash
+      [name, scopes, batching_enabled].hash
     end
 
     # Builds the object from hash

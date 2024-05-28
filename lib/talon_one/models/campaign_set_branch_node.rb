@@ -17,14 +17,29 @@ module TalonOne
     # Indicates the node type.
     attr_accessor :type
 
-    # Name of the set
+    # Name of the set.
     attr_accessor :name
 
-    # How does the set operates on its elements.
+    # An indicator of how the set operates on its elements.
     attr_accessor :operator
 
     # Child elements of this set.
     attr_accessor :elements
+
+    # The ID of the campaign set.
+    attr_accessor :group_id
+
+    # An indicator of whether the campaign set is locked for modification.
+    attr_accessor :locked
+
+    # A description of the campaign set.
+    attr_accessor :description
+
+    # The mode by which campaigns in the campaign evaluation group are evaluated.
+    attr_accessor :evaluation_mode
+
+    # The evaluation scope of the campaign evaluation group.
+    attr_accessor :evaluation_scope
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,7 +69,12 @@ module TalonOne
         :'type' => :'type',
         :'name' => :'name',
         :'operator' => :'operator',
-        :'elements' => :'elements'
+        :'elements' => :'elements',
+        :'group_id' => :'groupId',
+        :'locked' => :'locked',
+        :'description' => :'description',
+        :'evaluation_mode' => :'evaluationMode',
+        :'evaluation_scope' => :'evaluationScope'
       }
     end
 
@@ -64,7 +84,12 @@ module TalonOne
         :'type' => :'String',
         :'name' => :'String',
         :'operator' => :'String',
-        :'elements' => :'Array<CampaignSetNode>'
+        :'elements' => :'Array<CampaignSetNode>',
+        :'group_id' => :'Integer',
+        :'locked' => :'Boolean',
+        :'description' => :'String',
+        :'evaluation_mode' => :'String',
+        :'evaluation_scope' => :'String'
       }
     end
 
@@ -106,6 +131,26 @@ module TalonOne
           self.elements = value
         end
       end
+
+      if attributes.key?(:'group_id')
+        self.group_id = attributes[:'group_id']
+      end
+
+      if attributes.key?(:'locked')
+        self.locked = attributes[:'locked']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'evaluation_mode')
+        self.evaluation_mode = attributes[:'evaluation_mode']
+      end
+
+      if attributes.key?(:'evaluation_scope')
+        self.evaluation_scope = attributes[:'evaluation_scope']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -128,6 +173,22 @@ module TalonOne
         invalid_properties.push('invalid value for "elements", elements cannot be nil.')
       end
 
+      if @group_id.nil?
+        invalid_properties.push('invalid value for "group_id", group_id cannot be nil.')
+      end
+
+      if @locked.nil?
+        invalid_properties.push('invalid value for "locked", locked cannot be nil.')
+      end
+
+      if @evaluation_mode.nil?
+        invalid_properties.push('invalid value for "evaluation_mode", evaluation_mode cannot be nil.')
+      end
+
+      if @evaluation_scope.nil?
+        invalid_properties.push('invalid value for "evaluation_scope", evaluation_scope cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -142,6 +203,14 @@ module TalonOne
       operator_validator = EnumAttributeValidator.new('String', ["ALL", "FIRST"])
       return false unless operator_validator.valid?(@operator)
       return false if @elements.nil?
+      return false if @group_id.nil?
+      return false if @locked.nil?
+      return false if @evaluation_mode.nil?
+      evaluation_mode_validator = EnumAttributeValidator.new('String', ["stackable", "listOrder", "lowestDiscount", "highestDiscount"])
+      return false unless evaluation_mode_validator.valid?(@evaluation_mode)
+      return false if @evaluation_scope.nil?
+      evaluation_scope_validator = EnumAttributeValidator.new('String', ["cartItem", "session"])
+      return false unless evaluation_scope_validator.valid?(@evaluation_scope)
       true
     end
 
@@ -165,6 +234,26 @@ module TalonOne
       @operator = operator
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] evaluation_mode Object to be assigned
+    def evaluation_mode=(evaluation_mode)
+      validator = EnumAttributeValidator.new('String', ["stackable", "listOrder", "lowestDiscount", "highestDiscount"])
+      unless validator.valid?(evaluation_mode)
+        fail ArgumentError, "invalid value for \"evaluation_mode\", must be one of #{validator.allowable_values}."
+      end
+      @evaluation_mode = evaluation_mode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] evaluation_scope Object to be assigned
+    def evaluation_scope=(evaluation_scope)
+      validator = EnumAttributeValidator.new('String', ["cartItem", "session"])
+      unless validator.valid?(evaluation_scope)
+        fail ArgumentError, "invalid value for \"evaluation_scope\", must be one of #{validator.allowable_values}."
+      end
+      @evaluation_scope = evaluation_scope
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -173,7 +262,12 @@ module TalonOne
           type == o.type &&
           name == o.name &&
           operator == o.operator &&
-          elements == o.elements
+          elements == o.elements &&
+          group_id == o.group_id &&
+          locked == o.locked &&
+          description == o.description &&
+          evaluation_mode == o.evaluation_mode &&
+          evaluation_scope == o.evaluation_scope
     end
 
     # @see the `==` method
@@ -185,7 +279,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, operator, elements].hash
+      [type, name, operator, elements, group_id, locked, description, evaluation_mode, evaluation_scope].hash
     end
 
     # Builds the object from hash

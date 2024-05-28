@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **audience_id** | **Integer** | The ID of the audience. | [optional] 
-**members_count** | **Integer** | The count of members under a single audience. | [optional] 
+**members_count** | **Integer** | The member count of the audience. | [optional] 
 
 ## Code Sample
 

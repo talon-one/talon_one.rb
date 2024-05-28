@@ -78,26 +78,6 @@ describe 'NewApplication' do
     end
   end
 
-  describe 'test attribute "campaign_priority"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["universal", "stackable", "exclusive"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.campaign_priority = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "exclusive_campaigns_strategy"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["listOrder", "lowestDiscount", "highestDiscount"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.exclusive_campaigns_strategy = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe 'test attribute "default_discount_scope"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

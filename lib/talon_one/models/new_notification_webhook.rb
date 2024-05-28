@@ -20,11 +20,15 @@ module TalonOne
     # List of API HTTP headers for the given webhook-based notification.
     attr_accessor :headers
 
+    # Indicates whether the notification is activated.
+    attr_accessor :enabled
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'url' => :'url',
-        :'headers' => :'headers'
+        :'headers' => :'headers',
+        :'enabled' => :'enabled'
       }
     end
 
@@ -32,7 +36,8 @@ module TalonOne
     def self.openapi_types
       {
         :'url' => :'String',
-        :'headers' => :'Array<String>'
+        :'headers' => :'Array<String>',
+        :'enabled' => :'Boolean'
       }
     end
 
@@ -66,6 +71,12 @@ module TalonOne
           self.headers = value
         end
       end
+
+      if attributes.key?(:'enabled')
+        self.enabled = attributes[:'enabled']
+      else
+        self.enabled = true
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,7 +108,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           url == o.url &&
-          headers == o.headers
+          headers == o.headers &&
+          enabled == o.enabled
     end
 
     # @see the `==` method
@@ -109,7 +121,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, headers].hash
+      [url, headers, enabled].hash
     end
 
     # Builds the object from hash

@@ -14,14 +14,20 @@ require 'date'
 
 module TalonOne
   class CreateApplicationAPIKey
-    # Title for API Key.
+    # Title of the API key.
     attr_accessor :title
 
-    # The date the API key expired.
+    # The date the API key expires.
     attr_accessor :expires
 
     # The third-party platform the API key is valid for. Use `none` for a generic API key to be used from your own integration layer. 
     attr_accessor :platform
+
+    # The API key type. Can be empty or `staging`.  Staging API keys can only be used for dry requests with the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint, [Update customer profile](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint, and [Track event](https://docs.talon.one/integration-api#tag/Events/operation/trackEventV2) endpoint.  When using the _Update customer profile_ endpoint with a staging API key, the query parameter `runRuleEngine` must be `true`. 
+    attr_accessor :type
+
+    # A time offset in nanoseconds associated with the API key. When making a request using the API key, rule evaluation is based on a date that is calculated by adding the offset to the current date. 
+    attr_accessor :time_offset
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -50,7 +56,9 @@ module TalonOne
       {
         :'title' => :'title',
         :'expires' => :'expires',
-        :'platform' => :'platform'
+        :'platform' => :'platform',
+        :'type' => :'type',
+        :'time_offset' => :'timeOffset'
       }
     end
 
@@ -59,7 +67,9 @@ module TalonOne
       {
         :'title' => :'String',
         :'expires' => :'DateTime',
-        :'platform' => :'String'
+        :'platform' => :'String',
+        :'type' => :'String',
+        :'time_offset' => :'Integer'
       }
     end
 
@@ -95,6 +105,14 @@ module TalonOne
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'time_offset')
+        self.time_offset = attributes[:'time_offset']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,19 +135,31 @@ module TalonOne
     def valid?
       return false if @title.nil?
       return false if @expires.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce"])
+      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
       return false unless platform_validator.valid?(@platform)
+      type_validator = EnumAttributeValidator.new('String', ["staging"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce"])
+      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["staging"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -139,7 +169,9 @@ module TalonOne
       self.class == o.class &&
           title == o.title &&
           expires == o.expires &&
-          platform == o.platform
+          platform == o.platform &&
+          type == o.type &&
+          time_offset == o.time_offset
     end
 
     # @see the `==` method
@@ -151,7 +183,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, expires, platform].hash
+      [title, expires, platform, type, time_offset].hash
     end
 
     # Builds the object from hash

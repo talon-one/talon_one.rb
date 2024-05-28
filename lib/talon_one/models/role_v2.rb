@@ -13,27 +13,40 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # 
   class RoleV2
+    # Internal ID of this entity.
+    attr_accessor :id
+
+    # The time this entity was created.
+    attr_accessor :created
+
+    # The time this entity was last modified.
+    attr_accessor :modified
+
+    # The ID of the account that owns this entity.
+    attr_accessor :account_id
+
     # Name of the role.
     attr_accessor :name
 
     # Description of the role.
     attr_accessor :description
 
-    # Indicates whether the role grants admin permissions.
-    attr_accessor :is_admin
-
     attr_accessor :permissions
 
-    # An array of user identifiers.
+    # A list of user IDs the role is assigned to.
     attr_accessor :members
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'created' => :'created',
+        :'modified' => :'modified',
+        :'account_id' => :'accountId',
         :'name' => :'name',
         :'description' => :'description',
-        :'is_admin' => :'isAdmin',
         :'permissions' => :'permissions',
         :'members' => :'members'
       }
@@ -42,9 +55,12 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'Integer',
+        :'created' => :'DateTime',
+        :'modified' => :'DateTime',
+        :'account_id' => :'Integer',
         :'name' => :'String',
         :'description' => :'String',
-        :'is_admin' => :'Boolean',
         :'permissions' => :'RoleV2Permissions',
         :'members' => :'Array<Integer>'
       }
@@ -71,16 +87,28 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'modified')
+        self.modified = attributes[:'modified']
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'is_admin')
-        self.is_admin = attributes[:'is_admin']
       end
 
       if attributes.key?(:'permissions')
@@ -98,12 +126,32 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @created.nil?
+        invalid_properties.push('invalid value for "created", created cannot be nil.')
+      end
+
+      if @modified.nil?
+        invalid_properties.push('invalid value for "modified", modified cannot be nil.')
+      end
+
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @created.nil?
+      return false if @modified.nil?
+      return false if @account_id.nil?
       true
     end
 
@@ -112,9 +160,12 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          created == o.created &&
+          modified == o.modified &&
+          account_id == o.account_id &&
           name == o.name &&
           description == o.description &&
-          is_admin == o.is_admin &&
           permissions == o.permissions &&
           members == o.members
     end
@@ -128,7 +179,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, is_admin, permissions, members].hash
+      [id, created, modified, account_id, name, description, permissions, members].hash
     end
 
     # Builds the object from hash

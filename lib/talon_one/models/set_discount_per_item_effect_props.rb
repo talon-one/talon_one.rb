@@ -24,7 +24,7 @@ module TalonOne
     # The index of the item in the cart items list on which this discount should be applied.
     attr_accessor :position
 
-    # Only used when [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening) is enabled. Indicates which item the discount applies to for cart items with `quantity` > 1. 
+    # For cart items with `quantity` > 1, the sub position indicates which item the discount applies to. 
     attr_accessor :sub_position
 
     # The original value of the discount.
@@ -45,6 +45,12 @@ module TalonOne
     # The name of the bundle definition.
     attr_accessor :bundle_name
 
+    # The index of the targeted bundle item on which the applied discount is based.
+    attr_accessor :targeted_item_position
+
+    # The sub-position of the targeted bundle item on which the applied discount is based. 
+    attr_accessor :targeted_item_sub_position
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,7 +63,9 @@ module TalonOne
         :'total_discount' => :'totalDiscount',
         :'desired_total_discount' => :'desiredTotalDiscount',
         :'bundle_index' => :'bundleIndex',
-        :'bundle_name' => :'bundleName'
+        :'bundle_name' => :'bundleName',
+        :'targeted_item_position' => :'targetedItemPosition',
+        :'targeted_item_sub_position' => :'targetedItemSubPosition'
       }
     end
 
@@ -73,7 +81,9 @@ module TalonOne
         :'total_discount' => :'Float',
         :'desired_total_discount' => :'Float',
         :'bundle_index' => :'Integer',
-        :'bundle_name' => :'String'
+        :'bundle_name' => :'String',
+        :'targeted_item_position' => :'Float',
+        :'targeted_item_sub_position' => :'Float'
       }
     end
 
@@ -137,6 +147,14 @@ module TalonOne
       if attributes.key?(:'bundle_name')
         self.bundle_name = attributes[:'bundle_name']
       end
+
+      if attributes.key?(:'targeted_item_position')
+        self.targeted_item_position = attributes[:'targeted_item_position']
+      end
+
+      if attributes.key?(:'targeted_item_sub_position')
+        self.targeted_item_sub_position = attributes[:'targeted_item_sub_position']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -181,7 +199,9 @@ module TalonOne
           total_discount == o.total_discount &&
           desired_total_discount == o.desired_total_discount &&
           bundle_index == o.bundle_index &&
-          bundle_name == o.bundle_name
+          bundle_name == o.bundle_name &&
+          targeted_item_position == o.targeted_item_position &&
+          targeted_item_sub_position == o.targeted_item_sub_position
     end
 
     # @see the `==` method
@@ -193,7 +213,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value, position, sub_position, desired_value, scope, total_discount, desired_total_discount, bundle_index, bundle_name].hash
+      [name, value, position, sub_position, desired_value, scope, total_discount, desired_total_discount, bundle_index, bundle_name, targeted_item_position, targeted_item_sub_position].hash
     end
 
     # Builds the object from hash

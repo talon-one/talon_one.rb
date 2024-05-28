@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **effect_type** | **String** | The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects). | 
 **triggered_by_coupon** | **Integer** | The ID of the coupon that was being evaluated when this effect was triggered. | [optional] 
 **triggered_for_catalog_item** | **Integer** | The ID of the catalog item that was being evaluated when this effect was triggered. | [optional] 
+**condition_index** | **Integer** | The index of the condition that was triggered. | [optional] 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::EffectEntity.new(campaign_id: 244,
                                  rule_name: Give 20% discount,
                                  effect_type: rejectCoupon,
                                  triggered_by_coupon: 4928,
-                                 triggered_for_catalog_item: 786)
+                                 triggered_for_catalog_item: 786,
+                                 condition_index: 786)
 ```
 
 

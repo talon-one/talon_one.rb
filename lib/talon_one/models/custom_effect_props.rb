@@ -24,7 +24,7 @@ module TalonOne
     # The index of the item in the cart item list to which the custom effect is applied.
     attr_accessor :cart_item_position
 
-    # When cart item flattening is enabled, the sub position indicates to which item unit the custom effect is applied, for cart items with quantity > 1. 
+    # For cart items with quantity > 1, the sub position indicates to which item unit the custom effect is applied. 
     attr_accessor :cart_item_sub_position
 
     # The position of the bundle in a list of item bundles created from the same bundle definition.

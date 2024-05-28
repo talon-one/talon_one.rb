@@ -33,7 +33,7 @@ module TalonOne
     # The index of the item in the cart items for which the loyalty points were rolled back.
     attr_accessor :cart_item_position
 
-    # The sub-position is returned when [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening) is enabled. It indicates to which item the loyalty points were rolled back, for cart items with `quantity` > 1. 
+    # For cart items with `quantity` > 1, the sub-position indicates to which item the loyalty points were rolled back. 
     attr_accessor :cart_item_sub_position
 
     # The alphanumeric identifier of the loyalty card. 

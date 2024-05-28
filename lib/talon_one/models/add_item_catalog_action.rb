@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The specific properties of the \"ADD\" catalog sync action.
+  # The specific properties of the \"ADD\" catalog sync action. 
   class AddItemCatalogAction
     # The unique SKU of the item to add.
     attr_accessor :sku
@@ -24,7 +24,9 @@ module TalonOne
     # The attributes of the item to add.
     attr_accessor :attributes
 
-    # Indicates whether to replace the attributes of the item if the same SKU exists.
+    attr_accessor :product
+
+    # Indicates whether to replace the attributes of the item if the same SKU exists.  **Note**: When set to `true`:   - If you do not provide a new `price` value, the existing `price` value is retained.   - If you do not provide a new `product` value, the `product` value is set to `null`. 
     attr_accessor :replace_if_exists
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -33,6 +35,7 @@ module TalonOne
         :'sku' => :'sku',
         :'price' => :'price',
         :'attributes' => :'attributes',
+        :'product' => :'product',
         :'replace_if_exists' => :'replaceIfExists'
       }
     end
@@ -43,6 +46,7 @@ module TalonOne
         :'sku' => :'String',
         :'price' => :'Float',
         :'attributes' => :'Object',
+        :'product' => :'Product',
         :'replace_if_exists' => :'Boolean'
       }
     end
@@ -80,6 +84,10 @@ module TalonOne
         self.attributes = attributes[:'attributes']
       end
 
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
+      end
+
       if attributes.key?(:'replace_if_exists')
         self.replace_if_exists = attributes[:'replace_if_exists']
       else
@@ -113,6 +121,7 @@ module TalonOne
           sku == o.sku &&
           price == o.price &&
           attributes == o.attributes &&
+          product == o.product &&
           replace_if_exists == o.replace_if_exists
     end
 
@@ -125,7 +134,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [sku, price, attributes, replace_if_exists].hash
+      [sku, price, attributes, product, replace_if_exists].hash
     end
 
     # Builds the object from hash

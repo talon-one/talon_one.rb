@@ -15,14 +15,11 @@ require 'date'
 module TalonOne
   # 
   class CampaignSet
-    # Internal ID of this entity.
-    attr_accessor :id
-
-    # The time this entity was created.
-    attr_accessor :created
-
     # The ID of the application that owns this entity.
     attr_accessor :application_id
+
+    # Internal ID of this entity.
+    attr_accessor :id
 
     # Version of the campaign set.
     attr_accessor :version
@@ -35,9 +32,8 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created' => :'created',
         :'application_id' => :'applicationId',
+        :'id' => :'id',
         :'version' => :'version',
         :'set' => :'set',
         :'updated_by' => :'updatedBy'
@@ -47,9 +43,8 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'Integer',
-        :'created' => :'DateTime',
         :'application_id' => :'Integer',
+        :'id' => :'Integer',
         :'version' => :'Integer',
         :'set' => :'CampaignSetBranchNode',
         :'updated_by' => :'String'
@@ -77,16 +72,12 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'created')
-        self.created = attributes[:'created']
-      end
-
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'version')
@@ -106,16 +97,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created.nil?
-        invalid_properties.push('invalid value for "created", created cannot be nil.')
-      end
-
       if @application_id.nil?
         invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
+      end
+
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
@@ -136,9 +123,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created.nil?
       return false if @application_id.nil?
+      return false if @id.nil?
       return false if @version.nil?
       return false if @version < 1
       return false if @set.nil?
@@ -164,9 +150,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created == o.created &&
           application_id == o.application_id &&
+          id == o.id &&
           version == o.version &&
           set == o.set &&
           updated_by == o.updated_by
@@ -181,7 +166,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, version, set, updated_by].hash
+      [application_id, id, version, set, updated_by].hash
     end
 
     # Builds the object from hash

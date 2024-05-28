@@ -50,6 +50,12 @@ describe 'PatchItemCatalogAction' do
     end
   end
 
+  describe 'test attribute "product"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "create_if_not_exists"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Customer specific information about loyalty points.
+  # Customer-specific information about loyalty points.
   class LoyaltyProgramLedgers
     # The internal ID of loyalty program.
     attr_accessor :id
@@ -23,6 +23,9 @@ module TalonOne
 
     # Internal name of loyalty program.
     attr_accessor :name
+
+    # The date on which the customer joined the loyalty program in RFC3339.  **Note**: This is in the loyalty program's time zone. 
+    attr_accessor :join_date
 
     attr_accessor :ledger
 
@@ -35,6 +38,7 @@ module TalonOne
         :'id' => :'id',
         :'title' => :'title',
         :'name' => :'name',
+        :'join_date' => :'joinDate',
         :'ledger' => :'ledger',
         :'sub_ledgers' => :'subLedgers'
       }
@@ -46,6 +50,7 @@ module TalonOne
         :'id' => :'Integer',
         :'title' => :'String',
         :'name' => :'String',
+        :'join_date' => :'DateTime',
         :'ledger' => :'LedgerInfo',
         :'sub_ledgers' => :'Hash<String, LedgerInfo>'
       }
@@ -82,6 +87,10 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'join_date')
+        self.join_date = attributes[:'join_date']
       end
 
       if attributes.key?(:'ledger')
@@ -136,6 +145,7 @@ module TalonOne
           id == o.id &&
           title == o.title &&
           name == o.name &&
+          join_date == o.join_date &&
           ledger == o.ledger &&
           sub_ledgers == o.sub_ledgers
     end
@@ -149,7 +159,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, name, ledger, sub_ledgers].hash
+      [id, title, name, join_date, ledger, sub_ledgers].hash
     end
 
     # Builds the object from hash

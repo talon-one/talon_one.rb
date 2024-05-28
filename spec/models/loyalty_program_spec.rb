@@ -92,6 +92,42 @@ describe 'LoyaltyProgram' do
     end
   end
 
+  describe 'test attribute "tiers_expiration_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["tier_start_date", "program_join_date"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.tiers_expiration_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "tiers_expire_in"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "tiers_downgrade_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["one_down", "balance_based"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.tiers_downgrade_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "program_join_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["not_join", "points_activated", "points_earned"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.program_join_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "account_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -117,6 +153,24 @@ describe 'LoyaltyProgram' do
   end
 
   describe 'test attribute "card_based"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "can_update_tiers"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "can_update_join_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "can_upgrade_to_advanced_tiers"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

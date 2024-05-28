@@ -21,14 +21,17 @@ module TalonOne
     # The time this entity was created. The time this entity was created.
     attr_accessor :created
 
+    # The integration ID set by your integration layer.
+    attr_accessor :integration_id
+
+    # The integration ID of the store. You choose this ID when you create a store.
+    attr_accessor :store_integration_id
+
     # The ID of the application that owns this entity.
     attr_accessor :application_id
 
     # The globally unique Talon.One ID of the customer that created this entity.
     attr_accessor :profile_id
-
-    # The integration ID set by your integration layer.
-    attr_accessor :integration_id
 
     # Integration ID of the customer for the session.
     attr_accessor :profileintegrationid
@@ -39,7 +42,7 @@ module TalonOne
     # Any referral code entered.
     attr_accessor :referral
 
-    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. `closed` → `cancelled` or `partially_returned` 4. `partially_returned` → `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities#customer-session). 
+    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. `closed` → `cancelled` or `partially_returned` 4. `partially_returned` → `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). 
     attr_accessor :state
 
     # Serialized JSON representation.
@@ -84,9 +87,10 @@ module TalonOne
       {
         :'id' => :'id',
         :'created' => :'created',
+        :'integration_id' => :'integrationId',
+        :'store_integration_id' => :'storeIntegrationId',
         :'application_id' => :'applicationId',
         :'profile_id' => :'profileId',
-        :'integration_id' => :'integrationId',
         :'profileintegrationid' => :'profileintegrationid',
         :'coupon' => :'coupon',
         :'referral' => :'referral',
@@ -104,9 +108,10 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'created' => :'DateTime',
+        :'integration_id' => :'String',
+        :'store_integration_id' => :'String',
         :'application_id' => :'Integer',
         :'profile_id' => :'Integer',
-        :'integration_id' => :'String',
         :'profileintegrationid' => :'String',
         :'coupon' => :'String',
         :'referral' => :'String',
@@ -148,16 +153,20 @@ module TalonOne
         self.created = attributes[:'created']
       end
 
+      if attributes.key?(:'integration_id')
+        self.integration_id = attributes[:'integration_id']
+      end
+
+      if attributes.key?(:'store_integration_id')
+        self.store_integration_id = attributes[:'store_integration_id']
+      end
+
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
       end
 
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
-      end
-
-      if attributes.key?(:'integration_id')
-        self.integration_id = attributes[:'integration_id']
       end
 
       if attributes.key?(:'profileintegrationid')
@@ -213,16 +222,24 @@ module TalonOne
         invalid_properties.push('invalid value for "created", created cannot be nil.')
       end
 
-      if @application_id.nil?
-        invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
-      end
-
       if @integration_id.nil?
         invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
       end
 
       if @integration_id.to_s.length > 1000
         invalid_properties.push('invalid value for "integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be great than or equal to 1.')
+      end
+
+      if @application_id.nil?
+        invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
       end
 
       if !@profileintegrationid.nil? && @profileintegrationid.to_s.length > 1000
@@ -265,9 +282,11 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @created.nil?
-      return false if @application_id.nil?
       return false if @integration_id.nil?
       return false if @integration_id.to_s.length > 1000
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
+      return false if @application_id.nil?
       return false if !@profileintegrationid.nil? && @profileintegrationid.to_s.length > 1000
       return false if @coupon.nil?
       return false if @referral.nil?
@@ -293,6 +312,20 @@ module TalonOne
       end
 
       @integration_id = integration_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] store_integration_id Value to be assigned
+    def store_integration_id=(store_integration_id)
+      if !store_integration_id.nil? && store_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !store_integration_id.nil? && store_integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @store_integration_id = store_integration_id
     end
 
     # Custom attribute writer method with validation
@@ -322,9 +355,10 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           created == o.created &&
+          integration_id == o.integration_id &&
+          store_integration_id == o.store_integration_id &&
           application_id == o.application_id &&
           profile_id == o.profile_id &&
-          integration_id == o.integration_id &&
           profileintegrationid == o.profileintegrationid &&
           coupon == o.coupon &&
           referral == o.referral &&
@@ -345,7 +379,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, profile_id, integration_id, profileintegrationid, coupon, referral, state, cart_items, discounts, total_discounts, total, attributes].hash
+      [id, created, integration_id, store_integration_id, application_id, profile_id, profileintegrationid, coupon, referral, state, cart_items, discounts, total_discounts, total, attributes].hash
     end
 
     # Builds the object from hash

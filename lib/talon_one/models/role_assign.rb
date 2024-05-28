@@ -15,10 +15,10 @@ require 'date'
 module TalonOne
   # 
   class RoleAssign
-    # An array of userIDs.
+    # An array of user IDs.
     attr_accessor :users
 
-    # An array of roleIDs.
+    # An array of role IDs.
     attr_accessor :roles
 
     # Attribute mapping from ruby-style variable name to JSON key.

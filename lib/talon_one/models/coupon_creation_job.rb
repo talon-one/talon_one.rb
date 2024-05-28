@@ -56,7 +56,7 @@ module TalonOne
     # The batch ID coupons created by this job will bear.
     attr_accessor :batch_id
 
-    # The current status of this request. Possible values: - `pending` - `completed` - `failed` - `coupon pattern full` 
+    # The current status of this request. Possible values: - `pending verification` - `pending` - `completed` - `failed` - `coupon pattern full` 
     attr_accessor :status
 
     # The number of coupon codes that were already created for this request.

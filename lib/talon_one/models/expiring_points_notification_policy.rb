@@ -19,11 +19,15 @@ module TalonOne
 
     attr_accessor :triggers
 
+    # Indicates whether batching is activated.
+    attr_accessor :batching_enabled
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'triggers' => :'triggers'
+        :'triggers' => :'triggers',
+        :'batching_enabled' => :'batchingEnabled'
       }
     end
 
@@ -31,7 +35,8 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'triggers' => :'Array<ExpiringPointsNotificationTrigger>'
+        :'triggers' => :'Array<ExpiringPointsNotificationTrigger>',
+        :'batching_enabled' => :'Boolean'
       }
     end
 
@@ -64,6 +69,12 @@ module TalonOne
         if (value = attributes[:'triggers']).is_a?(Array)
           self.triggers = value
         end
+      end
+
+      if attributes.key?(:'batching_enabled')
+        self.batching_enabled = attributes[:'batching_enabled']
+      else
+        self.batching_enabled = true
       end
     end
 
@@ -115,7 +126,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          triggers == o.triggers
+          triggers == o.triggers &&
+          batching_enabled == o.batching_enabled
     end
 
     # @see the `==` method
@@ -127,7 +139,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, triggers].hash
+      [name, triggers, batching_enabled].hash
     end
 
     # Builds the object from hash

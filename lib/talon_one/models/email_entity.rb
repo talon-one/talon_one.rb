@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class EmailEntity
-    # The email address associated with your account.
+    # The email address associated with the user profile.
     attr_accessor :email
 
     # Attribute mapping from ruby-style variable name to JSON key.

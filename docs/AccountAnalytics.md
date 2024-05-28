@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **webhooks** | **Integer** | Total number of webhooks in the account. | 
 **loyalty_programs** | **Integer** | Total number of all loyalty programs in the account. | 
 **live_loyalty_programs** | **Integer** | Total number of live loyalty programs in the account. | 
+**last_updated_at** | **DateTime** | The point in time when the analytics numbers were updated last. | 
 
 ## Code Sample
 
@@ -47,7 +48,8 @@ instance = TalonOne::AccountAnalytics.new(applications: 11,
                                  custom_attributes: 18,
                                  webhooks: 2,
                                  loyalty_programs: 5,
-                                 live_loyalty_programs: 5)
+                                 live_loyalty_programs: 5,
+                                 last_updated_at: null)
 ```
 
 

@@ -26,9 +26,6 @@ module TalonOne
     # Aggregated statistic for account referrals.
     attr_accessor :referrals
 
-    # Aggregated statistic for the number of account API calls.
-    attr_accessor :api_calls
-
     attr_accessor :campaigns
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -38,7 +35,6 @@ module TalonOne
         :'discounts' => :'discounts',
         :'loyalty_points' => :'loyaltyPoints',
         :'referrals' => :'referrals',
-        :'api_calls' => :'apiCalls',
         :'campaigns' => :'campaigns'
       }
     end
@@ -50,7 +46,6 @@ module TalonOne
         :'discounts' => :'Array<AccountDashboardStatisticDiscount>',
         :'loyalty_points' => :'Array<AccountDashboardStatisticLoyaltyPoints>',
         :'referrals' => :'Array<AccountDashboardStatisticReferrals>',
-        :'api_calls' => :'Array<AccountDashboardStatisticApiCalls>',
         :'campaigns' => :'AccountDashboardStatisticCampaigns'
       }
     end
@@ -100,12 +95,6 @@ module TalonOne
         end
       end
 
-      if attributes.key?(:'api_calls')
-        if (value = attributes[:'api_calls']).is_a?(Array)
-          self.api_calls = value
-        end
-      end
-
       if attributes.key?(:'campaigns')
         self.campaigns = attributes[:'campaigns']
       end
@@ -138,7 +127,6 @@ module TalonOne
           discounts == o.discounts &&
           loyalty_points == o.loyalty_points &&
           referrals == o.referrals &&
-          api_calls == o.api_calls &&
           campaigns == o.campaigns
     end
 
@@ -151,7 +139,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [revenue, discounts, loyalty_points, referrals, api_calls, campaigns].hash
+      [revenue, discounts, loyalty_points, referrals, campaigns].hash
     end
 
     # Builds the object from hash

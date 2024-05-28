@@ -17,7 +17,7 @@ module TalonOne
     # The index of the cart item in the provided customer session's `cartItems` property.
     attr_accessor :position
 
-    # Number of cart items to return. It is only available when [cart item flattening](https://docs.talon.one/docs/product/campaigns/campaign-evaluation#flattening) is enabled. If cart item flattening is disabled, the cart item can only be returned in its entirety. 
+    # Number of cart items to return. 
     attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.

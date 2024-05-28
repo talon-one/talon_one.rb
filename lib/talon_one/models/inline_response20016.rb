@@ -14,8 +14,10 @@ require 'date'
 
 module TalonOne
   class InlineResponse20016
+    # true means there is more data in the source collection to request..
     attr_accessor :has_more
 
+    # List of loyalty card transaction logs.
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -30,7 +32,7 @@ module TalonOne
     def self.openapi_types
       {
         :'has_more' => :'Boolean',
-        :'data' => :'Array<CollectionItem>'
+        :'data' => :'Array<CardLedgerTransactionLogEntry>'
       }
     end
 

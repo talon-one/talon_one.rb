@@ -17,12 +17,16 @@ module TalonOne
   class NewBaseNotification
     attr_accessor :policy
 
+    # Indicates whether the notification is activated.
+    attr_accessor :enabled
+
     attr_accessor :webhook
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'policy' => :'policy',
+        :'enabled' => :'enabled',
         :'webhook' => :'webhook'
       }
     end
@@ -31,6 +35,7 @@ module TalonOne
     def self.openapi_types
       {
         :'policy' => :'Object',
+        :'enabled' => :'Boolean',
         :'webhook' => :'NewNotificationWebhook'
       }
     end
@@ -58,6 +63,12 @@ module TalonOne
 
       if attributes.key?(:'policy')
         self.policy = attributes[:'policy']
+      end
+
+      if attributes.key?(:'enabled')
+        self.enabled = attributes[:'enabled']
+      else
+        self.enabled = true
       end
 
       if attributes.key?(:'webhook')
@@ -94,6 +105,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           policy == o.policy &&
+          enabled == o.enabled &&
           webhook == o.webhook
     end
 
@@ -106,7 +118,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [policy, webhook].hash
+      [policy, enabled, webhook].hash
     end
 
     # Builds the object from hash

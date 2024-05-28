@@ -17,7 +17,7 @@ module TalonOne
   class IntegrationRequest
     attr_accessor :customer_session
 
-    # Extends the response with the chosen data entities. Use this property to get as much data as you need in one _Update customer session_ request instead of sending extra requests to other endpoints. 
+    # Extends the response with the chosen data entities. Use this property to get as much data as you need in one _Update customer session_ request instead of sending extra requests to other endpoints.  **Note:** To retrieve loyalty card details, your request must include a loyalty card ID. 
     attr_accessor :response_content
 
     class EnumAttributeValidator

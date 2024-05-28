@@ -24,7 +24,7 @@ module TalonOne
     # The index of the item in the cart items for which the discount was rolled back.
     attr_accessor :cart_item_position
 
-    # The index of the item unit in its line item. It is only used for cart items with `quantity` > 1 and is only returned when cart item flattening is enabled. 
+    # For cart items with `quantity` > 1, the subposition returns the index of the item unit in its line item. 
     attr_accessor :cart_item_sub_position
 
     # The ID of the additional cost that was rolled back.
