@@ -22,9 +22,9 @@ Name | Type | Description | Notes
 **referral_id** | **Integer** | The integration ID of the referring customer (if any) for whom this coupon was created as an effect. | [optional] 
 **recipient_integration_id** | **String** | The Integration ID of the customer that is allowed to redeem this coupon. | [optional] 
 **import_id** | **Integer** | The ID of the Import which created this coupon. | [optional] 
-**reservation** | **Boolean** | Defines the type of reservation: - &#x60;true&#x60;: The reservation is a soft reservation. Any customer can use the coupon. This is done via the [Create coupon reservation](https://docs.talon.one/integration-api#operation/createCouponReservation) endpoint. - &#x60;false&#x60;: The reservation is a hard reservation. Only the associated customer (&#x60;recipientIntegrationId&#x60;) can use the coupon. This is done via the Campaign Manager when you create a coupon for a given &#x60;recipientIntegrationId&#x60;, the [Create coupons](https://docs.talon.one/management-api#operation/createCoupons) endpoint or [Create coupons for multiple recipients](https://docs.talon.one/management-api#operation/createCouponsForMultipleRecipients) endpoint.  | [optional] [default to true]
+**reservation** | **Boolean** | Defines the reservation type: - &#x60;true&#x60;: The coupon can be reserved for multiple customers. - &#x60;false&#x60;: The coupon can be reserved only for one customer. It is a personal code.  | [optional] [default to true]
 **batch_id** | **String** | The id of the batch the coupon belongs to. | [optional] 
-**is_reservation_mandatory** | **Boolean** | Whether the reservation effect actually created a new reservation. | [optional] [default to false]
+**is_reservation_mandatory** | **Boolean** | An indication of whether the code can be redeemed only if it has been reserved first. | [optional] [default to false]
 **implicitly_reserved** | **Boolean** | An indication of whether the coupon is implicitly reserved for all customers. | [optional] 
 **profile_redemption_count** | **Integer** | The number of times the coupon was redeemed by the profile. | 
 

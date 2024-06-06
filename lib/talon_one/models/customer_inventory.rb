@@ -20,7 +20,7 @@ module TalonOne
 
     attr_accessor :referrals
 
-    # The coupons reserved by this profile. This array includes hard and soft reservations. See each coupon's `reservation` property. 
+    # The coupons reserved by this profile. This array includes hard and soft reservations. 
     attr_accessor :coupons
 
     attr_accessor :giveaways

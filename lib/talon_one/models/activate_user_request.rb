@@ -13,26 +13,22 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  class LoyaltyCardProfileRegistration
-    # Integration ID of the customer profile linked to the card.
-    attr_accessor :integration_id
-
-    # Timestamp the customer profile was linked to the card.
-    attr_accessor :timestamp
+  # 
+  class ActivateUserRequest
+    # The email address associated with the user profile.
+    attr_accessor :email
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'integration_id' => :'integrationId',
-        :'timestamp' => :'timestamp'
+        :'email' => :'email'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'integration_id' => :'String',
-        :'timestamp' => :'DateTime'
+        :'email' => :'String'
       }
     end
 
@@ -46,23 +42,19 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::LoyaltyCardProfileRegistration` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::ActivateUserRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::LoyaltyCardProfileRegistration`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::ActivateUserRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'integration_id')
-        self.integration_id = attributes[:'integration_id']
-      end
-
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
       end
     end
 
@@ -70,16 +62,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @integration_id.nil?
-        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
-      end
-
-      if @integration_id.to_s.length > 1000
-        invalid_properties.push('invalid value for "integration_id", the character length must be smaller than or equal to 1000.')
-      end
-
-      if @timestamp.nil?
-        invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
+      if @email.nil?
+        invalid_properties.push('invalid value for "email", email cannot be nil.')
       end
 
       invalid_properties
@@ -88,24 +72,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @integration_id.nil?
-      return false if @integration_id.to_s.length > 1000
-      return false if @timestamp.nil?
+      return false if @email.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] integration_id Value to be assigned
-    def integration_id=(integration_id)
-      if integration_id.nil?
-        fail ArgumentError, 'integration_id cannot be nil'
-      end
-
-      if integration_id.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "integration_id", the character length must be smaller than or equal to 1000.'
-      end
-
-      @integration_id = integration_id
     end
 
     # Checks equality by comparing each attribute.
@@ -113,8 +81,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          integration_id == o.integration_id &&
-          timestamp == o.timestamp
+          email == o.email
     end
 
     # @see the `==` method
@@ -126,7 +93,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [integration_id, timestamp].hash
+      [email].hash
     end
 
     # Builds the object from hash

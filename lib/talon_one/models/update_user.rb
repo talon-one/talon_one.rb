@@ -26,7 +26,7 @@ module TalonOne
     # Indicates the access level of the user.
     attr_accessor :policy
 
-    # A list of the IDs of the roles assigned to the user.  **Note**: Use the [List roles](https://docs.talon.one/management-api#tag/Roles/operation/getAllRoles) endpoint to find the ID of a role. 
+    # A list of the IDs of the roles assigned to the user.  **Note**: To find the ID of a role, use the [List roles](/management-api#tag/Roles/operation/listAllRolesV2) endpoint. 
     attr_accessor :roles
 
     # Application notifications that the user is subscribed to.

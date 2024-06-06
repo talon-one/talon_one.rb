@@ -37,11 +37,8 @@ module TalonOne
     # Timestamp when the log entry was created.
     attr_accessor :created_at
 
-    # The entity type the log is related to. 
+    # The entity type the notification is related to. 
     attr_accessor :entity_type
-
-    # The target URL of the request.
-    attr_accessor :url
 
     # Identifier of the Application.
     attr_accessor :application_id
@@ -83,7 +80,6 @@ module TalonOne
         :'response' => :'response',
         :'created_at' => :'createdAt',
         :'entity_type' => :'entityType',
-        :'url' => :'url',
         :'application_id' => :'applicationId',
         :'loyalty_program_id' => :'loyaltyProgramId'
       }
@@ -101,7 +97,6 @@ module TalonOne
         :'response' => :'MessageLogResponse',
         :'created_at' => :'DateTime',
         :'entity_type' => :'String',
-        :'url' => :'String',
         :'application_id' => :'Integer',
         :'loyalty_program_id' => :'Integer'
       }
@@ -164,10 +159,6 @@ module TalonOne
         self.entity_type = attributes[:'entity_type']
       end
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
-      end
-
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
       end
@@ -210,7 +201,7 @@ module TalonOne
       return false if @id.nil?
       return false if @service.nil?
       return false if @created_at.nil?
-      entity_type_validator = EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
+      entity_type_validator = EnumAttributeValidator.new('String', ["application", "loyalty_program"])
       return false unless entity_type_validator.valid?(@entity_type)
       return false if !@application_id.nil? && @application_id < 1
       return false if !@loyalty_program_id.nil? && @loyalty_program_id < 1
@@ -220,7 +211,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity_type Object to be assigned
     def entity_type=(entity_type)
-      validator = EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
+      validator = EnumAttributeValidator.new('String', ["application", "loyalty_program"])
       unless validator.valid?(entity_type)
         fail ArgumentError, "invalid value for \"entity_type\", must be one of #{validator.allowable_values}."
       end
@@ -261,7 +252,6 @@ module TalonOne
           response == o.response &&
           created_at == o.created_at &&
           entity_type == o.entity_type &&
-          url == o.url &&
           application_id == o.application_id &&
           loyalty_program_id == o.loyalty_program_id
     end
@@ -275,7 +265,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, service, change_type, notification_id, notification_name, request, response, created_at, entity_type, url, application_id, loyalty_program_id].hash
+      [id, service, change_type, notification_id, notification_name, request, response, created_at, entity_type, application_id, loyalty_program_id].hash
     end
 
     # Builds the object from hash
