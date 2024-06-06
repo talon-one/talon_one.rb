@@ -83,16 +83,10 @@ describe 'MessageLogEntry' do
   describe 'test attribute "entity_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["application", "loyalty_program"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.entity_type = value }.not_to raise_error
       # end
-    end
-  end
-
-  describe 'test attribute "url"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

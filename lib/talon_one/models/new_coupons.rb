@@ -51,7 +51,7 @@ module TalonOne
     # The pattern used to generate coupon codes. The character `#` is a placeholder and is replaced by a random character from the `validCharacters` set. 
     attr_accessor :coupon_pattern
 
-    # Whether the reservation effect actually created a new reservation.
+    # An indication of whether the code can be redeemed only if it has been reserved first.
     attr_accessor :is_reservation_mandatory
 
     # An indication of whether the coupon is implicitly reserved for all customers.

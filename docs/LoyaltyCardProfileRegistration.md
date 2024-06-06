@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **integration_id** | **String** | Integration ID of the customer profile linked to the card. | 
-**timestamp** | **DateTime** | Timestamp of the registration to the card. | 
+**timestamp** | **DateTime** | Timestamp the customer profile was linked to the card. | 
 
 ## Code Sample
 

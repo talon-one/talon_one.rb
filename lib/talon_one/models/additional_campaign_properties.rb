@@ -290,7 +290,7 @@ module TalonOne
     def valid?
       return false if @budgets.nil?
       return false if @frontend_state.nil?
-      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft"])
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
       return false unless frontend_state_validator.valid?(@frontend_state)
       true
     end
@@ -298,7 +298,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frontend_state Object to be assigned
     def frontend_state=(frontend_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
       unless validator.valid?(frontend_state)
         fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
       end

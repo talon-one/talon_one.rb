@@ -39,7 +39,7 @@ module TalonOne
     # Arbitrary properties associated with this item.
     attr_accessor :attributes
 
-    # Whether the reservation effect actually created a new reservation.
+    # An indication of whether the code can be redeemed only if it has been reserved first.
     attr_accessor :is_reservation_mandatory
 
     # An indication of whether the coupon is implicitly reserved for all customers.
