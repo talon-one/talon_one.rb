@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**start_time** | **DateTime** | The start of the aggregation time frame in UTC. | [optional] 
-**end_time** | **DateTime** | The end of the aggregation time frame in UTC. | [optional] 
-**total_revenue** | [**ApplicationAnalyticsDataPointTotalRevenue**](ApplicationAnalyticsDataPointTotalRevenue.md) |  | [optional] 
-**sessions_count** | [**ApplicationAnalyticsDataPointSessionsCount**](ApplicationAnalyticsDataPointSessionsCount.md) |  | [optional] 
-**avg_items_per_session** | [**ApplicationAnalyticsDataPointAvgItemsPerSession**](ApplicationAnalyticsDataPointAvgItemsPerSession.md) |  | [optional] 
-**avg_session_value** | [**ApplicationAnalyticsDataPointAvgSessionValue**](ApplicationAnalyticsDataPointAvgSessionValue.md) |  | [optional] 
+**start_time** | **DateTime** | The start of the aggregation time frame in UTC. | 
+**end_time** | **DateTime** | The end of the aggregation time frame in UTC. | 
+**total_revenue** | [**AnalyticsDataPoint**](AnalyticsDataPoint.md) |  | [optional] 
+**sessions_count** | [**AnalyticsDataPoint**](AnalyticsDataPoint.md) |  | [optional] 
+**avg_items_per_session** | [**AnalyticsDataPoint**](AnalyticsDataPoint.md) |  | [optional] 
+**avg_session_value** | [**AnalyticsDataPoint**](AnalyticsDataPoint.md) |  | [optional] 
 **total_discounts** | **Float** | The total value of discounts given for cart items in influenced sessions. | [optional] 
 **coupons_count** | **Float** | The number of times a coupon was successfully redeemed in influenced sessions. | [optional] 
 

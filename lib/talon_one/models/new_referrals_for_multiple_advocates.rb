@@ -18,7 +18,7 @@ module TalonOne
     # Timestamp at which point the referral code becomes valid.
     attr_accessor :start_date
 
-    # Expiration date of the referral code. Referral never expires if this is omitted, zero, or negative.
+    # Expiration date of the referral code. Referral never expires if this is omitted.
     attr_accessor :expiry_date
 
     # The number of times a referral code can be used. `0` means no limit but any campaign usage limits will still apply. 

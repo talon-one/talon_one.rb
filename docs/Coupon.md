@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **discount_limit** | **Float** | The total discount value that the code can give. Typically used to represent a gift card value.  | [optional] 
 **reservation_limit** | **Integer** | The number of reservations that can be made with this coupon code.  | [optional] 
 **start_date** | **DateTime** | Timestamp at which point the coupon becomes valid. | [optional] 
-**expiry_date** | **DateTime** | Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative. | [optional] 
+**expiry_date** | **DateTime** | Expiration date of the coupon. Coupon never expires if this is omitted. | [optional] 
 **limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | Limits configuration for a coupon. These limits will override the limits set from the campaign.  **Note:** Only usable when creating a single coupon which is not tied to a specific recipient. Only per-profile limits are allowed to be configured.  | [optional] 
 **usage_counter** | **Integer** | The number of times the coupon has been successfully redeemed. | 
 **discount_counter** | **Float** | The amount of discounts given on rules redeeming this coupon. Only usable if a coupon discount budget was set for this coupon. | [optional] 

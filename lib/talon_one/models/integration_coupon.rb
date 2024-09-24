@@ -39,7 +39,7 @@ module TalonOne
     # Timestamp at which point the coupon becomes valid.
     attr_accessor :start_date
 
-    # Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative.
+    # Expiration date of the coupon. Coupon never expires if this is omitted.
     attr_accessor :expiry_date
 
     # Limits configuration for a coupon. These limits will override the limits set from the campaign.  **Note:** Only usable when creating a single coupon which is not tied to a specific recipient. Only per-profile limits are allowed to be configured. 

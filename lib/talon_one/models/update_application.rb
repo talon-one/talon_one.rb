@@ -58,6 +58,12 @@ module TalonOne
     # The ID of the default campaign evaluation group to which new campaigns will be added unless a different group is selected when creating the campaign.
     attr_accessor :default_evaluation_group_id
 
+    # The ID of the default Cart-Item-Filter for this application.
+    attr_accessor :default_cart_item_filter_id
+
+    # Indicates whether the campaign staging and revisions feature is enabled for the Application.  **Important:** After this feature is enabled, it cannot be disabled. 
+    attr_accessor :enable_campaign_state_management
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -97,7 +103,9 @@ module TalonOne
         :'sandbox' => :'sandbox',
         :'enable_partial_discounts' => :'enablePartialDiscounts',
         :'default_discount_additional_cost_per_item_scope' => :'defaultDiscountAdditionalCostPerItemScope',
-        :'default_evaluation_group_id' => :'defaultEvaluationGroupId'
+        :'default_evaluation_group_id' => :'defaultEvaluationGroupId',
+        :'default_cart_item_filter_id' => :'defaultCartItemFilterId',
+        :'enable_campaign_state_management' => :'enableCampaignStateManagement'
       }
     end
 
@@ -118,7 +126,9 @@ module TalonOne
         :'sandbox' => :'Boolean',
         :'enable_partial_discounts' => :'Boolean',
         :'default_discount_additional_cost_per_item_scope' => :'String',
-        :'default_evaluation_group_id' => :'Integer'
+        :'default_evaluation_group_id' => :'Integer',
+        :'default_cart_item_filter_id' => :'Integer',
+        :'enable_campaign_state_management' => :'Boolean'
       }
     end
 
@@ -203,6 +213,14 @@ module TalonOne
 
       if attributes.key?(:'default_evaluation_group_id')
         self.default_evaluation_group_id = attributes[:'default_evaluation_group_id']
+      end
+
+      if attributes.key?(:'default_cart_item_filter_id')
+        self.default_cart_item_filter_id = attributes[:'default_cart_item_filter_id']
+      end
+
+      if attributes.key?(:'enable_campaign_state_management')
+        self.enable_campaign_state_management = attributes[:'enable_campaign_state_management']
       end
     end
 
@@ -346,7 +364,9 @@ module TalonOne
           sandbox == o.sandbox &&
           enable_partial_discounts == o.enable_partial_discounts &&
           default_discount_additional_cost_per_item_scope == o.default_discount_additional_cost_per_item_scope &&
-          default_evaluation_group_id == o.default_evaluation_group_id
+          default_evaluation_group_id == o.default_evaluation_group_id &&
+          default_cart_item_filter_id == o.default_cart_item_filter_id &&
+          enable_campaign_state_management == o.enable_campaign_state_management
     end
 
     # @see the `==` method
@@ -358,7 +378,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, default_evaluation_group_id].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, default_evaluation_group_id, default_cart_item_filter_id, enable_campaign_state_management].hash
     end
 
     # Builds the object from hash

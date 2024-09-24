@@ -58,6 +58,9 @@ module TalonOne
     # Hex key for HMAC-signing API calls as coming from this application (16 hex digits).
     attr_accessor :key
 
+    # Indicates whether the campaign staging and revisions feature is enabled for the Application.  **Important:** After this feature is enabled, it cannot be disabled. 
+    attr_accessor :enable_campaign_state_management
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -97,7 +100,8 @@ module TalonOne
         :'sandbox' => :'sandbox',
         :'enable_partial_discounts' => :'enablePartialDiscounts',
         :'default_discount_additional_cost_per_item_scope' => :'defaultDiscountAdditionalCostPerItemScope',
-        :'key' => :'key'
+        :'key' => :'key',
+        :'enable_campaign_state_management' => :'enableCampaignStateManagement'
       }
     end
 
@@ -118,7 +122,8 @@ module TalonOne
         :'sandbox' => :'Boolean',
         :'enable_partial_discounts' => :'Boolean',
         :'default_discount_additional_cost_per_item_scope' => :'String',
-        :'key' => :'String'
+        :'key' => :'String',
+        :'enable_campaign_state_management' => :'Boolean'
       }
     end
 
@@ -203,6 +208,10 @@ module TalonOne
 
       if attributes.key?(:'key')
         self.key = attributes[:'key']
+      end
+
+      if attributes.key?(:'enable_campaign_state_management')
+        self.enable_campaign_state_management = attributes[:'enable_campaign_state_management']
       end
     end
 
@@ -363,7 +372,8 @@ module TalonOne
           sandbox == o.sandbox &&
           enable_partial_discounts == o.enable_partial_discounts &&
           default_discount_additional_cost_per_item_scope == o.default_discount_additional_cost_per_item_scope &&
-          key == o.key
+          key == o.key &&
+          enable_campaign_state_management == o.enable_campaign_state_management
     end
 
     # @see the `==` method
@@ -375,7 +385,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, timezone, currency, case_sensitivity, attributes, limits, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, key].hash
+      [name, description, timezone, currency, case_sensitivity, attributes, limits, default_discount_scope, enable_cascading_discounts, enable_flattened_cart_items, attributes_settings, sandbox, enable_partial_discounts, default_discount_additional_cost_per_item_scope, key, enable_campaign_state_management].hash
     end
 
     # Builds the object from hash

@@ -136,6 +136,27 @@ module TalonOne
     # A campaign state described exactly as in the Campaign Manager.
     attr_accessor :frontend_state
 
+    # Indicates whether the linked stores were imported via a CSV file.
+    attr_accessor :stores_imported
+
+    # ID of the revision that was last activated on this campaign. 
+    attr_accessor :active_revision_id
+
+    # ID of the revision version that is active on the campaign. 
+    attr_accessor :active_revision_version_id
+
+    # Incrementing number representing how many revisions have been activated on this campaign, starts from 0 for a new campaign. 
+    attr_accessor :version
+
+    # ID of the revision currently being modified for the campaign. 
+    attr_accessor :current_revision_id
+
+    # ID of the latest version applied on the current revision. 
+    attr_accessor :current_revision_version_id
+
+    # Flag for determining whether we use current revision when sending requests with staging API key. 
+    attr_accessor :stage_revision
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -201,7 +222,14 @@ module TalonOne
         :'created_by' => :'createdBy',
         :'updated_by' => :'updatedBy',
         :'template_id' => :'templateId',
-        :'frontend_state' => :'frontendState'
+        :'frontend_state' => :'frontendState',
+        :'stores_imported' => :'storesImported',
+        :'active_revision_id' => :'activeRevisionId',
+        :'active_revision_version_id' => :'activeRevisionVersionId',
+        :'version' => :'version',
+        :'current_revision_id' => :'currentRevisionId',
+        :'current_revision_version_id' => :'currentRevisionVersionId',
+        :'stage_revision' => :'stageRevision'
       }
     end
 
@@ -248,7 +276,14 @@ module TalonOne
         :'created_by' => :'String',
         :'updated_by' => :'String',
         :'template_id' => :'Integer',
-        :'frontend_state' => :'String'
+        :'frontend_state' => :'String',
+        :'stores_imported' => :'Boolean',
+        :'active_revision_id' => :'Integer',
+        :'active_revision_version_id' => :'Integer',
+        :'version' => :'Integer',
+        :'current_revision_id' => :'Integer',
+        :'current_revision_version_id' => :'Integer',
+        :'stage_revision' => :'Boolean'
       }
     end
 
@@ -452,6 +487,36 @@ module TalonOne
       if attributes.key?(:'frontend_state')
         self.frontend_state = attributes[:'frontend_state']
       end
+
+      if attributes.key?(:'stores_imported')
+        self.stores_imported = attributes[:'stores_imported']
+      end
+
+      if attributes.key?(:'active_revision_id')
+        self.active_revision_id = attributes[:'active_revision_id']
+      end
+
+      if attributes.key?(:'active_revision_version_id')
+        self.active_revision_version_id = attributes[:'active_revision_version_id']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'current_revision_id')
+        self.current_revision_id = attributes[:'current_revision_id']
+      end
+
+      if attributes.key?(:'current_revision_version_id')
+        self.current_revision_version_id = attributes[:'current_revision_version_id']
+      end
+
+      if attributes.key?(:'stage_revision')
+        self.stage_revision = attributes[:'stage_revision']
+      else
+        self.stage_revision = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -514,6 +579,10 @@ module TalonOne
         invalid_properties.push('invalid value for "frontend_state", frontend_state cannot be nil.')
       end
 
+      if @stores_imported.nil?
+        invalid_properties.push('invalid value for "stores_imported", stores_imported cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -538,8 +607,9 @@ module TalonOne
       return false unless type_validator.valid?(@type)
       return false if @budgets.nil?
       return false if @frontend_state.nil?
-      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       return false unless frontend_state_validator.valid?(@frontend_state)
+      return false if @stores_imported.nil?
       true
     end
 
@@ -580,7 +650,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frontend_state Object to be assigned
     def frontend_state=(frontend_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       unless validator.valid?(frontend_state)
         fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
       end
@@ -632,7 +702,14 @@ module TalonOne
           created_by == o.created_by &&
           updated_by == o.updated_by &&
           template_id == o.template_id &&
-          frontend_state == o.frontend_state
+          frontend_state == o.frontend_state &&
+          stores_imported == o.stores_imported &&
+          active_revision_id == o.active_revision_id &&
+          active_revision_version_id == o.active_revision_version_id &&
+          version == o.version &&
+          current_revision_id == o.current_revision_id &&
+          current_revision_version_id == o.current_revision_version_id &&
+          stage_revision == o.stage_revision
     end
 
     # @see the `==` method
@@ -644,7 +721,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
     end
 
     # Builds the object from hash

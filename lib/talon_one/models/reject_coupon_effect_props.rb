@@ -30,6 +30,9 @@ module TalonOne
     # More details about the failure.
     attr_accessor :details
 
+    # The reason why the campaign was not applied.
+    attr_accessor :campaign_exclusion_reason
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +40,8 @@ module TalonOne
         :'rejection_reason' => :'rejectionReason',
         :'condition_index' => :'conditionIndex',
         :'effect_index' => :'effectIndex',
-        :'details' => :'details'
+        :'details' => :'details',
+        :'campaign_exclusion_reason' => :'campaignExclusionReason'
       }
     end
 
@@ -48,7 +52,8 @@ module TalonOne
         :'rejection_reason' => :'String',
         :'condition_index' => :'Integer',
         :'effect_index' => :'Integer',
-        :'details' => :'String'
+        :'details' => :'String',
+        :'campaign_exclusion_reason' => :'String'
       }
     end
 
@@ -92,6 +97,10 @@ module TalonOne
       if attributes.key?(:'details')
         self.details = attributes[:'details']
       end
+
+      if attributes.key?(:'campaign_exclusion_reason')
+        self.campaign_exclusion_reason = attributes[:'campaign_exclusion_reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -126,7 +135,8 @@ module TalonOne
           rejection_reason == o.rejection_reason &&
           condition_index == o.condition_index &&
           effect_index == o.effect_index &&
-          details == o.details
+          details == o.details &&
+          campaign_exclusion_reason == o.campaign_exclusion_reason
     end
 
     # @see the `==` method
@@ -138,7 +148,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, rejection_reason, condition_index, effect_index, details].hash
+      [value, rejection_reason, condition_index, effect_index, details, campaign_exclusion_reason].hash
     end
 
     # Builds the object from hash

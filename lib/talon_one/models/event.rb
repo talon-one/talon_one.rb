@@ -191,10 +191,6 @@ module TalonOne
         invalid_properties.push('invalid value for "effects", effects cannot be nil.')
       end
 
-      if @ledger_entries.nil?
-        invalid_properties.push('invalid value for "ledger_entries", ledger_entries cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -210,7 +206,6 @@ module TalonOne
       return false if @type.to_s.length < 1
       return false if @attributes.nil?
       return false if @effects.nil?
-      return false if @ledger_entries.nil?
       true
     end
 

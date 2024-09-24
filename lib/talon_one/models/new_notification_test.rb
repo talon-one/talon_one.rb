@@ -155,7 +155,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points"])
+      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points"])
       return false unless type_validator.valid?(@type)
       return false if @verb.nil?
       verb_validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
@@ -168,7 +168,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points"])
+      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

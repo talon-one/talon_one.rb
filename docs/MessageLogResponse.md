@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **DateTime** | Timestamp when the response was received. | 
-**response** | **String** | Raw response data. | 
-**status** | **Integer** | HTTP status code of the response. | 
+**created_at** | **DateTime** | Timestamp when the response was received. | [optional] 
+**response** | **String** | Raw response data. | [optional] 
+**status** | **Integer** | HTTP status code of the response. | [optional] 
 
 ## Code Sample
 

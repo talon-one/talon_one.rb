@@ -32,15 +32,6 @@ module TalonOne
     # The state of the campaign.  **Note:** A disabled or archived campaign is not evaluated for rules or coupons. 
     attr_accessor :campaign_state
 
-    # The [ID of the ruleset](https://docs.talon.one/management-api#operation/getRulesets) this campaign applies on customer session evaluation. 
-    attr_accessor :campaign_active_ruleset_id
-
-    # Date and time when the campaign becomes active.
-    attr_accessor :campaign_start_time
-
-    # Date and time when the campaign becomes inactive.
-    attr_accessor :campaign_end_time
-
     attr_accessor :total_revenue
 
     attr_accessor :sessions_count
@@ -84,9 +75,6 @@ module TalonOne
         :'campaign_name' => :'campaignName',
         :'campaign_tags' => :'campaignTags',
         :'campaign_state' => :'campaignState',
-        :'campaign_active_ruleset_id' => :'campaignActiveRulesetId',
-        :'campaign_start_time' => :'campaignStartTime',
-        :'campaign_end_time' => :'campaignEndTime',
         :'total_revenue' => :'totalRevenue',
         :'sessions_count' => :'sessionsCount',
         :'avg_items_per_session' => :'avgItemsPerSession',
@@ -105,15 +93,12 @@ module TalonOne
         :'campaign_name' => :'String',
         :'campaign_tags' => :'Array<String>',
         :'campaign_state' => :'String',
-        :'campaign_active_ruleset_id' => :'Integer',
-        :'campaign_start_time' => :'DateTime',
-        :'campaign_end_time' => :'DateTime',
-        :'total_revenue' => :'ApplicationCampaignAnalyticsTotalRevenue',
-        :'sessions_count' => :'ApplicationCampaignAnalyticsSessionsCount',
-        :'avg_items_per_session' => :'ApplicationCampaignAnalyticsAvgItemsPerSession',
-        :'avg_session_value' => :'ApplicationCampaignAnalyticsAvgSessionValue',
-        :'total_discounts' => :'ApplicationCampaignAnalyticsTotalDiscounts',
-        :'coupons_count' => :'ApplicationCampaignAnalyticsCouponsCount'
+        :'total_revenue' => :'AnalyticsDataPointWithTrendAndInfluencedRate',
+        :'sessions_count' => :'AnalyticsDataPointWithTrendAndInfluencedRate',
+        :'avg_items_per_session' => :'AnalyticsDataPointWithTrendAndUplift',
+        :'avg_session_value' => :'AnalyticsDataPointWithTrendAndUplift',
+        :'total_discounts' => :'AnalyticsDataPointWithTrend',
+        :'coupons_count' => :'AnalyticsDataPointWithTrend'
       }
     end
 
@@ -162,20 +147,6 @@ module TalonOne
 
       if attributes.key?(:'campaign_state')
         self.campaign_state = attributes[:'campaign_state']
-      else
-        self.campaign_state = 'enabled'
-      end
-
-      if attributes.key?(:'campaign_active_ruleset_id')
-        self.campaign_active_ruleset_id = attributes[:'campaign_active_ruleset_id']
-      end
-
-      if attributes.key?(:'campaign_start_time')
-        self.campaign_start_time = attributes[:'campaign_start_time']
-      end
-
-      if attributes.key?(:'campaign_end_time')
-        self.campaign_end_time = attributes[:'campaign_end_time']
       end
 
       if attributes.key?(:'total_revenue')
@@ -207,13 +178,43 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @start_time.nil?
+        invalid_properties.push('invalid value for "start_time", start_time cannot be nil.')
+      end
+
+      if @end_time.nil?
+        invalid_properties.push('invalid value for "end_time", end_time cannot be nil.')
+      end
+
+      if @campaign_id.nil?
+        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
+      end
+
+      if @campaign_name.nil?
+        invalid_properties.push('invalid value for "campaign_name", campaign_name cannot be nil.')
+      end
+
+      if @campaign_tags.nil?
+        invalid_properties.push('invalid value for "campaign_tags", campaign_tags cannot be nil.')
+      end
+
+      if @campaign_state.nil?
+        invalid_properties.push('invalid value for "campaign_state", campaign_state cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      campaign_state_validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
+      return false if @start_time.nil?
+      return false if @end_time.nil?
+      return false if @campaign_id.nil?
+      return false if @campaign_name.nil?
+      return false if @campaign_tags.nil?
+      return false if @campaign_state.nil?
+      campaign_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       return false unless campaign_state_validator.valid?(@campaign_state)
       true
     end
@@ -221,7 +222,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_state Object to be assigned
     def campaign_state=(campaign_state)
-      validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       unless validator.valid?(campaign_state)
         fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{validator.allowable_values}."
       end
@@ -239,9 +240,6 @@ module TalonOne
           campaign_name == o.campaign_name &&
           campaign_tags == o.campaign_tags &&
           campaign_state == o.campaign_state &&
-          campaign_active_ruleset_id == o.campaign_active_ruleset_id &&
-          campaign_start_time == o.campaign_start_time &&
-          campaign_end_time == o.campaign_end_time &&
           total_revenue == o.total_revenue &&
           sessions_count == o.sessions_count &&
           avg_items_per_session == o.avg_items_per_session &&
@@ -259,7 +257,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_time, end_time, campaign_id, campaign_name, campaign_tags, campaign_state, campaign_active_ruleset_id, campaign_start_time, campaign_end_time, total_revenue, sessions_count, avg_items_per_session, avg_session_value, total_discounts, coupons_count].hash
+      [start_time, end_time, campaign_id, campaign_name, campaign_tags, campaign_state, total_revenue, sessions_count, avg_items_per_session, avg_session_value, total_discounts, coupons_count].hash
     end
 
     # Builds the object from hash

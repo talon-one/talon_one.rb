@@ -39,17 +39,22 @@ module TalonOne
     # Indicates if this program is a live or sandbox program. Programs of a given type can only be connected to Applications of the same type.
     attr_accessor :sandbox
 
-    # The policy that defines which date is used to calculate the expiration date of a customer's current tier.  - `tier_start_date`: The tier expiration date is calculated based on when the customer joined the current tier.  - `program_join_date`: The tier expiration date is calculated based on when the customer joined the loyalty program. 
-    attr_accessor :tiers_expiration_policy
-
-    # The amount of time after which the tier expires.  The time format is an **integer** followed by one letter indicating the time unit. Examples: `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. 
-    attr_accessor :tiers_expire_in
-
-    # Customers's tier downgrade policy.  - `one_down`: Once the tier expires and if the user doesn't have enough points to stay in the tier, the user is downgraded one tier down.  - `balance_based`: Once the tier expires, the user's tier is evaluated based on the amount of active points the user has at this instant. 
-    attr_accessor :tiers_downgrade_policy
-
     # The policy that defines when the customer joins the loyalty program.   - `not_join`: The customer does not join the loyalty program but can still earn and spend loyalty points.       **Note**: The customer does not have a program join date.   - `points_activated`: The customer joins the loyalty program only when their earned loyalty points become active for the first time.   - `points_earned`: The customer joins the loyalty program when they earn loyalty points for the first time. 
     attr_accessor :program_join_policy
+
+    # The policy that defines how tier expiration, used to reevaluate the customer's current tier, is determined.  - `tier_start_date`: The tier expiration is relative to when the customer joined the current tier.  - `program_join_date`: The tier expiration is relative to when the customer joined the loyalty program.  - `customer_attribute`: The tier expiration is determined by a custom customer attribute.  - `absolute_expiration`: The tier is reevaluated at the start of each tier cycle. For this policy, it is required to provide a `tierCycleStartDate`. 
+    attr_accessor :tiers_expiration_policy
+
+    # Timestamp at which the tier cycle starts for all customers in the loyalty program.  **Note**: This is only required when the tier expiration policy is set to `absolute_expiration`. 
+    attr_accessor :tier_cycle_start_date
+
+    # The amount of time after which the tier expires and is reevaluated.  The time format is an **integer** followed by one letter indicating the time unit. Examples: `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. 
+    attr_accessor :tiers_expire_in
+
+    # The policy that defines how customer tiers are downgraded in the loyalty program after tier reevaluation.  - `one_down`: If the customer doesn't have enough points to stay in the current tier, they are downgraded by one tier.  - `balance_based`: The customer's tier is reevaluated based on the amount of active points they have at the moment. 
+    attr_accessor :tiers_downgrade_policy
+
+    attr_accessor :card_code_settings
 
     # The internal name for the Loyalty Program. This is an immutable value.
     attr_accessor :name
@@ -96,10 +101,12 @@ module TalonOne
         :'allow_subledger' => :'allowSubledger',
         :'users_per_card_limit' => :'usersPerCardLimit',
         :'sandbox' => :'sandbox',
+        :'program_join_policy' => :'programJoinPolicy',
         :'tiers_expiration_policy' => :'tiersExpirationPolicy',
+        :'tier_cycle_start_date' => :'tierCycleStartDate',
         :'tiers_expire_in' => :'tiersExpireIn',
         :'tiers_downgrade_policy' => :'tiersDowngradePolicy',
-        :'program_join_policy' => :'programJoinPolicy',
+        :'card_code_settings' => :'cardCodeSettings',
         :'name' => :'name',
         :'tiers' => :'tiers',
         :'timezone' => :'timezone',
@@ -118,10 +125,12 @@ module TalonOne
         :'allow_subledger' => :'Boolean',
         :'users_per_card_limit' => :'Integer',
         :'sandbox' => :'Boolean',
+        :'program_join_policy' => :'String',
         :'tiers_expiration_policy' => :'String',
+        :'tier_cycle_start_date' => :'DateTime',
         :'tiers_expire_in' => :'String',
         :'tiers_downgrade_policy' => :'String',
-        :'program_join_policy' => :'String',
+        :'card_code_settings' => :'CodeGeneratorSettings',
         :'name' => :'String',
         :'tiers' => :'Array<NewLoyaltyTier>',
         :'timezone' => :'String',
@@ -184,8 +193,16 @@ module TalonOne
         self.sandbox = attributes[:'sandbox']
       end
 
+      if attributes.key?(:'program_join_policy')
+        self.program_join_policy = attributes[:'program_join_policy']
+      end
+
       if attributes.key?(:'tiers_expiration_policy')
         self.tiers_expiration_policy = attributes[:'tiers_expiration_policy']
+      end
+
+      if attributes.key?(:'tier_cycle_start_date')
+        self.tier_cycle_start_date = attributes[:'tier_cycle_start_date']
       end
 
       if attributes.key?(:'tiers_expire_in')
@@ -196,8 +213,8 @@ module TalonOne
         self.tiers_downgrade_policy = attributes[:'tiers_downgrade_policy']
       end
 
-      if attributes.key?(:'program_join_policy')
-        self.program_join_policy = attributes[:'program_join_policy']
+      if attributes.key?(:'card_code_settings')
+        self.card_code_settings = attributes[:'card_code_settings']
       end
 
       if attributes.key?(:'name')
@@ -277,12 +294,12 @@ module TalonOne
       return false if @allow_subledger.nil?
       return false if !@users_per_card_limit.nil? && @users_per_card_limit < 0
       return false if @sandbox.nil?
-      tiers_expiration_policy_validator = EnumAttributeValidator.new('String', ["tier_start_date", "program_join_date"])
+      program_join_policy_validator = EnumAttributeValidator.new('String', ["not_join", "points_activated", "points_earned"])
+      return false unless program_join_policy_validator.valid?(@program_join_policy)
+      tiers_expiration_policy_validator = EnumAttributeValidator.new('String', ["tier_start_date", "program_join_date", "customer_attribute", "absolute_expiration"])
       return false unless tiers_expiration_policy_validator.valid?(@tiers_expiration_policy)
       tiers_downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless tiers_downgrade_policy_validator.valid?(@tiers_downgrade_policy)
-      program_join_policy_validator = EnumAttributeValidator.new('String', ["not_join", "points_activated", "points_earned"])
-      return false unless program_join_policy_validator.valid?(@program_join_policy)
       return false if @name.nil?
       return false if @timezone.nil?
       return false if @timezone.to_s.length < 1
@@ -301,9 +318,19 @@ module TalonOne
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] program_join_policy Object to be assigned
+    def program_join_policy=(program_join_policy)
+      validator = EnumAttributeValidator.new('String', ["not_join", "points_activated", "points_earned"])
+      unless validator.valid?(program_join_policy)
+        fail ArgumentError, "invalid value for \"program_join_policy\", must be one of #{validator.allowable_values}."
+      end
+      @program_join_policy = program_join_policy
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tiers_expiration_policy Object to be assigned
     def tiers_expiration_policy=(tiers_expiration_policy)
-      validator = EnumAttributeValidator.new('String', ["tier_start_date", "program_join_date"])
+      validator = EnumAttributeValidator.new('String', ["tier_start_date", "program_join_date", "customer_attribute", "absolute_expiration"])
       unless validator.valid?(tiers_expiration_policy)
         fail ArgumentError, "invalid value for \"tiers_expiration_policy\", must be one of #{validator.allowable_values}."
       end
@@ -318,16 +345,6 @@ module TalonOne
         fail ArgumentError, "invalid value for \"tiers_downgrade_policy\", must be one of #{validator.allowable_values}."
       end
       @tiers_downgrade_policy = tiers_downgrade_policy
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] program_join_policy Object to be assigned
-    def program_join_policy=(program_join_policy)
-      validator = EnumAttributeValidator.new('String', ["not_join", "points_activated", "points_earned"])
-      unless validator.valid?(program_join_policy)
-        fail ArgumentError, "invalid value for \"program_join_policy\", must be one of #{validator.allowable_values}."
-      end
-      @program_join_policy = program_join_policy
     end
 
     # Custom attribute writer method with validation
@@ -357,10 +374,12 @@ module TalonOne
           allow_subledger == o.allow_subledger &&
           users_per_card_limit == o.users_per_card_limit &&
           sandbox == o.sandbox &&
+          program_join_policy == o.program_join_policy &&
           tiers_expiration_policy == o.tiers_expiration_policy &&
+          tier_cycle_start_date == o.tier_cycle_start_date &&
           tiers_expire_in == o.tiers_expire_in &&
           tiers_downgrade_policy == o.tiers_downgrade_policy &&
-          program_join_policy == o.program_join_policy &&
+          card_code_settings == o.card_code_settings &&
           name == o.name &&
           tiers == o.tiers &&
           timezone == o.timezone &&
@@ -376,7 +395,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, tiers_expiration_policy, tiers_expire_in, tiers_downgrade_policy, program_join_policy, name, tiers, timezone, card_based].hash
+      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, name, tiers, timezone, card_based].hash
     end
 
     # Builds the object from hash

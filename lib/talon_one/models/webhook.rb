@@ -30,6 +30,9 @@ module TalonOne
     # Name or title for this webhook.
     attr_accessor :title
 
+    # A description of the webhook.
+    attr_accessor :description
+
     # API method for this webhook.
     attr_accessor :verb
 
@@ -78,6 +81,7 @@ module TalonOne
         :'modified' => :'modified',
         :'application_ids' => :'applicationIds',
         :'title' => :'title',
+        :'description' => :'description',
         :'verb' => :'verb',
         :'url' => :'url',
         :'headers' => :'headers',
@@ -95,6 +99,7 @@ module TalonOne
         :'modified' => :'DateTime',
         :'application_ids' => :'Array<Integer>',
         :'title' => :'String',
+        :'description' => :'String',
         :'verb' => :'String',
         :'url' => :'String',
         :'headers' => :'Array<String>',
@@ -145,6 +150,10 @@ module TalonOne
 
       if attributes.key?(:'title')
         self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.key?(:'verb')
@@ -282,6 +291,7 @@ module TalonOne
           modified == o.modified &&
           application_ids == o.application_ids &&
           title == o.title &&
+          description == o.description &&
           verb == o.verb &&
           url == o.url &&
           headers == o.headers &&
@@ -299,7 +309,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, application_ids, title, verb, url, headers, payload, params, enabled].hash
+      [id, created, modified, application_ids, title, description, verb, url, headers, payload, params, enabled].hash
     end
 
     # Builds the object from hash

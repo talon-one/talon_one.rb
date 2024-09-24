@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **modified** | **DateTime** | The time this entity was last modified. | 
 **application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications that are related to this entity. The IDs of the Applications that are related to this entity. | 
 **title** | **String** | Name or title for this webhook. | 
+**description** | **String** | A description of the webhook. | [optional] 
 **verb** | **String** | API method for this webhook. | 
 **url** | **String** | API URL (supports templating using parameters) for this webhook. | 
 **headers** | **Array&lt;String&gt;** | List of API HTTP headers for this webhook. | 
@@ -29,6 +30,7 @@ instance = TalonOne::WebhookWithOutgoingIntegrationDetails.new(id: 6,
                                  modified: 2021-09-12T10:12:42Z,
                                  application_ids: null,
                                  title: Send message,
+                                 description: A webhook to send a coupon to the user.,
                                  verb: POST,
                                  url: www.my-company.com/my-endpoint-name,
                                  headers: [{&quot;Authorization&quot;: &quot;Basic bmF2ZWVua3VtYXIU&#x3D;&quot;}, {&quot;Content-Type&quot;: &quot;application/json&quot;}],

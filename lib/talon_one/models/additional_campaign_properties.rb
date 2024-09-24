@@ -80,6 +80,9 @@ module TalonOne
     # A campaign state described exactly as in the Campaign Manager.
     attr_accessor :frontend_state
 
+    # Indicates whether the linked stores were imported via a CSV file.
+    attr_accessor :stores_imported
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -126,7 +129,8 @@ module TalonOne
         :'created_by' => :'createdBy',
         :'updated_by' => :'updatedBy',
         :'template_id' => :'templateId',
-        :'frontend_state' => :'frontendState'
+        :'frontend_state' => :'frontendState',
+        :'stores_imported' => :'storesImported'
       }
     end
 
@@ -154,7 +158,8 @@ module TalonOne
         :'created_by' => :'String',
         :'updated_by' => :'String',
         :'template_id' => :'Integer',
-        :'frontend_state' => :'String'
+        :'frontend_state' => :'String',
+        :'stores_imported' => :'Boolean'
       }
     end
 
@@ -268,6 +273,10 @@ module TalonOne
       if attributes.key?(:'frontend_state')
         self.frontend_state = attributes[:'frontend_state']
       end
+
+      if attributes.key?(:'stores_imported')
+        self.stores_imported = attributes[:'stores_imported']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -282,6 +291,10 @@ module TalonOne
         invalid_properties.push('invalid value for "frontend_state", frontend_state cannot be nil.')
       end
 
+      if @stores_imported.nil?
+        invalid_properties.push('invalid value for "stores_imported", stores_imported cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -290,15 +303,16 @@ module TalonOne
     def valid?
       return false if @budgets.nil?
       return false if @frontend_state.nil?
-      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       return false unless frontend_state_validator.valid?(@frontend_state)
+      return false if @stores_imported.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frontend_state Object to be assigned
     def frontend_state=(frontend_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "draft", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       unless validator.valid?(frontend_state)
         fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
       end
@@ -331,7 +345,8 @@ module TalonOne
           created_by == o.created_by &&
           updated_by == o.updated_by &&
           template_id == o.template_id &&
-          frontend_state == o.frontend_state
+          frontend_state == o.frontend_state &&
+          stores_imported == o.stores_imported
     end
 
     # @see the `==` method
@@ -343,7 +358,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state].hash
+      [budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported].hash
     end
 
     # Builds the object from hash

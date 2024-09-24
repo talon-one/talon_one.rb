@@ -15,9 +15,6 @@ require 'date'
 module TalonOne
   # Provides statistics regarding an application's campaigns.
   class ApplicationCampaignStats
-    # Number of draft campaigns.
-    attr_accessor :draft
-
     # Number of disabled campaigns.
     attr_accessor :disabled
 
@@ -36,7 +33,6 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'draft' => :'draft',
         :'disabled' => :'disabled',
         :'scheduled' => :'scheduled',
         :'running' => :'running',
@@ -48,7 +44,6 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'draft' => :'Integer',
         :'disabled' => :'Integer',
         :'scheduled' => :'Integer',
         :'running' => :'Integer',
@@ -78,10 +73,6 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'draft')
-        self.draft = attributes[:'draft']
-      end
-
       if attributes.key?(:'disabled')
         self.disabled = attributes[:'disabled']
       end
@@ -107,10 +98,6 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @draft.nil?
-        invalid_properties.push('invalid value for "draft", draft cannot be nil.')
-      end
-
       if @disabled.nil?
         invalid_properties.push('invalid value for "disabled", disabled cannot be nil.')
       end
@@ -137,7 +124,6 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @draft.nil?
       return false if @disabled.nil?
       return false if @scheduled.nil?
       return false if @running.nil?
@@ -151,7 +137,6 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          draft == o.draft &&
           disabled == o.disabled &&
           scheduled == o.scheduled &&
           running == o.running &&
@@ -168,7 +153,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, disabled, scheduled, running, expired, archived].hash
+      [disabled, scheduled, running, expired, archived].hash
     end
 
     # Builds the object from hash

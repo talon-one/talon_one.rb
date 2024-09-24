@@ -65,28 +65,10 @@ describe 'ApplicationCampaignAnalytics' do
   describe 'test attribute "campaign_state"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.campaign_state = value }.not_to raise_error
       # end
-    end
-  end
-
-  describe 'test attribute "campaign_active_ruleset_id"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "campaign_start_time"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "campaign_end_time"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

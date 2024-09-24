@@ -23,6 +23,9 @@ module TalonOne
     # The display name of the achievement in the Campaign Manager.
     attr_accessor :title
 
+    # The description of the achievement in the Campaign Manager.
+    attr_accessor :description
+
     # The ID of the campaign the achievement belongs to.
     attr_accessor :campaign_id
 
@@ -72,6 +75,7 @@ module TalonOne
         :'achievement_id' => :'achievementId',
         :'name' => :'name',
         :'title' => :'title',
+        :'description' => :'description',
         :'campaign_id' => :'campaignId',
         :'status' => :'status',
         :'target' => :'target',
@@ -88,6 +92,7 @@ module TalonOne
         :'achievement_id' => :'Integer',
         :'name' => :'String',
         :'title' => :'String',
+        :'description' => :'String',
         :'campaign_id' => :'Integer',
         :'status' => :'String',
         :'target' => :'Float',
@@ -129,6 +134,10 @@ module TalonOne
 
       if attributes.key?(:'title')
         self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.key?(:'campaign_id')
@@ -189,6 +198,10 @@ module TalonOne
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
+      if @description.nil?
+        invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
       if @campaign_id.nil?
         invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
       end
@@ -221,6 +234,7 @@ module TalonOne
       return false if @name.to_s.length < 1
       return false if @name !~ Regexp.new(/^[a-zA-Z]\w+$/)
       return false if @title.nil?
+      return false if @description.nil?
       return false if @campaign_id.nil?
       return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["inprogress", "completed", "expired"])
@@ -272,6 +286,7 @@ module TalonOne
           achievement_id == o.achievement_id &&
           name == o.name &&
           title == o.title &&
+          description == o.description &&
           campaign_id == o.campaign_id &&
           status == o.status &&
           target == o.target &&
@@ -290,7 +305,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [achievement_id, name, title, campaign_id, status, target, progress, start_date, completion_date, end_date].hash
+      [achievement_id, name, title, description, campaign_id, status, target, progress, start_date, completion_date, end_date].hash
     end
 
     # Builds the object from hash

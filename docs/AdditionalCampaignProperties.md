@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **updated_by** | **String** | Name of the user who last updated this campaign if available. | [optional] 
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
 **frontend_state** | **String** | A campaign state described exactly as in the Campaign Manager. | 
+**stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
 
 ## Code Sample
 
@@ -53,7 +54,8 @@ instance = TalonOne::AdditionalCampaignProperties.new(budgets: null,
                                  created_by: John Doe,
                                  updated_by: Jane Doe,
                                  template_id: 3,
-                                 frontend_state: running)
+                                 frontend_state: running,
+                                 stores_imported: true)
 ```
 
 

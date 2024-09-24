@@ -14,6 +14,7 @@ require 'date'
 
 module TalonOne
   class BaseNotificationEntity
+    # Indicates which notification properties to apply.
     attr_accessor :policy
 
     # Indicates whether the notification is activated.

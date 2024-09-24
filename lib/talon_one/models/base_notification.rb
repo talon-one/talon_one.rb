@@ -15,6 +15,7 @@ require 'date'
 module TalonOne
   # 
   class BaseNotification
+    # Indicates which notification properties to apply.
     attr_accessor :policy
 
     # Indicates whether the notification is activated.
@@ -151,7 +152,7 @@ module TalonOne
       return false if @id.nil?
       return false if @id < 1
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
+      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -173,7 +174,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
+      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "card_expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

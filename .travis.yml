@@ -10,4 +10,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build talon_one.gemspec
-  - gem install ./talon_one-5.0.0.gem
+  - gem install ./talon_one-6.0.0.gem

@@ -39,6 +39,18 @@ module TalonOne
     # The index of the condition that was triggered.
     attr_accessor :condition_index
 
+    # The ID of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation).
+    attr_accessor :evaluation_group_id
+
+    # The evaluation mode of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation).
+    attr_accessor :evaluation_group_mode
+
+    # The revision ID of the campaign that was used when triggering the effect.
+    attr_accessor :campaign_revision_id
+
+    # The revision version ID of the campaign that was used when triggering the effect.
+    attr_accessor :campaign_revision_version_id
+
     # The properties of the effect. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     attr_accessor :props
 
@@ -53,6 +65,10 @@ module TalonOne
         :'triggered_by_coupon' => :'triggeredByCoupon',
         :'triggered_for_catalog_item' => :'triggeredForCatalogItem',
         :'condition_index' => :'conditionIndex',
+        :'evaluation_group_id' => :'evaluationGroupID',
+        :'evaluation_group_mode' => :'evaluationGroupMode',
+        :'campaign_revision_id' => :'campaignRevisionId',
+        :'campaign_revision_version_id' => :'campaignRevisionVersionId',
         :'props' => :'props'
       }
     end
@@ -68,6 +84,10 @@ module TalonOne
         :'triggered_by_coupon' => :'Integer',
         :'triggered_for_catalog_item' => :'Integer',
         :'condition_index' => :'Integer',
+        :'evaluation_group_id' => :'Integer',
+        :'evaluation_group_mode' => :'String',
+        :'campaign_revision_id' => :'Integer',
+        :'campaign_revision_version_id' => :'Integer',
         :'props' => :'Object'
       }
     end
@@ -123,6 +143,22 @@ module TalonOne
 
       if attributes.key?(:'condition_index')
         self.condition_index = attributes[:'condition_index']
+      end
+
+      if attributes.key?(:'evaluation_group_id')
+        self.evaluation_group_id = attributes[:'evaluation_group_id']
+      end
+
+      if attributes.key?(:'evaluation_group_mode')
+        self.evaluation_group_mode = attributes[:'evaluation_group_mode']
+      end
+
+      if attributes.key?(:'campaign_revision_id')
+        self.campaign_revision_id = attributes[:'campaign_revision_id']
+      end
+
+      if attributes.key?(:'campaign_revision_version_id')
+        self.campaign_revision_version_id = attributes[:'campaign_revision_version_id']
       end
 
       if attributes.key?(:'props')
@@ -186,6 +222,10 @@ module TalonOne
           triggered_by_coupon == o.triggered_by_coupon &&
           triggered_for_catalog_item == o.triggered_for_catalog_item &&
           condition_index == o.condition_index &&
+          evaluation_group_id == o.evaluation_group_id &&
+          evaluation_group_mode == o.evaluation_group_mode &&
+          campaign_revision_id == o.campaign_revision_id &&
+          campaign_revision_version_id == o.campaign_revision_version_id &&
           props == o.props
     end
 
@@ -198,7 +238,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, props].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, props].hash
     end
 
     # Builds the object from hash

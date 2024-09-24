@@ -17,17 +17,22 @@ module TalonOne
     # The alphanumeric identifier of the loyalty card. 
     attr_accessor :new_card_identifier
 
+    # Reason for transferring and blocking the loyalty card. 
+    attr_accessor :block_reason
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'new_card_identifier' => :'newCardIdentifier'
+        :'new_card_identifier' => :'newCardIdentifier',
+        :'block_reason' => :'blockReason'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'new_card_identifier' => :'String'
+        :'new_card_identifier' => :'String',
+        :'block_reason' => :'String'
       }
     end
 
@@ -54,6 +59,10 @@ module TalonOne
 
       if attributes.key?(:'new_card_identifier')
         self.new_card_identifier = attributes[:'new_card_identifier']
+      end
+
+      if attributes.key?(:'block_reason')
+        self.block_reason = attributes[:'block_reason']
       end
     end
 
@@ -99,7 +108,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          new_card_identifier == o.new_card_identifier
+          new_card_identifier == o.new_card_identifier &&
+          block_reason == o.block_reason
     end
 
     # @see the `==` method
@@ -111,7 +121,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [new_card_identifier].hash
+      [new_card_identifier, block_reason].hash
     end
 
     # Builds the object from hash
