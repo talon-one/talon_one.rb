@@ -14,20 +14,25 @@ require 'date'
 
 module TalonOne
   class UpdateLoyaltyCard
-    # Status of the loyalty card. Can be one of: ['active', 'inactive'] 
+    # Status of the loyalty card. Can be `active` or `inactive`. 
     attr_accessor :status
+
+    # Reason for transferring and blocking the loyalty card. 
+    attr_accessor :block_reason
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status'
+        :'status' => :'status',
+        :'block_reason' => :'blockReason'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String'
+        :'status' => :'String',
+        :'block_reason' => :'String'
       }
     end
 
@@ -55,6 +60,10 @@ module TalonOne
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
+
+      if attributes.key?(:'block_reason')
+        self.block_reason = attributes[:'block_reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,7 +89,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status
+          status == o.status &&
+          block_reason == o.block_reason
     end
 
     # @see the `==` method
@@ -92,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status].hash
+      [status, block_reason].hash
     end
 
     # Builds the object from hash

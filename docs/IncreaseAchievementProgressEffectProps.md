@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **progress_tracker_id** | **Integer** | The internal ID of the achievement progress tracker. | [optional] 
 **delta** | **Float** | The value by which the customer&#39;s current progress in the achievement is increased. | 
 **value** | **Float** | The current progress of the customer in the achievement. | 
-**target** | **Float** | The required number of actions or the transactional milestone to complete the achievement. | 
+**target** | **Float** | The target value to complete the achievement. | 
 **is_just_completed** | **Boolean** | Indicates if the customer has completed the achievement in the current session. | 
 
 ## Code Sample

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **additional_costs** | [**Array&lt;AccountAdditionalCost&gt;**](AccountAdditionalCost.md) | The additional costs that the application is subscribed to. | [optional] 
 **audiences** | [**Array&lt;Audience&gt;**](Audience.md) | The audiences contained in the account which the application belongs to. | [optional] 
 **collections** | [**Array&lt;Collection&gt;**](Collection.md) | The account-level collections that the application is subscribed to. | [optional] 
+**application_cart_item_filters** | [**Array&lt;ApplicationCIF&gt;**](ApplicationCIF.md) | The cart item filters belonging to the Application. | [optional] 
 
 ## Code Sample
 
@@ -37,7 +38,8 @@ instance = TalonOne::Environment.new(id: 6,
                                  attributes: null,
                                  additional_costs: null,
                                  audiences: null,
-                                 collections: null)
+                                 collections: null,
+                                 application_cart_item_filters: null)
 ```
 
 

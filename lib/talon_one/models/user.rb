@@ -63,6 +63,9 @@ module TalonOne
     # Timestamp when the user was notified for feed.
     attr_accessor :latest_feed_timestamp
 
+    # Additional user attributes, created and used by external identity providers.
+    attr_accessor :additional_attributes
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -103,7 +106,8 @@ module TalonOne
         :'application_notification_subscriptions' => :'applicationNotificationSubscriptions',
         :'last_signed_in' => :'lastSignedIn',
         :'last_accessed' => :'lastAccessed',
-        :'latest_feed_timestamp' => :'latestFeedTimestamp'
+        :'latest_feed_timestamp' => :'latestFeedTimestamp',
+        :'additional_attributes' => :'additionalAttributes'
       }
     end
 
@@ -125,7 +129,8 @@ module TalonOne
         :'application_notification_subscriptions' => :'Object',
         :'last_signed_in' => :'DateTime',
         :'last_accessed' => :'DateTime',
-        :'latest_feed_timestamp' => :'DateTime'
+        :'latest_feed_timestamp' => :'DateTime',
+        :'additional_attributes' => :'Object'
       }
     end
 
@@ -214,6 +219,10 @@ module TalonOne
 
       if attributes.key?(:'latest_feed_timestamp')
         self.latest_feed_timestamp = attributes[:'latest_feed_timestamp']
+      end
+
+      if attributes.key?(:'additional_attributes')
+        self.additional_attributes = attributes[:'additional_attributes']
       end
     end
 
@@ -307,7 +316,8 @@ module TalonOne
           application_notification_subscriptions == o.application_notification_subscriptions &&
           last_signed_in == o.last_signed_in &&
           last_accessed == o.last_accessed &&
-          latest_feed_timestamp == o.latest_feed_timestamp
+          latest_feed_timestamp == o.latest_feed_timestamp &&
+          additional_attributes == o.additional_attributes
     end
 
     # @see the `==` method
@@ -319,7 +329,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, email, account_id, name, state, invite_token, is_admin, policy, roles, auth_method, application_notification_subscriptions, last_signed_in, last_accessed, latest_feed_timestamp].hash
+      [id, created, modified, email, account_id, name, state, invite_token, is_admin, policy, roles, auth_method, application_notification_subscriptions, last_signed_in, last_accessed, latest_feed_timestamp, additional_attributes].hash
     end
 
     # Builds the object from hash

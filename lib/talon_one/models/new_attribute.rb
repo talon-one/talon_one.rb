@@ -248,7 +248,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @entity.nil?
-      entity_validator = EnumAttributeValidator.new('String', ["Account", "Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral", "Store"])
+      entity_validator = EnumAttributeValidator.new('String', ["Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral", "Store"])
       return false unless entity_validator.valid?(@entity)
       return false if @name.nil?
       return false if @name !~ Regexp.new(/^[A-Za-z]\w*$/)
@@ -266,7 +266,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity Object to be assigned
     def entity=(entity)
-      validator = EnumAttributeValidator.new('String', ["Account", "Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral", "Store"])
+      validator = EnumAttributeValidator.new('String', ["Application", "Campaign", "CustomerProfile", "CustomerSession", "CartItem", "Coupon", "Event", "Giveaway", "Referral", "Store"])
       unless validator.valid?(entity)
         fail ArgumentError, "invalid value for \"entity\", must be one of #{validator.allowable_values}."
       end

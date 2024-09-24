@@ -17,10 +17,10 @@ module TalonOne
   class CampaignStateChangedNotification
     attr_accessor :campaign
 
-    # The campaign's old state. Can be one of the following: ['running', 'disabled', 'scheduled', 'expired', 'draft', 'archived'] 
+    # The campaign's old state. Can be one of the following: ['running', 'disabled', 'scheduled', 'expired', 'archived'] 
     attr_accessor :old_state
 
-    # The campaign's new state. Can be one of the following: ['running', 'disabled', 'scheduled', 'expired', 'draft', 'archived'] 
+    # The campaign's new state. Can be one of the following: ['running', 'disabled', 'scheduled', 'expired', 'archived'] 
     attr_accessor :new_state
 
     attr_accessor :ruleset

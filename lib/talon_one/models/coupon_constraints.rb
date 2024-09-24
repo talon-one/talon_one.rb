@@ -26,7 +26,7 @@ module TalonOne
     # Timestamp at which point the coupon becomes valid.
     attr_accessor :start_date
 
-    # Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative.
+    # Expiration date of the coupon. Coupon never expires if this is omitted.
     attr_accessor :expiry_date
 
     # Attribute mapping from ruby-style variable name to JSON key.

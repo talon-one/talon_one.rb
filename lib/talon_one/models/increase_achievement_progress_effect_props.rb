@@ -30,7 +30,7 @@ module TalonOne
     # The current progress of the customer in the achievement.
     attr_accessor :value
 
-    # The required number of actions or the transactional milestone to complete the achievement.
+    # The target value to complete the achievement.
     attr_accessor :target
 
     # Indicates if the customer has completed the achievement in the current session.

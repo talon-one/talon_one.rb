@@ -27,7 +27,7 @@ module TalonOne
     # Timestamp at which point the coupon becomes valid.
     attr_accessor :start_date
 
-    # Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative.
+    # Expiration date of the coupon. Coupon never expires if this is omitted.
     attr_accessor :expiry_date
 
     # Optional property to set the value of custom coupon attributes. They are defined in the Campaign Manager, see [Managing attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes).  Coupon attributes can also be set to _mandatory_ in your Application [settings](https://docs.talon.one/docs/product/applications/using-attributes#making-attributes-mandatory). If your Application uses mandatory attributes, you must use this property to set their value. 

@@ -80,21 +80,9 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @response.nil?
-        invalid_properties.push('invalid value for "response", response cannot be nil.')
-      end
-
       pattern = Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-      if @response !~ pattern
+      if !@response.nil? && @response !~ pattern
         invalid_properties.push("invalid value for \"response\", must conform to the pattern #{pattern}.")
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
       end
 
       invalid_properties
@@ -103,22 +91,15 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @created_at.nil?
-      return false if @response.nil?
-      return false if @response !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-      return false if @status.nil?
+      return false if !@response.nil? && @response !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] response Value to be assigned
     def response=(response)
-      if response.nil?
-        fail ArgumentError, 'response cannot be nil'
-      end
-
       pattern = Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-      if response !~ pattern
+      if !response.nil? && response !~ pattern
         fail ArgumentError, "invalid value for \"response\", must conform to the pattern #{pattern}."
       end
 

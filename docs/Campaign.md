@@ -45,6 +45,13 @@ Name | Type | Description | Notes
 **updated_by** | **String** | Name of the user who last updated this campaign if available. | [optional] 
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
 **frontend_state** | **String** | A campaign state described exactly as in the Campaign Manager. | 
+**stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
+**active_revision_id** | **Integer** | ID of the revision that was last activated on this campaign.  | [optional] 
+**active_revision_version_id** | **Integer** | ID of the revision version that is active on the campaign.  | [optional] 
+**version** | **Integer** | Incrementing number representing how many revisions have been activated on this campaign, starts from 0 for a new campaign.  | [optional] 
+**current_revision_id** | **Integer** | ID of the revision currently being modified for the campaign.  | [optional] 
+**current_revision_version_id** | **Integer** | ID of the latest version applied on the current revision.  | [optional] 
+**stage_revision** | **Boolean** | Flag for determining whether we use current revision when sending requests with staging API key.  | [optional] [default to false]
 
 ## Code Sample
 
@@ -91,7 +98,14 @@ instance = TalonOne::Campaign.new(id: 4,
                                  created_by: John Doe,
                                  updated_by: Jane Doe,
                                  template_id: 3,
-                                 frontend_state: running)
+                                 frontend_state: running,
+                                 stores_imported: true,
+                                 active_revision_id: 6,
+                                 active_revision_version_id: 6,
+                                 version: 6,
+                                 current_revision_id: 6,
+                                 current_revision_version_id: 6,
+                                 stage_revision: false)
 ```
 
 

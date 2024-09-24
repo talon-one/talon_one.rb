@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications that are related to this entity. | 
 **title** | **String** | Name or title for this webhook. | 
+**description** | **String** | A description of the webhook. | [optional] 
 **verb** | **String** | API method for this webhook. | 
 **url** | **String** | API URL (supports templating using parameters) for this webhook. | 
 **headers** | **Array&lt;String&gt;** | List of API HTTP headers for this webhook. | 
@@ -20,6 +21,7 @@ require 'TalonOne'
 
 instance = TalonOne::NewWebhook.new(application_ids: null,
                                  title: Send message,
+                                 description: A webhook to send a coupon to the user.,
                                  verb: POST,
                                  url: www.my-company.com/my-endpoint-name,
                                  headers: [{&quot;Authorization&quot;: &quot;Basic bmF2ZWVua3VtYXIU&#x3D;&quot;}, {&quot;Content-Type&quot;: &quot;application/json&quot;}],

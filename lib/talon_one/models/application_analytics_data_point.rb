@@ -53,10 +53,10 @@ module TalonOne
       {
         :'start_time' => :'DateTime',
         :'end_time' => :'DateTime',
-        :'total_revenue' => :'ApplicationAnalyticsDataPointTotalRevenue',
-        :'sessions_count' => :'ApplicationAnalyticsDataPointSessionsCount',
-        :'avg_items_per_session' => :'ApplicationAnalyticsDataPointAvgItemsPerSession',
-        :'avg_session_value' => :'ApplicationAnalyticsDataPointAvgSessionValue',
+        :'total_revenue' => :'AnalyticsDataPoint',
+        :'sessions_count' => :'AnalyticsDataPoint',
+        :'avg_items_per_session' => :'AnalyticsDataPoint',
+        :'avg_session_value' => :'AnalyticsDataPoint',
         :'total_discounts' => :'Float',
         :'coupons_count' => :'Float'
       }
@@ -120,12 +120,22 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @start_time.nil?
+        invalid_properties.push('invalid value for "start_time", start_time cannot be nil.')
+      end
+
+      if @end_time.nil?
+        invalid_properties.push('invalid value for "end_time", end_time cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @start_time.nil?
+      return false if @end_time.nil?
       true
     end
 

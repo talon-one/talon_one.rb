@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **discount_limit** | **Float** | The total discount value that the code can give. Typically used to represent a gift card value.  | [optional] 
 **reservation_limit** | **Integer** | The number of reservations that can be made with this coupon code.  | [optional] 
 **start_date** | **DateTime** | Timestamp at which point the coupon becomes valid. | [optional] 
-**expiry_date** | **DateTime** | Expiration date of the coupon. Coupon never expires if this is omitted, zero, or negative. | [optional] 
+**expiry_date** | **DateTime** | Expiration date of the coupon. Coupon never expires if this is omitted. | [optional] 
 **number_of_coupons** | **Integer** | The number of new coupon codes to generate for the campaign. | 
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with coupons. | 

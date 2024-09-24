@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **last_signed_in** | **DateTime** | Timestamp when the user last signed in to Talon.One. | [optional] 
 **last_accessed** | **DateTime** | Timestamp of the user&#39;s last activity after signing in to Talon.One. | [optional] 
 **latest_feed_timestamp** | **DateTime** | Timestamp when the user was notified for feed. | [optional] 
+**additional_attributes** | [**Object**](.md) | Additional user attributes, created and used by external identity providers. | [optional] 
 
 ## Code Sample
 
@@ -41,7 +42,8 @@ instance = TalonOne::User.new(id: 6,
                                  application_notification_subscriptions: null,
                                  last_signed_in: 2021-09-12T10:12:42Z,
                                  last_accessed: 2021-09-12T10:14:42Z,
-                                 latest_feed_timestamp: 2020-06-01T00:00Z)
+                                 latest_feed_timestamp: 2020-06-01T00:00Z,
+                                 additional_attributes: null)
 ```
 
 

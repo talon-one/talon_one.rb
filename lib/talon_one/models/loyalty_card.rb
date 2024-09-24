@@ -24,8 +24,11 @@ module TalonOne
     # The ID of the loyalty program that owns this entity.
     attr_accessor :program_id
 
-    # Status of the loyalty card. Can be one of: ['active', 'inactive'] 
+    # Status of the loyalty card. Can be `active` or `inactive`. 
     attr_accessor :status
+
+    # Reason for transferring and blocking the loyalty card. 
+    attr_accessor :block_reason
 
     # The alphanumeric identifier of the loyalty card. 
     attr_accessor :identifier
@@ -50,6 +53,9 @@ module TalonOne
     # The alphanumeric identifier of the loyalty card. 
     attr_accessor :new_card_identifier
 
+    # The ID of the batch in which the loyalty card was created.
+    attr_accessor :batch_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,6 +63,7 @@ module TalonOne
         :'created' => :'created',
         :'program_id' => :'programID',
         :'status' => :'status',
+        :'block_reason' => :'blockReason',
         :'identifier' => :'identifier',
         :'users_per_card_limit' => :'usersPerCardLimit',
         :'profiles' => :'profiles',
@@ -64,7 +71,8 @@ module TalonOne
         :'subledgers' => :'subledgers',
         :'modified' => :'modified',
         :'old_card_identifier' => :'oldCardIdentifier',
-        :'new_card_identifier' => :'newCardIdentifier'
+        :'new_card_identifier' => :'newCardIdentifier',
+        :'batch_id' => :'batchId'
       }
     end
 
@@ -75,6 +83,7 @@ module TalonOne
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
         :'status' => :'String',
+        :'block_reason' => :'String',
         :'identifier' => :'String',
         :'users_per_card_limit' => :'Integer',
         :'profiles' => :'Array<LoyaltyCardProfileRegistration>',
@@ -82,7 +91,8 @@ module TalonOne
         :'subledgers' => :'Hash<String, LedgerInfo>',
         :'modified' => :'DateTime',
         :'old_card_identifier' => :'String',
-        :'new_card_identifier' => :'String'
+        :'new_card_identifier' => :'String',
+        :'batch_id' => :'String'
       }
     end
 
@@ -123,6 +133,10 @@ module TalonOne
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'block_reason')
+        self.block_reason = attributes[:'block_reason']
+      end
+
       if attributes.key?(:'identifier')
         self.identifier = attributes[:'identifier']
       end
@@ -157,6 +171,10 @@ module TalonOne
 
       if attributes.key?(:'new_card_identifier')
         self.new_card_identifier = attributes[:'new_card_identifier']
+      end
+
+      if attributes.key?(:'batch_id')
+        self.batch_id = attributes[:'batch_id']
       end
     end
 
@@ -280,6 +298,7 @@ module TalonOne
           created == o.created &&
           program_id == o.program_id &&
           status == o.status &&
+          block_reason == o.block_reason &&
           identifier == o.identifier &&
           users_per_card_limit == o.users_per_card_limit &&
           profiles == o.profiles &&
@@ -287,7 +306,8 @@ module TalonOne
           subledgers == o.subledgers &&
           modified == o.modified &&
           old_card_identifier == o.old_card_identifier &&
-          new_card_identifier == o.new_card_identifier
+          new_card_identifier == o.new_card_identifier &&
+          batch_id == o.batch_id
     end
 
     # @see the `==` method
@@ -299,7 +319,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, program_id, status, identifier, users_per_card_limit, profiles, ledger, subledgers, modified, old_card_identifier, new_card_identifier].hash
+      [id, created, program_id, status, block_reason, identifier, users_per_card_limit, profiles, ledger, subledgers, modified, old_card_identifier, new_card_identifier, batch_id].hash
     end
 
     # Builds the object from hash

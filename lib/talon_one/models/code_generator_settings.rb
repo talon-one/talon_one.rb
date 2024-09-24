@@ -17,7 +17,7 @@ module TalonOne
     # List of characters used to generate the random parts of a code. 
     attr_accessor :valid_characters
 
-    # The pattern used to generate coupon codes. The character `#` is a placeholder and is replaced by a random character from the `validCharacters` set. 
+    # The pattern used to generate codes, such as coupon codes, referral codes, and loyalty cards. The character `#` is a placeholder and is replaced by a random character from the `validCharacters` set. 
     attr_accessor :coupon_pattern
 
     # Attribute mapping from ruby-style variable name to JSON key.

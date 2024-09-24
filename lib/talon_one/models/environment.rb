@@ -57,6 +57,9 @@ module TalonOne
     # The account-level collections that the application is subscribed to.
     attr_accessor :collections
 
+    # The cart item filters belonging to the Application.
+    attr_accessor :application_cart_item_filters
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -73,7 +76,8 @@ module TalonOne
         :'attributes' => :'attributes',
         :'additional_costs' => :'additionalCosts',
         :'audiences' => :'audiences',
-        :'collections' => :'collections'
+        :'collections' => :'collections',
+        :'application_cart_item_filters' => :'applicationCartItemFilters'
       }
     end
 
@@ -93,7 +97,8 @@ module TalonOne
         :'attributes' => :'Array<Attribute>',
         :'additional_costs' => :'Array<AccountAdditionalCost>',
         :'audiences' => :'Array<Audience>',
-        :'collections' => :'Array<Collection>'
+        :'collections' => :'Array<Collection>',
+        :'application_cart_item_filters' => :'Array<ApplicationCIF>'
       }
     end
 
@@ -193,6 +198,12 @@ module TalonOne
           self.collections = value
         end
       end
+
+      if attributes.key?(:'application_cart_item_filters')
+        if (value = attributes[:'application_cart_item_filters']).is_a?(Array)
+          self.application_cart_item_filters = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -261,7 +272,8 @@ module TalonOne
           attributes == o.attributes &&
           additional_costs == o.additional_costs &&
           audiences == o.audiences &&
-          collections == o.collections
+          collections == o.collections &&
+          application_cart_item_filters == o.application_cart_item_filters
     end
 
     # @see the `==` method
@@ -273,7 +285,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, achievements, attributes, additional_costs, audiences, collections].hash
+      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, achievements, attributes, additional_costs, audiences, collections, application_cart_item_filters].hash
     end
 
     # Builds the object from hash

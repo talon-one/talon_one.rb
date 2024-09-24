@@ -17,17 +17,22 @@ module TalonOne
     # An indication of whether single sign-on is enforced for the account. When enforced, users cannot use their email and password to sign in to Talon.One. It is not possible to change this to `false` after it is set to `true`. 
     attr_accessor :enforced
 
+    # Assertion Consumer Service (ACS) URL for setting up a new SAML connection with an identity provider like Okta or Microsoft Entra ID. 
+    attr_accessor :new_acs_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'enforced' => :'enforced'
+        :'enforced' => :'enforced',
+        :'new_acs_url' => :'newAcsUrl'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'enforced' => :'Boolean'
+        :'enforced' => :'Boolean',
+        :'new_acs_url' => :'String'
       }
     end
 
@@ -55,6 +60,10 @@ module TalonOne
       if attributes.key?(:'enforced')
         self.enforced = attributes[:'enforced']
       end
+
+      if attributes.key?(:'new_acs_url')
+        self.new_acs_url = attributes[:'new_acs_url']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,7 +89,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          enforced == o.enforced
+          enforced == o.enforced &&
+          new_acs_url == o.new_acs_url
     end
 
     # @see the `==` method
@@ -92,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [enforced].hash
+      [enforced, new_acs_url].hash
     end
 
     # Builds the object from hash

@@ -17,6 +17,9 @@ module TalonOne
     # Webhook title.
     attr_accessor :title
 
+    # A description of the webhook.
+    attr_accessor :description
+
     # IDs of the Applications to which a webhook must be linked.
     attr_accessor :application_ids
 
@@ -24,6 +27,7 @@ module TalonOne
     def self.attribute_map
       {
         :'title' => :'title',
+        :'description' => :'description',
         :'application_ids' => :'applicationIds'
       }
     end
@@ -32,6 +36,7 @@ module TalonOne
     def self.openapi_types
       {
         :'title' => :'String',
+        :'description' => :'String',
         :'application_ids' => :'Array<Integer>'
       }
     end
@@ -59,6 +64,10 @@ module TalonOne
 
       if attributes.key?(:'title')
         self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.key?(:'application_ids')
@@ -97,6 +106,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           title == o.title &&
+          description == o.description &&
           application_ids == o.application_ids
     end
 
@@ -109,7 +119,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, application_ids].hash
+      [title, description, application_ids].hash
     end
 
     # Builds the object from hash

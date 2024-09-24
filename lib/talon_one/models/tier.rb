@@ -20,10 +20,13 @@ module TalonOne
     # The name of the tier.
     attr_accessor :name
 
+    # Date and time when the customer moved to this tier. This value uses the loyalty program's time zone setting.
+    attr_accessor :start_date
+
     # Date when tier level expires in the RFC3339 format (in the Loyalty Program's timezone).
     attr_accessor :expiry_date
 
-    # Customers's tier downgrade policy. - `one_down`: Once the tier expires and if the user doesn't have enough points to stay in the tier, the user is downgraded one tier down. - `balance_based`: Once the tier expires, the user's tier is evaluated based on the amount of active points the user has at this instant. 
+    # The policy that defines how customer tiers are downgraded in the loyalty program after tier reevaluation.  - `one_down`: If the customer doesn't have enough points to stay in the current tier, they are downgraded by one tier.  - `balance_based`: The customer's tier is reevaluated based on the amount of active points they have at the moment. 
     attr_accessor :downgrade_policy
 
     class EnumAttributeValidator
@@ -53,6 +56,7 @@ module TalonOne
       {
         :'id' => :'id',
         :'name' => :'name',
+        :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
         :'downgrade_policy' => :'downgradePolicy'
       }
@@ -63,6 +67,7 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'name' => :'String',
+        :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
         :'downgrade_policy' => :'String'
       }
@@ -95,6 +100,10 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
       if attributes.key?(:'expiry_date')
@@ -148,6 +157,7 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
+          start_date == o.start_date &&
           expiry_date == o.expiry_date &&
           downgrade_policy == o.downgrade_policy
     end
@@ -161,7 +171,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, expiry_date, downgrade_policy].hash
+      [id, name, start_date, expiry_date, downgrade_policy].hash
     end
 
     # Builds the object from hash

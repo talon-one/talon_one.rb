@@ -51,6 +51,12 @@ module TalonOne
     # More details about the failure.
     attr_accessor :details
 
+    # The ID of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation).
+    attr_accessor :evaluation_group_id
+
+    # The evaluation mode of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-
+    attr_accessor :evaluation_group_mode
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +71,9 @@ module TalonOne
         :'rule_name' => :'ruleName',
         :'condition_index' => :'conditionIndex',
         :'effect_index' => :'effectIndex',
-        :'details' => :'details'
+        :'details' => :'details',
+        :'evaluation_group_id' => :'evaluationGroupID',
+        :'evaluation_group_mode' => :'evaluationGroupMode'
       }
     end
 
@@ -83,7 +91,9 @@ module TalonOne
         :'rule_name' => :'String',
         :'condition_index' => :'Integer',
         :'effect_index' => :'Integer',
-        :'details' => :'String'
+        :'details' => :'String',
+        :'evaluation_group_id' => :'Integer',
+        :'evaluation_group_mode' => :'String'
       }
     end
 
@@ -155,6 +165,14 @@ module TalonOne
       if attributes.key?(:'details')
         self.details = attributes[:'details']
       end
+
+      if attributes.key?(:'evaluation_group_id')
+        self.evaluation_group_id = attributes[:'evaluation_group_id']
+      end
+
+      if attributes.key?(:'evaluation_group_mode')
+        self.evaluation_group_mode = attributes[:'evaluation_group_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -211,7 +229,9 @@ module TalonOne
           rule_name == o.rule_name &&
           condition_index == o.condition_index &&
           effect_index == o.effect_index &&
-          details == o.details
+          details == o.details &&
+          evaluation_group_id == o.evaluation_group_id &&
+          evaluation_group_mode == o.evaluation_group_mode
     end
 
     # @see the `==` method
@@ -223,7 +243,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, campaign_name, ruleset_id, coupon_id, coupon_value, referral_id, referral_value, rule_index, rule_name, condition_index, effect_index, details].hash
+      [campaign_id, campaign_name, ruleset_id, coupon_id, coupon_value, referral_id, referral_value, rule_index, rule_name, condition_index, effect_index, details, evaluation_group_id, evaluation_group_mode].hash
     end
 
     # Builds the object from hash
