@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem "typhoeus"
+gem "bundler"
+
+gem "talon_one", path: "../.."

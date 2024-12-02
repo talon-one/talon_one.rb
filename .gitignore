@@ -40,3 +40,6 @@ build/
 
 .idea
 .DS_Store
+
+.github/.example/vendor
+.github/.example/Gemfile.lock
