@@ -13,21 +13,20 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class ApplicationCustomer
-    # Internal ID of this entity. Internal ID of this entity.
+    # Internal ID of this entity.
     attr_accessor :id
 
-    # The time this entity was created. The time this entity was created. The time this entity was created. The time this entity was created.
+    # The time this entity was created.
     attr_accessor :created
 
-    # The integration ID set by your integration layer. The integration ID set by your integration layer.
+    # The integration ID set by your integration layer.
     attr_accessor :integration_id
 
     # Arbitrary properties associated with this item.
     attr_accessor :attributes
 
-    # The ID of the Talon.One account that owns this profile. The ID of the Talon.One account that owns this profile.
+    # The ID of the Talon.One account that owns this profile.
     attr_accessor :account_id
 
     # The total amount of closed sessions by a customer. A closed session is a successful purchase.

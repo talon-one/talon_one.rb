@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class Import
     # Internal ID of this entity.
     attr_accessor :id

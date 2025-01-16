@@ -32,6 +32,16 @@ describe 'CampaignVersions' do
       expect(@instance).to be_instance_of(TalonOne::CampaignVersions)
     end
   end
+  describe 'test attribute "revision_frontend_state"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["revised", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.revision_frontend_state = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "active_revision_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

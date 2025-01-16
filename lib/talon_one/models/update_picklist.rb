@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class UpdatePicklist
     # The type of allowed values in the picklist. If the type `time` is chosen, it must be an RFC3339 timestamp string.
     attr_accessor :type

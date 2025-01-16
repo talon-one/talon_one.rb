@@ -287,7 +287,7 @@ describe 'Campaign' do
   describe 'test attribute "frontend_state"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.frontend_state = value }.not_to raise_error
       # end
@@ -297,6 +297,16 @@ describe 'Campaign' do
   describe 'test attribute "stores_imported"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "revision_frontend_state"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["revised", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.revision_frontend_state = value }.not_to raise_error
+      # end
     end
   end
 

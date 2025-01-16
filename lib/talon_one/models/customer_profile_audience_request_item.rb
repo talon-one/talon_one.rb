@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class CustomerProfileAudienceRequestItem
-    # Defines the action to perform: - `add`: Adds the customer profile to the audience. If the customer profile does not exist, it will be created. - `delete`: Removes the customer profile from the audience. 
+    # Defines the action to perform: - `add`: Adds the customer profile to the audience.    **Note**: If the customer profile does not exist, it will be created. The profile will not be visible in any Application   until a session or profile update is received for that profile. - `delete`: Removes the customer profile from the audience. 
     attr_accessor :action
 
     # The ID of this customer profile in the third-party integration.

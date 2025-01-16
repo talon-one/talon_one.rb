@@ -13,12 +13,12 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # The representation of the customer session.
   class CustomerSessionV2
     # Internal ID of this entity.
     attr_accessor :id
 
-    # The time this entity was created. The time this entity was created.
+    # The time this entity was created.
     attr_accessor :created
 
     # The integration ID set by your integration layer.
@@ -36,10 +36,10 @@ module TalonOne
     # When using the `dry` query parameter, use this property to list the campaign to be evaluated by the Rule Engine.  These campaigns will be evaluated, even if they are disabled, allowing you to test specific campaigns before activating them. 
     attr_accessor :evaluable_campaign_ids
 
-    # Any coupon codes entered.  **Important - for requests only**:  - If you [create a coupon budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a coupon code by the time you close it. - In requests where `dry=false`, providing an empty array discards any previous coupons. To avoid this, provide `\"couponCodes\": null` or omit the parameter entirely. 
+    # Any coupon codes entered.  **Important - for requests only**:  - If you [create a coupon budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a coupon code by the time you close it. - In requests where `dry=false`, providing an empty array discards any previous coupons. To avoid this, omit the parameter entirely. 
     attr_accessor :coupon_codes
 
-    # Any referral code entered.  **Important - for requests only**:  - If you [create a referral budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a referral code by the time you close it. - In requests where `dry=false`, providing an empty value discards the previous referral code. To avoid this, provide `\"referralCode\": null` or omit the parameter entirely. 
+    # Any referral code entered.  **Important - for requests only**:  - If you [create a referral budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a referral code by the time you close it. - In requests where `dry=false`, providing an empty value discards the previous referral code. To avoid this, omit the parameter entirely. 
     attr_accessor :referral_code
 
     # Identifier of a loyalty card.
@@ -54,13 +54,13 @@ module TalonOne
     # Use this property to set a value for the additional costs of this session, such as a shipping cost.  They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs). 
     attr_accessor :additional_costs
 
-    # Session custom identifiers that you can set limits on or use inside your rules.  For example, you can use IP addresses as identifiers to potentially identify devices and limit discounts abuse in case of customers creating multiple accounts. See the [tutorial](https://docs.talon.one/docs/dev/tutorials/using-identifiers).  **Important**: Ensure the session contains an identifier by the time you close it if: - You [create a unique identifier budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign. - Your campaign has [coupons](https://docs.talon.one/docs/product/campaigns/coupons/coupon-page-overview). 
+    # Session custom identifiers that you can set limits on or use inside your rules.  For example, you can use IP addresses as identifiers to potentially identify devices and limit discounts abuse in case of customers creating multiple accounts. See the [tutorial](https://docs.talon.one/docs/dev/tutorials/using-identifiers).  **Important**: Ensure the session contains an identifier by the time you close it if: - You [create a unique identifier budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign. - Your campaign has [coupons](https://docs.talon.one/docs/product/campaigns/coupons/coupon-page-overview). - We recommend passing an anonymized (hashed) version of the identifier value. 
     attr_accessor :identifiers
 
     # Use this property to set a value for the attributes of your choice. Attributes represent any information to attach to your session, like the shipping city.  You can use [built-in attributes](https://docs.talon.one/docs/dev/concepts/attributes#built-in-attributes) or [custom ones](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes). Custom attributes must be created in the Campaign Manager before you set them with this property. 
     attr_accessor :attributes
 
-    # Indicates whether this is the first session for the customer's profile. Will always be true for anonymous sessions.
+    # Indicates whether this is the first session for the customer's profile. It's always `true` for anonymous sessions.
     attr_accessor :first_session
 
     # The total value of cart items and additional costs in the session, before any discounts are applied.
@@ -74,6 +74,9 @@ module TalonOne
 
     # Timestamp of the most recent event received on this session.
     attr_accessor :updated
+
+    # The likelihood of the customer session closing based on predictive modeling, expressed as a decimal between `0` and `1`.
+    attr_accessor :closure_prediction
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -119,7 +122,8 @@ module TalonOne
         :'total' => :'total',
         :'cart_item_total' => :'cartItemTotal',
         :'additional_cost_total' => :'additionalCostTotal',
-        :'updated' => :'updated'
+        :'updated' => :'updated',
+        :'closure_prediction' => :'closurePrediction'
       }
     end
 
@@ -145,7 +149,8 @@ module TalonOne
         :'total' => :'Float',
         :'cart_item_total' => :'Float',
         :'additional_cost_total' => :'Float',
-        :'updated' => :'DateTime'
+        :'updated' => :'DateTime',
+        :'closure_prediction' => :'Float'
       }
     end
 
@@ -262,6 +267,10 @@ module TalonOne
 
       if attributes.key?(:'updated')
         self.updated = attributes[:'updated']
+      end
+
+      if attributes.key?(:'closure_prediction')
+        self.closure_prediction = attributes[:'closure_prediction']
       end
     end
 
@@ -437,7 +446,8 @@ module TalonOne
           total == o.total &&
           cart_item_total == o.cart_item_total &&
           additional_cost_total == o.additional_cost_total &&
-          updated == o.updated
+          updated == o.updated &&
+          closure_prediction == o.closure_prediction
     end
 
     # @see the `==` method
@@ -449,7 +459,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes, first_session, total, cart_item_total, additional_cost_total, updated].hash
+      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes, first_session, total, cart_item_total, additional_cost_total, updated, closure_prediction].hash
     end
 
     # Builds the object from hash

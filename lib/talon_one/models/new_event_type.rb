@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewEventType
     # The human-friendly name for this event type.
     attr_accessor :title

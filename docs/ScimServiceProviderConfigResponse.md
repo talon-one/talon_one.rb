@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **filter** | [**ScimServiceProviderConfigResponseFilter**](ScimServiceProviderConfigResponseFilter.md) |  | [optional] 
 **patch** | [**ScimServiceProviderConfigResponsePatch**](ScimServiceProviderConfigResponsePatch.md) |  | [optional] 
 **schemas** | **Array&lt;String&gt;** | A list of SCIM schemas that define the structure and data types supported by the service provider. | [optional] 
+**sort** | [**ScimServiceProviderConfigResponseSort**](ScimServiceProviderConfigResponseSort.md) |  | [optional] 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = TalonOne::ScimServiceProviderConfigResponse.new(bulk: null,
                                  documentation_uri: null,
                                  filter: null,
                                  patch: null,
-                                 schemas: null)
+                                 schemas: null,
+                                 sort: null)
 ```
 
 

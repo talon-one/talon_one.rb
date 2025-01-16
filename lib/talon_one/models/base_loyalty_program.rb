@@ -55,6 +55,9 @@ module TalonOne
 
     attr_accessor :card_code_settings
 
+    # The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - `only_pending`: Only pending points can be rolled back. - `within_balance`: Available active points can be rolled back if there aren't enough pending points. The active balance of the customer cannot be negative. 
+    attr_accessor :return_policy
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -93,7 +96,8 @@ module TalonOne
         :'tier_cycle_start_date' => :'tierCycleStartDate',
         :'tiers_expire_in' => :'tiersExpireIn',
         :'tiers_downgrade_policy' => :'tiersDowngradePolicy',
-        :'card_code_settings' => :'cardCodeSettings'
+        :'card_code_settings' => :'cardCodeSettings',
+        :'return_policy' => :'returnPolicy'
       }
     end
 
@@ -113,7 +117,8 @@ module TalonOne
         :'tier_cycle_start_date' => :'DateTime',
         :'tiers_expire_in' => :'String',
         :'tiers_downgrade_policy' => :'String',
-        :'card_code_settings' => :'CodeGeneratorSettings'
+        :'card_code_settings' => :'CodeGeneratorSettings',
+        :'return_policy' => :'String'
       }
     end
 
@@ -195,6 +200,10 @@ module TalonOne
       if attributes.key?(:'card_code_settings')
         self.card_code_settings = attributes[:'card_code_settings']
       end
+
+      if attributes.key?(:'return_policy')
+        self.return_policy = attributes[:'return_policy']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -218,6 +227,8 @@ module TalonOne
       return false unless tiers_expiration_policy_validator.valid?(@tiers_expiration_policy)
       tiers_downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless tiers_downgrade_policy_validator.valid?(@tiers_downgrade_policy)
+      return_policy_validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      return false unless return_policy_validator.valid?(@return_policy)
       true
     end
 
@@ -261,6 +272,16 @@ module TalonOne
       @tiers_downgrade_policy = tiers_downgrade_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] return_policy Object to be assigned
+    def return_policy=(return_policy)
+      validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      unless validator.valid?(return_policy)
+        fail ArgumentError, "invalid value for \"return_policy\", must be one of #{validator.allowable_values}."
+      end
+      @return_policy = return_policy
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -279,7 +300,8 @@ module TalonOne
           tier_cycle_start_date == o.tier_cycle_start_date &&
           tiers_expire_in == o.tiers_expire_in &&
           tiers_downgrade_policy == o.tiers_downgrade_policy &&
-          card_code_settings == o.card_code_settings
+          card_code_settings == o.card_code_settings &&
+          return_policy == o.return_policy
     end
 
     # @see the `==` method
@@ -291,7 +313,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings].hash
+      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, return_policy].hash
     end
 
     # Builds the object from hash

@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # An updated loyalty program.
   class UpdateLoyaltyProgram
     # The display title for the Loyalty Program.
     attr_accessor :title
@@ -55,6 +55,9 @@ module TalonOne
     attr_accessor :tiers_downgrade_policy
 
     attr_accessor :card_code_settings
+
+    # The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - `only_pending`: Only pending points can be rolled back. - `within_balance`: Available active points can be rolled back if there aren't enough pending points. The active balance of the customer cannot be negative. 
+    attr_accessor :return_policy
 
     # The tiers in this loyalty program.
     attr_accessor :tiers
@@ -98,6 +101,7 @@ module TalonOne
         :'tiers_expire_in' => :'tiersExpireIn',
         :'tiers_downgrade_policy' => :'tiersDowngradePolicy',
         :'card_code_settings' => :'cardCodeSettings',
+        :'return_policy' => :'returnPolicy',
         :'tiers' => :'tiers'
       }
     end
@@ -119,6 +123,7 @@ module TalonOne
         :'tiers_expire_in' => :'String',
         :'tiers_downgrade_policy' => :'String',
         :'card_code_settings' => :'CodeGeneratorSettings',
+        :'return_policy' => :'String',
         :'tiers' => :'Array<NewLoyaltyTier>'
       }
     end
@@ -202,6 +207,10 @@ module TalonOne
         self.card_code_settings = attributes[:'card_code_settings']
       end
 
+      if attributes.key?(:'return_policy')
+        self.return_policy = attributes[:'return_policy']
+      end
+
       if attributes.key?(:'tiers')
         if (value = attributes[:'tiers']).is_a?(Array)
           self.tiers = value
@@ -230,6 +239,8 @@ module TalonOne
       return false unless tiers_expiration_policy_validator.valid?(@tiers_expiration_policy)
       tiers_downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless tiers_downgrade_policy_validator.valid?(@tiers_downgrade_policy)
+      return_policy_validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      return false unless return_policy_validator.valid?(@return_policy)
       true
     end
 
@@ -273,6 +284,16 @@ module TalonOne
       @tiers_downgrade_policy = tiers_downgrade_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] return_policy Object to be assigned
+    def return_policy=(return_policy)
+      validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      unless validator.valid?(return_policy)
+        fail ArgumentError, "invalid value for \"return_policy\", must be one of #{validator.allowable_values}."
+      end
+      @return_policy = return_policy
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -292,6 +313,7 @@ module TalonOne
           tiers_expire_in == o.tiers_expire_in &&
           tiers_downgrade_policy == o.tiers_downgrade_policy &&
           card_code_settings == o.card_code_settings &&
+          return_policy == o.return_policy &&
           tiers == o.tiers
     end
 
@@ -304,7 +326,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, tiers].hash
+      [title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, return_policy, tiers].hash
     end
 
     # Builds the object from hash

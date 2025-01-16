@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # The specific properties of the product this item belongs to, if available.
   class Product
-    # The name of the product.
+    # The product the item belongs to.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

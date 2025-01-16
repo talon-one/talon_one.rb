@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # Point balance of a ledger in the Loyalty Program.
   class LoyaltyBalanceWithTier
     # Total amount of points awarded to this customer and available to spend.
     attr_accessor :active_points

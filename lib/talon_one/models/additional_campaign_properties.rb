@@ -77,7 +77,7 @@ module TalonOne
     # The ID of the Campaign Template this Campaign was created from.
     attr_accessor :template_id
 
-    # A campaign state described exactly as in the Campaign Manager.
+    # The campaign state displayed in the Campaign Manager.
     attr_accessor :frontend_state
 
     # Indicates whether the linked stores were imported via a CSV file.
@@ -303,7 +303,7 @@ module TalonOne
     def valid?
       return false if @budgets.nil?
       return false if @frontend_state.nil?
-      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       return false unless frontend_state_validator.valid?(@frontend_state)
       return false if @stores_imported.nil?
       true
@@ -312,7 +312,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frontend_state Object to be assigned
     def frontend_state=(frontend_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       unless validator.valid?(frontend_state)
         fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
       end

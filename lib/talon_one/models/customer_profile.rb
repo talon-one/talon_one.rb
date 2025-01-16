@@ -13,12 +13,11 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class CustomerProfile
     # Internal ID of this entity.
     attr_accessor :id
 
-    # The time this entity was created. The time this entity was created.
+    # The time this entity was created.
     attr_accessor :created
 
     # The integration ID set by your integration layer.

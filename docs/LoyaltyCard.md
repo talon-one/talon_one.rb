@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **id** | **Integer** | Internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **program_id** | **Integer** | The ID of the loyalty program that owns this entity. | 
+**program_name** | **String** | The integration name of the loyalty program that owns this entity. | [optional] 
+**program_title** | **String** | The Campaign Manager-displayed name of the loyalty program that owns this entity. | [optional] 
 **status** | **String** | Status of the loyalty card. Can be &#x60;active&#x60; or &#x60;inactive&#x60;.  | 
 **block_reason** | **String** | Reason for transferring and blocking the loyalty card.  | [optional] 
 **identifier** | **String** | The alphanumeric identifier of the loyalty card.  | 
@@ -27,6 +29,8 @@ require 'TalonOne'
 instance = TalonOne::LoyaltyCard.new(id: 6,
                                  created: 2020-06-10T09:05:27.993483Z,
                                  program_id: 125,
+                                 program_name: Loyalty_program,
+                                 program_title: Loyalty program,
                                  status: active,
                                  block_reason: Current card lost. Customer needs a new card.,
                                  identifier: summer-loyalty-card-0543,

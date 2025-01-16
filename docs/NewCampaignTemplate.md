@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **tags** | **Array&lt;String&gt;** | A list of tags for the campaign template. | [optional] 
 **features** | **Array&lt;String&gt;** | A list of features for the campaign template. | [optional] 
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
+**coupon_reservation_settings** | [**CampaignTemplateCouponReservationSettings**](CampaignTemplateCouponReservationSettings.md) |  | [optional] 
 **referral_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **limits** | [**Array&lt;TemplateLimitConfig&gt;**](TemplateLimitConfig.md) | The set of limits that will operate for this campaign template. | [optional] 
 **template_params** | [**Array&lt;CampaignTemplateParams&gt;**](CampaignTemplateParams.md) | Fields which can be used to replace values in a rule. | [optional] 
@@ -34,6 +35,7 @@ instance = TalonOne::NewCampaignTemplate.new(name: null,
                                  tags: null,
                                  features: null,
                                  coupon_settings: null,
+                                 coupon_reservation_settings: null,
                                  referral_settings: null,
                                  limits: null,
                                  template_params: null,

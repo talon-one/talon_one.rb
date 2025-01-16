@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::NewPicklist.new(type: 2012-11-01T22:08:41+00:00,
+instance = TalonOne::NewPicklist.new(type: string,
                                  values: [Jeans, Shirt, Coat])
 ```
 

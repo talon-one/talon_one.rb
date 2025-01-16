@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # A generic effect that is fired by a triggered campaign. The props property will contain information specific to the specific effect type.
   class Effect
     # The ID of the campaign that triggered this effect.
     attr_accessor :campaign_id

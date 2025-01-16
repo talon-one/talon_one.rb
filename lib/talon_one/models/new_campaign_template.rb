@@ -40,6 +40,8 @@ module TalonOne
 
     attr_accessor :coupon_settings
 
+    attr_accessor :coupon_reservation_settings
+
     attr_accessor :referral_settings
 
     # The set of limits that will operate for this campaign template.
@@ -91,6 +93,7 @@ module TalonOne
         :'tags' => :'tags',
         :'features' => :'features',
         :'coupon_settings' => :'couponSettings',
+        :'coupon_reservation_settings' => :'couponReservationSettings',
         :'referral_settings' => :'referralSettings',
         :'limits' => :'limits',
         :'template_params' => :'templateParams',
@@ -112,6 +115,7 @@ module TalonOne
         :'tags' => :'Array<String>',
         :'features' => :'Array<String>',
         :'coupon_settings' => :'CodeGeneratorSettings',
+        :'coupon_reservation_settings' => :'CampaignTemplateCouponReservationSettings',
         :'referral_settings' => :'CodeGeneratorSettings',
         :'limits' => :'Array<TemplateLimitConfig>',
         :'template_params' => :'Array<CampaignTemplateParams>',
@@ -180,6 +184,10 @@ module TalonOne
 
       if attributes.key?(:'coupon_settings')
         self.coupon_settings = attributes[:'coupon_settings']
+      end
+
+      if attributes.key?(:'coupon_reservation_settings')
+        self.coupon_reservation_settings = attributes[:'coupon_reservation_settings']
       end
 
       if attributes.key?(:'referral_settings')
@@ -310,6 +318,7 @@ module TalonOne
           tags == o.tags &&
           features == o.features &&
           coupon_settings == o.coupon_settings &&
+          coupon_reservation_settings == o.coupon_reservation_settings &&
           referral_settings == o.referral_settings &&
           limits == o.limits &&
           template_params == o.template_params &&
@@ -327,7 +336,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, instructions, campaign_attributes, coupon_attributes, state, tags, features, coupon_settings, referral_settings, limits, template_params, campaign_collections, default_campaign_group_id, campaign_type].hash
+      [name, description, instructions, campaign_attributes, coupon_attributes, state, tags, features, coupon_settings, coupon_reservation_settings, referral_settings, limits, template_params, campaign_collections, default_campaign_group_id, campaign_type].hash
     end
 
     # Builds the object from hash

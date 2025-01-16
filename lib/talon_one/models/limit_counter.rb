@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class LimitCounter
     # The ID of the campaign that owns this entity.
     attr_accessor :campaign_id

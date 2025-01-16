@@ -208,6 +208,11 @@ module TalonOne
         invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if @card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
+      end
+
       if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
         invalid_properties.push('invalid value for "customer_session_id", the character length must be smaller than or equal to 255.')
       end
@@ -266,6 +271,7 @@ module TalonOne
       return false if @program_id.nil?
       return false if @card_identifier.nil?
       return false if @card_identifier.to_s.length > 108
+      return false if @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
@@ -292,6 +298,11 @@ module TalonOne
 
       if card_identifier.to_s.length > 108
         fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
       end
 
       @card_identifier = card_identifier

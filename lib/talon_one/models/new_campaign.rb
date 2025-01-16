@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewCampaign
     # A user-facing name for this campaign.
     attr_accessor :name

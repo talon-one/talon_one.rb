@@ -17,7 +17,7 @@ require 'TalonOne'
 instance = TalonOne::FeatureFlag.new(name: canCreateCampaignFromTemplate,
                                  value: true,
                                  created: 2021-09-22T12:24:14.956203Z,
-                                 modified: null)
+                                 modified: 2021-09-25T10:34:12.956203Z)
 ```
 
 

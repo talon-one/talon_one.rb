@@ -15,10 +15,10 @@ require 'date'
 module TalonOne
   # A tier in a loyalty program.
   class NewLoyaltyTier
-    # The name of the tier
+    # The name of the tier.
     attr_accessor :name
 
-    # The minimum amount of points required to be eligible for the tier.
+    # The minimum amount of points required to enter the tier.
     attr_accessor :min_points
 
     # Attribute mapping from ruby-style variable name to JSON key.

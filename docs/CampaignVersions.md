@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**revision_frontend_state** | **String** | The campaign revision state displayed in the Campaign Manager. | [optional] 
 **active_revision_id** | **Integer** | ID of the revision that was last activated on this campaign.  | [optional] 
 **active_revision_version_id** | **Integer** | ID of the revision version that is active on the campaign.  | [optional] 
 **version** | **Integer** | Incrementing number representing how many revisions have been activated on this campaign, starts from 0 for a new campaign.  | [optional] 
@@ -16,7 +17,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignVersions.new(active_revision_id: 6,
+instance = TalonOne::CampaignVersions.new(revision_frontend_state: revised,
+                                 active_revision_id: 6,
                                  active_revision_version_id: 6,
                                  version: 6,
                                  current_revision_id: 6,

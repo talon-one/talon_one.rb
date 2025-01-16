@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyMembership.new(joined: null,
+instance = TalonOne::LoyaltyMembership.new(joined: 2012-03-20T14:15:22Z,
                                  loyalty_program_id: 323414846)
 ```
 

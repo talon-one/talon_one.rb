@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **Integer** | Internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **modified** | **DateTime** | The time this entity was last modified. | 
-**application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications that are related to this entity. The IDs of the Applications that are related to this entity. | 
+**application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications in which this webhook is available. An empty array means the webhook is available in &#x60;All Applications&#x60;.  | 
 **title** | **String** | Name or title for this webhook. | 
 **description** | **String** | A description of the webhook. | [optional] 
 **verb** | **String** | API method for this webhook. | 

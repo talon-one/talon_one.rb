@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **created_by** | **String** | Name of the user who created this campaign if available. | [optional] 
 **updated_by** | **String** | Name of the user who last updated this campaign if available. | [optional] 
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
-**frontend_state** | **String** | A campaign state described exactly as in the Campaign Manager. | 
+**frontend_state** | **String** | The campaign state displayed in the Campaign Manager. | 
 **stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
 
 ## Code Sample

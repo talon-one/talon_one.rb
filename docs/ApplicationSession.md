@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Internal ID of this entity. | 
-**created** | **DateTime** | The time this entity was created. The time this entity was created. | 
+**created** | **DateTime** | The time this entity was created. | 
 **integration_id** | **String** | The integration ID set by your integration layer. | 
 **store_integration_id** | **String** | The integration ID of the store. You choose this ID when you create a store. | [optional] 
 **application_id** | **Integer** | The ID of the application that owns this entity. | 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::ApplicationSession.new(id: 6,
-                                 created: null,
+                                 created: 2020-02-07T08:15:22Z,
                                  integration_id: URNGV8294NV,
                                  store_integration_id: STORE-001,
                                  application_id: 322,

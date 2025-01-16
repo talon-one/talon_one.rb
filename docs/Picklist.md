@@ -20,7 +20,7 @@ require 'TalonOne'
 
 instance = TalonOne::Picklist.new(id: 6,
                                  created: 2020-06-10T09:05:27.993483Z,
-                                 type: 2012-11-01T22:08:41+00:00,
+                                 type: string,
                                  values: [Jeans, Shirt, Coat],
                                  modified_by: 124,
                                  created_by: 134,

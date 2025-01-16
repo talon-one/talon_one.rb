@@ -78,6 +78,11 @@ module TalonOne
         invalid_properties.push('invalid value for "new_card_identifier", the character length must be smaller than or equal to 108.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if @new_card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"new_card_identifier\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -86,6 +91,7 @@ module TalonOne
     def valid?
       return false if @new_card_identifier.nil?
       return false if @new_card_identifier.to_s.length > 108
+      return false if @new_card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       true
     end
 
@@ -98,6 +104,11 @@ module TalonOne
 
       if new_card_identifier.to_s.length > 108
         fail ArgumentError, 'invalid value for "new_card_identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if new_card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"new_card_identifier\", must conform to the pattern #{pattern}."
       end
 
       @new_card_identifier = new_card_identifier

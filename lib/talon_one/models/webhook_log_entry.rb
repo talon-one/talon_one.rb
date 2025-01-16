@@ -27,7 +27,7 @@ module TalonOne
     # ID of the application that triggered the webhook.
     attr_accessor :application_id
 
-    # Target url of request
+    # The target URL of the request.
     attr_accessor :url
 
     # Request message

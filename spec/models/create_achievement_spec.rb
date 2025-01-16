@@ -68,4 +68,36 @@ describe 'CreateAchievement' do
     end
   end
 
+  describe 'test attribute "recurrence_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.recurrence_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "activation_policy"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.activation_policy = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "fixed_start_date"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "end_date"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

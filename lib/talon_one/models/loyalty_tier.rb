@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # A tier in a loyalty program.
   class LoyaltyTier
     # Internal ID of this entity.
     attr_accessor :id
@@ -24,10 +24,16 @@ module TalonOne
     # The ID of the loyalty program that owns this entity.
     attr_accessor :program_id
 
-    # The name of the tier
+    # The integration name of the loyalty program that owns this entity.
+    attr_accessor :program_name
+
+    # The Campaign Manager-displayed name of the loyalty program that owns this entity.
+    attr_accessor :program_title
+
+    # The name of the tier.
     attr_accessor :name
 
-    # The minimum amount of points required to be eligible for the tier.
+    # The minimum amount of points required to enter the tier.
     attr_accessor :min_points
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -36,6 +42,8 @@ module TalonOne
         :'id' => :'id',
         :'created' => :'created',
         :'program_id' => :'programID',
+        :'program_name' => :'programName',
+        :'program_title' => :'programTitle',
         :'name' => :'name',
         :'min_points' => :'minPoints'
       }
@@ -47,6 +55,8 @@ module TalonOne
         :'id' => :'Integer',
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
+        :'program_name' => :'String',
+        :'program_title' => :'String',
         :'name' => :'String',
         :'min_points' => :'Float'
       }
@@ -83,6 +93,14 @@ module TalonOne
 
       if attributes.key?(:'program_id')
         self.program_id = attributes[:'program_id']
+      end
+
+      if attributes.key?(:'program_name')
+        self.program_name = attributes[:'program_name']
+      end
+
+      if attributes.key?(:'program_title')
+        self.program_title = attributes[:'program_title']
       end
 
       if attributes.key?(:'name')
@@ -168,6 +186,8 @@ module TalonOne
           id == o.id &&
           created == o.created &&
           program_id == o.program_id &&
+          program_name == o.program_name &&
+          program_title == o.program_title &&
           name == o.name &&
           min_points == o.min_points
     end
@@ -181,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, program_id, name, min_points].hash
+      [id, created, program_id, program_name, program_title, name, min_points].hash
     end
 
     # Builds the object from hash

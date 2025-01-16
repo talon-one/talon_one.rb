@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | The ID of loyalty program. Internal ID of this entity. | 
+**id** | **Integer** | The ID of loyalty program. | 
 **created** | **DateTime** | The time this entity was created. | 
 **title** | **String** | The display title for the Loyalty Program. | 
 **description** | **String** | Description of our Loyalty Program. | 
@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **tiers_expire_in** | **String** | The amount of time after which the tier expires and is reevaluated.  The time format is an **integer** followed by one letter indicating the time unit. Examples: &#x60;30s&#x60;, &#x60;40m&#x60;, &#x60;1h&#x60;, &#x60;5D&#x60;, &#x60;7W&#x60;, &#x60;10M&#x60;, &#x60;15Y&#x60;.  Available units:  - &#x60;s&#x60;: seconds - &#x60;m&#x60;: minutes - &#x60;h&#x60;: hours - &#x60;D&#x60;: days - &#x60;W&#x60;: weeks - &#x60;M&#x60;: months - &#x60;Y&#x60;: years  You can round certain units up or down: - &#x60;_D&#x60; for rounding down days only. Signifies the start of the day. - &#x60;_U&#x60; for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year.  | [optional] 
 **tiers_downgrade_policy** | **String** | The policy that defines how customer tiers are downgraded in the loyalty program after tier reevaluation.  - &#x60;one_down&#x60;: If the customer doesn&#39;t have enough points to stay in the current tier, they are downgraded by one tier.  - &#x60;balance_based&#x60;: The customer&#39;s tier is reevaluated based on the amount of active points they have at the moment.  | [optional] 
 **card_code_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
+**return_policy** | **String** | The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - &#x60;only_pending&#x60;: Only pending points can be rolled back. - &#x60;within_balance&#x60;: Available active points can be rolled back if there aren&#39;t enough pending points. The active balance of the customer cannot be negative.  | [optional] 
 **account_id** | **Integer** | The ID of the Talon.One account that owns this program. | 
 **name** | **String** | The internal name for the Loyalty Program. This is an immutable value. | 
 **tiers** | [**Array&lt;LoyaltyTier&gt;**](LoyaltyTier.md) | The tiers in this loyalty program. | [optional] 
@@ -36,7 +37,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::LoyaltyProgram.new(id: null,
+instance = TalonOne::LoyaltyProgram.new(id: 139,
                                  created: 2020-06-10T09:05:27.993483Z,
                                  title: Point collection,
                                  description: Customers collect 10 points per 1$ spent,
@@ -52,9 +53,10 @@ instance = TalonOne::LoyaltyProgram.new(id: null,
                                  tiers_expire_in: 27W_U,
                                  tiers_downgrade_policy: null,
                                  card_code_settings: null,
+                                 return_policy: null,
                                  account_id: 1,
                                  name: my_program,
-                                 tiers: [{name&#x3D;Gold, minPoints&#x3D;300, id&#x3D;3, created&#x3D;2021-06-10T09:05:27.993483Z, programID&#x3D;139}, {name&#x3D;Silver, minPoints&#x3D;200, id&#x3D;2, created&#x3D;2021-06-10T09:04:59.355258Z, programId&#x3D;139}, {name&#x3D;Bronze, minPoints&#x3D;100, id&#x3D;1, created&#x3D;2021-06-10T09:04:39.355258Z, programId&#x3D;139}],
+                                 tiers: [{name&#x3D;Gold, minPoints&#x3D;300, id&#x3D;3, created&#x3D;2021-06-10T09:05:27.993483Z, programID&#x3D;139}, {name&#x3D;Silver, minPoints&#x3D;200, id&#x3D;2, created&#x3D;2021-06-10T09:04:59.355258Z, programID&#x3D;139}, {name&#x3D;Bronze, minPoints&#x3D;100, id&#x3D;1, created&#x3D;2021-06-10T09:04:39.355258Z, programID&#x3D;139}],
                                  timezone: Europe/Berlin,
                                  card_based: true,
                                  can_update_tiers: true,

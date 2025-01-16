@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;AudienceAnalytics&gt;**](AudienceAnalytics.md) |  | 
+**data** | [**Array&lt;CustomerProfile&gt;**](CustomerProfile.md) |  | 
 
 ## Code Sample
 

@@ -13,9 +13,9 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # A Loyalty Program
   class LoyaltyProgram
-    # The ID of loyalty program. Internal ID of this entity.
+    # The ID of loyalty program.
     attr_accessor :id
 
     # The time this entity was created.
@@ -61,6 +61,9 @@ module TalonOne
     attr_accessor :tiers_downgrade_policy
 
     attr_accessor :card_code_settings
+
+    # The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - `only_pending`: Only pending points can be rolled back. - `within_balance`: Available active points can be rolled back if there aren't enough pending points. The active balance of the customer cannot be negative. 
+    attr_accessor :return_policy
 
     # The ID of the Talon.One account that owns this program.
     attr_accessor :account_id
@@ -133,6 +136,7 @@ module TalonOne
         :'tiers_expire_in' => :'tiersExpireIn',
         :'tiers_downgrade_policy' => :'tiersDowngradePolicy',
         :'card_code_settings' => :'cardCodeSettings',
+        :'return_policy' => :'returnPolicy',
         :'account_id' => :'accountID',
         :'name' => :'name',
         :'tiers' => :'tiers',
@@ -165,6 +169,7 @@ module TalonOne
         :'tiers_expire_in' => :'String',
         :'tiers_downgrade_policy' => :'String',
         :'card_code_settings' => :'CodeGeneratorSettings',
+        :'return_policy' => :'String',
         :'account_id' => :'Integer',
         :'name' => :'String',
         :'tiers' => :'Array<LoyaltyTier>',
@@ -263,6 +268,10 @@ module TalonOne
 
       if attributes.key?(:'card_code_settings')
         self.card_code_settings = attributes[:'card_code_settings']
+      end
+
+      if attributes.key?(:'return_policy')
+        self.return_policy = attributes[:'return_policy']
       end
 
       if attributes.key?(:'account_id')
@@ -402,6 +411,8 @@ module TalonOne
       return false unless tiers_expiration_policy_validator.valid?(@tiers_expiration_policy)
       tiers_downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless tiers_downgrade_policy_validator.valid?(@tiers_downgrade_policy)
+      return_policy_validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      return false unless return_policy_validator.valid?(@return_policy)
       return false if @account_id.nil?
       return false if @name.nil?
       return false if @timezone.nil?
@@ -450,6 +461,16 @@ module TalonOne
       @tiers_downgrade_policy = tiers_downgrade_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] return_policy Object to be assigned
+    def return_policy=(return_policy)
+      validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      unless validator.valid?(return_policy)
+        fail ArgumentError, "invalid value for \"return_policy\", must be one of #{validator.allowable_values}."
+      end
+      @return_policy = return_policy
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] timezone Value to be assigned
     def timezone=(timezone)
@@ -485,6 +506,7 @@ module TalonOne
           tiers_expire_in == o.tiers_expire_in &&
           tiers_downgrade_policy == o.tiers_downgrade_policy &&
           card_code_settings == o.card_code_settings &&
+          return_policy == o.return_policy &&
           account_id == o.account_id &&
           name == o.name &&
           tiers == o.tiers &&
@@ -506,7 +528,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, account_id, name, tiers, timezone, card_based, can_update_tiers, can_update_join_policy, can_update_tier_expiration_policy, can_upgrade_to_advanced_tiers, can_update_subledgers].hash
+      [id, created, title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, return_policy, account_id, name, tiers, timezone, card_based, can_update_tiers, can_update_join_policy, can_update_tier_expiration_policy, can_upgrade_to_advanced_tiers, can_update_subledgers].hash
     end
 
     # Builds the object from hash

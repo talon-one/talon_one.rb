@@ -1,0 +1,24 @@
+current directory: /Users/neokil/repos/talon.one/talon_one.rb/.github/.example/vendor/bundle/ruby/3.3.0/gems/json-2.8.2/ext/json/ext/parser
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+checking for rb_enc_interned_str() in ruby.h... yes
+checking for rb_hash_new_capa() in ruby.h... yes
+checking for rb_gc_mark_locations() in ruby.h... yes
+checking for rb_hash_bulk_insert() in ruby.h... yes
+checking for rb_category_warn() in ruby.h... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /Users/neokil/repos/talon.one/talon_one.rb/.github/.example/vendor/bundle/ruby/3.3.0/gems/json-2.8.2/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20241202-99294-vdo9w0 sitelibdir\=./.gem.20241202-99294-vdo9w0 clean
+
+current directory: /Users/neokil/repos/talon.one/talon_one.rb/.github/.example/vendor/bundle/ruby/3.3.0/gems/json-2.8.2/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20241202-99294-vdo9w0 sitelibdir\=./.gem.20241202-99294-vdo9w0
+compiling parser.c
+linking shared-object json/ext/parser.bundle
+
+current directory: /Users/neokil/repos/talon.one/talon_one.rb/.github/.example/vendor/bundle/ruby/3.3.0/gems/json-2.8.2/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20241202-99294-vdo9w0 sitelibdir\=./.gem.20241202-99294-vdo9w0 install
+/usr/bin/install -c -m 0755 parser.bundle ./.gem.20241202-99294-vdo9w0/json/ext
+
+current directory: /Users/neokil/repos/talon.one/talon_one.rb/.github/.example/vendor/bundle/ruby/3.3.0/gems/json-2.8.2/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20241202-99294-vdo9w0 sitelibdir\=./.gem.20241202-99294-vdo9w0 clean

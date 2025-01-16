@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # The body of a V2 integration API request (customer profile update). Next to the customer profile details, this contains an optional listing of extra properties that should be returned in the response.
   class CustomerProfileIntegrationRequestV2
     # Arbitrary properties associated with this item.
     attr_accessor :attributes
