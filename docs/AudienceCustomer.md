@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Internal ID of this entity. | 
-**created** | **DateTime** | The time this entity was created. The time this entity was created. | 
+**created** | **DateTime** | The time this entity was created. | 
 **integration_id** | **String** | The integration ID set by your integration layer. | 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this item. | 
 **account_id** | **Integer** | The ID of the Talon.One account that owns this profile. | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::AudienceCustomer.new(id: 6,
-                                 created: null,
+                                 created: 2020-02-07T08:15:22Z,
                                  integration_id: URNGV8294NV,
                                  attributes: {&quot;Language&quot;:&quot;english&quot;,&quot;ShippingCountry&quot;:&quot;DE&quot;},
                                  account_id: 31,

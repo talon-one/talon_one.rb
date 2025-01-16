@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # List of customer profiles linked to the loyalty card.
   class LoyaltyCardBalances
     attr_accessor :balance
 

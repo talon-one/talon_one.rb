@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class ManagementKey
     # Name for management key.
     attr_accessor :name

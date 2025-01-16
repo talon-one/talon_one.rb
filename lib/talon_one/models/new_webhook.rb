@@ -13,9 +13,8 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewWebhook
-    # The IDs of the Applications that are related to this entity.
+    # The IDs of the Applications in which this webhook is available. An empty array means the webhook is available in `All Applications`. 
     attr_accessor :application_ids
 
     # Name or title for this webhook.

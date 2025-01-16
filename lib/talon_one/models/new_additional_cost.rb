@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewAdditionalCost
     # The internal name used in API requests.
     attr_accessor :name

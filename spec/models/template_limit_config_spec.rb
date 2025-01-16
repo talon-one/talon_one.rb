@@ -57,7 +57,7 @@ describe 'TemplateLimitConfig' do
   describe 'test attribute "entities"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["Coupon", "Referral", "Profile", "Identifier"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["Coupon", "Referral", "Profile", "Identifier", "Store", "Session"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.entities = value }.not_to raise_error
       # end

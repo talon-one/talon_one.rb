@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;AccessLogEntry&gt;**](AccessLogEntry.md) |  | 
+**data** | [**Array&lt;CampaignAnalytics&gt;**](CampaignAnalytics.md) |  | 
 
 ## Code Sample
 

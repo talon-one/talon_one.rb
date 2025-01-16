@@ -30,6 +30,12 @@ module TalonOne
     # The name of the notification.
     attr_accessor :notification_name
 
+    # ID of the webhook.
+    attr_accessor :webhook_id
+
+    # The name of the webhook.
+    attr_accessor :webhook_name
+
     attr_accessor :request
 
     attr_accessor :response
@@ -37,14 +43,20 @@ module TalonOne
     # Timestamp when the log entry was created.
     attr_accessor :created_at
 
-    # The entity type the notification is related to. 
+    # The entity type the log is related to. 
     attr_accessor :entity_type
+
+    # The target URL of the request.
+    attr_accessor :url
 
     # Identifier of the Application.
     attr_accessor :application_id
 
     # Identifier of the loyalty program.
     attr_accessor :loyalty_program_id
+
+    # Identifier of the campaign.
+    attr_accessor :campaign_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -76,12 +88,16 @@ module TalonOne
         :'change_type' => :'changeType',
         :'notification_id' => :'notificationId',
         :'notification_name' => :'notificationName',
+        :'webhook_id' => :'webhookId',
+        :'webhook_name' => :'webhookName',
         :'request' => :'request',
         :'response' => :'response',
         :'created_at' => :'createdAt',
         :'entity_type' => :'entityType',
+        :'url' => :'url',
         :'application_id' => :'applicationId',
-        :'loyalty_program_id' => :'loyaltyProgramId'
+        :'loyalty_program_id' => :'loyaltyProgramId',
+        :'campaign_id' => :'campaignId'
       }
     end
 
@@ -93,12 +109,16 @@ module TalonOne
         :'change_type' => :'String',
         :'notification_id' => :'Integer',
         :'notification_name' => :'String',
+        :'webhook_id' => :'Integer',
+        :'webhook_name' => :'String',
         :'request' => :'MessageLogRequest',
         :'response' => :'MessageLogResponse',
         :'created_at' => :'DateTime',
         :'entity_type' => :'String',
+        :'url' => :'String',
         :'application_id' => :'Integer',
-        :'loyalty_program_id' => :'Integer'
+        :'loyalty_program_id' => :'Integer',
+        :'campaign_id' => :'Integer'
       }
     end
 
@@ -143,6 +163,14 @@ module TalonOne
         self.notification_name = attributes[:'notification_name']
       end
 
+      if attributes.key?(:'webhook_id')
+        self.webhook_id = attributes[:'webhook_id']
+      end
+
+      if attributes.key?(:'webhook_name')
+        self.webhook_name = attributes[:'webhook_name']
+      end
+
       if attributes.key?(:'request')
         self.request = attributes[:'request']
       end
@@ -159,12 +187,20 @@ module TalonOne
         self.entity_type = attributes[:'entity_type']
       end
 
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
       end
 
       if attributes.key?(:'loyalty_program_id')
         self.loyalty_program_id = attributes[:'loyalty_program_id']
+      end
+
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
       end
     end
 
@@ -184,12 +220,20 @@ module TalonOne
         invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
       end
 
+      if @entity_type.nil?
+        invalid_properties.push('invalid value for "entity_type", entity_type cannot be nil.')
+      end
+
       if !@application_id.nil? && @application_id < 1
         invalid_properties.push('invalid value for "application_id", must be greater than or equal to 1.')
       end
 
       if !@loyalty_program_id.nil? && @loyalty_program_id < 1
         invalid_properties.push('invalid value for "loyalty_program_id", must be greater than or equal to 1.')
+      end
+
+      if !@campaign_id.nil? && @campaign_id < 1
+        invalid_properties.push('invalid value for "campaign_id", must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -201,17 +245,19 @@ module TalonOne
       return false if @id.nil?
       return false if @service.nil?
       return false if @created_at.nil?
-      entity_type_validator = EnumAttributeValidator.new('String', ["application", "loyalty_program"])
+      return false if @entity_type.nil?
+      entity_type_validator = EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
       return false unless entity_type_validator.valid?(@entity_type)
       return false if !@application_id.nil? && @application_id < 1
       return false if !@loyalty_program_id.nil? && @loyalty_program_id < 1
+      return false if !@campaign_id.nil? && @campaign_id < 1
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] entity_type Object to be assigned
     def entity_type=(entity_type)
-      validator = EnumAttributeValidator.new('String', ["application", "loyalty_program"])
+      validator = EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
       unless validator.valid?(entity_type)
         fail ArgumentError, "invalid value for \"entity_type\", must be one of #{validator.allowable_values}."
       end
@@ -238,6 +284,16 @@ module TalonOne
       @loyalty_program_id = loyalty_program_id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] campaign_id Value to be assigned
+    def campaign_id=(campaign_id)
+      if !campaign_id.nil? && campaign_id < 1
+        fail ArgumentError, 'invalid value for "campaign_id", must be greater than or equal to 1.'
+      end
+
+      @campaign_id = campaign_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -248,12 +304,16 @@ module TalonOne
           change_type == o.change_type &&
           notification_id == o.notification_id &&
           notification_name == o.notification_name &&
+          webhook_id == o.webhook_id &&
+          webhook_name == o.webhook_name &&
           request == o.request &&
           response == o.response &&
           created_at == o.created_at &&
           entity_type == o.entity_type &&
+          url == o.url &&
           application_id == o.application_id &&
-          loyalty_program_id == o.loyalty_program_id
+          loyalty_program_id == o.loyalty_program_id &&
+          campaign_id == o.campaign_id
     end
 
     # @see the `==` method
@@ -265,7 +325,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, service, change_type, notification_id, notification_name, request, response, created_at, entity_type, application_id, loyalty_program_id].hash
+      [id, service, change_type, notification_id, notification_name, webhook_id, webhook_name, request, response, created_at, entity_type, url, application_id, loyalty_program_id, campaign_id].hash
     end
 
     # Builds the object from hash

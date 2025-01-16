@@ -29,6 +29,8 @@ module TalonOne
     # A list of SCIM schemas that define the structure and data types supported by the service provider.
     attr_accessor :schemas
 
+    attr_accessor :sort
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +39,8 @@ module TalonOne
         :'documentation_uri' => :'documentationUri',
         :'filter' => :'filter',
         :'patch' => :'patch',
-        :'schemas' => :'schemas'
+        :'schemas' => :'schemas',
+        :'sort' => :'sort'
       }
     end
 
@@ -49,7 +52,8 @@ module TalonOne
         :'documentation_uri' => :'String',
         :'filter' => :'ScimServiceProviderConfigResponseFilter',
         :'patch' => :'ScimServiceProviderConfigResponsePatch',
-        :'schemas' => :'Array<String>'
+        :'schemas' => :'Array<String>',
+        :'sort' => :'ScimServiceProviderConfigResponseSort'
       }
     end
 
@@ -99,6 +103,10 @@ module TalonOne
           self.schemas = value
         end
       end
+
+      if attributes.key?(:'sort')
+        self.sort = attributes[:'sort']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -124,7 +132,8 @@ module TalonOne
           documentation_uri == o.documentation_uri &&
           filter == o.filter &&
           patch == o.patch &&
-          schemas == o.schemas
+          schemas == o.schemas &&
+          sort == o.sort
     end
 
     # @see the `==` method
@@ -136,7 +145,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [bulk, change_password, documentation_uri, filter, patch, schemas].hash
+      [bulk, change_password, documentation_uri, filter, patch, schemas, sort].hash
     end
 
     # Builds the object from hash

@@ -23,7 +23,7 @@ instance = TalonOne::Change.new(id: 6,
                                  user_id: 388,
                                  application_id: 359,
                                  entity: /v1/applications/359/campaigns/6727,
-                                 old: null,
+                                 old: {},
                                  new: {&quot;applicationId\&quot;&quot;:359,&quot;attributes\&quot;&quot;:{},&quot;campaignGroups\&quot;&quot;:[],&quot;created\&quot;&quot;:&quot;2022-07-08T13:04:02.972762328Z&quot;,&quot;description\&quot;&quot;:&quot;&quot;,&quot;features\&quot;&quot;:[&quot;referrals&quot;,&quot;loyalty&quot;],&quot;id&quot;:6727},
                                  management_key_id: 3)
 ```

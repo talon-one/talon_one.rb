@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::LoyaltyLedger.new(ledger: null,
-                                 sub_ledgers: {&quot;mysubledger&quot;:{&quot;activePoints&quot;:286,&quot;pendingPoints&quot;:50,&quot;spentPoints&quot;:150,&quot;expiredPoints&quot;:25}})
+                                 sub_ledgers: {&quot;mysubledger&quot;:{&quot;total&quot;:0,&quot;totalActivePoints&quot;:286,&quot;totalPendingPoints&quot;:50,&quot;totalSpentPoints&quot;:150,&quot;totalExpiredPoints&quot;:25}})
 ```
 
 

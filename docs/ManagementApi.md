@@ -63,7 +63,6 @@ Method | HTTP request | Description
 [**get_achievement**](ManagementApi.md#get_achievement) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/achievements/{achievementId} | Get achievement
 [**get_additional_cost**](ManagementApi.md#get_additional_cost) | **GET** /v1/additional_costs/{additionalCostId} | Get additional cost
 [**get_additional_costs**](ManagementApi.md#get_additional_costs) | **GET** /v1/additional_costs | List additional costs
-[**get_all_access_logs**](ManagementApi.md#get_all_access_logs) | **GET** /v1/access_logs | List access logs
 [**get_application**](ManagementApi.md#get_application) | **GET** /v1/applications/{applicationId} | Get Application
 [**get_application_api_health**](ManagementApi.md#get_application_api_health) | **GET** /v1/applications/{applicationId}/health_report | Get Application health
 [**get_application_customer**](ManagementApi.md#get_application_customer) | **GET** /v1/applications/{applicationId}/customers/{customerId} | Get application&#39;s customer
@@ -200,7 +199,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-body = TalonOne::ActivateUserRequest.new # ActivateUserRequest | body
+body = TalonOne::DeactivateUserRequest.new # DeactivateUserRequest | body
 
 begin
   #Enable user by email address
@@ -215,7 +214,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**ActivateUserRequest**](ActivateUserRequest.md)| body | 
+ **body** | **DeactivateUserRequest**| body | 
 
 ### Return type
 
@@ -1865,7 +1864,7 @@ opts = {
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
   usable: 'usable_example', # String | - `true`: only coupons where `usageCounter < usageLimit` will be returned. - `false`: only coupons where `usageCounter >= usageLimit` will be returned. 
   referral_id: 56, # Integer | Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code.
-  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's `RecipientIntegrationId` field. 
+  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile ID specified in the coupon's `RecipientIntegrationId` field. 
   exact_match: false # Boolean | Filter results to an exact case-insensitive matching against the coupon code
 }
 
@@ -1895,7 +1894,7 @@ Name | Type | Description  | Notes
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
  **usable** | **String**| - &#x60;true&#x60;: only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned. - &#x60;false&#x60;: only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60; will be returned.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code. | [optional] 
- **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s &#x60;RecipientIntegrationId&#x60; field.  | [optional] 
+ **recipient_integration_id** | **String**| Filter results by match with a profile ID specified in the coupon&#39;s &#x60;RecipientIntegrationId&#x60; field.  | [optional] 
  **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
 
 ### Return type
@@ -2179,7 +2178,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-body = TalonOne::DeleteUserRequest.new # DeleteUserRequest | body
+body = TalonOne::DeactivateUserRequest.new # DeactivateUserRequest | body
 
 begin
   #Delete user by email address
@@ -2194,7 +2193,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**DeleteUserRequest**](DeleteUserRequest.md)| body | 
+ **body** | **DeactivateUserRequest**| body | 
 
 ### Return type
 
@@ -2635,7 +2634,7 @@ Name | Type | Description  | Notes
 
 Export coupons
 
-Download a CSV file containing the coupons that match the given properties.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file can contain the following columns:  - `accountid`: The ID of your deployment. - `applicationid`: The ID of the Application this coupon is related to. - `attributes`: A json object describing _custom_ referral attribute names and their values. - `batchid`: The ID of the batch this coupon is part of. - `campaignid`: The ID of the campaign this coupon is related to. - `counter`: The number of times this coupon has been redeemed. - `created`: The creation date of the coupon code. - `deleted`: Whether the coupon code is deleted. - `deleted_changelogid`: The ID of the delete event in the logs. - `discount_counter`: The amount of discount given by this coupon. - `discount_limitval`: The maximum discount amount that can be given be this coupon. - `expirydate`: The end date in RFC3339 of the code redemption period. - `id`: The internal ID of the coupon code. - `importid`: The ID of the import job that created this coupon. - `is_reservation_mandatory`: Whether this coupon requires a reservation to be redeemed. - `limits`: The limits set on this coupon. - `limitval`: The maximum number of redemptions of this code. - `recipientintegrationid`: The integration ID of the recipient of the coupon.   Only the customer with this integration ID can redeem this code. Available only for personal codes. - `referralid`: The ID of the referral code that triggered the creation of this coupon (create coupon effect). - `reservation`: Whether the coupon can be reserved for multiple customers. - `reservation_counter`: How many times this coupon has been reserved. - `reservation_limitval`: The maximum of number of reservations this coupon can have. - `startdate`: The start date in RFC3339 of the code redemption period. - `value`: The coupon code. 
+Download a CSV file containing the coupons that match the given properties.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file can contain the following columns:  - `accountid`: The ID of your deployment. - `applicationid`: The ID of the Application this coupon is related to. - `attributes`: A json object describing _custom_ referral attribute names and their values. - `batchid`: The ID of the batch this coupon is part of. - `campaignid`: The ID of the campaign this coupon is related to. - `counter`: The number of times this coupon has been redeemed. - `created`: The creation date in RFC3339 of the coupon code. - `deleted`: Whether the coupon code is deleted. - `deleted_changelogid`: The ID of the delete event in the logs. - `discount_counter`: The amount of discount given by this coupon. - `discount_limitval`: The maximum discount amount that can be given be this coupon. - `expirydate`: The end date in RFC3339 of the code redemption period. - `id`: The internal ID of the coupon code. - `importid`: The ID of the import job that created this coupon. - `is_reservation_mandatory`: Whether this coupon requires a reservation to be redeemed. - `limits`: The limits set on this coupon. - `limitval`: The maximum number of redemptions of this code. - `recipientintegrationid`: The integration ID of the recipient of the coupon.   Only the customer with this integration ID can redeem this code. Available only for personal codes. - `referralid`: The ID of the referral code that triggered the creation of this coupon (create coupon effect). - `reservation`: Whether the coupon can be reserved for multiple customers. - `reservation_counter`: How many times this coupon has been reserved. - `reservation_limitval`: The maximum of number of reservations this coupon can have. - `startdate`: The start date in RFC3339 of the code redemption period. - `value`: The coupon code. 
 
 ### Example
 
@@ -2658,7 +2657,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 opts = {
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
   value: 'value_example', # String | Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -2689,7 +2688,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
  **value** | **String**| Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters. | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
@@ -2883,7 +2882,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 opts = {
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
   date_format: 'date_format_example' # String | Determines the format of dates in the export document.
@@ -2904,7 +2903,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
@@ -3210,7 +3209,8 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
-  batch_id: 'batch_id_example' # String | Filter results by loyalty card batch ID.
+  batch_id: 'batch_id_example', # String | Filter results by loyalty card batch ID.
+  date_format: 'date_format_example' # String | Determines the format of dates in the export document.
 }
 
 begin
@@ -3229,6 +3229,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **batch_id** | **String**| Filter results by loyalty card batch ID. | [optional] 
+ **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
 
 ### Return type
 
@@ -3407,7 +3408,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 opts = {
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | - `expired`: Matches referrals in which the expiration date is set and in the past. - `validNow`: Matches referrals in which start date is null or in the past and expiration date is null or in the future. - `validFuture`: Matches referrals in which start date is set and in the future. 
@@ -3431,7 +3432,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| - &#x60;expired&#x60;: Matches referrals in which the expiration date is set and in the past. - &#x60;validNow&#x60;: Matches referrals in which start date is null or in the past and expiration date is null or in the future. - &#x60;validFuture&#x60;: Matches referrals in which start date is set and in the future.  | [optional] 
@@ -3831,7 +3832,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20036 get_additional_costs(opts)
+> InlineResponse20035 get_additional_costs(opts)
 
 List additional costs
 
@@ -3882,82 +3883,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20036**](InlineResponse20036.md)
-
-### Authorization
-
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_all_access_logs
-
-> InlineResponse20020 get_all_access_logs(opts)
-
-List access logs
-
-Fetches the access logs for the entire account. Sensitive requests (logins) are _always_ filtered from the logs. 
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: management_key
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-opts = {
-  range_start: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-  range_end: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-  path: 'path_example', # String | Only return results where the request path matches the given regular expression.
-  method: 'method_example', # String | Only return results where the request method matches the given regular expression.
-  status: 'status_example', # String | Filter results by HTTP status codes.
-  page_size: 1000, # Integer | The number of items in the response.
-  skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sort: 'sort_example' # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
-}
-
-begin
-  #List access logs
-  result = api_instance.get_all_access_logs(opts)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_all_access_logs: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
- **path** | **String**| Only return results where the request path matches the given regular expression. | [optional] 
- **method** | **String**| Only return results where the request method matches the given regular expression. | [optional] 
- **status** | **String**| Filter results by HTTP status codes. | [optional] 
- **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
- **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
-
-### Return type
-
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20035**](InlineResponse20035.md)
 
 ### Authorization
 
@@ -4034,7 +3960,7 @@ Name | Type | Description  | Notes
 
 Get Application health
 
-Display the health of the Application and show the last time the Application was used.  You can also display this information from the **Settings** of an Application, in the **Developer Settings** menu. See the [docs](https://docs.talon.one/docs/dev/tutorials/monitoring-integration-status). 
+Display the health of the Application and show the last time the Application was used.  You can also find this information in the Campaign Manager. In your Application, click **Settings** > **Integration API Keys**. See the [docs](https://docs.talon.one/docs/dev/tutorials/monitoring-integration-status). 
 
 ### Example
 
@@ -4150,7 +4076,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customer_friends
 
-> InlineResponse20033 get_application_customer_friends(application_id, integration_id, opts)
+> InlineResponse20032 get_application_customer_friends(application_id, integration_id, opts)
 
 List friends referred by customer profile
 
@@ -4207,7 +4133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20033**](InlineResponse20033.md)
+[**InlineResponse20032**](InlineResponse20032.md)
 
 ### Authorization
 
@@ -4221,7 +4147,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20022 get_application_customers(application_id, opts)
+> InlineResponse20021 get_application_customers(application_id, opts)
 
 List application's customers
 
@@ -4276,7 +4202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -4290,7 +4216,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers_by_attributes
 
-> InlineResponse20023 get_application_customers_by_attributes(application_id, body, opts)
+> InlineResponse20022 get_application_customers_by_attributes(application_id, body, opts)
 
 List application customers matching the given attributes
 
@@ -4345,7 +4271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -4359,7 +4285,7 @@ Name | Type | Description  | Notes
 
 ## get_application_event_types
 
-> InlineResponse20029 get_application_event_types(application_id, opts)
+> InlineResponse20028 get_application_event_types(application_id, opts)
 
 List Applications event types
 
@@ -4412,7 +4338,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -4426,7 +4352,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events_without_total_count
 
-> InlineResponse20028 get_application_events_without_total_count(application_id, opts)
+> InlineResponse20027 get_application_events_without_total_count(application_id, opts)
 
 List Applications events
 
@@ -4501,7 +4427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -4576,7 +4502,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions
 
-> InlineResponse20027 get_application_sessions(application_id, opts)
+> InlineResponse20026 get_application_sessions(application_id, opts)
 
 List Application sessions
 
@@ -4612,7 +4538,7 @@ opts = {
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
   coupon: 'coupon_example', # String | Filter by sessions with this coupon. Must be exact match.
   referral: 'referral_example', # String | Filter by sessions with this referral. Must be exact match.
-  integration_id: 'integration_id_example', # String | Filter by sessions with this integrationId. Must be exact match.
+  integration_id: 'integration_id_example', # String | Filter by sessions with this integration ID. Must be exact match.
   store_integration_id: 'store_integration_id_example' # String | The integration ID of the store. You choose this ID when you create a store.
 }
 
@@ -4640,12 +4566,12 @@ Name | Type | Description  | Notes
  **created_after** | **DateTime**| Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **coupon** | **String**| Filter by sessions with this coupon. Must be exact match. | [optional] 
  **referral** | **String**| Filter by sessions with this referral. Must be exact match. | [optional] 
- **integration_id** | **String**| Filter by sessions with this integrationId. Must be exact match. | [optional] 
+ **integration_id** | **String**| Filter by sessions with this integration ID. Must be exact match. | [optional] 
  **store_integration_id** | **String**| The integration ID of the store. You choose this ID when you create a store. | [optional] 
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -4783,7 +4709,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20034 get_attributes(opts)
+> InlineResponse20033 get_attributes(opts)
 
 List custom attributes
 
@@ -4836,7 +4762,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20034**](InlineResponse20034.md)
+[**InlineResponse20033**](InlineResponse20033.md)
 
 ### Authorization
 
@@ -4850,7 +4776,7 @@ Name | Type | Description  | Notes
 
 ## get_audience_memberships
 
-> InlineResponse20032 get_audience_memberships(audience_id, opts)
+> InlineResponse20031 get_audience_memberships(audience_id, opts)
 
 List audience members
 
@@ -4905,7 +4831,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20032**](InlineResponse20032.md)
+[**InlineResponse20031**](InlineResponse20031.md)
 
 ### Authorization
 
@@ -4919,7 +4845,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences
 
-> InlineResponse20030 get_audiences(opts)
+> InlineResponse20029 get_audiences(opts)
 
 List audiences
 
@@ -4972,7 +4898,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -4986,7 +4912,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences_analytics
 
-> InlineResponse20031 get_audiences_analytics(audience_ids, opts)
+> InlineResponse20030 get_audiences_analytics(audience_ids, opts)
 
 List audience analytics
 
@@ -5035,7 +4961,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20031**](InlineResponse20031.md)
+[**InlineResponse20030**](InlineResponse20030.md)
 
 ### Authorization
 
@@ -5110,7 +5036,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_analytics
 
-> InlineResponse20021 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
+> InlineResponse20020 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
@@ -5165,7 +5091,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -5483,7 +5409,7 @@ opts = {
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   campaign_group_id: 56, # Integer | Filter results to campaigns owned by the specified campaign access group ID.
-  template_id: 56, # Integer | The ID of the Campaign Template this Campaign was created from.
+  template_id: 56, # Integer | The ID of the campaign template this campaign was created from.
   store_id: 56 # Integer | Filter results to campaigns linked to the specified store ID.
 }
 
@@ -5511,7 +5437,7 @@ Name | Type | Description  | Notes
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **campaign_group_id** | **Integer**| Filter results to campaigns owned by the specified campaign access group ID. | [optional] 
- **template_id** | **Integer**| The ID of the Campaign Template this Campaign was created from. | [optional] 
+ **template_id** | **Integer**| The ID of the campaign template this campaign was created from. | [optional] 
  **store_id** | **Integer**| Filter results to campaigns linked to the specified store ID. | [optional] 
 
 ### Return type
@@ -5530,7 +5456,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20042 get_changes(opts)
+> InlineResponse20041 get_changes(opts)
 
 Get audit logs for an account
 
@@ -5597,7 +5523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20042**](InlineResponse20042.md)
+[**InlineResponse20041**](InlineResponse20041.md)
 
 ### Authorization
 
@@ -5777,9 +5703,9 @@ opts = {
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   redeemed: 'redeemed_example', # String | - `true`: only coupons where `usageCounter > 0` will be returned. - `false`: only coupons where `usageCounter = 0` will be returned. - This field cannot be used in conjunction with the `usable` query parameter. 
   referral_id: 56, # Integer | Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code.
-  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
+  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile ID specified in the coupon's RecipientIntegrationId field.
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code.
   expires_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon expiration date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   expires_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon expiration date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   starts_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon start date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -5813,9 +5739,9 @@ Name | Type | Description  | Notes
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **redeemed** | **String**| - &#x60;true&#x60;: only coupons where &#x60;usageCounter &gt; 0&#x60; will be returned. - &#x60;false&#x60;: only coupons where &#x60;usageCounter &#x3D; 0&#x60; will be returned. - This field cannot be used in conjunction with the &#x60;usable&#x60; query parameter.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code. | [optional] 
- **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
+ **recipient_integration_id** | **String**| Filter results by match with a profile ID specified in the coupon&#39;s RecipientIntegrationId field. | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code. | [optional] [default to false]
  **expires_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon expiration date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **expires_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon expiration date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **starts_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon start date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
@@ -5909,7 +5835,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports_without_total_count
 
-> InlineResponse20026 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
+> InlineResponse20025 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
 
@@ -5941,10 +5867,10 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
-  name: 'name_example', # String | Only return reports matching the customer name
+  name: 'name_example', # String | Only return reports matching the customer name.
   integration_id: 'integration_id_example', # String | Filter results performing an exact matching against the profile integration identifier.
-  campaign_name: 'campaign_name_example', # String | Only return reports matching the campaignName
-  advocate_name: 'advocate_name_example' # String | Only return reports matching the current customer referrer name
+  campaign_name: 'campaign_name_example', # String | Only return reports matching the campaign name.
+  advocate_name: 'advocate_name_example' # String | Only return reports matching the current customer referrer name.
 }
 
 begin
@@ -5967,14 +5893,14 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
- **name** | **String**| Only return reports matching the customer name | [optional] 
+ **name** | **String**| Only return reports matching the customer name. | [optional] 
  **integration_id** | **String**| Filter results performing an exact matching against the profile integration identifier. | [optional] 
- **campaign_name** | **String**| Only return reports matching the campaignName | [optional] 
- **advocate_name** | **String**| Only return reports matching the current customer referrer name | [optional] 
+ **campaign_name** | **String**| Only return reports matching the campaign name. | [optional] 
+ **advocate_name** | **String**| Only return reports matching the current customer referrer name. | [optional] 
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -6116,7 +6042,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile_achievement_progress
 
-> InlineResponse20047 get_customer_profile_achievement_progress(application_id, integration_id, opts)
+> InlineResponse20046 get_customer_profile_achievement_progress(application_id, integration_id, opts)
 
 List customer achievements
 
@@ -6173,7 +6099,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20047**](InlineResponse20047.md)
+[**InlineResponse20046**](InlineResponse20046.md)
 
 ### Authorization
 
@@ -6187,7 +6113,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profiles
 
-> InlineResponse20025 get_customer_profiles(opts)
+> InlineResponse20024 get_customer_profiles(opts)
 
 List customer profiles
 
@@ -6215,7 +6141,7 @@ api_instance = TalonOne::ManagementApi.new
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sandbox: false # Boolean | Indicates whether you are pointing to a sandbox or Live customer.
+  sandbox: false # Boolean | Indicates whether you are pointing to a sandbox or live customer.
 }
 
 begin
@@ -6234,11 +6160,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sandbox** | **Boolean**| Indicates whether you are pointing to a sandbox or Live customer. | [optional] [default to false]
+ **sandbox** | **Boolean**| Indicates whether you are pointing to a sandbox or live customer. | [optional] [default to false]
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -6252,7 +6178,7 @@ Name | Type | Description  | Notes
 
 ## get_customers_by_attributes
 
-> InlineResponse20024 get_customers_by_attributes(body, opts)
+> InlineResponse20023 get_customers_by_attributes(body, opts)
 
 List customer profiles matching the given attributes
 
@@ -6281,7 +6207,7 @@ body = TalonOne::CustomerProfileSearchQuery.new # CustomerProfileSearchQuery | b
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sandbox: false # Boolean | Indicates whether you are pointing to a sandbox or Live customer.
+  sandbox: false # Boolean | Indicates whether you are pointing to a sandbox or live customer.
 }
 
 begin
@@ -6301,11 +6227,11 @@ Name | Type | Description  | Notes
  **body** | [**CustomerProfileSearchQuery**](CustomerProfileSearchQuery.md)| body | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sandbox** | **Boolean**| Indicates whether you are pointing to a sandbox or Live customer. | [optional] [default to false]
+ **sandbox** | **Boolean**| Indicates whether you are pointing to a sandbox or live customer. | [optional] [default to false]
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -6319,7 +6245,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20040 get_event_types(opts)
+> InlineResponse20039 get_event_types(opts)
 
 List event types
 
@@ -6374,7 +6300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20040**](InlineResponse20040.md)
+[**InlineResponse20039**](InlineResponse20039.md)
 
 ### Authorization
 
@@ -6388,7 +6314,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20043 get_exports(opts)
+> InlineResponse20042 get_exports(opts)
 
 Get exports
 
@@ -6443,7 +6369,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20043**](InlineResponse20043.md)
+[**InlineResponse20042**](InlineResponse20042.md)
 
 ### Authorization
 
@@ -7007,7 +6933,7 @@ opts = {
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches referrals in which the expiration date is set and in the past. The second matches referrals in which start date is null or in the past and expiration date is null or in the future, the third matches referrals in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only referrals where `usageCounter < usageLimit` will be returned, \"false\" will return only referrals where `usageCounter >= usageLimit`. 
-  advocate: 'advocate_example' # String | Filter results by match with a profile id specified in the referral's AdvocateProfileIntegrationId field
+  advocate: 'advocate_example' # String | Filter results by match with a profile ID specified in the referral's AdvocateProfileIntegrationId field.
 }
 
 begin
@@ -7034,7 +6960,7 @@ Name | Type | Description  | Notes
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiration date is set and in the past. The second matches referrals in which start date is null or in the past and expiration date is null or in the future, the third matches referrals in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
- **advocate** | **String**| Filter results by match with a profile id specified in the referral&#39;s AdvocateProfileIntegrationId field | [optional] 
+ **advocate** | **String**| Filter results by match with a profile ID specified in the referral&#39;s AdvocateProfileIntegrationId field. | [optional] 
 
 ### Return type
 
@@ -7363,7 +7289,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20041 get_users(opts)
+> InlineResponse20040 get_users(opts)
 
 List users in account
 
@@ -7414,7 +7340,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20041**](InlineResponse20041.md)
+[**InlineResponse20040**](InlineResponse20040.md)
 
 ### Authorization
 
@@ -7487,7 +7413,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_activation_logs
 
-> InlineResponse20038 get_webhook_activation_logs(opts)
+> InlineResponse20037 get_webhook_activation_logs(opts)
 
 List webhook activation log entries
 
@@ -7517,9 +7443,9 @@ opts = {
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
   integration_request_uuid: 'integration_request_uuid_example', # String | Filter results by integration request UUID.
-  webhook_id: 3.4, # Float | Filter results by Webhook.
+  webhook_id: 3.4, # Float | Filter results by webhook id.
   application_id: 3.4, # Float | Filter results by Application ID.
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
 }
@@ -7542,15 +7468,15 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
  **integration_request_uuid** | **String**| Filter results by integration request UUID. | [optional] 
- **webhook_id** | **Float**| Filter results by Webhook. | [optional] 
+ **webhook_id** | **Float**| Filter results by webhook id. | [optional] 
  **application_id** | **Float**| Filter results by Application ID. | [optional] 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **created_before** | **DateTime**| Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
 
 ### Return type
 
-[**InlineResponse20038**](InlineResponse20038.md)
+[**InlineResponse20037**](InlineResponse20037.md)
 
 ### Authorization
 
@@ -7564,7 +7490,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_logs
 
-> InlineResponse20039 get_webhook_logs(opts)
+> InlineResponse20038 get_webhook_logs(opts)
 
 List webhook log entries
 
@@ -7594,9 +7520,9 @@ opts = {
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
   status: 'status_example', # String | Filter results by HTTP status codes.
-  webhook_id: 3.4, # Float | Filter results by Webhook.
+  webhook_id: 3.4, # Float | Filter results by webhook id.
   application_id: 3.4, # Float | Filter results by Application ID.
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   request_uuid: 'request_uuid_example', # String | Filter results by request UUID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -7620,16 +7546,16 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
  **status** | **String**| Filter results by HTTP status codes. | [optional] 
- **webhook_id** | **Float**| Filter results by Webhook. | [optional] 
+ **webhook_id** | **Float**| Filter results by webhook id. | [optional] 
  **application_id** | **Float**| Filter results by Application ID. | [optional] 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **request_uuid** | **String**| Filter results by request UUID. | [optional] 
  **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
 
 ### Return type
 
-[**InlineResponse20039**](InlineResponse20039.md)
+[**InlineResponse20038**](InlineResponse20038.md)
 
 ### Authorization
 
@@ -7643,7 +7569,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20037 get_webhooks(opts)
+> InlineResponse20036 get_webhooks(opts)
 
 List webhooks
 
@@ -7704,7 +7630,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20037**](InlineResponse20037.md)
+[**InlineResponse20036**](InlineResponse20036.md)
 
 ### Authorization
 
@@ -8110,7 +8036,7 @@ Name | Type | Description  | Notes
 
 Import loyalty cards
 
-Upload a CSV file containing the loyalty cards that you want to use in your card-based loyalty program. Send the file as multipart data.  It contains the following columns for each card:  - `identifier` (required): The alphanumeric identifier of the loyalty card. - `state` (required): The state of the loyalty card. It can be `active` or `inactive`. - `customerprofileids` (optional): An array of strings representing the identifiers of the customer profiles linked to the loyalty card.  **Note:** We recommend limiting your file size to 500MB.  **Example:**  ```csv identifier,state,customerprofileids 123-456-789AT,active,Alexa001;UserA ``` 
+Upload a CSV file containing the loyalty cards that you want to use in your card-based loyalty program. Send the file as multipart data.  It contains the following columns for each card:  - `identifier` (required): The alphanumeric identifier of the loyalty card. - `state` (required): The state of the loyalty card. It can be `active` or `inactive`. - `customerprofileids` (optional): An array of strings representing the identifiers of the customer profiles linked to the loyalty card. The identifiers should be separated with a semicolon (;).  **Note:** We recommend limiting your file size to 500MB.  **Example:**  ```csv identifier,state,customerprofileids 123-456-789AT,active,Alexa001;UserA ``` 
 
 ### Example
 
@@ -8236,7 +8162,7 @@ Name | Type | Description  | Notes
 
 Import loyalty points
 
-Upload a CSV file containing the loyalty points you want to import into a given loyalty program. Send the file as multipart data.  Depending on the type of loyalty program, you can import points into a given customer profile or loyalty card.  The CSV file contains the following columns:  - `customerprofileid` (optional): For profile-based loyalty programs, the integration ID of the customer profile where the loyalty points are imported. - `identifier` (optional): For card-based loyalty programs, the identifier of the loyalty card where the loyalty points are imported. - `amount`: The amount of points to award to the customer profile. - `startdate` (optional): The earliest date when the points can be redeemed. The points are `active` from this date until the expiration date.    **Note**: It must be an RFC3339 timestamp string or string `immediate`. Empty or missing values are considered `immediate`. - `expirydate` (optional): The latest date when the points can be redeemed. The points are `expired` after this date.    **Note**: It must be an RFC3339 timestamp string or string `unlimited`. Empty or missing values are considered `unlimited`. - `subledgerid` (optional): The ID of the subledger that should received the points. - `reason` (optional): The reason why these points are awarded.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Note:** For existing customer profiles and loyalty cards, the imported points are added to any previous active or pending points, depending on the value provided for `startdate`. If `startdate` matches the current date, the imported points are _active_. If it is later, the points are _pending_ until the date provided for `startdate` is reached.  **Note:** We recommend limiting your file size to 500MB.  **Example for profile-based programs:**  ```text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ```  **Example for card-based programs:**  ```text identifier,amount,startdate,expirydate,subledgerid,reason summer-loyalty-card-0543,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ``` 
+Upload a CSV file containing the loyalty points you want to import into a given loyalty program. Send the file as multipart data.  Depending on the type of loyalty program, you can import points into a given customer profile or loyalty card.  The CSV file contains the following columns:  - `customerprofileid` (optional): For profile-based loyalty programs, the integration ID of the customer profile where the loyalty points are imported.    **Note**: If the customer profile does not exist, it will be created. The profile will not be visible in any Application   until a session or profile update is received for that profile. - `identifier` (optional): For card-based loyalty programs, the identifier of the loyalty card where the loyalty points are imported. - `amount`: The amount of points to award to the customer profile. - `startdate` (optional): The earliest date when the points can be redeemed. The points are `active` from this date until the expiration date.    **Note**: It must be an RFC3339 timestamp string or string `immediate`. Empty or missing values are considered `immediate`. - `expirydate` (optional): The latest date when the points can be redeemed. The points are `expired` after this date.    **Note**: It must be an RFC3339 timestamp string or string `unlimited`. Empty or missing values are considered `unlimited`. - `subledgerid` (optional): The ID of the subledger that should received the points. - `reason` (optional): The reason why these points are awarded.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Note:** For existing customer profiles and loyalty cards, the imported points are added to any previous active or pending points, depending on the value provided for `startdate`. If `startdate` matches the current date, the imported points are _active_. If it is later, the points are _pending_ until the date provided for `startdate` is reached.  **Note:** We recommend limiting your file size to 500MB.  **Example for profile-based programs:**  ```text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ```  **Example for card-based programs:**  ```text identifier,amount,startdate,expirydate,subledgerid,reason summer-loyalty-card-0543,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ``` 
 
 ### Example
 
@@ -8550,7 +8476,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements
 
-> InlineResponse20046 list_achievements(application_id, campaign_id, opts)
+> InlineResponse20045 list_achievements(application_id, campaign_id, opts)
 
 List achievements
 
@@ -8605,7 +8531,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20046**](InlineResponse20046.md)
+[**InlineResponse20045**](InlineResponse20045.md)
 
 ### Authorization
 
@@ -8619,7 +8545,7 @@ Name | Type | Description  | Notes
 
 ## list_all_roles_v2
 
-> InlineResponse20044 list_all_roles_v2
+> InlineResponse20043 list_all_roles_v2
 
 List roles
 
@@ -8660,7 +8586,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20044**](InlineResponse20044.md)
+[**InlineResponse20043**](InlineResponse20043.md)
 
 ### Authorization
 
@@ -8674,7 +8600,7 @@ This endpoint does not need any parameter.
 
 ## list_catalog_items
 
-> InlineResponse20035 list_catalog_items(catalog_id, opts)
+> InlineResponse20034 list_catalog_items(catalog_id, opts)
 
 List items in a catalog
 
@@ -8731,7 +8657,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20035**](InlineResponse20035.md)
+[**InlineResponse20034**](InlineResponse20034.md)
 
 ### Authorization
 
@@ -8889,7 +8815,7 @@ Name | Type | Description  | Notes
 
 ## list_stores
 
-> InlineResponse20045 list_stores(application_id, opts)
+> InlineResponse20044 list_stores(application_id, opts)
 
 List stores
 
@@ -8920,7 +8846,7 @@ opts = {
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** This parameter works only with numeric fields. 
   with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
-  campaign_id: 3.4, # Float | Filter results by campaign.
+  campaign_id: 3.4, # Float | Filter results by campaign ID.
   name: 'name_example', # String | The name of the store.
   integration_id: 'integration_id_example', # String | The integration ID of the store.
   query: 'query_example' # String | Filter results by `name` or `integrationId`.
@@ -8945,14 +8871,14 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields.  | [optional] 
  **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
- **campaign_id** | **Float**| Filter results by campaign. | [optional] 
+ **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **name** | **String**| The name of the store. | [optional] 
  **integration_id** | **String**| The integration ID of the store. | [optional] 
  **query** | **String**| Filter results by &#x60;name&#x60; or &#x60;integrationId&#x60;. | [optional] 
 
 ### Return type
 
-[**InlineResponse20045**](InlineResponse20045.md)
+[**InlineResponse20044**](InlineResponse20044.md)
 
 ### Authorization
 
@@ -9939,9 +9865,9 @@ opts = {
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiration date is set and in the past. The second matches coupons in which start date is null or in the past and expiration date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code.
-  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
+  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile ID specified in the coupon's RecipientIntegrationId field.
   batch_id: 'batch_id_example', # String | Filter results by batches of coupons
-  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code.
   campaign_state: 'campaign_state_example' # String | Filter results by the state of the campaign.  - `enabled`: Campaigns that are scheduled, running (activated), or expired. - `running`: Campaigns that are running (activated). - `disabled`: Campaigns that are disabled. - `expired`: Campaigns that are expired. - `archived`: Campaigns that are archived. 
 }
 
@@ -9970,9 +9896,9 @@ Name | Type | Description  | Notes
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiration date is set and in the past. The second matches coupons in which start date is null or in the past and expiration date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code. | [optional] 
- **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
+ **recipient_integration_id** | **String**| Filter results by match with a profile ID specified in the coupon&#39;s RecipientIntegrationId field. | [optional] 
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
- **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code. | [optional] [default to false]
  **campaign_state** | **String**| Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived.  | [optional] 
 
 ### Return type
@@ -10029,8 +9955,8 @@ opts = {
   valid: 'valid_example', # String | Either \"expired\", \"validNow\", or \"validFuture\". The first option matches coupons in which the expiration date is set and in the past. The second matches coupons in which start date is null or in the past and expiration date is null or in the future, the third matches coupons in which start date is set and in the future. 
   usable: 'usable_example', # String | Either \"true\" or \"false\". If \"true\", only coupons where `usageCounter < usageLimit` will be returned, \"false\" will return only coupons where `usageCounter >= usageLimit`. 
   referral_id: 56, # Integer | Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code.
-  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile id specified in the coupon's RecipientIntegrationId field
-  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code
+  recipient_integration_id: 'recipient_integration_id_example', # String | Filter results by match with a profile ID specified in the coupon's RecipientIntegrationId field.
+  exact_match: false, # Boolean | Filter results to an exact case-insensitive matching against the coupon code.
   batch_id: 'batch_id_example' # String | Filter results by batches of coupons
 }
 
@@ -10060,8 +9986,8 @@ Name | Type | Description  | Notes
  **valid** | **String**| Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches coupons in which the expiration date is set and in the past. The second matches coupons in which start date is null or in the past and expiration date is null or in the future, the third matches coupons in which start date is set and in the future.  | [optional] 
  **usable** | **String**| Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only coupons where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only coupons where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;.  | [optional] 
  **referral_id** | **Integer**| Filter the results by matching them with the ID of a referral. This filter shows the coupons created by redeeming a referral code. | [optional] 
- **recipient_integration_id** | **String**| Filter results by match with a profile id specified in the coupon&#39;s RecipientIntegrationId field | [optional] 
- **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code | [optional] [default to false]
+ **recipient_integration_id** | **String**| Filter results by match with a profile ID specified in the coupon&#39;s RecipientIntegrationId field. | [optional] 
+ **exact_match** | **Boolean**| Filter results to an exact case-insensitive matching against the coupon code. | [optional] [default to false]
  **batch_id** | **String**| Filter results by batches of coupons | [optional] 
 
 ### Return type
@@ -10394,7 +10320,7 @@ Name | Type | Description  | Notes
 
 Update campaign
 
-Update the given campaign.
+Update the given campaign.  **Important:** You cannot use this endpoint to update campaigns if [campaign staging and revisions](https://docs.talon.one/docs/product/applications/managing-general-settings#campaign-staging-and-revisions) is enabled for your Application. 
 
 ### Example
 
@@ -10522,7 +10448,7 @@ Name | Type | Description  | Notes
 
 Update coupon
 
-Update the specified coupon.  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <p>With this <code>PUT</code> endpoint alone, if you do not explicitly set a value for the <code>startDate</code>, <code>expiryDate</code>, and <code>recipientIntegrationId</code> properties in your request, it is automatically set to <code>null</code>.</p>  </div> 
+Update the specified coupon.  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <p>With this <code>PUT</code> endpoint, if you do not explicitly set a value for the <code>startDate</code>, <code>expiryDate</code>, and <code>recipientIntegrationId</code> properties in your request, it is automatically set to <code>null</code>.</p>  </div> 
 
 ### Example
 
@@ -10587,7 +10513,7 @@ Name | Type | Description  | Notes
 
 Update coupons
 
-Update all coupons, or a specific batch of coupons in the given campaign. You can find the `batchId` in the **Coupons** view of your Application in the Campaign Manager, or you can use [List coupons](#operation/getCouponsWithoutTotalCount).  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <ul>     <li>Only send sequential requests to this endpoint.</li>     <li>Requests to this endpoint timeout after 30 minutes. If you hit a timeout, reach out to our support team.</li>   </ul>  </div>  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
+Update all coupons or a specific batch of coupons in the given campaign. You can find the `batchId` on the **Coupons** page of your campaign in the Campaign Manager, or you can use [List coupons](#operation/getCouponsWithoutTotalCount).  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <ul>     <li>Only send sequential requests to this endpoint.</li>     <li>Requests to this endpoint time out after 30 minutes. If you hit a timeout, contact our support team.</li>     <li>With this <code>PUT</code> endpoint, if you do not explicitly set a value for the <code>startDate</code> and <code>expiryDate</code> properties in your request, it is automatically set to <code>null</code>.</li>   </ul>  </div>  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
 
 ### Example
 

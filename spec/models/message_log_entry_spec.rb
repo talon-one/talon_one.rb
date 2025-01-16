@@ -62,6 +62,18 @@ describe 'MessageLogEntry' do
     end
   end
 
+  describe 'test attribute "webhook_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "webhook_name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "request"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -83,10 +95,16 @@ describe 'MessageLogEntry' do
   describe 'test attribute "entity_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["application", "loyalty_program"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["application", "loyalty_program", "webhook"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.entity_type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "url"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
@@ -97,6 +115,12 @@ describe 'MessageLogEntry' do
   end
 
   describe 'test attribute "loyalty_program_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "campaign_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

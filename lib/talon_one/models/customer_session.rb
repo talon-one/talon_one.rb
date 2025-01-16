@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class CustomerSession
     # The integration ID set by your integration layer.
     attr_accessor :integration_id

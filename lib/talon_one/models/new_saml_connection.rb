@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # A new SAML 2.0 connection.
   class NewSamlConnection
     # X.509 Certificate.
     attr_accessor :x509certificate

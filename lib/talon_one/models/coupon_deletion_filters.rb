@@ -179,8 +179,6 @@ module TalonOne
 
       if attributes.key?(:'value')
         self.value = attributes[:'value']
-      else
-        self.value = 'false'
       end
 
       if attributes.key?(:'batch_id')

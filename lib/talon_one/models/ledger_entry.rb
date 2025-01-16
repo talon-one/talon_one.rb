@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
+  # Entry in the point ledger.
   class LedgerEntry
     # Internal ID of this entity.
     attr_accessor :id

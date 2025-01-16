@@ -21,6 +21,9 @@ module TalonOne
     # Integration IDs of the customer profiles linked to the card.
     attr_accessor :customer_profile_ids
 
+    # The alphanumeric identifier of the loyalty card. 
+    attr_accessor :card_identifier
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -47,7 +50,8 @@ module TalonOne
     def self.attribute_map
       {
         :'status' => :'status',
-        :'customer_profile_ids' => :'customerProfileIds'
+        :'customer_profile_ids' => :'customerProfileIds',
+        :'card_identifier' => :'cardIdentifier'
       }
     end
 
@@ -55,7 +59,8 @@ module TalonOne
     def self.openapi_types
       {
         :'status' => :'String',
-        :'customer_profile_ids' => :'Array<String>'
+        :'customer_profile_ids' => :'Array<String>',
+        :'card_identifier' => :'String'
       }
     end
 
@@ -91,12 +96,25 @@ module TalonOne
           self.customer_profile_ids = value
         end
       end
+
+      if attributes.key?(:'card_identifier')
+        self.card_identifier = attributes[:'card_identifier']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@card_identifier.nil? && @card_identifier.to_s.length > 108
+        invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !@card_identifier.nil? && @card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -105,6 +123,8 @@ module TalonOne
     def valid?
       status_validator = EnumAttributeValidator.new('String', ["active", "inactive"])
       return false unless status_validator.valid?(@status)
+      return false if !@card_identifier.nil? && @card_identifier.to_s.length > 108
+      return false if !@card_identifier.nil? && @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       true
     end
 
@@ -118,13 +138,29 @@ module TalonOne
       @status = status
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] card_identifier Value to be assigned
+    def card_identifier=(card_identifier)
+      if !card_identifier.nil? && card_identifier.to_s.length > 108
+        fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !card_identifier.nil? && card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
+      end
+
+      @card_identifier = card_identifier
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
-          customer_profile_ids == o.customer_profile_ids
+          customer_profile_ids == o.customer_profile_ids &&
+          card_identifier == o.card_identifier
     end
 
     # @see the `==` method
@@ -136,7 +172,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, customer_profile_ids].hash
+      [status, customer_profile_ids, card_identifier].hash
     end
 
     # Builds the object from hash

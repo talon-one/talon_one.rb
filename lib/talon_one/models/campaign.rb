@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class Campaign
     # Unique ID for this entity.
     attr_accessor :id
@@ -133,11 +132,14 @@ module TalonOne
     # The ID of the Campaign Template this Campaign was created from.
     attr_accessor :template_id
 
-    # A campaign state described exactly as in the Campaign Manager.
+    # The campaign state displayed in the Campaign Manager.
     attr_accessor :frontend_state
 
     # Indicates whether the linked stores were imported via a CSV file.
     attr_accessor :stores_imported
+
+    # The campaign revision state displayed in the Campaign Manager.
+    attr_accessor :revision_frontend_state
 
     # ID of the revision that was last activated on this campaign. 
     attr_accessor :active_revision_id
@@ -224,6 +226,7 @@ module TalonOne
         :'template_id' => :'templateId',
         :'frontend_state' => :'frontendState',
         :'stores_imported' => :'storesImported',
+        :'revision_frontend_state' => :'revisionFrontendState',
         :'active_revision_id' => :'activeRevisionId',
         :'active_revision_version_id' => :'activeRevisionVersionId',
         :'version' => :'version',
@@ -278,6 +281,7 @@ module TalonOne
         :'template_id' => :'Integer',
         :'frontend_state' => :'String',
         :'stores_imported' => :'Boolean',
+        :'revision_frontend_state' => :'String',
         :'active_revision_id' => :'Integer',
         :'active_revision_version_id' => :'Integer',
         :'version' => :'Integer',
@@ -492,6 +496,10 @@ module TalonOne
         self.stores_imported = attributes[:'stores_imported']
       end
 
+      if attributes.key?(:'revision_frontend_state')
+        self.revision_frontend_state = attributes[:'revision_frontend_state']
+      end
+
       if attributes.key?(:'active_revision_id')
         self.active_revision_id = attributes[:'active_revision_id']
       end
@@ -607,9 +615,11 @@ module TalonOne
       return false unless type_validator.valid?(@type)
       return false if @budgets.nil?
       return false if @frontend_state.nil?
-      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       return false unless frontend_state_validator.valid?(@frontend_state)
       return false if @stores_imported.nil?
+      revision_frontend_state_validator = EnumAttributeValidator.new('String', ["revised", "pending"])
+      return false unless revision_frontend_state_validator.valid?(@revision_frontend_state)
       true
     end
 
@@ -650,11 +660,21 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] frontend_state Object to be assigned
     def frontend_state=(frontend_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       unless validator.valid?(frontend_state)
         fail ArgumentError, "invalid value for \"frontend_state\", must be one of #{validator.allowable_values}."
       end
       @frontend_state = frontend_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] revision_frontend_state Object to be assigned
+    def revision_frontend_state=(revision_frontend_state)
+      validator = EnumAttributeValidator.new('String', ["revised", "pending"])
+      unless validator.valid?(revision_frontend_state)
+        fail ArgumentError, "invalid value for \"revision_frontend_state\", must be one of #{validator.allowable_values}."
+      end
+      @revision_frontend_state = revision_frontend_state
     end
 
     # Checks equality by comparing each attribute.
@@ -704,6 +724,7 @@ module TalonOne
           template_id == o.template_id &&
           frontend_state == o.frontend_state &&
           stores_imported == o.stores_imported &&
+          revision_frontend_state == o.revision_frontend_state &&
           active_revision_id == o.active_revision_id &&
           active_revision_version_id == o.active_revision_version_id &&
           version == o.version &&
@@ -721,7 +742,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, revision_frontend_state, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
     end
 
     # Builds the object from hash

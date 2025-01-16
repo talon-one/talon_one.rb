@@ -35,7 +35,7 @@ describe 'BulkOperationOnCampaigns' do
   describe 'test attribute "operation"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["disable", "delete"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["disable", "delete", "activate_revision"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.operation = value }.not_to raise_error
       # end
@@ -43,6 +43,12 @@ describe 'BulkOperationOnCampaigns' do
   end
 
   describe 'test attribute "campaign_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "activate_at"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

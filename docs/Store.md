@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Internal ID of this entity. | 
-**created** | **DateTime** | The time this entity was created. The time this entity was created. | 
+**created** | **DateTime** | The time this entity was created. | 
 **name** | **String** | The name of the store. | 
 **description** | **String** | The description of the store. | 
 **attributes** | [**Object**](.md) | The attributes of the store. | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::Store.new(id: 6,
-                                 created: null,
+                                 created: 2020-02-07T08:15:22Z,
                                  name: South US store,
                                  description: This is the description of the store in south US.,
                                  attributes: {&quot;country&quot;:&quot;USA&quot;,&quot;code&quot;:1234},

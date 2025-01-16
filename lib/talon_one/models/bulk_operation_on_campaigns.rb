@@ -20,6 +20,9 @@ module TalonOne
     # The list of campaign IDs on which the operation will be performed.
     attr_accessor :campaign_ids
 
+    # Timestamp when the revisions are finalized after the `activate_revision` operation. The current time is used when left blank.  **Note:** It must be an RFC3339 timestamp string. 
+    attr_accessor :activate_at
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -46,7 +49,8 @@ module TalonOne
     def self.attribute_map
       {
         :'operation' => :'operation',
-        :'campaign_ids' => :'campaignIds'
+        :'campaign_ids' => :'campaignIds',
+        :'activate_at' => :'activateAt'
       }
     end
 
@@ -54,7 +58,8 @@ module TalonOne
     def self.openapi_types
       {
         :'operation' => :'String',
-        :'campaign_ids' => :'Array<Integer>'
+        :'campaign_ids' => :'Array<Integer>',
+        :'activate_at' => :'DateTime'
       }
     end
 
@@ -88,6 +93,10 @@ module TalonOne
           self.campaign_ids = value
         end
       end
+
+      if attributes.key?(:'activate_at')
+        self.activate_at = attributes[:'activate_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,7 +118,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @operation.nil?
-      operation_validator = EnumAttributeValidator.new('String', ["disable", "delete"])
+      operation_validator = EnumAttributeValidator.new('String', ["disable", "delete", "activate_revision"])
       return false unless operation_validator.valid?(@operation)
       return false if @campaign_ids.nil?
       true
@@ -118,7 +127,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] operation Object to be assigned
     def operation=(operation)
-      validator = EnumAttributeValidator.new('String', ["disable", "delete"])
+      validator = EnumAttributeValidator.new('String', ["disable", "delete", "activate_revision"])
       unless validator.valid?(operation)
         fail ArgumentError, "invalid value for \"operation\", must be one of #{validator.allowable_values}."
       end
@@ -131,7 +140,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           operation == o.operation &&
-          campaign_ids == o.campaign_ids
+          campaign_ids == o.campaign_ids &&
+          activate_at == o.activate_at
     end
 
     # @see the `==` method
@@ -143,7 +153,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [operation, campaign_ids].hash
+      [operation, campaign_ids, activate_at].hash
     end
 
     # Builds the object from hash

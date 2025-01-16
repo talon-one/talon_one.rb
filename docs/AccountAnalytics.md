@@ -49,7 +49,7 @@ instance = TalonOne::AccountAnalytics.new(applications: 11,
                                  webhooks: 2,
                                  loyalty_programs: 5,
                                  live_loyalty_programs: 5,
-                                 last_updated_at: null)
+                                 last_updated_at: 2022-12-12T12:12:12Z)
 ```
 
 

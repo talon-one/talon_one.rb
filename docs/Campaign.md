@@ -44,8 +44,9 @@ Name | Type | Description | Notes
 **created_by** | **String** | Name of the user who created this campaign if available. | [optional] 
 **updated_by** | **String** | Name of the user who last updated this campaign if available. | [optional] 
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
-**frontend_state** | **String** | A campaign state described exactly as in the Campaign Manager. | 
+**frontend_state** | **String** | The campaign state displayed in the Campaign Manager. | 
 **stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
+**revision_frontend_state** | **String** | The campaign revision state displayed in the Campaign Manager. | [optional] 
 **active_revision_id** | **Integer** | ID of the revision that was last activated on this campaign.  | [optional] 
 **active_revision_version_id** | **Integer** | ID of the revision version that is active on the campaign.  | [optional] 
 **version** | **Integer** | Incrementing number representing how many revisions have been activated on this campaign, starts from 0 for a new campaign.  | [optional] 
@@ -100,6 +101,7 @@ instance = TalonOne::Campaign.new(id: 4,
                                  template_id: 3,
                                  frontend_state: running,
                                  stores_imported: true,
+                                 revision_frontend_state: revised,
                                  active_revision_id: 6,
                                  active_revision_version_id: 6,
                                  version: 6,

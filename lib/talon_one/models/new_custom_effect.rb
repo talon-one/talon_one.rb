@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewCustomEffect
     # The IDs of the Applications that are related to this entity.
     attr_accessor :application_ids

@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewCampaignCollection
     # A short description of the purpose of this collection.
     attr_accessor :description

@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class ItemAttribute
     # The ID of the attribute of the item.
     attr_accessor :attributeid

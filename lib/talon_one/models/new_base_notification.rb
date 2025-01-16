@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewBaseNotification
     # Indicates which notification properties to apply.
     attr_accessor :policy

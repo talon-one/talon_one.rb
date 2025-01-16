@@ -18,6 +18,9 @@ module TalonOne
     # Number of disabled campaigns.
     attr_accessor :disabled
 
+    # Number of staged campaigns.
+    attr_accessor :staged
+
     # Number of scheduled campaigns.
     attr_accessor :scheduled
 
@@ -34,6 +37,7 @@ module TalonOne
     def self.attribute_map
       {
         :'disabled' => :'disabled',
+        :'staged' => :'staged',
         :'scheduled' => :'scheduled',
         :'running' => :'running',
         :'expired' => :'expired',
@@ -45,6 +49,7 @@ module TalonOne
     def self.openapi_types
       {
         :'disabled' => :'Integer',
+        :'staged' => :'Integer',
         :'scheduled' => :'Integer',
         :'running' => :'Integer',
         :'expired' => :'Integer',
@@ -77,6 +82,10 @@ module TalonOne
         self.disabled = attributes[:'disabled']
       end
 
+      if attributes.key?(:'staged')
+        self.staged = attributes[:'staged']
+      end
+
       if attributes.key?(:'scheduled')
         self.scheduled = attributes[:'scheduled']
       end
@@ -102,6 +111,10 @@ module TalonOne
         invalid_properties.push('invalid value for "disabled", disabled cannot be nil.')
       end
 
+      if @staged.nil?
+        invalid_properties.push('invalid value for "staged", staged cannot be nil.')
+      end
+
       if @scheduled.nil?
         invalid_properties.push('invalid value for "scheduled", scheduled cannot be nil.')
       end
@@ -125,6 +138,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @disabled.nil?
+      return false if @staged.nil?
       return false if @scheduled.nil?
       return false if @running.nil?
       return false if @expired.nil?
@@ -138,6 +152,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           disabled == o.disabled &&
+          staged == o.staged &&
           scheduled == o.scheduled &&
           running == o.running &&
           expired == o.expired &&
@@ -153,7 +168,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [disabled, scheduled, running, expired, archived].hash
+      [disabled, staged, scheduled, running, expired, archived].hash
     end
 
     # Builds the object from hash

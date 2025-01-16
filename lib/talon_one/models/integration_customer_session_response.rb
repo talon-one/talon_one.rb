@@ -16,6 +16,7 @@ module TalonOne
   class IntegrationCustomerSessionResponse
     attr_accessor :customer_session
 
+    # The returned effects.  **Note:** This endpoint returns only the effects that are valid after any rollback effects and their corresponding non-rollback effects are removed. 
     attr_accessor :effects
 
     # Attribute mapping from ruby-style variable name to JSON key.

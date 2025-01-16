@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class LoyaltyCard
     # Internal ID of this entity.
     attr_accessor :id
@@ -23,6 +22,12 @@ module TalonOne
 
     # The ID of the loyalty program that owns this entity.
     attr_accessor :program_id
+
+    # The integration name of the loyalty program that owns this entity.
+    attr_accessor :program_name
+
+    # The Campaign Manager-displayed name of the loyalty program that owns this entity.
+    attr_accessor :program_title
 
     # Status of the loyalty card. Can be `active` or `inactive`. 
     attr_accessor :status
@@ -62,6 +67,8 @@ module TalonOne
         :'id' => :'id',
         :'created' => :'created',
         :'program_id' => :'programID',
+        :'program_name' => :'programName',
+        :'program_title' => :'programTitle',
         :'status' => :'status',
         :'block_reason' => :'blockReason',
         :'identifier' => :'identifier',
@@ -82,6 +89,8 @@ module TalonOne
         :'id' => :'Integer',
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
+        :'program_name' => :'String',
+        :'program_title' => :'String',
         :'status' => :'String',
         :'block_reason' => :'String',
         :'identifier' => :'String',
@@ -127,6 +136,14 @@ module TalonOne
 
       if attributes.key?(:'program_id')
         self.program_id = attributes[:'program_id']
+      end
+
+      if attributes.key?(:'program_name')
+        self.program_name = attributes[:'program_name']
+      end
+
+      if attributes.key?(:'program_title')
+        self.program_title = attributes[:'program_title']
       end
 
       if attributes.key?(:'status')
@@ -206,6 +223,11 @@ module TalonOne
         invalid_properties.push('invalid value for "identifier", the character length must be smaller than or equal to 108.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if @identifier !~ pattern
+        invalid_properties.push("invalid value for \"identifier\", must conform to the pattern #{pattern}.")
+      end
+
       if @users_per_card_limit.nil?
         invalid_properties.push('invalid value for "users_per_card_limit", users_per_card_limit cannot be nil.')
       end
@@ -218,8 +240,18 @@ module TalonOne
         invalid_properties.push('invalid value for "old_card_identifier", the character length must be smaller than or equal to 108.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !@old_card_identifier.nil? && @old_card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"old_card_identifier\", must conform to the pattern #{pattern}.")
+      end
+
       if !@new_card_identifier.nil? && @new_card_identifier.to_s.length > 108
         invalid_properties.push('invalid value for "new_card_identifier", the character length must be smaller than or equal to 108.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !@new_card_identifier.nil? && @new_card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"new_card_identifier\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -234,10 +266,13 @@ module TalonOne
       return false if @status.nil?
       return false if @identifier.nil?
       return false if @identifier.to_s.length > 108
+      return false if @identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       return false if @users_per_card_limit.nil?
       return false if @users_per_card_limit < 0
       return false if !@old_card_identifier.nil? && @old_card_identifier.to_s.length > 108
+      return false if !@old_card_identifier.nil? && @old_card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       return false if !@new_card_identifier.nil? && @new_card_identifier.to_s.length > 108
+      return false if !@new_card_identifier.nil? && @new_card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       true
     end
 
@@ -250,6 +285,11 @@ module TalonOne
 
       if identifier.to_s.length > 108
         fail ArgumentError, 'invalid value for "identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if identifier !~ pattern
+        fail ArgumentError, "invalid value for \"identifier\", must conform to the pattern #{pattern}."
       end
 
       @identifier = identifier
@@ -276,6 +316,11 @@ module TalonOne
         fail ArgumentError, 'invalid value for "old_card_identifier", the character length must be smaller than or equal to 108.'
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !old_card_identifier.nil? && old_card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"old_card_identifier\", must conform to the pattern #{pattern}."
+      end
+
       @old_card_identifier = old_card_identifier
     end
 
@@ -284,6 +329,11 @@ module TalonOne
     def new_card_identifier=(new_card_identifier)
       if !new_card_identifier.nil? && new_card_identifier.to_s.length > 108
         fail ArgumentError, 'invalid value for "new_card_identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !new_card_identifier.nil? && new_card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"new_card_identifier\", must conform to the pattern #{pattern}."
       end
 
       @new_card_identifier = new_card_identifier
@@ -297,6 +347,8 @@ module TalonOne
           id == o.id &&
           created == o.created &&
           program_id == o.program_id &&
+          program_name == o.program_name &&
+          program_title == o.program_title &&
           status == o.status &&
           block_reason == o.block_reason &&
           identifier == o.identifier &&
@@ -319,7 +371,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, program_id, status, block_reason, identifier, users_per_card_limit, profiles, ledger, subledgers, modified, old_card_identifier, new_card_identifier, batch_id].hash
+      [id, created, program_id, program_name, program_title, status, block_reason, identifier, users_per_card_limit, profiles, ledger, subledgers, modified, old_card_identifier, new_card_identifier, batch_id].hash
     end
 
     # Builds the object from hash

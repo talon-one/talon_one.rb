@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class RevisionVersion
     # Unique ID for this entity. Not to be confused with the Integration ID, which is set by your integration layer and used in most endpoints.
     attr_accessor :id

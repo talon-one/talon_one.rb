@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class TemplateArgDef
     # The type of value this argument expects.
     attr_accessor :type
@@ -26,6 +25,9 @@ module TalonOne
 
     # Arbitrary metadata that may be used to render an input for this argument.
     attr_accessor :ui
+
+    # The identifier for the associated value within the JSON object.
+    attr_accessor :key
 
     # ID of the picklist linked to a template.
     attr_accessor :picklist_id
@@ -62,6 +64,7 @@ module TalonOne
         :'description' => :'description',
         :'title' => :'title',
         :'ui' => :'ui',
+        :'key' => :'key',
         :'picklist_id' => :'picklistID',
         :'restricted_by_picklist' => :'restrictedByPicklist'
       }
@@ -74,6 +77,7 @@ module TalonOne
         :'description' => :'String',
         :'title' => :'String',
         :'ui' => :'Object',
+        :'key' => :'String',
         :'picklist_id' => :'Integer',
         :'restricted_by_picklist' => :'Boolean'
       }
@@ -114,6 +118,10 @@ module TalonOne
 
       if attributes.key?(:'ui')
         self.ui = attributes[:'ui']
+      end
+
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
       end
 
       if attributes.key?(:'picklist_id')
@@ -198,6 +206,7 @@ module TalonOne
           description == o.description &&
           title == o.title &&
           ui == o.ui &&
+          key == o.key &&
           picklist_id == o.picklist_id &&
           restricted_by_picklist == o.restricted_by_picklist
     end
@@ -211,7 +220,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, description, title, ui, picklist_id, restricted_by_picklist].hash
+      [type, description, title, ui, key, picklist_id, restricted_by_picklist].hash
     end
 
     # Builds the object from hash

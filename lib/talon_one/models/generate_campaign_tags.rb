@@ -14,20 +14,20 @@ require 'date'
 
 module TalonOne
   class GenerateCampaignTags
-    # ID of the campaign.
-    attr_accessor :campaign_id
+    # ID of a ruleset.
+    attr_accessor :ruleset_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'campaign_id' => :'campaignID'
+        :'ruleset_id' => :'rulesetID'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'campaign_id' => :'Integer'
+        :'ruleset_id' => :'Integer'
       }
     end
 
@@ -52,8 +52,8 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'campaign_id')
-        self.campaign_id = attributes[:'campaign_id']
+      if attributes.key?(:'ruleset_id')
+        self.ruleset_id = attributes[:'ruleset_id']
       end
     end
 
@@ -61,8 +61,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
+      if @ruleset_id.nil?
+        invalid_properties.push('invalid value for "ruleset_id", ruleset_id cannot be nil.')
       end
 
       invalid_properties
@@ -71,7 +71,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @campaign_id.nil?
+      return false if @ruleset_id.nil?
       true
     end
 
@@ -80,7 +80,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          campaign_id == o.campaign_id
+          ruleset_id == o.ruleset_id
     end
 
     # @see the `==` method
@@ -92,7 +92,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id].hash
+      [ruleset_id].hash
     end
 
     # Builds the object from hash

@@ -100,6 +100,12 @@ describe 'UpdateCampaignTemplate' do
     end
   end
 
+  describe 'test attribute "coupon_reservation_settings"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "referral_settings"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

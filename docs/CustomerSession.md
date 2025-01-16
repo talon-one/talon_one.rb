@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CustomerSession.new(integration_id: null,
+instance = TalonOne::CustomerSession.new(integration_id: URNGV8294NV,
                                  created: 2020-02-07T08:15:22Z,
                                  application_id: 322,
                                  profile_id: URNGV8294NV,

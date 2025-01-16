@@ -31,6 +31,40 @@ module TalonOne
 
     attr_accessor :period_end_override
 
+    # The policy that determines if and how the achievement recurs. - `no_recurrence`: The achievement can be completed only once. - `on_expiration`: The achievement resets after it expires and becomes available again. 
+    attr_accessor :recurrence_policy
+
+    # The policy that determines how the achievement starts, ends, or resets. - `user_action`: The achievement ends or resets relative to when the customer started the achievement. - `fixed_schedule`: The achievement starts, ends, or resets for all customers following a fixed schedule. 
+    attr_accessor :activation_policy
+
+    # The achievement's start date when `activationPolicy` is set to `fixed_schedule`.  **Note:** It must be an RFC3339 timestamp string. 
+    attr_accessor :fixed_start_date
+
+    # The achievement's end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It must be an RFC3339 timestamp string. 
+    attr_accessor :end_date
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -39,7 +73,11 @@ module TalonOne
         :'description' => :'description',
         :'target' => :'target',
         :'period' => :'period',
-        :'period_end_override' => :'periodEndOverride'
+        :'period_end_override' => :'periodEndOverride',
+        :'recurrence_policy' => :'recurrencePolicy',
+        :'activation_policy' => :'activationPolicy',
+        :'fixed_start_date' => :'fixedStartDate',
+        :'end_date' => :'endDate'
       }
     end
 
@@ -51,7 +89,11 @@ module TalonOne
         :'description' => :'String',
         :'target' => :'Float',
         :'period' => :'String',
-        :'period_end_override' => :'TimePoint'
+        :'period_end_override' => :'TimePoint',
+        :'recurrence_policy' => :'String',
+        :'activation_policy' => :'String',
+        :'fixed_start_date' => :'DateTime',
+        :'end_date' => :'DateTime'
       }
     end
 
@@ -99,6 +141,22 @@ module TalonOne
       if attributes.key?(:'period_end_override')
         self.period_end_override = attributes[:'period_end_override']
       end
+
+      if attributes.key?(:'recurrence_policy')
+        self.recurrence_policy = attributes[:'recurrence_policy']
+      end
+
+      if attributes.key?(:'activation_policy')
+        self.activation_policy = attributes[:'activation_policy']
+      end
+
+      if attributes.key?(:'fixed_start_date')
+        self.fixed_start_date = attributes[:'fixed_start_date']
+      end
+
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -127,6 +185,10 @@ module TalonOne
       return false if !@name.nil? && @name.to_s.length > 1000
       return false if !@name.nil? && @name.to_s.length < 1
       return false if !@name.nil? && @name !~ Regexp.new(/^[a-zA-Z]\w+$/)
+      recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      return false unless recurrence_policy_validator.valid?(@recurrence_policy)
+      activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
+      return false unless activation_policy_validator.valid?(@activation_policy)
       true
     end
 
@@ -149,6 +211,26 @@ module TalonOne
       @name = name
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] recurrence_policy Object to be assigned
+    def recurrence_policy=(recurrence_policy)
+      validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      unless validator.valid?(recurrence_policy)
+        fail ArgumentError, "invalid value for \"recurrence_policy\", must be one of #{validator.allowable_values}."
+      end
+      @recurrence_policy = recurrence_policy
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] activation_policy Object to be assigned
+    def activation_policy=(activation_policy)
+      validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
+      unless validator.valid?(activation_policy)
+        fail ArgumentError, "invalid value for \"activation_policy\", must be one of #{validator.allowable_values}."
+      end
+      @activation_policy = activation_policy
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -159,7 +241,11 @@ module TalonOne
           description == o.description &&
           target == o.target &&
           period == o.period &&
-          period_end_override == o.period_end_override
+          period_end_override == o.period_end_override &&
+          recurrence_policy == o.recurrence_policy &&
+          activation_policy == o.activation_policy &&
+          fixed_start_date == o.fixed_start_date &&
+          end_date == o.end_date
     end
 
     # @see the `==` method
@@ -171,7 +257,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, title, description, target, period, period_end_override].hash
+      [name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date].hash
     end
 
     # Builds the object from hash

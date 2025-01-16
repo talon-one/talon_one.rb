@@ -48,4 +48,10 @@ describe 'GenerateLoyaltyCard' do
     end
   end
 
+  describe 'test attribute "card_identifier"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

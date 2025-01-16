@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class NewAudience
     # The human-friendly display name for this audience.
     attr_accessor :name

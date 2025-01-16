@@ -17,17 +17,27 @@ module TalonOne
     # The ID of the loyalty program that owns this entity.
     attr_accessor :program_id
 
+    # The integration name of the loyalty program that owns this entity.
+    attr_accessor :program_name
+
+    # The Campaign Manager-displayed name of the loyalty program that owns this entity.
+    attr_accessor :program_title
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'program_id' => :'programID'
+        :'program_id' => :'programID',
+        :'program_name' => :'programName',
+        :'program_title' => :'programTitle'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'program_id' => :'Integer'
+        :'program_id' => :'Integer',
+        :'program_name' => :'String',
+        :'program_title' => :'String'
       }
     end
 
@@ -55,6 +65,14 @@ module TalonOne
       if attributes.key?(:'program_id')
         self.program_id = attributes[:'program_id']
       end
+
+      if attributes.key?(:'program_name')
+        self.program_name = attributes[:'program_name']
+      end
+
+      if attributes.key?(:'program_title')
+        self.program_title = attributes[:'program_title']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,7 +98,9 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          program_id == o.program_id
+          program_id == o.program_id &&
+          program_name == o.program_name &&
+          program_title == o.program_title
     end
 
     # @see the `==` method
@@ -92,7 +112,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [program_id].hash
+      [program_id, program_name, program_title].hash
     end
 
     # Builds the object from hash

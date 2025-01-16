@@ -288,6 +288,11 @@ module TalonOne
         invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !@card_identifier.nil? && @card_identifier !~ pattern
+        invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
+      end
+
       if @subledger_id.nil?
         invalid_properties.push('invalid value for "subledger_id", subledger_id cannot be nil.')
       end
@@ -321,6 +326,7 @@ module TalonOne
       return false if @expiry_date.nil?
       return false if !@customer_profile_id.nil? && @customer_profile_id.to_s.length > 255
       return false if !@card_identifier.nil? && @card_identifier.to_s.length > 108
+      return false if !@card_identifier.nil? && @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
       return false if @subledger_id.nil?
       return false if @subledger_id.to_s.length > 64
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
@@ -380,6 +386,11 @@ module TalonOne
     def card_identifier=(card_identifier)
       if !card_identifier.nil? && card_identifier.to_s.length > 108
         fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !card_identifier.nil? && card_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
       end
 
       @card_identifier = card_identifier

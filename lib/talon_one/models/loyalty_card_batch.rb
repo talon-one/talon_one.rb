@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class LoyaltyCardBatch
     # Number of loyalty cards in the batch.
     attr_accessor :number_of_cards
@@ -23,6 +22,8 @@ module TalonOne
 
     # Status of the loyalty cards in the batch.
     attr_accessor :status
+
+    attr_accessor :card_code_settings
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -51,7 +52,8 @@ module TalonOne
       {
         :'number_of_cards' => :'numberOfCards',
         :'batch_id' => :'batchId',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'card_code_settings' => :'cardCodeSettings'
       }
     end
 
@@ -60,7 +62,8 @@ module TalonOne
       {
         :'number_of_cards' => :'Integer',
         :'batch_id' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'card_code_settings' => :'CodeGeneratorSettings'
       }
     end
 
@@ -97,6 +100,10 @@ module TalonOne
         self.status = attributes[:'status']
       else
         self.status = 'active'
+      end
+
+      if attributes.key?(:'card_code_settings')
+        self.card_code_settings = attributes[:'card_code_settings']
       end
     end
 
@@ -172,7 +179,8 @@ module TalonOne
       self.class == o.class &&
           number_of_cards == o.number_of_cards &&
           batch_id == o.batch_id &&
-          status == o.status
+          status == o.status &&
+          card_code_settings == o.card_code_settings
     end
 
     # @see the `==` method
@@ -184,7 +192,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [number_of_cards, batch_id, status].hash
+      [number_of_cards, batch_id, status, card_code_settings].hash
     end
 
     # Builds the object from hash

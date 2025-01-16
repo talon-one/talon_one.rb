@@ -156,4 +156,10 @@ describe 'CustomerSessionV2' do
     end
   end
 
+  describe 'test attribute "closure_prediction"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

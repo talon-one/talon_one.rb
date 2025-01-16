@@ -214,7 +214,7 @@ module TalonOne
       return false if @campaign_name.nil?
       return false if @campaign_tags.nil?
       return false if @campaign_state.nil?
-      campaign_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      campaign_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       return false unless campaign_state_validator.valid?(@campaign_state)
       true
     end
@@ -222,7 +222,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_state Object to be assigned
     def campaign_state=(campaign_state)
-      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived"])
+      validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       unless validator.valid?(campaign_state)
         fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{validator.allowable_values}."
       end

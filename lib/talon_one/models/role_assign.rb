@@ -13,7 +13,6 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # 
   class RoleAssign
     # An array of user IDs.
     attr_accessor :users

@@ -16,15 +16,12 @@ module TalonOne
   class InlineResponse20030
     attr_accessor :has_more
 
-    attr_accessor :total_result_size
-
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'has_more' => :'hasMore',
-        :'total_result_size' => :'totalResultSize',
         :'data' => :'data'
       }
     end
@@ -33,8 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'has_more' => :'Boolean',
-        :'total_result_size' => :'Integer',
-        :'data' => :'Array<Audience>'
+        :'data' => :'Array<AudienceAnalytics>'
       }
     end
 
@@ -61,10 +57,6 @@ module TalonOne
 
       if attributes.key?(:'has_more')
         self.has_more = attributes[:'has_more']
-      end
-
-      if attributes.key?(:'total_result_size')
-        self.total_result_size = attributes[:'total_result_size']
       end
 
       if attributes.key?(:'data')
@@ -98,7 +90,6 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           has_more == o.has_more &&
-          total_result_size == o.total_result_size &&
           data == o.data
     end
 
@@ -111,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [has_more, total_result_size, data].hash
+      [has_more, data].hash
     end
 
     # Builds the object from hash
