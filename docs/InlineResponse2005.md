@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Application&gt;**](Application.md) |  | 
+**has_more** | **Boolean** |  | 
+**data** | [**Array&lt;CardLedgerPointsEntryIntegrationAPI&gt;**](CardLedgerPointsEntryIntegrationAPI.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse2005.new(total_result_size: 1,
+instance = TalonOne::InlineResponse2005.new(has_more: true,
                                  data: null)
 ```
 

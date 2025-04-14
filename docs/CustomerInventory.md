@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **referrals** | [**Array&lt;InventoryReferral&gt;**](InventoryReferral.md) |  | [optional] 
 **coupons** | [**Array&lt;InventoryCoupon&gt;**](InventoryCoupon.md) | The coupons reserved by this profile. This array includes hard and soft reservations.  | [optional] 
 **giveaways** | [**Array&lt;Giveaway&gt;**](Giveaway.md) |  | [optional] 
-**achievements** | [**Array&lt;AchievementProgress&gt;**](AchievementProgress.md) |  | [optional] 
+**achievements** | [**Array&lt;AchievementProgressWithDefinition&gt;**](AchievementProgressWithDefinition.md) |  | [optional] 
 
 ## Code Sample
 

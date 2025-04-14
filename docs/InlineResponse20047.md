@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | 
-**data** | [**Array&lt;AchievementProgress&gt;**](AchievementProgress.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;Store&gt;**](Store.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20047.new(has_more: true,
+instance = TalonOne::InlineResponse20047.new(has_more: null,
+                                 total_result_size: 1,
                                  data: null)
 ```
 

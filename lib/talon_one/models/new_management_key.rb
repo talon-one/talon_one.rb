@@ -38,6 +38,9 @@ module TalonOne
     # The date the management key was created.
     attr_accessor :created
 
+    # The management key is disabled (this property is set to `true`) when the user who created the key is disabled or deleted.
+    attr_accessor :disabled
+
     # The management key.
     attr_accessor :key
 
@@ -52,6 +55,7 @@ module TalonOne
         :'created_by' => :'createdBy',
         :'account_id' => :'accountID',
         :'created' => :'created',
+        :'disabled' => :'disabled',
         :'key' => :'key'
       }
     end
@@ -67,6 +71,7 @@ module TalonOne
         :'created_by' => :'Integer',
         :'account_id' => :'Integer',
         :'created' => :'DateTime',
+        :'disabled' => :'Boolean',
         :'key' => :'String'
       }
     end
@@ -126,6 +131,10 @@ module TalonOne
 
       if attributes.key?(:'created')
         self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'disabled')
+        self.disabled = attributes[:'disabled']
       end
 
       if attributes.key?(:'key')
@@ -199,6 +208,7 @@ module TalonOne
           created_by == o.created_by &&
           account_id == o.account_id &&
           created == o.created &&
+          disabled == o.disabled &&
           key == o.key
     end
 
@@ -211,7 +221,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created, key].hash
+      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created, disabled, key].hash
     end
 
     # Builds the object from hash

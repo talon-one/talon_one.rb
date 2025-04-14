@@ -83,6 +83,9 @@ module TalonOne
     # Indicates whether the linked stores were imported via a CSV file.
     attr_accessor :stores_imported
 
+    # A list of value map IDs for the campaign.
+    attr_accessor :value_maps_ids
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -130,7 +133,8 @@ module TalonOne
         :'updated_by' => :'updatedBy',
         :'template_id' => :'templateId',
         :'frontend_state' => :'frontendState',
-        :'stores_imported' => :'storesImported'
+        :'stores_imported' => :'storesImported',
+        :'value_maps_ids' => :'valueMapsIds'
       }
     end
 
@@ -159,7 +163,8 @@ module TalonOne
         :'updated_by' => :'String',
         :'template_id' => :'Integer',
         :'frontend_state' => :'String',
-        :'stores_imported' => :'Boolean'
+        :'stores_imported' => :'Boolean',
+        :'value_maps_ids' => :'Array<Integer>'
       }
     end
 
@@ -277,16 +282,18 @@ module TalonOne
       if attributes.key?(:'stores_imported')
         self.stores_imported = attributes[:'stores_imported']
       end
+
+      if attributes.key?(:'value_maps_ids')
+        if (value = attributes[:'value_maps_ids']).is_a?(Array)
+          self.value_maps_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @budgets.nil?
-        invalid_properties.push('invalid value for "budgets", budgets cannot be nil.')
-      end
-
       if @frontend_state.nil?
         invalid_properties.push('invalid value for "frontend_state", frontend_state cannot be nil.')
       end
@@ -301,7 +308,6 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @budgets.nil?
       return false if @frontend_state.nil?
       frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       return false unless frontend_state_validator.valid?(@frontend_state)
@@ -346,7 +352,8 @@ module TalonOne
           updated_by == o.updated_by &&
           template_id == o.template_id &&
           frontend_state == o.frontend_state &&
-          stores_imported == o.stores_imported
+          stores_imported == o.stores_imported &&
+          value_maps_ids == o.value_maps_ids
     end
 
     # @see the `==` method
@@ -358,7 +365,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported].hash
+      [budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, value_maps_ids].hash
     end
 
     # Builds the object from hash

@@ -16,7 +16,7 @@ require 'TalonOne'
 
 instance = TalonOne::Binding.new(name: my property,
                                  type: templateParameter,
-                                 expression: null,
+                                 expression: [string1, string2],
                                  value_type: string)
 ```
 

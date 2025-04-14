@@ -14,39 +14,23 @@ require 'date'
 
 module TalonOne
   class ProductUnitAnalytics
-    # The start of the aggregation time frame in UTC.
-    attr_accessor :start_time
+    attr_accessor :data
 
-    # The end of the aggregation time frame in UTC.
-    attr_accessor :end_time
-
-    attr_accessor :purchased_units
-
-    # The ID of the analytics-level product.
-    attr_accessor :product_id
-
-    # The name of the analytics-level product.
-    attr_accessor :product_name
+    attr_accessor :totals
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'start_time' => :'startTime',
-        :'end_time' => :'endTime',
-        :'purchased_units' => :'purchasedUnits',
-        :'product_id' => :'productId',
-        :'product_name' => :'productName'
+        :'data' => :'data',
+        :'totals' => :'totals'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'start_time' => :'DateTime',
-        :'end_time' => :'DateTime',
-        :'purchased_units' => :'AnalyticsDataPointWithTrend',
-        :'product_id' => :'Integer',
-        :'product_name' => :'String'
+        :'data' => :'Array<ProductUnitAnalyticsDataPoint>',
+        :'totals' => :'ProductUnitAnalyticsTotals'
       }
     end
 
@@ -71,24 +55,14 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'start_time')
-        self.start_time = attributes[:'start_time']
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
+        end
       end
 
-      if attributes.key?(:'end_time')
-        self.end_time = attributes[:'end_time']
-      end
-
-      if attributes.key?(:'purchased_units')
-        self.purchased_units = attributes[:'purchased_units']
-      end
-
-      if attributes.key?(:'product_id')
-        self.product_id = attributes[:'product_id']
-      end
-
-      if attributes.key?(:'product_name')
-        self.product_name = attributes[:'product_name']
+      if attributes.key?(:'totals')
+        self.totals = attributes[:'totals']
       end
     end
 
@@ -96,24 +70,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @start_time.nil?
-        invalid_properties.push('invalid value for "start_time", start_time cannot be nil.')
+      if @data.nil?
+        invalid_properties.push('invalid value for "data", data cannot be nil.')
       end
 
-      if @end_time.nil?
-        invalid_properties.push('invalid value for "end_time", end_time cannot be nil.')
-      end
-
-      if @purchased_units.nil?
-        invalid_properties.push('invalid value for "purchased_units", purchased_units cannot be nil.')
-      end
-
-      if @product_id.nil?
-        invalid_properties.push('invalid value for "product_id", product_id cannot be nil.')
-      end
-
-      if @product_name.nil?
-        invalid_properties.push('invalid value for "product_name", product_name cannot be nil.')
+      if @totals.nil?
+        invalid_properties.push('invalid value for "totals", totals cannot be nil.')
       end
 
       invalid_properties
@@ -122,11 +84,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @start_time.nil?
-      return false if @end_time.nil?
-      return false if @purchased_units.nil?
-      return false if @product_id.nil?
-      return false if @product_name.nil?
+      return false if @data.nil?
+      return false if @totals.nil?
       true
     end
 
@@ -135,11 +94,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          start_time == o.start_time &&
-          end_time == o.end_time &&
-          purchased_units == o.purchased_units &&
-          product_id == o.product_id &&
-          product_name == o.product_name
+          data == o.data &&
+          totals == o.totals
     end
 
     # @see the `==` method
@@ -151,7 +107,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_time, end_time, purchased_units, product_id, product_name].hash
+      [data, totals].hash
     end
 
     # Builds the object from hash

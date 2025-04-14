@@ -200,7 +200,7 @@ module TalonOne
     def valid?
       return false if @title.nil?
       return false if @expires.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
+      platform_validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "shopify", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
       return false unless platform_validator.valid?(@platform)
       type_validator = EnumAttributeValidator.new('String', ["staging"])
       return false unless type_validator.valid?(@type)
@@ -215,7 +215,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "selligent", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
+      validator = EnumAttributeValidator.new('String', ["none", "segment", "braze", "mparticle", "shopify", "iterable", "customer_engagement", "customer_data", "salesforce", "emarsys"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

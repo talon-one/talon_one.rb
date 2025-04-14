@@ -27,6 +27,9 @@ module TalonOne
     # Total amount of points awarded but never redeemed. They cannot be used anymore.
     attr_accessor :expired_points
 
+    # Total amount of negative points. This implies that `activePoints` is `0`.
+    attr_accessor :negative_points
+
     attr_accessor :current_tier
 
     attr_accessor :projected_tier
@@ -44,6 +47,7 @@ module TalonOne
         :'pending_points' => :'pendingPoints',
         :'spent_points' => :'spentPoints',
         :'expired_points' => :'expiredPoints',
+        :'negative_points' => :'negativePoints',
         :'current_tier' => :'currentTier',
         :'projected_tier' => :'projectedTier',
         :'points_to_next_tier' => :'pointsToNextTier',
@@ -58,6 +62,7 @@ module TalonOne
         :'pending_points' => :'Float',
         :'spent_points' => :'Float',
         :'expired_points' => :'Float',
+        :'negative_points' => :'Float',
         :'current_tier' => :'Tier',
         :'projected_tier' => :'ProjectedTier',
         :'points_to_next_tier' => :'Float',
@@ -102,6 +107,10 @@ module TalonOne
         self.expired_points = attributes[:'expired_points']
       end
 
+      if attributes.key?(:'negative_points')
+        self.negative_points = attributes[:'negative_points']
+      end
+
       if attributes.key?(:'current_tier')
         self.current_tier = attributes[:'current_tier']
       end
@@ -141,6 +150,7 @@ module TalonOne
           pending_points == o.pending_points &&
           spent_points == o.spent_points &&
           expired_points == o.expired_points &&
+          negative_points == o.negative_points &&
           current_tier == o.current_tier &&
           projected_tier == o.projected_tier &&
           points_to_next_tier == o.points_to_next_tier &&
@@ -156,7 +166,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [active_points, pending_points, spent_points, expired_points, current_tier, projected_tier, points_to_next_tier, next_tier_name].hash
+      [active_points, pending_points, spent_points, expired_points, negative_points, current_tier, projected_tier, points_to_next_tier, next_tier_name].hash
     end
 
     # Builds the object from hash

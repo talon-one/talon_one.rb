@@ -22,6 +22,12 @@ module TalonOne
     # Indicates whether batching is activated.
     attr_accessor :batching_enabled
 
+    # Indicates whether to include all generated coupons. If `false`, only the `batchId` of the generated coupons is included.
+    attr_accessor :include_data
+
+    # The required size of each batch of data. This value applies only when `batchingEnabled` is `true`.
+    attr_accessor :batch_size
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -49,7 +55,9 @@ module TalonOne
       {
         :'name' => :'name',
         :'scopes' => :'scopes',
-        :'batching_enabled' => :'batchingEnabled'
+        :'batching_enabled' => :'batchingEnabled',
+        :'include_data' => :'includeData',
+        :'batch_size' => :'batchSize'
       }
     end
 
@@ -58,7 +66,9 @@ module TalonOne
       {
         :'name' => :'String',
         :'scopes' => :'Array<String>',
-        :'batching_enabled' => :'Boolean'
+        :'batching_enabled' => :'Boolean',
+        :'include_data' => :'Boolean',
+        :'batch_size' => :'Integer'
       }
     end
 
@@ -97,6 +107,14 @@ module TalonOne
         self.batching_enabled = attributes[:'batching_enabled']
       else
         self.batching_enabled = true
+      end
+
+      if attributes.key?(:'include_data')
+        self.include_data = attributes[:'include_data']
+      end
+
+      if attributes.key?(:'batch_size')
+        self.batch_size = attributes[:'batch_size']
       end
     end
 
@@ -149,7 +167,9 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           scopes == o.scopes &&
-          batching_enabled == o.batching_enabled
+          batching_enabled == o.batching_enabled &&
+          include_data == o.include_data &&
+          batch_size == o.batch_size
     end
 
     # @see the `==` method
@@ -161,7 +181,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, scopes, batching_enabled].hash
+      [name, scopes, batching_enabled, include_data, batch_size].hash
     end
 
     # Builds the object from hash

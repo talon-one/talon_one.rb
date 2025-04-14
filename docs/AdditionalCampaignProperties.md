@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**budgets** | [**Array&lt;CampaignBudget&gt;**](CampaignBudget.md) | A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined.  | 
+**budgets** | [**Array&lt;CampaignBudget&gt;**](CampaignBudget.md) | A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined.  | [optional] 
 **coupon_redemption_count** | **Integer** | This property is **deprecated**. The count should be available under *budgets* property. Number of coupons redeemed in the campaign.  | [optional] 
 **referral_redemption_count** | **Integer** | This property is **deprecated**. The count should be available under *budgets* property. Number of referral codes redeemed in the campaign.  | [optional] 
 **discount_count** | **Float** | This property is **deprecated**. The count should be available under *budgets* property. Total amount of discounts redeemed in the campaign.  | [optional] 
@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
 **frontend_state** | **String** | The campaign state displayed in the Campaign Manager. | 
 **stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
+**value_maps_ids** | **Array&lt;Integer&gt;** | A list of value map IDs for the campaign. | [optional] 
 
 ## Code Sample
 
@@ -55,7 +56,8 @@ instance = TalonOne::AdditionalCampaignProperties.new(budgets: null,
                                  updated_by: Jane Doe,
                                  template_id: 3,
                                  frontend_state: running,
-                                 stores_imported: true)
+                                 stores_imported: true,
+                                 value_maps_ids: [100, 215])
 ```
 
 

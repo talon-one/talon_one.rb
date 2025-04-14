@@ -38,4 +38,10 @@ describe 'CatalogsStrikethroughNotificationPolicy' do
     end
   end
 
+  describe 'test attribute "ahead_of_days_trigger"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

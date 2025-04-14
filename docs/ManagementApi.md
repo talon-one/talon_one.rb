@@ -97,6 +97,7 @@ Method | HTTP request | Description
 [**get_customer_profile_achievement_progress**](ManagementApi.md#get_customer_profile_achievement_progress) | **GET** /v1/applications/{applicationId}/achievement_progress/{integrationId} | List customer achievements
 [**get_customer_profiles**](ManagementApi.md#get_customer_profiles) | **GET** /v1/customers/no_total | List customer profiles
 [**get_customers_by_attributes**](ManagementApi.md#get_customers_by_attributes) | **POST** /v1/customer_search/no_total | List customer profiles matching the given attributes
+[**get_dashboard_statistics**](ManagementApi.md#get_dashboard_statistics) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/dashboard | Get statistics for loyalty dashboard
 [**get_event_types**](ManagementApi.md#get_event_types) | **GET** /v1/event_types | List event types
 [**get_exports**](ManagementApi.md#get_exports) | **GET** /v1/exports | Get exports
 [**get_loyalty_card**](ManagementApi.md#get_loyalty_card) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId} | Get loyalty card
@@ -320,7 +321,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
-integration_id = 'integration_id_example' # String | The identifier of the profile.
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 body = TalonOne::AddLoyaltyPoints.new # AddLoyaltyPoints | body
 
 begin
@@ -337,7 +338,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **integration_id** | **String**| The identifier of the profile. | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **body** | [**AddLoyaltyPoints**](AddLoyaltyPoints.md)| body | 
 
 ### Return type
@@ -356,7 +357,7 @@ nil (empty response body)
 
 ## copy_campaign_to_applications
 
-> InlineResponse2006 copy_campaign_to_applications(application_id, campaign_id, body)
+> InlineResponse2008 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into the specified Application
 
@@ -405,7 +406,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -844,7 +845,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons
 
-> InlineResponse2008 create_coupons(application_id, campaign_id, body, opts)
+> InlineResponse20010 create_coupons(application_id, campaign_id, body, opts)
 
 Create coupons
 
@@ -873,7 +874,7 @@ application_id = 56 # Integer | The ID of the Application. It is displayed in yo
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 body = TalonOne::NewCoupons.new # NewCoupons | body
 opts = {
-  silent: 'yes' # String | Possible values: `yes` or `no`. - `yes`: Increases the perfomance of the API call by returning a 204 response. - `no`: Returns a 200 response that contains the updated customer profiles. 
+  silent: 'yes' # String | Possible values: `yes` or `no`. - `yes`: Increases the performance of the API call by returning a 204 response. - `no`: Returns a 200 response that contains the updated customer profiles. 
 }
 
 begin
@@ -893,11 +894,11 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
  **body** | [**NewCoupons**](NewCoupons.md)| body | 
- **silent** | **String**| Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  | [optional] [default to &#39;yes&#39;]
+ **silent** | **String**| Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  | [optional] [default to &#39;yes&#39;]
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -1037,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons_for_multiple_recipients
 
-> InlineResponse2008 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
+> InlineResponse20010 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
 
 Create coupons for multiple recipients
 
@@ -1066,7 +1067,7 @@ application_id = 56 # Integer | The ID of the Application. It is displayed in yo
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 body = TalonOne::NewCouponsForMultipleRecipients.new # NewCouponsForMultipleRecipients | body
 opts = {
-  silent: 'yes' # String | Possible values: `yes` or `no`. - `yes`: Increases the perfomance of the API call by returning a 204 response. - `no`: Returns a 200 response that contains the updated customer profiles. 
+  silent: 'yes' # String | Possible values: `yes` or `no`. - `yes`: Increases the performance of the API call by returning a 204 response. - `no`: Returns a 200 response that contains the updated customer profiles. 
 }
 
 begin
@@ -1086,11 +1087,11 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
  **body** | [**NewCouponsForMultipleRecipients**](NewCouponsForMultipleRecipients.md)| body | 
- **silent** | **String**| Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  | [optional] [default to &#39;yes&#39;]
+ **silent** | **String**| Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  | [optional] [default to &#39;yes&#39;]
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -3275,7 +3276,7 @@ api_instance = TalonOne::ManagementApi.new
 range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
-integration_id = 'integration_id_example' # String | The identifier of the profile.
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 opts = {
   date_format: 'date_format_example' # String | Determines the format of dates in the export document.
 }
@@ -3297,7 +3298,7 @@ Name | Type | Description  | Notes
  **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **integration_id** | **String**| The identifier of the profile. | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
 
 ### Return type
@@ -3456,7 +3457,7 @@ Name | Type | Description  | Notes
 
 ## get_access_logs_without_total_count
 
-> InlineResponse20019 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
+> InlineResponse20022 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
 
 Get access logs for Application
 
@@ -3519,7 +3520,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -3832,7 +3833,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20035 get_additional_costs(opts)
+> InlineResponse20038 get_additional_costs(opts)
 
 List additional costs
 
@@ -3883,7 +3884,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20035**](InlineResponse20035.md)
+[**InlineResponse20038**](InlineResponse20038.md)
 
 ### Authorization
 
@@ -4076,7 +4077,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customer_friends
 
-> InlineResponse20032 get_application_customer_friends(application_id, integration_id, opts)
+> InlineResponse20035 get_application_customer_friends(application_id, integration_id, opts)
 
 List friends referred by customer profile
 
@@ -4133,7 +4134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20032**](InlineResponse20032.md)
+[**InlineResponse20035**](InlineResponse20035.md)
 
 ### Authorization
 
@@ -4147,7 +4148,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20021 get_application_customers(application_id, opts)
+> InlineResponse20024 get_application_customers(application_id, opts)
 
 List application's customers
 
@@ -4202,7 +4203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -4216,7 +4217,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers_by_attributes
 
-> InlineResponse20022 get_application_customers_by_attributes(application_id, body, opts)
+> InlineResponse20025 get_application_customers_by_attributes(application_id, body, opts)
 
 List application customers matching the given attributes
 
@@ -4271,7 +4272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -4285,7 +4286,7 @@ Name | Type | Description  | Notes
 
 ## get_application_event_types
 
-> InlineResponse20028 get_application_event_types(application_id, opts)
+> InlineResponse20031 get_application_event_types(application_id, opts)
 
 List Applications event types
 
@@ -4338,7 +4339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20031**](InlineResponse20031.md)
 
 ### Authorization
 
@@ -4352,7 +4353,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events_without_total_count
 
-> InlineResponse20027 get_application_events_without_total_count(application_id, opts)
+> InlineResponse20030 get_application_events_without_total_count(application_id, opts)
 
 List Applications events
 
@@ -4427,7 +4428,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20030**](InlineResponse20030.md)
 
 ### Authorization
 
@@ -4502,7 +4503,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions
 
-> InlineResponse20026 get_application_sessions(application_id, opts)
+> InlineResponse20029 get_application_sessions(application_id, opts)
 
 List Application sessions
 
@@ -4571,7 +4572,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -4585,7 +4586,7 @@ Name | Type | Description  | Notes
 
 ## get_applications
 
-> InlineResponse2005 get_applications(opts)
+> InlineResponse2007 get_applications(opts)
 
 List Applications
 
@@ -4636,7 +4637,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -4709,7 +4710,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20033 get_attributes(opts)
+> InlineResponse20036 get_attributes(opts)
 
 List custom attributes
 
@@ -4762,7 +4763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20033**](InlineResponse20033.md)
+[**InlineResponse20036**](InlineResponse20036.md)
 
 ### Authorization
 
@@ -4776,7 +4777,7 @@ Name | Type | Description  | Notes
 
 ## get_audience_memberships
 
-> InlineResponse20031 get_audience_memberships(audience_id, opts)
+> InlineResponse20034 get_audience_memberships(audience_id, opts)
 
 List audience members
 
@@ -4831,7 +4832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20031**](InlineResponse20031.md)
+[**InlineResponse20034**](InlineResponse20034.md)
 
 ### Authorization
 
@@ -4845,7 +4846,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences
 
-> InlineResponse20029 get_audiences(opts)
+> InlineResponse20032 get_audiences(opts)
 
 List audiences
 
@@ -4898,7 +4899,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20032**](InlineResponse20032.md)
 
 ### Authorization
 
@@ -4912,7 +4913,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences_analytics
 
-> InlineResponse20030 get_audiences_analytics(audience_ids, opts)
+> InlineResponse20033 get_audiences_analytics(audience_ids, opts)
 
 List audience analytics
 
@@ -4961,7 +4962,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**InlineResponse20033**](InlineResponse20033.md)
 
 ### Authorization
 
@@ -5036,7 +5037,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_analytics
 
-> InlineResponse20020 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
+> InlineResponse20023 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
@@ -5091,7 +5092,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -5105,7 +5106,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_by_attributes
 
-> InlineResponse2006 get_campaign_by_attributes(application_id, body, opts)
+> InlineResponse2008 get_campaign_by_attributes(application_id, body, opts)
 
 List campaigns that match the given attributes
 
@@ -5162,7 +5163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -5235,7 +5236,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_groups
 
-> InlineResponse20011 get_campaign_groups(opts)
+> InlineResponse20013 get_campaign_groups(opts)
 
 List campaign access groups
 
@@ -5286,7 +5287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -5300,7 +5301,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_templates
 
-> InlineResponse20012 get_campaign_templates(opts)
+> InlineResponse20014 get_campaign_templates(opts)
 
 List campaign templates
 
@@ -5359,7 +5360,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -5373,7 +5374,7 @@ Name | Type | Description  | Notes
 
 ## get_campaigns
 
-> InlineResponse2006 get_campaigns(application_id, opts)
+> InlineResponse2008 get_campaigns(application_id, opts)
 
 List campaigns
 
@@ -5442,7 +5443,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -5456,7 +5457,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20041 get_changes(opts)
+> InlineResponse20044 get_changes(opts)
 
 Get audit logs for an account
 
@@ -5523,7 +5524,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20041**](InlineResponse20041.md)
+[**InlineResponse20044**](InlineResponse20044.md)
 
 ### Authorization
 
@@ -5600,7 +5601,7 @@ Name | Type | Description  | Notes
 
 ## get_collection_items
 
-> InlineResponse20018 get_collection_items(collection_id, opts)
+> InlineResponse20021 get_collection_items(collection_id, opts)
 
 Get collection items
 
@@ -5651,7 +5652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -5665,7 +5666,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_without_total_count
 
-> InlineResponse2009 get_coupons_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20011 get_coupons_without_total_count(application_id, campaign_id, opts)
 
 List coupons
 
@@ -5750,7 +5751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -5835,7 +5836,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports_without_total_count
 
-> InlineResponse20025 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
+> InlineResponse20028 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
 
@@ -5900,7 +5901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -6042,7 +6043,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile_achievement_progress
 
-> InlineResponse20046 get_customer_profile_achievement_progress(application_id, integration_id, opts)
+> InlineResponse20049 get_customer_profile_achievement_progress(application_id, integration_id, opts)
 
 List customer achievements
 
@@ -6068,7 +6069,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
-integration_id = 'integration_id_example' # String | The identifier of the profile.
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 opts = {
   page_size: 50, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
@@ -6091,7 +6092,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **integration_id** | **String**| The identifier of the profile. | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **achievement_id** | **Integer**| The ID of the achievement. You can get this ID with the [List achievement](https://docs.talon.one/management-api#tag/Achievements/operation/listAchievements) endpoint. | [optional] 
@@ -6099,7 +6100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20046**](InlineResponse20046.md)
+[**InlineResponse20049**](InlineResponse20049.md)
 
 ### Authorization
 
@@ -6113,7 +6114,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profiles
 
-> InlineResponse20024 get_customer_profiles(opts)
+> InlineResponse20027 get_customer_profiles(opts)
 
 List customer profiles
 
@@ -6164,7 +6165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -6178,7 +6179,7 @@ Name | Type | Description  | Notes
 
 ## get_customers_by_attributes
 
-> InlineResponse20023 get_customers_by_attributes(body, opts)
+> InlineResponse20026 get_customers_by_attributes(body, opts)
 
 List customer profiles matching the given attributes
 
@@ -6231,7 +6232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -6243,9 +6244,76 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## get_dashboard_statistics
+
+> InlineResponse20016 get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
+
+Get statistics for loyalty dashboard
+
+Retrieve the statistics displayed on the specified loyalty program's dashboard, such as the total active points, pending points, spent points, and expired points.  **Important:** The returned data does not include the current day. All statistics are updated daily at 11:59 PM in the loyalty program time zone. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+opts = {
+  subledger_id: 'subledger_id_example' # String | The ID of the subledger by which we filter the data.
+}
+
+begin
+  #Get statistics for loyalty dashboard
+  result = api_instance.get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_dashboard_statistics: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
+
+### Return type
+
+[**InlineResponse20016**](InlineResponse20016.md)
+
+### Authorization
+
+[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_event_types
 
-> InlineResponse20039 get_event_types(opts)
+> InlineResponse20042 get_event_types(opts)
 
 List event types
 
@@ -6300,7 +6368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20039**](InlineResponse20039.md)
+[**InlineResponse20042**](InlineResponse20042.md)
 
 ### Authorization
 
@@ -6314,7 +6382,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20042 get_exports(opts)
+> InlineResponse20045 get_exports(opts)
 
 Get exports
 
@@ -6369,7 +6437,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20042**](InlineResponse20042.md)
+[**InlineResponse20045**](InlineResponse20045.md)
 
 ### Authorization
 
@@ -6444,7 +6512,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_card_transaction_logs
 
-> InlineResponse20016 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
+> InlineResponse20019 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
 
 List card's transactions
 
@@ -6503,7 +6571,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**InlineResponse20019**](InlineResponse20019.md)
 
 ### Authorization
 
@@ -6517,7 +6585,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_cards
 
-> InlineResponse20015 get_loyalty_cards(loyalty_program_id, opts)
+> InlineResponse20018 get_loyalty_cards(loyalty_program_id, opts)
 
 List loyalty cards
 
@@ -6576,7 +6644,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**InlineResponse20018**](InlineResponse20018.md)
 
 ### Authorization
 
@@ -6616,7 +6684,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
-integration_id = 'integration_id_example' # String | The identifier of the profile.
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 
 begin
   #Get customer's full loyalty ledger
@@ -6633,7 +6701,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **integration_id** | **String**| The identifier of the profile. | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
 
 ### Return type
 
@@ -6710,7 +6778,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_program_transactions
 
-> InlineResponse20014 get_loyalty_program_transactions(loyalty_program_id, opts)
+> InlineResponse20017 get_loyalty_program_transactions(loyalty_program_id, opts)
 
 List loyalty program transactions
 
@@ -6769,7 +6837,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
@@ -6783,7 +6851,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_programs
 
-> InlineResponse20013 get_loyalty_programs
+> InlineResponse20015 get_loyalty_programs
 
 List loyalty programs
 
@@ -6824,7 +6892,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20015**](InlineResponse20015.md)
 
 ### Authorization
 
@@ -6842,7 +6910,7 @@ This endpoint does not need any parameter.
 
 Get loyalty program statistics
 
-Retrieve the statistics of the specified loyalty program such as the total active points, pending points, spent points, and expired points.  **Important:** The returned data does not include the current day. All statistics are updated daily at 11:59 PM in the loyalty program time zone. 
+⚠️ Deprecation notice: Support for requests to this endpoint will end soon. To retrieve statistics for a loyalty program, use the [Get statistics for loyalty dashboard](/management-api#tag/Loyalty/operation/getDashboardStatistics) endpoint.  Retrieve the statistics of the specified loyalty program, such as the total active points, pending points, spent points, and expired points. 
 
 ### Example
 
@@ -6897,7 +6965,7 @@ Name | Type | Description  | Notes
 
 ## get_referrals_without_total_count
 
-> InlineResponse20010 get_referrals_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20012 get_referrals_without_total_count(application_id, campaign_id, opts)
 
 List referrals
 
@@ -6964,7 +7032,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -7100,7 +7168,7 @@ Name | Type | Description  | Notes
 
 ## get_rulesets
 
-> InlineResponse2007 get_rulesets(application_id, campaign_id, opts)
+> InlineResponse2009 get_rulesets(application_id, campaign_id, opts)
 
 List campaign rulesets
 
@@ -7155,7 +7223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -7289,7 +7357,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20040 get_users(opts)
+> InlineResponse20043 get_users(opts)
 
 List users in account
 
@@ -7340,7 +7408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20040**](InlineResponse20040.md)
+[**InlineResponse20043**](InlineResponse20043.md)
 
 ### Authorization
 
@@ -7413,7 +7481,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_activation_logs
 
-> InlineResponse20037 get_webhook_activation_logs(opts)
+> InlineResponse20040 get_webhook_activation_logs(opts)
 
 List webhook activation log entries
 
@@ -7476,7 +7544,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20037**](InlineResponse20037.md)
+[**InlineResponse20040**](InlineResponse20040.md)
 
 ### Authorization
 
@@ -7490,7 +7558,7 @@ Name | Type | Description  | Notes
 
 ## get_webhook_logs
 
-> InlineResponse20038 get_webhook_logs(opts)
+> InlineResponse20041 get_webhook_logs(opts)
 
 List webhook log entries
 
@@ -7555,7 +7623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20038**](InlineResponse20038.md)
+[**InlineResponse20041**](InlineResponse20041.md)
 
 ### Authorization
 
@@ -7569,7 +7637,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20036 get_webhooks(opts)
+> InlineResponse20039 get_webhooks(opts)
 
 List webhooks
 
@@ -7630,7 +7698,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20036**](InlineResponse20036.md)
+[**InlineResponse20039**](InlineResponse20039.md)
 
 ### Authorization
 
@@ -8407,7 +8475,7 @@ nil (empty response body)
 
 ## list_account_collections
 
-> InlineResponse20017 list_account_collections(opts)
+> InlineResponse20020 list_account_collections(opts)
 
 List collections in account
 
@@ -8462,7 +8530,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -8476,7 +8544,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements
 
-> InlineResponse20045 list_achievements(application_id, campaign_id, opts)
+> InlineResponse20048 list_achievements(application_id, campaign_id, opts)
 
 List achievements
 
@@ -8531,7 +8599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20045**](InlineResponse20045.md)
+[**InlineResponse20048**](InlineResponse20048.md)
 
 ### Authorization
 
@@ -8545,7 +8613,7 @@ Name | Type | Description  | Notes
 
 ## list_all_roles_v2
 
-> InlineResponse20043 list_all_roles_v2
+> InlineResponse20046 list_all_roles_v2
 
 List roles
 
@@ -8586,7 +8654,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20043**](InlineResponse20043.md)
+[**InlineResponse20046**](InlineResponse20046.md)
 
 ### Authorization
 
@@ -8600,7 +8668,7 @@ This endpoint does not need any parameter.
 
 ## list_catalog_items
 
-> InlineResponse20034 list_catalog_items(catalog_id, opts)
+> InlineResponse20037 list_catalog_items(catalog_id, opts)
 
 List items in a catalog
 
@@ -8657,7 +8725,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20034**](InlineResponse20034.md)
+[**InlineResponse20037**](InlineResponse20037.md)
 
 ### Authorization
 
@@ -8671,7 +8739,7 @@ Name | Type | Description  | Notes
 
 ## list_collections
 
-> InlineResponse20017 list_collections(application_id, campaign_id, opts)
+> InlineResponse20020 list_collections(application_id, campaign_id, opts)
 
 List collections in campaign
 
@@ -8730,7 +8798,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -8744,7 +8812,7 @@ Name | Type | Description  | Notes
 
 ## list_collections_in_application
 
-> InlineResponse20017 list_collections_in_application(application_id, opts)
+> InlineResponse20020 list_collections_in_application(application_id, opts)
 
 List collections in Application
 
@@ -8801,7 +8869,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -8815,7 +8883,7 @@ Name | Type | Description  | Notes
 
 ## list_stores
 
-> InlineResponse20044 list_stores(application_id, opts)
+> InlineResponse20047 list_stores(application_id, opts)
 
 List stores
 
@@ -8878,7 +8946,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20044**](InlineResponse20044.md)
+[**InlineResponse20047**](InlineResponse20047.md)
 
 ### Authorization
 
@@ -9010,7 +9078,7 @@ nil (empty response body)
 
 Create notification about added or deducted loyalty points
 
-Create a notification about added or deducted loyalty points in a given profile-based loyalty program. A notification for added or deducted loyalty points is different from regular webhooks in that it is loyalty program-scoped and has a predefined payload.  For more information, see [Managing loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/managing-loyalty-notifications). 
+Create a notification about added or deducted loyalty points in a given profile-based loyalty program. A notification for added or deducted loyalty points is different from regular webhooks in that it is loyalty program-scoped and has a predefined payload.  For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
 
 ### Example
 
@@ -9071,7 +9139,7 @@ Name | Type | Description  | Notes
 
 Create strikethrough notification
 
-Create a notification for the in the given Application. For more information, see [Managing notifications](https://docs.talon.one/docs/product/applications/outbound-notifications).  See the [payload](https://docs.talon.one/outbound-notifications) you will receive. 
+Create a notification for the in the given Application. For more information, see [Application notifications](https://docs.talon.one/docs/product/applications/application-notifications/overview).  See the [payload](https://docs.talon.one/outbound-notifications) you will receive. 
 
 ### Example
 
@@ -9132,7 +9200,7 @@ Name | Type | Description  | Notes
 
 Create notification about pending loyalty points
 
-Create a notification about pending loyalty points for a given profile-based loyalty program. For more information, see [Managing loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/managing-loyalty-notifications). 
+Create a notification about pending loyalty points for a given profile-based loyalty program. For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
 
 ### Example
 
@@ -9215,7 +9283,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
-integration_id = 'integration_id_example' # String | The identifier of the profile.
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 body = TalonOne::DeductLoyaltyPoints.new # DeductLoyaltyPoints | body
 
 begin
@@ -9232,7 +9300,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **integration_id** | **String**| The identifier of the profile. | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **body** | [**DeductLoyaltyPoints**](DeductLoyaltyPoints.md)| body | 
 
 ### Return type
@@ -9828,7 +9896,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_application_wide_without_total_count
 
-> InlineResponse2009 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
+> InlineResponse20011 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
 
 List coupons that match the given attributes (without total count)
 
@@ -9903,7 +9971,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -9917,7 +9985,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_without_total_count
 
-> InlineResponse2009 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
+> InlineResponse20011 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
 
 List coupons that match the given attributes in campaign (without total count)
 
@@ -9992,7 +10060,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 

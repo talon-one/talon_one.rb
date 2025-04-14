@@ -20,7 +20,7 @@ module TalonOne
     # The exact moment this entity was created.
     attr_accessor :created
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # The ID of the user associated with this entity.
@@ -138,6 +138,9 @@ module TalonOne
     # Indicates whether the linked stores were imported via a CSV file.
     attr_accessor :stores_imported
 
+    # A list of value map IDs for the campaign.
+    attr_accessor :value_maps_ids
+
     # The campaign revision state displayed in the Campaign Manager.
     attr_accessor :revision_frontend_state
 
@@ -226,6 +229,7 @@ module TalonOne
         :'template_id' => :'templateId',
         :'frontend_state' => :'frontendState',
         :'stores_imported' => :'storesImported',
+        :'value_maps_ids' => :'valueMapsIds',
         :'revision_frontend_state' => :'revisionFrontendState',
         :'active_revision_id' => :'activeRevisionId',
         :'active_revision_version_id' => :'activeRevisionVersionId',
@@ -281,6 +285,7 @@ module TalonOne
         :'template_id' => :'Integer',
         :'frontend_state' => :'String',
         :'stores_imported' => :'Boolean',
+        :'value_maps_ids' => :'Array<Integer>',
         :'revision_frontend_state' => :'String',
         :'active_revision_id' => :'Integer',
         :'active_revision_version_id' => :'Integer',
@@ -496,6 +501,12 @@ module TalonOne
         self.stores_imported = attributes[:'stores_imported']
       end
 
+      if attributes.key?(:'value_maps_ids')
+        if (value = attributes[:'value_maps_ids']).is_a?(Array)
+          self.value_maps_ids = value
+        end
+      end
+
       if attributes.key?(:'revision_frontend_state')
         self.revision_frontend_state = attributes[:'revision_frontend_state']
       end
@@ -579,10 +590,6 @@ module TalonOne
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      if @budgets.nil?
-        invalid_properties.push('invalid value for "budgets", budgets cannot be nil.')
-      end
-
       if @frontend_state.nil?
         invalid_properties.push('invalid value for "frontend_state", frontend_state cannot be nil.')
       end
@@ -613,7 +620,6 @@ module TalonOne
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
       return false unless type_validator.valid?(@type)
-      return false if @budgets.nil?
       return false if @frontend_state.nil?
       frontend_state_validator = EnumAttributeValidator.new('String', ["expired", "scheduled", "running", "disabled", "archived", "staged"])
       return false unless frontend_state_validator.valid?(@frontend_state)
@@ -724,6 +730,7 @@ module TalonOne
           template_id == o.template_id &&
           frontend_state == o.frontend_state &&
           stores_imported == o.stores_imported &&
+          value_maps_ids == o.value_maps_ids &&
           revision_frontend_state == o.revision_frontend_state &&
           active_revision_id == o.active_revision_id &&
           active_revision_version_id == o.active_revision_version_id &&
@@ -742,7 +749,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, revision_frontend_state, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, value_maps_ids, revision_frontend_state, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
     end
 
     # Builds the object from hash

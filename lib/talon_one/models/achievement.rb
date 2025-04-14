@@ -49,7 +49,7 @@ module TalonOne
     # The achievement's end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It must be an RFC3339 timestamp string. 
     attr_accessor :end_date
 
-    # ID of the campaign, to which the achievement belongs to
+    # The ID of the campaign the achievement belongs to.
     attr_accessor :campaign_id
 
     # ID of the user that created this achievement.
@@ -60,6 +60,9 @@ module TalonOne
 
     # Indicates if a customer has made progress in the achievement.
     attr_accessor :has_progress
+
+    # The status of the achievement.
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -101,7 +104,8 @@ module TalonOne
         :'campaign_id' => :'campaignId',
         :'user_id' => :'userId',
         :'created_by' => :'createdBy',
-        :'has_progress' => :'hasProgress'
+        :'has_progress' => :'hasProgress',
+        :'status' => :'status'
       }
     end
 
@@ -123,7 +127,8 @@ module TalonOne
         :'campaign_id' => :'Integer',
         :'user_id' => :'Integer',
         :'created_by' => :'String',
-        :'has_progress' => :'Boolean'
+        :'has_progress' => :'Boolean',
+        :'status' => :'String'
       }
     end
 
@@ -211,6 +216,10 @@ module TalonOne
       if attributes.key?(:'has_progress')
         self.has_progress = attributes[:'has_progress']
       end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -254,20 +263,12 @@ module TalonOne
         invalid_properties.push('invalid value for "target", target cannot be nil.')
       end
 
-      if @period.nil?
-        invalid_properties.push('invalid value for "period", period cannot be nil.')
-      end
-
       if @campaign_id.nil?
         invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
       end
 
       if @user_id.nil?
         invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
-      end
-
-      if @created_by.nil?
-        invalid_properties.push('invalid value for "created_by", created_by cannot be nil.')
       end
 
       invalid_properties
@@ -285,14 +286,14 @@ module TalonOne
       return false if @title.nil?
       return false if @description.nil?
       return false if @target.nil?
-      return false if @period.nil?
       recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
       return false unless recurrence_policy_validator.valid?(@recurrence_policy)
       activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
       return false unless activation_policy_validator.valid?(@activation_policy)
       return false if @campaign_id.nil?
       return false if @user_id.nil?
-      return false if @created_by.nil?
+      status_validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
@@ -339,6 +340,16 @@ module TalonOne
       @activation_policy = activation_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -359,7 +370,8 @@ module TalonOne
           campaign_id == o.campaign_id &&
           user_id == o.user_id &&
           created_by == o.created_by &&
-          has_progress == o.has_progress
+          has_progress == o.has_progress &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -371,7 +383,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date, campaign_id, user_id, created_by, has_progress].hash
+      [id, created, name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date, campaign_id, user_id, created_by, has_progress, status].hash
     end
 
     # Builds the object from hash

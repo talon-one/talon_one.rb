@@ -29,7 +29,7 @@ module TalonOne
     # Arbitrary additional JSON data associated with the Application cart item filter.
     attr_accessor :expression
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

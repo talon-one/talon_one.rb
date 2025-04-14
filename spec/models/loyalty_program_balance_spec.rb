@@ -44,6 +44,12 @@ describe 'LoyaltyProgramBalance' do
     end
   end
 
+  describe 'test attribute "negative_balance"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "expired_balance"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -63,6 +69,12 @@ describe 'LoyaltyProgramBalance' do
   end
 
   describe 'test attribute "tentative_pending_balance"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "tentative_negative_balance"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;ApplicationSession&gt;**](ApplicationSession.md) |  | 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;CustomerProfile&gt;**](CustomerProfile.md) |  | 
 
 ## Code Sample
 
@@ -13,6 +14,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::InlineResponse20026.new(has_more: null,
+                                 total_result_size: null,
                                  data: null)
 ```
 

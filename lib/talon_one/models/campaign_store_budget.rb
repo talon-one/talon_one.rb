@@ -47,7 +47,7 @@ module TalonOne
         :'created' => :'DateTime',
         :'campaign_id' => :'Integer',
         :'store_id' => :'Integer',
-        :'limits' => :'Array<LimitConfig>'
+        :'limits' => :'Array<CampaignStoreBudgetLimitConfig>'
       }
     end
 

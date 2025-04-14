@@ -154,7 +154,7 @@ module TalonOne
     end
 
     # Create referral code for an advocate
-    # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the `campaignId` parameter, and will be associated with the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
+    # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the `campaignId` parameter, and will be associated with the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
     # @param body [NewReferral] body
     # @param [Hash] opts the optional parameters
     # @return [Referral]
@@ -164,7 +164,7 @@ module TalonOne
     end
 
     # Create referral code for an advocate
-    # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the &#x60;campaignId&#x60; parameter, and will be associated with the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+    # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the &#x60;campaignId&#x60; parameter, and will be associated with the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
     # @param body [NewReferral] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(Referral, Integer, Hash)>] Referral data, response status code and response headers
@@ -218,10 +218,10 @@ module TalonOne
     end
 
     # Create referral codes for multiple advocates
-    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the `campaignId` parameter, and one referral code will be associated with one advocate using the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile. 
+    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the `campaignId` parameter, and one referral code will be associated with one advocate using the profile specified in the `advocateProfileIntegrationId` parameter as the advocate's profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
     # @param body [NewReferralsForMultipleAdvocates] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
     # @return [InlineResponse201]
     def create_referrals_for_multiple_advocates(body, opts = {})
       data, _status_code, _headers = create_referrals_for_multiple_advocates_with_http_info(body, opts)
@@ -229,10 +229,10 @@ module TalonOne
     end
 
     # Create referral codes for multiple advocates
-    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+    # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
     # @param body [NewReferralsForMultipleAdvocates] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
     # @return [Array<(InlineResponse201, Integer, Hash)>] InlineResponse201 data, response status code and response headers
     def create_referrals_for_multiple_advocates_with_http_info(body, opts = {})
       if @api_client.config.debugging
@@ -610,6 +610,197 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # List customer's achievement history
+    # Retrieve all progress history of a given customer in the given achievement. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+    # @param achievement_id [Integer] The achievement identifier. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :progress_status Filter by customer progress status in the achievement. 
+    # @option opts [DateTime] :start_date Timestamp that filters the results to only contain achievements created on or after the start date.
+    # @option opts [DateTime] :end_date Timestamp that filters the results to only contain achievements created before or on the end date.
+    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @return [InlineResponse2002]
+    def get_customer_achievement_history(integration_id, achievement_id, opts = {})
+      data, _status_code, _headers = get_customer_achievement_history_with_http_info(integration_id, achievement_id, opts)
+      data
+    end
+
+    # List customer&#39;s achievement history
+    # Retrieve all progress history of a given customer in the given achievement. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+    # @param achievement_id [Integer] The achievement identifier. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :progress_status Filter by customer progress status in the achievement. 
+    # @option opts [DateTime] :start_date Timestamp that filters the results to only contain achievements created on or after the start date.
+    # @option opts [DateTime] :end_date Timestamp that filters the results to only contain achievements created before or on the end date.
+    # @option opts [Integer] :page_size The number of items in the response.
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    def get_customer_achievement_history_with_http_info(integration_id, achievement_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.get_customer_achievement_history ...'
+      end
+      # verify the required parameter 'integration_id' is set
+      if @api_client.config.client_side_validation && integration_id.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_customer_achievement_history"
+      end
+      # verify the required parameter 'achievement_id' is set
+      if @api_client.config.client_side_validation && achievement_id.nil?
+        fail ArgumentError, "Missing the required parameter 'achievement_id' when calling IntegrationApi.get_customer_achievement_history"
+      end
+      allowable_values = ["inprogress", "completed", "expired"]
+      if @api_client.config.client_side_validation && opts[:'progress_status'] && !opts[:'progress_status'].all? { |item| allowable_values.include?(item) }
+        fail ArgumentError, "invalid value for \"progress_status\", must include one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_achievement_history, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_achievement_history, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/customer_profiles/{integrationId}/achievements/{achievementId}'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s)).sub('{' + 'achievementId' + '}', CGI.escape(achievement_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'progressStatus'] = @api_client.build_collection_param(opts[:'progress_status'], :csv) if !opts[:'progress_status'].nil?
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2002' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['api_key_v1']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#get_customer_achievement_history\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List customer's available achievements
+    # Retrieve all the achievements available to a given customer and their progress in them. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :campaign_ids Filter by one or more Campaign IDs, separated by a comma.  **Note:** If no campaigns are specified, data for all the campaigns in the Application is returned. 
+    # @option opts [Array<String>] :achievement_ids Filter by one or more Achievement IDs, separated by a comma.  **Note:** If no achievements are specified, data for all the achievements in the Application is returned. 
+    # @option opts [Array<String>] :achievement_status Filter by status of the achievement.  **Note:** If the achievement status is not specified, only data for all active achievements in the Application is returned. 
+    # @option opts [Array<String>] :current_progress_status Filter by customer progress status in the achievement. 
+    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @return [InlineResponse2001]
+    def get_customer_achievements(integration_id, opts = {})
+      data, _status_code, _headers = get_customer_achievements_with_http_info(integration_id, opts)
+      data
+    end
+
+    # List customer&#39;s available achievements
+    # Retrieve all the achievements available to a given customer and their progress in them. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :campaign_ids Filter by one or more Campaign IDs, separated by a comma.  **Note:** If no campaigns are specified, data for all the campaigns in the Application is returned. 
+    # @option opts [Array<String>] :achievement_ids Filter by one or more Achievement IDs, separated by a comma.  **Note:** If no achievements are specified, data for all the achievements in the Application is returned. 
+    # @option opts [Array<String>] :achievement_status Filter by status of the achievement.  **Note:** If the achievement status is not specified, only data for all active achievements in the Application is returned. 
+    # @option opts [Array<String>] :current_progress_status Filter by customer progress status in the achievement. 
+    # @option opts [Integer] :page_size The number of items in the response.
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    def get_customer_achievements_with_http_info(integration_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.get_customer_achievements ...'
+      end
+      # verify the required parameter 'integration_id' is set
+      if @api_client.config.client_side_validation && integration_id.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_customer_achievements"
+      end
+      allowable_values = ["active", "scheduled"]
+      if @api_client.config.client_side_validation && opts[:'achievement_status'] && !opts[:'achievement_status'].all? { |item| allowable_values.include?(item) }
+        fail ArgumentError, "invalid value for \"achievement_status\", must include one of #{allowable_values}"
+      end
+      allowable_values = ["inprogress", "completed", "not_started"]
+      if @api_client.config.client_side_validation && opts[:'current_progress_status'] && !opts[:'current_progress_status'].all? { |item| allowable_values.include?(item) }
+        fail ArgumentError, "invalid value for \"current_progress_status\", must include one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_achievements, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_achievements, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/customer_profiles/{integrationId}/achievements'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'campaignIds'] = @api_client.build_collection_param(opts[:'campaign_ids'], :csv) if !opts[:'campaign_ids'].nil?
+      query_params[:'achievementIds'] = @api_client.build_collection_param(opts[:'achievement_ids'], :csv) if !opts[:'achievement_ids'].nil?
+      query_params[:'achievementStatus'] = @api_client.build_collection_param(opts[:'achievement_status'], :csv) if !opts[:'achievement_status'].nil?
+      query_params[:'currentProgressStatus'] = @api_client.build_collection_param(opts[:'current_progress_status'], :csv) if !opts[:'current_progress_status'].nil?
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2001' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['api_key_v1']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#get_customer_achievements\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List customer data
     # Return the customer inventory regarding entities referencing this customer profile's `integrationId`.  Typical entities returned are: customer profile information, referral codes, loyalty points, loyalty cards and reserved coupons. Reserved coupons also include redeemed coupons. 
     # @param integration_id [String] The integration ID of the customer profile. You can get the &#x60;integrationId&#x60; of a profile using: - A customer session integration ID with the [Update customer session](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint. - The Management API with the [List application&#39;s customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint. 
@@ -919,7 +1110,7 @@ module TalonOne
     # @option opts [Array<String>] :subledger_id Filter results by one or more subledger IDs. Must be exact match.
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2005]
     def get_loyalty_card_points(loyalty_program_id, loyalty_card_id, opts = {})
       data, _status_code, _headers = get_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
@@ -934,7 +1125,7 @@ module TalonOne
     # @option opts [Array<String>] :subledger_id Filter results by one or more subledger IDs. Must be exact match.
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
     def get_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_points ...'
@@ -955,8 +1146,8 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 50
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_card_points, must be smaller than or equal to 50.'
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_card_points, must be smaller than or equal to 1000.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
@@ -985,7 +1176,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2003' 
+      return_type = opts[:return_type] || 'InlineResponse2005' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1015,9 +1206,9 @@ module TalonOne
     # @option opts [String] :loyalty_transaction_type Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file. 
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
-    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
+    # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [InlineResponse2001]
+    # @return [InlineResponse2003]
     def get_loyalty_card_transactions(loyalty_program_id, loyalty_card_id, opts = {})
       data, _status_code, _headers = get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
@@ -1034,7 +1225,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [Array<(InlineResponse2001, Integer, Hash)>] InlineResponse2001 data, response status code and response headers
+    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
     def get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_transactions ...'
@@ -1087,7 +1278,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2001' 
+      return_type = opts[:return_type] || 'InlineResponse2003' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1117,7 +1308,7 @@ module TalonOne
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [InlineResponse2004]
+    # @return [InlineResponse2006]
     def get_loyalty_program_profile_points(loyalty_program_id, integration_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_profile_points_with_http_info(loyalty_program_id, integration_id, opts)
       data
@@ -1132,7 +1323,7 @@ module TalonOne
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
+    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
     def get_loyalty_program_profile_points_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_program_profile_points ...'
@@ -1149,8 +1340,8 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 50
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_program_profile_points, must be smaller than or equal to 50.'
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_program_profile_points, must be smaller than or equal to 1000.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
@@ -1179,7 +1370,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
+      return_type = opts[:return_type] || 'InlineResponse2006' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1211,7 +1402,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [InlineResponse2002]
+    # @return [InlineResponse2004]
     def get_loyalty_program_profile_transactions(loyalty_program_id, integration_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts)
       data
@@ -1228,7 +1419,7 @@ module TalonOne
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
     def get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_program_profile_transactions ...'
@@ -1245,8 +1436,8 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'loyalty_transaction_type'] && !allowable_values.include?(opts[:'loyalty_transaction_type'])
         fail ArgumentError, "invalid value for \"loyalty_transaction_type\", must be one of #{allowable_values}"
       end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 50
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_program_profile_transactions, must be smaller than or equal to 50.'
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_loyalty_program_profile_transactions, must be smaller than or equal to 1000.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
@@ -1277,7 +1468,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2002' 
+      return_type = opts[:return_type] || 'InlineResponse2004' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1649,7 +1840,7 @@ module TalonOne
     # Triggers a custom event.  To use this endpoint: 1. Define a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) in the Campaign Manager. 1. Update or create a rule to check for this event. 1. Trigger the event with this endpoint. After you have successfully sent an event to Talon.One, you can list the received events in the **Events** view in the Campaign Manager.  Talon.One also offers a set of [built-in events](https://docs.talon.one/docs/dev/concepts/entities/events). Ensure you do not create a custom event when you can use a built-in event.  For example, use this endpoint to trigger an event when a customer shares a link to a product. See the [tutorial](https://docs.talon.one/docs/product/tutorials/referrals/incentivizing-product-link-sharing).  <div class=\"redoc-section\">    <p class=\"title\">Important</p>    1. `profileId` is required even though the schema does not say it.   1. If the customer profile ID is new, a new profile is automatically created but the `customer_profile_created` [built-in event ](https://docs.talon.one/docs/dev/concepts/entities/events) is **not** triggered.   1. We recommend sending requests sequentially. See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests).  </div> 
     # @param body [IntegrationEventV2Request] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
     # @return [TrackEventV2Response]
     def track_event_v2(body, opts = {})
@@ -1661,7 +1852,7 @@ module TalonOne
     # Triggers a custom event.  To use this endpoint: 1. Define a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) in the Campaign Manager. 1. Update or create a rule to check for this event. 1. Trigger the event with this endpoint. After you have successfully sent an event to Talon.One, you can list the received events in the **Events** view in the Campaign Manager.  Talon.One also offers a set of [built-in events](https://docs.talon.one/docs/dev/concepts/entities/events). Ensure you do not create a custom event when you can use a built-in event.  For example, use this endpoint to trigger an event when a customer shares a link to a product. See the [tutorial](https://docs.talon.one/docs/product/tutorials/referrals/incentivizing-product-link-sharing).  &lt;div class&#x3D;\&quot;redoc-section\&quot;&gt;    &lt;p class&#x3D;\&quot;title\&quot;&gt;Important&lt;/p&gt;    1. &#x60;profileId&#x60; is required even though the schema does not say it.   1. If the customer profile ID is new, a new profile is automatically created but the &#x60;customer_profile_created&#x60; [built-in event ](https://docs.talon.one/docs/dev/concepts/entities/events) is **not** triggered.   1. We recommend sending requests sequentially. See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests).  &lt;/div&gt; 
     # @param body [IntegrationEventV2Request] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
     # @return [Array<(TrackEventV2Response, Integer, Hash)>] TrackEventV2Response data, response status code and response headers
     def track_event_v2_with_http_info(body, opts = {})
@@ -1999,7 +2190,7 @@ module TalonOne
     # Update (or create) up to 1000 [customer profiles](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles) in 1 request.  The `integrationId` must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://docs.talon.one/integration-api#tag/Customer-sessions).  **Note:** This endpoint does not trigger the Rule Engine. To trigger the Rule Engine for customer profile updates, use the [Update customer profile](#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint. 
     # @param body [MultipleCustomerProfileIntegrationRequest] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
     # @return [MultipleCustomerProfileIntegrationResponseV2]
     def update_customer_profiles_v2(body, opts = {})
       data, _status_code, _headers = update_customer_profiles_v2_with_http_info(body, opts)
@@ -2010,7 +2201,7 @@ module TalonOne
     # Update (or create) up to 1000 [customer profiles](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles) in 1 request.  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://docs.talon.one/integration-api#tag/Customer-sessions).  **Note:** This endpoint does not trigger the Rule Engine. To trigger the Rule Engine for customer profile updates, use the [Update customer profile](#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint. 
     # @param body [MultipleCustomerProfileIntegrationRequest] body
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+    # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
     # @return [Array<(MultipleCustomerProfileIntegrationResponseV2, Integer, Hash)>] MultipleCustomerProfileIntegrationResponseV2 data, response status code and response headers
     def update_customer_profiles_v2_with_http_info(body, opts = {})
       if @api_client.config.debugging

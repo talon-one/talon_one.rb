@@ -17,17 +17,22 @@ module TalonOne
     # Notification name.
     attr_accessor :name
 
+    # The number of days in advance that strikethrough pricing updates should be sent.
+    attr_accessor :ahead_of_days_trigger
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name'
+        :'name' => :'name',
+        :'ahead_of_days_trigger' => :'aheadOfDaysTrigger'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String'
+        :'name' => :'String',
+        :'ahead_of_days_trigger' => :'Integer'
       }
     end
 
@@ -55,6 +60,10 @@ module TalonOne
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
+
+      if attributes.key?(:'ahead_of_days_trigger')
+        self.ahead_of_days_trigger = attributes[:'ahead_of_days_trigger']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +78,14 @@ module TalonOne
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
+      if !@ahead_of_days_trigger.nil? && @ahead_of_days_trigger > 30
+        invalid_properties.push('invalid value for "ahead_of_days_trigger", must be smaller than or equal to 30.')
+      end
+
+      if !@ahead_of_days_trigger.nil? && @ahead_of_days_trigger < 1
+        invalid_properties.push('invalid value for "ahead_of_days_trigger", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -77,6 +94,8 @@ module TalonOne
     def valid?
       return false if @name.nil?
       return false if @name.to_s.length < 1
+      return false if !@ahead_of_days_trigger.nil? && @ahead_of_days_trigger > 30
+      return false if !@ahead_of_days_trigger.nil? && @ahead_of_days_trigger < 1
       true
     end
 
@@ -94,12 +113,27 @@ module TalonOne
       @name = name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] ahead_of_days_trigger Value to be assigned
+    def ahead_of_days_trigger=(ahead_of_days_trigger)
+      if !ahead_of_days_trigger.nil? && ahead_of_days_trigger > 30
+        fail ArgumentError, 'invalid value for "ahead_of_days_trigger", must be smaller than or equal to 30.'
+      end
+
+      if !ahead_of_days_trigger.nil? && ahead_of_days_trigger < 1
+        fail ArgumentError, 'invalid value for "ahead_of_days_trigger", must be greater than or equal to 1.'
+      end
+
+      @ahead_of_days_trigger = ahead_of_days_trigger
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name
+          name == o.name &&
+          ahead_of_days_trigger == o.ahead_of_days_trigger
     end
 
     # @see the `==` method
@@ -111,7 +145,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name].hash
+      [name, ahead_of_days_trigger].hash
     end
 
     # Builds the object from hash

@@ -14,14 +14,14 @@ require 'date'
 
 module TalonOne
   class InlineResponse20033
-    attr_accessor :total_result_size
+    attr_accessor :has_more
 
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total_result_size' => :'totalResultSize',
+        :'has_more' => :'hasMore',
         :'data' => :'data'
       }
     end
@@ -29,8 +29,8 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total_result_size' => :'Integer',
-        :'data' => :'Array<Attribute>'
+        :'has_more' => :'Boolean',
+        :'data' => :'Array<AudienceAnalytics>'
       }
     end
 
@@ -55,8 +55,8 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total_result_size')
-        self.total_result_size = attributes[:'total_result_size']
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
 
       if attributes.key?(:'data')
@@ -70,10 +70,6 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @total_result_size.nil?
-        invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
-      end
-
       if @data.nil?
         invalid_properties.push('invalid value for "data", data cannot be nil.')
       end
@@ -84,7 +80,6 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @total_result_size.nil?
       return false if @data.nil?
       true
     end
@@ -94,7 +89,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total_result_size == o.total_result_size &&
+          has_more == o.has_more &&
           data == o.data
     end
 
@@ -107,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_result_size, data].hash
+      [has_more, data].hash
     end
 
     # Builds the object from hash

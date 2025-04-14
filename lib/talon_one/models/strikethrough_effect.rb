@@ -32,6 +32,12 @@ module TalonOne
 
     attr_accessor :props
 
+    # The start of the time frame where the effect is active in UTC.
+    attr_accessor :start_time
+
+    # The end of the time frame where the effect is active in UTC.
+    attr_accessor :end_time
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,7 +46,9 @@ module TalonOne
         :'rule_index' => :'ruleIndex',
         :'rule_name' => :'ruleName',
         :'type' => :'type',
-        :'props' => :'props'
+        :'props' => :'props',
+        :'start_time' => :'startTime',
+        :'end_time' => :'endTime'
       }
     end
 
@@ -52,7 +60,9 @@ module TalonOne
         :'rule_index' => :'Integer',
         :'rule_name' => :'String',
         :'type' => :'String',
-        :'props' => :'Object'
+        :'props' => :'Object',
+        :'start_time' => :'DateTime',
+        :'end_time' => :'DateTime'
       }
     end
 
@@ -99,6 +109,14 @@ module TalonOne
 
       if attributes.key?(:'props')
         self.props = attributes[:'props']
+      end
+
+      if attributes.key?(:'start_time')
+        self.start_time = attributes[:'start_time']
+      end
+
+      if attributes.key?(:'end_time')
+        self.end_time = attributes[:'end_time']
       end
     end
 
@@ -155,7 +173,9 @@ module TalonOne
           rule_index == o.rule_index &&
           rule_name == o.rule_name &&
           type == o.type &&
-          props == o.props
+          props == o.props &&
+          start_time == o.start_time &&
+          end_time == o.end_time
     end
 
     # @see the `==` method
@@ -167,7 +187,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, type, props].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, type, props, start_time, end_time].hash
     end
 
     # Builds the object from hash

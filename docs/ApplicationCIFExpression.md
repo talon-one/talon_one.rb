@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **cart_item_filter_id** | **Integer** | The ID of the Application cart item filter. | [optional] 
 **created_by** | **Integer** | The ID of the user who created the Application cart item filter. | [optional] 
 **expression** | **Array&lt;Object&gt;** | Arbitrary additional JSON data associated with the Application cart item filter. | [optional] 
-**application_id** | **Integer** | The ID of the application that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
 
 ## Code Sample
 

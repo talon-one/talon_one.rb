@@ -59,7 +59,7 @@ describe 'IntegrationApi' do
 
   # unit tests for create_referral
   # Create referral code for an advocate
-  # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the &#x60;campaignId&#x60; parameter, and will be associated with the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+  # Creates a referral code for an advocate. The code will be valid for the referral campaign for which is created, indicated in the &#x60;campaignId&#x60; parameter, and will be associated with the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
   # @param body body
   # @param [Hash] opts the optional parameters
   # @return [Referral]
@@ -71,10 +71,10 @@ describe 'IntegrationApi' do
 
   # unit tests for create_referrals_for_multiple_advocates
   # Create referral codes for multiple advocates
-  # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile. 
+  # Creates unique referral codes for multiple advocates. The code will be valid for the referral campaign for which it is created, indicated in the &#x60;campaignId&#x60; parameter, and one referral code will be associated with one advocate using the profile specified in the &#x60;advocateProfileIntegrationId&#x60; parameter as the advocate&#39;s profile.  **Note:** Any [referral limits](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets#referral-limits) set are ignored when you use this endpoint. 
   # @param body body
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
   # @return [InlineResponse201]
   describe 'create_referrals_for_multiple_advocates test' do
     it 'should work' do
@@ -139,6 +139,42 @@ describe 'IntegrationApi' do
   # @param [Hash] opts the optional parameters
   # @return [LoyaltyCard]
   describe 'generate_loyalty_card test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_customer_achievement_history
+  # List customer&#39;s achievement history
+  # Retrieve all progress history of a given customer in the given achievement. 
+  # @param integration_id The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+  # @param achievement_id The achievement identifier. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array<String>] :progress_status Filter by customer progress status in the achievement. 
+  # @option opts [DateTime] :start_date Timestamp that filters the results to only contain achievements created on or after the start date.
+  # @option opts [DateTime] :end_date Timestamp that filters the results to only contain achievements created before or on the end date.
+  # @option opts [Integer] :page_size The number of items in the response.
+  # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+  # @return [InlineResponse2002]
+  describe 'get_customer_achievement_history test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_customer_achievements
+  # List customer&#39;s available achievements
+  # Retrieve all the achievements available to a given customer and their progress in them. 
+  # @param integration_id The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array<String>] :campaign_ids Filter by one or more Campaign IDs, separated by a comma.  **Note:** If no campaigns are specified, data for all the campaigns in the Application is returned. 
+  # @option opts [Array<String>] :achievement_ids Filter by one or more Achievement IDs, separated by a comma.  **Note:** If no achievements are specified, data for all the achievements in the Application is returned. 
+  # @option opts [Array<String>] :achievement_status Filter by status of the achievement.  **Note:** If the achievement status is not specified, only data for all active achievements in the Application is returned. 
+  # @option opts [Array<String>] :current_progress_status Filter by customer progress status in the achievement. 
+  # @option opts [Integer] :page_size The number of items in the response.
+  # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+  # @return [InlineResponse2001]
+  describe 'get_customer_achievements test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -216,7 +252,7 @@ describe 'IntegrationApi' do
   # @option opts [Array<String>] :subledger_id Filter results by one or more subledger IDs. Must be exact match.
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-  # @return [InlineResponse2003]
+  # @return [InlineResponse2005]
   describe 'get_loyalty_card_points test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -235,7 +271,7 @@ describe 'IntegrationApi' do
   # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2003]
   describe 'get_loyalty_card_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -252,7 +288,7 @@ describe 'IntegrationApi' do
   # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-  # @return [InlineResponse2004]
+  # @return [InlineResponse2006]
   describe 'get_loyalty_program_profile_points test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -271,7 +307,7 @@ describe 'IntegrationApi' do
   # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-  # @return [InlineResponse2002]
+  # @return [InlineResponse2004]
   describe 'get_loyalty_program_profile_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -348,7 +384,7 @@ describe 'IntegrationApi' do
   # Triggers a custom event.  To use this endpoint: 1. Define a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) in the Campaign Manager. 1. Update or create a rule to check for this event. 1. Trigger the event with this endpoint. After you have successfully sent an event to Talon.One, you can list the received events in the **Events** view in the Campaign Manager.  Talon.One also offers a set of [built-in events](https://docs.talon.one/docs/dev/concepts/entities/events). Ensure you do not create a custom event when you can use a built-in event.  For example, use this endpoint to trigger an event when a customer shares a link to a product. See the [tutorial](https://docs.talon.one/docs/product/tutorials/referrals/incentivizing-product-link-sharing).  &lt;div class&#x3D;\&quot;redoc-section\&quot;&gt;    &lt;p class&#x3D;\&quot;title\&quot;&gt;Important&lt;/p&gt;    1. &#x60;profileId&#x60; is required even though the schema does not say it.   1. If the customer profile ID is new, a new profile is automatically created but the &#x60;customer_profile_created&#x60; [built-in event ](https://docs.talon.one/docs/dev/concepts/entities/events) is **not** triggered.   1. We recommend sending requests sequentially. See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests).  &lt;/div&gt; 
   # @param body body
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
   # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
   # @return [TrackEventV2Response]
   describe 'track_event_v2 test' do
@@ -415,7 +451,7 @@ describe 'IntegrationApi' do
   # Update (or create) up to 1000 [customer profiles](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles) in 1 request.  The &#x60;integrationId&#x60; must be any identifier that remains stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  A customer profile [can be linked to one or more sessions](https://docs.talon.one/integration-api#tag/Customer-sessions).  **Note:** This endpoint does not trigger the Rule Engine. To trigger the Rule Engine for customer profile updates, use the [Update customer profile](#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint. 
   # @param body body
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the perfomance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
+  # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
   # @return [MultipleCustomerProfileIntegrationResponseV2]
   describe 'update_customer_profiles_v2 test' do
     it 'should work' do

@@ -38,7 +38,7 @@ module TalonOne
     # Timestamp of the most recent update to the Application cart item filter.
     attr_accessor :modified
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

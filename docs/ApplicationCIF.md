@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **modified_by** | **Integer** | The ID of the user who last updated the Application cart item filter. | [optional] 
 **created_by** | **Integer** | The ID of the user who created the Application cart item filter. | [optional] 
 **modified** | **DateTime** | Timestamp of the most recent update to the Application cart item filter. | [optional] 
-**application_id** | **Integer** | The ID of the application that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
 
 ## Code Sample
 

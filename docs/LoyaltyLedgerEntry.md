@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **sub_ledger_id** | **String** | This specifies if we are adding loyalty points to the main ledger or a subledger. | 
 **user_id** | **Integer** | This is the ID of the user who created this entry, if the addition or subtraction was done manually. | [optional] 
 **archived** | **Boolean** | Indicates if the entry belongs to the archived session. | [optional] 
+**flags** | [**LoyaltyLedgerEntryFlags**](LoyaltyLedgerEntryFlags.md) |  | [optional] 
 
 ## Code Sample
 
@@ -37,7 +38,8 @@ instance = TalonOne::LoyaltyLedgerEntry.new(created: 2021-07-20T22:00Z,
                                  name: Add points on purchase,
                                  sub_ledger_id: mysubledger,
                                  user_id: 499,
-                                 archived: false)
+                                 archived: false,
+                                 flags: null)
 ```
 
 

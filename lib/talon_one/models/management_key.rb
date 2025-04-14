@@ -38,6 +38,9 @@ module TalonOne
     # The date the management key was created.
     attr_accessor :created
 
+    # The management key is disabled (this property is set to `true`) when the user who created the key is disabled or deleted.
+    attr_accessor :disabled
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +51,8 @@ module TalonOne
         :'id' => :'id',
         :'created_by' => :'createdBy',
         :'account_id' => :'accountID',
-        :'created' => :'created'
+        :'created' => :'created',
+        :'disabled' => :'disabled'
       }
     end
 
@@ -62,7 +66,8 @@ module TalonOne
         :'id' => :'Integer',
         :'created_by' => :'Integer',
         :'account_id' => :'Integer',
-        :'created' => :'DateTime'
+        :'created' => :'DateTime',
+        :'disabled' => :'Boolean'
       }
     end
 
@@ -121,6 +126,10 @@ module TalonOne
 
       if attributes.key?(:'created')
         self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'disabled')
+        self.disabled = attributes[:'disabled']
       end
     end
 
@@ -184,7 +193,8 @@ module TalonOne
           id == o.id &&
           created_by == o.created_by &&
           account_id == o.account_id &&
-          created == o.created
+          created == o.created &&
+          disabled == o.disabled
     end
 
     # @see the `==` method
@@ -196,7 +206,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created].hash
+      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created, disabled].hash
     end
 
     # Builds the object from hash

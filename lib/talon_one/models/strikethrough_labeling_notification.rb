@@ -15,7 +15,10 @@ require 'date'
 module TalonOne
   # The strikethrough labels notification for an application.
   class StrikethroughLabelingNotification
-    # The ID of the application that catalog items labels belongs to.
+    # The version of the strikethrough pricing notification.
+    attr_accessor :version
+
+    # The ID of the Application to which the catalog items labels belongs.
     attr_accessor :application_id
 
     # The batch number of the notification. Notifications might be sent in different batches.
@@ -28,9 +31,32 @@ module TalonOne
 
     attr_accessor :changed_items
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'version' => :'version',
         :'application_id' => :'applicationId',
         :'current_batch' => :'currentBatch',
         :'total_batches' => :'totalBatches',
@@ -42,6 +68,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'version' => :'String',
         :'application_id' => :'Integer',
         :'current_batch' => :'Integer',
         :'total_batches' => :'Integer',
@@ -70,6 +97,10 @@ module TalonOne
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
 
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
@@ -124,6 +155,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      version_validator = EnumAttributeValidator.new('String', ["v2"])
+      return false unless version_validator.valid?(@version)
       return false if @application_id.nil?
       return false if @current_batch.nil?
       return false if @total_batches.nil?
@@ -132,11 +165,22 @@ module TalonOne
       true
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] version Object to be assigned
+    def version=(version)
+      validator = EnumAttributeValidator.new('String', ["v2"])
+      unless validator.valid?(version)
+        fail ArgumentError, "invalid value for \"version\", must be one of #{validator.allowable_values}."
+      end
+      @version = version
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          version == o.version &&
           application_id == o.application_id &&
           current_batch == o.current_batch &&
           total_batches == o.total_batches &&
@@ -153,7 +197,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application_id, current_batch, total_batches, trigger, changed_items].hash
+      [version, application_id, current_batch, total_batches, trigger, changed_items].hash
     end
 
     # Builds the object from hash

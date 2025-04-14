@@ -20,6 +20,9 @@ module TalonOne
     # Indicates whether batching is activated.
     attr_accessor :batching_enabled
 
+    # The required size of each batch of data. This value applies only when `batchingEnabled` is `true`.
+    attr_accessor :batch_size
+
     attr_accessor :triggers
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -27,6 +30,7 @@ module TalonOne
       {
         :'name' => :'name',
         :'batching_enabled' => :'batchingEnabled',
+        :'batch_size' => :'batchSize',
         :'triggers' => :'triggers'
       }
     end
@@ -36,6 +40,7 @@ module TalonOne
       {
         :'name' => :'String',
         :'batching_enabled' => :'Boolean',
+        :'batch_size' => :'Integer',
         :'triggers' => :'Array<TierWillDowngradeNotificationTrigger>'
       }
     end
@@ -69,6 +74,10 @@ module TalonOne
         self.batching_enabled = attributes[:'batching_enabled']
       else
         self.batching_enabled = true
+      end
+
+      if attributes.key?(:'batch_size')
+        self.batch_size = attributes[:'batch_size']
       end
 
       if attributes.key?(:'triggers')
@@ -127,6 +136,7 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           batching_enabled == o.batching_enabled &&
+          batch_size == o.batch_size &&
           triggers == o.triggers
     end
 
@@ -139,7 +149,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, batching_enabled, triggers].hash
+      [name, batching_enabled, batch_size, triggers].hash
     end
 
     # Builds the object from hash

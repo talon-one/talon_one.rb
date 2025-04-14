@@ -30,7 +30,7 @@ module TalonOne
     def self.openapi_types
       {
         :'has_more' => :'Boolean',
-        :'data' => :'Array<CardLedgerPointsEntryIntegrationAPI>'
+        :'data' => :'Array<CardLedgerTransactionLogEntryIntegrationAPI>'
       }
     end
 

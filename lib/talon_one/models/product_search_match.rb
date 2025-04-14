@@ -20,7 +20,7 @@ module TalonOne
     # The string matching the given value. Either a product name or SKU.
     attr_accessor :value
 
-    # The ID of the SKU linked to a product. If empty, this is an analytics-level product.
+    # The ID of the SKU linked to a product. If empty, this is an product.
     attr_accessor :product_sku_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -79,10 +79,6 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @product_id.nil?
-        invalid_properties.push('invalid value for "product_id", product_id cannot be nil.')
-      end
-
       if @value.nil?
         invalid_properties.push('invalid value for "value", value cannot be nil.')
       end
@@ -93,7 +89,6 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @product_id.nil?
       return false if @value.nil?
       true
     end

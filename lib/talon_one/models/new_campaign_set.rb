@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class NewCampaignSet
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # Version of the campaign set.

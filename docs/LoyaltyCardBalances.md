@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::LoyaltyCardBalances.new(balance: null,
-                                 subledger_balances: {&quot;mysubledger&quot;:{&quot;activePoints&quot;:286,&quot;pendingPoints&quot;:50,&quot;spentPoints&quot;:150,&quot;expiredPoints&quot;:25}},
+                                 subledger_balances: {&quot;mysubledger&quot;:{&quot;activePoints&quot;:286,&quot;pendingPoints&quot;:50,&quot;spentPoints&quot;:150,&quot;expiredPoints&quot;:25,&quot;negativePoints&quot;:0}},
                                  profiles: null)
 ```
 

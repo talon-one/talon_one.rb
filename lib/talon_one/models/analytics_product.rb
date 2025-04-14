@@ -14,25 +14,24 @@ require 'date'
 
 module TalonOne
   class AnalyticsProduct
-    # The ID of the analytics-level product.
+    # The ID of the product.
     attr_accessor :id
 
-    # Indicates whether the analytics-level product is connected to a catalog and also has a product name.
-    attr_accessor :is_preliminary
-
-    # The name of the analytics-level product.
+    # The name of the product.
     attr_accessor :name
 
     # The ID of the catalog. You can find the ID in the Campaign Manager in **Account** > **Tools** > **Cart item catalogs**. 
     attr_accessor :catalog_id
 
+    attr_accessor :units_sold
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'is_preliminary' => :'isPreliminary',
         :'name' => :'name',
-        :'catalog_id' => :'catalogId'
+        :'catalog_id' => :'catalogId',
+        :'units_sold' => :'unitsSold'
       }
     end
 
@@ -40,9 +39,9 @@ module TalonOne
     def self.openapi_types
       {
         :'id' => :'Integer',
-        :'is_preliminary' => :'Boolean',
         :'name' => :'String',
-        :'catalog_id' => :'Integer'
+        :'catalog_id' => :'Integer',
+        :'units_sold' => :'AnalyticsDataPointWithTrend'
       }
     end
 
@@ -71,16 +70,16 @@ module TalonOne
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'is_preliminary')
-        self.is_preliminary = attributes[:'is_preliminary']
-      end
-
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
       if attributes.key?(:'catalog_id')
         self.catalog_id = attributes[:'catalog_id']
+      end
+
+      if attributes.key?(:'units_sold')
+        self.units_sold = attributes[:'units_sold']
       end
     end
 
@@ -92,12 +91,12 @@ module TalonOne
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @is_preliminary.nil?
-        invalid_properties.push('invalid value for "is_preliminary", is_preliminary cannot be nil.')
-      end
-
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @catalog_id.nil?
+        invalid_properties.push('invalid value for "catalog_id", catalog_id cannot be nil.')
       end
 
       invalid_properties
@@ -107,8 +106,8 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @is_preliminary.nil?
       return false if @name.nil?
+      return false if @catalog_id.nil?
       true
     end
 
@@ -118,9 +117,9 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          is_preliminary == o.is_preliminary &&
           name == o.name &&
-          catalog_id == o.catalog_id
+          catalog_id == o.catalog_id &&
+          units_sold == o.units_sold
     end
 
     # @see the `==` method
@@ -132,7 +131,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, is_preliminary, name, catalog_id].hash
+      [id, name, catalog_id, units_sold].hash
     end
 
     # Builds the object from hash

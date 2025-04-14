@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class UpdateAchievement
-    # The internal name of the achievement used in API requests. 
+    # The internal name of the achievement used in API requests.  **Note**: The name should start with a letter. This cannot be changed after the achievement has been created. 
     attr_accessor :name
 
     # The display name for the achievement in the Campaign Manager.
@@ -26,7 +26,7 @@ module TalonOne
     # The required number of actions or the transactional milestone to complete the achievement.
     attr_accessor :target
 
-    # The relative duration after which the achievement ends and resets for a particular customer profile. 
+    # The relative duration after which the achievement ends and resets for a particular customer profile.  **Note**: The `period` does not start when the achievement is created.  The period is a **positive real number** followed by one letter indicating the time unit.  Examples: `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can also round certain units down to the beginning of period and up to the end of period.: - `_D` for rounding down days only. Signifies the start of the day. Example: `30D_D` - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. Example: `23W_U`  **Note**: You can either use the round down and round up option or set an absolute period. 
     attr_accessor :period
 
     attr_accessor :period_end_override

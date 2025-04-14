@@ -32,7 +32,7 @@ module TalonOne
     # The integration ID of the store. You choose this ID when you create a store.  **Note**: You cannot edit the `integrationId` after the store has been created. 
     attr_accessor :integration_id
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # Timestamp of the most recent update on this entity.

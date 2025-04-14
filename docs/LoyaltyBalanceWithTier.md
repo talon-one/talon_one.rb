@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **pending_points** | **Float** | Total amount of points awarded to this customer but not available until their start date. | [optional] 
 **spent_points** | **Float** | Total amount of points already spent by this customer. | [optional] 
 **expired_points** | **Float** | Total amount of points awarded but never redeemed. They cannot be used anymore. | [optional] 
+**negative_points** | **Float** | Total amount of negative points. This implies that &#x60;activePoints&#x60; is &#x60;0&#x60;. | [optional] 
 **current_tier** | [**Tier**](Tier.md) |  | [optional] 
 **projected_tier** | [**ProjectedTier**](ProjectedTier.md) |  | [optional] 
 **points_to_next_tier** | **Float** | The number of points required to move up a tier. | [optional] 
@@ -22,6 +23,7 @@ instance = TalonOne::LoyaltyBalanceWithTier.new(active_points: 286.0,
                                  pending_points: 50.0,
                                  spent_points: 150.0,
                                  expired_points: 286.0,
+                                 negative_points: 286.0,
                                  current_tier: null,
                                  projected_tier: null,
                                  points_to_next_tier: 20.0,

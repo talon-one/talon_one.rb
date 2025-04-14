@@ -20,7 +20,7 @@ module TalonOne
     # The time this entity was created.
     attr_accessor :created
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # The slots defined for this application.

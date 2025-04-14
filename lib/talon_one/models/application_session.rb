@@ -26,7 +26,7 @@ module TalonOne
     # The integration ID of the store. You choose this ID when you create a store.
     attr_accessor :store_integration_id
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # The globally unique Talon.One ID of the customer that created this entity.
@@ -50,7 +50,7 @@ module TalonOne
     # **API V1 only.** A map of labeled discount values, in the same currency as the session.  If you are using the V2 endpoints, refer to the `totalDiscounts` property instead. 
     attr_accessor :discounts
 
-    # The total sum of the discounts applied to this session.
+    # The total sum of the discounts applied to this session.  **Note:** If more than one session is returned, this value is displayed as `0`. 
     attr_accessor :total_discounts
 
     # The total sum of the session before any discounts applied.

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **total_pending_points** | **Float** | Total amount of pending points, which are not active yet but will become active in the future. | 
 **total_spent_points** | **Float** | Total amount of points already spent by this customer. | 
 **total_expired_points** | **Float** | Total amount of points, that expired without ever being spent. | 
+**total_negative_points** | **Float** | Total amount of negative points. This implies that &#x60;totalActivePoints&#x60; is &#x60;0&#x60;. | 
 **transactions** | [**Array&lt;LoyaltyLedgerEntry&gt;**](LoyaltyLedgerEntry.md) | List of all events that have happened such as additions, subtractions and expiries. | [optional] 
 **expiring_points** | [**Array&lt;LoyaltyLedgerEntry&gt;**](LoyaltyLedgerEntry.md) | List of all points that will expire. | [optional] 
 **active_points** | [**Array&lt;LoyaltyLedgerEntry&gt;**](LoyaltyLedgerEntry.md) | List of all currently active points. | [optional] 
@@ -26,6 +27,7 @@ instance = TalonOne::LoyaltySubLedger.new(total: null,
                                  total_pending_points: null,
                                  total_spent_points: null,
                                  total_expired_points: null,
+                                 total_negative_points: null,
                                  transactions: null,
                                  expiring_points: null,
                                  active_points: null,

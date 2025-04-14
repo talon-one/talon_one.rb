@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product_id** | **Integer** | The ID of the product. | 
+**product_id** | **Integer** | The ID of the product. | [optional] 
 **value** | **String** | The string matching the given value. Either a product name or SKU. | 
-**product_sku_id** | **Integer** | The ID of the SKU linked to a product. If empty, this is an analytics-level product. | [optional] 
+**product_sku_id** | **Integer** | The ID of the SKU linked to a product. If empty, this is an product. | [optional] 
 
 ## Code Sample
 

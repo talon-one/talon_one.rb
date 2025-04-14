@@ -32,6 +32,16 @@ describe 'StrikethroughLabelingNotification' do
       expect(@instance).to be_instance_of(TalonOne::StrikethroughLabelingNotification)
     end
   end
+  describe 'test attribute "version"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["v2"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.version = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "application_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

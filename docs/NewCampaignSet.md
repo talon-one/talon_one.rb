@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application_id** | **Integer** | The ID of the application that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **version** | **Integer** | Version of the campaign set. | 
 **set** | [**CampaignSetBranchNode**](CampaignSetBranchNode.md) |  | 
 

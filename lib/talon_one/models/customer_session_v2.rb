@@ -24,7 +24,7 @@ module TalonOne
     # The integration ID set by your integration layer.
     attr_accessor :integration_id
 
-    # The ID of the application that owns this entity.
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
     # ID of the customer profile set by your integration layer.  **Note:** If the customer does not yet have a known `profileId`, we recommend you use a guest `profileId`. 
@@ -75,9 +75,6 @@ module TalonOne
     # Timestamp of the most recent event received on this session.
     attr_accessor :updated
 
-    # The likelihood of the customer session closing based on predictive modeling, expressed as a decimal between `0` and `1`.
-    attr_accessor :closure_prediction
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -122,8 +119,7 @@ module TalonOne
         :'total' => :'total',
         :'cart_item_total' => :'cartItemTotal',
         :'additional_cost_total' => :'additionalCostTotal',
-        :'updated' => :'updated',
-        :'closure_prediction' => :'closurePrediction'
+        :'updated' => :'updated'
       }
     end
 
@@ -149,8 +145,7 @@ module TalonOne
         :'total' => :'Float',
         :'cart_item_total' => :'Float',
         :'additional_cost_total' => :'Float',
-        :'updated' => :'DateTime',
-        :'closure_prediction' => :'Float'
+        :'updated' => :'DateTime'
       }
     end
 
@@ -267,10 +262,6 @@ module TalonOne
 
       if attributes.key?(:'updated')
         self.updated = attributes[:'updated']
-      end
-
-      if attributes.key?(:'closure_prediction')
-        self.closure_prediction = attributes[:'closure_prediction']
       end
     end
 
@@ -446,8 +437,7 @@ module TalonOne
           total == o.total &&
           cart_item_total == o.cart_item_total &&
           additional_cost_total == o.additional_cost_total &&
-          updated == o.updated &&
-          closure_prediction == o.closure_prediction
+          updated == o.updated
     end
 
     # @see the `==` method
@@ -459,7 +449,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes, first_session, total, cart_item_total, additional_cost_total, updated, closure_prediction].hash
+      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes, first_session, total, cart_item_total, additional_cost_total, updated].hash
     end
 
     # Builds the object from hash

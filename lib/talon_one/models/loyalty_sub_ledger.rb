@@ -30,6 +30,9 @@ module TalonOne
     # Total amount of points, that expired without ever being spent.
     attr_accessor :total_expired_points
 
+    # Total amount of negative points. This implies that `totalActivePoints` is `0`.
+    attr_accessor :total_negative_points
+
     # List of all events that have happened such as additions, subtractions and expiries.
     attr_accessor :transactions
 
@@ -55,6 +58,7 @@ module TalonOne
         :'total_pending_points' => :'totalPendingPoints',
         :'total_spent_points' => :'totalSpentPoints',
         :'total_expired_points' => :'totalExpiredPoints',
+        :'total_negative_points' => :'totalNegativePoints',
         :'transactions' => :'transactions',
         :'expiring_points' => :'expiringPoints',
         :'active_points' => :'activePoints',
@@ -72,6 +76,7 @@ module TalonOne
         :'total_pending_points' => :'Float',
         :'total_spent_points' => :'Float',
         :'total_expired_points' => :'Float',
+        :'total_negative_points' => :'Float',
         :'transactions' => :'Array<LoyaltyLedgerEntry>',
         :'expiring_points' => :'Array<LoyaltyLedgerEntry>',
         :'active_points' => :'Array<LoyaltyLedgerEntry>',
@@ -120,6 +125,10 @@ module TalonOne
 
       if attributes.key?(:'total_expired_points')
         self.total_expired_points = attributes[:'total_expired_points']
+      end
+
+      if attributes.key?(:'total_negative_points')
+        self.total_negative_points = attributes[:'total_negative_points']
       end
 
       if attributes.key?(:'transactions')
@@ -181,6 +190,10 @@ module TalonOne
         invalid_properties.push('invalid value for "total_expired_points", total_expired_points cannot be nil.')
       end
 
+      if @total_negative_points.nil?
+        invalid_properties.push('invalid value for "total_negative_points", total_negative_points cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -192,6 +205,7 @@ module TalonOne
       return false if @total_pending_points.nil?
       return false if @total_spent_points.nil?
       return false if @total_expired_points.nil?
+      return false if @total_negative_points.nil?
       true
     end
 
@@ -205,6 +219,7 @@ module TalonOne
           total_pending_points == o.total_pending_points &&
           total_spent_points == o.total_spent_points &&
           total_expired_points == o.total_expired_points &&
+          total_negative_points == o.total_negative_points &&
           transactions == o.transactions &&
           expiring_points == o.expiring_points &&
           active_points == o.active_points &&
@@ -222,7 +237,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total, total_active_points, total_pending_points, total_spent_points, total_expired_points, transactions, expiring_points, active_points, pending_points, expired_points, current_tier].hash
+      [total, total_active_points, total_pending_points, total_spent_points, total_expired_points, total_negative_points, transactions, expiring_points, active_points, pending_points, expired_points, current_tier].hash
     end
 
     # Builds the object from hash

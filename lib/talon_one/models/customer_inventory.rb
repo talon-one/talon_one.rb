@@ -47,7 +47,7 @@ module TalonOne
         :'referrals' => :'Array<InventoryReferral>',
         :'coupons' => :'Array<InventoryCoupon>',
         :'giveaways' => :'Array<Giveaway>',
-        :'achievements' => :'Array<AchievementProgress>'
+        :'achievements' => :'Array<AchievementProgressWithDefinition>'
       }
     end
 

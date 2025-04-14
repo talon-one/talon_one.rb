@@ -21,11 +21,15 @@ module TalonOne
     # The name / description of the effect
     attr_accessor :name
 
+    # The original quantity in case a partial reward was applied.
+    attr_accessor :desired_quantity
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'sku' => :'sku',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'desired_quantity' => :'desiredQuantity'
       }
     end
 
@@ -33,7 +37,8 @@ module TalonOne
     def self.openapi_types
       {
         :'sku' => :'String',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'desired_quantity' => :'Integer'
       }
     end
 
@@ -64,6 +69,10 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'desired_quantity')
+        self.desired_quantity = attributes[:'desired_quantity']
       end
     end
 
@@ -96,7 +105,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           sku == o.sku &&
-          name == o.name
+          name == o.name &&
+          desired_quantity == o.desired_quantity
     end
 
     # @see the `==` method
@@ -108,7 +118,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [sku, name].hash
+      [sku, name, desired_quantity].hash
     end
 
     # Builds the object from hash

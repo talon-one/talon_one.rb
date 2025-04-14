@@ -192,10 +192,6 @@ module TalonOne
         invalid_properties.push('invalid value for "target", target cannot be nil.')
       end
 
-      if @period.nil?
-        invalid_properties.push('invalid value for "period", period cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -209,7 +205,6 @@ module TalonOne
       return false if @title.nil?
       return false if @description.nil?
       return false if @target.nil?
-      return false if @period.nil?
       recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
       return false unless recurrence_policy_validator.valid?(@recurrence_policy)
       activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])

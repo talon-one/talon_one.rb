@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. | 
 **created** | **DateTime** | The exact moment this entity was created. | 
-**application_id** | **Integer** | The ID of the application that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **user_id** | **Integer** | The ID of the user associated with this entity. | 
 **name** | **String** | A user-facing name for this campaign. | 
 **description** | **String** | A detailed description of the campaign. | 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **campaign_groups** | **Array&lt;Integer&gt;** | The IDs of the [campaign groups](https://docs.talon.one/docs/product/account/managing-campaign-groups) this campaign belongs to.  | [optional] 
 **type** | **String** | The campaign type. Possible type values:   - &#x60;cartItem&#x60;: Type of campaign that can apply effects only to cart items.   - &#x60;advanced&#x60;: Type of campaign that can apply effects to customer sessions and cart items.  | [default to &#39;advanced&#39;]
 **linked_store_ids** | **Array&lt;Integer&gt;** | A list of store IDs that you want to link to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store.  | [optional] 
-**budgets** | [**Array&lt;CampaignBudget&gt;**](CampaignBudget.md) | A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined.  | 
+**budgets** | [**Array&lt;CampaignBudget&gt;**](CampaignBudget.md) | A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined.  | [optional] 
 **coupon_redemption_count** | **Integer** | This property is **deprecated**. The count should be available under *budgets* property. Number of coupons redeemed in the campaign.  | [optional] 
 **referral_redemption_count** | **Integer** | This property is **deprecated**. The count should be available under *budgets* property. Number of referral codes redeemed in the campaign.  | [optional] 
 **discount_count** | **Float** | This property is **deprecated**. The count should be available under *budgets* property. Total amount of discounts redeemed in the campaign.  | [optional] 
@@ -46,6 +46,7 @@ Name | Type | Description | Notes
 **template_id** | **Integer** | The ID of the Campaign Template this Campaign was created from. | [optional] 
 **frontend_state** | **String** | The campaign state displayed in the Campaign Manager. | 
 **stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
+**value_maps_ids** | **Array&lt;Integer&gt;** | A list of value map IDs for the campaign. | [optional] 
 **revision_frontend_state** | **String** | The campaign revision state displayed in the Campaign Manager. | [optional] 
 **active_revision_id** | **Integer** | ID of the revision that was last activated on this campaign.  | [optional] 
 **active_revision_version_id** | **Integer** | ID of the revision version that is active on the campaign.  | [optional] 
@@ -101,6 +102,7 @@ instance = TalonOne::Campaign.new(id: 4,
                                  template_id: 3,
                                  frontend_state: running,
                                  stores_imported: true,
+                                 value_maps_ids: [100, 215],
                                  revision_frontend_state: revised,
                                  active_revision_id: 6,
                                  active_revision_version_id: 6,

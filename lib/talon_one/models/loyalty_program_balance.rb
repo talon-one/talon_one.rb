@@ -21,6 +21,9 @@ module TalonOne
     # Sum of pending points.
     attr_accessor :pending_balance
 
+    # Sum of negative points. This implies that `currentBalance` is `0`.
+    attr_accessor :negative_balance
+
     # **DEPRECATED** Value is shown as 0. 
     attr_accessor :expired_balance
 
@@ -33,15 +36,20 @@ module TalonOne
     # The tentative points balance, reflecting the `pendingBalance` and all point additions with a future activation date within the current open customer session. When the session is closed, the effects are applied and the `pendingBalance` is updated to this value.  **Note:** Tentative balances are specific to the current session and do not take into account other open sessions for the given customer. 
     attr_accessor :tentative_pending_balance
 
+    # The tentative negative balance after all additions and deductions from the current customer session are applied to `negativeBalance`. When the session is closed, the tentative effects are applied and `negativeBalance` is updated to this value.  **Note:** Tentative balances are specific to the current session and do not take into account other open sessions for the given customer. 
+    attr_accessor :tentative_negative_balance
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'current_balance' => :'currentBalance',
         :'pending_balance' => :'pendingBalance',
+        :'negative_balance' => :'negativeBalance',
         :'expired_balance' => :'expiredBalance',
         :'spent_balance' => :'spentBalance',
         :'tentative_current_balance' => :'tentativeCurrentBalance',
-        :'tentative_pending_balance' => :'tentativePendingBalance'
+        :'tentative_pending_balance' => :'tentativePendingBalance',
+        :'tentative_negative_balance' => :'tentativeNegativeBalance'
       }
     end
 
@@ -50,10 +58,12 @@ module TalonOne
       {
         :'current_balance' => :'Float',
         :'pending_balance' => :'Float',
+        :'negative_balance' => :'Float',
         :'expired_balance' => :'Float',
         :'spent_balance' => :'Float',
         :'tentative_current_balance' => :'Float',
-        :'tentative_pending_balance' => :'Float'
+        :'tentative_pending_balance' => :'Float',
+        :'tentative_negative_balance' => :'Float'
       }
     end
 
@@ -86,6 +96,10 @@ module TalonOne
         self.pending_balance = attributes[:'pending_balance']
       end
 
+      if attributes.key?(:'negative_balance')
+        self.negative_balance = attributes[:'negative_balance']
+      end
+
       if attributes.key?(:'expired_balance')
         self.expired_balance = attributes[:'expired_balance']
       end
@@ -101,6 +115,10 @@ module TalonOne
       if attributes.key?(:'tentative_pending_balance')
         self.tentative_pending_balance = attributes[:'tentative_pending_balance']
       end
+
+      if attributes.key?(:'tentative_negative_balance')
+        self.tentative_negative_balance = attributes[:'tentative_negative_balance']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,6 +133,10 @@ module TalonOne
         invalid_properties.push('invalid value for "pending_balance", pending_balance cannot be nil.')
       end
 
+      if @negative_balance.nil?
+        invalid_properties.push('invalid value for "negative_balance", negative_balance cannot be nil.')
+      end
+
       if @expired_balance.nil?
         invalid_properties.push('invalid value for "expired_balance", expired_balance cannot be nil.')
       end
@@ -127,6 +149,10 @@ module TalonOne
         invalid_properties.push('invalid value for "tentative_current_balance", tentative_current_balance cannot be nil.')
       end
 
+      if @tentative_negative_balance.nil?
+        invalid_properties.push('invalid value for "tentative_negative_balance", tentative_negative_balance cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -135,9 +161,11 @@ module TalonOne
     def valid?
       return false if @current_balance.nil?
       return false if @pending_balance.nil?
+      return false if @negative_balance.nil?
       return false if @expired_balance.nil?
       return false if @spent_balance.nil?
       return false if @tentative_current_balance.nil?
+      return false if @tentative_negative_balance.nil?
       true
     end
 
@@ -148,10 +176,12 @@ module TalonOne
       self.class == o.class &&
           current_balance == o.current_balance &&
           pending_balance == o.pending_balance &&
+          negative_balance == o.negative_balance &&
           expired_balance == o.expired_balance &&
           spent_balance == o.spent_balance &&
           tentative_current_balance == o.tentative_current_balance &&
-          tentative_pending_balance == o.tentative_pending_balance
+          tentative_pending_balance == o.tentative_pending_balance &&
+          tentative_negative_balance == o.tentative_negative_balance
     end
 
     # @see the `==` method
@@ -163,7 +193,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [current_balance, pending_balance, expired_balance, spent_balance, tentative_current_balance, tentative_pending_balance].hash
+      [current_balance, pending_balance, negative_balance, expired_balance, spent_balance, tentative_current_balance, tentative_pending_balance, tentative_negative_balance].hash
     end
 
     # Builds the object from hash

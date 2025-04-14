@@ -48,6 +48,8 @@ module TalonOne
     # Indicates if the entry belongs to the archived session.
     attr_accessor :archived
 
+    attr_accessor :flags
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +66,8 @@ module TalonOne
         :'name' => :'name',
         :'sub_ledger_id' => :'subLedgerID',
         :'user_id' => :'userID',
-        :'archived' => :'archived'
+        :'archived' => :'archived',
+        :'flags' => :'flags'
       }
     end
 
@@ -84,7 +87,8 @@ module TalonOne
         :'name' => :'String',
         :'sub_ledger_id' => :'String',
         :'user_id' => :'Integer',
-        :'archived' => :'Boolean'
+        :'archived' => :'Boolean',
+        :'flags' => :'LoyaltyLedgerEntryFlags'
       }
     end
 
@@ -164,6 +168,10 @@ module TalonOne
       if attributes.key?(:'archived')
         self.archived = attributes[:'archived']
       end
+
+      if attributes.key?(:'flags')
+        self.flags = attributes[:'flags']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -227,7 +235,8 @@ module TalonOne
           name == o.name &&
           sub_ledger_id == o.sub_ledger_id &&
           user_id == o.user_id &&
-          archived == o.archived
+          archived == o.archived &&
+          flags == o.flags
     end
 
     # @see the `==` method
@@ -239,7 +248,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_profile_id, card_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id, archived].hash
+      [created, program_id, customer_profile_id, card_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id, archived, flags].hash
     end
 
     # Builds the object from hash

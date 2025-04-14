@@ -27,13 +27,17 @@ module TalonOne
     # Total amount of points awarded but never redeemed. They cannot be used anymore.
     attr_accessor :expired_points
 
+    # Total amount of negative points. This implies that `activePoints` is `0`.
+    attr_accessor :negative_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'active_points' => :'activePoints',
         :'pending_points' => :'pendingPoints',
         :'spent_points' => :'spentPoints',
-        :'expired_points' => :'expiredPoints'
+        :'expired_points' => :'expiredPoints',
+        :'negative_points' => :'negativePoints'
       }
     end
 
@@ -43,7 +47,8 @@ module TalonOne
         :'active_points' => :'Float',
         :'pending_points' => :'Float',
         :'spent_points' => :'Float',
-        :'expired_points' => :'Float'
+        :'expired_points' => :'Float',
+        :'negative_points' => :'Float'
       }
     end
 
@@ -83,6 +88,10 @@ module TalonOne
       if attributes.key?(:'expired_points')
         self.expired_points = attributes[:'expired_points']
       end
+
+      if attributes.key?(:'negative_points')
+        self.negative_points = attributes[:'negative_points']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,7 +115,8 @@ module TalonOne
           active_points == o.active_points &&
           pending_points == o.pending_points &&
           spent_points == o.spent_points &&
-          expired_points == o.expired_points
+          expired_points == o.expired_points &&
+          negative_points == o.negative_points
     end
 
     # @see the `==` method
@@ -118,7 +128,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [active_points, pending_points, spent_points, expired_points].hash
+      [active_points, pending_points, spent_points, expired_points, negative_points].hash
     end
 
     # Builds the object from hash

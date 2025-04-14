@@ -13,27 +13,10 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # The current progress of the customer in the achievement.
   class AchievementProgress
-    # The internal ID of the achievement.
-    attr_accessor :achievement_id
-
-    # The internal name of the achievement used in API requests. 
-    attr_accessor :name
-
-    # The display name of the achievement in the Campaign Manager.
-    attr_accessor :title
-
-    # The description of the achievement in the Campaign Manager.
-    attr_accessor :description
-
-    # The ID of the campaign the achievement belongs to.
-    attr_accessor :campaign_id
-
     # The status of the achievement.
     attr_accessor :status
-
-    # The required number of actions or the transactional milestone to complete the achievement.
-    attr_accessor :target
 
     # The current progress of the customer in the achievement.
     attr_accessor :progress
@@ -72,13 +55,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'achievement_id' => :'achievementId',
-        :'name' => :'name',
-        :'title' => :'title',
-        :'description' => :'description',
-        :'campaign_id' => :'campaignId',
         :'status' => :'status',
-        :'target' => :'target',
         :'progress' => :'progress',
         :'start_date' => :'startDate',
         :'completion_date' => :'completionDate',
@@ -89,13 +66,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'achievement_id' => :'Integer',
-        :'name' => :'String',
-        :'title' => :'String',
-        :'description' => :'String',
-        :'campaign_id' => :'Integer',
         :'status' => :'String',
-        :'target' => :'Float',
         :'progress' => :'Float',
         :'start_date' => :'DateTime',
         :'completion_date' => :'DateTime',
@@ -124,32 +95,8 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'achievement_id')
-        self.achievement_id = attributes[:'achievement_id']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
-      end
-
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'campaign_id')
-        self.campaign_id = attributes[:'campaign_id']
-      end
-
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'target')
-        self.target = attributes[:'target']
       end
 
       if attributes.key?(:'progress')
@@ -173,39 +120,6 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @achievement_id.nil?
-        invalid_properties.push('invalid value for "achievement_id", achievement_id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @name.to_s.length > 1000
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 1000.')
-      end
-
-      if @name.to_s.length < 1
-        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
-      end
-
-      pattern = Regexp.new(/^[a-zA-Z]\w+$/)
-      if @name !~ pattern
-        invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
-      end
-
-      if @title.nil?
-        invalid_properties.push('invalid value for "title", title cannot be nil.')
-      end
-
-      if @description.nil?
-        invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
       if @status.nil?
         invalid_properties.push('invalid value for "status", status cannot be nil.')
       end
@@ -214,64 +128,23 @@ module TalonOne
         invalid_properties.push('invalid value for "progress", progress cannot be nil.')
       end
 
-      if @start_date.nil?
-        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
-      end
-
-      if @end_date.nil?
-        invalid_properties.push('invalid value for "end_date", end_date cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @achievement_id.nil?
-      return false if @name.nil?
-      return false if @name.to_s.length > 1000
-      return false if @name.to_s.length < 1
-      return false if @name !~ Regexp.new(/^[a-zA-Z]\w+$/)
-      return false if @title.nil?
-      return false if @description.nil?
-      return false if @campaign_id.nil?
       return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["inprogress", "completed", "expired"])
+      status_validator = EnumAttributeValidator.new('String', ["inprogress", "completed", "expired", "not_started"])
       return false unless status_validator.valid?(@status)
       return false if @progress.nil?
-      return false if @start_date.nil?
-      return false if @end_date.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      if name.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 1000.'
-      end
-
-      if name.to_s.length < 1
-        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 1.'
-      end
-
-      pattern = Regexp.new(/^[a-zA-Z]\w+$/)
-      if name !~ pattern
-        fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["inprogress", "completed", "expired"])
+      validator = EnumAttributeValidator.new('String', ["inprogress", "completed", "expired", "not_started"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -283,13 +156,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          achievement_id == o.achievement_id &&
-          name == o.name &&
-          title == o.title &&
-          description == o.description &&
-          campaign_id == o.campaign_id &&
           status == o.status &&
-          target == o.target &&
           progress == o.progress &&
           start_date == o.start_date &&
           completion_date == o.completion_date &&
@@ -305,7 +172,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [achievement_id, name, title, description, campaign_id, status, target, progress, start_date, completion_date, end_date].hash
+      [status, progress, start_date, completion_date, end_date].hash
     end
 
     # Builds the object from hash

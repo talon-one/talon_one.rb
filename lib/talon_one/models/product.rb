@@ -66,10 +66,6 @@ module TalonOne
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @name.to_s.length > 50
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
-      end
-
       invalid_properties
     end
 
@@ -77,22 +73,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @name.nil?
-      return false if @name.to_s.length > 50
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      if name.to_s.length > 50
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 50.'
-      end
-
-      @name = name
     end
 
     # Checks equality by comparing each attribute.

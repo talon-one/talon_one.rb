@@ -20,6 +20,8 @@ module TalonOne
 
     attr_accessor :store_count
 
+    attr_accessor :imported
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -47,7 +49,8 @@ module TalonOne
       {
         :'action' => :'action',
         :'period' => :'period',
-        :'store_count' => :'storeCount'
+        :'store_count' => :'storeCount',
+        :'imported' => :'imported'
       }
     end
 
@@ -56,7 +59,8 @@ module TalonOne
       {
         :'action' => :'String',
         :'period' => :'String',
-        :'store_count' => :'Integer'
+        :'store_count' => :'Integer',
+        :'imported' => :'Boolean'
       }
     end
 
@@ -92,6 +96,10 @@ module TalonOne
       if attributes.key?(:'store_count')
         self.store_count = attributes[:'store_count']
       end
+
+      if attributes.key?(:'imported')
+        self.imported = attributes[:'imported']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,6 +114,10 @@ module TalonOne
         invalid_properties.push('invalid value for "store_count", store_count cannot be nil.')
       end
 
+      if @imported.nil?
+        invalid_properties.push('invalid value for "imported", imported cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -118,6 +130,7 @@ module TalonOne
       period_validator = EnumAttributeValidator.new('String', ["overall", "daily", "weekly", "monthly", "yearly"])
       return false unless period_validator.valid?(@period)
       return false if @store_count.nil?
+      return false if @imported.nil?
       true
     end
 
@@ -148,7 +161,8 @@ module TalonOne
       self.class == o.class &&
           action == o.action &&
           period == o.period &&
-          store_count == o.store_count
+          store_count == o.store_count &&
+          imported == o.imported
     end
 
     # @see the `==` method
@@ -160,7 +174,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action, period, store_count].hash
+      [action, period, store_count, imported].hash
     end
 
     # Builds the object from hash

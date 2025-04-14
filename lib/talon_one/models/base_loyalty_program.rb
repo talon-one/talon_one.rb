@@ -55,7 +55,7 @@ module TalonOne
 
     attr_accessor :card_code_settings
 
-    # The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - `only_pending`: Only pending points can be rolled back. - `within_balance`: Available active points can be rolled back if there aren't enough pending points. The active balance of the customer cannot be negative. 
+    # The policy that defines the rollback of points in case of a partially returned, cancelled, or reopened [customer session](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). - `only_pending`: Only pending points can be rolled back. - `within_balance`: Available active points can be rolled back if there aren't enough pending points. The active balance of the customer cannot be negative. - `unlimited`: Allows negative balance without any limit. 
     attr_accessor :return_policy
 
     class EnumAttributeValidator
@@ -227,7 +227,7 @@ module TalonOne
       return false unless tiers_expiration_policy_validator.valid?(@tiers_expiration_policy)
       tiers_downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless tiers_downgrade_policy_validator.valid?(@tiers_downgrade_policy)
-      return_policy_validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      return_policy_validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance", "unlimited"])
       return false unless return_policy_validator.valid?(@return_policy)
       true
     end
@@ -275,7 +275,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_policy Object to be assigned
     def return_policy=(return_policy)
-      validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance"])
+      validator = EnumAttributeValidator.new('String', ["only_pending", "within_balance", "unlimited"])
       unless validator.valid?(return_policy)
         fail ArgumentError, "invalid value for \"return_policy\", must be one of #{validator.allowable_values}."
       end

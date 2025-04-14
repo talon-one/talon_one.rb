@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **created** | **DateTime** | The time this entity was created. | 
 **campaign_id** | **Integer** | The ID of the campaign that owns this entity. | 
 **store_id** | **Integer** | The ID of the store. | 
-**limits** | [**Array&lt;LimitConfig&gt;**](LimitConfig.md) | The set of budget limits for stores linked to the campaign. | 
+**limits** | [**Array&lt;CampaignStoreBudgetLimitConfig&gt;**](CampaignStoreBudgetLimitConfig.md) | The set of budget limits for stores linked to the campaign. | 
 
 ## Code Sample
 

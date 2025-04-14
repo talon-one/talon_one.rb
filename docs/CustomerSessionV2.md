@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **Integer** | Internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **integration_id** | **String** | The integration ID set by your integration layer. | 
-**application_id** | **Integer** | The ID of the application that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **profile_id** | **String** | ID of the customer profile set by your integration layer.  **Note:** If the customer does not yet have a known &#x60;profileId&#x60;, we recommend you use a guest &#x60;profileId&#x60;.  | 
 **store_integration_id** | **String** | The integration ID of the store. You choose this ID when you create a store. | [optional] 
 **evaluable_campaign_ids** | **Array&lt;Integer&gt;** | When using the &#x60;dry&#x60; query parameter, use this property to list the campaign to be evaluated by the Rule Engine.  These campaigns will be evaluated, even if they are disabled, allowing you to test specific campaigns before activating them.  | [optional] 
@@ -24,7 +24,6 @@ Name | Type | Description | Notes
 **cart_item_total** | **Float** | The total value of cart items, before any discounts are applied. | 
 **additional_cost_total** | **Float** | The total value of additional costs, before any discounts are applied. | 
 **updated** | **DateTime** | Timestamp of the most recent event received on this session. | 
-**closure_prediction** | **Float** | The likelihood of the customer session closing based on predictive modeling, expressed as a decimal between &#x60;0&#x60; and &#x60;1&#x60;. | [optional] 
 
 ## Code Sample
 
@@ -50,8 +49,7 @@ instance = TalonOne::CustomerSessionV2.new(id: 6,
                                  total: 119.99,
                                  cart_item_total: 99.99,
                                  additional_cost_total: 20.0,
-                                 updated: 2020-02-08T14:15:22Z,
-                                 closure_prediction: 0.283)
+                                 updated: 2020-02-08T14:15:22Z)
 ```
 
 
