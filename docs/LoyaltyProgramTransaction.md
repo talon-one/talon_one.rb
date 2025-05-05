@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **user_email** | **String** | The email of the Campaign Manager account that manually added or deducted points. Applies only to manual transactions. | [optional] 
 **ruleset_id** | **Integer** | ID of the ruleset containing the rule that triggered the effect. Applies only for transactions that resulted from a customer session. | [optional] 
 **rule_name** | **String** | Name of the rule that triggered the effect. Applies only for transactions that resulted from a customer session. | [optional] 
+**flags** | [**LoyaltyLedgerEntryFlags**](LoyaltyLedgerEntryFlags.md) |  | [optional] 
 
 ## Code Sample
 
@@ -45,7 +46,8 @@ instance = TalonOne::LoyaltyProgramTransaction.new(id: 123,
                                  user_id: 5,
                                  user_email: john.doe@example.com,
                                  ruleset_id: 11,
-                                 rule_name: 10 points for every $100 spent)
+                                 rule_name: 10 points for every $100 spent,
+                                 flags: null)
 ```
 
 

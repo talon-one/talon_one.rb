@@ -18,6 +18,9 @@ module TalonOne
     # The version of the strikethrough pricing notification.
     attr_accessor :version
 
+    # Timestamp at which the strikethrough pricing update becomes valid. Set for **scheduled** strikethrough pricing updates (version: v2) only. 
+    attr_accessor :valid_from
+
     # The ID of the Application to which the catalog items labels belongs.
     attr_accessor :application_id
 
@@ -57,6 +60,7 @@ module TalonOne
     def self.attribute_map
       {
         :'version' => :'version',
+        :'valid_from' => :'validFrom',
         :'application_id' => :'applicationId',
         :'current_batch' => :'currentBatch',
         :'total_batches' => :'totalBatches',
@@ -69,6 +73,7 @@ module TalonOne
     def self.openapi_types
       {
         :'version' => :'String',
+        :'valid_from' => :'DateTime',
         :'application_id' => :'Integer',
         :'current_batch' => :'Integer',
         :'total_batches' => :'Integer',
@@ -100,6 +105,10 @@ module TalonOne
 
       if attributes.key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'valid_from')
+        self.valid_from = attributes[:'valid_from']
       end
 
       if attributes.key?(:'application_id')
@@ -181,6 +190,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           version == o.version &&
+          valid_from == o.valid_from &&
           application_id == o.application_id &&
           current_batch == o.current_batch &&
           total_batches == o.total_batches &&
@@ -197,7 +207,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [version, application_id, current_batch, total_batches, trigger, changed_items].hash
+      [version, valid_from, application_id, current_batch, total_batches, trigger, changed_items].hash
     end
 
     # Builds the object from hash

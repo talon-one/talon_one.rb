@@ -68,6 +68,8 @@ module TalonOne
     # Name of the rule that triggered the effect. Applies only for transactions that resulted from a customer session.
     attr_accessor :rule_name
 
+    attr_accessor :flags
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -110,7 +112,8 @@ module TalonOne
         :'user_id' => :'userId',
         :'user_email' => :'userEmail',
         :'ruleset_id' => :'rulesetId',
-        :'rule_name' => :'ruleName'
+        :'rule_name' => :'ruleName',
+        :'flags' => :'flags'
       }
     end
 
@@ -134,7 +137,8 @@ module TalonOne
         :'user_id' => :'Integer',
         :'user_email' => :'String',
         :'ruleset_id' => :'Integer',
-        :'rule_name' => :'String'
+        :'rule_name' => :'String',
+        :'flags' => :'LoyaltyLedgerEntryFlags'
       }
     end
 
@@ -229,6 +233,10 @@ module TalonOne
 
       if attributes.key?(:'rule_name')
         self.rule_name = attributes[:'rule_name']
+      end
+
+      if attributes.key?(:'flags')
+        self.flags = attributes[:'flags']
       end
     end
 
@@ -442,7 +450,8 @@ module TalonOne
           user_id == o.user_id &&
           user_email == o.user_email &&
           ruleset_id == o.ruleset_id &&
-          rule_name == o.rule_name
+          rule_name == o.rule_name &&
+          flags == o.flags
     end
 
     # @see the `==` method
@@ -454,7 +463,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, program_id, campaign_id, created, type, amount, name, start_date, expiry_date, customer_profile_id, card_identifier, subledger_id, customer_session_id, import_id, user_id, user_email, ruleset_id, rule_name].hash
+      [id, program_id, campaign_id, created, type, amount, name, start_date, expiry_date, customer_profile_id, card_identifier, subledger_id, customer_session_id, import_id, user_id, user_email, ruleset_id, rule_name, flags].hash
     end
 
     # Builds the object from hash

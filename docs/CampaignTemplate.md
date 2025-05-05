@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **updated** | **DateTime** | Timestamp of the most recent update to the campaign template or any of its elements. | [optional] 
 **updated_by** | **String** | Name of the user who last updated this campaign template, if available. | [optional] 
 **valid_application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications that are related to this entity. | 
+**is_user_favorite** | **Boolean** | A flag indicating whether the user marked the template as a favorite. | [optional] [default to false]
 
 ## Code Sample
 
@@ -59,7 +60,8 @@ instance = TalonOne::CampaignTemplate.new(id: 6,
                                  campaign_type: advanced,
                                  updated: 2022-08-24T14:15:22Z,
                                  updated_by: Jane Doe,
-                                 valid_application_ids: [1, 2, 3])
+                                 valid_application_ids: [1, 2, 3],
+                                 is_user_favorite: false)
 ```
 
 

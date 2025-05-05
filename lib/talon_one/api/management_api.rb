@@ -21,7 +21,7 @@ module TalonOne
     end
     # Enable user by email address
     # Enable a [disabled user](https://docs.talon.one/docs/product/account/account-settings/managing-users#disabling-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def activate_user_by_email(body, opts = {})
@@ -31,7 +31,7 @@ module TalonOne
 
     # Enable user by email address
     # Enable a [disabled user](https://docs.talon.one/docs/product/account/account-settings/managing-users#disabling-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def activate_user_by_email_with_http_info(body, opts = {})
@@ -1435,7 +1435,7 @@ module TalonOne
 
     # Disable user by email address
     # [Disable a specific user](https://docs.talon.one/docs/product/account/account-settings/managing-users#disabling-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def deactivate_user_by_email(body, opts = {})
@@ -1445,7 +1445,7 @@ module TalonOne
 
     # Disable user by email address
     # [Disable a specific user](https://docs.talon.one/docs/product/account/account-settings/managing-users#disabling-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def deactivate_user_by_email_with_http_info(body, opts = {})
@@ -2310,7 +2310,7 @@ module TalonOne
 
     # Delete user by email address
     # [Delete a specific user](https://docs.talon.one/docs/product/account/account-settings/managing-users#deleting-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_user_by_email(body, opts = {})
@@ -2320,7 +2320,7 @@ module TalonOne
 
     # Delete user by email address
     # [Delete a specific user](https://docs.talon.one/docs/product/account/account-settings/managing-users#deleting-a-user) by their email address. 
-    # @param body [DeactivateUserRequest] body
+    # @param body [DeleteUserRequest] body
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_user_by_email_with_http_info(body, opts = {})
@@ -2837,7 +2837,7 @@ module TalonOne
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -2861,7 +2861,7 @@ module TalonOne
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -3544,7 +3544,7 @@ module TalonOne
     end
 
     # Export customer's transaction logs
-    # Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. 
+    # Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. 
     # @param range_start [DateTime] Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param range_end [DateTime] Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param loyalty_program_id [String] The identifier for the loyalty program.
@@ -3558,7 +3558,7 @@ module TalonOne
     end
 
     # Export customer&#39;s transaction logs
-    # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. 
+    # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;flags&#x60;: The flags of the transaction, when applicable. The &#x60;createsNegativeBalance&#x60; flag indicates whether the transaction results in a negative balance. 
     # @param range_start [DateTime] Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param range_end [DateTime] Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param loyalty_program_id [String] The identifier for the loyalty program.
@@ -3806,7 +3806,7 @@ module TalonOne
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20022]
     def get_access_logs_without_total_count(application_id, range_start, range_end, opts = {})
       data, _status_code, _headers = get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts)
@@ -3824,7 +3824,7 @@ module TalonOne
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20022, Integer, Hash)>] InlineResponse20022 data, response status code and response headers
     def get_access_logs_without_total_count_with_http_info(application_id, range_start, range_end, opts = {})
       if @api_client.config.debugging
@@ -4232,7 +4232,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20038]
     def get_additional_costs(opts = {})
       data, _status_code, _headers = get_additional_costs_with_http_info(opts)
@@ -4244,7 +4244,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20038, Integer, Hash)>] InlineResponse20038 data, response status code and response headers
     def get_additional_costs_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -4499,7 +4499,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @return [InlineResponse20035]
     def get_application_customer_friends(application_id, integration_id, opts = {})
@@ -4514,7 +4514,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @return [Array<(InlineResponse20035, Integer, Hash)>] InlineResponse20035 data, response status code and response headers
     def get_application_customer_friends_with_http_info(application_id, integration_id, opts = {})
@@ -4755,7 +4755,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20031]
     def get_application_event_types(application_id, opts = {})
       data, _status_code, _headers = get_application_event_types_with_http_info(application_id, opts)
@@ -4768,7 +4768,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20031, Integer, Hash)>] InlineResponse20031 data, response status code and response headers
     def get_application_event_types_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
@@ -4834,7 +4834,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -4858,7 +4858,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :type Comma-separated list of types by which to filter events. Must be exact match(es).
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -5022,7 +5022,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :profile Profile integration ID filter for sessions. Must be exact match.
     # @option opts [String] :state Filter by sessions with this state. Must be exact match.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -5043,7 +5043,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :profile Profile integration ID filter for sessions. Must be exact match.
     # @option opts [String] :state Filter by sessions with this state. Must be exact match.
     # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -5128,7 +5128,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse2007]
     def get_applications(opts = {})
       data, _status_code, _headers = get_applications_with_http_info(opts)
@@ -5140,7 +5140,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
     def get_applications_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -5263,7 +5263,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity.
     # @return [InlineResponse20036]
     def get_attributes(opts = {})
@@ -5276,7 +5276,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :entity Returned attributes will be filtered by supplied entity.
     # @return [Array<(InlineResponse20036, Integer, Hash)>] InlineResponse20036 data, response status code and response headers
     def get_attributes_with_http_info(opts = {})
@@ -5340,7 +5340,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :profile_query The filter to select a profile.
     # @return [InlineResponse20034]
     def get_audience_memberships(audience_id, opts = {})
@@ -5354,7 +5354,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :profile_query The filter to select a profile.
     # @return [Array<(InlineResponse20034, Integer, Hash)>] InlineResponse20034 data, response status code and response headers
     def get_audience_memberships_with_http_info(audience_id, opts = {})
@@ -5421,7 +5421,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @return [InlineResponse20032]
     def get_audiences(opts = {})
@@ -5434,7 +5434,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @return [Array<(InlineResponse20032, Integer, Hash)>] InlineResponse20032 data, response status code and response headers
     def get_audiences_with_http_info(opts = {})
@@ -5496,7 +5496,7 @@ module TalonOne
     # Get a list of audience IDs and their member count. 
     # @param audience_ids [String] The IDs of one or more audiences, separated by commas, by which to filter results.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20033]
     def get_audiences_analytics(audience_ids, opts = {})
       data, _status_code, _headers = get_audiences_analytics_with_http_info(audience_ids, opts)
@@ -5507,7 +5507,7 @@ module TalonOne
     # Get a list of audience IDs and their member count. 
     # @param audience_ids [String] The IDs of one or more audiences, separated by commas, by which to filter results.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20033, Integer, Hash)>] InlineResponse20033 data, response status code and response headers
     def get_audiences_analytics_with_http_info(audience_ids, opts = {})
       if @api_client.config.debugging
@@ -5722,7 +5722,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
     # @return [InlineResponse2008]
     def get_campaign_by_attributes(application_id, body, opts = {})
@@ -5737,7 +5737,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
     # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
     def get_campaign_by_attributes_with_http_info(application_id, body, opts = {})
@@ -5876,7 +5876,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20013]
     def get_campaign_groups(opts = {})
       data, _status_code, _headers = get_campaign_groups_with_http_info(opts)
@@ -5888,7 +5888,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20013, Integer, Hash)>] InlineResponse20013 data, response status code and response headers
     def get_campaign_groups_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -5949,7 +5949,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :state Filter results by the state of the campaign template.
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign template.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign template. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values. 
@@ -5965,7 +5965,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :state Filter results by the state of the campaign template.
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign template.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign template. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values. 
@@ -6039,7 +6039,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
@@ -6060,7 +6060,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
     # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign.
     # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values 
@@ -6145,7 +6145,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
     # @option opts [Integer] :user_id Filter results by user ID.
@@ -6165,7 +6165,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [String] :entity_path Filter results on a case insensitive matching of the url path of the entity
     # @option opts [Integer] :user_id Filter results by user ID.
@@ -6394,7 +6394,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -6423,7 +6423,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -6633,7 +6633,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :name Only return reports matching the customer name.
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaign name.
@@ -6652,7 +6652,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :name Only return reports matching the customer name.
     # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
     # @option opts [String] :campaign_name Only return reports matching the campaign name.
@@ -6737,7 +6737,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [CustomerAnalytics]
     def get_customer_analytics(application_id, customer_id, opts = {})
       data, _status_code, _headers = get_customer_analytics_with_http_info(application_id, customer_id, opts)
@@ -6751,7 +6751,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(CustomerAnalytics, Integer, Hash)>] CustomerAnalytics data, response status code and response headers
     def get_customer_analytics_with_http_info(application_id, customer_id, opts = {})
       if @api_client.config.debugging
@@ -7205,7 +7205,7 @@ module TalonOne
     # @option opts [Boolean] :include_old_versions Include all versions of every event type. (default to false)
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20042]
     def get_event_types(opts = {})
       data, _status_code, _headers = get_event_types_with_http_info(opts)
@@ -7219,7 +7219,7 @@ module TalonOne
     # @option opts [Boolean] :include_old_versions Include all versions of every event type.
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20042, Integer, Hash)>] InlineResponse20042 data, response status code and response headers
     def get_event_types_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -7533,7 +7533,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :identifier The card code by which to filter loyalty cards in the response.
     # @option opts [Integer] :profile_id Filter results by customer profile ID.
     # @option opts [String] :batch_id Filter results by loyalty card batch ID.
@@ -7549,7 +7549,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :identifier The card code by which to filter loyalty cards in the response.
     # @option opts [Integer] :profile_id Filter results by customer profile ID.
     # @option opts [String] :batch_id Filter results by loyalty card batch ID.
@@ -7963,6 +7963,121 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # List message log entries
+    # Retrieve all message log entries.
+    # @param entity_type [String] The entity type the log is related to. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :message_id Filter results by message ID.
+    # @option opts [String] :change_type Filter results by change type.
+    # @option opts [String] :notification_i_ds Filter results by notification ID (include up to 30 values, separated by a comma).
+    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [String] :cursor A specific unique value in the database. If this value is not given, the server fetches results starting with the first record. 
+    # @option opts [String] :period Filter results by time period. Choose between the available relative time frames. 
+    # @option opts [Boolean] :is_successful Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to&#x60;true&#x60;, only log entries with &#x60;2xx&#x60; response codes are returned. When set to &#x60;false&#x60;, only log entries with &#x60;4xx&#x60; and &#x60;5xx&#x60; response codes are returned. 
+    # @option opts [Float] :application_id Filter results by Application ID.
+    # @option opts [Float] :campaign_id Filter results by campaign ID.
+    # @option opts [Integer] :loyalty_program_id Identifier of the loyalty program.
+    # @option opts [Integer] :response_code Filter results by response status code.
+    # @option opts [String] :webhook_i_ds Filter results by webhook ID (include up to 30 values, separated by a comma).
+    # @return [MessageLogEntries]
+    def get_message_logs(entity_type, opts = {})
+      data, _status_code, _headers = get_message_logs_with_http_info(entity_type, opts)
+      data
+    end
+
+    # List message log entries
+    # Retrieve all message log entries.
+    # @param entity_type [String] The entity type the log is related to. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :message_id Filter results by message ID.
+    # @option opts [String] :change_type Filter results by change type.
+    # @option opts [String] :notification_i_ds Filter results by notification ID (include up to 30 values, separated by a comma).
+    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [String] :cursor A specific unique value in the database. If this value is not given, the server fetches results starting with the first record. 
+    # @option opts [String] :period Filter results by time period. Choose between the available relative time frames. 
+    # @option opts [Boolean] :is_successful Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to&#x60;true&#x60;, only log entries with &#x60;2xx&#x60; response codes are returned. When set to &#x60;false&#x60;, only log entries with &#x60;4xx&#x60; and &#x60;5xx&#x60; response codes are returned. 
+    # @option opts [Float] :application_id Filter results by Application ID.
+    # @option opts [Float] :campaign_id Filter results by campaign ID.
+    # @option opts [Integer] :loyalty_program_id Identifier of the loyalty program.
+    # @option opts [Integer] :response_code Filter results by response status code.
+    # @option opts [String] :webhook_i_ds Filter results by webhook ID (include up to 30 values, separated by a comma).
+    # @return [Array<(MessageLogEntries, Integer, Hash)>] MessageLogEntries data, response status code and response headers
+    def get_message_logs_with_http_info(entity_type, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_message_logs ...'
+      end
+      # verify the required parameter 'entity_type' is set
+      if @api_client.config.client_side_validation && entity_type.nil?
+        fail ArgumentError, "Missing the required parameter 'entity_type' when calling ManagementApi.get_message_logs"
+      end
+      # verify enum value
+      allowable_values = ["application", "loyalty_program", "webhook"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(entity_type)
+        fail ArgumentError, "invalid value for \"entity_type\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["CampaignEvaluationTreeChanged", "CampaignNotification", "CouponCreated", "CouponUpdated", "CouponDeleted", "AsyncCouponsCreated", "CouponsDeleted", "CouponsUpdated", "CouponCodeExpiring", "StrikethroughPrice", "LoyaltyPointsAdded", "LoyaltyPointsDeducted", "LoyaltyPointsExpiring", "LoyaltyPointsPendingToActive", "TierWillDowngrade", "TierUpgrade", "TierDowngrade", "LoyaltyCardPointsAdded", "LoyaltyCardPointsDeducted", "LoyaltyCardPointsExpiring"]
+      if @api_client.config.client_side_validation && opts[:'change_type'] && !allowable_values.include?(opts[:'change_type'])
+        fail ArgumentError, "invalid value for \"change_type\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["15m", "30m", "1h", "4h", "1d", "2d"]
+      if @api_client.config.client_side_validation && opts[:'period'] && !allowable_values.include?(opts[:'period'])
+        fail ArgumentError, "invalid value for \"period\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/message_logs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'entityType'] = entity_type
+      query_params[:'messageID'] = opts[:'message_id'] if !opts[:'message_id'].nil?
+      query_params[:'changeType'] = opts[:'change_type'] if !opts[:'change_type'].nil?
+      query_params[:'notificationIDs'] = opts[:'notification_i_ds'] if !opts[:'notification_i_ds'].nil?
+      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
+      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'period'] = opts[:'period'] if !opts[:'period'].nil?
+      query_params[:'isSuccessful'] = opts[:'is_successful'] if !opts[:'is_successful'].nil?
+      query_params[:'applicationId'] = opts[:'application_id'] if !opts[:'application_id'].nil?
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'loyaltyProgramId'] = opts[:'loyalty_program_id'] if !opts[:'loyalty_program_id'].nil?
+      query_params[:'responseCode'] = opts[:'response_code'] if !opts[:'response_code'].nil?
+      query_params[:'webhookIDs'] = opts[:'webhook_i_ds'] if !opts[:'webhook_i_ds'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'MessageLogEntries' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_message_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List referrals
     # List all referrals of the specified campaign.
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
@@ -7970,7 +8085,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -7990,7 +8105,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :code Filter results performing case-insensitive matching against the referral code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the referral creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -8217,7 +8332,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse2009]
     def get_rulesets(application_id, campaign_id, opts = {})
       data, _status_code, _headers = get_rulesets_with_http_info(application_id, campaign_id, opts)
@@ -8231,7 +8346,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
     def get_rulesets_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
@@ -8430,7 +8545,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [InlineResponse20043]
     def get_users(opts = {})
       data, _status_code, _headers = get_users_with_http_info(opts)
@@ -8442,7 +8557,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @return [Array<(InlineResponse20043, Integer, Hash)>] InlineResponse20043 data, response status code and response headers
     def get_users_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -8565,7 +8680,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
     # @option opts [Float] :webhook_id Filter results by webhook id.
     # @option opts [Float] :application_id Filter results by Application ID.
@@ -8583,7 +8698,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
     # @option opts [Float] :webhook_id Filter results by webhook id.
     # @option opts [Float] :application_id Filter results by Application ID.
@@ -8656,7 +8771,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Float] :webhook_id Filter results by webhook id.
     # @option opts [Float] :application_id Filter results by Application ID.
@@ -8675,7 +8790,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :status Filter results by HTTP status codes.
     # @option opts [Float] :webhook_id Filter results by webhook id.
     # @option opts [Float] :application_id Filter results by Application ID.
@@ -8753,7 +8868,7 @@ module TalonOne
     # List all webhooks.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :application_ids Checks if the given catalog or its attributes are referenced in the specified Application ID.  **Note**: If no Application ID is provided, we check for all connected Applications. 
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :creation_type Filter results by creation type.
@@ -8770,7 +8885,7 @@ module TalonOne
     # List all webhooks.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :application_ids Checks if the given catalog or its attributes are referenced in the specified Application ID.  **Note**: If no Application ID is provided, we check for all connected Applications. 
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :creation_type Filter results by creation type.
@@ -9682,7 +9797,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [InlineResponse20020]
@@ -9696,7 +9811,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
@@ -9989,7 +10104,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [InlineResponse20020]
@@ -10005,7 +10120,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
@@ -10079,7 +10194,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [InlineResponse20020]
@@ -10094,7 +10209,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [String] :name Filter by collection name.
     # @return [Array<(InlineResponse20020, Integer, Hash)>] InlineResponse20020 data, response status code and response headers
@@ -10164,7 +10279,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Float] :campaign_id Filter results by campaign ID.
     # @option opts [String] :name The name of the store.
@@ -10182,7 +10297,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Float] :campaign_id Filter results by campaign ID.
     # @option opts [String] :name The name of the store.
@@ -10252,74 +10367,6 @@ module TalonOne
       return data, status_code, headers
     end
 
-    # Activate or deactivate notification
-    # Activate or deactivate the given notification. When `enabled` is false, updates will no longer be sent for the given notification. 
-    # @param notification_id [Integer] The ID of the notification. Get it with the appropriate _List notifications_ endpoint.
-    # @param body [NotificationActivation] body
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def notification_activation(notification_id, body, opts = {})
-      notification_activation_with_http_info(notification_id, body, opts)
-      nil
-    end
-
-    # Activate or deactivate notification
-    # Activate or deactivate the given notification. When &#x60;enabled&#x60; is false, updates will no longer be sent for the given notification. 
-    # @param notification_id [Integer] The ID of the notification. Get it with the appropriate _List notifications_ endpoint.
-    # @param body [NotificationActivation] body
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def notification_activation_with_http_info(notification_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.notification_activation ...'
-      end
-      # verify the required parameter 'notification_id' is set
-      if @api_client.config.client_side_validation && notification_id.nil?
-        fail ArgumentError, "Missing the required parameter 'notification_id' when calling ManagementApi.notification_activation"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.notification_activation"
-      end
-      # resource path
-      local_var_path = '/v1/notifications/{notificationId}/activation'.sub('{' + 'notificationId' + '}', CGI.escape(notification_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#notification_activation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Validate Okta API ownership
     # Validate the ownership of the API through a challenge-response mechanism.  This challenger endpoint is used by Okta to confirm that communication between Talon.One and Okta is correctly configured and accessible for provisioning and deprovisioning of Talon.One users, and that only Talon.One can receive and respond to events from Okta. 
     # @param [Hash] opts the optional parameters
@@ -10370,216 +10417,6 @@ module TalonOne
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#okta_event_handler_challenge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Create notification about added or deducted loyalty points
-    # Create a notification about added or deducted loyalty points in a given profile-based loyalty program. A notification for added or deducted loyalty points is different from regular webhooks in that it is loyalty program-scoped and has a predefined payload.  For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
-    # @param loyalty_program_id [Integer] Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [BaseNotification]
-    def post_added_deducted_points_notification(loyalty_program_id, body, opts = {})
-      data, _status_code, _headers = post_added_deducted_points_notification_with_http_info(loyalty_program_id, body, opts)
-      data
-    end
-
-    # Create notification about added or deducted loyalty points
-    # Create a notification about added or deducted loyalty points in a given profile-based loyalty program. A notification for added or deducted loyalty points is different from regular webhooks in that it is loyalty program-scoped and has a predefined payload.  For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
-    # @param loyalty_program_id [Integer] Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(BaseNotification, Integer, Hash)>] BaseNotification data, response status code and response headers
-    def post_added_deducted_points_notification_with_http_info(loyalty_program_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.post_added_deducted_points_notification ...'
-      end
-      # verify the required parameter 'loyalty_program_id' is set
-      if @api_client.config.client_side_validation && loyalty_program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.post_added_deducted_points_notification"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.post_added_deducted_points_notification"
-      end
-      # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/notifications/added_deducted_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'BaseNotification' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#post_added_deducted_points_notification\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Create strikethrough notification
-    # Create a notification for the in the given Application. For more information, see [Application notifications](https://docs.talon.one/docs/product/applications/application-notifications/overview).  See the [payload](https://docs.talon.one/outbound-notifications) you will receive. 
-    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [BaseNotification]
-    def post_catalogs_strikethrough_notification(application_id, body, opts = {})
-      data, _status_code, _headers = post_catalogs_strikethrough_notification_with_http_info(application_id, body, opts)
-      data
-    end
-
-    # Create strikethrough notification
-    # Create a notification for the in the given Application. For more information, see [Application notifications](https://docs.talon.one/docs/product/applications/application-notifications/overview).  See the [payload](https://docs.talon.one/outbound-notifications) you will receive. 
-    # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(BaseNotification, Integer, Hash)>] BaseNotification data, response status code and response headers
-    def post_catalogs_strikethrough_notification_with_http_info(application_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.post_catalogs_strikethrough_notification ...'
-      end
-      # verify the required parameter 'application_id' is set
-      if @api_client.config.client_side_validation && application_id.nil?
-        fail ArgumentError, "Missing the required parameter 'application_id' when calling ManagementApi.post_catalogs_strikethrough_notification"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.post_catalogs_strikethrough_notification"
-      end
-      # resource path
-      local_var_path = '/v1/applications/{applicationId}/catalogs/notifications/strikethrough'.sub('{' + 'applicationId' + '}', CGI.escape(application_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'BaseNotification' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#post_catalogs_strikethrough_notification\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Create notification about pending loyalty points
-    # Create a notification about pending loyalty points for a given profile-based loyalty program. For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
-    # @param loyalty_program_id [Integer] Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [BaseNotification]
-    def post_pending_points_notification(loyalty_program_id, body, opts = {})
-      data, _status_code, _headers = post_pending_points_notification_with_http_info(loyalty_program_id, body, opts)
-      data
-    end
-
-    # Create notification about pending loyalty points
-    # Create a notification about pending loyalty points for a given profile-based loyalty program. For more information, see [Loyalty notifications](https://docs.talon.one/docs/product/loyalty-programs/loyalty-notifications/overview). 
-    # @param loyalty_program_id [Integer] Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-    # @param body [NewBaseNotification] body
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(BaseNotification, Integer, Hash)>] BaseNotification data, response status code and response headers
-    def post_pending_points_notification_with_http_info(loyalty_program_id, body, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.post_pending_points_notification ...'
-      end
-      # verify the required parameter 'loyalty_program_id' is set
-      if @api_client.config.client_side_validation && loyalty_program_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_program_id' when calling ManagementApi.post_pending_points_notification"
-      end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling ManagementApi.post_pending_points_notification"
-      end
-      # resource path
-      local_var_path = '/v1/loyalty_programs/{loyaltyProgramId}/notifications/pending_points'.sub('{' + 'loyaltyProgramId' + '}', CGI.escape(loyalty_program_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] || @api_client.object_to_http_body(body) 
-
-      # return_type
-      return_type = opts[:return_type] || 'BaseNotification' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#post_pending_points_notification\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -11281,7 +11118,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -11305,7 +11142,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -11411,7 +11248,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
@@ -11435,7 +11272,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** This parameter works only with numeric fields. 
+    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
     # @option opts [String] :value Filter results performing case-insensitive matching against the coupon code. Both the code and the query are folded to remove all non-alpha-numeric characters.
     # @option opts [DateTime] :created_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
     # @option opts [DateTime] :created_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.

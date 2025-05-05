@@ -9,7 +9,7 @@ This SDK supports all of the operations of Talon.One's Integration API and Manag
 Add this to the Gemfile:
 
 ```shell
-gem 'talon_one', '~> 8.0.0'
+gem 'talon_one', '~> 9.0.0'
 ```
 
 ### Build a gem
@@ -25,10 +25,10 @@ gem build talon_one.gemspec
 To install the gem locally:
 
 ```shell
-gem install ./talon_one-8.0.0.gem
+gem install ./talon_one-9.0.0.gem
 ```
 
-For development, run `gem install --dev ./talon_one-8.0.0.gem` to install the development dependencies.
+For development, run `gem install --dev ./talon_one-9.0.0.gem` to install the development dependencies.
 
 ### RubyGems
 
@@ -308,6 +308,7 @@ Class | Method | HTTP request | Description
 *TalonOne::ManagementApi* | [**get_loyalty_program_transactions**](docs/ManagementApi.md#get_loyalty_program_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/transactions | List loyalty program transactions
 *TalonOne::ManagementApi* | [**get_loyalty_programs**](docs/ManagementApi.md#get_loyalty_programs) | **GET** /v1/loyalty_programs | List loyalty programs
 *TalonOne::ManagementApi* | [**get_loyalty_statistics**](docs/ManagementApi.md#get_loyalty_statistics) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/statistics | Get loyalty program statistics
+*TalonOne::ManagementApi* | [**get_message_logs**](docs/ManagementApi.md#get_message_logs) | **GET** /v1/message_logs | List message log entries
 *TalonOne::ManagementApi* | [**get_referrals_without_total_count**](docs/ManagementApi.md#get_referrals_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/no_total | List referrals
 *TalonOne::ManagementApi* | [**get_role_v2**](docs/ManagementApi.md#get_role_v2) | **GET** /v2/roles/{roleId} | Get role
 *TalonOne::ManagementApi* | [**get_ruleset**](docs/ManagementApi.md#get_ruleset) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/rulesets/{rulesetId} | Get ruleset
@@ -338,11 +339,7 @@ Class | Method | HTTP request | Description
 *TalonOne::ManagementApi* | [**list_collections**](docs/ManagementApi.md#list_collections) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/collections | List collections in campaign
 *TalonOne::ManagementApi* | [**list_collections_in_application**](docs/ManagementApi.md#list_collections_in_application) | **GET** /v1/applications/{applicationId}/collections | List collections in Application
 *TalonOne::ManagementApi* | [**list_stores**](docs/ManagementApi.md#list_stores) | **GET** /v1/applications/{applicationId}/stores | List stores
-*TalonOne::ManagementApi* | [**notification_activation**](docs/ManagementApi.md#notification_activation) | **PUT** /v1/notifications/{notificationId}/activation | Activate or deactivate notification
 *TalonOne::ManagementApi* | [**okta_event_handler_challenge**](docs/ManagementApi.md#okta_event_handler_challenge) | **GET** /v1/provisioning/okta | Validate Okta API ownership
-*TalonOne::ManagementApi* | [**post_added_deducted_points_notification**](docs/ManagementApi.md#post_added_deducted_points_notification) | **POST** /v1/loyalty_programs/{loyaltyProgramId}/notifications/added_deducted_points | Create notification about added or deducted loyalty points
-*TalonOne::ManagementApi* | [**post_catalogs_strikethrough_notification**](docs/ManagementApi.md#post_catalogs_strikethrough_notification) | **POST** /v1/applications/{applicationId}/catalogs/notifications/strikethrough | Create strikethrough notification
-*TalonOne::ManagementApi* | [**post_pending_points_notification**](docs/ManagementApi.md#post_pending_points_notification) | **POST** /v1/loyalty_programs/{loyaltyProgramId}/notifications/pending_points | Create notification about pending loyalty points
 *TalonOne::ManagementApi* | [**remove_loyalty_points**](docs/ManagementApi.md#remove_loyalty_points) | **PUT** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/deduct_points | Deduct points from customer profile
 *TalonOne::ManagementApi* | [**reset_password**](docs/ManagementApi.md#reset_password) | **POST** /v1/reset_password | Reset password
 *TalonOne::ManagementApi* | [**scim_create_user**](docs/ManagementApi.md#scim_create_user) | **POST** /v1/provisioning/scim/Users | Create SCIM user
@@ -533,9 +530,9 @@ Class | Method | HTTP request | Description
 - [TalonOne::CustomerProfileUpdateV2Response](docs/CustomerProfileUpdateV2Response.md)
 - [TalonOne::CustomerSession](docs/CustomerSession.md)
 - [TalonOne::CustomerSessionV2](docs/CustomerSessionV2.md)
-- [TalonOne::DeactivateUserRequest](docs/DeactivateUserRequest.md)
 - [TalonOne::DeductLoyaltyPoints](docs/DeductLoyaltyPoints.md)
 - [TalonOne::DeductLoyaltyPointsEffectProps](docs/DeductLoyaltyPointsEffectProps.md)
+- [TalonOne::DeleteUserRequest](docs/DeleteUserRequest.md)
 - [TalonOne::Effect](docs/Effect.md)
 - [TalonOne::EffectEntity](docs/EffectEntity.md)
 - [TalonOne::EmailEntity](docs/EmailEntity.md)
@@ -795,6 +792,7 @@ Class | Method | HTTP request | Description
 - [TalonOne::ReturnedCartItem](docs/ReturnedCartItem.md)
 - [TalonOne::Revision](docs/Revision.md)
 - [TalonOne::RevisionActivation](docs/RevisionActivation.md)
+- [TalonOne::RevisionActivationRequest](docs/RevisionActivationRequest.md)
 - [TalonOne::RevisionVersion](docs/RevisionVersion.md)
 - [TalonOne::Role](docs/Role.md)
 - [TalonOne::RoleAssign](docs/RoleAssign.md)

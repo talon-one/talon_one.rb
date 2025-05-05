@@ -13,68 +13,26 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  class NewMessageTest
-    # The message type.
-    attr_accessor :type
+  class RevisionActivationRequest
+    # The list of IDs of the users who will receive the activation request.
+    attr_accessor :user_ids
 
-    # Array of query parameters.
-    attr_accessor :_query_params
-
-    # List of API HTTP headers for the given message.
-    attr_accessor :headers
-
-    # API method for this message.
-    attr_accessor :verb
-
-    # API URL for the given message.
-    attr_accessor :url
-
-    # API payload of this message.
-    attr_accessor :payload
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Time when the revisions are finalized after the `activate_revision` operation. The current time is used when left blank.  **Note:** It must be an RFC3339 timestamp string. 
+    attr_accessor :activate_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'_query_params' => :'queryParams',
-        :'headers' => :'headers',
-        :'verb' => :'verb',
-        :'url' => :'url',
-        :'payload' => :'payload'
+        :'user_ids' => :'userIds',
+        :'activate_at' => :'activateAt'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'_query_params' => :'Hash<String, String>',
-        :'headers' => :'Hash<String, String>',
-        :'verb' => :'String',
-        :'url' => :'String',
-        :'payload' => :'String'
+        :'user_ids' => :'Array<Integer>',
+        :'activate_at' => :'DateTime'
       }
     end
 
@@ -88,43 +46,25 @@ module TalonOne
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::NewMessageTest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `TalonOne::RevisionActivationRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::NewMessageTest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `TalonOne::RevisionActivationRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'_query_params')
-        if (value = attributes[:'_query_params']).is_a?(Hash)
-          self._query_params = value
+      if attributes.key?(:'user_ids')
+        if (value = attributes[:'user_ids']).is_a?(Array)
+          self.user_ids = value
         end
       end
 
-      if attributes.key?(:'headers')
-        if (value = attributes[:'headers']).is_a?(Hash)
-          self.headers = value
-        end
-      end
-
-      if attributes.key?(:'verb')
-        self.verb = attributes[:'verb']
-      end
-
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
-      end
-
-      if attributes.key?(:'payload')
-        self.payload = attributes[:'payload']
+      if attributes.key?(:'activate_at')
+        self.activate_at = attributes[:'activate_at']
       end
     end
 
@@ -132,16 +72,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @verb.nil?
-        invalid_properties.push('invalid value for "verb", verb cannot be nil.')
-      end
-
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      if @user_ids.nil?
+        invalid_properties.push('invalid value for "user_ids", user_ids cannot be nil.')
       end
 
       invalid_properties
@@ -150,34 +82,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points", "rule_engine_webhook"])
-      return false unless type_validator.valid?(@type)
-      return false if @verb.nil?
-      verb_validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
-      return false unless verb_validator.valid?(@verb)
-      return false if @url.nil?
+      return false if @user_ids.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points", "rule_engine_webhook"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] verb Object to be assigned
-    def verb=(verb)
-      validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
-      unless validator.valid?(verb)
-        fail ArgumentError, "invalid value for \"verb\", must be one of #{validator.allowable_values}."
-      end
-      @verb = verb
     end
 
     # Checks equality by comparing each attribute.
@@ -185,12 +91,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          _query_params == o._query_params &&
-          headers == o.headers &&
-          verb == o.verb &&
-          url == o.url &&
-          payload == o.payload
+          user_ids == o.user_ids &&
+          activate_at == o.activate_at
     end
 
     # @see the `==` method
@@ -202,7 +104,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, _query_params, headers, verb, url, payload].hash
+      [user_ids, activate_at].hash
     end
 
     # Builds the object from hash

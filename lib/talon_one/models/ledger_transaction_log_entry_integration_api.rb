@@ -51,6 +51,8 @@ module TalonOne
     # The name of the rule that triggered this effect.
     attr_accessor :rule_name
 
+    attr_accessor :flags
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -87,7 +89,8 @@ module TalonOne
         :'amount' => :'amount',
         :'id' => :'id',
         :'ruleset_id' => :'rulesetId',
-        :'rule_name' => :'ruleName'
+        :'rule_name' => :'ruleName',
+        :'flags' => :'flags'
       }
     end
 
@@ -105,7 +108,8 @@ module TalonOne
         :'amount' => :'Float',
         :'id' => :'Integer',
         :'ruleset_id' => :'Integer',
-        :'rule_name' => :'String'
+        :'rule_name' => :'String',
+        :'flags' => :'LoyaltyLedgerEntryFlags'
       }
     end
 
@@ -176,6 +180,10 @@ module TalonOne
 
       if attributes.key?(:'rule_name')
         self.rule_name = attributes[:'rule_name']
+      end
+
+      if attributes.key?(:'flags')
+        self.flags = attributes[:'flags']
       end
     end
 
@@ -342,7 +350,8 @@ module TalonOne
           amount == o.amount &&
           id == o.id &&
           ruleset_id == o.ruleset_id &&
-          rule_name == o.rule_name
+          rule_name == o.rule_name &&
+          flags == o.flags
     end
 
     # @see the `==` method
@@ -354,7 +363,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name].hash
+      [created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags].hash
     end
 
     # Builds the object from hash

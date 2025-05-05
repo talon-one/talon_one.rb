@@ -86,6 +86,9 @@ module TalonOne
     # The IDs of the Applications that are related to this entity.
     attr_accessor :valid_application_ids
 
+    # A flag indicating whether the user marked the template as a favorite.
+    attr_accessor :is_user_favorite
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -135,7 +138,8 @@ module TalonOne
         :'campaign_type' => :'campaignType',
         :'updated' => :'updated',
         :'updated_by' => :'updatedBy',
-        :'valid_application_ids' => :'validApplicationIds'
+        :'valid_application_ids' => :'validApplicationIds',
+        :'is_user_favorite' => :'isUserFavorite'
       }
     end
 
@@ -166,7 +170,8 @@ module TalonOne
         :'campaign_type' => :'String',
         :'updated' => :'DateTime',
         :'updated_by' => :'String',
-        :'valid_application_ids' => :'Array<Integer>'
+        :'valid_application_ids' => :'Array<Integer>',
+        :'is_user_favorite' => :'Boolean'
       }
     end
 
@@ -305,6 +310,12 @@ module TalonOne
         if (value = attributes[:'valid_application_ids']).is_a?(Array)
           self.valid_application_ids = value
         end
+      end
+
+      if attributes.key?(:'is_user_favorite')
+        self.is_user_favorite = attributes[:'is_user_favorite']
+      else
+        self.is_user_favorite = false
       end
     end
 
@@ -448,7 +459,8 @@ module TalonOne
           campaign_type == o.campaign_type &&
           updated == o.updated &&
           updated_by == o.updated_by &&
-          valid_application_ids == o.valid_application_ids
+          valid_application_ids == o.valid_application_ids &&
+          is_user_favorite == o.is_user_favorite
     end
 
     # @see the `==` method
@@ -460,7 +472,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, features, coupon_settings, coupon_reservation_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, campaign_type, updated, updated_by, valid_application_ids].hash
+      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, features, coupon_settings, coupon_reservation_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, campaign_type, updated, updated_by, valid_application_ids, is_user_favorite].hash
     end
 
     # Builds the object from hash

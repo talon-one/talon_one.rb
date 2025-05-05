@@ -1842,6 +1842,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  (default to 'yes')
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
+    # @option opts [Boolean] :force_complete_evaluation Forces evaluation for all matching campaigns regardless of the [campaign evaluation mode](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation#setting-campaign-evaluation-mode). Requires &#x60;dry&#x3D;true&#x60;.  (default to false)
     # @return [TrackEventV2Response]
     def track_event_v2(body, opts = {})
       data, _status_code, _headers = track_event_v2_with_http_info(body, opts)
@@ -1854,6 +1855,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
     # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
+    # @option opts [Boolean] :force_complete_evaluation Forces evaluation for all matching campaigns regardless of the [campaign evaluation mode](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation#setting-campaign-evaluation-mode). Requires &#x60;dry&#x3D;true&#x60;. 
     # @return [Array<(TrackEventV2Response, Integer, Hash)>] TrackEventV2Response data, response status code and response headers
     def track_event_v2_with_http_info(body, opts = {})
       if @api_client.config.debugging
@@ -1870,6 +1872,7 @@ module TalonOne
       query_params = opts[:query_params] || {}
       query_params[:'silent'] = opts[:'silent'] if !opts[:'silent'].nil?
       query_params[:'dry'] = opts[:'dry'] if !opts[:'dry'].nil?
+      query_params[:'forceCompleteEvaluation'] = opts[:'force_complete_evaluation'] if !opts[:'force_complete_evaluation'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -386,6 +386,7 @@ describe 'IntegrationApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
   # @option opts [Boolean] :dry Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;. 
+  # @option opts [Boolean] :force_complete_evaluation Forces evaluation for all matching campaigns regardless of the [campaign evaluation mode](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation#setting-campaign-evaluation-mode). Requires &#x60;dry&#x3D;true&#x60;. 
   # @return [TrackEventV2Response]
   describe 'track_event_v2 test' do
     it 'should work' do

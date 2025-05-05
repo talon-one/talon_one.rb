@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **id** | **Integer** | ID of the loyalty ledger transaction. | 
 **ruleset_id** | **Integer** | The ID of the ruleset containing the rule that triggered this effect. | [optional] 
 **rule_name** | **String** | The name of the rule that triggered this effect. | [optional] 
+**flags** | [**LoyaltyLedgerEntryFlags**](LoyaltyLedgerEntryFlags.md) |  | [optional] 
 
 ## Code Sample
 
@@ -33,7 +34,8 @@ instance = TalonOne::LedgerTransactionLogEntryIntegrationAPI.new(created: null,
                                  amount: 10.25,
                                  id: 123,
                                  ruleset_id: 11,
-                                 rule_name: Add 2 points)
+                                 rule_name: Add 2 points,
+                                 flags: null)
 ```
 
 
