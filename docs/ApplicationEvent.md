@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **profile_id** | **Integer** | The globally unique Talon.One ID of the customer that created this entity. | [optional] 

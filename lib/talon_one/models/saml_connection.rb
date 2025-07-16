@@ -42,7 +42,7 @@ module TalonOne
     # The application-defined unique identifier that is the intended audience of the SAML assertion. This is most often the SP Entity ID of your application. When not specified, the ACS URL will be used. 
     attr_accessor :audience_uri
 
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.

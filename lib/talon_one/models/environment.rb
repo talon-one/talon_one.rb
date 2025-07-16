@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class Environment
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.
@@ -59,6 +59,9 @@ module TalonOne
     # The cart item filters belonging to the Application.
     attr_accessor :application_cart_item_filters
 
+    # The price types that this Application can use.
+    attr_accessor :price_types
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -76,7 +79,8 @@ module TalonOne
         :'additional_costs' => :'additionalCosts',
         :'audiences' => :'audiences',
         :'collections' => :'collections',
-        :'application_cart_item_filters' => :'applicationCartItemFilters'
+        :'application_cart_item_filters' => :'applicationCartItemFilters',
+        :'price_types' => :'priceTypes'
       }
     end
 
@@ -97,7 +101,8 @@ module TalonOne
         :'additional_costs' => :'Array<AccountAdditionalCost>',
         :'audiences' => :'Array<Audience>',
         :'collections' => :'Array<Collection>',
-        :'application_cart_item_filters' => :'Array<ApplicationCIF>'
+        :'application_cart_item_filters' => :'Array<ApplicationCIF>',
+        :'price_types' => :'Array<PriceType>'
       }
     end
 
@@ -203,6 +208,12 @@ module TalonOne
           self.application_cart_item_filters = value
         end
       end
+
+      if attributes.key?(:'price_types')
+        if (value = attributes[:'price_types']).is_a?(Array)
+          self.price_types = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -272,7 +283,8 @@ module TalonOne
           additional_costs == o.additional_costs &&
           audiences == o.audiences &&
           collections == o.collections &&
-          application_cart_item_filters == o.application_cart_item_filters
+          application_cart_item_filters == o.application_cart_item_filters &&
+          price_types == o.price_types
     end
 
     # @see the `==` method
@@ -284,7 +296,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, achievements, attributes, additional_costs, audiences, collections, application_cart_item_filters].hash
+      [id, created, application_id, slots, functions, templates, variables, giveaways_pools, loyalty_programs, achievements, attributes, additional_costs, audiences, collections, application_cart_item_filters, price_types].hash
     end
 
     # Builds the object from hash

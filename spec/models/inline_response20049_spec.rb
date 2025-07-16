@@ -32,12 +32,6 @@ describe 'InlineResponse20049' do
       expect(@instance).to be_instance_of(TalonOne::InlineResponse20049)
     end
   end
-  describe 'test attribute "has_more"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

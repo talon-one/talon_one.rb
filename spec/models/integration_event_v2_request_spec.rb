@@ -62,6 +62,12 @@ describe 'IntegrationEventV2Request' do
     end
   end
 
+  describe 'test attribute "loyalty_cards"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "response_content"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

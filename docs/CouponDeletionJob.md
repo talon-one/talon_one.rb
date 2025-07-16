@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 

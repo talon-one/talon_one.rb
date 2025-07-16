@@ -17,7 +17,7 @@ module TalonOne
     # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # Version of the campaign set.

@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # The representation of the customer session.
   class CustomerSessionV2
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.

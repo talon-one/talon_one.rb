@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **start_date** | **DateTime** | Timestamp at which point the referral code becomes valid. | [optional] 
 **expiry_date** | **DateTime** | Expiration date of the referral code. Referral never expires if this is omitted. | [optional] 

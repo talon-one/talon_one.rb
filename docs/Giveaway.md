@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **code** | **String** | The code value of this giveaway. | 
 **pool_id** | **Integer** | The ID of the pool to return giveaway codes from. | 

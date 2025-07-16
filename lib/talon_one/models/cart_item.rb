@@ -58,8 +58,23 @@ module TalonOne
     # Use this property to set a value for the additional costs of this item, such as a shipping cost. They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs). 
     attr_accessor :additional_costs
 
-    # The [catalog item ID](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs/#synchronizing-a-cart-item-catalog).
+    # The catalog item ID.
     attr_accessor :catalog_item_id
+
+    # The selected price type for this cart item (e.g. the price for members only).
+    attr_accessor :selected_price_type
+
+    # The reference ID of the selected price adjustment for this cart item. Only returned if the selected price resulted from a price adjustment.
+    attr_accessor :adjustment_reference_id
+
+    # The date and time from which the price adjustment is effective. Only returned if the selected price resulted from a price adjustment that contains this field.
+    attr_accessor :adjustment_effective_from
+
+    # The date and time until which the price adjustment is effective. Only returned if the selected price resulted from a price adjustment that contains this field.
+    attr_accessor :adjustment_effective_until
+
+    # A map of keys and values representing the price types and related price adjustment details for this cart item. The keys correspond to the `priceType` names. 
+    attr_accessor :prices
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -79,7 +94,12 @@ module TalonOne
         :'position' => :'position',
         :'attributes' => :'attributes',
         :'additional_costs' => :'additionalCosts',
-        :'catalog_item_id' => :'catalogItemID'
+        :'catalog_item_id' => :'catalogItemID',
+        :'selected_price_type' => :'selectedPriceType',
+        :'adjustment_reference_id' => :'adjustmentReferenceId',
+        :'adjustment_effective_from' => :'adjustmentEffectiveFrom',
+        :'adjustment_effective_until' => :'adjustmentEffectiveUntil',
+        :'prices' => :'prices'
       }
     end
 
@@ -101,7 +121,12 @@ module TalonOne
         :'position' => :'Float',
         :'attributes' => :'Object',
         :'additional_costs' => :'Hash<String, AdditionalCost>',
-        :'catalog_item_id' => :'Integer'
+        :'catalog_item_id' => :'Integer',
+        :'selected_price_type' => :'String',
+        :'adjustment_reference_id' => :'String',
+        :'adjustment_effective_from' => :'DateTime',
+        :'adjustment_effective_until' => :'DateTime',
+        :'prices' => :'Hash<String, PriceDetail>'
       }
     end
 
@@ -191,6 +216,28 @@ module TalonOne
       if attributes.key?(:'catalog_item_id')
         self.catalog_item_id = attributes[:'catalog_item_id']
       end
+
+      if attributes.key?(:'selected_price_type')
+        self.selected_price_type = attributes[:'selected_price_type']
+      end
+
+      if attributes.key?(:'adjustment_reference_id')
+        self.adjustment_reference_id = attributes[:'adjustment_reference_id']
+      end
+
+      if attributes.key?(:'adjustment_effective_from')
+        self.adjustment_effective_from = attributes[:'adjustment_effective_from']
+      end
+
+      if attributes.key?(:'adjustment_effective_until')
+        self.adjustment_effective_until = attributes[:'adjustment_effective_until']
+      end
+
+      if attributes.key?(:'prices')
+        if (value = attributes[:'prices']).is_a?(Hash)
+          self.prices = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -274,7 +321,12 @@ module TalonOne
           position == o.position &&
           attributes == o.attributes &&
           additional_costs == o.additional_costs &&
-          catalog_item_id == o.catalog_item_id
+          catalog_item_id == o.catalog_item_id &&
+          selected_price_type == o.selected_price_type &&
+          adjustment_reference_id == o.adjustment_reference_id &&
+          adjustment_effective_from == o.adjustment_effective_from &&
+          adjustment_effective_until == o.adjustment_effective_until &&
+          prices == o.prices
     end
 
     # @see the `==` method
@@ -286,7 +338,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sku, quantity, returned_quantity, remaining_quantity, price, category, product, weight, height, width, length, position, attributes, additional_costs, catalog_item_id].hash
+      [name, sku, quantity, returned_quantity, remaining_quantity, price, category, product, weight, height, width, length, position, attributes, additional_costs, catalog_item_id, selected_price_type, adjustment_reference_id, adjustment_effective_from, adjustment_effective_until, prices].hash
     end
 
     # Builds the object from hash

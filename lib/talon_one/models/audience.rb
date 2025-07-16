@@ -17,7 +17,7 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :account_id
 
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.

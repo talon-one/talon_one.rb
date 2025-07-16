@@ -35,7 +35,7 @@ describe 'CatalogAction' do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY", "ADD_PRICE_ADJUSTMENT"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.type = value }.not_to raise_error
       # end

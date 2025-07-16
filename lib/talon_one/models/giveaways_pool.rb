@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # Giveaways pools is an entity for managing multiple similar giveaways.
   class GiveawaysPool
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.

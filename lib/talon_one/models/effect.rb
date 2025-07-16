@@ -51,6 +51,15 @@ module TalonOne
     # The revision version ID of the campaign that was used when triggering the effect.
     attr_accessor :campaign_revision_version_id
 
+    # The selected price type for the SKU targeted by this effect.
+    attr_accessor :selected_price_type
+
+    # The value of the selected price type to apply to the SKU targeted by this effect, before any discounts are applied.
+    attr_accessor :selected_price
+
+    # The reference identifier of the selected price adjustment for this SKU. This is only returned if the `selectedPrice` resulted from a price adjustment.
+    attr_accessor :adjustment_reference_id
+
     # The properties of the effect. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     attr_accessor :props
 
@@ -69,6 +78,9 @@ module TalonOne
         :'evaluation_group_mode' => :'evaluationGroupMode',
         :'campaign_revision_id' => :'campaignRevisionId',
         :'campaign_revision_version_id' => :'campaignRevisionVersionId',
+        :'selected_price_type' => :'selectedPriceType',
+        :'selected_price' => :'selectedPrice',
+        :'adjustment_reference_id' => :'adjustmentReferenceId',
         :'props' => :'props'
       }
     end
@@ -88,6 +100,9 @@ module TalonOne
         :'evaluation_group_mode' => :'String',
         :'campaign_revision_id' => :'Integer',
         :'campaign_revision_version_id' => :'Integer',
+        :'selected_price_type' => :'String',
+        :'selected_price' => :'Float',
+        :'adjustment_reference_id' => :'String',
         :'props' => :'Object'
       }
     end
@@ -161,6 +176,18 @@ module TalonOne
         self.campaign_revision_version_id = attributes[:'campaign_revision_version_id']
       end
 
+      if attributes.key?(:'selected_price_type')
+        self.selected_price_type = attributes[:'selected_price_type']
+      end
+
+      if attributes.key?(:'selected_price')
+        self.selected_price = attributes[:'selected_price']
+      end
+
+      if attributes.key?(:'adjustment_reference_id')
+        self.adjustment_reference_id = attributes[:'adjustment_reference_id']
+      end
+
       if attributes.key?(:'props')
         self.props = attributes[:'props']
       end
@@ -226,6 +253,9 @@ module TalonOne
           evaluation_group_mode == o.evaluation_group_mode &&
           campaign_revision_id == o.campaign_revision_id &&
           campaign_revision_version_id == o.campaign_revision_version_id &&
+          selected_price_type == o.selected_price_type &&
+          selected_price == o.selected_price &&
+          adjustment_reference_id == o.adjustment_reference_id &&
           props == o.props
     end
 
@@ -238,7 +268,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, props].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, selected_price_type, selected_price, adjustment_reference_id, props].hash
     end
 
     # Builds the object from hash

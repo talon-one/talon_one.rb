@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class WebhookWithOutgoingIntegrationDetails
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.
@@ -31,6 +31,9 @@ module TalonOne
 
     # A description of the webhook.
     attr_accessor :description
+
+    # Indicates if the webhook is a draft.
+    attr_accessor :draft
 
     # API method for this webhook.
     attr_accessor :verb
@@ -90,6 +93,7 @@ module TalonOne
         :'application_ids' => :'applicationIds',
         :'title' => :'title',
         :'description' => :'description',
+        :'draft' => :'draft',
         :'verb' => :'verb',
         :'url' => :'url',
         :'headers' => :'headers',
@@ -111,6 +115,7 @@ module TalonOne
         :'application_ids' => :'Array<Integer>',
         :'title' => :'String',
         :'description' => :'String',
+        :'draft' => :'Boolean',
         :'verb' => :'String',
         :'url' => :'String',
         :'headers' => :'Array<String>',
@@ -168,6 +173,10 @@ module TalonOne
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'draft')
+        self.draft = attributes[:'draft']
       end
 
       if attributes.key?(:'verb')
@@ -240,6 +249,10 @@ module TalonOne
         invalid_properties.push("invalid value for \"title\", must conform to the pattern #{pattern}.")
       end
 
+      if @draft.nil?
+        invalid_properties.push('invalid value for "draft", draft cannot be nil.')
+      end
+
       if @verb.nil?
         invalid_properties.push('invalid value for "verb", verb cannot be nil.')
       end
@@ -272,6 +285,7 @@ module TalonOne
       return false if @application_ids.nil?
       return false if @title.nil?
       return false if @title !~ Regexp.new(/^[A-Za-z][A-Za-z0-9_.!~*'() -]*$/)
+      return false if @draft.nil?
       return false if @verb.nil?
       verb_validator = EnumAttributeValidator.new('String', ["POST", "PUT", "GET", "DELETE", "PATCH"])
       return false unless verb_validator.valid?(@verb)
@@ -318,6 +332,7 @@ module TalonOne
           application_ids == o.application_ids &&
           title == o.title &&
           description == o.description &&
+          draft == o.draft &&
           verb == o.verb &&
           url == o.url &&
           headers == o.headers &&
@@ -338,7 +353,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, application_ids, title, description, verb, url, headers, payload, params, enabled, outgoing_integration_template_id, outgoing_integration_type_id, outgoing_integration_type_name].hash
+      [id, created, modified, application_ids, title, description, draft, verb, url, headers, payload, params, enabled, outgoing_integration_template_id, outgoing_integration_type_id, outgoing_integration_type_name].hash
     end
 
     # Builds the object from hash

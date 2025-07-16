@@ -133,10 +133,6 @@ module TalonOne
         invalid_properties.push('invalid value for "pending_balance", pending_balance cannot be nil.')
       end
 
-      if @negative_balance.nil?
-        invalid_properties.push('invalid value for "negative_balance", negative_balance cannot be nil.')
-      end
-
       if @expired_balance.nil?
         invalid_properties.push('invalid value for "expired_balance", expired_balance cannot be nil.')
       end
@@ -149,10 +145,6 @@ module TalonOne
         invalid_properties.push('invalid value for "tentative_current_balance", tentative_current_balance cannot be nil.')
       end
 
-      if @tentative_negative_balance.nil?
-        invalid_properties.push('invalid value for "tentative_negative_balance", tentative_negative_balance cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -161,11 +153,9 @@ module TalonOne
     def valid?
       return false if @current_balance.nil?
       return false if @pending_balance.nil?
-      return false if @negative_balance.nil?
       return false if @expired_balance.nil?
       return false if @spent_balance.nil?
       return false if @tentative_current_balance.nil?
-      return false if @tentative_negative_balance.nil?
       true
     end
 
