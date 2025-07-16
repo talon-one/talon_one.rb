@@ -15,7 +15,7 @@ require 'date'
 module TalonOne
   # Entry in the point ledger.
   class LedgerEntry
-    # Internal ID of this entity.
+    # The internal ID of this entity.
     attr_accessor :id
 
     # The time this entity was created.

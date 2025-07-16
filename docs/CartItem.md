@@ -19,7 +19,12 @@ Name | Type | Description | Notes
 **position** | **Float** | Position of the Cart Item in the Cart (calculated internally). | [optional] 
 **attributes** | [**Object**](.md) | Use this property to set a value for the attributes of your choice. [Attributes](https://docs.talon.one/docs/dev/concepts/attributes) represent any information to attach to this cart item.  Custom _cart item_ attributes must be created in the Campaign Manager before you set them with this property.  **Note:** Any previously defined attributes that you do not include in the array will be removed.  | [optional] 
 **additional_costs** | [**Hash&lt;String, AdditionalCost&gt;**](AdditionalCost.md) | Use this property to set a value for the additional costs of this item, such as a shipping cost. They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs).  | [optional] 
-**catalog_item_id** | **Integer** | The [catalog item ID](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs/#synchronizing-a-cart-item-catalog). | [optional] 
+**catalog_item_id** | **Integer** | The catalog item ID. | [optional] 
+**selected_price_type** | **String** | The selected price type for this cart item (e.g. the price for members only). | [optional] 
+**adjustment_reference_id** | **String** | The reference ID of the selected price adjustment for this cart item. Only returned if the selected price resulted from a price adjustment. | [optional] 
+**adjustment_effective_from** | **DateTime** | The date and time from which the price adjustment is effective. Only returned if the selected price resulted from a price adjustment that contains this field. | [optional] 
+**adjustment_effective_until** | **DateTime** | The date and time until which the price adjustment is effective. Only returned if the selected price resulted from a price adjustment that contains this field. | [optional] 
+**prices** | [**Hash&lt;String, PriceDetail&gt;**](PriceDetail.md) | A map of keys and values representing the price types and related price adjustment details for this cart item. The keys correspond to the &#x60;priceType&#x60; names.  | [optional] 
 
 ## Code Sample
 
@@ -41,7 +46,12 @@ instance = TalonOne::CartItem.new(name: Air Glide,
                                  position: null,
                                  attributes: {&quot;image&quot;:&quot;11.jpeg&quot;,&quot;material&quot;:&quot;leather&quot;},
                                  additional_costs: {&quot;shipping&quot;:{&quot;price&quot;:9}},
-                                 catalog_item_id: null)
+                                 catalog_item_id: null,
+                                 selected_price_type: member,
+                                 adjustment_reference_id: 68851723-e6fa-488f-ace9-112581e6c19b,
+                                 adjustment_effective_from: 2021-09-12T10:12:42Z,
+                                 adjustment_effective_until: 2021-09-12T10:12:42Z,
+                                 prices: {&quot;member&quot;:{&quot;price&quot;:90,&quot;adjustmentReferenceId&quot;:&quot;68851723-e6fa-488f-ace9-112581e6c19b&quot;,&quot;effectiveFrom&quot;:&quot;2025-05-25T00:00:00Z&quot;,&quot;effectiveUntil&quot;:&quot;2025-05-30T00:00:00Z&quot;},&quot;base&quot;:{&quot;price&quot;:100}})
 ```
 
 

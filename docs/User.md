@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **modified** | **DateTime** | The time this entity was last modified. | 
 **email** | **String** | The email address associated with the user profile. | 

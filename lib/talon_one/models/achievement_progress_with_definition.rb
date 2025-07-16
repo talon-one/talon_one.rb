@@ -48,7 +48,7 @@ module TalonOne
     # The required number of actions or the transactional milestone to complete the achievement.
     attr_accessor :target
 
-    # The policy that determines if and how the achievement recurs. - `no_recurrence`: The achievement can be completed only once. - `on_expiration`: The achievement resets after it expires and becomes available again. 
+    # The policy that determines if and how the achievement recurs. - `no_recurrence`: The achievement can be completed only once. - `on_expiration`: The achievement resets after it expires and becomes available again. - `on_completion`: When the customer progress status reaches `completed`, the achievement resets and becomes available again. 
     attr_accessor :achievement_recurrence_policy
 
     # The policy that determines how the achievement starts, ends, or resets. - `user_action`: The achievement ends or resets relative to when the customer started the achievement. - `fixed_schedule`: The achievement starts, ends, or resets for all customers following a fixed schedule. 
@@ -278,7 +278,7 @@ module TalonOne
       return false if @description.nil?
       return false if @campaign_id.nil?
       return false if @achievement_recurrence_policy.nil?
-      achievement_recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      achievement_recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       return false unless achievement_recurrence_policy_validator.valid?(@achievement_recurrence_policy)
       return false if @achievement_activation_policy.nil?
       achievement_activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
@@ -322,7 +322,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] achievement_recurrence_policy Object to be assigned
     def achievement_recurrence_policy=(achievement_recurrence_policy)
-      validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       unless validator.valid?(achievement_recurrence_policy)
         fail ArgumentError, "invalid value for \"achievement_recurrence_policy\", must be one of #{validator.allowable_values}."
       end

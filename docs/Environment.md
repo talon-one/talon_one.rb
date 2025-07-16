@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **application_id** | **Integer** | The ID of the Application that owns this entity. | 
 **slots** | [**Array&lt;SlotDef&gt;**](SlotDef.md) | The slots defined for this application. | 
@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **audiences** | [**Array&lt;Audience&gt;**](Audience.md) | The audiences contained in the account which the application belongs to. | [optional] 
 **collections** | [**Array&lt;Collection&gt;**](Collection.md) | The account-level collections that the application is subscribed to. | [optional] 
 **application_cart_item_filters** | [**Array&lt;ApplicationCIF&gt;**](ApplicationCIF.md) | The cart item filters belonging to the Application. | [optional] 
+**price_types** | [**Array&lt;PriceType&gt;**](PriceType.md) | The price types that this Application can use. | [optional] 
 
 ## Code Sample
 
@@ -39,7 +40,8 @@ instance = TalonOne::Environment.new(id: 6,
                                  additional_costs: null,
                                  audiences: null,
                                  collections: null,
-                                 application_cart_item_filters: null)
+                                 application_cart_item_filters: null,
+                                 price_types: null)
 ```
 
 

@@ -26,13 +26,29 @@ module TalonOne
     # Can be one of the following: - `string` - `number` - `boolean` 
     attr_accessor :value_type
 
+    # The minimum value allowed for this placeholder.
+    attr_accessor :min_value
+
+    # The maximum value allowed for this placeholder.
+    attr_accessor :max_value
+
+    # Id of the attribute attached to the placeholder.
+    attr_accessor :attribute_id
+
+    # Describes the placeholder field and value in the template. This description can be used when creating campaigns from this template.
+    attr_accessor :description
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'type' => :'type',
         :'expression' => :'expression',
-        :'value_type' => :'valueType'
+        :'value_type' => :'valueType',
+        :'min_value' => :'minValue',
+        :'max_value' => :'maxValue',
+        :'attribute_id' => :'attributeId',
+        :'description' => :'description'
       }
     end
 
@@ -42,7 +58,11 @@ module TalonOne
         :'name' => :'String',
         :'type' => :'String',
         :'expression' => :'Array<Object>',
-        :'value_type' => :'String'
+        :'value_type' => :'String',
+        :'min_value' => :'Float',
+        :'max_value' => :'Float',
+        :'attribute_id' => :'Integer',
+        :'description' => :'String'
       }
     end
 
@@ -84,6 +104,22 @@ module TalonOne
       if attributes.key?(:'value_type')
         self.value_type = attributes[:'value_type']
       end
+
+      if attributes.key?(:'min_value')
+        self.min_value = attributes[:'min_value']
+      end
+
+      if attributes.key?(:'max_value')
+        self.max_value = attributes[:'max_value']
+      end
+
+      if attributes.key?(:'attribute_id')
+        self.attribute_id = attributes[:'attribute_id']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +153,11 @@ module TalonOne
           name == o.name &&
           type == o.type &&
           expression == o.expression &&
-          value_type == o.value_type
+          value_type == o.value_type &&
+          min_value == o.min_value &&
+          max_value == o.max_value &&
+          attribute_id == o.attribute_id &&
+          description == o.description
     end
 
     # @see the `==` method
@@ -129,7 +169,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, type, expression, value_type].hash
+      [name, type, expression, value_type, min_value, max_value, attribute_id, description].hash
     end
 
     # Builds the object from hash

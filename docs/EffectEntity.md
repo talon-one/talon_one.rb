@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **evaluation_group_mode** | **String** | The evaluation mode of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation). | [optional] 
 **campaign_revision_id** | **Integer** | The revision ID of the campaign that was used when triggering the effect. | [optional] 
 **campaign_revision_version_id** | **Integer** | The revision version ID of the campaign that was used when triggering the effect. | [optional] 
+**selected_price_type** | **String** | The selected price type for the SKU targeted by this effect. | [optional] 
+**selected_price** | **Float** | The value of the selected price type to apply to the SKU targeted by this effect, before any discounts are applied. | [optional] 
+**adjustment_reference_id** | **String** | The reference identifier of the selected price adjustment for this SKU. This is only returned if the &#x60;selectedPrice&#x60; resulted from a price adjustment. | [optional] 
 
 ## Code Sample
 
@@ -33,7 +36,10 @@ instance = TalonOne::EffectEntity.new(campaign_id: 244,
                                  evaluation_group_id: 3,
                                  evaluation_group_mode: stackable,
                                  campaign_revision_id: 1,
-                                 campaign_revision_version_id: 5)
+                                 campaign_revision_version_id: 5,
+                                 selected_price_type: member,
+                                 selected_price: 100.0,
+                                 adjustment_reference_id: 68851723-e6fa-488f-ace9-112581e6c19b)
 ```
 
 

@@ -105,8 +105,8 @@ module TalonOne
         invalid_properties.push('invalid value for "usage_limit", must be greater than or equal to 0.')
       end
 
-      if !@discount_limit.nil? && @discount_limit > 999999
-        invalid_properties.push('invalid value for "discount_limit", must be smaller than or equal to 999999.')
+      if !@discount_limit.nil? && @discount_limit > 1E+15
+        invalid_properties.push('invalid value for "discount_limit", must be smaller than or equal to 1E+15.')
       end
 
       if !@discount_limit.nil? && @discount_limit < 0
@@ -129,7 +129,7 @@ module TalonOne
     def valid?
       return false if !@usage_limit.nil? && @usage_limit > 999999
       return false if !@usage_limit.nil? && @usage_limit < 0
-      return false if !@discount_limit.nil? && @discount_limit > 999999
+      return false if !@discount_limit.nil? && @discount_limit > 1E+15
       return false if !@discount_limit.nil? && @discount_limit < 0
       return false if !@reservation_limit.nil? && @reservation_limit > 999999
       return false if !@reservation_limit.nil? && @reservation_limit < 0
@@ -153,8 +153,8 @@ module TalonOne
     # Custom attribute writer method with validation
     # @param [Object] discount_limit Value to be assigned
     def discount_limit=(discount_limit)
-      if !discount_limit.nil? && discount_limit > 999999
-        fail ArgumentError, 'invalid value for "discount_limit", must be smaller than or equal to 999999.'
+      if !discount_limit.nil? && discount_limit > 1E+15
+        fail ArgumentError, 'invalid value for "discount_limit", must be smaller than or equal to 1E+15.'
       end
 
       if !discount_limit.nil? && discount_limit < 0

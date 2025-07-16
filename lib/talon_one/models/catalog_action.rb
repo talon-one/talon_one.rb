@@ -107,7 +107,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY"])
+      type_validator = EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY", "ADD_PRICE_ADJUSTMENT"])
       return false unless type_validator.valid?(@type)
       return false if @payload.nil?
       true
@@ -116,7 +116,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY"])
+      validator = EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY", "ADD_PRICE_ADJUSTMENT"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **integration_id** | **String** | The integration ID set by your integration layer. | 
 **application_id** | **Integer** | The ID of the Application that owns this entity. | 

@@ -29,6 +29,9 @@ module TalonOne
     # Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-a-custom-attribute).
     attr_accessor :attributes
 
+    # Identifier of the loyalty card used during this event.
+    attr_accessor :loyalty_cards
+
     # Optional list of requested information to be present on the response related to the tracking custom event. 
     attr_accessor :response_content
 
@@ -62,6 +65,7 @@ module TalonOne
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
         :'type' => :'type',
         :'attributes' => :'attributes',
+        :'loyalty_cards' => :'loyaltyCards',
         :'response_content' => :'responseContent'
       }
     end
@@ -74,6 +78,7 @@ module TalonOne
         :'evaluable_campaign_ids' => :'Array<Integer>',
         :'type' => :'String',
         :'attributes' => :'Object',
+        :'loyalty_cards' => :'Array<String>',
         :'response_content' => :'Array<String>'
       }
     end
@@ -119,6 +124,12 @@ module TalonOne
 
       if attributes.key?(:'attributes')
         self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'loyalty_cards')
+        if (value = attributes[:'loyalty_cards']).is_a?(Array)
+          self.loyalty_cards = value
+        end
       end
 
       if attributes.key?(:'response_content')
@@ -199,6 +210,7 @@ module TalonOne
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
           type == o.type &&
           attributes == o.attributes &&
+          loyalty_cards == o.loyalty_cards &&
           response_content == o.response_content
     end
 
@@ -211,7 +223,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, response_content].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, loyalty_cards, response_content].hash
     end
 
     # Builds the object from hash

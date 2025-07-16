@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 **type** | **String** | The kind of binding. Possible values are: - &#x60;bundle&#x60; - &#x60;cartItemFilter&#x60; - &#x60;subledgerBalance&#x60; - &#x60;templateParameter&#x60;  | [optional] 
 **expression** | **Array&lt;Object&gt;** | A Talang expression that will be evaluated and its result attached to the name of the binding. | 
 **value_type** | **String** | Can be one of the following: - &#x60;string&#x60; - &#x60;number&#x60; - &#x60;boolean&#x60;  | [optional] 
+**min_value** | **Float** | The minimum value allowed for this placeholder. | [optional] 
+**max_value** | **Float** | The maximum value allowed for this placeholder. | [optional] 
+**attribute_id** | **Integer** | Id of the attribute attached to the placeholder. | [optional] 
+**description** | **String** | Describes the placeholder field and value in the template. This description can be used when creating campaigns from this template. | [optional] 
 
 ## Code Sample
 
@@ -17,7 +21,11 @@ require 'TalonOne'
 instance = TalonOne::Binding.new(name: my property,
                                  type: templateParameter,
                                  expression: [string1, string2],
-                                 value_type: string)
+                                 value_type: string,
+                                 min_value: 0.0,
+                                 max_value: 19.9,
+                                 attribute_id: 100,
+                                 description: This is a template parameter of type &#x60;number&#x60;.)
 ```
 
 

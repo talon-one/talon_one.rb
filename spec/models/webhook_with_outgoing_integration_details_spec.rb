@@ -68,6 +68,12 @@ describe 'WebhookWithOutgoingIntegrationDetails' do
     end
   end
 
+  describe 'test attribute "draft"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "verb"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

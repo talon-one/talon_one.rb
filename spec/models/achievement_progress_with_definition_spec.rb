@@ -105,7 +105,7 @@ describe 'AchievementProgressWithDefinition' do
   describe 'test attribute "achievement_recurrence_policy"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.achievement_recurrence_policy = value }.not_to raise_error
       # end

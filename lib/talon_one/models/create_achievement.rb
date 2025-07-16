@@ -31,7 +31,7 @@ module TalonOne
 
     attr_accessor :period_end_override
 
-    # The policy that determines if and how the achievement recurs. - `no_recurrence`: The achievement can be completed only once. - `on_expiration`: The achievement resets after it expires and becomes available again. 
+    # The policy that determines if and how the achievement recurs. - `no_recurrence`: The achievement can be completed only once. - `on_expiration`: The achievement resets after it expires and becomes available again. - `on_completion`: When the customer progress status reaches `completed`, the achievement resets and becomes available again. 
     attr_accessor :recurrence_policy
 
     # The policy that determines how the achievement starts, ends, or resets. - `user_action`: The achievement ends or resets relative to when the customer started the achievement. - `fixed_schedule`: The achievement starts, ends, or resets for all customers following a fixed schedule. 
@@ -205,7 +205,7 @@ module TalonOne
       return false if @title.nil?
       return false if @description.nil?
       return false if @target.nil?
-      recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       return false unless recurrence_policy_validator.valid?(@recurrence_policy)
       activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
       return false unless activation_policy_validator.valid?(@activation_policy)
@@ -238,7 +238,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] recurrence_policy Object to be assigned
     def recurrence_policy=(recurrence_policy)
-      validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration"])
+      validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       unless validator.valid?(recurrence_policy)
         fail ArgumentError, "invalid value for \"recurrence_policy\", must be one of #{validator.allowable_values}."
       end

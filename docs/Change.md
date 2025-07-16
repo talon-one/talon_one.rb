@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Integer** | Internal ID of this entity. | 
+**id** | **Integer** | The internal ID of this entity. | 
 **created** | **DateTime** | The time this entity was created. | 
 **user_id** | **Integer** | The ID of the user associated with this entity. | 
 **application_id** | **Integer** | ID of application associated with change. | [optional] 
