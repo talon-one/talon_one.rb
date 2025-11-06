@@ -23,12 +23,16 @@ module TalonOne
     # A map of the link between the campaign access group-related permission set and the Application ID the permissions apply to.
     attr_accessor :campaign_access_groups
 
+    # Name of the account-level permission set
+    attr_accessor :account
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'applications' => :'applications',
         :'loyalty_programs' => :'loyaltyPrograms',
-        :'campaign_access_groups' => :'campaignAccessGroups'
+        :'campaign_access_groups' => :'campaignAccessGroups',
+        :'account' => :'account'
       }
     end
 
@@ -37,7 +41,8 @@ module TalonOne
       {
         :'applications' => :'Hash<String, RoleV2ApplicationDetails>',
         :'loyalty_programs' => :'Hash<String, String>',
-        :'campaign_access_groups' => :'Hash<String, String>'
+        :'campaign_access_groups' => :'Hash<String, String>',
+        :'account' => :'String'
       }
     end
 
@@ -79,6 +84,10 @@ module TalonOne
           self.campaign_access_groups = value
         end
       end
+
+      if attributes.key?(:'account')
+        self.account = attributes[:'account']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -101,7 +110,8 @@ module TalonOne
       self.class == o.class &&
           applications == o.applications &&
           loyalty_programs == o.loyalty_programs &&
-          campaign_access_groups == o.campaign_access_groups
+          campaign_access_groups == o.campaign_access_groups &&
+          account == o.account
     end
 
     # @see the `==` method
@@ -113,7 +123,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [applications, loyalty_programs, campaign_access_groups].hash
+      [applications, loyalty_programs, campaign_access_groups, account].hash
     end
 
     # Builds the object from hash

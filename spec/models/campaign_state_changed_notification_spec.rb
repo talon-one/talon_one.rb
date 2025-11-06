@@ -32,25 +32,19 @@ describe 'CampaignStateChangedNotification' do
       expect(@instance).to be_instance_of(TalonOne::CampaignStateChangedNotification)
     end
   end
-  describe 'test attribute "campaign"' do
+  describe 'test attribute "notification_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "old_state"' do
+  describe 'test attribute "total_result_size"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "new_state"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "ruleset"' do
+  describe 'test attribute "data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **users** | **Integer** | Total number of allowed users in the account. | 
 **api_volume** | **Integer** | Allowed volume of API requests to the account. | 
 **promotion_types** | **Array&lt;String&gt;** | Array of promotion types that are employed in the account. | 
+**secondary_deployment_price** | **Integer** | The price for a secondary deployment according to contractual agreements. | 
+**currency_code** | **String** | The currency of the contract. | 
 
 ## Code Sample
 
@@ -33,7 +35,9 @@ instance = TalonOne::AccountLimits.new(live_applications: null,
                                  webhooks: null,
                                  users: null,
                                  api_volume: null,
-                                 promotion_types: null)
+                                 promotion_types: null,
+                                 secondary_deployment_price: null,
+                                 currency_code: null)
 ```
 
 

@@ -44,6 +44,9 @@ module TalonOne
     # Enables or disables webhook from showing in the Rule Builder.
     attr_accessor :enabled
 
+    # The ID of the credential that this webhook is using.
+    attr_accessor :authentication_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -78,7 +81,8 @@ module TalonOne
         :'headers' => :'headers',
         :'payload' => :'payload',
         :'params' => :'params',
-        :'enabled' => :'enabled'
+        :'enabled' => :'enabled',
+        :'authentication_id' => :'authenticationId'
       }
     end
 
@@ -94,7 +98,8 @@ module TalonOne
         :'headers' => :'Array<String>',
         :'payload' => :'String',
         :'params' => :'Array<TemplateArgDef>',
-        :'enabled' => :'Boolean'
+        :'enabled' => :'Boolean',
+        :'authentication_id' => :'Integer'
       }
     end
 
@@ -163,6 +168,10 @@ module TalonOne
 
       if attributes.key?(:'enabled')
         self.enabled = attributes[:'enabled']
+      end
+
+      if attributes.key?(:'authentication_id')
+        self.authentication_id = attributes[:'authentication_id']
       end
     end
 
@@ -266,7 +275,8 @@ module TalonOne
           headers == o.headers &&
           payload == o.payload &&
           params == o.params &&
-          enabled == o.enabled
+          enabled == o.enabled &&
+          authentication_id == o.authentication_id
     end
 
     # @see the `==` method
@@ -278,7 +288,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application_ids, title, description, draft, verb, url, headers, payload, params, enabled].hash
+      [application_ids, title, description, draft, verb, url, headers, payload, params, enabled, authentication_id].hash
     end
 
     # Builds the object from hash

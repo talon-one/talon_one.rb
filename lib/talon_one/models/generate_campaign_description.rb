@@ -14,6 +14,9 @@ require 'date'
 
 module TalonOne
   class GenerateCampaignDescription
+    # ID of a campaign.
+    attr_accessor :campaign_id
+
     # ID of a ruleset.
     attr_accessor :ruleset_id
 
@@ -23,6 +26,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'campaign_id' => :'campaignID',
         :'ruleset_id' => :'rulesetID',
         :'currency' => :'currency'
       }
@@ -31,6 +35,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'campaign_id' => :'Integer',
         :'ruleset_id' => :'Integer',
         :'currency' => :'String'
       }
@@ -57,6 +62,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
+      end
+
       if attributes.key?(:'ruleset_id')
         self.ruleset_id = attributes[:'ruleset_id']
       end
@@ -70,6 +79,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @campaign_id.nil?
+        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
+      end
+
       if @ruleset_id.nil?
         invalid_properties.push('invalid value for "ruleset_id", ruleset_id cannot be nil.')
       end
@@ -84,6 +97,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @campaign_id.nil?
       return false if @ruleset_id.nil?
       return false if @currency.nil?
       true
@@ -94,6 +108,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          campaign_id == o.campaign_id &&
           ruleset_id == o.ruleset_id &&
           currency == o.currency
     end
@@ -107,7 +122,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ruleset_id, currency].hash
+      [campaign_id, ruleset_id, currency].hash
     end
 
     # Builds the object from hash

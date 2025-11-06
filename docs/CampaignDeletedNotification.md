@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**campaign** | [**Campaign**](Campaign.md) |  | 
-**deleted_at** | **DateTime** | Time when the campaign was deleted. | 
+**notification_type** | **String** | The type of the notification | 
+**total_result_size** | **Integer** | The total size of the result set. | 
+**data** | [**Array&lt;CampaignDeletedNotificationItem&gt;**](CampaignDeletedNotificationItem.md) | A list of campaign notification data. | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignDeletedNotification.new(campaign: null,
-                                 deleted_at: 2022-11-10T23:00Z)
+instance = TalonOne::CampaignDeletedNotification.new(notification_type: CampaignNotification,
+                                 total_result_size: null,
+                                 data: null)
 ```
 
 

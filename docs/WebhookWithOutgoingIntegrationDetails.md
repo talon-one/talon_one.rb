@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **payload** | **String** | API payload (supports templating using parameters) for this webhook. | [optional] 
 **params** | [**Array&lt;TemplateArgDef&gt;**](TemplateArgDef.md) | Array of template argument definitions. | 
 **enabled** | **Boolean** | Enables or disables webhook from showing in the Rule Builder. | 
+**authentication_id** | **Integer** | The ID of the credential that this webhook is using. | [optional] 
 **outgoing_integration_template_id** | **Integer** | Identifier of the outgoing integration template. | [optional] 
 **outgoing_integration_type_id** | **Integer** | Identifier of the outgoing integration type. | [optional] 
 **outgoing_integration_type_name** | **String** | Name of the outgoing integration. | [optional] 
@@ -41,6 +42,7 @@ instance = TalonOne::WebhookWithOutgoingIntegrationDetails.new(id: 6,
 },
                                  params: [],
                                  enabled: true,
+                                 authentication_id: 1,
                                  outgoing_integration_template_id: 1,
                                  outgoing_integration_type_id: 1,
                                  outgoing_integration_type_name: Braze)

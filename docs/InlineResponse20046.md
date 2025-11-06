@@ -4,16 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;RoleV2&gt;**](RoleV2.md) |  | 
+**data** | [**Array&lt;ListCampaignStoreBudgets&gt;**](ListCampaignStoreBudgets.md) |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20046.new(total_result_size: 1,
-                                 data: null)
+instance = TalonOne::InlineResponse20046.new(data: null)
 ```
 
 

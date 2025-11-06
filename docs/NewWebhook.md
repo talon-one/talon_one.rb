@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **payload** | **String** | API payload (supports templating using parameters) for this webhook. | [optional] 
 **params** | [**Array&lt;TemplateArgDef&gt;**](TemplateArgDef.md) | Array of template argument definitions. | 
 **enabled** | **Boolean** | Enables or disables webhook from showing in the Rule Builder. | 
+**authentication_id** | **Integer** | The ID of the credential that this webhook is using. | [optional] 
 
 ## Code Sample
 
@@ -31,7 +32,8 @@ instance = TalonOne::NewWebhook.new(application_ids: null,
 	&quot;message&quot;: &quot;${message}&quot;
 },
                                  params: [],
-                                 enabled: true)
+                                 enabled: true,
+                                 authentication_id: 1)
 ```
 
 

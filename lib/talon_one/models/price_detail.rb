@@ -17,6 +17,9 @@ module TalonOne
     # The value of this price type.
     attr_accessor :price
 
+    # The context identifier of the selected price adjustment.
+    attr_accessor :adjustment_context_id
+
     # The reference identifier of the selected price adjustment for this SKU.
     attr_accessor :adjustment_reference_id
 
@@ -30,6 +33,7 @@ module TalonOne
     def self.attribute_map
       {
         :'price' => :'price',
+        :'adjustment_context_id' => :'adjustmentContextId',
         :'adjustment_reference_id' => :'adjustmentReferenceId',
         :'adjustment_effective_from' => :'adjustmentEffectiveFrom',
         :'adjustment_effective_until' => :'adjustmentEffectiveUntil'
@@ -40,6 +44,7 @@ module TalonOne
     def self.openapi_types
       {
         :'price' => :'Float',
+        :'adjustment_context_id' => :'String',
         :'adjustment_reference_id' => :'String',
         :'adjustment_effective_from' => :'DateTime',
         :'adjustment_effective_until' => :'DateTime'
@@ -69,6 +74,10 @@ module TalonOne
 
       if attributes.key?(:'price')
         self.price = attributes[:'price']
+      end
+
+      if attributes.key?(:'adjustment_context_id')
+        self.adjustment_context_id = attributes[:'adjustment_context_id']
       end
 
       if attributes.key?(:'adjustment_reference_id')
@@ -103,6 +112,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           price == o.price &&
+          adjustment_context_id == o.adjustment_context_id &&
           adjustment_reference_id == o.adjustment_reference_id &&
           adjustment_effective_from == o.adjustment_effective_from &&
           adjustment_effective_until == o.adjustment_effective_until
@@ -117,7 +127,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [price, adjustment_reference_id, adjustment_effective_from, adjustment_effective_until].hash
+      [price, adjustment_context_id, adjustment_reference_id, adjustment_effective_from, adjustment_effective_until].hash
     end
 
     # Builds the object from hash

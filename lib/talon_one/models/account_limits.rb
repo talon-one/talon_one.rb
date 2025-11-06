@@ -50,6 +50,12 @@ module TalonOne
     # Array of promotion types that are employed in the account.
     attr_accessor :promotion_types
 
+    # The price for a secondary deployment according to contractual agreements.
+    attr_accessor :secondary_deployment_price
+
+    # The currency of the contract.
+    attr_accessor :currency_code
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +70,9 @@ module TalonOne
         :'webhooks' => :'webhooks',
         :'users' => :'users',
         :'api_volume' => :'apiVolume',
-        :'promotion_types' => :'promotionTypes'
+        :'promotion_types' => :'promotionTypes',
+        :'secondary_deployment_price' => :'SecondaryDeploymentPrice',
+        :'currency_code' => :'currencyCode'
       }
     end
 
@@ -82,7 +90,9 @@ module TalonOne
         :'webhooks' => :'Integer',
         :'users' => :'Integer',
         :'api_volume' => :'Integer',
-        :'promotion_types' => :'Array<String>'
+        :'promotion_types' => :'Array<String>',
+        :'secondary_deployment_price' => :'Integer',
+        :'currency_code' => :'String'
       }
     end
 
@@ -156,6 +166,14 @@ module TalonOne
           self.promotion_types = value
         end
       end
+
+      if attributes.key?(:'secondary_deployment_price')
+        self.secondary_deployment_price = attributes[:'secondary_deployment_price']
+      end
+
+      if attributes.key?(:'currency_code')
+        self.currency_code = attributes[:'currency_code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -210,6 +228,14 @@ module TalonOne
         invalid_properties.push('invalid value for "promotion_types", promotion_types cannot be nil.')
       end
 
+      if @secondary_deployment_price.nil?
+        invalid_properties.push('invalid value for "secondary_deployment_price", secondary_deployment_price cannot be nil.')
+      end
+
+      if @currency_code.nil?
+        invalid_properties.push('invalid value for "currency_code", currency_code cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -228,6 +254,8 @@ module TalonOne
       return false if @users.nil?
       return false if @api_volume.nil?
       return false if @promotion_types.nil?
+      return false if @secondary_deployment_price.nil?
+      return false if @currency_code.nil?
       true
     end
 
@@ -247,7 +275,9 @@ module TalonOne
           webhooks == o.webhooks &&
           users == o.users &&
           api_volume == o.api_volume &&
-          promotion_types == o.promotion_types
+          promotion_types == o.promotion_types &&
+          secondary_deployment_price == o.secondary_deployment_price &&
+          currency_code == o.currency_code
     end
 
     # @see the `==` method
@@ -259,7 +289,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live_applications, sandbox_applications, active_campaigns, coupons, referral_codes, active_rules, live_loyalty_programs, sandbox_loyalty_programs, webhooks, users, api_volume, promotion_types].hash
+      [live_applications, sandbox_applications, active_campaigns, coupons, referral_codes, active_rules, live_loyalty_programs, sandbox_loyalty_programs, webhooks, users, api_volume, promotion_types, secondary_deployment_price, currency_code].hash
     end
 
     # Builds the object from hash

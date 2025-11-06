@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **activation_policy** | **String** | The policy that determines how the achievement starts, ends, or resets. - &#x60;user_action&#x60;: The achievement ends or resets relative to when the customer started the achievement. - &#x60;fixed_schedule&#x60;: The achievement starts, ends, or resets for all customers following a fixed schedule.  | [optional] 
 **fixed_start_date** | **DateTime** | The achievement&#39;s start date when &#x60;activationPolicy&#x60; is set to &#x60;fixed_schedule&#x60;.  **Note:** It must be an RFC3339 timestamp string.  | [optional] 
 **end_date** | **DateTime** | The achievement&#39;s end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It must be an RFC3339 timestamp string.  | [optional] 
+**allow_rollback_after_completion** | **Boolean** | When &#x60;true&#x60;, customer progress can be rolled back in completed achievements. | [optional] 
 **campaign_id** | **Integer** | The ID of the campaign the achievement belongs to. | 
 **user_id** | **Integer** | ID of the user that created this achievement. | 
 **created_by** | **String** | Name of the user that created the achievement.  **Note**: This is not available if the user has been deleted.  | [optional] 
@@ -39,6 +40,7 @@ instance = TalonOne::Achievement.new(id: 6,
                                  activation_policy: fixed_schedule,
                                  fixed_start_date: null,
                                  end_date: null,
+                                 allow_rollback_after_completion: false,
                                  campaign_id: 1,
                                  user_id: 1234,
                                  created_by: John Doe,

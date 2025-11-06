@@ -32,19 +32,19 @@ describe 'CampaignCollectionEditedNotification' do
       expect(@instance).to be_instance_of(TalonOne::CampaignCollectionEditedNotification)
     end
   end
-  describe 'test attribute "campaign"' do
+  describe 'test attribute "notification_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "ruleset"' do
+  describe 'test attribute "total_result_size"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "collection"' do
+  describe 'test attribute "data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

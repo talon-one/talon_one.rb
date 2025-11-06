@@ -49,6 +49,9 @@ module TalonOne
     # The achievement's end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It must be an RFC3339 timestamp string. 
     attr_accessor :end_date
 
+    # When `true`, customer progress can be rolled back in completed achievements.
+    attr_accessor :allow_rollback_after_completion
+
     # The ID of the campaign the achievement belongs to.
     attr_accessor :campaign_id
 
@@ -94,6 +97,7 @@ module TalonOne
         :'activation_policy' => :'activationPolicy',
         :'fixed_start_date' => :'fixedStartDate',
         :'end_date' => :'endDate',
+        :'allow_rollback_after_completion' => :'allowRollbackAfterCompletion',
         :'campaign_id' => :'campaignId',
         :'status' => :'status',
         :'current_progress' => :'currentProgress'
@@ -115,6 +119,7 @@ module TalonOne
         :'activation_policy' => :'String',
         :'fixed_start_date' => :'DateTime',
         :'end_date' => :'DateTime',
+        :'allow_rollback_after_completion' => :'Boolean',
         :'campaign_id' => :'Integer',
         :'status' => :'String',
         :'current_progress' => :'AchievementProgress'
@@ -188,6 +193,10 @@ module TalonOne
 
       if attributes.key?(:'end_date')
         self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'allow_rollback_after_completion')
+        self.allow_rollback_after_completion = attributes[:'allow_rollback_after_completion']
       end
 
       if attributes.key?(:'campaign_id')
@@ -338,6 +347,7 @@ module TalonOne
           activation_policy == o.activation_policy &&
           fixed_start_date == o.fixed_start_date &&
           end_date == o.end_date &&
+          allow_rollback_after_completion == o.allow_rollback_after_completion &&
           campaign_id == o.campaign_id &&
           status == o.status &&
           current_progress == o.current_progress
@@ -352,7 +362,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date, campaign_id, status, current_progress].hash
+      [id, created, name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date, allow_rollback_after_completion, campaign_id, status, current_progress].hash
     end
 
     # Builds the object from hash

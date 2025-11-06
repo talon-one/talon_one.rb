@@ -32,6 +32,12 @@ describe 'GenerateCampaignDescription' do
       expect(@instance).to be_instance_of(TalonOne::GenerateCampaignDescription)
     end
   end
+  describe 'test attribute "campaign_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "ruleset_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

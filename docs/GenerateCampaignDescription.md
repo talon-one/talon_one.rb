@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**campaign_id** | **Integer** | ID of a campaign. | 
 **ruleset_id** | **Integer** | ID of a ruleset. | 
 **currency** | **String** | Currency for the campaign. | 
 
@@ -12,7 +13,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::GenerateCampaignDescription.new(ruleset_id: null,
+instance = TalonOne::GenerateCampaignDescription.new(campaign_id: null,
+                                 ruleset_id: null,
                                  currency: null)
 ```
 

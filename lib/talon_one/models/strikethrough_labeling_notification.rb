@@ -34,6 +34,9 @@ module TalonOne
 
     attr_accessor :changed_items
 
+    # The type of the notification
+    attr_accessor :notification_type
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -65,7 +68,8 @@ module TalonOne
         :'current_batch' => :'currentBatch',
         :'total_batches' => :'totalBatches',
         :'trigger' => :'trigger',
-        :'changed_items' => :'changedItems'
+        :'changed_items' => :'changedItems',
+        :'notification_type' => :'NotificationType'
       }
     end
 
@@ -78,7 +82,8 @@ module TalonOne
         :'current_batch' => :'Integer',
         :'total_batches' => :'Integer',
         :'trigger' => :'StrikethroughTrigger',
-        :'changed_items' => :'Array<StrikethroughChangedItem>'
+        :'changed_items' => :'Array<StrikethroughChangedItem>',
+        :'notification_type' => :'String'
       }
     end
 
@@ -132,6 +137,10 @@ module TalonOne
           self.changed_items = value
         end
       end
+
+      if attributes.key?(:'notification_type')
+        self.notification_type = attributes[:'notification_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -158,6 +167,10 @@ module TalonOne
         invalid_properties.push('invalid value for "changed_items", changed_items cannot be nil.')
       end
 
+      if @notification_type.nil?
+        invalid_properties.push('invalid value for "notification_type", notification_type cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -171,6 +184,7 @@ module TalonOne
       return false if @total_batches.nil?
       return false if @trigger.nil?
       return false if @changed_items.nil?
+      return false if @notification_type.nil?
       true
     end
 
@@ -195,7 +209,8 @@ module TalonOne
           current_batch == o.current_batch &&
           total_batches == o.total_batches &&
           trigger == o.trigger &&
-          changed_items == o.changed_items
+          changed_items == o.changed_items &&
+          notification_type == o.notification_type
     end
 
     # @see the `==` method
@@ -207,7 +222,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [version, valid_from, application_id, current_batch, total_batches, trigger, changed_items].hash
+      [version, valid_from, application_id, current_batch, total_batches, trigger, changed_items, notification_type].hash
     end
 
     # Builds the object from hash

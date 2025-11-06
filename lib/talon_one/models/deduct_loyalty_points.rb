@@ -97,10 +97,6 @@ module TalonOne
         invalid_properties.push('invalid value for "points", must be smaller than or equal to 999999999999.99.')
       end
 
-      if @points <= 0
-        invalid_properties.push('invalid value for "points", must be greater than 0.')
-      end
-
       invalid_properties
     end
 
@@ -109,7 +105,6 @@ module TalonOne
     def valid?
       return false if @points.nil?
       return false if @points > 999999999999.99
-      return false if @points <= 0
       true
     end
 
@@ -122,10 +117,6 @@ module TalonOne
 
       if points > 999999999999.99
         fail ArgumentError, 'invalid value for "points", must be smaller than or equal to 999999999999.99.'
-      end
-
-      if points <= 0
-        fail ArgumentError, 'invalid value for "points", must be greater than 0.'
       end
 
       @points = points

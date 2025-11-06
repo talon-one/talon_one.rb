@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**campaign** | [**Campaign**](Campaign.md) |  | 
-**old_campaign** | [**Campaign**](Campaign.md) |  | 
-**ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
+**notification_type** | **String** | The type of the notification | 
+**total_result_size** | **Integer** | The total size of the result set. | 
+**data** | [**Array&lt;CampaignEditedNotificationItem&gt;**](CampaignEditedNotificationItem.md) | A list of campaign notification data. | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignEditedNotification.new(campaign: null,
-                                 old_campaign: null,
-                                 ruleset: null)
+instance = TalonOne::CampaignEditedNotification.new(notification_type: CampaignNotification,
+                                 total_result_size: null,
+                                 data: null)
 ```
 
 

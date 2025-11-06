@@ -38,6 +38,18 @@ module TalonOne
     # The end of the time frame where the effect is active in UTC.
     attr_accessor :end_time
 
+    # The selected price type for this cart item (e.g. the price for members only).
+    attr_accessor :selected_price_type
+
+    # The value of the selected price type to apply to the SKU targeted by this effect, before any discounts are applied.
+    attr_accessor :selected_price
+
+    # The reference identifier of the selected price adjustment for this cart item.
+    attr_accessor :adjustment_reference_id
+
+    # A list of entities (e.g. audiences) targeted by this effect.
+    attr_accessor :targets
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +60,11 @@ module TalonOne
         :'type' => :'type',
         :'props' => :'props',
         :'start_time' => :'startTime',
-        :'end_time' => :'endTime'
+        :'end_time' => :'endTime',
+        :'selected_price_type' => :'selectedPriceType',
+        :'selected_price' => :'selectedPrice',
+        :'adjustment_reference_id' => :'adjustmentReferenceId',
+        :'targets' => :'targets'
       }
     end
 
@@ -62,7 +78,11 @@ module TalonOne
         :'type' => :'String',
         :'props' => :'Object',
         :'start_time' => :'DateTime',
-        :'end_time' => :'DateTime'
+        :'end_time' => :'DateTime',
+        :'selected_price_type' => :'String',
+        :'selected_price' => :'Float',
+        :'adjustment_reference_id' => :'String',
+        :'targets' => :'Array<Object>'
       }
     end
 
@@ -117,6 +137,24 @@ module TalonOne
 
       if attributes.key?(:'end_time')
         self.end_time = attributes[:'end_time']
+      end
+
+      if attributes.key?(:'selected_price_type')
+        self.selected_price_type = attributes[:'selected_price_type']
+      end
+
+      if attributes.key?(:'selected_price')
+        self.selected_price = attributes[:'selected_price']
+      end
+
+      if attributes.key?(:'adjustment_reference_id')
+        self.adjustment_reference_id = attributes[:'adjustment_reference_id']
+      end
+
+      if attributes.key?(:'targets')
+        if (value = attributes[:'targets']).is_a?(Array)
+          self.targets = value
+        end
       end
     end
 
@@ -175,7 +213,11 @@ module TalonOne
           type == o.type &&
           props == o.props &&
           start_time == o.start_time &&
-          end_time == o.end_time
+          end_time == o.end_time &&
+          selected_price_type == o.selected_price_type &&
+          selected_price == o.selected_price &&
+          adjustment_reference_id == o.adjustment_reference_id &&
+          targets == o.targets
     end
 
     # @see the `==` method
@@ -187,7 +229,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, type, props, start_time, end_time].hash
+      [campaign_id, ruleset_id, rule_index, rule_name, type, props, start_time, end_time, selected_price_type, selected_price, adjustment_reference_id, targets].hash
     end
 
     # Builds the object from hash

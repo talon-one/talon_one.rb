@@ -120,8 +120,6 @@ Method | HTTP request | Description
 [**get_user**](ManagementApi.md#get_user) | **GET** /v1/users/{userId} | Get user
 [**get_users**](ManagementApi.md#get_users) | **GET** /v1/users | List users in account
 [**get_webhook**](ManagementApi.md#get_webhook) | **GET** /v1/webhooks/{webhookId} | Get webhook
-[**get_webhook_activation_logs**](ManagementApi.md#get_webhook_activation_logs) | **GET** /v1/webhook_activation_logs | List webhook activation log entries
-[**get_webhook_logs**](ManagementApi.md#get_webhook_logs) | **GET** /v1/webhook_logs | List webhook log entries
 [**get_webhooks**](ManagementApi.md#get_webhooks) | **GET** /v1/webhooks | List webhooks
 [**import_account_collection**](ManagementApi.md#import_account_collection) | **POST** /v1/collections/{collectionId}/import | Import data into existing account-level collection
 [**import_allowed_list**](ManagementApi.md#import_allowed_list) | **POST** /v1/attributes/{attributeId}/allowed_list/import | Import allowed values for attribute
@@ -197,6 +195,11 @@ Enable a [disabled user](https://docs.talon.one/docs/product/account/account-set
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -232,7 +235,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -255,6 +258,11 @@ Add points to the given loyalty card in the specified card-based loyalty program
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -294,7 +302,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -317,6 +325,11 @@ Add points in the specified loyalty program for the given customer.  To get the 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -356,7 +369,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -379,6 +392,11 @@ Copy the campaign into all specified Applications.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -419,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -442,6 +460,11 @@ Create an account-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -478,7 +501,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -501,6 +524,11 @@ Create a new achievement in a specific campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -541,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -564,6 +592,11 @@ Create an [additional cost](https://docs.talon.one/docs/product/account/dev-tool
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -600,7 +633,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -623,6 +656,11 @@ Create a _custom attribute_ in this account. [Custom attributes](https://docs.ta
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -659,7 +697,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -682,6 +720,11 @@ Create a batch of loyalty cards in a specified [card-based loyalty program](http
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -720,7 +763,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -743,6 +786,11 @@ Use the campaign template referenced in the request body to create a new campaig
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -781,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -804,6 +852,11 @@ Create a new store budget for a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -843,7 +896,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -866,6 +919,11 @@ Create a campaign-level collection in a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -906,7 +964,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -929,6 +987,11 @@ Create coupons according to some pattern. Up to 20.000 coupons can be created wi
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -973,7 +1036,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -996,6 +1059,11 @@ Create up to 5,000,000 coupons asynchronously. You should typically use this enp
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1036,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1059,6 +1127,11 @@ This endpoint handles creating a job to delete coupons asynchronously.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1099,7 +1172,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1122,6 +1195,11 @@ Create coupons according to some pattern for up to 1000 recipients.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1166,7 +1244,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1189,6 +1267,11 @@ Resend an email invitation to an existing user.  **Note:** The invitation token 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1225,7 +1308,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1248,6 +1331,11 @@ Create a new user in the account and send an invitation to their email address. 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1284,7 +1372,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1307,6 +1395,11 @@ Send an email with a password recovery link to the email address of an existing 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1343,7 +1436,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1366,6 +1459,11 @@ Create a session to use the Management API endpoints. Use the value of the `toke
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1402,7 +1500,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1425,6 +1523,11 @@ Create a new store in a specific Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1463,7 +1566,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1486,6 +1589,11 @@ Disable user by email address
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1521,7 +1629,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1544,6 +1652,11 @@ Deduct points from the given loyalty card in the specified card-based loyalty pr
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1583,7 +1696,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1606,6 +1719,11 @@ Delete a given account-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1641,7 +1759,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1664,6 +1782,11 @@ Delete the specified achievement.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1703,7 +1826,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1726,6 +1849,11 @@ Delete the given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1763,7 +1891,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1786,6 +1914,11 @@ Delete the store budgets for a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1829,7 +1962,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1852,6 +1985,11 @@ Delete a given campaign-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1891,7 +2029,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1914,6 +2052,11 @@ Delete the specified coupon.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1953,7 +2096,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -1976,6 +2119,11 @@ Deletes all the coupons matching the specified criteria.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2041,7 +2189,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2064,6 +2212,11 @@ Delete the given loyalty card.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2101,7 +2254,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2124,6 +2277,11 @@ Delete the specified referral.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2163,7 +2321,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2186,6 +2344,11 @@ Delete the specified store.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2223,7 +2386,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2246,6 +2409,11 @@ Delete a specific user.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2281,7 +2449,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2304,6 +2472,11 @@ Delete user by email address
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2339,7 +2512,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2362,6 +2535,11 @@ Destroys the session.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2393,7 +2571,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2416,6 +2594,11 @@ Disconnect the stores linked to a specific campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2453,7 +2636,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2476,6 +2659,11 @@ Download a CSV file containing items from a given account-level collection.  **T
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2512,7 +2700,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2535,6 +2723,11 @@ Download a CSV file containing a list of all the customers who have participated
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2575,7 +2768,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2598,6 +2791,11 @@ Download a CSV file containing the integration IDs of the members of an audience
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2634,7 +2832,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2657,6 +2855,11 @@ Download a CSV file containing the store budgets for a given campaign.  **Tip:**
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2701,7 +2904,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2724,6 +2927,11 @@ Download a CSV file containing the stores linked to a specific campaign.  **Tip:
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2762,7 +2970,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2785,6 +2993,11 @@ Download a CSV file containing items from a given campaign-level collection.  **
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2825,7 +3038,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2848,6 +3061,11 @@ Download a CSV file containing the coupons that match the given properties.  **T
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2914,7 +3132,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -2937,6 +3155,11 @@ Download a CSV file containing the customer sessions that match the request.  **
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -2985,7 +3208,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3008,6 +3231,11 @@ Download a CSV file containing the tier information for customers of the specifi
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3050,7 +3278,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3073,6 +3301,11 @@ Download a CSV file containing the triggered effects that match the given attrib
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3119,7 +3352,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3142,6 +3375,11 @@ Export customer loyalty balance to CSV
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3182,7 +3420,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3205,6 +3443,11 @@ Download a CSV file containing the balance of each customer in the loyalty progr
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3245,7 +3488,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3268,6 +3511,11 @@ Download a CSV file containing the balances of all cards in the loyalty program.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3308,7 +3556,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3331,6 +3579,11 @@ Download a CSV file containing a loyalty card ledger log of the loyalty program.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3377,7 +3630,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3400,6 +3653,11 @@ Download a CSV file containing the loyalty cards from a specified loyalty progra
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3446,7 +3704,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3460,7 +3718,7 @@ Name | Type | Description  | Notes
 
 Export customer's transaction logs
 
-Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. 
+Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. 
 
 ### Example
 
@@ -3469,6 +3727,11 @@ Download a CSV file containing a customer's transaction logs in the loyalty prog
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3515,7 +3778,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3538,6 +3801,11 @@ Download a CSV file containing the giveaway codes of a specific giveaway pool.  
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3580,7 +3848,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3603,6 +3871,11 @@ Download a CSV file containing the referrals that match the given parameters.  *
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3655,7 +3928,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3678,6 +3951,11 @@ Retrieve the list of API calls sent to the specified Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3732,7 +4010,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3755,6 +4033,11 @@ Return the details of your companies Talon.One account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3791,7 +4074,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3814,6 +4097,11 @@ Return the analytics of your Talon.One account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3850,7 +4138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3873,6 +4161,11 @@ Retrieve a given account-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3909,7 +4202,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3932,6 +4225,11 @@ Get the details of a specific achievement.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -3972,7 +4270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -3995,6 +4293,11 @@ Returns the additional cost.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4031,7 +4334,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4054,6 +4357,11 @@ Returns all the defined additional costs for the account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4096,7 +4404,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4119,6 +4427,11 @@ Get the application specified by the ID.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4155,7 +4468,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4178,6 +4491,11 @@ Display the health of the Application and show the last time the Application was
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4214,7 +4532,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4237,6 +4555,11 @@ Retrieve the customers of the specified application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4275,7 +4598,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4298,6 +4621,11 @@ List the friends referred by the specified customer profile in this Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4346,7 +4674,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4369,6 +4697,11 @@ List all the customers of the specified application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4415,7 +4748,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4438,6 +4771,11 @@ Get a list of the application customers matching the provided criteria.  The mat
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4484,7 +4822,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4507,6 +4845,11 @@ Get all of the distinct values of the Event `type` property for events recorded 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4551,7 +4894,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4574,6 +4917,11 @@ Lists all events recorded for an application. Instead of having the total number
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4601,7 +4949,8 @@ opts = {
   coupon_code: 'coupon_code_example', # String | Coupon code
   referral_code: 'referral_code_example', # String | Referral code
   rule_query: 'rule_query_example', # String | Rule name filter for events
-  campaign_query: 'campaign_query_example' # String | Campaign name filter for events
+  campaign_query: 'campaign_query_example', # String | Campaign name filter for events
+  effect_type: 'effect_type_example' # String | The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
 }
 
 begin
@@ -4633,6 +4982,7 @@ Name | Type | Description  | Notes
  **referral_code** | **String**| Referral code | [optional] 
  **rule_query** | **String**| Rule name filter for events | [optional] 
  **campaign_query** | **String**| Campaign name filter for events | [optional] 
+ **effect_type** | **String**| The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects). | [optional] 
 
 ### Return type
 
@@ -4640,7 +4990,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4663,6 +5013,11 @@ Get the details of the given session. You can list the sessions with the [List A
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4701,7 +5056,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4724,6 +5079,11 @@ List all the sessions of the specified Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4784,7 +5144,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4807,6 +5167,11 @@ List all applications in the current account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4849,7 +5214,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4872,6 +5237,11 @@ Retrieve the specified custom attribute.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4908,7 +5278,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4931,6 +5301,11 @@ Return all the custom attributes for the account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -4975,7 +5350,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -4998,6 +5373,11 @@ Get a paginated list of the customer profiles in a given audience.  A maximum of
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5044,7 +5424,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5067,6 +5447,11 @@ Get all audiences created in the account. To create an audience, use [Create aud
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5111,7 +5496,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5134,6 +5519,11 @@ Get a list of audience IDs and their member count.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5174,7 +5564,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5197,6 +5587,11 @@ Retrieve the given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5235,7 +5630,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5258,6 +5653,11 @@ Retrieve statistical data about the performance of the given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5304,7 +5704,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5327,6 +5727,11 @@ Get a list of all the campaigns that match a set of attributes.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5375,7 +5780,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5398,6 +5803,11 @@ Get a campaign access group specified by its ID.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5434,7 +5844,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5457,6 +5867,11 @@ List the campaign access groups in the current account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5499,7 +5914,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5522,6 +5937,11 @@ Retrieve a list of campaign templates.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5572,7 +5992,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5595,6 +6015,11 @@ List the campaigns of the specified application that match your filter criteria.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5655,7 +6080,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5665,7 +6090,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20044 get_changes(opts)
+> InlineResponse20042 get_changes(opts)
 
 Get audit logs for an account
 
@@ -5678,6 +6103,11 @@ Retrieve the audit logs displayed in **Accounts > Audit logs**.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5732,11 +6162,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20044**](InlineResponse20044.md)
+[**InlineResponse20042**](InlineResponse20042.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5759,6 +6189,11 @@ Retrieve a given campaign-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5799,7 +6234,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5822,6 +6257,11 @@ Retrieve items from a given collection.  You can retrieve items from both accoun
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5864,7 +6304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5887,6 +6327,11 @@ List all the coupons matching the specified criteria.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -5963,7 +6408,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -5986,6 +6431,11 @@ Fetch the summary report of a given customer in the given application, in a time
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6034,7 +6484,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6057,6 +6507,11 @@ Fetch summary reports for all application customers based on a time range. Inste
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6113,7 +6568,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6136,6 +6591,11 @@ Fetch analytics for a given customer in the given application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6182,7 +6642,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6205,6 +6665,11 @@ Return the details of the specified customer profile.  <div class=\"redoc-sectio
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6241,7 +6706,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6251,7 +6716,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile_achievement_progress
 
-> InlineResponse20051 get_customer_profile_achievement_progress(application_id, integration_id, opts)
+> InlineResponse20049 get_customer_profile_achievement_progress(application_id, integration_id, opts)
 
 List customer achievements
 
@@ -6264,6 +6729,11 @@ For the given customer profile, list all the achievements that match your filter
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6308,11 +6778,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20051**](InlineResponse20051.md)
+[**InlineResponse20049**](InlineResponse20049.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6335,6 +6805,11 @@ List all customer profiles.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6377,7 +6852,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6400,6 +6875,11 @@ Get a list of the customer profiles matching the provided criteria.  The match i
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6444,7 +6924,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6467,6 +6947,11 @@ Retrieve the statistics displayed on the specified loyalty program's dashboard, 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6511,7 +6996,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6521,7 +7006,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20042 get_event_types(opts)
+> InlineResponse20040 get_event_types(opts)
 
 List event types
 
@@ -6534,6 +7019,11 @@ Fetch all event type definitions for your account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6576,11 +7066,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20042**](InlineResponse20042.md)
+[**InlineResponse20040**](InlineResponse20040.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6590,7 +7080,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20045 get_exports(opts)
+> InlineResponse20043 get_exports(opts)
 
 Get exports
 
@@ -6603,6 +7093,11 @@ List all past exports
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6645,11 +7140,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20045**](InlineResponse20045.md)
+[**InlineResponse20043**](InlineResponse20043.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6672,6 +7167,11 @@ Get the given loyalty card.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6710,7 +7210,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6733,6 +7233,11 @@ Retrieve the transaction logs for the given [loyalty card](https://docs.talon.on
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6752,7 +7257,9 @@ opts = {
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  subledger_id: 'subledger_id_example' # String | The ID of the subledger by which we filter the data.
+  subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'] # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
 }
 
 begin
@@ -6776,6 +7283,8 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
 
 ### Return type
 
@@ -6783,7 +7292,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6806,6 +7315,11 @@ For the given card-based loyalty program, list the loyalty cards that match your
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6856,7 +7370,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6879,6 +7393,11 @@ Get the loyalty ledger for this profile integration ID.  To get the `integration
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6917,7 +7436,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6940,6 +7459,11 @@ Get the specified [loyalty program](https://docs.talon.one/docs/product/loyalty-
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -6976,7 +7500,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -6999,6 +7523,11 @@ Retrieve loyalty program transaction logs in a given loyalty program with filter
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7015,6 +7544,8 @@ loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can g
 opts = {
   loyalty_transaction_type: 'loyalty_transaction_type_example', # String | Filter results by loyalty transaction type: - `manual`: Loyalty transaction that was done manually. - `session`: Loyalty transaction that resulted from a customer session. - `import`: Loyalty transaction that was imported from a CSV file. 
   subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
   start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   page_size: 50, # Integer | The number of items in the response.
@@ -7038,6 +7569,8 @@ Name | Type | Description  | Notes
  **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **loyalty_transaction_type** | **String**| Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file.  | [optional] 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
  **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
@@ -7049,7 +7582,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7072,6 +7605,11 @@ List the loyalty programs of the account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7104,7 +7642,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7127,6 +7665,11 @@ Get loyalty program statistics
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7163,7 +7706,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7186,6 +7729,11 @@ Retrieve all message log entries.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7203,8 +7751,8 @@ opts = {
   message_id: 'message_id_example', # String | Filter results by message ID.
   change_type: 'change_type_example', # String | Filter results by change type.
   notification_i_ds: 'notification_i_ds_example', # String | Filter results by notification ID (include up to 30 values, separated by a comma).
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
   cursor: 'cursor_example', # String | A specific unique value in the database. If this value is not given, the server fetches results starting with the first record. 
   period: 'period_example', # String | Filter results by time period. Choose between the available relative time frames. 
   is_successful: true, # Boolean | Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to`true`, only log entries with `2xx` response codes are returned. When set to `false`, only log entries with `4xx` and `5xx` response codes are returned. 
@@ -7233,8 +7781,8 @@ Name | Type | Description  | Notes
  **message_id** | **String**| Filter results by message ID. | [optional] 
  **change_type** | **String**| Filter results by change type. | [optional] 
  **notification_i_ds** | **String**| Filter results by notification ID (include up to 30 values, separated by a comma). | [optional] 
- **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
- **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
+ **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. Use UTC time. | [optional] 
+ **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. Use UTC time. | [optional] 
  **cursor** | **String**| A specific unique value in the database. If this value is not given, the server fetches results starting with the first record.  | [optional] 
  **period** | **String**| Filter results by time period. Choose between the available relative time frames.  | [optional] 
  **is_successful** | **Boolean**| Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to&#x60;true&#x60;, only log entries with &#x60;2xx&#x60; response codes are returned. When set to &#x60;false&#x60;, only log entries with &#x60;4xx&#x60; and &#x60;5xx&#x60; response codes are returned.  | [optional] 
@@ -7250,7 +7798,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7273,6 +7821,11 @@ List all referrals of the specified campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7331,7 +7884,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7354,6 +7907,11 @@ Get the details of a specific role. To see all the roles, use the [List roles](/
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7390,7 +7948,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7413,6 +7971,11 @@ Retrieve the specified ruleset.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7453,7 +8016,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7476,6 +8039,11 @@ List all rulesets of this campaign. A ruleset is a revision of the rules of a ca
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7522,7 +8090,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7545,6 +8113,11 @@ Get store details for a specific store ID.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7583,7 +8156,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7606,6 +8179,11 @@ Retrieve the data (including an invitation code) for a user. Non-admin users can
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7642,7 +8220,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7652,7 +8230,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20043 get_users(opts)
+> InlineResponse20041 get_users(opts)
 
 List users in account
 
@@ -7665,6 +8243,11 @@ Retrieve all users in your account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7703,11 +8286,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20043**](InlineResponse20043.md)
+[**InlineResponse20041**](InlineResponse20041.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7730,6 +8313,11 @@ Returns a webhook by its id.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7766,163 +8354,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_webhook_activation_logs
-
-> InlineResponse20040 get_webhook_activation_logs(opts)
-
-List webhook activation log entries
-
-Webhook activation log entries are created as soon as an integration request triggers a webhook effect. See the [docs](https://docs.talon.one/docs/dev/getting-started/webhooks). 
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: management_key
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-opts = {
-  page_size: 1000, # Integer | The number of items in the response.
-  skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  integration_request_uuid: 'integration_request_uuid_example', # String | Filter results by integration request UUID.
-  webhook_id: 3.4, # Float | Filter results by webhook id.
-  application_id: 3.4, # Float | Filter results by Application ID.
-  campaign_id: 3.4, # Float | Filter results by campaign ID.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-}
-
-begin
-  #List webhook activation log entries
-  result = api_instance.get_webhook_activation_logs(opts)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_webhook_activation_logs: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
- **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **integration_request_uuid** | **String**| Filter results by integration request UUID. | [optional] 
- **webhook_id** | **Float**| Filter results by webhook id. | [optional] 
- **application_id** | **Float**| Filter results by Application ID. | [optional] 
- **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
- **created_before** | **DateTime**| Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
- **created_after** | **DateTime**| Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
-
-### Return type
-
-[**InlineResponse20040**](InlineResponse20040.md)
-
-### Authorization
-
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_webhook_logs
-
-> InlineResponse20041 get_webhook_logs(opts)
-
-List webhook log entries
-
-Retrieve all webhook log entries.
-
-### Example
-
-```ruby
-# load the gem
-require 'talon_one'
-# setup authorization
-TalonOne.configure do |config|
-  # Configure API key authorization: management_key
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-
-  # Configure API key authorization: manager_auth
-  config.api_key['Authorization'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['Authorization'] = 'Bearer'
-end
-
-api_instance = TalonOne::ManagementApi.new
-opts = {
-  page_size: 1000, # Integer | The number of items in the response.
-  skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  status: 'status_example', # String | Filter results by HTTP status codes.
-  webhook_id: 3.4, # Float | Filter results by webhook id.
-  application_id: 3.4, # Float | Filter results by Application ID.
-  campaign_id: 3.4, # Float | Filter results by campaign ID.
-  request_uuid: 'request_uuid_example', # String | Filter results by request UUID.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-}
-
-begin
-  #List webhook log entries
-  result = api_instance.get_webhook_logs(opts)
-  p result
-rescue TalonOne::ApiError => e
-  puts "Exception when calling ManagementApi->get_webhook_logs: #{e}"
-end
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
- **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **status** | **String**| Filter results by HTTP status codes. | [optional] 
- **webhook_id** | **Float**| Filter results by webhook id. | [optional] 
- **application_id** | **Float**| Filter results by Application ID. | [optional] 
- **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
- **request_uuid** | **String**| Filter results by request UUID. | [optional] 
- **created_before** | **DateTime**| Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
- **created_after** | **DateTime**| Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
-
-### Return type
-
-[**InlineResponse20041**](InlineResponse20041.md)
-
-### Authorization
-
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -7945,6 +8377,11 @@ List all webhooks.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -7997,7 +8434,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8020,6 +8457,11 @@ Upload a CSV file containing the collection of string values that should be atta
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8060,7 +8502,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8083,6 +8525,11 @@ Upload a CSV file containing a list of [picklist values](https://docs.talon.one/
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8123,7 +8570,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8146,6 +8593,11 @@ Upload a CSV file containing the integration IDs of the members you want to add 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8186,7 +8638,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8209,6 +8661,11 @@ Upload a CSV file containing store budgets for a given campaign.  Send the file 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8255,7 +8712,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8278,6 +8735,11 @@ Upload a CSV file containing the stores you want to link to a specific campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8320,7 +8782,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8343,6 +8805,11 @@ Upload a CSV file containing the collection of string values that should be atta
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8387,7 +8854,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8410,6 +8877,11 @@ Upload a CSV file containing the coupons that should be created. The file should
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8454,7 +8926,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8477,6 +8949,11 @@ Upload a CSV file containing the loyalty cards that you want to use in your card
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8517,7 +8994,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8540,6 +9017,11 @@ Upload a CSV file containing existing customers to be assigned to existing tiers
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8580,7 +9062,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8603,6 +9085,11 @@ Upload a CSV file containing the loyalty points you want to import into a given 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8645,7 +9132,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8668,6 +9155,11 @@ Upload a CSV file containing the giveaway codes that should be created. Send the
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8708,7 +9200,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8731,6 +9223,11 @@ Upload a CSV file containing the referrals that should be created. The file shou
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8773,7 +9270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8796,6 +9293,11 @@ Invite user from identity provider
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8831,7 +9333,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8854,6 +9356,11 @@ List account-level collections in the account.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8900,7 +9407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8910,7 +9417,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements
 
-> InlineResponse20050 list_achievements(application_id, campaign_id, opts)
+> InlineResponse20048 list_achievements(application_id, campaign_id, opts)
 
 List achievements
 
@@ -8923,6 +9430,11 @@ List all the achievements for a specific campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -8965,11 +9477,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20050**](InlineResponse20050.md)
+[**InlineResponse20048**](InlineResponse20048.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -8979,7 +9491,7 @@ Name | Type | Description  | Notes
 
 ## list_all_roles_v2
 
-> InlineResponse20046 list_all_roles_v2
+> InlineResponse20044 list_all_roles_v2
 
 List roles
 
@@ -8992,6 +9504,11 @@ List all roles.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9020,11 +9537,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20046**](InlineResponse20046.md)
+[**InlineResponse20044**](InlineResponse20044.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9034,7 +9551,7 @@ This endpoint does not need any parameter.
 
 ## list_campaign_store_budget_limits
 
-> InlineResponse20048 list_campaign_store_budget_limits(application_id, campaign_id, opts)
+> InlineResponse20046 list_campaign_store_budget_limits(application_id, campaign_id, opts)
 
 List campaign store budget limits
 
@@ -9047,6 +9564,11 @@ Return the store budget limits for a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9087,11 +9609,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20048**](InlineResponse20048.md)
+[**InlineResponse20046**](InlineResponse20046.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9114,6 +9636,11 @@ Return a paginated list of cart items in the given catalog.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9162,7 +9689,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9185,6 +9712,11 @@ List collections in a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9235,7 +9767,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9258,6 +9790,11 @@ List campaign-level collections from all campaigns in a given Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9306,7 +9843,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9316,7 +9853,7 @@ Name | Type | Description  | Notes
 
 ## list_stores
 
-> InlineResponse20047 list_stores(application_id, opts)
+> InlineResponse20045 list_stores(application_id, opts)
 
 List stores
 
@@ -9329,6 +9866,11 @@ List all stores for a specific Application.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9379,11 +9921,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20047**](InlineResponse20047.md)
+[**InlineResponse20045**](InlineResponse20045.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9406,6 +9948,11 @@ Validate the ownership of the API through a challenge-response mechanism.  This 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9437,7 +9984,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9460,6 +10007,11 @@ Deduct points from the specified loyalty program and specified customer profile.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9499,7 +10051,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9522,6 +10074,11 @@ Consumes the supplied password reset token and updates the password for the asso
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9558,7 +10115,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9581,6 +10138,11 @@ Create a new Talon.One group using the SCIM Group provisioning protocol with an 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9617,7 +10179,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9640,6 +10202,11 @@ Create a new Talon.One user using the SCIM provisioning protocol with an identit
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9676,7 +10243,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9699,6 +10266,11 @@ Delete a specific group created using the SCIM provisioning protocol with an ide
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9734,7 +10306,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9757,6 +10329,11 @@ Delete a specific Talon.One user created using the SCIM provisioning protocol wi
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9792,7 +10369,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9815,6 +10392,11 @@ Retrieve data for a specific group created using the SCIM provisioning protocol 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9851,7 +10433,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9874,6 +10456,11 @@ Retrieve a paginated list of groups created using the SCIM protocol with an iden
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9906,7 +10493,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9929,6 +10516,11 @@ Retrieve a list of resource types supported by the SCIM provisioning protocol.  
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -9961,7 +10553,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -9984,6 +10576,11 @@ Retrieve a list of schemas supported by the SCIM provisioning protocol.  Schemas
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10016,7 +10613,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10039,6 +10636,11 @@ Retrieve the configuration settings of the SCIM service provider. It provides de
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10071,7 +10673,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10094,6 +10696,11 @@ Retrieve data for a specific Talon.One user created using the SCIM provisioning 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10130,7 +10737,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10153,6 +10760,11 @@ Retrieve a paginated list of users that have been provisioned using the SCIM pro
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10185,7 +10797,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10208,6 +10820,11 @@ Update certain attributes of a group created using the SCIM provisioning protoco
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10246,7 +10863,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10269,6 +10886,11 @@ Update certain attributes of a specific Talon.One user created using the SCIM pr
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10307,7 +10929,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10330,6 +10952,11 @@ Update the details of a specific group created using the SCIM provisioning proto
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10368,7 +10995,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10391,6 +11018,11 @@ Update the details of a specific Talon.One user created using the SCIM provision
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10429,7 +11061,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10452,6 +11084,11 @@ List the coupons whose attributes match the query criteria in all the campaigns 
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10518,7 +11155,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10541,6 +11178,11 @@ List the coupons whose attributes match the query criteria in the given campaign
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10607,7 +11249,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10617,7 +11259,7 @@ Name | Type | Description  | Notes
 
 ## summarize_campaign_store_budget
 
-> InlineResponse20049 summarize_campaign_store_budget(application_id, campaign_id)
+> InlineResponse20047 summarize_campaign_store_budget(application_id, campaign_id)
 
 Get summary of campaign store budgets
 
@@ -10630,6 +11272,11 @@ Fetch a summary of all store budget information for a given campaign.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10664,11 +11311,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20049**](InlineResponse20049.md)
+[**InlineResponse20047**](InlineResponse20047.md)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10691,6 +11338,11 @@ Transfer loyalty card data, such as linked customers, loyalty balances and trans
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10730,7 +11382,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10753,6 +11405,11 @@ Edit the description of a given account-level collection and enable or disable t
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10791,7 +11448,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10814,6 +11471,11 @@ Update the details of a specific achievement.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10856,7 +11518,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10879,6 +11541,11 @@ Updates an existing additional cost. Once created, the only property of an addit
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10917,7 +11584,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -10940,6 +11607,11 @@ Update an existing custom attribute. Once created, the only property of a custom
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -10978,7 +11650,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11001,6 +11673,11 @@ Update the given campaign.  **Important:** You cannot use this endpoint to updat
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11041,7 +11718,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11064,6 +11741,11 @@ Edit the description of a given campaign-level collection.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11106,7 +11788,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11129,6 +11811,11 @@ Update the specified coupon.  <div class=\"redoc-section\">   <p class=\"title\"
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11171,7 +11858,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11194,6 +11881,11 @@ Update all coupons or a specific batch of coupons in the given campaign. You can
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11233,7 +11925,7 @@ nil (empty response body)
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11256,6 +11948,11 @@ Update the status of the given loyalty card. A card can be _active_ or _inactive
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11296,7 +11993,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11319,6 +12016,11 @@ Update the specified referral.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11361,7 +12063,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11384,6 +12086,11 @@ Update a specific role.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11422,7 +12129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11445,6 +12152,11 @@ Update store details for a specific store ID.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11485,7 +12197,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 
@@ -11508,6 +12220,11 @@ Update the details of a specific user.
 require 'talon_one'
 # setup authorization
 TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
   # Configure API key authorization: management_key
   config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -11546,7 +12263,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
 
 ### HTTP request headers
 

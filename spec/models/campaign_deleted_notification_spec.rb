@@ -32,13 +32,19 @@ describe 'CampaignDeletedNotification' do
       expect(@instance).to be_instance_of(TalonOne::CampaignDeletedNotification)
     end
   end
-  describe 'test attribute "campaign"' do
+  describe 'test attribute "notification_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "deleted_at"' do
+  describe 'test attribute "total_result_size"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

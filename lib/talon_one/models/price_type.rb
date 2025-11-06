@@ -26,10 +26,10 @@ module TalonOne
     # The API name of the price type. This is an immutable value.
     attr_accessor :name
 
-    # The title of the price type.
+    # The name displayed in the Campaign Manager for the price type.
     attr_accessor :title
 
-    # The description of the price type.
+    # A description of the price type.
     attr_accessor :description
 
     # The date and time when the price type was last modified.
@@ -38,7 +38,7 @@ module TalonOne
     # A list of the IDs of the catalogs that are subscribed to this price type.
     attr_accessor :subscribed_catalogs_ids
 
-    # A list of the IDs of the audiences that are targeted by this price type.
+    # A list of the IDs of the audiences targeted by this price type.
     attr_accessor :targeted_audiences_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.

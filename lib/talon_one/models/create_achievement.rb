@@ -43,6 +43,9 @@ module TalonOne
     # The achievement's end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It must be an RFC3339 timestamp string. 
     attr_accessor :end_date
 
+    # When `true`, customer progress can be rolled back in completed achievements.
+    attr_accessor :allow_rollback_after_completion
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -77,7 +80,8 @@ module TalonOne
         :'recurrence_policy' => :'recurrencePolicy',
         :'activation_policy' => :'activationPolicy',
         :'fixed_start_date' => :'fixedStartDate',
-        :'end_date' => :'endDate'
+        :'end_date' => :'endDate',
+        :'allow_rollback_after_completion' => :'allowRollbackAfterCompletion'
       }
     end
 
@@ -93,7 +97,8 @@ module TalonOne
         :'recurrence_policy' => :'String',
         :'activation_policy' => :'String',
         :'fixed_start_date' => :'DateTime',
-        :'end_date' => :'DateTime'
+        :'end_date' => :'DateTime',
+        :'allow_rollback_after_completion' => :'Boolean'
       }
     end
 
@@ -156,6 +161,10 @@ module TalonOne
 
       if attributes.key?(:'end_date')
         self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'allow_rollback_after_completion')
+        self.allow_rollback_after_completion = attributes[:'allow_rollback_after_completion']
       end
     end
 
@@ -269,7 +278,8 @@ module TalonOne
           recurrence_policy == o.recurrence_policy &&
           activation_policy == o.activation_policy &&
           fixed_start_date == o.fixed_start_date &&
-          end_date == o.end_date
+          end_date == o.end_date &&
+          allow_rollback_after_completion == o.allow_rollback_after_completion
     end
 
     # @see the `==` method
@@ -281,7 +291,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date].hash
+      [name, title, description, target, period, period_end_override, recurrence_policy, activation_policy, fixed_start_date, end_date, allow_rollback_after_completion].hash
     end
 
     # Builds the object from hash
