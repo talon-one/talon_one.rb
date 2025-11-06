@@ -100,4 +100,10 @@ describe 'CreateAchievement' do
     end
   end
 
+  describe 'test attribute "allow_rollback_after_completion"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

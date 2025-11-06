@@ -96,4 +96,10 @@ describe 'NewWebhook' do
     end
   end
 
+  describe 'test attribute "authentication_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

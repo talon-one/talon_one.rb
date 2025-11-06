@@ -60,7 +60,6 @@ module TalonOne
     # The reference identifier of the selected price adjustment for this SKU. This is only returned if the `selectedPrice` resulted from a price adjustment.
     attr_accessor :adjustment_reference_id
 
-    # The properties of the effect. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     attr_accessor :props
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **calculated_at** | **DateTime** | The time at which this price was calculated. If provided, this is used to determine the most recent price adjustment to choose if price adjustments overlap. Defaults to internal creation time if not provided. | [optional] 
 **effective_from** | **DateTime** | The date and time from which the price adjustment is effective. | [optional] 
 **effective_until** | **DateTime** | The date and time until which the price adjustment is effective. | [optional] 
+**context_id** | **String** | Identifier of the context of this price adjustment (e.g. summer sale). | [optional] 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = TalonOne::NewPriceAdjustment.new(price_type: member,
                                  reference_id: 68851723-e6fa-488f-ace9-112581e6c19b,
                                  calculated_at: 2021-09-12T10:12:42Z,
                                  effective_from: 2021-09-12T10:12:42Z,
-                                 effective_until: 2021-09-12T10:12:42Z)
+                                 effective_until: 2021-09-12T10:12:42Z,
+                                 context_id: Summer2025)
 ```
 
 

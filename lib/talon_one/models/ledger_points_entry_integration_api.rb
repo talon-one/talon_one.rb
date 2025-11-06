@@ -18,6 +18,9 @@ module TalonOne
     # ID of the transaction that adds loyalty points.
     attr_accessor :id
 
+    # Unique identifier of the transaction in the UUID format.
+    attr_accessor :transaction_uuid
+
     # Date and time the loyalty points were added.
     attr_accessor :created
 
@@ -46,6 +49,7 @@ module TalonOne
     def self.attribute_map
       {
         :'id' => :'id',
+        :'transaction_uuid' => :'transactionUUID',
         :'created' => :'created',
         :'program_id' => :'programId',
         :'customer_session_id' => :'customerSessionId',
@@ -61,6 +65,7 @@ module TalonOne
     def self.openapi_types
       {
         :'id' => :'Integer',
+        :'transaction_uuid' => :'String',
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
         :'customer_session_id' => :'String',
@@ -95,6 +100,10 @@ module TalonOne
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'transaction_uuid')
+        self.transaction_uuid = attributes[:'transaction_uuid']
       end
 
       if attributes.key?(:'created')
@@ -136,6 +145,10 @@ module TalonOne
       invalid_properties = Array.new
       if @id.nil?
         invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @transaction_uuid.nil?
+        invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
       end
 
       if @created.nil?
@@ -189,6 +202,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
+      return false if @transaction_uuid.nil?
       return false if @created.nil?
       return false if @program_id.nil?
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
@@ -261,6 +275,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          transaction_uuid == o.transaction_uuid &&
           created == o.created &&
           program_id == o.program_id &&
           customer_session_id == o.customer_session_id &&
@@ -280,7 +295,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, program_id, customer_session_id, name, start_date, expiry_date, subledger_id, amount].hash
+      [id, transaction_uuid, created, program_id, customer_session_id, name, start_date, expiry_date, subledger_id, amount].hash
     end
 
     # Builds the object from hash

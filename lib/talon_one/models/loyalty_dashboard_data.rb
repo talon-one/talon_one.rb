@@ -30,6 +30,9 @@ module TalonOne
     # Total of expired points for this loyalty program.
     attr_accessor :total_expired_points
 
+    # Total of negative points for this loyalty program.
+    attr_accessor :total_negative_points
+
     # Number of loyalty program members.
     attr_accessor :total_members
 
@@ -48,6 +51,7 @@ module TalonOne
         :'total_pending_points' => :'totalPendingPoints',
         :'total_spent_points' => :'totalSpentPoints',
         :'total_expired_points' => :'totalExpiredPoints',
+        :'total_negative_points' => :'totalNegativePoints',
         :'total_members' => :'totalMembers',
         :'new_members' => :'newMembers',
         :'spent_points' => :'spentPoints',
@@ -63,6 +67,7 @@ module TalonOne
         :'total_pending_points' => :'Float',
         :'total_spent_points' => :'Float',
         :'total_expired_points' => :'Float',
+        :'total_negative_points' => :'Float',
         :'total_members' => :'Float',
         :'new_members' => :'Float',
         :'spent_points' => :'LoyaltyDashboardPointsBreakdown',
@@ -111,6 +116,10 @@ module TalonOne
         self.total_expired_points = attributes[:'total_expired_points']
       end
 
+      if attributes.key?(:'total_negative_points')
+        self.total_negative_points = attributes[:'total_negative_points']
+      end
+
       if attributes.key?(:'total_members')
         self.total_members = attributes[:'total_members']
       end
@@ -152,6 +161,10 @@ module TalonOne
         invalid_properties.push('invalid value for "total_expired_points", total_expired_points cannot be nil.')
       end
 
+      if @total_negative_points.nil?
+        invalid_properties.push('invalid value for "total_negative_points", total_negative_points cannot be nil.')
+      end
+
       if @total_members.nil?
         invalid_properties.push('invalid value for "total_members", total_members cannot be nil.')
       end
@@ -179,6 +192,7 @@ module TalonOne
       return false if @total_pending_points.nil?
       return false if @total_spent_points.nil?
       return false if @total_expired_points.nil?
+      return false if @total_negative_points.nil?
       return false if @total_members.nil?
       return false if @new_members.nil?
       return false if @spent_points.nil?
@@ -196,6 +210,7 @@ module TalonOne
           total_pending_points == o.total_pending_points &&
           total_spent_points == o.total_spent_points &&
           total_expired_points == o.total_expired_points &&
+          total_negative_points == o.total_negative_points &&
           total_members == o.total_members &&
           new_members == o.new_members &&
           spent_points == o.spent_points &&
@@ -211,7 +226,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, total_active_points, total_pending_points, total_spent_points, total_expired_points, total_members, new_members, spent_points, earned_points].hash
+      [date, total_active_points, total_pending_points, total_spent_points, total_expired_points, total_negative_points, total_members, new_members, spent_points, earned_points].hash
     end
 
     # Builds the object from hash

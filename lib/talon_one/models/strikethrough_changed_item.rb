@@ -30,6 +30,9 @@ module TalonOne
     # The price of the changed item.
     attr_accessor :price
 
+    # A map of keys and values representing the price types and related price adjustment details for this cart item.       The keys correspond to the `priceType` names. 
+    attr_accessor :prices
+
     # The evaluation time of the changed item.
     attr_accessor :evaluated_at
 
@@ -43,6 +46,7 @@ module TalonOne
         :'sku' => :'sku',
         :'version' => :'version',
         :'price' => :'price',
+        :'prices' => :'prices',
         :'evaluated_at' => :'evaluatedAt',
         :'effects' => :'effects'
       }
@@ -56,6 +60,7 @@ module TalonOne
         :'sku' => :'String',
         :'version' => :'Integer',
         :'price' => :'Float',
+        :'prices' => :'Hash<String, PriceDetail>',
         :'evaluated_at' => :'DateTime',
         :'effects' => :'Array<StrikethroughEffect>'
       }
@@ -100,6 +105,12 @@ module TalonOne
 
       if attributes.key?(:'price')
         self.price = attributes[:'price']
+      end
+
+      if attributes.key?(:'prices')
+        if (value = attributes[:'prices']).is_a?(Hash)
+          self.prices = value
+        end
       end
 
       if attributes.key?(:'evaluated_at')
@@ -185,6 +196,7 @@ module TalonOne
           sku == o.sku &&
           version == o.version &&
           price == o.price &&
+          prices == o.prices &&
           evaluated_at == o.evaluated_at &&
           effects == o.effects
     end
@@ -198,7 +210,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, catalog_id, sku, version, price, evaluated_at, effects].hash
+      [id, catalog_id, sku, version, price, prices, evaluated_at, effects].hash
     end
 
     # Builds the object from hash

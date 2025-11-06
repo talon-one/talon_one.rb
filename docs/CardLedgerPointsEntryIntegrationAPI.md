@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | ID of the transaction that adds loyalty points. | 
+**transaction_uuid** | **String** | Unique identifier of the transaction in the UUID format. | 
 **created** | **DateTime** | Date and time the loyalty card points were added. | 
 **program_id** | **Integer** | ID of the loyalty program. | 
 **customer_profile_id** | **String** | Integration ID of the customer profile linked to the card. | [optional] 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::CardLedgerPointsEntryIntegrationAPI.new(id: 123,
+                                 transaction_uuid: ce59f12a-f53b-4014-a745-636d93f2bd3f,
                                  created: null,
                                  program_id: 324,
                                  customer_profile_id: URNGV8294NV,

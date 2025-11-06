@@ -32,6 +32,12 @@ describe 'LedgerTransactionLogEntryIntegrationAPI' do
       expect(@instance).to be_instance_of(TalonOne::LedgerTransactionLogEntryIntegrationAPI)
     end
   end
+  describe 'test attribute "transaction_uuid"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "created"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

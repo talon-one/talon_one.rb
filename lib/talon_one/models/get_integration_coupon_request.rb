@@ -65,6 +65,8 @@ module TalonOne
 
       if attributes.key?(:'limit')
         self.limit = attributes[:'limit']
+      else
+        self.limit = 10
       end
     end
 

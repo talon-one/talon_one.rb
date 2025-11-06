@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | ID of the loyalty ledger transaction. | 
+**transaction_uuid** | **String** | Unique identifier of the transaction in the UUID format. | 
 **program_id** | **Integer** | ID of the loyalty program. | 
 **campaign_id** | **Integer** | ID of the campaign. | [optional] 
 **created** | **DateTime** | Date and time the loyalty transaction occurred. | 
@@ -30,6 +31,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::LoyaltyProgramTransaction.new(id: 123,
+                                 transaction_uuid: ce59f12a-f53b-4014-a745-636d93f2bd3f,
                                  program_id: 324,
                                  campaign_id: 324,
                                  created: null,

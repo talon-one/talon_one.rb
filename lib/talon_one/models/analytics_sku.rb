@@ -14,14 +14,20 @@ require 'date'
 
 module TalonOne
   class AnalyticsSKU
-    # The ID of the SKU linked to the application.
+    # The ID of the SKU linked to the Application.
     attr_accessor :id
 
-    # The SKU linked to the application.
+    # The SKU linked to the Application.
     attr_accessor :sku
 
     # Values in UTC for the date the SKU linked to the product was last updated.
     attr_accessor :last_updated
+
+    # The ID of the catalog that contains the SKU.
+    attr_accessor :catalog_id
+
+    # The ID of the product that the SKU belongs to.
+    attr_accessor :product_id
 
     attr_accessor :units_sold
 
@@ -31,6 +37,8 @@ module TalonOne
         :'id' => :'id',
         :'sku' => :'sku',
         :'last_updated' => :'lastUpdated',
+        :'catalog_id' => :'catalogId',
+        :'product_id' => :'productId',
         :'units_sold' => :'unitsSold'
       }
     end
@@ -41,6 +49,8 @@ module TalonOne
         :'id' => :'Integer',
         :'sku' => :'String',
         :'last_updated' => :'DateTime',
+        :'catalog_id' => :'Integer',
+        :'product_id' => :'Integer',
         :'units_sold' => :'AnalyticsDataPointWithTrend'
       }
     end
@@ -76,6 +86,14 @@ module TalonOne
 
       if attributes.key?(:'last_updated')
         self.last_updated = attributes[:'last_updated']
+      end
+
+      if attributes.key?(:'catalog_id')
+        self.catalog_id = attributes[:'catalog_id']
+      end
+
+      if attributes.key?(:'product_id')
+        self.product_id = attributes[:'product_id']
       end
 
       if attributes.key?(:'units_sold')
@@ -114,6 +132,8 @@ module TalonOne
           id == o.id &&
           sku == o.sku &&
           last_updated == o.last_updated &&
+          catalog_id == o.catalog_id &&
+          product_id == o.product_id &&
           units_sold == o.units_sold
     end
 
@@ -126,7 +146,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, sku, last_updated, units_sold].hash
+      [id, sku, last_updated, catalog_id, product_id, units_sold].hash
     end
 
     # Builds the object from hash

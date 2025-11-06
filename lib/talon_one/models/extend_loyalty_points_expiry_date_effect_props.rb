@@ -24,11 +24,8 @@ module TalonOne
     # Time frame by which the expiry date extends.  The time format is either: - immediate, or - an **integer** followed by a letter indicating the time unit.  Examples: `immediate`, `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. 
     attr_accessor :extension_duration
 
-    # The list of identifiers of transactions affected affected by the extension.
-    attr_accessor :transaction_uui_ds
-
-    # Expiry date before applying the extension.
-    attr_accessor :previous_expiration_date
+    # List of transactions affected by the expiry date update.
+    attr_accessor :affected_transactions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -36,8 +33,7 @@ module TalonOne
         :'program_id' => :'programId',
         :'sub_ledger_id' => :'subLedgerId',
         :'extension_duration' => :'extensionDuration',
-        :'transaction_uui_ds' => :'transactionUUIDs',
-        :'previous_expiration_date' => :'previousExpirationDate'
+        :'affected_transactions' => :'affectedTransactions'
       }
     end
 
@@ -47,8 +43,7 @@ module TalonOne
         :'program_id' => :'Integer',
         :'sub_ledger_id' => :'String',
         :'extension_duration' => :'String',
-        :'transaction_uui_ds' => :'Array<String>',
-        :'previous_expiration_date' => :'DateTime'
+        :'affected_transactions' => :'Array<LoyaltyLedgerEntryExpiryDateChange>'
       }
     end
 
@@ -85,14 +80,10 @@ module TalonOne
         self.extension_duration = attributes[:'extension_duration']
       end
 
-      if attributes.key?(:'transaction_uui_ds')
-        if (value = attributes[:'transaction_uui_ds']).is_a?(Array)
-          self.transaction_uui_ds = value
+      if attributes.key?(:'affected_transactions')
+        if (value = attributes[:'affected_transactions']).is_a?(Array)
+          self.affected_transactions = value
         end
-      end
-
-      if attributes.key?(:'previous_expiration_date')
-        self.previous_expiration_date = attributes[:'previous_expiration_date']
       end
     end
 
@@ -112,10 +103,6 @@ module TalonOne
         invalid_properties.push('invalid value for "extension_duration", extension_duration cannot be nil.')
       end
 
-      if @previous_expiration_date.nil?
-        invalid_properties.push('invalid value for "previous_expiration_date", previous_expiration_date cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -125,7 +112,6 @@ module TalonOne
       return false if @program_id.nil?
       return false if @sub_ledger_id.nil?
       return false if @extension_duration.nil?
-      return false if @previous_expiration_date.nil?
       true
     end
 
@@ -137,8 +123,7 @@ module TalonOne
           program_id == o.program_id &&
           sub_ledger_id == o.sub_ledger_id &&
           extension_duration == o.extension_duration &&
-          transaction_uui_ds == o.transaction_uui_ds &&
-          previous_expiration_date == o.previous_expiration_date
+          affected_transactions == o.affected_transactions
     end
 
     # @see the `==` method
@@ -150,7 +135,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [program_id, sub_ledger_id, extension_duration, transaction_uui_ds, previous_expiration_date].hash
+      [program_id, sub_ledger_id, extension_duration, affected_transactions].hash
     end
 
     # Builds the object from hash

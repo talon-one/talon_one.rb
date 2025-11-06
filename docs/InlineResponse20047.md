@@ -4,18 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | [optional] 
-**total_result_size** | **Integer** |  | [optional] 
-**data** | [**Array&lt;Store&gt;**](Store.md) |  | 
+**data** | [**Array&lt;SummaryCampaignStoreBudget&gt;**](SummaryCampaignStoreBudget.md) |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20047.new(has_more: null,
-                                 total_result_size: 1,
-                                 data: null)
+instance = TalonOne::InlineResponse20047.new(data: null)
 ```
 
 

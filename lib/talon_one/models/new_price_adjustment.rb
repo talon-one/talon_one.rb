@@ -32,6 +32,9 @@ module TalonOne
     # The date and time until which the price adjustment is effective.
     attr_accessor :effective_until
 
+    # Identifier of the context of this price adjustment (e.g. summer sale).
+    attr_accessor :context_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,7 +43,8 @@ module TalonOne
         :'reference_id' => :'referenceId',
         :'calculated_at' => :'calculatedAt',
         :'effective_from' => :'effectiveFrom',
-        :'effective_until' => :'effectiveUntil'
+        :'effective_until' => :'effectiveUntil',
+        :'context_id' => :'contextId'
       }
     end
 
@@ -52,7 +56,8 @@ module TalonOne
         :'reference_id' => :'String',
         :'calculated_at' => :'DateTime',
         :'effective_from' => :'DateTime',
-        :'effective_until' => :'DateTime'
+        :'effective_until' => :'DateTime',
+        :'context_id' => :'String'
       }
     end
 
@@ -101,6 +106,10 @@ module TalonOne
       if attributes.key?(:'effective_until')
         self.effective_until = attributes[:'effective_until']
       end
+
+      if attributes.key?(:'context_id')
+        self.context_id = attributes[:'context_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,6 +124,10 @@ module TalonOne
         invalid_properties.push('invalid value for "reference_id", reference_id cannot be nil.')
       end
 
+      if @reference_id.to_s.length < 1
+        invalid_properties.push('invalid value for "reference_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -123,7 +136,22 @@ module TalonOne
     def valid?
       return false if @price_type.nil?
       return false if @reference_id.nil?
+      return false if @reference_id.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reference_id Value to be assigned
+    def reference_id=(reference_id)
+      if reference_id.nil?
+        fail ArgumentError, 'reference_id cannot be nil'
+      end
+
+      if reference_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "reference_id", the character length must be great than or equal to 1.'
+      end
+
+      @reference_id = reference_id
     end
 
     # Checks equality by comparing each attribute.
@@ -136,7 +164,8 @@ module TalonOne
           reference_id == o.reference_id &&
           calculated_at == o.calculated_at &&
           effective_from == o.effective_from &&
-          effective_until == o.effective_until
+          effective_until == o.effective_until &&
+          context_id == o.context_id
     end
 
     # @see the `==` method
@@ -148,7 +177,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [price_type, price, reference_id, calculated_at, effective_from, effective_until].hash
+      [price_type, price, reference_id, calculated_at, effective_from, effective_until, context_id].hash
     end
 
     # Builds the object from hash

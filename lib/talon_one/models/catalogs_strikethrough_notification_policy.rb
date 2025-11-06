@@ -20,11 +20,15 @@ module TalonOne
     # The number of days in advance that strikethrough pricing updates should be sent.
     attr_accessor :ahead_of_days_trigger
 
+    # The required size of each batch of data.
+    attr_accessor :batch_size
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'ahead_of_days_trigger' => :'aheadOfDaysTrigger'
+        :'ahead_of_days_trigger' => :'aheadOfDaysTrigger',
+        :'batch_size' => :'batchSize'
       }
     end
 
@@ -32,7 +36,8 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'ahead_of_days_trigger' => :'Integer'
+        :'ahead_of_days_trigger' => :'Integer',
+        :'batch_size' => :'Integer'
       }
     end
 
@@ -63,6 +68,12 @@ module TalonOne
 
       if attributes.key?(:'ahead_of_days_trigger')
         self.ahead_of_days_trigger = attributes[:'ahead_of_days_trigger']
+      end
+
+      if attributes.key?(:'batch_size')
+        self.batch_size = attributes[:'batch_size']
+      else
+        self.batch_size = 1000
       end
     end
 
@@ -133,7 +144,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          ahead_of_days_trigger == o.ahead_of_days_trigger
+          ahead_of_days_trigger == o.ahead_of_days_trigger &&
+          batch_size == o.batch_size
     end
 
     # @see the `==` method
@@ -145,7 +157,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, ahead_of_days_trigger].hash
+      [name, ahead_of_days_trigger, batch_size].hash
     end
 
     # Builds the object from hash

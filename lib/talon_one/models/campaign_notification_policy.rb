@@ -74,6 +74,8 @@ module TalonOne
 
       if attributes.key?(:'batch_size')
         self.batch_size = attributes[:'batch_size']
+      else
+        self.batch_size = 5
       end
     end
 

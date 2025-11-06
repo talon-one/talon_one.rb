@@ -27,7 +27,7 @@ module TalonOne
     # Date and time when points should expire. The value should be provided in RFC 3339 format. If passed, `validityDuration` should be omitted. 
     attr_accessor :valid_until
 
-    # The amount of time before the points are considered valid.  The time format is either: - `immediate` or, - an **integer** followed by one letter indicating the time unit.  Examples: `immediate`, `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. 
+    # The amount of time before the points are considered valid.  The time format is either: - `immediate` or, - `on_action` or, - an **integer** followed by one letter indicating the time unit.  Examples: `immediate`, `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`, `on_action`.  Available units:  - `s`: seconds - `m`: minutes - `h`: hours - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year. 
     attr_accessor :pending_duration
 
     # Date and time after the points are considered valid. The value should be provided in RFC 3339 format. If passed, `pendingDuration` should be omitted. 
@@ -133,10 +133,6 @@ module TalonOne
         invalid_properties.push('invalid value for "points", must be smaller than or equal to 999999999999.99.')
       end
 
-      if @points <= 0
-        invalid_properties.push('invalid value for "points", must be greater than 0.')
-      end
-
       invalid_properties
     end
 
@@ -145,7 +141,6 @@ module TalonOne
     def valid?
       return false if @points.nil?
       return false if @points > 999999999999.99
-      return false if @points <= 0
       true
     end
 
@@ -158,10 +153,6 @@ module TalonOne
 
       if points > 999999999999.99
         fail ArgumentError, 'invalid value for "points", must be smaller than or equal to 999999999999.99.'
-      end
-
-      if points <= 0
-        fail ArgumentError, 'invalid value for "points", must be greater than 0.'
       end
 
       @points = points

@@ -63,7 +63,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -143,7 +143,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -219,7 +219,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -295,7 +295,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -359,7 +359,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -435,7 +435,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Achievement' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -499,7 +499,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AccountAdditionalCost' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -563,7 +563,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Attribute' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -633,7 +633,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyCardBatchResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -703,7 +703,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CreateTemplateCampaignResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -779,7 +779,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -855,7 +855,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -934,7 +934,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20010' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1010,7 +1010,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AsyncCouponCreationResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1086,7 +1086,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AsyncCouponDeletionJobResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1165,7 +1165,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20010' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1229,7 +1229,7 @@ module TalonOne
       return_type = opts[:return_type] || 'NewInviteEmail' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1293,7 +1293,7 @@ module TalonOne
       return_type = opts[:return_type] || 'User' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1357,7 +1357,7 @@ module TalonOne
       return_type = opts[:return_type] || 'NewPasswordEmail' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1421,7 +1421,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Session' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1491,7 +1491,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Store' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1553,7 +1553,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1633,7 +1633,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1695,7 +1695,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1769,7 +1769,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1835,7 +1835,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1917,7 +1917,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -1991,7 +1991,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2063,7 +2063,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2176,7 +2176,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2248,7 +2248,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2320,7 +2320,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2388,7 +2388,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2448,7 +2448,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2510,7 +2510,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2564,7 +2564,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2632,7 +2632,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2694,7 +2694,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2768,7 +2768,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2830,7 +2830,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2912,7 +2912,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -2980,7 +2980,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3054,7 +3054,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3174,7 +3174,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3259,7 +3259,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3327,7 +3327,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3405,7 +3405,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3470,7 +3470,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3535,7 +3535,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3600,7 +3600,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3693,7 +3693,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3771,7 +3771,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3790,7 +3790,7 @@ module TalonOne
     end
 
     # Export customer's transaction logs
-    # Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. 
+    # Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. 
     # @param range_start [DateTime] Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param range_end [DateTime] Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param loyalty_program_id [String] The identifier for the loyalty program.
@@ -3804,7 +3804,7 @@ module TalonOne
     end
 
     # Export customer&#39;s transaction logs
-    # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;flags&#x60;: The flags of the transaction, when applicable. The &#x60;createsNegativeBalance&#x60; flag indicates whether the transaction results in a negative balance. 
+    # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;flags&#x60;: The flags of the transaction, when applicable. The &#x60;createsNegativeBalance&#x60; flag indicates whether the transaction results in a negative balance. - &#x60;transactionUUID&#x60;: Unique identifier of the transaction in the UUID format. 
     # @param range_start [DateTime] Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param range_end [DateTime] Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @param loyalty_program_id [String] The identifier for the loyalty program.
@@ -3860,7 +3860,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -3928,7 +3928,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4023,7 +4023,7 @@ module TalonOne
       return_type = opts[:return_type] || 'String' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4133,7 +4133,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20022' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4195,7 +4195,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Account' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4257,7 +4257,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AccountAnalytics' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4319,7 +4319,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4393,7 +4393,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Achievement' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4455,7 +4455,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AccountAdditionalCost' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4528,7 +4528,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20038' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4590,7 +4590,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Application' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4652,7 +4652,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ApplicationApiHealth' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4720,7 +4720,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ApplicationCustomer' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4808,7 +4808,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20035' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4890,7 +4890,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20024' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -4977,7 +4977,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20025' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5056,7 +5056,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20031' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5092,6 +5092,7 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
+    # @option opts [String] :effect_type The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     # @return [InlineResponse20030]
     def get_application_events_without_total_count(application_id, opts = {})
       data, _status_code, _headers = get_application_events_without_total_count_with_http_info(application_id, opts)
@@ -5116,6 +5117,7 @@ module TalonOne
     # @option opts [String] :referral_code Referral code
     # @option opts [String] :rule_query Rule name filter for events
     # @option opts [String] :campaign_query Campaign name filter for events
+    # @option opts [String] :effect_type The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
     # @return [Array<(InlineResponse20030, Integer, Hash)>] InlineResponse20030 data, response status code and response headers
     def get_application_events_without_total_count_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
@@ -5160,6 +5162,7 @@ module TalonOne
       query_params[:'referralCode'] = opts[:'referral_code'] if !opts[:'referral_code'].nil?
       query_params[:'ruleQuery'] = opts[:'rule_query'] if !opts[:'rule_query'].nil?
       query_params[:'campaignQuery'] = opts[:'campaign_query'] if !opts[:'campaign_query'].nil?
+      query_params[:'effectType'] = opts[:'effect_type'] if !opts[:'effect_type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -5176,7 +5179,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20030' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5244,7 +5247,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ApplicationSession' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5351,7 +5354,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20029' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5424,7 +5427,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse2007' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5486,7 +5489,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Attribute' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5562,7 +5565,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20036' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5644,7 +5647,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20034' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5720,7 +5723,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20032' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5786,7 +5789,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20033' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5854,7 +5857,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Campaign' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -5943,7 +5946,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20023' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6037,7 +6040,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6099,7 +6102,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CampaignGroup' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6172,7 +6175,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20013' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6261,7 +6264,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20014' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6368,7 +6371,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6400,7 +6403,7 @@ module TalonOne
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Integer] :management_key_id Filter results that match the given management key ID.
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [InlineResponse20044]
+    # @return [InlineResponse20042]
     def get_changes(opts = {})
       data, _status_code, _headers = get_changes_with_http_info(opts)
       data
@@ -6420,7 +6423,7 @@ module TalonOne
     # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query. 
     # @option opts [Integer] :management_key_id Filter results that match the given management key ID.
     # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-    # @return [Array<(InlineResponse20044, Integer, Hash)>] InlineResponse20044 data, response status code and response headers
+    # @return [Array<(InlineResponse20042, Integer, Hash)>] InlineResponse20042 data, response status code and response headers
     def get_changes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_changes ...'
@@ -6462,10 +6465,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20044' 
+      return_type = opts[:return_type] || 'InlineResponse20042' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6539,7 +6542,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6615,7 +6618,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20021' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6757,7 +6760,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20011' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6853,7 +6856,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CustomerActivityReport' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -6958,7 +6961,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20028' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7043,7 +7046,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CustomerAnalytics' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7105,7 +7108,7 @@ module TalonOne
       return_type = opts[:return_type] || 'CustomerProfile' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7132,7 +7135,7 @@ module TalonOne
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Integer] :achievement_id The ID of the achievement. You can get this ID with the [List achievement](https://docs.talon.one/management-api#tag/Achievements/operation/listAchievements) endpoint.
     # @option opts [String] :title Filter results by the &#x60;title&#x60; of an achievement.
-    # @return [InlineResponse20051]
+    # @return [InlineResponse20049]
     def get_customer_profile_achievement_progress(application_id, integration_id, opts = {})
       data, _status_code, _headers = get_customer_profile_achievement_progress_with_http_info(application_id, integration_id, opts)
       data
@@ -7147,7 +7150,7 @@ module TalonOne
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Integer] :achievement_id The ID of the achievement. You can get this ID with the [List achievement](https://docs.talon.one/management-api#tag/Achievements/operation/listAchievements) endpoint.
     # @option opts [String] :title Filter results by the &#x60;title&#x60; of an achievement.
-    # @return [Array<(InlineResponse20051, Integer, Hash)>] InlineResponse20051 data, response status code and response headers
+    # @return [Array<(InlineResponse20049, Integer, Hash)>] InlineResponse20049 data, response status code and response headers
     def get_customer_profile_achievement_progress_with_http_info(application_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_customer_profile_achievement_progress ...'
@@ -7190,10 +7193,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20051' 
+      return_type = opts[:return_type] || 'InlineResponse20049' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7266,7 +7269,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20027' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7347,7 +7350,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20026' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7426,7 +7429,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20016' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7452,7 +7455,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @return [InlineResponse20042]
+    # @return [InlineResponse20040]
     def get_event_types(opts = {})
       data, _status_code, _headers = get_event_types_with_http_info(opts)
       data
@@ -7466,7 +7469,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @return [Array<(InlineResponse20042, Integer, Hash)>] InlineResponse20042 data, response status code and response headers
+    # @return [Array<(InlineResponse20040, Integer, Hash)>] InlineResponse20040 data, response status code and response headers
     def get_event_types_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_event_types ...'
@@ -7502,10 +7505,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20042' 
+      return_type = opts[:return_type] || 'InlineResponse20040' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7531,7 +7534,7 @@ module TalonOne
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [InlineResponse20045]
+    # @return [InlineResponse20043]
     def get_exports(opts = {})
       data, _status_code, _headers = get_exports_with_http_info(opts)
       data
@@ -7545,7 +7548,7 @@ module TalonOne
     # @option opts [Float] :application_id Filter results by Application ID.
     # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
     # @option opts [String] :entity The name of the entity type that was exported.
-    # @return [Array<(InlineResponse20045, Integer, Hash)>] InlineResponse20045 data, response status code and response headers
+    # @return [Array<(InlineResponse20043, Integer, Hash)>] InlineResponse20043 data, response status code and response headers
     def get_exports_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_exports ...'
@@ -7585,10 +7588,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20045' 
+      return_type = opts[:return_type] || 'InlineResponse20043' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7660,7 +7663,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyCard' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7688,6 +7691,8 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
+    # @option opts [Array<String>] :customer_session_i_ds Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions. 
+    # @option opts [Array<String>] :transaction_uui_ds Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions. 
     # @return [InlineResponse20019]
     def get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts = {})
       data, _status_code, _headers = get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_id, opts)
@@ -7704,6 +7709,8 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
+    # @option opts [Array<String>] :customer_session_i_ds Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions. 
+    # @option opts [Array<String>] :transaction_uui_ds Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions. 
     # @return [Array<(InlineResponse20019, Integer, Hash)>] InlineResponse20019 data, response status code and response headers
     def get_loyalty_card_transaction_logs_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
@@ -7739,6 +7746,8 @@ module TalonOne
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
       query_params[:'subledgerId'] = opts[:'subledger_id'] if !opts[:'subledger_id'].nil?
+      query_params[:'customerSessionIDs'] = @api_client.build_collection_param(opts[:'customer_session_i_ds'], :multi) if !opts[:'customer_session_i_ds'].nil?
+      query_params[:'transactionUUIDs'] = @api_client.build_collection_param(opts[:'transaction_uui_ds'], :multi) if !opts[:'transaction_uui_ds'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -7755,7 +7764,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20019' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7851,7 +7860,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20018' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7919,7 +7928,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyLedger' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -7981,7 +7990,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyProgram' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8005,6 +8014,8 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :loyalty_transaction_type Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file. 
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
+    # @option opts [Array<String>] :customer_session_i_ds Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions. 
+    # @option opts [Array<String>] :transaction_uui_ds Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions. 
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
@@ -8021,6 +8032,8 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :loyalty_transaction_type Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file. 
     # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
+    # @option opts [Array<String>] :customer_session_i_ds Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions. 
+    # @option opts [Array<String>] :transaction_uui_ds Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions. 
     # @option opts [DateTime] :start_date Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
     # @option opts [Integer] :page_size The number of items in the response.
@@ -8038,8 +8051,8 @@ module TalonOne
       if @api_client.config.client_side_validation && opts[:'loyalty_transaction_type'] && !allowable_values.include?(opts[:'loyalty_transaction_type'])
         fail ArgumentError, "invalid value for \"loyalty_transaction_type\", must be one of #{allowable_values}"
       end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 50
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_loyalty_program_transactions, must be smaller than or equal to 50.'
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_loyalty_program_transactions, must be smaller than or equal to 1000.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
@@ -8053,6 +8066,8 @@ module TalonOne
       query_params = opts[:query_params] || {}
       query_params[:'loyaltyTransactionType'] = opts[:'loyalty_transaction_type'] if !opts[:'loyalty_transaction_type'].nil?
       query_params[:'subledgerId'] = opts[:'subledger_id'] if !opts[:'subledger_id'].nil?
+      query_params[:'customerSessionIDs'] = @api_client.build_collection_param(opts[:'customer_session_i_ds'], :multi) if !opts[:'customer_session_i_ds'].nil?
+      query_params[:'transactionUUIDs'] = @api_client.build_collection_param(opts[:'transaction_uui_ds'], :multi) if !opts[:'transaction_uui_ds'].nil?
       query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
       query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
@@ -8073,7 +8088,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20017' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8129,7 +8144,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20015' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8191,7 +8206,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyDashboardData' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8216,8 +8231,8 @@ module TalonOne
     # @option opts [String] :message_id Filter results by message ID.
     # @option opts [String] :change_type Filter results by change type.
     # @option opts [String] :notification_i_ds Filter results by notification ID (include up to 30 values, separated by a comma).
-    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
+    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
     # @option opts [String] :cursor A specific unique value in the database. If this value is not given, the server fetches results starting with the first record. 
     # @option opts [String] :period Filter results by time period. Choose between the available relative time frames. 
     # @option opts [Boolean] :is_successful Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to&#x60;true&#x60;, only log entries with &#x60;2xx&#x60; response codes are returned. When set to &#x60;false&#x60;, only log entries with &#x60;4xx&#x60; and &#x60;5xx&#x60; response codes are returned. 
@@ -8239,8 +8254,8 @@ module TalonOne
     # @option opts [String] :message_id Filter results by message ID.
     # @option opts [String] :change_type Filter results by change type.
     # @option opts [String] :notification_i_ds Filter results by notification ID (include up to 30 values, separated by a comma).
-    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
+    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
+    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. Use UTC time.
     # @option opts [String] :cursor A specific unique value in the database. If this value is not given, the server fetches results starting with the first record. 
     # @option opts [String] :period Filter results by time period. Choose between the available relative time frames. 
     # @option opts [Boolean] :is_successful Indicates whether to return log entries with either successful or unsuccessful HTTP response codes. When set to&#x60;true&#x60;, only log entries with &#x60;2xx&#x60; response codes are returned. When set to &#x60;false&#x60;, only log entries with &#x60;4xx&#x60; and &#x60;5xx&#x60; response codes are returned. 
@@ -8306,7 +8321,7 @@ module TalonOne
       return_type = opts[:return_type] || 'MessageLogEntries' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8417,7 +8432,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20012' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8479,7 +8494,7 @@ module TalonOne
       return_type = opts[:return_type] || 'RoleV2' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8553,7 +8568,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Ruleset' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8638,7 +8653,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse2009' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8706,7 +8721,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Store' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8768,7 +8783,7 @@ module TalonOne
       return_type = opts[:return_type] || 'User' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8792,7 +8807,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @return [InlineResponse20043]
+    # @return [InlineResponse20041]
     def get_users(opts = {})
       data, _status_code, _headers = get_users_with_http_info(opts)
       data
@@ -8804,7 +8819,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @return [Array<(InlineResponse20043, Integer, Hash)>] InlineResponse20043 data, response status code and response headers
+    # @return [Array<(InlineResponse20041, Integer, Hash)>] InlineResponse20041 data, response status code and response headers
     def get_users_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_users ...'
@@ -8838,10 +8853,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20043' 
+      return_type = opts[:return_type] || 'InlineResponse20041' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8903,7 +8918,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Webhook' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -8917,195 +8932,6 @@ module TalonOne
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ManagementApi#get_webhook\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # List webhook activation log entries
-    # Webhook activation log entries are created as soon as an integration request triggers a webhook effect. See the [docs](https://docs.talon.one/docs/dev/getting-started/webhooks). 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
-    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
-    # @option opts [Float] :webhook_id Filter results by webhook id.
-    # @option opts [Float] :application_id Filter results by Application ID.
-    # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20040]
-    def get_webhook_activation_logs(opts = {})
-      data, _status_code, _headers = get_webhook_activation_logs_with_http_info(opts)
-      data
-    end
-
-    # List webhook activation log entries
-    # Webhook activation log entries are created as soon as an integration request triggers a webhook effect. See the [docs](https://docs.talon.one/docs/dev/getting-started/webhooks). 
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items in the response.
-    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @option opts [String] :integration_request_uuid Filter results by integration request UUID.
-    # @option opts [Float] :webhook_id Filter results by webhook id.
-    # @option opts [Float] :application_id Filter results by Application ID.
-    # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [DateTime] :created_before Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20040, Integer, Hash)>] InlineResponse20040 data, response status code and response headers
-    def get_webhook_activation_logs_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_activation_logs ...'
-      end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_activation_logs, must be smaller than or equal to 1000.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_activation_logs, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/v1/webhook_activation_logs'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'integrationRequestUuid'] = opts[:'integration_request_uuid'] if !opts[:'integration_request_uuid'].nil?
-      query_params[:'webhookId'] = opts[:'webhook_id'] if !opts[:'webhook_id'].nil?
-      query_params[:'applicationId'] = opts[:'application_id'] if !opts[:'application_id'].nil?
-      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse20040' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_webhook_activation_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # List webhook log entries
-    # Retrieve all webhook log entries.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
-    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @option opts [String] :status Filter results by HTTP status codes.
-    # @option opts [Float] :webhook_id Filter results by webhook id.
-    # @option opts [Float] :application_id Filter results by Application ID.
-    # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [String] :request_uuid Filter results by request UUID.
-    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @return [InlineResponse20041]
-    def get_webhook_logs(opts = {})
-      data, _status_code, _headers = get_webhook_logs_with_http_info(opts)
-      data
-    end
-
-    # List webhook log entries
-    # Retrieve all webhook log entries.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page_size The number of items in the response.
-    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-    # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-    # @option opts [String] :status Filter results by HTTP status codes.
-    # @option opts [Float] :webhook_id Filter results by webhook id.
-    # @option opts [Float] :application_id Filter results by Application ID.
-    # @option opts [Float] :campaign_id Filter results by campaign ID.
-    # @option opts [String] :request_uuid Filter results by request UUID.
-    # @option opts [DateTime] :created_before Filter results where request and response times to return entries before parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @option opts [DateTime] :created_after Filter results where request and response times to return entries after parameter value, expected to be an RFC3339 timestamp string. You can use any time zone setting. Talon.One will convert to UTC internally.
-    # @return [Array<(InlineResponse20041, Integer, Hash)>] InlineResponse20041 data, response status code and response headers
-    def get_webhook_logs_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ManagementApi.get_webhook_logs ...'
-      end
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_logs, must be smaller than or equal to 1000.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ManagementApi.get_webhook_logs, must be greater than or equal to 1.'
-      end
-
-      allowable_values = ["success", "error"]
-      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
-        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
-      end
-      # resource path
-      local_var_path = '/v1/webhook_logs'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
-      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
-      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
-      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
-      query_params[:'webhookId'] = opts[:'webhook_id'] if !opts[:'webhook_id'].nil?
-      query_params[:'applicationId'] = opts[:'application_id'] if !opts[:'application_id'].nil?
-      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
-      query_params[:'requestUuid'] = opts[:'request_uuid'] if !opts[:'request_uuid'].nil?
-      query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
-      query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:body] 
-
-      # return_type
-      return_type = opts[:return_type] || 'InlineResponse20041' 
-
-      # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
-
-      new_options = opts.merge(
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_webhook_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -9188,7 +9014,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20039' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9255,7 +9081,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9322,7 +9148,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9389,7 +9215,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9476,7 +9302,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9549,7 +9375,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9628,7 +9454,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9704,7 +9530,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9771,7 +9597,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9838,7 +9664,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9908,7 +9734,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -9975,7 +9801,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10048,7 +9874,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Import' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10110,7 +9936,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10189,7 +10015,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20020' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10215,7 +10041,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :title Filter by the display name for the achievement in the campaign manager.  **Note**: If no &#x60;title&#x60; is provided, all the achievements from the campaign are returned. 
-    # @return [InlineResponse20050]
+    # @return [InlineResponse20048]
     def list_achievements(application_id, campaign_id, opts = {})
       data, _status_code, _headers = list_achievements_with_http_info(application_id, campaign_id, opts)
       data
@@ -10229,7 +10055,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :title Filter by the display name for the achievement in the campaign manager.  **Note**: If no &#x60;title&#x60; is provided, all the achievements from the campaign are returned. 
-    # @return [Array<(InlineResponse20050, Integer, Hash)>] InlineResponse20050 data, response status code and response headers
+    # @return [Array<(InlineResponse20048, Integer, Hash)>] InlineResponse20048 data, response status code and response headers
     def list_achievements_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_achievements ...'
@@ -10271,10 +10097,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20050' 
+      return_type = opts[:return_type] || 'InlineResponse20048' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10295,7 +10121,7 @@ module TalonOne
     # List roles
     # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20046]
+    # @return [InlineResponse20044]
     def list_all_roles_v2(opts = {})
       data, _status_code, _headers = list_all_roles_v2_with_http_info(opts)
       data
@@ -10304,7 +10130,7 @@ module TalonOne
     # List roles
     # List all roles.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20046, Integer, Hash)>] InlineResponse20046 data, response status code and response headers
+    # @return [Array<(InlineResponse20044, Integer, Hash)>] InlineResponse20044 data, response status code and response headers
     def list_all_roles_v2_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_all_roles_v2 ...'
@@ -10327,10 +10153,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20046' 
+      return_type = opts[:return_type] || 'InlineResponse20044' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10355,7 +10181,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :action The action that this budget is limiting.
     # @option opts [String] :period The period to which the limit applies.  **Note**: For budgets with no period, set this to &#x60;overall&#x60;. 
-    # @return [InlineResponse20048]
+    # @return [InlineResponse20046]
     def list_campaign_store_budget_limits(application_id, campaign_id, opts = {})
       data, _status_code, _headers = list_campaign_store_budget_limits_with_http_info(application_id, campaign_id, opts)
       data
@@ -10368,7 +10194,7 @@ module TalonOne
     # @param [Hash] opts the optional parameters
     # @option opts [String] :action The action that this budget is limiting.
     # @option opts [String] :period The period to which the limit applies.  **Note**: For budgets with no period, set this to &#x60;overall&#x60;. 
-    # @return [Array<(InlineResponse20048, Integer, Hash)>] InlineResponse20048 data, response status code and response headers
+    # @return [Array<(InlineResponse20046, Integer, Hash)>] InlineResponse20046 data, response status code and response headers
     def list_campaign_store_budget_limits_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_campaign_store_budget_limits ...'
@@ -10409,10 +10235,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20048' 
+      return_type = opts[:return_type] || 'InlineResponse20046' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10497,7 +10323,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20037' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10588,7 +10414,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20020' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10673,7 +10499,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20020' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10703,7 +10529,7 @@ module TalonOne
     # @option opts [String] :name The name of the store.
     # @option opts [String] :integration_id The integration ID of the store.
     # @option opts [String] :query Filter results by &#x60;name&#x60; or &#x60;integrationId&#x60;.
-    # @return [InlineResponse20047]
+    # @return [InlineResponse20045]
     def list_stores(application_id, opts = {})
       data, _status_code, _headers = list_stores_with_http_info(application_id, opts)
       data
@@ -10721,7 +10547,7 @@ module TalonOne
     # @option opts [String] :name The name of the store.
     # @option opts [String] :integration_id The integration ID of the store.
     # @option opts [String] :query Filter results by &#x60;name&#x60; or &#x60;integrationId&#x60;.
-    # @return [Array<(InlineResponse20047, Integer, Hash)>] InlineResponse20047 data, response status code and response headers
+    # @return [Array<(InlineResponse20045, Integer, Hash)>] InlineResponse20045 data, response status code and response headers
     def list_stores_with_http_info(application_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.list_stores ...'
@@ -10764,10 +10590,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20047' 
+      return_type = opts[:return_type] || 'InlineResponse20045' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10821,7 +10647,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10897,7 +10723,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -10961,7 +10787,7 @@ module TalonOne
       return_type = opts[:return_type] || 'NewPassword' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11025,7 +10851,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimGroup' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11089,7 +10915,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimUser' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11149,7 +10975,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11209,7 +11035,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11271,7 +11097,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimGroup' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11327,7 +11153,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimGroupsListResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11383,7 +11209,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimResourceTypesListResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11439,7 +11265,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimSchemasListResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11495,7 +11321,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimServiceProviderConfigResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11557,7 +11383,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimUser' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11613,7 +11439,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimUsersListResponse' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11683,7 +11509,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimGroup' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11753,7 +11579,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimUser' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11823,7 +11649,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimGroup' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -11893,7 +11719,7 @@ module TalonOne
       return_type = opts[:return_type] || 'ScimUser' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12022,7 +11848,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20011' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12150,7 +11976,7 @@ module TalonOne
       return_type = opts[:return_type] || 'InlineResponse20011' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12173,7 +11999,7 @@ module TalonOne
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse20049]
+    # @return [InlineResponse20047]
     def summarize_campaign_store_budget(application_id, campaign_id, opts = {})
       data, _status_code, _headers = summarize_campaign_store_budget_with_http_info(application_id, campaign_id, opts)
       data
@@ -12184,7 +12010,7 @@ module TalonOne
     # @param application_id [Integer] The ID of the Application. It is displayed in your Talon.One deployment URL.
     # @param campaign_id [Integer] The ID of the campaign. It is displayed in your Talon.One deployment URL.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse20049, Integer, Hash)>] InlineResponse20049 data, response status code and response headers
+    # @return [Array<(InlineResponse20047, Integer, Hash)>] InlineResponse20047 data, response status code and response headers
     def summarize_campaign_store_budget_with_http_info(application_id, campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.summarize_campaign_store_budget ...'
@@ -12215,10 +12041,10 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20049' 
+      return_type = opts[:return_type] || 'InlineResponse20047' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12298,7 +12124,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12368,7 +12194,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12450,7 +12276,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Achievement' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12520,7 +12346,7 @@ module TalonOne
       return_type = opts[:return_type] || 'AccountAdditionalCost' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12590,7 +12416,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Attribute' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12666,7 +12492,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Campaign' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12748,7 +12574,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Collection' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12830,7 +12656,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Coupon' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12904,7 +12730,7 @@ module TalonOne
       return_type = opts[:return_type] 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -12984,7 +12810,7 @@ module TalonOne
       return_type = opts[:return_type] || 'LoyaltyCard' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -13066,7 +12892,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Referral' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -13136,7 +12962,7 @@ module TalonOne
       return_type = opts[:return_type] || 'RoleV2' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -13212,7 +13038,7 @@ module TalonOne
       return_type = opts[:return_type] || 'Store' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,
@@ -13282,7 +13108,7 @@ module TalonOne
       return_type = opts[:return_type] || 'User' 
 
       # auth_names
-      auth_names = opts[:auth_names] || ['management_key', 'manager_auth']
+      auth_names = opts[:auth_names] || ['api_key_v1', 'management_key', 'manager_auth']
 
       new_options = opts.merge(
         :header_params => header_params,

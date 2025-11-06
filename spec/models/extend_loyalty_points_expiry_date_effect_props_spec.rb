@@ -50,13 +50,7 @@ describe 'ExtendLoyaltyPointsExpiryDateEffectProps' do
     end
   end
 
-  describe 'test attribute "transaction_uui_ds"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "previous_expiration_date"' do
+  describe 'test attribute "affected_transactions"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

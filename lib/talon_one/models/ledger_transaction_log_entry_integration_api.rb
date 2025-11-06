@@ -13,8 +13,11 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Log entry for a given loyalty card transaction.
+  # Log entry for a given loyalty profile transaction.
   class LedgerTransactionLogEntryIntegrationAPI
+    # Unique identifier of the transaction in the UUID format.
+    attr_accessor :transaction_uuid
+
     # Date and time the loyalty transaction occurred.
     attr_accessor :created
 
@@ -78,6 +81,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'transaction_uuid' => :'transactionUUID',
         :'created' => :'created',
         :'program_id' => :'programId',
         :'customer_session_id' => :'customerSessionId',
@@ -97,6 +101,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'transaction_uuid' => :'String',
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
         :'customer_session_id' => :'String',
@@ -133,6 +138,10 @@ module TalonOne
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'transaction_uuid')
+        self.transaction_uuid = attributes[:'transaction_uuid']
+      end
 
       if attributes.key?(:'created')
         self.created = attributes[:'created']
@@ -191,6 +200,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @transaction_uuid.nil?
+        invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
+      end
+
       if @created.nil?
         invalid_properties.push('invalid value for "created", created cannot be nil.')
       end
@@ -253,6 +266,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @transaction_uuid.nil?
       return false if @created.nil?
       return false if @program_id.nil?
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
@@ -339,6 +353,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          transaction_uuid == o.transaction_uuid &&
           created == o.created &&
           program_id == o.program_id &&
           customer_session_id == o.customer_session_id &&
@@ -363,7 +378,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags].hash
+      [transaction_uuid, created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags].hash
     end
 
     # Builds the object from hash

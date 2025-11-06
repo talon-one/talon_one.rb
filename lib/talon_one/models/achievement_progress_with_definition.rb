@@ -60,6 +60,9 @@ module TalonOne
     # The achievement's end date. If defined, customers cannot participate in the achievement after this date.  **Note:** It is an RFC3339 timestamp string. 
     attr_accessor :achievement_end_date
 
+    # When `true`, customer progress can be rolled back in completed achievements.
+    attr_accessor :achievement_allow_rollback_after_completion
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -99,7 +102,8 @@ module TalonOne
         :'achievement_recurrence_policy' => :'achievementRecurrencePolicy',
         :'achievement_activation_policy' => :'achievementActivationPolicy',
         :'achievement_fixed_start_date' => :'achievementFixedStartDate',
-        :'achievement_end_date' => :'achievementEndDate'
+        :'achievement_end_date' => :'achievementEndDate',
+        :'achievement_allow_rollback_after_completion' => :'achievementAllowRollbackAfterCompletion'
       }
     end
 
@@ -120,7 +124,8 @@ module TalonOne
         :'achievement_recurrence_policy' => :'String',
         :'achievement_activation_policy' => :'String',
         :'achievement_fixed_start_date' => :'DateTime',
-        :'achievement_end_date' => :'DateTime'
+        :'achievement_end_date' => :'DateTime',
+        :'achievement_allow_rollback_after_completion' => :'Boolean'
       }
     end
 
@@ -203,6 +208,10 @@ module TalonOne
 
       if attributes.key?(:'achievement_end_date')
         self.achievement_end_date = attributes[:'achievement_end_date']
+      end
+
+      if attributes.key?(:'achievement_allow_rollback_after_completion')
+        self.achievement_allow_rollback_after_completion = attributes[:'achievement_allow_rollback_after_completion']
       end
     end
 
@@ -358,7 +367,8 @@ module TalonOne
           achievement_recurrence_policy == o.achievement_recurrence_policy &&
           achievement_activation_policy == o.achievement_activation_policy &&
           achievement_fixed_start_date == o.achievement_fixed_start_date &&
-          achievement_end_date == o.achievement_end_date
+          achievement_end_date == o.achievement_end_date &&
+          achievement_allow_rollback_after_completion == o.achievement_allow_rollback_after_completion
     end
 
     # @see the `==` method
@@ -370,7 +380,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, progress, start_date, completion_date, end_date, achievement_id, name, title, description, campaign_id, target, achievement_recurrence_policy, achievement_activation_policy, achievement_fixed_start_date, achievement_end_date].hash
+      [status, progress, start_date, completion_date, end_date, achievement_id, name, title, description, campaign_id, target, achievement_recurrence_policy, achievement_activation_policy, achievement_fixed_start_date, achievement_end_date, achievement_allow_rollback_after_completion].hash
     end
 
     # Builds the object from hash

@@ -14,17 +14,11 @@ require 'date'
 
 module TalonOne
   class InlineResponse20047
-    attr_accessor :has_more
-
-    attr_accessor :total_result_size
-
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'has_more' => :'hasMore',
-        :'total_result_size' => :'totalResultSize',
         :'data' => :'data'
       }
     end
@@ -32,9 +26,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'has_more' => :'Boolean',
-        :'total_result_size' => :'Integer',
-        :'data' => :'Array<Store>'
+        :'data' => :'Array<SummaryCampaignStoreBudget>'
       }
     end
 
@@ -59,14 +51,6 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'has_more')
-        self.has_more = attributes[:'has_more']
-      end
-
-      if attributes.key?(:'total_result_size')
-        self.total_result_size = attributes[:'total_result_size']
-      end
-
       if attributes.key?(:'data')
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
@@ -78,17 +62,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @data.nil?
       true
     end
 
@@ -97,8 +76,6 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          has_more == o.has_more &&
-          total_result_size == o.total_result_size &&
           data == o.data
     end
 
@@ -111,7 +88,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [has_more, total_result_size, data].hash
+      [data].hash
     end
 
     # Builds the object from hash

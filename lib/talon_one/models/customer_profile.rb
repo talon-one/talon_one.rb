@@ -35,7 +35,7 @@ module TalonOne
     # The total amount of money spent by the customer **before** discounts are applied.  The total sales amount excludes the following: - Cancelled or reopened sessions. - Returned items. 
     attr_accessor :total_sales
 
-    # **DEPRECATED** A list of loyalty programs joined by the customer. 
+    # **DEPRECATED. Always returns `null`.** A list of loyalty programs joined by the customer. 
     attr_accessor :loyalty_memberships
 
     # The audiences the customer belongs to.

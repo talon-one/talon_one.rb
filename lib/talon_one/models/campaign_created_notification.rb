@@ -13,29 +13,31 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # A notification regarding a campaign that was created.
   class CampaignCreatedNotification
-    attr_accessor :campaign
+    # The type of the notification
+    attr_accessor :notification_type
 
-    attr_accessor :ruleset
+    # The total size of the result set.
+    attr_accessor :total_result_size
 
-    attr_accessor :evaluation_position
+    # A list of campaign notification data.
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'campaign' => :'campaign',
-        :'ruleset' => :'ruleset',
-        :'evaluation_position' => :'evaluationPosition'
+        :'notification_type' => :'NotificationType',
+        :'total_result_size' => :'TotalResultSize',
+        :'data' => :'Data'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'campaign' => :'Campaign',
-        :'ruleset' => :'Ruleset',
-        :'evaluation_position' => :'CampaignEvaluationPosition'
+        :'notification_type' => :'String',
+        :'total_result_size' => :'Integer',
+        :'data' => :'Array<CampaignCreatedNotificationItem>'
       }
     end
 
@@ -60,16 +62,18 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'campaign')
-        self.campaign = attributes[:'campaign']
+      if attributes.key?(:'notification_type')
+        self.notification_type = attributes[:'notification_type']
       end
 
-      if attributes.key?(:'ruleset')
-        self.ruleset = attributes[:'ruleset']
+      if attributes.key?(:'total_result_size')
+        self.total_result_size = attributes[:'total_result_size']
       end
 
-      if attributes.key?(:'evaluation_position')
-        self.evaluation_position = attributes[:'evaluation_position']
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
+        end
       end
     end
 
@@ -77,12 +81,12 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @campaign.nil?
-        invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
+      if @notification_type.nil?
+        invalid_properties.push('invalid value for "notification_type", notification_type cannot be nil.')
       end
 
-      if @evaluation_position.nil?
-        invalid_properties.push('invalid value for "evaluation_position", evaluation_position cannot be nil.')
+      if @total_result_size.nil?
+        invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
       end
 
       invalid_properties
@@ -91,8 +95,8 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @campaign.nil?
-      return false if @evaluation_position.nil?
+      return false if @notification_type.nil?
+      return false if @total_result_size.nil?
       true
     end
 
@@ -101,9 +105,9 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          campaign == o.campaign &&
-          ruleset == o.ruleset &&
-          evaluation_position == o.evaluation_position
+          notification_type == o.notification_type &&
+          total_result_size == o.total_result_size &&
+          data == o.data
     end
 
     # @see the `==` method
@@ -115,7 +119,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign, ruleset, evaluation_position].hash
+      [notification_type, total_result_size, data].hash
     end
 
     # Builds the object from hash

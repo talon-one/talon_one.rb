@@ -4,20 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**campaign** | [**Campaign**](Campaign.md) |  | 
-**old_state** | **String** | The campaign&#39;s old state. Can be one of the following: [&#39;running&#39;, &#39;disabled&#39;, &#39;scheduled&#39;, &#39;expired&#39;, &#39;archived&#39;]  | 
-**new_state** | **String** | The campaign&#39;s new state. Can be one of the following: [&#39;running&#39;, &#39;disabled&#39;, &#39;scheduled&#39;, &#39;expired&#39;, &#39;archived&#39;]  | 
-**ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
+**notification_type** | **String** | The type of the notification | 
+**total_result_size** | **Integer** | The total size of the result set. | 
+**data** | [**Array&lt;CampaignStateChangedNotificationItem&gt;**](CampaignStateChangedNotificationItem.md) | A list of campaign notification data. | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignStateChangedNotification.new(campaign: null,
-                                 old_state: disabled,
-                                 new_state: running,
-                                 ruleset: null)
+instance = TalonOne::CampaignStateChangedNotification.new(notification_type: CampaignNotification,
+                                 total_result_size: null,
+                                 data: null)
 ```
 
 

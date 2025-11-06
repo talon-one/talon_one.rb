@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**campaign** | [**Campaign**](Campaign.md) |  | 
-**old_ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
-**ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
+**notification_type** | **String** | The type of the notification | 
+**total_result_size** | **Integer** | The total size of the result set. | 
+**data** | [**Array&lt;CampaignRulesetChangedNotificationItem&gt;**](CampaignRulesetChangedNotificationItem.md) | A list of campaign notification data. | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignRulesetChangedNotification.new(campaign: null,
-                                 old_ruleset: null,
-                                 ruleset: null)
+instance = TalonOne::CampaignRulesetChangedNotification.new(notification_type: CampaignNotification,
+                                 total_result_size: null,
+                                 data: null)
 ```
 
 

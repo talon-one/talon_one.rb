@@ -53,6 +53,9 @@ module TalonOne
     # Enables or disables webhook from showing in the Rule Builder.
     attr_accessor :enabled
 
+    # The ID of the credential that this webhook is using.
+    attr_accessor :authentication_id
+
     # Identifier of the outgoing integration template.
     attr_accessor :outgoing_integration_template_id
 
@@ -100,6 +103,7 @@ module TalonOne
         :'payload' => :'payload',
         :'params' => :'params',
         :'enabled' => :'enabled',
+        :'authentication_id' => :'authenticationId',
         :'outgoing_integration_template_id' => :'outgoingIntegrationTemplateId',
         :'outgoing_integration_type_id' => :'outgoingIntegrationTypeId',
         :'outgoing_integration_type_name' => :'outgoingIntegrationTypeName'
@@ -122,6 +126,7 @@ module TalonOne
         :'payload' => :'String',
         :'params' => :'Array<TemplateArgDef>',
         :'enabled' => :'Boolean',
+        :'authentication_id' => :'Integer',
         :'outgoing_integration_template_id' => :'Integer',
         :'outgoing_integration_type_id' => :'Integer',
         :'outgoing_integration_type_name' => :'String'
@@ -205,6 +210,10 @@ module TalonOne
 
       if attributes.key?(:'enabled')
         self.enabled = attributes[:'enabled']
+      end
+
+      if attributes.key?(:'authentication_id')
+        self.authentication_id = attributes[:'authentication_id']
       end
 
       if attributes.key?(:'outgoing_integration_template_id')
@@ -339,6 +348,7 @@ module TalonOne
           payload == o.payload &&
           params == o.params &&
           enabled == o.enabled &&
+          authentication_id == o.authentication_id &&
           outgoing_integration_template_id == o.outgoing_integration_template_id &&
           outgoing_integration_type_id == o.outgoing_integration_type_id &&
           outgoing_integration_type_name == o.outgoing_integration_type_name
@@ -353,7 +363,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, application_ids, title, description, draft, verb, url, headers, payload, params, enabled, outgoing_integration_template_id, outgoing_integration_type_id, outgoing_integration_type_name].hash
+      [id, created, modified, application_ids, title, description, draft, verb, url, headers, payload, params, enabled, authentication_id, outgoing_integration_template_id, outgoing_integration_type_id, outgoing_integration_type_name].hash
     end
 
     # Builds the object from hash

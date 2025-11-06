@@ -32,22 +32,6 @@ describe 'NewMessageTest' do
       expect(@instance).to be_instance_of(TalonOne::NewMessageTest)
     end
   end
-  describe 'test attribute "type"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["campaign", "loyalty_added_deducted_points", "card_added_deducted_points", "loyalty_added_deducted_points_balances", "loyalty_card_added_deducted_points_balances", "coupon", "expiring_coupons", "expiring_points", "pending_to_active_points", "strikethrough_pricing", "tier_downgrade", "tier_upgrade", "tier_will_downgrade", "card_expiring_points", "rule_engine_webhook"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.type = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "_query_params"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "headers"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -71,6 +55,18 @@ describe 'NewMessageTest' do
   end
 
   describe 'test attribute "payload"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "params"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "application_ids"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

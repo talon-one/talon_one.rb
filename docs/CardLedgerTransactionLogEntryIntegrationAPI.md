@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**transaction_uuid** | **String** | Unique identifier of the transaction in the UUID format. | 
 **created** | **DateTime** | Date and time the loyalty card transaction occurred. | 
 **program_id** | **Integer** | ID of the loyalty program. | 
 **card_identifier** | **String** | The alphanumeric identifier of the loyalty card.  | 
@@ -23,7 +24,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CardLedgerTransactionLogEntryIntegrationAPI.new(created: null,
+instance = TalonOne::CardLedgerTransactionLogEntryIntegrationAPI.new(transaction_uuid: ce59f12a-f53b-4014-a745-636d93f2bd3f,
+                                 created: null,
                                  program_id: 324,
                                  card_identifier: summer-loyalty-card-0543,
                                  customer_session_id: 05c2da0d-48fa-4aa1-b629-898f58f1584d,
