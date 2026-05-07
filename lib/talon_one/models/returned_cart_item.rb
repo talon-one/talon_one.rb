@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -20,11 +20,15 @@ module TalonOne
     # Number of cart items to return. 
     attr_accessor :quantity
 
+    # The SKU of the cart item in the provided customer session's `cartItems` property.
+    attr_accessor :sku
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'position' => :'position',
-        :'quantity' => :'quantity'
+        :'quantity' => :'quantity',
+        :'sku' => :'sku'
       }
     end
 
@@ -32,7 +36,8 @@ module TalonOne
     def self.openapi_types
       {
         :'position' => :'Integer',
-        :'quantity' => :'Integer'
+        :'quantity' => :'Integer',
+        :'sku' => :'String'
       }
     end
 
@@ -64,14 +69,18 @@ module TalonOne
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
       end
+
+      if attributes.key?(:'sku')
+        self.sku = attributes[:'sku']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @position.nil?
-        invalid_properties.push('invalid value for "position", position cannot be nil.')
+      if !@sku.nil? && @sku.to_s.length < 1
+        invalid_properties.push('invalid value for "sku", the character length must be great than or equal to 1.')
       end
 
       invalid_properties
@@ -80,8 +89,18 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @position.nil?
+      return false if !@sku.nil? && @sku.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sku Value to be assigned
+    def sku=(sku)
+      if !sku.nil? && sku.to_s.length < 1
+        fail ArgumentError, 'invalid value for "sku", the character length must be great than or equal to 1.'
+      end
+
+      @sku = sku
     end
 
     # Checks equality by comparing each attribute.
@@ -90,7 +109,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           position == o.position &&
-          quantity == o.quantity
+          quantity == o.quantity &&
+          sku == o.sku
     end
 
     # @see the `==` method
@@ -102,7 +122,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [position, quantity].hash
+      [position, quantity, sku].hash
     end
 
     # Builds the object from hash

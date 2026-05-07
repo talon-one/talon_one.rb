@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -44,6 +44,9 @@ module TalonOne
     # Points required to move up a tier.
     attr_accessor :points_to_next_tier
 
+    # The name of the next higher tier level in the loyalty program.  **Note**: - Returns `null` if the customer has reached the highest available tier. - Returns the lowest level tier name if the customer is not currently assigned to any tier. 
+    attr_accessor :next_tier_name
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -56,7 +59,8 @@ module TalonOne
         :'tentative_pending_balance' => :'tentativePendingBalance',
         :'tentative_negative_balance' => :'tentativeNegativeBalance',
         :'current_tier' => :'currentTier',
-        :'points_to_next_tier' => :'pointsToNextTier'
+        :'points_to_next_tier' => :'pointsToNextTier',
+        :'next_tier_name' => :'nextTierName'
       }
     end
 
@@ -72,7 +76,8 @@ module TalonOne
         :'tentative_pending_balance' => :'Float',
         :'tentative_negative_balance' => :'Float',
         :'current_tier' => :'Tier',
-        :'points_to_next_tier' => :'Float'
+        :'points_to_next_tier' => :'Float',
+        :'next_tier_name' => :'String'
       }
     end
 
@@ -136,6 +141,10 @@ module TalonOne
       if attributes.key?(:'points_to_next_tier')
         self.points_to_next_tier = attributes[:'points_to_next_tier']
       end
+
+      if attributes.key?(:'next_tier_name')
+        self.next_tier_name = attributes[:'next_tier_name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -190,7 +199,8 @@ module TalonOne
           tentative_pending_balance == o.tentative_pending_balance &&
           tentative_negative_balance == o.tentative_negative_balance &&
           current_tier == o.current_tier &&
-          points_to_next_tier == o.points_to_next_tier
+          points_to_next_tier == o.points_to_next_tier &&
+          next_tier_name == o.next_tier_name
     end
 
     # @see the `==` method
@@ -202,7 +212,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [current_balance, pending_balance, negative_balance, expired_balance, spent_balance, tentative_current_balance, tentative_pending_balance, tentative_negative_balance, current_tier, points_to_next_tier].hash
+      [current_balance, pending_balance, negative_balance, expired_balance, spent_balance, tentative_current_balance, tentative_pending_balance, tentative_negative_balance, current_tier, points_to_next_tier, next_tier_name].hash
     end
 
     # Builds the object from hash

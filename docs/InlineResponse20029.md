@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;ApplicationSession&gt;**](ApplicationSession.md) |  | 
+**has_more** | **Boolean** |  | 
+**data** | [**Array&lt;CustomerProfile&gt;**](CustomerProfile.md) |  | 
 
 ## Code Sample
 

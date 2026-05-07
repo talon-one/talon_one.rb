@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **number_of_coupons** | **Integer** | The number of new coupon codes to generate for the campaign. | 
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with coupons. | 
+**is_reservation_mandatory** | **Boolean** | An indication of whether the code can be redeemed only if it has been reserved first. | [optional] [default to false]
 **batch_id** | **String** | The batch ID coupons created by this job will bear. | 
 **status** | **String** | The current status of this request. Possible values: - &#x60;pending verification&#x60; - &#x60;pending&#x60; - &#x60;completed&#x60; - &#x60;failed&#x60; - &#x60;coupon pattern full&#x60;  | 
 **created_amount** | **Integer** | The number of coupon codes that were already created for this request. | 
@@ -45,6 +46,7 @@ instance = TalonOne::CouponCreationJob.new(id: 6,
                                  number_of_coupons: 200000,
                                  coupon_settings: null,
                                  attributes: null,
+                                 is_reservation_mandatory: false,
                                  batch_id: tqyrgahe,
                                  status: pending,
                                  created_amount: 1000000,

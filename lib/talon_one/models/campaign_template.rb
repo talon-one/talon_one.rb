@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -50,6 +50,9 @@ module TalonOne
     # A list of tags for the campaign template.
     attr_accessor :tags
 
+    # Indicates whether campaigns created from this template should be reevaluated when a customer returns an item.
+    attr_accessor :reevaluate_on_return
+
     # A list of features for the campaign template.
     attr_accessor :features
 
@@ -76,6 +79,9 @@ module TalonOne
 
     # The campaign type. Possible type values:   - `cartItem`: Type of campaign that can apply effects only to cart items.   - `advanced`: Type of campaign that can apply effects to customer sessions and cart items. 
     attr_accessor :campaign_type
+
+    # The number of Campaigns created from this template.
+    attr_accessor :campaigns_count
 
     # Timestamp of the most recent update to the campaign template or any of its elements.
     attr_accessor :updated
@@ -126,6 +132,7 @@ module TalonOne
         :'state' => :'state',
         :'active_ruleset_id' => :'activeRulesetId',
         :'tags' => :'tags',
+        :'reevaluate_on_return' => :'reevaluateOnReturn',
         :'features' => :'features',
         :'coupon_settings' => :'couponSettings',
         :'coupon_reservation_settings' => :'couponReservationSettings',
@@ -136,6 +143,7 @@ module TalonOne
         :'campaign_collections' => :'campaignCollections',
         :'default_campaign_group_id' => :'defaultCampaignGroupId',
         :'campaign_type' => :'campaignType',
+        :'campaigns_count' => :'campaignsCount',
         :'updated' => :'updated',
         :'updated_by' => :'updatedBy',
         :'valid_application_ids' => :'validApplicationIds',
@@ -158,6 +166,7 @@ module TalonOne
         :'state' => :'String',
         :'active_ruleset_id' => :'Integer',
         :'tags' => :'Array<String>',
+        :'reevaluate_on_return' => :'Boolean',
         :'features' => :'Array<String>',
         :'coupon_settings' => :'CodeGeneratorSettings',
         :'coupon_reservation_settings' => :'CampaignTemplateCouponReservationSettings',
@@ -168,6 +177,7 @@ module TalonOne
         :'campaign_collections' => :'Array<CampaignTemplateCollection>',
         :'default_campaign_group_id' => :'Integer',
         :'campaign_type' => :'String',
+        :'campaigns_count' => :'Integer',
         :'updated' => :'DateTime',
         :'updated_by' => :'String',
         :'valid_application_ids' => :'Array<Integer>',
@@ -246,6 +256,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'reevaluate_on_return')
+        self.reevaluate_on_return = attributes[:'reevaluate_on_return']
+      end
+
       if attributes.key?(:'features')
         if (value = attributes[:'features']).is_a?(Array)
           self.features = value
@@ -296,6 +310,10 @@ module TalonOne
         self.campaign_type = attributes[:'campaign_type']
       else
         self.campaign_type = 'advanced'
+      end
+
+      if attributes.key?(:'campaigns_count')
+        self.campaigns_count = attributes[:'campaigns_count']
       end
 
       if attributes.key?(:'updated')
@@ -359,6 +377,10 @@ module TalonOne
         invalid_properties.push('invalid value for "state", state cannot be nil.')
       end
 
+      if @reevaluate_on_return.nil?
+        invalid_properties.push('invalid value for "reevaluate_on_return", reevaluate_on_return cannot be nil.')
+      end
+
       if @applications_ids.nil?
         invalid_properties.push('invalid value for "applications_ids", applications_ids cannot be nil.')
       end
@@ -388,6 +410,7 @@ module TalonOne
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["draft", "enabled", "disabled"])
       return false unless state_validator.valid?(@state)
+      return false if @reevaluate_on_return.nil?
       return false if @applications_ids.nil?
       return false if @campaign_type.nil?
       campaign_type_validator = EnumAttributeValidator.new('String', ["cartItem", "advanced"])
@@ -447,6 +470,7 @@ module TalonOne
           state == o.state &&
           active_ruleset_id == o.active_ruleset_id &&
           tags == o.tags &&
+          reevaluate_on_return == o.reevaluate_on_return &&
           features == o.features &&
           coupon_settings == o.coupon_settings &&
           coupon_reservation_settings == o.coupon_reservation_settings &&
@@ -457,6 +481,7 @@ module TalonOne
           campaign_collections == o.campaign_collections &&
           default_campaign_group_id == o.default_campaign_group_id &&
           campaign_type == o.campaign_type &&
+          campaigns_count == o.campaigns_count &&
           updated == o.updated &&
           updated_by == o.updated_by &&
           valid_application_ids == o.valid_application_ids &&
@@ -472,7 +497,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, features, coupon_settings, coupon_reservation_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, campaign_type, updated, updated_by, valid_application_ids, is_user_favorite].hash
+      [id, created, account_id, user_id, name, description, instructions, campaign_attributes, coupon_attributes, state, active_ruleset_id, tags, reevaluate_on_return, features, coupon_settings, coupon_reservation_settings, referral_settings, limits, template_params, applications_ids, campaign_collections, default_campaign_group_id, campaign_type, campaigns_count, updated, updated_by, valid_application_ids, is_user_favorite].hash
     end
 
     # Builds the object from hash

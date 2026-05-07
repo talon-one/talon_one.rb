@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **state** | **String** | Only campaign templates in &#39;available&#39; state may be used to create campaigns. | 
 **active_ruleset_id** | **Integer** | The ID of the ruleset this campaign template will use. | [optional] 
 **tags** | **Array&lt;String&gt;** | A list of tags for the campaign template. | [optional] 
+**reevaluate_on_return** | **Boolean** | Indicates whether campaigns created from this template should be reevaluated when a customer returns an item. | [optional] 
 **features** | **Array&lt;String&gt;** | A list of features for the campaign template. | [optional] 
 **coupon_settings** | [**CodeGeneratorSettings**](CodeGeneratorSettings.md) |  | [optional] 
 **coupon_reservation_settings** | [**CampaignTemplateCouponReservationSettings**](CampaignTemplateCouponReservationSettings.md) |  | [optional] 
@@ -36,6 +37,7 @@ instance = TalonOne::UpdateCampaignTemplate.new(name: Discount campaign,
                                  state: null,
                                  active_ruleset_id: 5,
                                  tags: [discount],
+                                 reevaluate_on_return: true,
                                  features: null,
                                  coupon_settings: null,
                                  coupon_reservation_settings: null,

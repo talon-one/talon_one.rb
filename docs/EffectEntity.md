@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**experiment_id** | **Integer** | The ID of the experiment that campaign belongs to. | [optional] 
 **campaign_id** | **Integer** | The ID of the campaign that triggered this effect. | 
 **ruleset_id** | **Integer** | The ID of the ruleset that was active in the campaign when this effect was triggered. | 
 **rule_index** | **Integer** | The position of the rule that triggered this effect within the ruleset. | 
@@ -25,7 +26,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::EffectEntity.new(campaign_id: 244,
+instance = TalonOne::EffectEntity.new(experiment_id: 12,
+                                 campaign_id: 244,
                                  ruleset_id: 73,
                                  rule_index: 2,
                                  rule_name: Give 20% discount,

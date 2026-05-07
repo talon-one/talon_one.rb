@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -22,7 +22,13 @@ module TalonOne
 
     attr_accessor :old_ruleset
 
+    # The previous details of the placeholders before the ruleset was changed.
+    attr_accessor :old_placeholders
+
     attr_accessor :ruleset
+
+    # The current details of the [placeholders](https://docs.talon.one/docs/product/campaigns/templates/create-templates#use-placeholders) in the campaign.
+    attr_accessor :placeholders
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -30,7 +36,9 @@ module TalonOne
         :'event' => :'Event',
         :'campaign' => :'campaign',
         :'old_ruleset' => :'oldRuleset',
-        :'ruleset' => :'ruleset'
+        :'old_placeholders' => :'oldPlaceholders',
+        :'ruleset' => :'ruleset',
+        :'placeholders' => :'placeholders'
       }
     end
 
@@ -40,7 +48,9 @@ module TalonOne
         :'event' => :'String',
         :'campaign' => :'Campaign',
         :'old_ruleset' => :'Ruleset',
-        :'ruleset' => :'Ruleset'
+        :'old_placeholders' => :'Array<PlaceholderDetails>',
+        :'ruleset' => :'Ruleset',
+        :'placeholders' => :'Array<PlaceholderDetails>'
       }
     end
 
@@ -77,8 +87,20 @@ module TalonOne
         self.old_ruleset = attributes[:'old_ruleset']
       end
 
+      if attributes.key?(:'old_placeholders')
+        if (value = attributes[:'old_placeholders']).is_a?(Array)
+          self.old_placeholders = value
+        end
+      end
+
       if attributes.key?(:'ruleset')
         self.ruleset = attributes[:'ruleset']
+      end
+
+      if attributes.key?(:'placeholders')
+        if (value = attributes[:'placeholders']).is_a?(Array)
+          self.placeholders = value
+        end
       end
     end
 
@@ -113,7 +135,9 @@ module TalonOne
           event == o.event &&
           campaign == o.campaign &&
           old_ruleset == o.old_ruleset &&
-          ruleset == o.ruleset
+          old_placeholders == o.old_placeholders &&
+          ruleset == o.ruleset &&
+          placeholders == o.placeholders
     end
 
     # @see the `==` method
@@ -125,7 +149,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [event, campaign, old_ruleset, ruleset].hash
+      [event, campaign, old_ruleset, old_placeholders, ruleset, placeholders].hash
     end
 
     # Builds the object from hash

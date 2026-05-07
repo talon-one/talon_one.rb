@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -34,8 +34,11 @@ module TalonOne
 
     attr_accessor :changed_items
 
-    # The type of the notification
+    # The type of notification.
     attr_accessor :notification_type
+
+    # Timestamp at which the notification was sent.
+    attr_accessor :sent_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -69,7 +72,8 @@ module TalonOne
         :'total_batches' => :'totalBatches',
         :'trigger' => :'trigger',
         :'changed_items' => :'changedItems',
-        :'notification_type' => :'NotificationType'
+        :'notification_type' => :'NotificationType',
+        :'sent_at' => :'sentAt'
       }
     end
 
@@ -83,7 +87,8 @@ module TalonOne
         :'total_batches' => :'Integer',
         :'trigger' => :'StrikethroughTrigger',
         :'changed_items' => :'Array<StrikethroughChangedItem>',
-        :'notification_type' => :'String'
+        :'notification_type' => :'String',
+        :'sent_at' => :'DateTime'
       }
     end
 
@@ -141,6 +146,10 @@ module TalonOne
       if attributes.key?(:'notification_type')
         self.notification_type = attributes[:'notification_type']
       end
+
+      if attributes.key?(:'sent_at')
+        self.sent_at = attributes[:'sent_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -171,6 +180,10 @@ module TalonOne
         invalid_properties.push('invalid value for "notification_type", notification_type cannot be nil.')
       end
 
+      if @sent_at.nil?
+        invalid_properties.push('invalid value for "sent_at", sent_at cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -185,6 +198,9 @@ module TalonOne
       return false if @trigger.nil?
       return false if @changed_items.nil?
       return false if @notification_type.nil?
+      notification_type_validator = EnumAttributeValidator.new('String', ["StrikethroughPrice"])
+      return false unless notification_type_validator.valid?(@notification_type)
+      return false if @sent_at.nil?
       true
     end
 
@@ -196,6 +212,16 @@ module TalonOne
         fail ArgumentError, "invalid value for \"version\", must be one of #{validator.allowable_values}."
       end
       @version = version
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] notification_type Object to be assigned
+    def notification_type=(notification_type)
+      validator = EnumAttributeValidator.new('String', ["StrikethroughPrice"])
+      unless validator.valid?(notification_type)
+        fail ArgumentError, "invalid value for \"notification_type\", must be one of #{validator.allowable_values}."
+      end
+      @notification_type = notification_type
     end
 
     # Checks equality by comparing each attribute.
@@ -210,7 +236,8 @@ module TalonOne
           total_batches == o.total_batches &&
           trigger == o.trigger &&
           changed_items == o.changed_items &&
-          notification_type == o.notification_type
+          notification_type == o.notification_type &&
+          sent_at == o.sent_at
     end
 
     # @see the `==` method
@@ -222,7 +249,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [version, valid_from, application_id, current_batch, total_batches, trigger, changed_items, notification_type].hash
+      [version, valid_from, application_id, current_batch, total_batches, trigger, changed_items, notification_type, sent_at].hash
     end
 
     # Builds the object from hash

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **bundle_name** | **String** | The name of the bundle definition. | [optional] 
 **targeted_item_position** | **Float** | The index of the targeted bundle item on which the applied discount is based. | [optional] 
 **targeted_item_sub_position** | **Float** | The sub-position of the targeted bundle item on which the applied discount is based.  | [optional] 
+**excluded_from_price_history** | **Boolean** | When set to &#x60;true&#x60;, the applied discount is excluded from the item&#39;s price history. | [optional] 
 
 ## Code Sample
 
@@ -33,7 +34,8 @@ instance = TalonOne::SetDiscountPerItemEffectProps.new(name: null,
                                  bundle_index: null,
                                  bundle_name: null,
                                  targeted_item_position: null,
-                                 targeted_item_sub_position: null)
+                                 targeted_item_sub_position: null,
+                                 excluded_from_price_history: null)
 ```
 
 

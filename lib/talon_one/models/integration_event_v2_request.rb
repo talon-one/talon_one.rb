@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -29,11 +29,11 @@ module TalonOne
     # Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-a-custom-attribute).
     attr_accessor :attributes
 
-    # Identifier of the loyalty card used during this event.
-    attr_accessor :loyalty_cards
-
-    # Optional list of requested information to be present on the response related to the tracking custom event. 
+    # Extends the response with the chosen data entities. Use this property to get as much data back as needed from one request instead of sending extra requests to other endpoints. 
     attr_accessor :response_content
+
+    # Identifiers of the loyalty cards used during this event.
+    attr_accessor :loyalty_cards
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -65,8 +65,8 @@ module TalonOne
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
         :'type' => :'type',
         :'attributes' => :'attributes',
-        :'loyalty_cards' => :'loyaltyCards',
-        :'response_content' => :'responseContent'
+        :'response_content' => :'responseContent',
+        :'loyalty_cards' => :'loyaltyCards'
       }
     end
 
@@ -78,8 +78,8 @@ module TalonOne
         :'evaluable_campaign_ids' => :'Array<Integer>',
         :'type' => :'String',
         :'attributes' => :'Object',
-        :'loyalty_cards' => :'Array<String>',
-        :'response_content' => :'Array<String>'
+        :'response_content' => :'Array<String>',
+        :'loyalty_cards' => :'Array<String>'
       }
     end
 
@@ -126,15 +126,15 @@ module TalonOne
         self.attributes = attributes[:'attributes']
       end
 
-      if attributes.key?(:'loyalty_cards')
-        if (value = attributes[:'loyalty_cards']).is_a?(Array)
-          self.loyalty_cards = value
-        end
-      end
-
       if attributes.key?(:'response_content')
         if (value = attributes[:'response_content']).is_a?(Array)
           self.response_content = value
+        end
+      end
+
+      if attributes.key?(:'loyalty_cards')
+        if (value = attributes[:'loyalty_cards']).is_a?(Array)
+          self.loyalty_cards = value
         end
       end
     end
@@ -210,8 +210,8 @@ module TalonOne
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
           type == o.type &&
           attributes == o.attributes &&
-          loyalty_cards == o.loyalty_cards &&
-          response_content == o.response_content
+          response_content == o.response_content &&
+          loyalty_cards == o.loyalty_cards
     end
 
     # @see the `==` method
@@ -223,7 +223,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, loyalty_cards, response_content].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, response_content, loyalty_cards].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -44,11 +44,14 @@ module TalonOne
     # A disabled or archived campaign is not evaluated for rules or coupons. 
     attr_accessor :state
 
-    # [ID of Ruleset](https://docs.talon.one/management-api#operation/getRulesets) this campaign applies on customer session evaluation. 
+    # [ID of Ruleset](https://docs.talon.one/management-api#tag/Campaigns/operation/getRulesets) this campaign applies on customer session evaluation. 
     attr_accessor :active_ruleset_id
 
     # A list of tags for the campaign.
     attr_accessor :tags
+
+    # Indicates whether this campaign should be reevaluated when a customer returns an item.
+    attr_accessor :reevaluate_on_return
 
     # The features enabled in this campaign.
     attr_accessor :features
@@ -68,6 +71,9 @@ module TalonOne
 
     # A list of store IDs that you want to link to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store. 
     attr_accessor :linked_store_ids
+
+    # Arbitrary properties associated with coupons in this campaign.
+    attr_accessor :coupon_attributes
 
     # A list of all the budgets that are defined by this campaign and their usage.  **Note:** Budgets that are not defined do not appear in this list and their usage is not counted until they are defined. 
     attr_accessor :budgets
@@ -141,6 +147,9 @@ module TalonOne
     # A list of value map IDs for the campaign.
     attr_accessor :value_maps_ids
 
+    # The ID of the Experiment this Campaign is part of.
+    attr_accessor :experiment_id
+
     # The campaign revision state displayed in the Campaign Manager.
     attr_accessor :revision_frontend_state
 
@@ -199,6 +208,7 @@ module TalonOne
         :'state' => :'state',
         :'active_ruleset_id' => :'activeRulesetId',
         :'tags' => :'tags',
+        :'reevaluate_on_return' => :'reevaluateOnReturn',
         :'features' => :'features',
         :'coupon_settings' => :'couponSettings',
         :'referral_settings' => :'referralSettings',
@@ -206,6 +216,7 @@ module TalonOne
         :'campaign_groups' => :'campaignGroups',
         :'type' => :'type',
         :'linked_store_ids' => :'linkedStoreIds',
+        :'coupon_attributes' => :'couponAttributes',
         :'budgets' => :'budgets',
         :'coupon_redemption_count' => :'couponRedemptionCount',
         :'referral_redemption_count' => :'referralRedemptionCount',
@@ -230,6 +241,7 @@ module TalonOne
         :'frontend_state' => :'frontendState',
         :'stores_imported' => :'storesImported',
         :'value_maps_ids' => :'valueMapsIds',
+        :'experiment_id' => :'experimentId',
         :'revision_frontend_state' => :'revisionFrontendState',
         :'active_revision_id' => :'activeRevisionId',
         :'active_revision_version_id' => :'activeRevisionVersionId',
@@ -255,6 +267,7 @@ module TalonOne
         :'state' => :'String',
         :'active_ruleset_id' => :'Integer',
         :'tags' => :'Array<String>',
+        :'reevaluate_on_return' => :'Boolean',
         :'features' => :'Array<String>',
         :'coupon_settings' => :'CodeGeneratorSettings',
         :'referral_settings' => :'CodeGeneratorSettings',
@@ -262,6 +275,7 @@ module TalonOne
         :'campaign_groups' => :'Array<Integer>',
         :'type' => :'String',
         :'linked_store_ids' => :'Array<Integer>',
+        :'coupon_attributes' => :'Object',
         :'budgets' => :'Array<CampaignBudget>',
         :'coupon_redemption_count' => :'Integer',
         :'referral_redemption_count' => :'Integer',
@@ -286,6 +300,7 @@ module TalonOne
         :'frontend_state' => :'String',
         :'stores_imported' => :'Boolean',
         :'value_maps_ids' => :'Array<Integer>',
+        :'experiment_id' => :'Integer',
         :'revision_frontend_state' => :'String',
         :'active_revision_id' => :'Integer',
         :'active_revision_version_id' => :'Integer',
@@ -369,6 +384,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'reevaluate_on_return')
+        self.reevaluate_on_return = attributes[:'reevaluate_on_return']
+      end
+
       if attributes.key?(:'features')
         if (value = attributes[:'features']).is_a?(Array)
           self.features = value
@@ -405,6 +424,10 @@ module TalonOne
         if (value = attributes[:'linked_store_ids']).is_a?(Array)
           self.linked_store_ids = value
         end
+      end
+
+      if attributes.key?(:'coupon_attributes')
+        self.coupon_attributes = attributes[:'coupon_attributes']
       end
 
       if attributes.key?(:'budgets')
@@ -507,6 +530,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'experiment_id')
+        self.experiment_id = attributes[:'experiment_id']
+      end
+
       if attributes.key?(:'revision_frontend_state')
         self.revision_frontend_state = attributes[:'revision_frontend_state']
       end
@@ -578,6 +605,10 @@ module TalonOne
         invalid_properties.push('invalid value for "tags", tags cannot be nil.')
       end
 
+      if @reevaluate_on_return.nil?
+        invalid_properties.push('invalid value for "reevaluate_on_return", reevaluate_on_return cannot be nil.')
+      end
+
       if @features.nil?
         invalid_properties.push('invalid value for "features", features cannot be nil.')
       end
@@ -615,6 +646,7 @@ module TalonOne
       state_validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
       return false unless state_validator.valid?(@state)
       return false if @tags.nil?
+      return false if @reevaluate_on_return.nil?
       return false if @features.nil?
       return false if @limits.nil?
       return false if @type.nil?
@@ -700,6 +732,7 @@ module TalonOne
           state == o.state &&
           active_ruleset_id == o.active_ruleset_id &&
           tags == o.tags &&
+          reevaluate_on_return == o.reevaluate_on_return &&
           features == o.features &&
           coupon_settings == o.coupon_settings &&
           referral_settings == o.referral_settings &&
@@ -707,6 +740,7 @@ module TalonOne
           campaign_groups == o.campaign_groups &&
           type == o.type &&
           linked_store_ids == o.linked_store_ids &&
+          coupon_attributes == o.coupon_attributes &&
           budgets == o.budgets &&
           coupon_redemption_count == o.coupon_redemption_count &&
           referral_redemption_count == o.referral_redemption_count &&
@@ -731,6 +765,7 @@ module TalonOne
           frontend_state == o.frontend_state &&
           stores_imported == o.stores_imported &&
           value_maps_ids == o.value_maps_ids &&
+          experiment_id == o.experiment_id &&
           revision_frontend_state == o.revision_frontend_state &&
           active_revision_id == o.active_revision_id &&
           active_revision_version_id == o.active_revision_version_id &&
@@ -749,7 +784,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, value_maps_ids, revision_frontend_state, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
+      [id, created, application_id, user_id, name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, reevaluate_on_return, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, coupon_attributes, budgets, coupon_redemption_count, referral_redemption_count, discount_count, discount_effect_count, coupon_creation_count, custom_effect_count, referral_creation_count, add_free_item_effect_count, awarded_giveaways_count, created_loyalty_points_count, created_loyalty_points_effect_count, redeemed_loyalty_points_count, redeemed_loyalty_points_effect_count, call_api_effect_count, reservecoupon_effect_count, last_activity, updated, created_by, updated_by, template_id, frontend_state, stores_imported, value_maps_ids, experiment_id, revision_frontend_state, active_revision_id, active_revision_version_id, version, current_revision_id, current_revision_version_id, stage_revision].hash
     end
 
     # Builds the object from hash

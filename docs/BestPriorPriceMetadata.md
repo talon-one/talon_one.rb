@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**influencing_campaign_i_ds** | **Array&lt;Integer&gt;** |  | [optional] 
-**adjustment_reference_id** | **String** | Identifier related to the &#x60;referenceId&#x60; used during a &#x60;ADD_PRICE_ADJUSTMENT&#x60; action  using the [Sync cart item catalog endpoint](https://docs.talon.one/integration-api#tag/Catalogs/operation/syncCatalog). | [optional] 
+**influencing_campaign_details** | [**Array&lt;InfluencingCampaignDetails&gt;**](InfluencingCampaignDetails.md) | Details about campaigns that influenced the final price. | 
+**adjustment_details** | [**AdjustmentDetails**](AdjustmentDetails.md) |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::BestPriorPriceMetadata.new(influencing_campaign_i_ds: null,
-                                 adjustment_reference_id: null)
+instance = TalonOne::BestPriorPriceMetadata.new(influencing_campaign_details: null,
+                                 adjustment_details: null)
 ```
 
 

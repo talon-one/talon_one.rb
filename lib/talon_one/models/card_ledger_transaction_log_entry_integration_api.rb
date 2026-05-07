@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -24,7 +24,7 @@ module TalonOne
     # ID of the loyalty program.
     attr_accessor :program_id
 
-    # The alphanumeric identifier of the loyalty card. 
+    # The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. 
     attr_accessor :card_identifier
 
     # ID of the customer session where the transaction occurred.
@@ -36,7 +36,7 @@ module TalonOne
     # Name or reason of the loyalty ledger transaction.
     attr_accessor :name
 
-    # When points become active. Possible values:   - `immediate`: Points are active immediately.   - a timestamp value: Points become active at a given date and time. 
+    # When points become active. Possible values:   - `immediate`: Points are active immediately.   - `on_action`: Points become active based on the customer's action.   - a timestamp value: Points become active at a given date and time. 
     attr_accessor :start_date
 
     # Date when points expire. Possible values are:   - `unlimited`: Points have no expiration date.   - `timestamp value`: Points expire on the given date. 
@@ -56,6 +56,9 @@ module TalonOne
 
     # The name of the rule that triggered this effect.
     attr_accessor :rule_name
+
+    # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
+    attr_accessor :validity_duration
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -95,7 +98,8 @@ module TalonOne
         :'amount' => :'amount',
         :'id' => :'id',
         :'ruleset_id' => :'rulesetId',
-        :'rule_name' => :'ruleName'
+        :'rule_name' => :'ruleName',
+        :'validity_duration' => :'validityDuration'
       }
     end
 
@@ -115,7 +119,8 @@ module TalonOne
         :'amount' => :'Float',
         :'id' => :'Integer',
         :'ruleset_id' => :'Integer',
-        :'rule_name' => :'String'
+        :'rule_name' => :'String',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -195,6 +200,10 @@ module TalonOne
       if attributes.key?(:'rule_name')
         self.rule_name = attributes[:'rule_name']
       end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -221,7 +230,11 @@ module TalonOne
         invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if @card_identifier.to_s.length < 4
+        invalid_properties.push('invalid value for "card_identifier", the character length must be great than or equal to 4.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if @card_identifier !~ pattern
         invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
       end
@@ -285,7 +298,8 @@ module TalonOne
       return false if @program_id.nil?
       return false if @card_identifier.nil?
       return false if @card_identifier.to_s.length > 108
-      return false if @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
+      return false if @card_identifier.to_s.length < 4
+      return false if @card_identifier !~ Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
@@ -314,7 +328,11 @@ module TalonOne
         fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if card_identifier.to_s.length < 4
+        fail ArgumentError, 'invalid value for "card_identifier", the character length must be great than or equal to 4.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if card_identifier !~ pattern
         fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
       end
@@ -402,7 +420,8 @@ module TalonOne
           amount == o.amount &&
           id == o.id &&
           ruleset_id == o.ruleset_id &&
-          rule_name == o.rule_name
+          rule_name == o.rule_name &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -414,7 +433,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_uuid, created, program_id, card_identifier, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name].hash
+      [transaction_uuid, created, program_id, card_identifier, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, validity_duration].hash
     end
 
     # Builds the object from hash

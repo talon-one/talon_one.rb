@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -45,6 +45,9 @@ module TalonOne
     # Amount of loyalty points added in the transaction.
     attr_accessor :amount
 
+    # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
+    attr_accessor :validity_duration
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,7 +60,8 @@ module TalonOne
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
         :'subledger_id' => :'subledgerId',
-        :'amount' => :'amount'
+        :'amount' => :'amount',
+        :'validity_duration' => :'validityDuration'
       }
     end
 
@@ -73,7 +77,8 @@ module TalonOne
         :'start_date' => :'String',
         :'expiry_date' => :'String',
         :'subledger_id' => :'String',
-        :'amount' => :'Float'
+        :'amount' => :'Float',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -136,6 +141,10 @@ module TalonOne
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
       end
     end
 
@@ -283,7 +292,8 @@ module TalonOne
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
           subledger_id == o.subledger_id &&
-          amount == o.amount
+          amount == o.amount &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -295,7 +305,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, transaction_uuid, created, program_id, customer_session_id, name, start_date, expiry_date, subledger_id, amount].hash
+      [id, transaction_uuid, created, program_id, customer_session_id, name, start_date, expiry_date, subledger_id, amount, validity_duration].hash
     end
 
     # Builds the object from hash

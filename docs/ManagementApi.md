@@ -43,9 +43,11 @@ Method | HTTP request | Description
 [**disconnect_campaign_stores**](ManagementApi.md#disconnect_campaign_stores) | **DELETE** /v1/applications/{applicationId}/campaigns/{campaignId}/stores | Disconnect stores
 [**export_account_collection_items**](ManagementApi.md#export_account_collection_items) | **GET** /v1/collections/{collectionId}/export | Export account-level collection&#39;s items
 [**export_achievements**](ManagementApi.md#export_achievements) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/achievements/{achievementId}/export | Export achievement customer data
+[**export_application_campaign_analytics**](ManagementApi.md#export_application_campaign_analytics) | **GET** /v1/applications/{applicationId}/campaign_analytics/export | Export Application analytics aggregated by campaign
 [**export_audiences_memberships**](ManagementApi.md#export_audiences_memberships) | **GET** /v1/audiences/{audienceId}/memberships/export | Export audience members
 [**export_campaign_store_budgets**](ManagementApi.md#export_campaign_store_budgets) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/stores/budgets/export | Export campaign store budgets
 [**export_campaign_stores**](ManagementApi.md#export_campaign_stores) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/stores/export | Export stores
+[**export_campaign_value_map**](ManagementApi.md#export_campaign_value_map) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/value_maps/{valueMapId}/export | Export campaign value map
 [**export_collection_items**](ManagementApi.md#export_collection_items) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId}/export | Export campaign-level collection&#39;s items
 [**export_coupons**](ManagementApi.md#export_coupons) | **GET** /v1/applications/{applicationId}/export_coupons | Export coupons
 [**export_customer_sessions**](ManagementApi.md#export_customer_sessions) | **GET** /v1/applications/{applicationId}/export_customer_sessions | Export customer sessions
@@ -56,9 +58,11 @@ Method | HTTP request | Description
 [**export_loyalty_card_balances**](ManagementApi.md#export_loyalty_card_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/export_card_balances | Export all card transaction logs
 [**export_loyalty_card_ledger**](ManagementApi.md#export_loyalty_card_ledger) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/export_log | Export card&#39;s ledger log
 [**export_loyalty_cards**](ManagementApi.md#export_loyalty_cards) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/export | Export loyalty cards
+[**export_loyalty_join_dates**](ManagementApi.md#export_loyalty_join_dates) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/export_join_dates | Export customers&#39; loyalty program join dates
 [**export_loyalty_ledger**](ManagementApi.md#export_loyalty_ledger) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/export_log | Export customer&#39;s transaction logs
 [**export_pool_giveaways**](ManagementApi.md#export_pool_giveaways) | **GET** /v1/giveaways/pools/{poolId}/export | Export giveaway codes of a giveaway pool
 [**export_referrals**](ManagementApi.md#export_referrals) | **GET** /v1/applications/{applicationId}/export_referrals | Export referrals
+[**generate_coupon_rejections**](ManagementApi.md#generate_coupon_rejections) | **GET** /v1/coupon_rejections | Summarize coupon redemption failures in session
 [**get_access_logs_without_total_count**](ManagementApi.md#get_access_logs_without_total_count) | **GET** /v1/applications/{applicationId}/access_logs/no_total | Get access logs for Application
 [**get_account**](ManagementApi.md#get_account) | **GET** /v1/accounts/{accountId} | Get account details
 [**get_account_analytics**](ManagementApi.md#get_account_analytics) | **GET** /v1/accounts/{accountId}/analytics | Get account analytics
@@ -68,6 +72,7 @@ Method | HTTP request | Description
 [**get_additional_costs**](ManagementApi.md#get_additional_costs) | **GET** /v1/additional_costs | List additional costs
 [**get_application**](ManagementApi.md#get_application) | **GET** /v1/applications/{applicationId} | Get Application
 [**get_application_api_health**](ManagementApi.md#get_application_api_health) | **GET** /v1/applications/{applicationId}/health_report | Get Application health
+[**get_application_cart_item_filter_expression**](ManagementApi.md#get_application_cart_item_filter_expression) | **GET** /v1/applications/{applicationId}/cart_item_filters/{cartItemFilterId}/expressions/{expressionId} | Get Application cart item filter expression
 [**get_application_customer**](ManagementApi.md#get_application_customer) | **GET** /v1/applications/{applicationId}/customers/{customerId} | Get application&#39;s customer
 [**get_application_customer_friends**](ManagementApi.md#get_application_customer_friends) | **GET** /v1/applications/{applicationId}/profile/{integrationId}/friends | List friends referred by customer profile
 [**get_application_customers**](ManagementApi.md#get_application_customers) | **GET** /v1/applications/{applicationId}/customers | List application&#39;s customers
@@ -102,12 +107,15 @@ Method | HTTP request | Description
 [**get_customers_by_attributes**](ManagementApi.md#get_customers_by_attributes) | **POST** /v1/customer_search/no_total | List customer profiles matching the given attributes
 [**get_dashboard_statistics**](ManagementApi.md#get_dashboard_statistics) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/dashboard | Get statistics for loyalty dashboard
 [**get_event_types**](ManagementApi.md#get_event_types) | **GET** /v1/event_types | List event types
+[**get_experiment**](ManagementApi.md#get_experiment) | **GET** /v1/applications/{applicationId}/experiments/{experimentId} | Get experiment in Application
 [**get_exports**](ManagementApi.md#get_exports) | **GET** /v1/exports | Get exports
 [**get_loyalty_card**](ManagementApi.md#get_loyalty_card) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId} | Get loyalty card
 [**get_loyalty_card_transaction_logs**](ManagementApi.md#get_loyalty_card_transaction_logs) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/logs | List card&#39;s transactions
 [**get_loyalty_cards**](ManagementApi.md#get_loyalty_cards) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards | List loyalty cards
+[**get_loyalty_ledger_balances**](ManagementApi.md#get_loyalty_ledger_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/ledger_balances | Get customer&#39;s loyalty balances
 [**get_loyalty_points**](ManagementApi.md#get_loyalty_points) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId} | Get customer&#39;s full loyalty ledger
 [**get_loyalty_program**](ManagementApi.md#get_loyalty_program) | **GET** /v1/loyalty_programs/{loyaltyProgramId} | Get loyalty program
+[**get_loyalty_program_profile_ledger_transactions**](ManagementApi.md#get_loyalty_program_profile_ledger_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/ledger_transactions | List customer&#39;s loyalty transactions
 [**get_loyalty_program_transactions**](ManagementApi.md#get_loyalty_program_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/transactions | List loyalty program transactions
 [**get_loyalty_programs**](ManagementApi.md#get_loyalty_programs) | **GET** /v1/loyalty_programs | List loyalty programs
 [**get_loyalty_statistics**](ManagementApi.md#get_loyalty_statistics) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/statistics | Get loyalty program statistics
@@ -137,12 +145,15 @@ Method | HTTP request | Description
 [**list_account_collections**](ManagementApi.md#list_account_collections) | **GET** /v1/collections | List collections in account
 [**list_achievements**](ManagementApi.md#list_achievements) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/achievements | List achievements
 [**list_all_roles_v2**](ManagementApi.md#list_all_roles_v2) | **GET** /v2/roles | List roles
+[**list_application_cart_item_filters**](ManagementApi.md#list_application_cart_item_filters) | **GET** /v1/applications/{applicationId}/cart_item_filters | List Application cart item filters
 [**list_campaign_store_budget_limits**](ManagementApi.md#list_campaign_store_budget_limits) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/stores/budgets | List campaign store budget limits
 [**list_catalog_items**](ManagementApi.md#list_catalog_items) | **GET** /v1/catalogs/{catalogId}/items | List items in a catalog
 [**list_collections**](ManagementApi.md#list_collections) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/collections | List collections in campaign
 [**list_collections_in_application**](ManagementApi.md#list_collections_in_application) | **GET** /v1/applications/{applicationId}/collections | List collections in Application
+[**list_experiments**](ManagementApi.md#list_experiments) | **GET** /v1/applications/{applicationId}/experiments | List experiments
 [**list_stores**](ManagementApi.md#list_stores) | **GET** /v1/applications/{applicationId}/stores | List stores
 [**okta_event_handler_challenge**](ManagementApi.md#okta_event_handler_challenge) | **GET** /v1/provisioning/okta | Validate Okta API ownership
+[**price_history**](ManagementApi.md#price_history) | **POST** /v1/applications/{applicationId}/price_history | Get summary of price history
 [**remove_loyalty_points**](ManagementApi.md#remove_loyalty_points) | **PUT** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/deduct_points | Deduct points from customer profile
 [**reset_password**](ManagementApi.md#reset_password) | **POST** /v1/reset_password | Reset password
 [**scim_create_group**](ManagementApi.md#scim_create_group) | **POST** /v1/provisioning/scim/Groups | Create SCIM group
@@ -172,7 +183,7 @@ Method | HTTP request | Description
 [**update_collection**](ManagementApi.md#update_collection) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId} | Update campaign-level collection&#39;s description
 [**update_coupon**](ManagementApi.md#update_coupon) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/{couponId} | Update coupon
 [**update_coupon_batch**](ManagementApi.md#update_coupon_batch) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons | Update coupons
-[**update_loyalty_card**](ManagementApi.md#update_loyalty_card) | **PUT** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId} | Update loyalty card status
+[**update_loyalty_card**](ManagementApi.md#update_loyalty_card) | **PUT** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId} | Update loyalty card
 [**update_referral**](ManagementApi.md#update_referral) | **PUT** /v1/applications/{applicationId}/campaigns/{campaignId}/referrals/{referralId} | Update referral
 [**update_role_v2**](ManagementApi.md#update_role_v2) | **PUT** /v2/roles/{roleId} | Update role
 [**update_store**](ManagementApi.md#update_store) | **PUT** /v1/applications/{applicationId}/stores/{storeId} | Update store
@@ -275,7 +286,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
+loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
 body = TalonOne::AddLoyaltyPoints.new # AddLoyaltyPoints | body
 
@@ -292,7 +303,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
+ **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
  **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
  **body** | [**AddLoyaltyPoints**](AddLoyaltyPoints.md)| body | 
 
@@ -316,7 +327,7 @@ nil (empty response body)
 
 Add points to customer profile
 
-Add points in the specified loyalty program for the given customer.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint. 
+Add points in the specified loyalty program for the given customer.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint. 
 
 ### Example
 
@@ -379,7 +390,7 @@ nil (empty response body)
 
 ## copy_campaign_to_applications
 
-> InlineResponse2008 copy_campaign_to_applications(application_id, campaign_id, body)
+> InlineResponse2009 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into the specified Application
 
@@ -433,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -711,7 +722,7 @@ Name | Type | Description  | Notes
 
 Create loyalty cards
 
-Create a batch of loyalty cards in a specified [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types).  Customers can use loyalty cards to collect and spend loyalty points.  **Important:**  - The specified card-based loyalty program must have a defined card code format that is used to generate the loyalty card codes. - Trying to create more than 20,000 loyalty cards in a single request returns an error message with a `400` status code. 
+Create a batch of loyalty cards in a specified [card-based loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types).  Customers can use loyalty cards to collect and spend loyalty points.  > [!important] **Note** > - The specified card-based loyalty program must have a defined card code >   format that is used to generate the loyalty card codes. > - Trying to create more than 20,000 loyalty cards in a single request >   returns an error message with a `400` status code. 
 
 ### Example
 
@@ -974,7 +985,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons
 
-> InlineResponse20010 create_coupons(application_id, campaign_id, body, opts)
+> InlineResponse20011 create_coupons(application_id, campaign_id, body, opts)
 
 Create coupons
 
@@ -1032,7 +1043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -1182,7 +1193,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons_for_multiple_recipients
 
-> InlineResponse20010 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
+> InlineResponse20011 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
 
 Create coupons for multiple recipients
 
@@ -1240,7 +1251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -1258,7 +1269,7 @@ Name | Type | Description  | Notes
 
 Resend invitation email
 
-Resend an email invitation to an existing user.  **Note:** The invitation token is valid for 24 hours after the email has been sent. 
+Resend an email invitation to an existing user.  > [!note] The invitation token is valid for 24 hours after the email has been sent. 
 
 ### Example
 
@@ -1322,7 +1333,7 @@ Name | Type | Description  | Notes
 
 Invite user
 
-Create a new user in the account and send an invitation to their email address.  **Note**: The invitation token is valid for 24 hours after the email has been sent. You can resend an invitation to a user with the [Resend invitation email](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/createInviteEmail) endpoint. 
+Create a new user in the account and send an invitation to their email address.  > [!note] The invitation token is valid for 24 hours after the email has > been sent. You can resend an invitation to a user with the [Resend > invitation email](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/createInviteEmail) > endpoint. 
 
 ### Example
 
@@ -1386,7 +1397,7 @@ Name | Type | Description  | Notes
 
 Request a password reset
 
-Send an email with a password recovery link to the email address of an existing account.  **Note:** The password recovery link expires 30 minutes after this endpoint is triggered. 
+Send an email with a password recovery link to the email address of an existing account.  > [!note] The password recovery link expires 30 minutes after this endpoint is triggered. 
 
 ### Example
 
@@ -1450,7 +1461,7 @@ Name | Type | Description  | Notes
 
 Create session
 
-Create a session to use the Management API endpoints. Use the value of the `token` property provided in the response as bearer token in other API calls.  A token is valid for 3 months. In accordance with best pratices, use your generated token for all your API requests. Do **not** regenerate a token for each request.  This endpoint has a rate limit of 3 to 6 requests per second per account, depending on your setup.  <div class=\"redoc-section\">   <p class=\"title\">Granular API key</p>   Instead of using a session, you can also use the <a href=\"https://docs.talon.one/docs/product/account/dev-tools/managing-mapi-keys\">Management API key feature</a>   in the Campaign Manager to decide which endpoints can be used with a given key. </div> 
+Create a session to use the Management API endpoints.  Use the value of the `token` property provided in the response as bearer token in other API calls.  A token is valid for 3 months. In accordance with best pratices, use your generated token for all your API requests. Do **not** regenerate a token for each request.  This endpoint has a rate limit of 3 to 6 requests per second per account, depending on your setup.  > [!note] > Instead of using a session, you can also use the <a href=\"https://docs.talon.one/docs/product/account/dev-tools/managing-mapi-keys\">Management API key feature</a> > in the Campaign Manager to decide which endpoints can be used with a given key. 
 
 ### Example
 
@@ -1670,7 +1681,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 body = TalonOne::DeductLoyaltyPoints.new # DeductLoyaltyPoints | body
 
 begin
@@ -1687,7 +1698,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
  **body** | [**DeductLoyaltyPoints**](DeductLoyaltyPoints.md)| body | 
 
 ### Return type
@@ -1736,7 +1747,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 
 begin
   #Delete account-level collection
@@ -1751,7 +1762,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
 
 ### Return type
 
@@ -2004,7 +2015,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 
 begin
   #Delete campaign-level collection
@@ -2021,7 +2032,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
 
 ### Return type
 
@@ -2230,7 +2241,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 
 begin
   #Delete loyalty card
@@ -2246,7 +2257,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
 
 ### Return type
 
@@ -2650,7 +2661,7 @@ nil (empty response body)
 
 Export account-level collection's items
 
-Download a CSV file containing items from a given account-level collection.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
+Download a CSV file containing items from a given account-level collection.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files). 
 
 ### Example
 
@@ -2676,7 +2687,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 
 begin
   #Export account-level collection's items
@@ -2692,7 +2703,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
 
 ### Return type
 
@@ -2776,13 +2787,85 @@ Name | Type | Description  | Notes
 - **Accept**: application/csv
 
 
+## export_application_campaign_analytics
+
+> String export_application_campaign_analytics(application_id, range_start, range_end, opts)
+
+Export Application analytics aggregated by campaign
+
+Download a CSV file containing analytics data aggregated by campaign for the campaigns of an Application.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns:  - `campaign_id`: The ID of the campaign. This column also contains labels   for the [total and influenced values](https://docs.talon.one/docs/product/campaigns/analytics/application-dashboard#display-the-analytics-data). - `start_date`: The start of the aggregation time frame in UTC. - `end_date`: The end of the aggregation time frame in UTC. - `revenue`: The total, pre-discount value of all items purchased in a customer session. - `sessions`: The number of all closed sessions. - `average_session_value`: The average customer session value, calculated by dividing the revenue value by the number of sessions. - `average_items_per_session`: The number of items from sessions divided by the number of sessions. - `coupons`: The number of times a coupon was successfully redeemed in sessions. - `discounts`: The total value of discounts given for cart items in sessions. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+opts = {
+  campaign_ids: ['campaign_ids_example'] # Array<String> | Filter by one or more Campaign IDs, separated by a comma.  **Note:** If no campaigns are specified, data for all the campaigns in the Application is returned. 
+}
+
+begin
+  #Export Application analytics aggregated by campaign
+  result = api_instance.export_application_campaign_analytics(application_id, range_start, range_end, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_application_campaign_analytics: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **campaign_ids** | [**Array&lt;String&gt;**](String.md)| Filter by one or more Campaign IDs, separated by a comma.  **Note:** If no campaigns are specified, data for all the campaigns in the Application is returned.  | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
 ## export_audiences_memberships
 
 > String export_audiences_memberships(audience_id)
 
 Export audience members
 
-Download a CSV file containing the integration IDs of the members of an audience.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The file contains the following column: - `profileintegrationid`: The integration ID of the customer profile. 
+Download a CSV file containing the integration IDs of the members of an audience.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The file contains the following column:  - `profileintegrationid`: The integration ID of the customer profile. 
 
 ### Example
 
@@ -2846,7 +2929,7 @@ Name | Type | Description  | Notes
 
 Export campaign store budgets
 
-Download a CSV file containing the store budgets for a given campaign.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns:  - `store_integration_id`: The identifier of the store. - `limit`: The budget limit for the store. 
+Download a CSV file containing the store budgets for a given campaign.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns:  - `store_integration_id`: The identifier of the store. - `limit`: The budget limit for the store. 
 
 ### Example
 
@@ -2918,7 +3001,7 @@ Name | Type | Description  | Notes
 
 Export stores
 
-Download a CSV file containing the stores linked to a specific campaign.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following column:  - `store_integration_id`: The identifier of the store. 
+Download a CSV file containing the stores linked to a specific campaign.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following column:  - `store_integration_id`: The identifier of the store. 
 
 ### Example
 
@@ -2978,13 +3061,13 @@ Name | Type | Description  | Notes
 - **Accept**: application/csv
 
 
-## export_collection_items
+## export_campaign_value_map
 
-> String export_collection_items(application_id, campaign_id, collection_id)
+> String export_campaign_value_map(application_id, campaign_id, value_map_id)
 
-Export campaign-level collection's items
+Export campaign value map
 
-Download a CSV file containing items from a given campaign-level collection.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
+Download a CSV file containing all the value map items in a campaign. If there are multiple versions of the value map, only the items of the current version are exported.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `identifier`: The value of the attribute in the targeted item, for example, an item's SKU. - `value`: The value that is associated with the identifier, for example, the item's price. 
 
 ### Example
 
@@ -3012,7 +3095,75 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint.
+value_map_id = 56 # Integer | The ID of the value map. 
+
+begin
+  #Export campaign value map
+  result = api_instance.export_campaign_value_map(application_id, campaign_id, value_map_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_campaign_value_map: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
+ **value_map_id** | **Integer**| The ID of the value map.  | 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv, application/json
+
+
+## export_collection_items
+
+> String export_collection_items(application_id, campaign_id, collection_id)
+
+Export campaign-level collection's items
+
+Download a CSV file containing items from a given campaign-level collection.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files). 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 
 begin
   #Export campaign-level collection's items
@@ -3030,7 +3181,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
 
 ### Return type
 
@@ -3052,7 +3203,7 @@ Name | Type | Description  | Notes
 
 Export coupons
 
-Download a CSV file containing the coupons that match the given properties.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file can contain the following columns:  - `accountid`: The ID of your deployment. - `applicationid`: The ID of the Application this coupon is related to. - `attributes`: A json object describing _custom_ referral attribute names and their values. - `batchid`: The ID of the batch this coupon is part of. - `campaignid`: The ID of the campaign this coupon is related to. - `counter`: The number of times this coupon has been redeemed. - `created`: The creation date in RFC3339 of the coupon code. - `deleted`: Whether the coupon code is deleted. - `deleted_changelogid`: The ID of the delete event in the logs. - `discount_counter`: The amount of discount given by this coupon. - `discount_limitval`: The maximum discount amount that can be given be this coupon. - `expirydate`: The end date in RFC3339 of the code redemption period. - `id`: The internal ID of the coupon code. - `importid`: The ID of the import job that created this coupon. - `is_reservation_mandatory`: Whether this coupon requires a reservation to be redeemed. - `limits`: The limits set on this coupon. - `limitval`: The maximum number of redemptions of this code. - `recipientintegrationid`: The integration ID of the recipient of the coupon.   Only the customer with this integration ID can redeem this code. Available only for personal codes. - `referralid`: The ID of the referral code that triggered the creation of this coupon (create coupon effect). - `reservation`: Whether the coupon can be reserved for multiple customers. - `reservation_counter`: How many times this coupon has been reserved. - `reservation_limitval`: The maximum of number of reservations this coupon can have. - `startdate`: The start date in RFC3339 of the code redemption period. - `value`: The coupon code. 
+Download a CSV file containing the coupons that match the given properties.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file can contain the following columns:  - `accountid`: The ID of your deployment. - `applicationid`: The ID of the Application this coupon is related to. - `attributes`: A json object describing _custom_ referral attribute names and their values. - `batchid`: The ID of the batch this coupon is part of. - `campaignid`: The ID of the campaign this coupon is related to. - `counter`: The number of times this coupon has been redeemed. - `created`: The creation date in RFC3339 of the coupon code. - `deleted`: Whether the coupon code is deleted. - `deleted_changelogid`: The ID of the delete event in the logs. - `discount_counter`: The amount of discount given by this coupon. - `discount_limitval`: The maximum discount amount that can be given be this coupon. - `expirydate`: The end date in RFC3339 of the code redemption period. - `id`: The internal ID of the coupon code. - `importid`: The ID of the import job that created this coupon. - `is_reservation_mandatory`: Whether this coupon requires a reservation to be redeemed. - `limits`: The limits set on this coupon. - `limitval`: The maximum number of redemptions of this code. - `recipientintegrationid`: The integration ID of the recipient of the coupon.    Only the customer with this integration ID can redeem this code. Available only for personal codes. - `referralid`: The ID of the referral code that triggered the creation of this coupon (create coupon effect). - `reservation`: Whether the coupon can be reserved for multiple customers. - `reservation_counter`: How many times this coupon has been reserved. - `reservation_limitval`: The maximum of number of reservations this coupon can have. - `startdate`: The start date in RFC3339 of the code redemption period. - `value`: The coupon code. 
 
 ### Example
 
@@ -3146,7 +3297,7 @@ Name | Type | Description  | Notes
 
 Export customer sessions
 
-Download a CSV file containing the customer sessions that match the request.  **Important:** Archived sessions cannot be exported. See the [retention policy](https://docs.talon.one/docs/dev/server-infrastructure-and-data-retention).  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  - `id`: The internal ID of the session. - `firstsession`: Whether this is a first session. - `integrationid`: The integration ID of the session. - `applicationid`: The ID of the Application. - `profileid`: The internal ID of the customer profile. - `profileintegrationid`: The integration ID of the customer profile. - `created`: The timestamp when the session was created. - `state`: The [state](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#customer-session-states) of the session. - `cartitems`: The cart items in the session. - `discounts`: The discounts in the session. - `total`: The total value of cart items and additional costs in the session, before any discounts are applied. - `attributes`: The attributes set in the session. - `closedat`: Timestamp when the session was closed. - `cancelledat`: Timestamp when the session was cancelled. - `referral`: The referral code in the session. - `identifiers`: The identifiers in the session. - `additional_costs`: The [additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs) in the session. - `updated`: Timestamp of the last session update. - `store_integration_id`: The integration ID of the store. - `coupons`: Coupon codes in the session. 
+Download a CSV file containing the customer sessions that match the request.  > [!important] Archived sessions cannot be exported. See the [retention > policy](https://docs.talon.one/docs/dev/server-infrastructure-and-data-retention).  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  - `id`: The internal ID of the session. - `firstsession`: Whether this is a first session. - `integrationid`: The integration ID of the session. - `applicationid`: The ID of the Application. - `profileid`: The internal ID of the customer profile. - `profileintegrationid`: The integration ID of the customer profile. - `created`: The timestamp when the session was created. - `state`: The [state](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#customer-session-states)    of the session. - `cartitems`: The cart items in the session. - `discounts`: The discounts in the session. - `total`: The total value of cart items and additional costs in the session, before any discounts are applied. - `attributes`: The attributes set in the session. - `closedat`: Timestamp when the session was closed. - `cancelledat`: Timestamp when the session was cancelled. - `referral`: The referral code in the session. - `identifiers`: The identifiers in the session. - `additional_costs`: The [additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs)    in the session. - `updated`: Timestamp of the last session update. - `store_integration_id`: The integration ID of the store. - `coupons`: Coupon codes in the session. 
 
 ### Example
 
@@ -3292,7 +3443,7 @@ Name | Type | Description  | Notes
 
 Export triggered effects
 
-Download a CSV file containing the triggered effects that match the given attributes.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `applicationid`: The ID of the Application. - `campaignid`: The ID of the campaign. - `couponid`: The ID of the coupon, when applicable to the effect. - `created`: The timestamp of the effect. - `event_type`: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - `eventid`: The internal ID of the effect. - `name`: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - `profileintegrationid`: The ID of the customer profile, when applicable. - `props`: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - `ruleindex`: The index of the rule. - `rulesetid`: The ID of the rule set. - `sessionid`: The internal ID of the session that triggered the effect. - `profileid`: The internal ID of the customer profile. - `sessionintegrationid`: The integration ID of the session. - `total_revenue`: The total revenue. - `store_integration_id`: The integration ID of the store. You choose this ID when you create a store. 
+Download a CSV file containing the triggered effects that match the given attributes.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `applicationid`: The ID of the Application. - `campaignid`: The ID of the campaign. - `couponid`: The ID of the coupon, when applicable to the effect. - `created`: The timestamp of the effect. - `event_type`: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - `eventid`: The internal ID of the effect. - `name`: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - `profileintegrationid`: The ID of the customer profile, when applicable. - `props`: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - `ruleindex`: The index of the rule. - `rulesetid`: The ID of the rule set. - `sessionid`: The internal ID of the session that triggered the effect. - `profileid`: The internal ID of the customer profile. - `sessionintegrationid`: The integration ID of the session. - `total_revenue`: The total revenue. - `store_integration_id`: The integration ID of the store. You choose this ID when you create a store. 
 
 ### Example
 
@@ -3366,7 +3517,7 @@ Name | Type | Description  | Notes
 
 Export customer loyalty balance to CSV
 
-⚠️ Deprecation notice: Support for requests to this endpoint will end soon. To export customer loyalty balances to CSV, use the [Export customer loyalty balances to CSV](/management-api#tag/Loyalty/operation/exportLoyaltyBalances) endpoint.  Download a CSV file containing the balance of each customer in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
+To export customer loyalty balances to CSV, use the [Export customer loyalty balances to CSV](/management-api#tag/Loyalty/operation/exportLoyaltyBalances) endpoint.  Download a CSV file containing the balance of each customer in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files). 
 
 ### Example
 
@@ -3394,7 +3545,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
 opts = {
-  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 }
 
 begin
@@ -3412,7 +3563,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
 
 ### Return type
 
@@ -3434,7 +3585,7 @@ Name | Type | Description  | Notes
 
 Export customer loyalty balances
 
-Download a CSV file containing the balance of each customer in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subdleger, when applicatble. - `profileIntegrationID`: The integration ID of the customer profile. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. - `currentTier`: The tier that the customer is in at the time of the export. 
+Download a CSV file containing the balance of each customer in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subledger, when applicable. - `profileIntegrationID`: The integration ID of the customer profile. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. - `currentTier`: The tier that the customer is in at the time of the export. 
 
 ### Example
 
@@ -3462,7 +3613,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
 opts = {
-  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. > - This parameter does not affect the `currentTier` field in the CSV file, which shows the customer's tier at the time of export. 
 }
 
 begin
@@ -3480,7 +3631,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
- **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. &gt; - This parameter does not affect the &#x60;currentTier&#x60; field in the CSV file, which shows the customer&#39;s tier at the time of export.  | [optional] 
 
 ### Return type
 
@@ -3502,7 +3653,7 @@ Name | Type | Description  | Notes
 
 Export all card transaction logs
 
-Download a CSV file containing the balances of all cards in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns: - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subdleger, when applicatble. - `cardIdentifier`: The alphanumeric identifier of the loyalty card. - `cardState`:The state of the loyalty card. It can be `active` or `inactive`. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. 
+Download a CSV file containing the balances of all cards in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns: - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subdleger, when applicatble. - `cardIdentifier`: The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. - `cardState`:The state of the loyalty card. It can be `active` or `inactive`. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. 
 
 ### Example
 
@@ -3530,7 +3681,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
-  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 }
 
 begin
@@ -3548,7 +3699,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
 
 ### Return type
 
@@ -3570,7 +3721,7 @@ Name | Type | Description  | Notes
 
 Export card's ledger log
 
-Download a CSV file containing a loyalty card ledger log of the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/). 
+Download a CSV file containing a loyalty card ledger log of the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files). 
 
 ### Example
 
@@ -3597,9 +3748,9 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 opts = {
   date_format: 'date_format_example' # String | Determines the format of dates in the export document.
 }
@@ -3619,9 +3770,9 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
 
 ### Return type
@@ -3644,7 +3795,7 @@ Name | Type | Description  | Notes
 
 Export loyalty cards
 
-Download a CSV file containing the loyalty cards from a specified loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns: - `identifier`: The unique identifier of the loyalty card. - `created`: The date and time the loyalty card was created. - `status`: The status of the loyalty card. - `userpercardlimit`: The maximum number of customer profiles that can be linked to the card. - `customerprofileids`: Integration IDs of the customer profiles linked to the card. - `blockreason`: The reason for transferring and blocking the loyalty card. - `generated`: An indicator of whether the loyalty card was generated. - `batchid`: The ID of the batch the loyalty card is in. 
+Download a CSV file containing the loyalty cards from a specified loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns:  - `identifier`: The unique identifier of the loyalty card. - `created`: The date and time the loyalty card was created. - `status`: The status of the loyalty card. - `userpercardlimit`: The maximum number of customer profiles that can be linked to the card. - `customerprofileids`: Integration IDs of the customer profiles linked to the card. - `blockreason`: The reason for transferring and blocking the loyalty card. - `generated`: An indicator of whether the loyalty card was generated. - `batchid`: The ID of the batch the loyalty card is in. - `attributes`: The custom attributes of this loyalty card. Currently, this feature is only available upon request. 
 
 ### Example
 
@@ -3673,8 +3824,8 @@ api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
   batch_id: 'batch_id_example', # String | Filter results by loyalty card batch ID.
-  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return loyalty cards created before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. 
-  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return loyalty cards created after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. 
+  created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return loyalty cards created before this timestamp.  **Note:** This must be an RFC3339 timestamp string. 
+  created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return loyalty cards created after this timestamp.  **Note:** This must be an RFC3339 timestamp string. 
   date_format: 'date_format_example' # String | Determines the format of dates in the export document.
 }
 
@@ -3694,8 +3845,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **batch_id** | **String**| Filter results by loyalty card batch ID. | [optional] 
- **created_before** | **DateTime**| Only return loyalty cards created before this timestamp.  **Note:** - This must be an RFC3339 timestamp string.  | [optional] 
- **created_after** | **DateTime**| Only return loyalty cards created after this timestamp.  **Note:** - This must be an RFC3339 timestamp string.  | [optional] 
+ **created_before** | **DateTime**| Only return loyalty cards created before this timestamp.  **Note:** This must be an RFC3339 timestamp string.  | [optional] 
+ **created_after** | **DateTime**| Only return loyalty cards created after this timestamp.  **Note:** This must be an RFC3339 timestamp string.  | [optional] 
  **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
 
 ### Return type
@@ -3712,13 +3863,13 @@ Name | Type | Description  | Notes
 - **Accept**: application/csv
 
 
-## export_loyalty_ledger
+## export_loyalty_join_dates
 
-> String export_loyalty_ledger(range_start, range_end, loyalty_program_id, integration_id, opts)
+> String export_loyalty_join_dates(loyalty_program_id)
 
-Export customer's transaction logs
+Export customers' loyalty program join dates
 
-Download a CSV file containing a customer's transaction logs in the loyalty program.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. 
+Download a CSV file containing the join dates of all customers in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `loyaltyProgramID`: The ID of the loyalty program. - `profileIntegrationID`: The integration ID of the customer profile. - `joinDate`: The customer's loyalty program join date in RFC3339 format. 
 
 ### Example
 
@@ -3744,8 +3895,72 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+loyalty_program_id = 'loyalty_program_id_example' # String | The identifier of the loyalty program.
+
+begin
+  #Export customers' loyalty program join dates
+  result = api_instance.export_loyalty_join_dates(loyalty_program_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->export_loyalty_join_dates: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loyalty_program_id** | **String**| The identifier of the loyalty program. | 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/csv
+
+
+## export_loyalty_ledger
+
+> String export_loyalty_ledger(range_start, range_end, loyalty_program_id, integration_id, opts)
+
+Export customer's transaction logs
+
+Download a CSV file containing a customer's transaction logs in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
 integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 opts = {
@@ -3766,8 +3981,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
  **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **date_format** | **String**| Determines the format of dates in the export document. | [optional] 
@@ -3792,7 +4007,7 @@ Name | Type | Description  | Notes
 
 Export giveaway codes of a giveaway pool
 
-Download a CSV file containing the giveaway codes of a specific giveaway pool.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns:  - `id`: The internal ID of the giveaway. - `poolid`: The internal ID of the giveaway pool. - `code`: The giveaway code. - `startdate`: The validity start date in RFC3339 of the giveaway (can be empty). - `enddate`: The validity end date in RFC3339 of the giveaway (can be empty). - `attributes`: Any custom attributes associated with the giveaway code (can be empty). - `used`: An indication of whether the giveaway is already awarded. - `importid`: The ID of the import which created the giveaway. - `created`: The creation time of the giveaway code. - `profileintegrationid`: The third-party integration ID of the customer profile that was awarded the giveaway. Can be empty if the giveaway was not awarded. - `profileid`: The internal ID of the customer profile that was awarded the giveaway. Can be empty if the giveaway was not awarded or an internal ID does not exist. 
+Download a CSV file containing the giveaway codes of a specific giveaway pool.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns:  - `id`: The internal ID of the giveaway. - `poolid`: The internal ID of the giveaway pool. - `code`: The giveaway code. - `startdate`: The validity start date in RFC3339 of the giveaway (can be empty). - `enddate`: The validity end date in RFC3339 of the giveaway (can be empty). - `attributes`: Any custom attributes associated with the giveaway code (can be empty). - `used`: An indication of whether the giveaway is already awarded. - `importid`: The ID of the import which created the giveaway. - `created`: The creation time of the giveaway code. - `profileintegrationid`: The third-party integration ID of the customer    profile that was awarded the giveaway. Can be empty if the giveaway was not    awarded. - `profileid`: The internal ID of the customer profile that was awarded the    giveaway. Can be empty if the giveaway was not awarded or an internal ID    does not exist. 
 
 ### Example
 
@@ -3862,7 +4077,7 @@ Name | Type | Description  | Notes
 
 Export referrals
 
-Download a CSV file containing the referrals that match the given parameters.  **Tip:** If the exported CSV file is too large to view, you can [split it into multiple files](https://www.makeuseof.com/tag/how-to-split-a-huge-csv-excel-workbook-into-seperate-files/).  The CSV file contains the following columns:  - `code`: The referral code. - `advocateprofileintegrationid`: The profile ID of the advocate. - `startdate`: The start date in RFC3339 of the code redemption period. - `expirydate`: The end date in RFC3339 of the code redemption period. - `limitval`: The maximum number of redemptions of this code. Defaults to `1` when left blank. - `attributes`: A json object describing _custom_ referral attribute names and their values. 
+Download a CSV file containing the referrals that match the given parameters.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The CSV file contains the following columns:  - `code`: The referral code. - `advocateprofileintegrationid`: The profile ID of the advocate. - `startdate`: The start date in RFC3339 of the code redemption period. - `expirydate`: The end date in RFC3339 of the code redemption period. - `limitval`: The maximum number of redemptions of this code. Defaults to `1` when left blank. - `attributes`: A json object describing _custom_ referral attribute names and their values. 
 
 ### Example
 
@@ -3936,9 +4151,81 @@ Name | Type | Description  | Notes
 - **Accept**: application/csv
 
 
+## generate_coupon_rejections
+
+> InlineResponse20053 generate_coupon_rejections(session_integration_id, opts)
+
+Summarize coupon redemption failures in session
+
+Create a summary of the reasons for coupon redemption failures in a given customer session. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+session_integration_id = 'session_integration_id_example' # String | The integration ID of the session to summarize.
+opts = {
+  application_id: 3.4, # Float | Filter results by Application ID.
+  language: 'language_example', # String | The [ISO-639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) code of the language in which the summary will be generated. 
+  coupon_code: 'coupon_code_example' # String | The coupon code for which to get the rejection reason.
+}
+
+begin
+  #Summarize coupon redemption failures in session
+  result = api_instance.generate_coupon_rejections(session_integration_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->generate_coupon_rejections: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_integration_id** | **String**| The integration ID of the session to summarize. | 
+ **application_id** | **Float**| Filter results by Application ID. | [optional] 
+ **language** | **String**| The [ISO-639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) code of the language in which the summary will be generated.  | [optional] 
+ **coupon_code** | **String**| The coupon code for which to get the rejection reason. | [optional] 
+
+### Return type
+
+[**InlineResponse20053**](InlineResponse20053.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_access_logs_without_total_count
 
-> InlineResponse20022 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
+> InlineResponse20024 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
 
 Get access logs for Application
 
@@ -3969,8 +4256,8 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 opts = {
   path: 'path_example', # String | Only return results where the request path matches the given regular expression.
   method: 'method_example', # String | Only return results where the request method matches the given regular expression.
@@ -3995,8 +4282,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **path** | **String**| Only return results where the request path matches the given regular expression. | [optional] 
  **method** | **String**| Only return results where the request method matches the given regular expression. | [optional] 
  **status** | **String**| Filter results by HTTP status codes. | [optional] 
@@ -4006,7 +4293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -4050,7 +4337,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-account_id = 56 # Integer | The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#operation/getUsers) endpoint in the `accountId` property. 
+account_id = 56 # Integer | The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/getUsers) endpoint in the `accountId` property. 
 
 begin
   #Get account details
@@ -4066,7 +4353,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **account_id** | **Integer**| The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#operation/getUsers) endpoint in the &#x60;accountId&#x60; property.  | 
+ **account_id** | **Integer**| The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/getUsers) endpoint in the &#x60;accountId&#x60; property.  | 
 
 ### Return type
 
@@ -4114,7 +4401,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-account_id = 56 # Integer | The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#operation/getUsers) endpoint in the `accountId` property. 
+account_id = 56 # Integer | The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/getUsers) endpoint in the `accountId` property. 
 
 begin
   #Get account analytics
@@ -4130,7 +4417,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **account_id** | **Integer**| The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#operation/getUsers) endpoint in the &#x60;accountId&#x60; property.  | 
+ **account_id** | **Integer**| The identifier of the account. Retrieve it via the [List users in account](https://docs.talon.one/management-api#tag/Accounts-and-users/operation/getUsers) endpoint in the &#x60;accountId&#x60; property.  | 
 
 ### Return type
 
@@ -4178,7 +4465,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 
 begin
   #Get account-level collection
@@ -4194,7 +4481,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
 
 ### Return type
 
@@ -4344,7 +4631,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20038 get_additional_costs(opts)
+> InlineResponse20040 get_additional_costs(opts)
 
 List additional costs
 
@@ -4400,7 +4687,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20038**](InlineResponse20038.md)
+[**InlineResponse20040**](InlineResponse20040.md)
 
 ### Authorization
 
@@ -4418,7 +4705,7 @@ Name | Type | Description  | Notes
 
 Get Application
 
-Get the application specified by the ID.
+Get the Application specified by the ID.
 
 ### Example
 
@@ -4540,6 +4827,74 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## get_application_cart_item_filter_expression
+
+> ApplicationCIFExpression get_application_cart_item_filter_expression(application_id, cart_item_filter_id, expression_id)
+
+Get Application cart item filter expression
+
+Get an Application cart item filter expression for a specific Application.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+cart_item_filter_id = 56 # Integer | The ID of the Application cart item filter. You can get this ID with the [List Application cart item filters](https://docs.talon.one/management-api#tag/Applications/operation/listApplicationCartItemFilters) endpoint.
+expression_id = 56 # Integer | The ID of the Application cart item filter expression.
+
+begin
+  #Get Application cart item filter expression
+  result = api_instance.get_application_cart_item_filter_expression(application_id, cart_item_filter_id, expression_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_application_cart_item_filter_expression: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **cart_item_filter_id** | **Integer**| The ID of the Application cart item filter. You can get this ID with the [List Application cart item filters](https://docs.talon.one/management-api#tag/Applications/operation/listApplicationCartItemFilters) endpoint. | 
+ **expression_id** | **Integer**| The ID of the Application cart item filter expression. | 
+
+### Return type
+
+[**ApplicationCIFExpression**](ApplicationCIFExpression.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_application_customer
 
 > ApplicationCustomer get_application_customer(application_id, customer_id)
@@ -4573,7 +4928,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
-customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint. 
+customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint. 
 
 begin
   #Get application's customer
@@ -4590,7 +4945,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint.  | 
+ **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint.  | 
 
 ### Return type
 
@@ -4608,7 +4963,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customer_friends
 
-> InlineResponse20035 get_application_customer_friends(application_id, integration_id, opts)
+> InlineResponse20037 get_application_customer_friends(application_id, integration_id, opts)
 
 List friends referred by customer profile
 
@@ -4644,7 +4999,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
 }
 
 begin
@@ -4666,11 +5021,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20035**](InlineResponse20035.md)
+[**InlineResponse20037**](InlineResponse20037.md)
 
 ### Authorization
 
@@ -4684,7 +5039,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20024 get_application_customers(application_id, opts)
+> InlineResponse20026 get_application_customers(application_id, opts)
 
 List application's customers
 
@@ -4719,7 +5074,7 @@ opts = {
   integration_id: 'integration_id_example', # String | Filter results performing an exact matching against the profile integration identifier.
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
 }
 
 begin
@@ -4740,11 +5095,11 @@ Name | Type | Description  | Notes
  **integration_id** | **String**| Filter results performing an exact matching against the profile integration identifier. | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -4758,7 +5113,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers_by_attributes
 
-> InlineResponse20025 get_application_customers_by_attributes(application_id, body, opts)
+> InlineResponse20027 get_application_customers_by_attributes(application_id, body, opts)
 
 List application customers matching the given attributes
 
@@ -4793,7 +5148,7 @@ body = TalonOne::CustomerProfileSearchQuery.new # CustomerProfileSearchQuery | b
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
 }
 
 begin
@@ -4814,11 +5169,11 @@ Name | Type | Description  | Notes
  **body** | [**CustomerProfileSearchQuery**](CustomerProfileSearchQuery.md)| body | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -4832,7 +5187,7 @@ Name | Type | Description  | Notes
 
 ## get_application_event_types
 
-> InlineResponse20031 get_application_event_types(application_id, opts)
+> InlineResponse20033 get_application_event_types(application_id, opts)
 
 List Applications event types
 
@@ -4890,7 +5245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20031**](InlineResponse20031.md)
+[**InlineResponse20033**](InlineResponse20033.md)
 
 ### Authorization
 
@@ -4904,7 +5259,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events_without_total_count
 
-> InlineResponse20030 get_application_events_without_total_count(application_id, opts)
+> InlineResponse20032 get_application_events_without_total_count(application_id, opts)
 
 List Applications events
 
@@ -4986,7 +5341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**InlineResponse20032**](InlineResponse20032.md)
 
 ### Authorization
 
@@ -5066,7 +5421,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions
 
-> InlineResponse20029 get_application_sessions(application_id, opts)
+> InlineResponse20031 get_application_sessions(application_id, opts)
 
 List Application sessions
 
@@ -5101,14 +5456,15 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  profile: 'profile_example', # String | Profile integration ID filter for sessions. Must be exact match.
+  partial_match: false, # Boolean | Enables partial matching for a single text search field. When enabled, the search term matches anywhere within the field value (case-insensitive). Minimum 3 characters required for partial matches; shorter inputs automatically fall back to exact match.  **Note:** Use with one of: `integrationId`, `profile`, `coupon`, `referral`, or `storeIntegrationId`.
+  profile: 'profile_example', # String | Filter by sessions with this profile integration ID. By default, requires exact match. Use `partialMatch=true` to search for partial matches (minimum 3 characters).
   state: 'state_example', # String | Filter by sessions with this state. Must be exact match.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally.
-  coupon: 'coupon_example', # String | Filter by sessions with this coupon. Must be exact match.
-  referral: 'referral_example', # String | Filter by sessions with this referral. Must be exact match.
-  integration_id: 'integration_id_example', # String | Filter by sessions with this integration ID. Must be exact match.
-  store_integration_id: 'store_integration_id_example' # String | The integration ID of the store. You choose this ID when you create a store.
+  coupon: 'coupon_example', # String | Filter by sessions with this coupon. By default, requires exact match. Use `partialMatch=true` to search for partial matches (minimum 3 characters).
+  referral: 'referral_example', # String | Filter by sessions with this referral. By default, requires exact match. Use `partialMatch=true` to search for partial matches (minimum 3 characters).
+  integration_id: 'integration_id_example', # String | Filter by sessions with this integration ID. By default, requires exact match. Use `partialMatch=true` to search for partial matches (minimum 3 characters).
+  store_integration_id: 'store_integration_id_example' # String | The integration ID of the store. You choose this ID when you create a store. By default, requires exact match. Use `partialMatch=true` to search for partial matches (minimum 3 characters).
 }
 
 begin
@@ -5129,18 +5485,19 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **profile** | **String**| Profile integration ID filter for sessions. Must be exact match. | [optional] 
+ **partial_match** | **Boolean**| Enables partial matching for a single text search field. When enabled, the search term matches anywhere within the field value (case-insensitive). Minimum 3 characters required for partial matches; shorter inputs automatically fall back to exact match.  **Note:** Use with one of: &#x60;integrationId&#x60;, &#x60;profile&#x60;, &#x60;coupon&#x60;, &#x60;referral&#x60;, or &#x60;storeIntegrationId&#x60;. | [optional] [default to false]
+ **profile** | **String**| Filter by sessions with this profile integration ID. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters). | [optional] 
  **state** | **String**| Filter by sessions with this state. Must be exact match. | [optional] 
  **created_before** | **DateTime**| Only return events created before this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Only return events created after this date. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
- **coupon** | **String**| Filter by sessions with this coupon. Must be exact match. | [optional] 
- **referral** | **String**| Filter by sessions with this referral. Must be exact match. | [optional] 
- **integration_id** | **String**| Filter by sessions with this integration ID. Must be exact match. | [optional] 
- **store_integration_id** | **String**| The integration ID of the store. You choose this ID when you create a store. | [optional] 
+ **coupon** | **String**| Filter by sessions with this coupon. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters). | [optional] 
+ **referral** | **String**| Filter by sessions with this referral. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters). | [optional] 
+ **integration_id** | **String**| Filter by sessions with this integration ID. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters). | [optional] 
+ **store_integration_id** | **String**| The integration ID of the store. You choose this ID when you create a store. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters). | [optional] 
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20031**](InlineResponse20031.md)
 
 ### Authorization
 
@@ -5154,11 +5511,11 @@ Name | Type | Description  | Notes
 
 ## get_applications
 
-> InlineResponse2007 get_applications(opts)
+> InlineResponse2008 get_applications(opts)
 
 List Applications
 
-List all applications in the current account.
+List all the Applications in the current account.
 
 ### Example
 
@@ -5210,7 +5567,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -5288,7 +5645,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20036 get_attributes(opts)
+> InlineResponse20038 get_attributes(opts)
 
 List custom attributes
 
@@ -5322,7 +5679,11 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  entity: 'entity_example' # String | Returned attributes will be filtered by supplied entity.
+  entity: 'entity_example', # String | Returned attributes will be filtered by supplied entity.
+  application_ids: 'application_ids_example', # String | Returned attributes will be filtered by supplied application ids
+  type: 'type_example', # String | Returned attributes will be filtered by supplied type
+  kind: 'kind_example', # String | Returned attributes will be filtered by supplied kind (builtin or custom)
+  search: 'search_example' # String | Returned attributes will be filtered by searching case insensitive through Attribute name, description and type
 }
 
 begin
@@ -5343,10 +5704,14 @@ Name | Type | Description  | Notes
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
  **entity** | **String**| Returned attributes will be filtered by supplied entity. | [optional] 
+ **application_ids** | **String**| Returned attributes will be filtered by supplied application ids | [optional] 
+ **type** | **String**| Returned attributes will be filtered by supplied type | [optional] 
+ **kind** | **String**| Returned attributes will be filtered by supplied kind (builtin or custom) | [optional] 
+ **search** | **String**| Returned attributes will be filtered by searching case insensitive through Attribute name, description and type | [optional] 
 
 ### Return type
 
-[**InlineResponse20036**](InlineResponse20036.md)
+[**InlineResponse20038**](InlineResponse20038.md)
 
 ### Authorization
 
@@ -5360,7 +5725,7 @@ Name | Type | Description  | Notes
 
 ## get_audience_memberships
 
-> InlineResponse20034 get_audience_memberships(audience_id, opts)
+> InlineResponse20036 get_audience_memberships(audience_id, opts)
 
 List audience members
 
@@ -5420,7 +5785,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20034**](InlineResponse20034.md)
+[**InlineResponse20036**](InlineResponse20036.md)
 
 ### Authorization
 
@@ -5434,7 +5799,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences
 
-> InlineResponse20032 get_audiences(opts)
+> InlineResponse20034 get_audiences(opts)
 
 List audiences
 
@@ -5468,7 +5833,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
 }
 
 begin
@@ -5488,11 +5853,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20032**](InlineResponse20032.md)
+[**InlineResponse20034**](InlineResponse20034.md)
 
 ### Authorization
 
@@ -5506,7 +5871,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences_analytics
 
-> InlineResponse20033 get_audiences_analytics(audience_ids, opts)
+> InlineResponse20035 get_audiences_analytics(audience_ids, opts)
 
 List audience analytics
 
@@ -5560,7 +5925,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20033**](InlineResponse20033.md)
+[**InlineResponse20035**](InlineResponse20035.md)
 
 ### Authorization
 
@@ -5640,7 +6005,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_analytics
 
-> InlineResponse20023 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
+> InlineResponse20025 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
@@ -5672,8 +6037,8 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 opts = {
   granularity: 'granularity_example' # String | The time interval between the results in the returned time-series.
 }
@@ -5694,13 +6059,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **granularity** | **String**| The time interval between the results in the returned time-series. | [optional] 
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -5714,7 +6079,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_by_attributes
 
-> InlineResponse2008 get_campaign_by_attributes(application_id, body, opts)
+> InlineResponse2009 get_campaign_by_attributes(application_id, body, opts)
 
 List campaigns that match the given attributes
 
@@ -5776,7 +6141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -5854,7 +6219,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_groups
 
-> InlineResponse20013 get_campaign_groups(opts)
+> InlineResponse20014 get_campaign_groups(opts)
 
 List campaign access groups
 
@@ -5910,7 +6275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -5924,7 +6289,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_templates
 
-> InlineResponse20014 get_campaign_templates(opts)
+> InlineResponse20015 get_campaign_templates(opts)
 
 List campaign templates
 
@@ -5988,7 +6353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**InlineResponse20015**](InlineResponse20015.md)
 
 ### Authorization
 
@@ -6002,7 +6367,7 @@ Name | Type | Description  | Notes
 
 ## get_campaigns
 
-> InlineResponse2008 get_campaigns(application_id, opts)
+> InlineResponse2009 get_campaigns(application_id, opts)
 
 List campaigns
 
@@ -6042,6 +6407,10 @@ opts = {
   tags: 'tags_example', # String | Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \"name\" query parameter, a logical OR will be performed to search both tags and name for the provided values 
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
+  start_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign start time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
+  start_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign start time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
+  end_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign end time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
+  end_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign end time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   campaign_group_id: 56, # Integer | Filter results to campaigns owned by the specified campaign access group ID.
   template_id: 56, # Integer | The ID of the campaign template this campaign was created from.
   store_id: 56 # Integer | Filter results to campaigns linked to the specified store ID.
@@ -6070,13 +6439,17 @@ Name | Type | Description  | Notes
  **tags** | **String**| Filter results performing case-insensitive matching against the tags of the campaign. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values  | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
+ **start_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign start time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
+ **start_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign start time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
+ **end_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign end time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
+ **end_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the campaign end time timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **campaign_group_id** | **Integer**| Filter results to campaigns owned by the specified campaign access group ID. | [optional] 
  **template_id** | **Integer**| The ID of the campaign template this campaign was created from. | [optional] 
  **store_id** | **Integer**| Filter results to campaigns linked to the specified store ID. | [optional] 
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -6090,7 +6463,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20042 get_changes(opts)
+> InlineResponse20044 get_changes(opts)
 
 Get audit logs for an account
 
@@ -6129,7 +6502,7 @@ opts = {
   user_id: 56, # Integer | Filter results by user ID.
   created_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   created_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   management_key_id: 56, # Integer | Filter results that match the given management key ID.
   include_old: true # Boolean | When this flag is set to false, the state without the change will not be returned. The default value is true.
 }
@@ -6156,13 +6529,13 @@ Name | Type | Description  | Notes
  **user_id** | **Integer**| Filter results by user ID. | [optional] 
  **created_before** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
  **created_after** | **DateTime**| Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the change creation timestamp. You can use any time zone setting. Talon.One will convert to UTC internally. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **management_key_id** | **Integer**| Filter results that match the given management key ID. | [optional] 
  **include_old** | **Boolean**| When this flag is set to false, the state without the change will not be returned. The default value is true. | [optional] 
 
 ### Return type
 
-[**InlineResponse20042**](InlineResponse20042.md)
+[**InlineResponse20044**](InlineResponse20044.md)
 
 ### Authorization
 
@@ -6208,7 +6581,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 
 begin
   #Get campaign-level collection
@@ -6226,7 +6599,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
 
 ### Return type
 
@@ -6244,7 +6617,7 @@ Name | Type | Description  | Notes
 
 ## get_collection_items
 
-> InlineResponse20021 get_collection_items(collection_id, opts)
+> InlineResponse20023 get_collection_items(collection_id, opts)
 
 Get collection items
 
@@ -6274,7 +6647,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56 # Integer | The number of items to skip when paging through large result sets.
@@ -6294,13 +6667,13 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -6314,7 +6687,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_without_total_count
 
-> InlineResponse20011 get_coupons_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20012 get_coupons_without_total_count(application_id, campaign_id, opts)
 
 List coupons
 
@@ -6404,7 +6777,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -6448,10 +6821,10 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
-customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint. 
+customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint. 
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56 # Integer | The number of items to skip when paging through large result sets.
@@ -6471,10 +6844,10 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint.  | 
+ **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint.  | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
 
@@ -6494,7 +6867,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports_without_total_count
 
-> InlineResponse20028 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
+> InlineResponse20030 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
 
@@ -6524,8 +6897,8 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
@@ -6551,8 +6924,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
@@ -6564,7 +6937,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20030**](InlineResponse20030.md)
 
 ### Authorization
 
@@ -6609,7 +6982,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
-customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint. 
+customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint. 
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
@@ -6631,7 +7004,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
- **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint.  | 
+ **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint.  | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
@@ -6656,7 +7029,7 @@ Name | Type | Description  | Notes
 
 Get customer profile
 
-Return the details of the specified customer profile.  <div class=\"redoc-section\">   <p class=\"title\">Performance tips</p>    You can retrieve the same information via the Integration API, which can save you extra API requests. consider these options:    - Request the customer profile to be part of the response content using     [Update Customer Session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2).   - Send an empty update with the [Update Customer Profile](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint with `runRuleEngine=false`. </div> 
+Return the details of the specified customer profile.  > [!note] > You can retrieve the same information via the Integration API, which can save you extra API requests. Consider these options: > - Request the customer profile to be part of the response content using >   [Update Customer Session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2). > - Send an empty update with the [Update Customer Profile](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint with `runRuleEngine=false`. 
 
 ### Example
 
@@ -6682,7 +7055,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint. 
+customer_id = 56 # Integer | The value of the `id` property of a customer profile. Get it with the [List Application's customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint. 
 
 begin
   #Get customer profile
@@ -6698,7 +7071,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#operation/getApplicationCustomers) endpoint.  | 
+ **customer_id** | **Integer**| The value of the &#x60;id&#x60; property of a customer profile. Get it with the [List Application&#39;s customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint.  | 
 
 ### Return type
 
@@ -6716,7 +7089,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile_achievement_progress
 
-> InlineResponse20049 get_customer_profile_achievement_progress(application_id, integration_id, opts)
+> InlineResponse20052 get_customer_profile_achievement_progress(application_id, integration_id, opts)
 
 List customer achievements
 
@@ -6778,7 +7151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20049**](InlineResponse20049.md)
+[**InlineResponse20052**](InlineResponse20052.md)
 
 ### Authorization
 
@@ -6792,7 +7165,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profiles
 
-> InlineResponse20027 get_customer_profiles(opts)
+> InlineResponse20029 get_customer_profiles(opts)
 
 List customer profiles
 
@@ -6848,7 +7221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -6862,7 +7235,7 @@ Name | Type | Description  | Notes
 
 ## get_customers_by_attributes
 
-> InlineResponse20026 get_customers_by_attributes(body, opts)
+> InlineResponse20028 get_customers_by_attributes(body, opts)
 
 List customer profiles matching the given attributes
 
@@ -6920,7 +7293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -6934,11 +7307,11 @@ Name | Type | Description  | Notes
 
 ## get_dashboard_statistics
 
-> InlineResponse20016 get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
+> InlineResponse20018 get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
 
 Get statistics for loyalty dashboard
 
-Retrieve the statistics displayed on the specified loyalty program's dashboard, such as the total active points, pending points, spent points, and expired points.  **Important:** The returned data does not include the current day. All statistics are updated daily at 11:59 PM in the loyalty program time zone. 
+Retrieve the statistics displayed on the specified loyalty program's dashboard, such as the total active points, pending points, spent points, and expired points.  > [!important] The returned data does not include the current day. All statistics > are updated daily at 11:59 PM in the loyalty program time zone. 
 
 ### Example
 
@@ -6965,8 +7338,8 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_start = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from after this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+range_end = DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Only return results from before this timestamp.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
 opts = {
   subledger_id: 'subledger_id_example' # String | The ID of the subledger by which we filter the data.
 }
@@ -6986,13 +7359,13 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **range_start** | **DateTime**| Only return results from after this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
- **range_end** | **DateTime**| Only return results from before this timestamp.  **Note:** - This must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_start** | **DateTime**| Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
+ **range_end** | **DateTime**| Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**InlineResponse20018**](InlineResponse20018.md)
 
 ### Authorization
 
@@ -7006,7 +7379,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20040 get_event_types(opts)
+> InlineResponse20042 get_event_types(opts)
 
 List event types
 
@@ -7066,7 +7439,73 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20040**](InlineResponse20040.md)
+[**InlineResponse20042**](InlineResponse20042.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_experiment
+
+> Experiment get_experiment(application_id, experiment_id)
+
+Get experiment in Application
+
+Retrieve the given experiment associated with the Application.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+experiment_id = 56 # Integer | The ID of the experiment.
+
+begin
+  #Get experiment in Application
+  result = api_instance.get_experiment(application_id, experiment_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_experiment: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **experiment_id** | **Integer**| The ID of the experiment. | 
+
+### Return type
+
+[**Experiment**](Experiment.md)
 
 ### Authorization
 
@@ -7080,7 +7519,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20043 get_exports(opts)
+> InlineResponse20045 get_exports(opts)
 
 Get exports
 
@@ -7140,7 +7579,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20043**](InlineResponse20043.md)
+[**InlineResponse20045**](InlineResponse20045.md)
 
 ### Authorization
 
@@ -7185,7 +7624,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 
 begin
   #Get loyalty card
@@ -7202,7 +7641,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
 
 ### Return type
 
@@ -7220,7 +7659,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_card_transaction_logs
 
-> InlineResponse20019 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
+> InlineResponse20021 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
 
 List card's transactions
 
@@ -7251,15 +7690,15 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 opts = {
-  start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
-  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
-  transaction_uui_ds: ['transaction_uui_ds_example'] # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'] # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
 }
 
 begin
@@ -7277,18 +7716,18 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
- **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
- **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
+ **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
- **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
- **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -7302,7 +7741,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_cards
 
-> InlineResponse20018 get_loyalty_cards(loyalty_program_id, opts)
+> InlineResponse20020 get_loyalty_cards(loyalty_program_id, opts)
 
 List loyalty cards
 
@@ -7337,7 +7776,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  identifier: 'identifier_example', # String | The card code by which to filter loyalty cards in the response.
+  identifier: 'identifier_example', # String | The card code by which to filter loyalty cards in the response.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
   profile_id: 56, # Integer | Filter results by customer profile ID.
   batch_id: 'batch_id_example' # String | Filter results by loyalty card batch ID.
 }
@@ -7360,13 +7799,89 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **identifier** | **String**| The card code by which to filter loyalty cards in the response. | [optional] 
+ **identifier** | **String**| The card code by which to filter loyalty cards in the response.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | [optional] 
  **profile_id** | **Integer**| Filter results by customer profile ID. | [optional] 
  **batch_id** | **String**| Filter results by loyalty card batch ID. | [optional] 
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**InlineResponse20020**](InlineResponse20020.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_loyalty_ledger_balances
+
+> LoyaltyBalancesWithTiers get_loyalty_ledger_balances(loyalty_program_id, integration_id, opts)
+
+Get customer's loyalty balances
+
+Retrieve loyalty ledger balances for the given Integration ID in the specified loyalty program.  You can filter balances by date and subledger ID, and include tier-related information in the response.  > [!note] If no filtering options are applied, you retrieve all loyalty > balances on the current date for the given integration ID.  Loyalty balances are calculated when Talon.One receives your request using the points stored in our database, so retrieving a large number of balances at once can impact performance.  For more information, see:  - [Managing card-based loyalty program data](https://docs.talon.one/docs/product/loyalty-programs/card-based/managing-loyalty-cards)  - [Managing profile-based loyalty program data](https://docs.talon.one/docs/product/loyalty-programs/profile-based/managing-pb-lp-data) 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+loyalty_program_id = 56 # Integer | Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+opts = {
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  subledger_id: 'subledger_id_example', # String | The ID of the subledger used to filter the data. Leave this value empty (\"\") to query the main ledger.
+  include_tiers: false, # Boolean | Indicates whether tier information is included in the response.  When set to `true`, the response includes information about the current tier and the number of points required to move to next tier. 
+  include_projected_tier: false # Boolean | Indicates whether the customer's projected tier information is included in the response.  When set to `true`, the response includes information about the customer's active points and the name of the projected tier.  **Note** We recommend filtering by `subledgerId` for better performance. 
+}
+
+begin
+  #Get customer's loyalty balances
+  result = api_instance.get_loyalty_ledger_balances(loyalty_program_id, integration_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_loyalty_ledger_balances: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loyalty_program_id** | **Integer**| Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
+ **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **subledger_id** | **String**| The ID of the subledger used to filter the data. Leave this value empty (\&quot;\&quot;) to query the main ledger. | [optional] 
+ **include_tiers** | **Boolean**| Indicates whether tier information is included in the response.  When set to &#x60;true&#x60;, the response includes information about the current tier and the number of points required to move to next tier.  | [optional] [default to false]
+ **include_projected_tier** | **Boolean**| Indicates whether the customer&#39;s projected tier information is included in the response.  When set to &#x60;true&#x60;, the response includes information about the customer&#39;s active points and the name of the projected tier.  **Note** We recommend filtering by &#x60;subledgerId&#x60; for better performance.  | [optional] [default to false]
+
+### Return type
+
+[**LoyaltyBalancesWithTiers**](LoyaltyBalancesWithTiers.md)
 
 ### Authorization
 
@@ -7384,7 +7899,7 @@ Name | Type | Description  | Notes
 
 Get customer's full loyalty ledger
 
-Get the loyalty ledger for this profile integration ID.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint.  **Important:** To get loyalty transaction logs for a given Integration ID in a loyalty program, we recommend using the Integration API's [Get customer's loyalty logs](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). 
+Get the loyalty ledger for this profile integration ID.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint.  **Important:** To get loyalty transaction logs for a given Integration ID in a loyalty program, we recommend using the Integration API's [Get customer's loyalty logs](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). 
 
 ### Example
 
@@ -7450,7 +7965,7 @@ Name | Type | Description  | Notes
 
 Get loyalty program
 
-Get the specified [loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview). To list all loyalty programs in your Application, use [List loyalty programs](#operation/getLoyaltyPrograms).  To list the loyalty programs that a customer profile is part of, use the [List customer data](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/getCustomerInventory) 
+Get the specified [loyalty program](https://docs.talon.one/docs/product/loyalty-programs/overview).  To list all loyalty programs in your Application, use [List loyalty programs](#tag/Loyalty/operation/getLoyaltyPrograms).  To list the loyalty programs that a customer profile is part of, use [List customer data](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/getCustomerInventory). 
 
 ### Example
 
@@ -7508,13 +8023,99 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## get_loyalty_program_profile_ledger_transactions
+
+> InlineResponse2005 get_loyalty_program_profile_ledger_transactions(loyalty_program_id, integration_id, opts)
+
+List customer's loyalty transactions
+
+Retrieve paginated results of loyalty transaction logs for the given Integration ID in the specified loyalty program.  You can filter transactions by date or by ledger (subledger or main ledger). If no filters are applied, the last 50 loyalty transactions for the given integration ID are returned.  > [!note] To retrieve all loyalty program transaction logs in a given > loyalty program, use the [List loyalty program transactions](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyProgramTransactions) > endpoint. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+loyalty_program_id = 56 # Integer | Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+opts = {
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
+  subledger_id: 'subledger_id_example', # String | The ID of the subledger used to filter the data. Leave this value empty (\"\") to query the main ledger.
+  loyalty_transaction_type: 'loyalty_transaction_type_example', # String | Filter results by loyalty transaction type: - `manual`: Loyalty transaction that was done manually. - `session`: Loyalty transaction that resulted from a customer session. - `import`: Loyalty transaction that was imported from a CSV file. 
+  start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  page_size: 50, # Integer | The number of items in the response.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  awaits_activation: true # Boolean | If `true`: Filters results to include only point transactions that have action-based activation and have not expired.  If `false`: Returns a `400` response. 
+}
+
+begin
+  #List customer's loyalty transactions
+  result = api_instance.get_loyalty_program_profile_ledger_transactions(loyalty_program_id, integration_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_loyalty_program_profile_ledger_transactions: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loyalty_program_id** | **Integer**| Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
+ **subledger_id** | **String**| The ID of the subledger used to filter the data. Leave this value empty (\&quot;\&quot;) to query the main ledger. | [optional] 
+ **loyalty_transaction_type** | **String**| Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file.  | [optional] 
+ **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
+ **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **awaits_activation** | **Boolean**| If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response.  | [optional] 
+
+### Return type
+
+[**InlineResponse2005**](InlineResponse2005.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_loyalty_program_transactions
 
-> InlineResponse20017 get_loyalty_program_transactions(loyalty_program_id, opts)
+> InlineResponse20019 get_loyalty_program_transactions(loyalty_program_id, opts)
 
 List loyalty program transactions
 
-Retrieve loyalty program transaction logs in a given loyalty program with filtering options applied. Manual and imported transactions are also included. **Note:** If no filters are applied, the last 50 loyalty transactions for the given loyalty program are returned.  **Important:** To get loyalty transaction logs for a given Integration ID in a loyalty program, we recommend using the Integration API's [Get customer's loyalty logs](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). 
+Retrieve loyalty program transaction logs in a given loyalty program with filtering options applied. Manual and imported transactions are also included.  > [!note] **Note** > - If no filters are applied, the last 50 loyalty transactions for the given loyalty program are returned. > - To get loyalty transaction logs for a given Integration ID in >   a loyalty program, we recommend using the Integration API's [Get customer's loyalty >   logs](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). 
 
 ### Example
 
@@ -7544,12 +8145,13 @@ loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can g
 opts = {
   loyalty_transaction_type: 'loyalty_transaction_type_example', # String | Filter results by loyalty transaction type: - `manual`: Loyalty transaction that was done manually. - `session`: Loyalty transaction that resulted from a customer session. - `import`: Loyalty transaction that was imported from a CSV file. 
   subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
-  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
-  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
-  start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
+  start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   page_size: 50, # Integer | The number of items in the response.
-  skip: 56 # Integer | The number of items to skip when paging through large result sets.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  awaits_activation: true # Boolean | If `true`: Filters results to include only point transactions that have action-based activation and have not expired.  If `false`: Returns a `400` response. 
 }
 
 begin
@@ -7569,16 +8171,17 @@ Name | Type | Description  | Notes
  **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **loyalty_transaction_type** | **String**| Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file.  | [optional] 
  **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
- **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
- **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
- **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
- **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  **Note:**  - It must be an RFC3339 timestamp string. - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
+ **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **awaits_activation** | **Boolean**| If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response.  | [optional] 
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20019**](InlineResponse20019.md)
 
 ### Authorization
 
@@ -7592,7 +8195,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_programs
 
-> InlineResponse20015 get_loyalty_programs
+> InlineResponse20017 get_loyalty_programs
 
 List loyalty programs
 
@@ -7638,7 +8241,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
@@ -7656,7 +8259,7 @@ This endpoint does not need any parameter.
 
 Get loyalty program statistics
 
-⚠️ Deprecation notice: Support for requests to this endpoint will end soon. To retrieve statistics for a loyalty program, use the [Get statistics for loyalty dashboard](/management-api#tag/Loyalty/operation/getDashboardStatistics) endpoint.  Retrieve the statistics of the specified loyalty program, such as the total active points, pending points, spent points, and expired points. 
+> [warning] This endpoint is deprecated.  To retrieve statistics for a loyalty program, use the [Get statistics for loyalty dashboard](/management-api#tag/Loyalty/operation/getDashboardStatistics) endpoint.  Retrieve the statistics of the specified loyalty program, such as the total active points, pending points, spent points, and expired points. 
 
 ### Example
 
@@ -7808,7 +8411,7 @@ Name | Type | Description  | Notes
 
 ## get_referrals_without_total_count
 
-> InlineResponse20012 get_referrals_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20013 get_referrals_without_total_count(application_id, campaign_id, opts)
 
 List referrals
 
@@ -7880,7 +8483,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -8026,7 +8629,7 @@ Name | Type | Description  | Notes
 
 ## get_rulesets
 
-> InlineResponse2009 get_rulesets(application_id, campaign_id, opts)
+> InlineResponse20010 get_rulesets(application_id, campaign_id, opts)
 
 List campaign rulesets
 
@@ -8086,7 +8689,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -8230,7 +8833,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20041 get_users(opts)
+> InlineResponse20043 get_users(opts)
 
 List users in account
 
@@ -8286,7 +8889,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20041**](InlineResponse20041.md)
+[**InlineResponse20043**](InlineResponse20043.md)
 
 ### Authorization
 
@@ -8364,7 +8967,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20039 get_webhooks(opts)
+> InlineResponse20041 get_webhooks(opts)
 
 List webhooks
 
@@ -8430,7 +9033,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20039**](InlineResponse20039.md)
+[**InlineResponse20041**](InlineResponse20041.md)
 
 ### Authorization
 
@@ -8448,7 +9051,7 @@ Name | Type | Description  | Notes
 
 Import data into existing account-level collection
 
-Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  Example:  ``` item Addidas Nike Asics ```  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+Upload a CSV file containing the collection of string values that should be attached as payload for collection.  The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  ## Example  ``` item Adidas Nike Asics ```  > [!note] Before sending a request to this endpoint, ensure the data in the > CSV to import is different from the data currently stored in the collection. 
 
 ### Example
 
@@ -8474,7 +9077,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 opts = {
   up_file: 'up_file_example' # String | The file containing the data that is being imported.
 }
@@ -8493,7 +9096,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
  **up_file** | **String**| The file containing the data that is being imported. | [optional] 
 
 ### Return type
@@ -8516,7 +9119,7 @@ Name | Type | Description  | Notes
 
 Import allowed values for attribute
 
-Upload a CSV file containing a list of [picklist values](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#picklist-values) for the specified attribute.  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column: - `item` (required): the values in your allowed list, for example a list of SKU's.  An allowed list is limited to 500,000 items.  Example:  ```text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 ``` 
+Upload a CSV file containing a list of [picklist values](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#picklist-values) for the specified attribute.  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column:  - `item`: The values in your allowed list, for example a list of SKUs.  An allowed list is limited to 500,000 items.  ## Example  ```text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 ``` 
 
 ### Example
 
@@ -8584,7 +9187,7 @@ Name | Type | Description  | Notes
 
 Import audience members
 
-Upload a CSV file containing the integration IDs of the members you want to add to an audience.  The file should be sent as multipart data and should contain only the following column (required): - `profileintegrationid`: The integration ID of the customer profile.  The import **replaces** the previous list of audience members.  **Note:** We recommend limiting your file size to 500MB.  Example:  ```text profileintegrationid charles alexa ``` 
+Upload a CSV file containing the integration IDs of the members you want to add to an audience.  The file should be sent as multipart data and should contain only the following column (required):  - `profileintegrationid`: The integration ID of the customer profile.  The import **replaces** the previous list of audience members.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```text profileintegrationid charles alexa ``` 
 
 ### Example
 
@@ -8796,7 +9399,7 @@ Name | Type | Description  | Notes
 
 Import data into existing campaign-level collection
 
-Upload a CSV file containing the collection of string values that should be attached as payload for collection. The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  Example:  ``` item Addidas Nike Asics ```  **Note:** Before sending a request to this endpoint, ensure the data in the CSV to import is different from the data currently stored in the collection. 
+Upload a CSV file containing the collection of string values that should be attached as payload for collection.  The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - `item`: the values in your collection.  A collection is limited to 500,000 items.  ## Example  ``` item Adidas Nike Asics ```  > [!note] Before sending a request to this endpoint, ensure the data in the > CSV to import is different from the data currently stored in the collection. 
 
 ### Example
 
@@ -8824,7 +9427,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 opts = {
   up_file: 'up_file_example' # String | The file containing the data that is being imported.
 }
@@ -8845,7 +9448,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
  **up_file** | **String**| The file containing the data that is being imported. | [optional] 
 
 ### Return type
@@ -8868,7 +9471,7 @@ Name | Type | Description  | Notes
 
 Import coupons
 
-Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.  The CSV file contains the following columns:  - `value` (required): The coupon code. - `expirydate`: The end date in RFC3339 of the code redemption period. - `startdate`: The start date in RFC3339 of the code redemption period. - `recipientintegrationid`: The integration ID of the recipient of the coupon.   Only the customer with this integration ID can redeem this code. Available only for personal codes. - `limitval`: The maximum number of redemptions of this code. For unlimited redemptions, use `0`. Defaults to `1` when not provided. - `discountlimit`: The total discount value that the code can give. This is typically used to represent a gift card value. - `attributes`: A JSON object describing _custom_ coupon attribute names and their values, enclosed with double quotation marks.    For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated with the coupon entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"category\": \"10_off\"}\"`.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Note:** We recommend limiting your file size to 500MB.  **Example:**  ```text \"value\",\"expirydate\",\"startdate\",\"recipientintegrationid\",\"limitval\",\"attributes\",\"discountlimit\" COUP1,2018-07-01T04:00:00Z,2018-05-01T04:00:00Z,cust123,1,\"{\"\"Category\"\": \"\"10_off\"\"}\",2.4 ```  Once imported, you can find the `batchId` in the Campaign Manager or by using [List coupons](#tag/Coupons/operation/getCouponsWithoutTotalCount). 
+Upload a CSV file containing the coupons that should be created. The file should be sent as multipart data.  The CSV file contains the following columns:  - `value` (required): The coupon code. Must be at least 3 characters long. We recommend using alphanumeric characters.   There is no maximum length but limiting the code to 30 characters   ensures it is fully readable in the Campaign Manager.   The code should be unique unless you set `skipDuplicates` to `true`. - `expirydate`: The end date in RFC3339 of the code redemption period. - `startdate`: The start date in RFC3339 of the code redemption period. - `recipientintegrationid`: The integration ID of the recipient of the coupon.   Only the customer with this integration ID can redeem this code. Available only for personal codes. - `limitval`: The maximum number of redemptions of this code. For unlimited redemptions, use `0`. Defaults to `1` when not provided. - `discountlimit`: The total discount value that the code can give. This is typically used to represent a gift card value. - `attributes`: A JSON object describing _custom_ coupon attribute names and their values, enclosed with double quotation marks.<br />   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated with the coupon entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"category\": \"10_off\"}\"`.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```text \"value\",\"expirydate\",\"startdate\",\"recipientintegrationid\",\"limitval\",\"attributes\",\"discountlimit\" COUP1,2018-07-01T04:00:00Z,2018-05-01T04:00:00Z,cust123,1,\"{\"\"Category\"\": \"\"10_off\"\"}\",2.4 ```  Once imported, you can find the `batchId` in the Campaign Manager or by using [List coupons](#tag/Coupons/operation/getCouponsWithoutTotalCount). 
 
 ### Example
 
@@ -8940,7 +9543,7 @@ Name | Type | Description  | Notes
 
 Import loyalty cards
 
-Upload a CSV file containing the loyalty cards that you want to use in your card-based loyalty program. Send the file as multipart data.  It contains the following columns for each card:  - `identifier` (required): The alphanumeric identifier of the loyalty card. - `state` (required): The state of the loyalty card. It can be `active` or `inactive`. - `customerprofileids` (optional): An array of strings representing the identifiers of the customer profiles linked to the loyalty card. The identifiers should be separated with a semicolon (;).  **Note:** We recommend limiting your file size to 500MB.  **Example:**  ```csv identifier,state,customerprofileids 123-456-789AT,active,Alexa001;UserA ``` 
+Upload a CSV file containing the loyalty cards that you want to use in your card-based loyalty program.  Send the file as multipart data.  It contains the following columns for each card:  - `identifier` (required): The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. - `state` (required): The state of the loyalty card. It can be `active` or `inactive`. - `customerprofileids` (optional): An array of strings representing the identifiers of the customer profiles linked to the loyalty card. The identifiers should be separated with a semicolon (;).  > [!note] We recommend limiting your file size to 500MB.  ## Example  ```csv identifier,state,customerprofileids 123-456-789AT,active,Alexa001;UserA ``` 
 
 ### Example
 
@@ -9008,7 +9611,7 @@ Name | Type | Description  | Notes
 
 Import customers into loyalty tiers
 
-Upload a CSV file containing existing customers to be assigned to existing tiers. Send the file as multipart data.  **Important:** This endpoint only works with loyalty programs with advanced tiers (with expiration and downgrade policy) feature enabled.  The CSV file should contain the following columns: - `subledgerid` (optional): The ID of the subledger. If this field is empty, the main ledger will be used. - `customerprofileid`: The integration ID of the customer profile to whom the tier should be assigned. - `tiername`: The name of an existing tier to assign to the customer. - `expirydate`: The expiration date of the tier when the tier is reevaluated. It should be a future date.  About customer assignment to a tier: - If the customer isn't already in a tier, the customer is assigned to the specified tier during the tier import. - If the customer is already in the tier that's specified in the CSV file, only the expiration date is updated.  **Note:** We recommend not using this endpoint to update the tier of a customer. To update a customer's tier, you can [add](/management-api#tag/Loyalty/operation/addLoyaltyPoints) or [deduct](/management-api#tag/Loyalty/operation/removeLoyaltyPoints) their loyalty points.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Note:** We recommend limiting your file size to 500MB.  **Example:** ```csv subledgerid,customerprofileid,tiername,expirydate SUB1,alexa,Gold,2024-03-21T07:32:14Z ,george,Silver,2025-04-16T21:12:37Z SUB2,avocado,Bronze,2026-05-03T11:47:01Z ``` 
+Upload a CSV file containing existing customers to be assigned to existing tiers.  Send the file as multipart data.  > [!important] This endpoint only works with loyalty programs with advanced > tiers (with expiration and downgrade policy) feature enabled.  The CSV file should contain the following columns:  - `subledgerid` (optional): The ID of the subledger. If this field is empty, the main ledger will be used. - `customerprofileid`: The integration ID of the customer profile to whom the tier should be assigned. - `tiername`: The name of an existing tier to assign to the customer. - `expirydate`: The expiration date of the tier when the tier is reevaluated. It should be a future date.  About customer assignment to a tier:  - If the customer isn't already in a tier, the customer is assigned to the specified tier during the tier import. - If the customer is already in the tier that's specified in the CSV file, only the expiration date is updated.  > [!note] We recommend not using this endpoint to update the tier of a customer.  To update a customer's tier, you can [add](/management-api#tag/Loyalty/operation/addLoyaltyPoints) or [deduct](/management-api#tag/Loyalty/operation/removeLoyaltyPoints) their loyalty points.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```csv subledgerid,customerprofileid,tiername,expirydate SUB1,alexa,Gold,2024-03-21T07:32:14Z ,george,Silver,2025-04-16T21:12:37Z SUB2,avocado,Bronze,2026-05-03T11:47:01Z ``` 
 
 ### Example
 
@@ -9076,7 +9679,7 @@ Name | Type | Description  | Notes
 
 Import loyalty points
 
-Upload a CSV file containing the loyalty points you want to import into a given loyalty program. Send the file as multipart data.  Depending on the type of loyalty program, you can import points into a given customer profile or loyalty card.  The CSV file contains the following columns:  - `customerprofileid` (optional): For profile-based loyalty programs, the integration ID of the customer profile where the loyalty points are imported.    **Note**: If the customer profile does not exist, it will be created. The profile will not be visible in any Application   until a session or profile update is received for that profile. - `identifier` (optional): For card-based loyalty programs, the identifier of the loyalty card where the loyalty points are imported. - `amount`: The amount of points to award to the customer profile. - `startdate` (optional): The earliest date when the points can be redeemed. The points are `active` from this date until the expiration date.    **Note**: It must be an RFC3339 timestamp string or string `immediate`. Empty or missing values are considered `immediate`. - `expirydate` (optional): The latest date when the points can be redeemed. The points are `expired` after this date.    **Note**: It must be an RFC3339 timestamp string or string `unlimited`. Empty or missing values are considered `unlimited`. - `subledgerid` (optional): The ID of the subledger that should received the points. - `reason` (optional): The reason why these points are awarded.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Note:** For existing customer profiles and loyalty cards, the imported points are added to any previous active or pending points, depending on the value provided for `startdate`. If `startdate` matches the current date, the imported points are _active_. If it is later, the points are _pending_ until the date provided for `startdate` is reached.  **Note:** We recommend limiting your file size to 500MB.  **Example for profile-based programs:**  ```text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ```  **Example for card-based programs:**  ```text identifier,amount,startdate,expirydate,subledgerid,reason summer-loyalty-card-0543,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ``` 
+Upload a CSV file containing the loyalty points you want to import into a given loyalty program.  Send the file as multipart data.  Depending on the type of loyalty program, you can import points into a given customer profile or loyalty card.  The CSV file contains the following columns:  - `customerprofileid` (optional): For profile-based loyalty programs, the   integration ID of the customer profile where the loyalty points are   imported.   **Note**: If the customer profile does not exist, it will be created. The profile will not be visible in any Application   until a session or profile update is received for that profile. - `identifier` (optional): For card-based loyalty programs, the identifier of the loyalty card where the loyalty points are imported. - `amount`: The amount of points to award to the customer profile. - `startdate` (optional): The earliest date when the points can be redeemed. The points are `active` from this date until the expiration date.   This parameter accepts one of the following values:     - A timestamp string in RFC3339 format.     - `immediate`     - `on_action`   **Note**: Empty or missing values default to `immediate`. - `expirydate` (optional): The latest date when the points can be redeemed.   The points are `expired` after this date.   **Note**: It must be an RFC3339 timestamp string or string `unlimited`. Empty or missing values are considered `unlimited`.   If passed, `validityDuration` should be omitted. - `validityDuration` (optional): The duration for which the points remain active, relative to the   activation date. The time format is an **integer** followed by one letter indicating the time unit.<br />   Examples: `30s`, `40m`, `1h`, `5D`, `7W`, `10M`, `15Y`.    Available units:    - `s`: seconds   - `m`: minutes   - `h`: hours   - `D`: days   - `W`: weeks   - `M`: months   - `Y`: years    You can round certain units up or down:    - `_D` for rounding down days only. Signifies the start of the day.   - `_U` for rounding up days, weeks, months and years. Signifies the end of   the day, week, month or year.    If passed, `expirydate` should be omitted. - `subledgerid` (optional): The ID of the subledger that should received the points. - `reason` (optional): The reason why these points are awarded.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  > [!note] For existing customer profiles and loyalty cards, the imported > points are added to any previous active or pending points, depending on the > value provided for `startdate`. If `startdate` matches the current date, the > imported points are _active_. If it is later, the points are _pending_ until > the date provided for `startdate` is reached.  > [!note] We recommend limiting your file size to 500 MB.  ## Example for profile-based programs  ```text customerprofileid,amount,startdate,expirydate,subledgerid,reason URNGV8294NV,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ```  ## Example for card-based programs  ```text identifier,amount,startdate,expirydate,subledgerid,reason summer-loyalty-card-0543,100,2009-11-10T23:00:00Z,2009-11-11T23:00:00Z,subledger1,appeasement ``` 
 
 ### Example
 
@@ -9146,7 +9749,7 @@ Name | Type | Description  | Notes
 
 Import giveaway codes into a giveaway pool
 
-Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file contains the following columns: - `code` (required): The code of your giveaway, for instance, a gift card redemption code. - `startdate`:  The start date in RFC3339 of the code redemption period. - `enddate`: The last date in RFC3339 of the code redemption period. - `attributes`: A JSON object describing _custom_ giveaway attribute names and their values, enclosed with double quotation marks.    For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `provider` associated with the giveaway entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"provider\": \"myPartnerCompany\"}\"`.  The `startdate` and `enddate` have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not. You can use the time zone setting of your choice. The values are converted to UTC internally by Talon.One.  **Note:**  - We recommend limiting your file size to 500MB. - You can import the same code multiple times. Duplicate codes are treated and distributed to customers as unique codes.  **Example:**  ```text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Aliexpress\"\"}\" ``` 
+Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file contains the following columns:  - `code` (required): The code of your giveaway, for instance, a gift card redemption code. - `startdate`:  The start date in RFC3339 of the code redemption period. - `enddate`: The last date in RFC3339 of the code redemption period. - `attributes`: A JSON object describing _custom_ giveaway attribute names and their values, enclosed with double quotation marks.<br />   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `provider` associated with the giveaway entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"provider\": \"myPartnerCompany\"}\"`.  The `startdate` and `enddate` have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not.  You can use the time zone setting of your choice. The values are converted to UTC internally by Talon.One.  > [!note] **Note** > - We recommend limiting your file size to 500MB. > - You can import the same code multiple times. Duplicate codes are treated and distributed to customers as unique codes.  ## Example  ```text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Amazon\"\"}\" GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\"{\"\"provider\"\": \"\"Aliexpress\"\"}\" ``` 
 
 ### Example
 
@@ -9214,7 +9817,7 @@ Name | Type | Description  | Notes
 
 Import referrals
 
-Upload a CSV file containing the referrals that should be created. The file should be sent as multipart data.  The CSV file contains the following columns:  - `code` (required): The referral code. - `advocateprofileintegrationid` (required): The profile ID of the advocate. - `startdate`: The start date in RFC3339 of the code redemption period. - `expirydate`: The end date in RFC3339 of the code redemption period. - `limitval`: The maximum number of redemptions of this code. Defaults to `1` when left blank. - `attributes`: A JSON object describing _custom_ referral attribute names and their values, enclosed with double quotation marks.    For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated with the referral entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"category\": \"10_off\"}\"`.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  **Important:** When you import a CSV file with referrals, a [customer profile](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles) is **not** automatically created for each `advocateprofileintegrationid` column value. Use the [Update customer profile](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfileV2) endpoint or the [Update multiple customer profiles](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfilesV2) endpoint to create the customer profiles.  **Note:** We recommend limiting your file size to 500MB.  **Example:**  ```text code,startdate,expirydate,advocateprofileintegrationid,limitval,attributes REFERRAL_CODE1,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid_4,1,\"{\"\"my_attribute\"\": \"\"10_off\"\"}\" REFERRAL_CODE2,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid1,1,\"{\"\"my_attribute\"\": \"\"20_off\"\"}\" ``` 
+Upload a CSV file containing the referrals that should be created.  The file should be sent as multipart data.  The CSV file contains the following columns:  - `code` (required): The referral code. - `advocateprofileintegrationid` (required): The profile ID of the advocate. - `startdate`: The start date in RFC3339 of the code redemption period. - `expirydate`: The end date in RFC3339 of the code redemption period. - `limitval`: The maximum number of redemptions of this code. Defaults to `1` when left blank. - `attributes`: A JSON object describing _custom_ referral attribute names and their values, enclosed with double quotation marks.<br />   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called `category` associated with the referral entity, the object in the CSV file, when opened in a text editor, must be: `\"{\"category\": \"10_off\"}\"`.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  > [!important] When you import a CSV file with referrals, > a [customer profile](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles) > is **not** automatically created for each `advocateprofileintegrationid` > column value. Use the [Update customer profile](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfileV2) > endpoint or the [Update multiple customer profiles](https://docs.talon.one/integration-api#tag/Customer-profiles/operation/updateCustomerProfilesV2) > endpoint to create the customer profiles.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```text code,startdate,expirydate,advocateprofileintegrationid,limitval,attributes REFERRAL_CODE1,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid_4,1,\"{\"\"my_attribute\"\": \"\"10_off\"\"}\" REFERRAL_CODE2,2020-11-10T23:00:00Z,2021-11-11T23:00:00Z,integid1,1,\"{\"\"my_attribute\"\": \"\"20_off\"\"}\" ``` 
 
 ### Example
 
@@ -9343,7 +9946,7 @@ nil (empty response body)
 
 ## list_account_collections
 
-> InlineResponse20020 list_account_collections(opts)
+> InlineResponse20022 list_account_collections(opts)
 
 List collections in account
 
@@ -9377,7 +9980,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   name: 'name_example' # String | Filter by collection name.
 }
 
@@ -9398,12 +10001,12 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **name** | **String**| Filter by collection name. | [optional] 
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -9417,7 +10020,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements
 
-> InlineResponse20048 list_achievements(application_id, campaign_id, opts)
+> InlineResponse20051 list_achievements(application_id, campaign_id, opts)
 
 List achievements
 
@@ -9477,7 +10080,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20048**](InlineResponse20048.md)
+[**InlineResponse20051**](InlineResponse20051.md)
 
 ### Authorization
 
@@ -9491,7 +10094,7 @@ Name | Type | Description  | Notes
 
 ## list_all_roles_v2
 
-> InlineResponse20044 list_all_roles_v2
+> InlineResponse20046 list_all_roles_v2
 
 List roles
 
@@ -9537,7 +10140,79 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20044**](InlineResponse20044.md)
+[**InlineResponse20046**](InlineResponse20046.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_application_cart_item_filters
+
+> InlineResponse20048 list_application_cart_item_filters(application_id, opts)
+
+List Application cart item filters
+
+Return all the Application cart item filters for a specific Application.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+opts = {
+  page_size: 50, # Integer | The number of items in the response.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  title: 'title_example' # String | Filter by the display name of the Application cart item filter in the Application.  **Note**: If no `title` is provided, all the Application cart item filters in the Application are returned. 
+}
+
+begin
+  #List Application cart item filters
+  result = api_instance.list_application_cart_item_filters(application_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->list_application_cart_item_filters: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
+ **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **title** | **String**| Filter by the display name of the Application cart item filter in the Application.  **Note**: If no &#x60;title&#x60; is provided, all the Application cart item filters in the Application are returned.  | [optional] 
+
+### Return type
+
+[**InlineResponse20048**](InlineResponse20048.md)
 
 ### Authorization
 
@@ -9551,7 +10226,7 @@ This endpoint does not need any parameter.
 
 ## list_campaign_store_budget_limits
 
-> InlineResponse20046 list_campaign_store_budget_limits(application_id, campaign_id, opts)
+> InlineResponse20049 list_campaign_store_budget_limits(application_id, campaign_id, opts)
 
 List campaign store budget limits
 
@@ -9609,7 +10284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20046**](InlineResponse20046.md)
+[**InlineResponse20049**](InlineResponse20049.md)
 
 ### Authorization
 
@@ -9623,7 +10298,7 @@ Name | Type | Description  | Notes
 
 ## list_catalog_items
 
-> InlineResponse20037 list_catalog_items(catalog_id, opts)
+> InlineResponse20039 list_catalog_items(catalog_id, opts)
 
 List items in a catalog
 
@@ -9657,7 +10332,7 @@ catalog_id = 56 # Integer | The ID of the catalog. You can find the ID in the Ca
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   sku: ['sku_example'], # Array<String> | Filter results by one or more SKUs. Must be exact match.
   product_names: ['product_names_example'] # Array<String> | Filter results by one or more product names. Must be exact match.
 }
@@ -9679,13 +10354,13 @@ Name | Type | Description  | Notes
  **catalog_id** | **Integer**| The ID of the catalog. You can find the ID in the Campaign Manager in **Account** &gt; **Tools** &gt; **Cart item catalogs**. | 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **sku** | [**Array&lt;String&gt;**](String.md)| Filter results by one or more SKUs. Must be exact match. | [optional] 
  **product_names** | [**Array&lt;String&gt;**](String.md)| Filter results by one or more product names. Must be exact match. | [optional] 
 
 ### Return type
 
-[**InlineResponse20037**](InlineResponse20037.md)
+[**InlineResponse20039**](InlineResponse20039.md)
 
 ### Authorization
 
@@ -9699,7 +10374,7 @@ Name | Type | Description  | Notes
 
 ## list_collections
 
-> InlineResponse20020 list_collections(application_id, campaign_id, opts)
+> InlineResponse20022 list_collections(application_id, campaign_id, opts)
 
 List collections in campaign
 
@@ -9735,7 +10410,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   name: 'name_example' # String | Filter by collection name.
 }
 
@@ -9758,12 +10433,12 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **name** | **String**| Filter by collection name. | [optional] 
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -9777,7 +10452,7 @@ Name | Type | Description  | Notes
 
 ## list_collections_in_application
 
-> InlineResponse20020 list_collections_in_application(application_id, opts)
+> InlineResponse20022 list_collections_in_application(application_id, opts)
 
 List collections in Application
 
@@ -9812,7 +10487,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   name: 'name_example' # String | Filter by collection name.
 }
 
@@ -9834,12 +10509,84 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **name** | **String**| Filter by collection name. | [optional] 
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20022**](InlineResponse20022.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_experiments
+
+> InlineResponse20016 list_experiments(application_id, opts)
+
+List experiments
+
+List all experiments of the specified Application that match your filter criteria.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+opts = {
+  page_size: 1000, # Integer | The number of items in the response.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  sort: 'sort_example' # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
+}
+
+begin
+  #List experiments
+  result = api_instance.list_experiments(application_id, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->list_experiments: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
+ **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
+
+### Return type
+
+[**InlineResponse20016**](InlineResponse20016.md)
 
 ### Authorization
 
@@ -9853,7 +10600,7 @@ Name | Type | Description  | Notes
 
 ## list_stores
 
-> InlineResponse20045 list_stores(application_id, opts)
+> InlineResponse20047 list_stores(application_id, opts)
 
 List stores
 
@@ -9888,7 +10635,7 @@ opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When `true`: `hasMore` is true when there is a next page. `totalResultSize` is always zero. - When `false`: `hasMore` is always false. `totalResultSize` contains the total number of results for this query. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
   campaign_id: 3.4, # Float | Filter results by campaign ID.
   name: 'name_example', # String | The name of the store.
   integration_id: 'integration_id_example', # String | The integration ID of the store.
@@ -9913,7 +10660,7 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
- **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total size of the result, across all pages. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;hasMore&#x60; is true when there is a next page. &#x60;totalResultSize&#x60; is always zero. - When &#x60;false&#x60;: &#x60;hasMore&#x60; is always false. &#x60;totalResultSize&#x60; contains the total number of results for this query.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
  **campaign_id** | **Float**| Filter results by campaign ID. | [optional] 
  **name** | **String**| The name of the store. | [optional] 
  **integration_id** | **String**| The integration ID of the store. | [optional] 
@@ -9921,7 +10668,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20045**](InlineResponse20045.md)
+[**InlineResponse20047**](InlineResponse20047.md)
 
 ### Authorization
 
@@ -9992,13 +10739,79 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## price_history
+
+> PriceHistoryResponse price_history(application_id, body)
+
+Get summary of price history
+
+Fetch the historical price data for a given SKU within a defined timeframe. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+body = TalonOne::PriceHistoryRequest.new # PriceHistoryRequest | body
+
+begin
+  #Get summary of price history
+  result = api_instance.price_history(application_id, body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->price_history: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **body** | [**PriceHistoryRequest**](PriceHistoryRequest.md)| body | 
+
+### Return type
+
+[**PriceHistoryResponse**](PriceHistoryResponse.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## remove_loyalty_points
 
 > remove_loyalty_points(loyalty_program_id, integration_id, body)
 
 Deduct points from customer profile
 
-Deduct points from the specified loyalty program and specified customer profile.  **Important:** - Only active points can be deducted. - Only pending points are rolled back when a session is cancelled or reopened.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint. 
+Deduct points from the specified loyalty program and specified customer profile.  > [!note] **Note** > - Only active points can be deducted. > - Only pending points are rolled back when a session is cancelled or reopened.  To get the `integrationId` of the profile from a `sessionId`, use the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint. 
 
 ### Example
 
@@ -11071,11 +11884,11 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_application_wide_without_total_count
 
-> InlineResponse20011 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
+> InlineResponse20012 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
 
 List coupons that match the given attributes (without total count)
 
-List the coupons whose attributes match the query criteria in all the campaigns of the given Application.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+List the coupons whose attributes match the query criteria in all the campaigns of the given Application.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  > [!note] The total count is not included in the response. 
 
 ### Example
 
@@ -11151,7 +11964,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -11165,11 +11978,11 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_without_total_count
 
-> InlineResponse20011 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
+> InlineResponse20012 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
 
 List coupons that match the given attributes in campaign (without total count)
 
-List the coupons whose attributes match the query criteria in the given campaign.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  **Note:** The total count is not included in the response. 
+List the coupons whose attributes match the query criteria in the given campaign.  The match is successful if all the attributes of the request are found in a coupon, even if the coupon has more attributes that are not present on the request.  > [!note] The total count is not included in the response. 
 
 ### Example
 
@@ -11245,7 +12058,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -11259,7 +12072,7 @@ Name | Type | Description  | Notes
 
 ## summarize_campaign_store_budget
 
-> InlineResponse20047 summarize_campaign_store_budget(application_id, campaign_id)
+> InlineResponse20050 summarize_campaign_store_budget(application_id, campaign_id)
 
 Get summary of campaign store budgets
 
@@ -11311,7 +12124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20047**](InlineResponse20047.md)
+[**InlineResponse20050**](InlineResponse20050.md)
 
 ### Authorization
 
@@ -11329,7 +12142,7 @@ Name | Type | Description  | Notes
 
 Transfer card data
 
-Transfer loyalty card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  **Important:**  - The original card is automatically blocked once the new card is created, and it cannot be activated again. - The default status of the new card is _active_. 
+Transfer loyalty card data, such as linked customers, loyalty balances and transactions, from a given loyalty card to a new, automatically created loyalty card.  > [!important] **Note** > - The original card is automatically blocked once the new card is created,     and it cannot be activated again. > - The default status of the new card is _active_. 
 
 ### Example
 
@@ -11356,7 +12169,7 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
 body = TalonOne::TransferLoyaltyCard.new # TransferLoyaltyCard | body
 
 begin
@@ -11373,7 +12186,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
  **body** | [**TransferLoyaltyCard**](TransferLoyaltyCard.md)| body | 
 
 ### Return type
@@ -11422,7 +12235,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::ManagementApi.new
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 body = TalonOne::UpdateCollection.new # UpdateCollection | body
 
 begin
@@ -11439,7 +12252,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#operation/listAccountCollections) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
  **body** | [**UpdateCollection**](UpdateCollection.md)| body | 
 
 ### Return type
@@ -11664,7 +12477,7 @@ Name | Type | Description  | Notes
 
 Update campaign
 
-Update the given campaign.  **Important:** You cannot use this endpoint to update campaigns if [campaign staging and revisions](https://docs.talon.one/docs/product/applications/managing-general-settings#campaign-staging-and-revisions) is enabled for your Application. 
+Update the given campaign.  > [!important] You cannot use this endpoint to update campaigns if [campaign staging and > revisions](https://docs.talon.one/docs/product/applications/managing-general-settings#campaign-staging-and-revisions) > is enabled for your Application. 
 
 ### Example
 
@@ -11760,7 +12573,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
-collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint.
+collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 body = TalonOne::UpdateCampaignCollection.new # UpdateCampaignCollection | body
 
 begin
@@ -11779,7 +12592,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#operation/listCollectionsInApplication) endpoint. | 
+ **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
  **body** | [**UpdateCampaignCollection**](UpdateCampaignCollection.md)| body | 
 
 ### Return type
@@ -11802,7 +12615,7 @@ Name | Type | Description  | Notes
 
 Update coupon
 
-Update the specified coupon.  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <p>With this <code>PUT</code> endpoint, if you do not explicitly set a value for the <code>startDate</code>, <code>expiryDate</code>, and <code>recipientIntegrationId</code> properties in your request, it is automatically set to <code>null</code>.</p>  </div> 
+Update the specified coupon.  > [!note] > With this `PUT` endpoint, if you do not explicitly set a value for the `startDate`, `expiryDate`, > and `recipientIntegrationId` properties in your request, it is automatically set to `null`. 
 
 ### Example
 
@@ -11872,7 +12685,7 @@ Name | Type | Description  | Notes
 
 Update coupons
 
-Update all coupons or a specific batch of coupons in the given campaign. You can find the `batchId` on the **Coupons** page of your campaign in the Campaign Manager, or you can use [List coupons](#operation/getCouponsWithoutTotalCount).  <div class=\"redoc-section\">   <p class=\"title\">Important</p>    <ul>     <li>Only send sequential requests to this endpoint.</li>     <li>Requests to this endpoint time out after 30 minutes. If you hit a timeout, contact our support team.</li>     <li>With this <code>PUT</code> endpoint, if you do not explicitly set a value for the <code>startDate</code> and <code>expiryDate</code> properties in your request, it is automatically set to <code>null</code>.</li>   </ul>  </div>  To update a specific coupon, use [Update coupon](#operation/updateCoupon). 
+Update all coupons or a specific batch of coupons in the given campaign.  You can find the `batchId` on the **Coupons** page of your campaign in the Campaign Manager, or you can use [List coupons](#tag/Coupons/operation/getCouponsWithoutTotalCount).  > [!note] **Note** > - Only send sequential requests to this endpoint. > - Requests to this endpoint time out after 30 minutes. If you hit a timeout, contact our support team. > - With this `PUT` endpoint, if you do not explicitly set a value for the `startDate` and `expiryDate` properties in your request, it is automatically set to `null`.  To update a specific coupon, use [Update coupon](#tag/Coupons/operation/updateCoupon). 
 
 ### Example
 
@@ -11937,9 +12750,9 @@ nil (empty response body)
 
 > LoyaltyCard update_loyalty_card(loyalty_program_id, loyalty_card_id, body)
 
-Update loyalty card status
+Update loyalty card
 
-Update the status of the given loyalty card. A card can be _active_ or _inactive_.
+Update the details of a specific loyalty card. You can set the card's status to `active` or `inactive` through this endpoint. At least one of `status` or `attributes` must be provided.
 
 ### Example
 
@@ -11966,11 +12779,11 @@ end
 
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
-loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint. 
-body = TalonOne::UpdateLoyaltyCard.new # UpdateLoyaltyCard | body
+loyalty_card_id = 'loyalty_card_id_example' # String | Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `NewCard2026%` as `NewCard2026%25`. 
+body = TalonOne::UpdateLoyaltyCardRequest.new # UpdateLoyaltyCardRequest | body
 
 begin
-  #Update loyalty card status
+  #Update loyalty card
   result = api_instance.update_loyalty_card(loyalty_program_id, loyalty_card_id, body)
   p result
 rescue TalonOne::ApiError => e
@@ -11984,8 +12797,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  | 
- **body** | [**UpdateLoyaltyCard**](UpdateLoyaltyCard.md)| body | 
+ **loyalty_card_id** | **String**| Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;.  | 
+ **body** | [**UpdateLoyaltyCardRequest**](UpdateLoyaltyCardRequest.md)| body | 
 
 ### Return type
 

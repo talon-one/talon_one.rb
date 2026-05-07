@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -135,7 +135,7 @@ module TalonOne
       return false if @name.nil?
       return false if @name.to_s.length < 1
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["string", "number", "boolean", "percent", "(list string)", "time"])
+      type_validator = EnumAttributeValidator.new('String', ["string", "number", "boolean", "percent", "(list string)", "(list number)", "time"])
       return false unless type_validator.valid?(@type)
       return false if @description.nil?
       true
@@ -158,7 +158,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["string", "number", "boolean", "percent", "(list string)", "time"])
+      validator = EnumAttributeValidator.new('String', ["string", "number", "boolean", "percent", "(list string)", "(list number)", "time"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

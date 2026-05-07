@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -28,6 +28,28 @@ module TalonOne
 
     # The type of the notification
     attr_accessor :notification_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -150,7 +172,19 @@ module TalonOne
       return false if @operation.nil?
       return false if @employee_name.nil?
       return false if @notification_type.nil?
+      notification_type_validator = EnumAttributeValidator.new('String', ["CouponsUpdated"])
+      return false unless notification_type_validator.valid?(@notification_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] notification_type Object to be assigned
+    def notification_type=(notification_type)
+      validator = EnumAttributeValidator.new('String', ["CouponsUpdated"])
+      unless validator.valid?(notification_type)
+        fail ArgumentError, "invalid value for \"notification_type\", must be one of #{validator.allowable_values}."
+      end
+      @notification_type = notification_type
     end
 
     # Checks equality by comparing each attribute.

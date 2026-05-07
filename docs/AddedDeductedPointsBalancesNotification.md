@@ -1,0 +1,35 @@
+# TalonOne::AddedDeductedPointsBalancesNotification
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**employee_name** | **String** | The name of the employee who added or deducted points. | 
+**loyalty_program_id** | **Integer** | The ID of the loyalty program. | 
+**notification_type** | **String** | The type of notification. | 
+**profile_integration_id** | **String** | The integration ID of the customer profile to whom points were added or deducted. | 
+**session_integration_id** | **String** | The integration ID of the session through which the points were earned or lost. | 
+**subledger_id** | **String** | The ID of the subledger within the loyalty program where these points were added. | 
+**type_of_change** | **String** | The notification source, that is, it indicates whether the points were added or deducted via one of the following routes: - [The Campaign Manager](/docs/product/getting-started) - [Management API](/management-api#tag/Loyalty) - [Rule Engine](/docs/product/applications/evaluation-order-for-rules-and-filters)  | 
+**user_id** | **Integer** | The ID of the employee who added or deducted points. | 
+**actions** | [**Array&lt;AddedDeductedPointsBalancesAction&gt;**](AddedDeductedPointsBalancesAction.md) | The list of actions that have been triggered in the loyalty program. | 
+**current_points** | **Float** | The current points balance. | 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::AddedDeductedPointsBalancesNotification.new(employee_name: Franziska Schneider,
+                                 loyalty_program_id: 5,
+                                 notification_type: null,
+                                 profile_integration_id: URNGV8294NV,
+                                 session_integration_id: cc53e4fa-547f-4f5e-8333-76e05c381f67,
+                                 subledger_id: sub-123,
+                                 type_of_change: null,
+                                 user_id: 25,
+                                 actions: null,
+                                 current_points: 10.99)
+```
+
+

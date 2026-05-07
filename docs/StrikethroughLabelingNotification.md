@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **total_batches** | **Integer** | The total number of batches for the notification. | 
 **trigger** | [**StrikethroughTrigger**](StrikethroughTrigger.md) |  | 
 **changed_items** | [**Array&lt;StrikethroughChangedItem&gt;**](StrikethroughChangedItem.md) |  | 
-**notification_type** | **String** | The type of the notification | 
+**notification_type** | **String** | The type of notification. | 
+**sent_at** | **DateTime** | Timestamp at which the notification was sent. | 
 
 ## Code Sample
 
@@ -25,7 +26,8 @@ instance = TalonOne::StrikethroughLabelingNotification.new(version: null,
                                  total_batches: 10,
                                  trigger: null,
                                  changed_items: null,
-                                 notification_type: null)
+                                 notification_type: null,
+                                 sent_at: null)
 ```
 
 

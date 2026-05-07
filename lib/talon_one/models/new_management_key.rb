@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -41,6 +41,9 @@ module TalonOne
     # The management key is disabled (this property is set to `true`) when the user who created the key is disabled or deleted.
     attr_accessor :disabled
 
+    # The last time the management key was used.
+    attr_accessor :last_used
+
     # The management key.
     attr_accessor :key
 
@@ -56,6 +59,7 @@ module TalonOne
         :'account_id' => :'accountID',
         :'created' => :'created',
         :'disabled' => :'disabled',
+        :'last_used' => :'lastUsed',
         :'key' => :'key'
       }
     end
@@ -72,6 +76,7 @@ module TalonOne
         :'account_id' => :'Integer',
         :'created' => :'DateTime',
         :'disabled' => :'Boolean',
+        :'last_used' => :'DateTime',
         :'key' => :'String'
       }
     end
@@ -135,6 +140,10 @@ module TalonOne
 
       if attributes.key?(:'disabled')
         self.disabled = attributes[:'disabled']
+      end
+
+      if attributes.key?(:'last_used')
+        self.last_used = attributes[:'last_used']
       end
 
       if attributes.key?(:'key')
@@ -209,6 +218,7 @@ module TalonOne
           account_id == o.account_id &&
           created == o.created &&
           disabled == o.disabled &&
+          last_used == o.last_used &&
           key == o.key
     end
 
@@ -221,7 +231,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created, disabled, key].hash
+      [name, expiry_date, endpoints, allowed_application_ids, id, created_by, account_id, created, disabled, last_used, key].hash
     end
 
     # Builds the object from hash

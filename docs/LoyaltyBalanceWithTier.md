@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **current_tier** | [**Tier**](Tier.md) |  | [optional] 
 **projected_tier** | [**ProjectedTier**](ProjectedTier.md) |  | [optional] 
 **points_to_next_tier** | **Float** | The number of points required to move up a tier. | [optional] 
-**next_tier_name** | **String** | The name of the tier consecutive to the current tier. | [optional] 
+**next_tier_name** | **String** | The name of the next higher tier level in the loyalty program.  **Note**: - Returns &#x60;null&#x60; if the customer has reached the highest available tier. - Returns the lowest level tier name if the customer is not currently assigned to any tier.  | [optional] 
 
 ## Code Sample
 
@@ -27,7 +27,7 @@ instance = TalonOne::LoyaltyBalanceWithTier.new(active_points: 286.0,
                                  current_tier: null,
                                  projected_tier: null,
                                  points_to_next_tier: 20.0,
-                                 next_tier_name: silver)
+                                 next_tier_name: Silver)
 ```
 
 

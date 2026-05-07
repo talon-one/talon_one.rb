@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -32,11 +32,14 @@ module TalonOne
     # A disabled or archived campaign is not evaluated for rules or coupons. 
     attr_accessor :state
 
-    # [ID of Ruleset](https://docs.talon.one/management-api#operation/getRulesets) this campaign applies on customer session evaluation. 
+    # [ID of Ruleset](https://docs.talon.one/management-api#tag/Campaigns/operation/getRulesets) this campaign applies on customer session evaluation. 
     attr_accessor :active_ruleset_id
 
     # A list of tags for the campaign.
     attr_accessor :tags
+
+    # Indicates whether this campaign should be reevaluated when a customer returns an item.
+    attr_accessor :reevaluate_on_return
 
     # The features enabled in this campaign.
     attr_accessor :features
@@ -56,6 +59,9 @@ module TalonOne
 
     # A list of store IDs that you want to link to the campaign.  **Note:** Campaigns with linked store IDs will only be evaluated when there is a [customer session update](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) that references a linked store. 
     attr_accessor :linked_store_ids
+
+    # Arbitrary properties associated with coupons in this campaign.
+    attr_accessor :coupon_attributes
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -90,13 +96,15 @@ module TalonOne
         :'state' => :'state',
         :'active_ruleset_id' => :'activeRulesetId',
         :'tags' => :'tags',
+        :'reevaluate_on_return' => :'reevaluateOnReturn',
         :'features' => :'features',
         :'coupon_settings' => :'couponSettings',
         :'referral_settings' => :'referralSettings',
         :'limits' => :'limits',
         :'campaign_groups' => :'campaignGroups',
         :'type' => :'type',
-        :'linked_store_ids' => :'linkedStoreIds'
+        :'linked_store_ids' => :'linkedStoreIds',
+        :'coupon_attributes' => :'couponAttributes'
       }
     end
 
@@ -111,13 +119,15 @@ module TalonOne
         :'state' => :'String',
         :'active_ruleset_id' => :'Integer',
         :'tags' => :'Array<String>',
+        :'reevaluate_on_return' => :'Boolean',
         :'features' => :'Array<String>',
         :'coupon_settings' => :'CodeGeneratorSettings',
         :'referral_settings' => :'CodeGeneratorSettings',
         :'limits' => :'Array<LimitConfig>',
         :'campaign_groups' => :'Array<Integer>',
         :'type' => :'String',
-        :'linked_store_ids' => :'Array<Integer>'
+        :'linked_store_ids' => :'Array<Integer>',
+        :'coupon_attributes' => :'Object'
       }
     end
 
@@ -178,6 +188,10 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'reevaluate_on_return')
+        self.reevaluate_on_return = attributes[:'reevaluate_on_return']
+      end
+
       if attributes.key?(:'features')
         if (value = attributes[:'features']).is_a?(Array)
           self.features = value
@@ -214,6 +228,10 @@ module TalonOne
         if (value = attributes[:'linked_store_ids']).is_a?(Array)
           self.linked_store_ids = value
         end
+      end
+
+      if attributes.key?(:'coupon_attributes')
+        self.coupon_attributes = attributes[:'coupon_attributes']
       end
     end
 
@@ -311,13 +329,15 @@ module TalonOne
           state == o.state &&
           active_ruleset_id == o.active_ruleset_id &&
           tags == o.tags &&
+          reevaluate_on_return == o.reevaluate_on_return &&
           features == o.features &&
           coupon_settings == o.coupon_settings &&
           referral_settings == o.referral_settings &&
           limits == o.limits &&
           campaign_groups == o.campaign_groups &&
           type == o.type &&
-          linked_store_ids == o.linked_store_ids
+          linked_store_ids == o.linked_store_ids &&
+          coupon_attributes == o.coupon_attributes
     end
 
     # @see the `==` method
@@ -329,7 +349,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids].hash
+      [name, description, start_time, end_time, attributes, state, active_ruleset_id, tags, reevaluate_on_return, features, coupon_settings, referral_settings, limits, campaign_groups, type, linked_store_ids, coupon_attributes].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -83,9 +83,6 @@ module TalonOne
     # `True` if the tier definitions can be updated. 
     attr_accessor :can_update_tiers
 
-    # `True` if the program join policy can be updated. 
-    attr_accessor :can_update_join_policy
-
     # `True` if the tier expiration policy can be updated. 
     attr_accessor :can_update_tier_expiration_policy
 
@@ -143,7 +140,6 @@ module TalonOne
         :'timezone' => :'timezone',
         :'card_based' => :'cardBased',
         :'can_update_tiers' => :'canUpdateTiers',
-        :'can_update_join_policy' => :'canUpdateJoinPolicy',
         :'can_update_tier_expiration_policy' => :'canUpdateTierExpirationPolicy',
         :'can_upgrade_to_advanced_tiers' => :'canUpgradeToAdvancedTiers',
         :'can_update_subledgers' => :'canUpdateSubledgers'
@@ -176,7 +172,6 @@ module TalonOne
         :'timezone' => :'String',
         :'card_based' => :'Boolean',
         :'can_update_tiers' => :'Boolean',
-        :'can_update_join_policy' => :'Boolean',
         :'can_update_tier_expiration_policy' => :'Boolean',
         :'can_upgrade_to_advanced_tiers' => :'Boolean',
         :'can_update_subledgers' => :'Boolean'
@@ -302,10 +297,6 @@ module TalonOne
         self.can_update_tiers = attributes[:'can_update_tiers']
       else
         self.can_update_tiers = false
-      end
-
-      if attributes.key?(:'can_update_join_policy')
-        self.can_update_join_policy = attributes[:'can_update_join_policy']
       end
 
       if attributes.key?(:'can_update_tier_expiration_policy')
@@ -513,7 +504,6 @@ module TalonOne
           timezone == o.timezone &&
           card_based == o.card_based &&
           can_update_tiers == o.can_update_tiers &&
-          can_update_join_policy == o.can_update_join_policy &&
           can_update_tier_expiration_policy == o.can_update_tier_expiration_policy &&
           can_upgrade_to_advanced_tiers == o.can_upgrade_to_advanced_tiers &&
           can_update_subledgers == o.can_update_subledgers
@@ -528,7 +518,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, return_policy, account_id, name, tiers, timezone, card_based, can_update_tiers, can_update_join_policy, can_update_tier_expiration_policy, can_upgrade_to_advanced_tiers, can_update_subledgers].hash
+      [id, created, title, description, subscribed_applications, default_validity, default_pending, allow_subledger, users_per_card_limit, sandbox, program_join_policy, tiers_expiration_policy, tier_cycle_start_date, tiers_expire_in, tiers_downgrade_policy, card_code_settings, return_policy, account_id, name, tiers, timezone, card_based, can_update_tiers, can_update_tier_expiration_policy, can_upgrade_to_advanced_tiers, can_update_subledgers].hash
     end
 
     # Builds the object from hash

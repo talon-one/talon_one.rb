@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -48,7 +48,7 @@ module TalonOne
     # For cart items with `quantity` > 1, the sub position indicates to which item the loyalty points addition is applied. 
     attr_accessor :cart_item_sub_position
 
-    # The alphanumeric identifier of the loyalty card. 
+    # The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. 
     attr_accessor :card_identifier
 
     # The position of the bundle in a list of item bundles created from the same bundle definition.
@@ -56,6 +56,12 @@ module TalonOne
 
     # The name of the bundle definition.
     attr_accessor :bundle_name
+
+    # If `true`, the loyalty points remain pending until a specific action is complete. The `startDate` parameter automatically sets to `on_action`. 
+    attr_accessor :awaits_activation
+
+    # The duration for which the points remain active, calculated relative to the  activation date.    **Note**: This value is returned only if `awaitsActivation` is `true`  and `expiryDate` is not set. 
+    attr_accessor :validity_duration
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -73,7 +79,9 @@ module TalonOne
         :'cart_item_sub_position' => :'cartItemSubPosition',
         :'card_identifier' => :'cardIdentifier',
         :'bundle_index' => :'bundleIndex',
-        :'bundle_name' => :'bundleName'
+        :'bundle_name' => :'bundleName',
+        :'awaits_activation' => :'awaitsActivation',
+        :'validity_duration' => :'validityDuration'
       }
     end
 
@@ -93,7 +101,9 @@ module TalonOne
         :'cart_item_sub_position' => :'Float',
         :'card_identifier' => :'String',
         :'bundle_index' => :'Integer',
-        :'bundle_name' => :'String'
+        :'bundle_name' => :'String',
+        :'awaits_activation' => :'Boolean',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -173,6 +183,14 @@ module TalonOne
       if attributes.key?(:'bundle_name')
         self.bundle_name = attributes[:'bundle_name']
       end
+
+      if attributes.key?(:'awaits_activation')
+        self.awaits_activation = attributes[:'awaits_activation']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -211,7 +229,11 @@ module TalonOne
         invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !@card_identifier.nil? && @card_identifier.to_s.length < 4
+        invalid_properties.push('invalid value for "card_identifier", the character length must be great than or equal to 4.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if !@card_identifier.nil? && @card_identifier !~ pattern
         invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
       end
@@ -230,7 +252,8 @@ module TalonOne
       return false if @recipient_integration_id.to_s.length > 1000
       return false if @transaction_uuid.nil?
       return false if !@card_identifier.nil? && @card_identifier.to_s.length > 108
-      return false if !@card_identifier.nil? && @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
+      return false if !@card_identifier.nil? && @card_identifier.to_s.length < 4
+      return false if !@card_identifier.nil? && @card_identifier !~ Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       true
     end
 
@@ -255,7 +278,11 @@ module TalonOne
         fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if !card_identifier.nil? && card_identifier.to_s.length < 4
+        fail ArgumentError, 'invalid value for "card_identifier", the character length must be great than or equal to 4.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if !card_identifier.nil? && card_identifier !~ pattern
         fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
       end
@@ -281,7 +308,9 @@ module TalonOne
           cart_item_sub_position == o.cart_item_sub_position &&
           card_identifier == o.card_identifier &&
           bundle_index == o.bundle_index &&
-          bundle_name == o.bundle_name
+          bundle_name == o.bundle_name &&
+          awaits_activation == o.awaits_activation &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -293,7 +322,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, program_id, sub_ledger_id, value, desired_value, recipient_integration_id, start_date, expiry_date, transaction_uuid, cart_item_position, cart_item_sub_position, card_identifier, bundle_index, bundle_name].hash
+      [name, program_id, sub_ledger_id, value, desired_value, recipient_integration_id, start_date, expiry_date, transaction_uuid, cart_item_position, cart_item_sub_position, card_identifier, bundle_index, bundle_name, awaits_activation, validity_duration].hash
     end
 
     # Builds the object from hash

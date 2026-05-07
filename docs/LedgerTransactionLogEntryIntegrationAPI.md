@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **customer_session_id** | **String** | ID of the customer session where the transaction occurred. | [optional] 
 **type** | **String** | Type of transaction. Possible values:   - &#x60;addition&#x60;: Signifies added points.   - &#x60;subtraction&#x60;: Signifies deducted points.  | 
 **name** | **String** | Name or reason of the loyalty ledger transaction. | 
-**start_date** | **String** | When points become active. Possible values:   - &#x60;immediate&#x60;: Points are immediately active.   - a timestamp value: Points become active at a given date and time.  | 
+**start_date** | **String** | When points become active. Possible values:   - &#x60;immediate&#x60;: Points are immediately active.   - &#x60;on_action&#x60;: Points become active based on the customer&#39;s action.   - a timestamp value: Points become active at a given date and time.  | 
 **expiry_date** | **String** | Date when points expire. Possible values are:   - &#x60;unlimited&#x60;: Points have no expiration date.   - &#x60;timestamp value&#x60;: Points expire on the given date.  | 
 **subledger_id** | **String** | ID of the subledger. | 
 **amount** | **Float** | Amount of loyalty points added or deducted in the transaction. | 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **ruleset_id** | **Integer** | The ID of the ruleset containing the rule that triggered this effect. | [optional] 
 **rule_name** | **String** | The name of the rule that triggered this effect. | [optional] 
 **flags** | [**LoyaltyLedgerEntryFlags**](LoyaltyLedgerEntryFlags.md) |  | [optional] 
+**validity_duration** | **String** | The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which &#x60;awaitsActivation&#x60; is &#x60;true&#x60; and &#x60;expiryDate&#x60; is not set.  | [optional] 
 
 ## Code Sample
 
@@ -37,7 +38,8 @@ instance = TalonOne::LedgerTransactionLogEntryIntegrationAPI.new(transaction_uui
                                  id: 123,
                                  ruleset_id: 11,
                                  rule_name: Add 2 points,
-                                 flags: null)
+                                 flags: null,
+                                 validity_duration: 30D)
 ```
 
 

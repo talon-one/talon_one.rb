@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **expiry_date** | **String** | Date when points expire. Possible values are:   - &#x60;unlimited&#x60;: Points have no expiration date.   - &#x60;timestamp value&#x60;: Points expire on the given date and time.  | 
 **subledger_id** | **String** | ID of the subledger. | 
 **amount** | **Float** | Amount of loyalty points added in the transaction. | 
+**validity_duration** | **String** | The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which &#x60;awaitsActivation&#x60; is &#x60;true&#x60; and &#x60;expiryDate&#x60; is not set.  | [optional] 
 
 ## Code Sample
 
@@ -31,7 +32,8 @@ instance = TalonOne::CardLedgerPointsEntryIntegrationAPI.new(id: 123,
                                  start_date: 2022-01-02T15:04:05Z07:00,
                                  expiry_date: 2022-08-02T15:04:05Z07:00,
                                  subledger_id: sub-123,
-                                 amount: 10.25)
+                                 amount: 10.25,
+                                 validity_duration: 30D)
 ```
 
 

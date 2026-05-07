@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;LedgerPointsEntryIntegrationAPI&gt;**](LedgerPointsEntryIntegrationAPI.md) |  | 
+**data** | [**Array&lt;CardLedgerPointsEntryIntegrationAPI&gt;**](CardLedgerPointsEntryIntegrationAPI.md) |  | 
 
 ## Code Sample
 
