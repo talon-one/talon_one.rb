@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **tentative_negative_balance** | **Float** | The tentative negative balance after all additions and deductions from the current customer session are applied to &#x60;negativeBalance&#x60;. When the session is closed, the tentative effects are applied and &#x60;negativeBalance&#x60; is updated to this value.  **Note:** Tentative balances are specific to the current session and do not take into account other open sessions for the given customer.  | [optional] 
 **current_tier** | [**Tier**](Tier.md) |  | [optional] 
 **points_to_next_tier** | **Float** | Points required to move up a tier. | [optional] 
+**next_tier_name** | **String** | The name of the next higher tier level in the loyalty program.  **Note**: - Returns &#x60;null&#x60; if the customer has reached the highest available tier. - Returns the lowest level tier name if the customer is not currently assigned to any tier.  | [optional] 
 
 ## Code Sample
 
@@ -29,7 +30,8 @@ instance = TalonOne::LedgerInfo.new(current_balance: 100.0,
                                  tentative_pending_balance: 20.0,
                                  tentative_negative_balance: 100.0,
                                  current_tier: null,
-                                 points_to_next_tier: 20.0)
+                                 points_to_next_tier: 20.0,
+                                 next_tier_name: Silver)
 ```
 
 

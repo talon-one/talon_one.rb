@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -21,10 +21,10 @@ module TalonOne
     # When using the `dry` query parameter, use this property to list the campaign to be evaluated by the Rule Engine.  These campaigns will be evaluated, even if they are disabled, allowing you to test specific campaigns before activating them. 
     attr_accessor :evaluable_campaign_ids
 
-    attr_accessor :audiences_changes
-
-    # Extends the response with the chosen data entities. Use this property to get as much data as you need in one _Update customer profile_ request instead of sending extra requests to other endpoints. 
+    # Extends the response with the chosen data entities. Use this property to get as much data back as needed from one request instead of sending extra requests to other endpoints. 
     attr_accessor :response_content
+
+    attr_accessor :audiences_changes
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -53,8 +53,8 @@ module TalonOne
       {
         :'attributes' => :'attributes',
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
-        :'audiences_changes' => :'audiencesChanges',
-        :'response_content' => :'responseContent'
+        :'response_content' => :'responseContent',
+        :'audiences_changes' => :'audiencesChanges'
       }
     end
 
@@ -63,8 +63,8 @@ module TalonOne
       {
         :'attributes' => :'Object',
         :'evaluable_campaign_ids' => :'Array<Integer>',
-        :'audiences_changes' => :'ProfileAudiencesChanges',
-        :'response_content' => :'Array<String>'
+        :'response_content' => :'Array<String>',
+        :'audiences_changes' => :'ProfileAudiencesChanges'
       }
     end
 
@@ -99,14 +99,14 @@ module TalonOne
         end
       end
 
-      if attributes.key?(:'audiences_changes')
-        self.audiences_changes = attributes[:'audiences_changes']
-      end
-
       if attributes.key?(:'response_content')
         if (value = attributes[:'response_content']).is_a?(Array)
           self.response_content = value
         end
+      end
+
+      if attributes.key?(:'audiences_changes')
+        self.audiences_changes = attributes[:'audiences_changes']
       end
     end
 
@@ -130,8 +130,8 @@ module TalonOne
       self.class == o.class &&
           attributes == o.attributes &&
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
-          audiences_changes == o.audiences_changes &&
-          response_content == o.response_content
+          response_content == o.response_content &&
+          audiences_changes == o.audiences_changes
     end
 
     # @see the `==` method
@@ -143,7 +143,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [attributes, evaluable_campaign_ids, audiences_changes, response_content].hash
+      [attributes, evaluable_campaign_ids, response_content, audiences_changes].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -51,6 +51,9 @@ module TalonOne
     # The items to add to this session. **Do not exceed 1000 items** and ensure the sum of all cart item's `quantity` **does not exceed 10.000** per request. 
     attr_accessor :cart_items
 
+    # The experiment variant allocations to add to this session. 
+    attr_accessor :experiment_variant_allocations
+
     # Use this property to set a value for the additional costs of this session, such as a shipping cost.  They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs). 
     attr_accessor :additional_costs
 
@@ -62,6 +65,9 @@ module TalonOne
 
     # Indicates whether this is the first session for the customer's profile. It's always `true` for anonymous sessions.
     attr_accessor :first_session
+
+    # The number of times the session was updated. When the session is created, this value is initialized to `1`.
+    attr_accessor :update_count
 
     # The total value of cart items and additional costs in the session, before any discounts are applied.
     attr_accessor :total
@@ -112,10 +118,12 @@ module TalonOne
         :'loyalty_cards' => :'loyaltyCards',
         :'state' => :'state',
         :'cart_items' => :'cartItems',
+        :'experiment_variant_allocations' => :'experimentVariantAllocations',
         :'additional_costs' => :'additionalCosts',
         :'identifiers' => :'identifiers',
         :'attributes' => :'attributes',
         :'first_session' => :'firstSession',
+        :'update_count' => :'updateCount',
         :'total' => :'total',
         :'cart_item_total' => :'cartItemTotal',
         :'additional_cost_total' => :'additionalCostTotal',
@@ -138,10 +146,12 @@ module TalonOne
         :'loyalty_cards' => :'Array<String>',
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
+        :'experiment_variant_allocations' => :'Array<ExperimentVariantAllocation>',
         :'additional_costs' => :'Hash<String, AdditionalCost>',
         :'identifiers' => :'Array<String>',
         :'attributes' => :'Object',
         :'first_session' => :'Boolean',
+        :'update_count' => :'Integer',
         :'total' => :'Float',
         :'cart_item_total' => :'Float',
         :'additional_cost_total' => :'Float',
@@ -228,6 +238,12 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'experiment_variant_allocations')
+        if (value = attributes[:'experiment_variant_allocations']).is_a?(Array)
+          self.experiment_variant_allocations = value
+        end
+      end
+
       if attributes.key?(:'additional_costs')
         if (value = attributes[:'additional_costs']).is_a?(Hash)
           self.additional_costs = value
@@ -246,6 +262,10 @@ module TalonOne
 
       if attributes.key?(:'first_session')
         self.first_session = attributes[:'first_session']
+      end
+
+      if attributes.key?(:'update_count')
+        self.update_count = attributes[:'update_count']
       end
 
       if attributes.key?(:'total')
@@ -321,6 +341,10 @@ module TalonOne
         invalid_properties.push('invalid value for "first_session", first_session cannot be nil.')
       end
 
+      if @update_count.nil?
+        invalid_properties.push('invalid value for "update_count", update_count cannot be nil.')
+      end
+
       if @total.nil?
         invalid_properties.push('invalid value for "total", total cannot be nil.')
       end
@@ -358,6 +382,7 @@ module TalonOne
       return false if @cart_items.nil?
       return false if @attributes.nil?
       return false if @first_session.nil?
+      return false if @update_count.nil?
       return false if @total.nil?
       return false if @cart_item_total.nil?
       return false if @additional_cost_total.nil?
@@ -430,10 +455,12 @@ module TalonOne
           loyalty_cards == o.loyalty_cards &&
           state == o.state &&
           cart_items == o.cart_items &&
+          experiment_variant_allocations == o.experiment_variant_allocations &&
           additional_costs == o.additional_costs &&
           identifiers == o.identifiers &&
           attributes == o.attributes &&
           first_session == o.first_session &&
+          update_count == o.update_count &&
           total == o.total &&
           cart_item_total == o.cart_item_total &&
           additional_cost_total == o.additional_cost_total &&
@@ -449,7 +476,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes, first_session, total, cart_item_total, additional_cost_total, updated].hash
+      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes, first_session, update_count, total, cart_item_total, additional_cost_total, updated].hash
     end
 
     # Builds the object from hash

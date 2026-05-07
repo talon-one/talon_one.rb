@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -24,7 +24,7 @@ module TalonOne
     # ID of the loyalty program.
     attr_accessor :program_id
 
-    # The alphanumeric identifier of the loyalty card. 
+    # The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. 
     attr_accessor :card_identifier
 
     # The ID of the Application that owns this entity.
@@ -221,7 +221,11 @@ module TalonOne
         invalid_properties.push('invalid value for "card_identifier", the character length must be smaller than or equal to 108.')
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if @card_identifier.to_s.length < 4
+        invalid_properties.push('invalid value for "card_identifier", the character length must be great than or equal to 4.')
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if @card_identifier !~ pattern
         invalid_properties.push("invalid value for \"card_identifier\", must conform to the pattern #{pattern}.")
       end
@@ -285,7 +289,8 @@ module TalonOne
       return false if @program_id.nil?
       return false if @card_identifier.nil?
       return false if @card_identifier.to_s.length > 108
-      return false if @card_identifier !~ Regexp.new(/^[A-Za-z0-9_-]*$/)
+      return false if @card_identifier.to_s.length < 4
+      return false if @card_identifier !~ Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
@@ -314,7 +319,11 @@ module TalonOne
         fail ArgumentError, 'invalid value for "card_identifier", the character length must be smaller than or equal to 108.'
       end
 
-      pattern = Regexp.new(/^[A-Za-z0-9_-]*$/)
+      if card_identifier.to_s.length < 4
+        fail ArgumentError, 'invalid value for "card_identifier", the character length must be great than or equal to 4.'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       if card_identifier !~ pattern
         fail ArgumentError, "invalid value for \"card_identifier\", must conform to the pattern #{pattern}."
       end

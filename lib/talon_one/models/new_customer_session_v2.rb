@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -38,6 +38,9 @@ module TalonOne
 
     # The items to add to this session. **Do not exceed 1000 items** and ensure the sum of all cart item's `quantity` **does not exceed 10.000** per request. 
     attr_accessor :cart_items
+
+    # The experiment variant allocations to add to this session. 
+    attr_accessor :experiment_variant_allocations
 
     # Use this property to set a value for the additional costs of this session, such as a shipping cost.  They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs). 
     attr_accessor :additional_costs
@@ -81,6 +84,7 @@ module TalonOne
         :'loyalty_cards' => :'loyaltyCards',
         :'state' => :'state',
         :'cart_items' => :'cartItems',
+        :'experiment_variant_allocations' => :'experimentVariantAllocations',
         :'additional_costs' => :'additionalCosts',
         :'identifiers' => :'identifiers',
         :'attributes' => :'attributes'
@@ -98,6 +102,7 @@ module TalonOne
         :'loyalty_cards' => :'Array<String>',
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
+        :'experiment_variant_allocations' => :'Array<ExperimentVariantAllocation>',
         :'additional_costs' => :'Hash<String, AdditionalCost>',
         :'identifiers' => :'Array<String>',
         :'attributes' => :'Object'
@@ -164,6 +169,12 @@ module TalonOne
       if attributes.key?(:'cart_items')
         if (value = attributes[:'cart_items']).is_a?(Array)
           self.cart_items = value
+        end
+      end
+
+      if attributes.key?(:'experiment_variant_allocations')
+        if (value = attributes[:'experiment_variant_allocations']).is_a?(Array)
+          self.experiment_variant_allocations = value
         end
       end
 
@@ -261,6 +272,7 @@ module TalonOne
           loyalty_cards == o.loyalty_cards &&
           state == o.state &&
           cart_items == o.cart_items &&
+          experiment_variant_allocations == o.experiment_variant_allocations &&
           additional_costs == o.additional_costs &&
           identifiers == o.identifiers &&
           attributes == o.attributes
@@ -275,7 +287,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, additional_costs, identifiers, attributes].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -31,6 +31,9 @@ module TalonOne
 
     # The IDs of the Applications in which this webhook is available. An empty array means the webhook is available in `All Applications`. 
     attr_accessor :application_ids
+
+    # The ID of the credential that this webhook is using.
+    attr_accessor :authentication_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -62,7 +65,8 @@ module TalonOne
         :'url' => :'url',
         :'payload' => :'payload',
         :'params' => :'params',
-        :'application_ids' => :'applicationIds'
+        :'application_ids' => :'applicationIds',
+        :'authentication_id' => :'authenticationId'
       }
     end
 
@@ -74,7 +78,8 @@ module TalonOne
         :'url' => :'String',
         :'payload' => :'String',
         :'params' => :'Array<TemplateArgDef>',
-        :'application_ids' => :'Array<Integer>'
+        :'application_ids' => :'Array<Integer>',
+        :'authentication_id' => :'Integer'
       }
     end
 
@@ -128,6 +133,10 @@ module TalonOne
           self.application_ids = value
         end
       end
+
+      if attributes.key?(:'authentication_id')
+        self.authentication_id = attributes[:'authentication_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -175,7 +184,8 @@ module TalonOne
           url == o.url &&
           payload == o.payload &&
           params == o.params &&
-          application_ids == o.application_ids
+          application_ids == o.application_ids &&
+          authentication_id == o.authentication_id
     end
 
     # @see the `==` method
@@ -187,7 +197,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headers, verb, url, payload, params, application_ids].hash
+      [headers, verb, url, payload, params, application_ids, authentication_id].hash
     end
 
     # Builds the object from hash

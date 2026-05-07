@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -15,6 +15,9 @@ require 'date'
 module TalonOne
   # A generic effect that is fired by a triggered campaign. The props property will contain information specific to the specific effect type.
   class Effect
+    # The ID of the experiment that campaign belongs to.
+    attr_accessor :experiment_id
+
     # The ID of the campaign that triggered this effect.
     attr_accessor :campaign_id
 
@@ -65,6 +68,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'experiment_id' => :'experimentId',
         :'campaign_id' => :'campaignId',
         :'ruleset_id' => :'rulesetId',
         :'rule_index' => :'ruleIndex',
@@ -87,6 +91,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'experiment_id' => :'Integer',
         :'campaign_id' => :'Integer',
         :'ruleset_id' => :'Integer',
         :'rule_index' => :'Integer',
@@ -126,6 +131,10 @@ module TalonOne
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'experiment_id')
+        self.experiment_id = attributes[:'experiment_id']
+      end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
@@ -240,6 +249,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          experiment_id == o.experiment_id &&
           campaign_id == o.campaign_id &&
           ruleset_id == o.ruleset_id &&
           rule_index == o.rule_index &&
@@ -267,7 +277,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, selected_price_type, selected_price, adjustment_reference_id, props].hash
+      [experiment_id, campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, selected_price_type, selected_price, adjustment_reference_id, props].hash
     end
 
     # Builds the object from hash

@@ -22,7 +22,7 @@ instance = TalonOne::StrikethroughChangedItem.new(id: 1,
                                  catalog_id: 10,
                                  sku: SKU1241028,
                                  version: 6,
-                                 price: 99.99,
+                                 price: 100.0,
                                  prices: {&quot;member&quot;:{&quot;price&quot;:90,&quot;adjustmentReferenceId&quot;:&quot;68851723-e6fa-488f-ace9-112581e6c19b&quot;,&quot;adjustmentEffectiveFrom&quot;:&quot;2025-05-25T00:00:00Z&quot;,&quot;adjustmentEffectiveUntil&quot;:&quot;2025-05-30T00:00:00Z&quot;},&quot;base&quot;:{&quot;price&quot;:100}},
                                  evaluated_at: 2020-06-10T09:05:27.993483Z,
                                  effects: null)

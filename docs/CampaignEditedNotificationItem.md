@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **campaign** | [**Campaign**](Campaign.md) |  | 
 **old_campaign** | [**Campaign**](Campaign.md) |  | 
 **ruleset** | [**Ruleset**](Ruleset.md) |  | [optional] 
+**placeholders** | [**Array&lt;PlaceholderDetails&gt;**](PlaceholderDetails.md) | The current details of the [placeholders](https://docs.talon.one/docs/product/campaigns/templates/create-templates#use-placeholders) in the campaign. | [optional] 
 
 ## Code Sample
 
@@ -17,7 +18,8 @@ require 'TalonOne'
 instance = TalonOne::CampaignEditedNotificationItem.new(event: campaign_state_changed,
                                  campaign: null,
                                  old_campaign: null,
-                                 ruleset: null)
+                                 ruleset: null,
+                                 placeholders: null)
 ```
 
 

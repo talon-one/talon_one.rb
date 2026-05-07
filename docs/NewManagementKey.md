@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **account_id** | **Integer** | ID of account the key is used for. | 
 **created** | **DateTime** | The date the management key was created. | 
 **disabled** | **Boolean** | The management key is disabled (this property is set to &#x60;true&#x60;) when the user who created the key is disabled or deleted. | [optional] 
+**last_used** | **DateTime** | The last time the management key was used. | [optional] 
 **key** | **String** | The management key. | 
 
 ## Code Sample
@@ -29,6 +30,7 @@ instance = TalonOne::NewManagementKey.new(name: My generated key,
                                  account_id: 13,
                                  created: 2022-03-02T16:46:17.758585Z,
                                  disabled: true,
+                                 last_used: 2022-03-02T16:46:17.758585Z,
                                  key: f45f90d21dcd9bac965c45e547e9754a3196891d09948e35adbcbedc4e9e4b01)
 ```
 

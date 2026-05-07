@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -51,6 +51,9 @@ module TalonOne
     # The sub-position of the targeted bundle item on which the applied discount is based. 
     attr_accessor :targeted_item_sub_position
 
+    # When set to `true`, the applied discount is excluded from the item's price history.
+    attr_accessor :excluded_from_price_history
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +68,8 @@ module TalonOne
         :'bundle_index' => :'bundleIndex',
         :'bundle_name' => :'bundleName',
         :'targeted_item_position' => :'targetedItemPosition',
-        :'targeted_item_sub_position' => :'targetedItemSubPosition'
+        :'targeted_item_sub_position' => :'targetedItemSubPosition',
+        :'excluded_from_price_history' => :'excludedFromPriceHistory'
       }
     end
 
@@ -83,7 +87,8 @@ module TalonOne
         :'bundle_index' => :'Integer',
         :'bundle_name' => :'String',
         :'targeted_item_position' => :'Float',
-        :'targeted_item_sub_position' => :'Float'
+        :'targeted_item_sub_position' => :'Float',
+        :'excluded_from_price_history' => :'Boolean'
       }
     end
 
@@ -155,6 +160,10 @@ module TalonOne
       if attributes.key?(:'targeted_item_sub_position')
         self.targeted_item_sub_position = attributes[:'targeted_item_sub_position']
       end
+
+      if attributes.key?(:'excluded_from_price_history')
+        self.excluded_from_price_history = attributes[:'excluded_from_price_history']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -201,7 +210,8 @@ module TalonOne
           bundle_index == o.bundle_index &&
           bundle_name == o.bundle_name &&
           targeted_item_position == o.targeted_item_position &&
-          targeted_item_sub_position == o.targeted_item_sub_position
+          targeted_item_sub_position == o.targeted_item_sub_position &&
+          excluded_from_price_history == o.excluded_from_price_history
     end
 
     # @see the `==` method
@@ -213,7 +223,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value, position, sub_position, desired_value, scope, total_discount, desired_total_discount, bundle_index, bundle_name, targeted_item_position, targeted_item_sub_position].hash
+      [name, value, position, sub_position, desired_value, scope, total_discount, desired_total_discount, bundle_index, bundle_name, targeted_item_position, targeted_item_sub_position, excluded_from_price_history].hash
     end
 
     # Builds the object from hash

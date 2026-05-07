@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **payload** | **String** | API payload of this message. | [optional] 
 **params** | [**Array&lt;TemplateArgDef&gt;**](TemplateArgDef.md) | Array of template argument definitions. | [optional] 
 **application_ids** | **Array&lt;Integer&gt;** | The IDs of the Applications in which this webhook is available. An empty array means the webhook is available in &#x60;All Applications&#x60;.  | [optional] 
+**authentication_id** | **Integer** | The ID of the credential that this webhook is using. | [optional] 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::NewMessageTest.new(headers: {&quot;content-type&quot;:&quot
 	&quot;integrationId&quot;: &quot;${$Profile.IntegrationId}&quot;
 },
                                  params: [],
-                                 application_ids: null)
+                                 application_ids: null,
+                                 authentication_id: 1)
 ```
 
 

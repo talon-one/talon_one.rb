@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -21,11 +21,14 @@ module TalonOne
     # discount value.
     attr_accessor :value
 
+    attr_accessor :excluded_from_price_history
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'excluded_from_price_history' => :'excludedFromPriceHistory'
       }
     end
 
@@ -33,7 +36,8 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
-        :'value' => :'Object'
+        :'value' => :'Object',
+        :'excluded_from_price_history' => :'Boolean'
       }
     end
 
@@ -64,6 +68,10 @@ module TalonOne
 
       if attributes.key?(:'value')
         self.value = attributes[:'value']
+      end
+
+      if attributes.key?(:'excluded_from_price_history')
+        self.excluded_from_price_history = attributes[:'excluded_from_price_history']
       end
     end
 
@@ -96,7 +104,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          value == o.value
+          value == o.value &&
+          excluded_from_price_history == o.excluded_from_price_history
     end
 
     # @see the `==` method
@@ -108,7 +117,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, value].hash
+      [name, value, excluded_from_price_history].hash
     end
 
     # Builds the object from hash

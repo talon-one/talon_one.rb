@@ -27,7 +27,6 @@ Name | Type | Description | Notes
 **timezone** | **String** | A string containing an IANA timezone descriptor. | 
 **card_based** | **Boolean** | Defines the type of loyalty program: - &#x60;true&#x60;: the program is a card-based. - &#x60;false&#x60;: the program is profile-based.  | [default to false]
 **can_update_tiers** | **Boolean** | &#x60;True&#x60; if the tier definitions can be updated.  | [optional] [default to false]
-**can_update_join_policy** | **Boolean** | &#x60;True&#x60; if the program join policy can be updated.  | [optional] 
 **can_update_tier_expiration_policy** | **Boolean** | &#x60;True&#x60; if the tier expiration policy can be updated.  | [optional] 
 **can_upgrade_to_advanced_tiers** | **Boolean** | &#x60;True&#x60; if the program can be upgraded to use the &#x60;tiersExpireIn&#x60; and &#x60;tiersDowngradePolicy&#x60; properties.  | [optional] [default to false]
 **can_update_subledgers** | **Boolean** | &#x60;True&#x60; if the &#x60;allowSubledger&#x60; property can be updated in the loyalty program.  | [optional] [default to false]
@@ -60,7 +59,6 @@ instance = TalonOne::LoyaltyProgram.new(id: 139,
                                  timezone: Europe/Berlin,
                                  card_based: true,
                                  can_update_tiers: true,
-                                 can_update_join_policy: true,
                                  can_update_tier_expiration_policy: true,
                                  can_upgrade_to_advanced_tiers: true,
                                  can_update_subledgers: true)

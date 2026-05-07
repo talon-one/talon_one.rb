@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -14,10 +14,13 @@ require 'date'
 
 module TalonOne
   class BestPriorPrice
+    # The ID of the historical price.
+    attr_accessor :id
+
     # sku
     attr_accessor :sku
 
-    # The date and time when the best price was observed.
+    # The date and time when the price was observed.
     attr_accessor :observed_at
 
     # The context ID of the context active at the time of observation. 
@@ -33,6 +36,7 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'sku' => :'sku',
         :'observed_at' => :'observedAt',
         :'context_id' => :'contextId',
@@ -45,6 +49,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'Integer',
         :'sku' => :'String',
         :'observed_at' => :'DateTime',
         :'context_id' => :'String',
@@ -75,6 +80,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'sku')
         self.sku = attributes[:'sku']
       end
@@ -104,6 +113,10 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
       if @sku.nil?
         invalid_properties.push('invalid value for "sku", sku cannot be nil.')
       end
@@ -134,6 +147,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
       return false if @sku.nil?
       return false if @observed_at.nil?
       return false if @context_id.nil?
@@ -148,6 +162,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           sku == o.sku &&
           observed_at == o.observed_at &&
           context_id == o.context_id &&
@@ -165,7 +180,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [sku, observed_at, context_id, price, metadata, target].hash
+      [id, sku, observed_at, context_id, price, metadata, target].hash
     end
 
     # Builds the object from hash

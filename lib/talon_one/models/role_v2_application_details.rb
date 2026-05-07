@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -26,13 +26,16 @@ module TalonOne
     # Name of the tools-related permission set.
     attr_accessor :tools
 
+    attr_accessor :thresholds
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'application' => :'application',
         :'campaign' => :'campaign',
         :'draft_campaign' => :'draftCampaign',
-        :'tools' => :'tools'
+        :'tools' => :'tools',
+        :'thresholds' => :'thresholds'
       }
     end
 
@@ -42,7 +45,8 @@ module TalonOne
         :'application' => :'String',
         :'campaign' => :'String',
         :'draft_campaign' => :'String',
-        :'tools' => :'String'
+        :'tools' => :'String',
+        :'thresholds' => :'RolesV2Thresholds'
       }
     end
 
@@ -82,6 +86,10 @@ module TalonOne
       if attributes.key?(:'tools')
         self.tools = attributes[:'tools']
       end
+
+      if attributes.key?(:'thresholds')
+        self.thresholds = attributes[:'thresholds']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,7 +113,8 @@ module TalonOne
           application == o.application &&
           campaign == o.campaign &&
           draft_campaign == o.draft_campaign &&
-          tools == o.tools
+          tools == o.tools &&
+          thresholds == o.thresholds
     end
 
     # @see the `==` method
@@ -117,7 +126,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application, campaign, draft_campaign, tools].hash
+      [application, campaign, draft_campaign, tools, thresholds].hash
     end
 
     # Builds the object from hash

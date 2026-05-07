@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -14,11 +14,14 @@ require 'date'
 
 module TalonOne
   class InlineResponse20046
+    attr_accessor :total_result_size
+
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'total_result_size' => :'totalResultSize',
         :'data' => :'data'
       }
     end
@@ -26,7 +29,8 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListCampaignStoreBudgets>'
+        :'total_result_size' => :'Integer',
+        :'data' => :'Array<RoleV2>'
       }
     end
 
@@ -51,6 +55,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'total_result_size')
+        self.total_result_size = attributes[:'total_result_size']
+      end
+
       if attributes.key?(:'data')
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
@@ -62,12 +70,22 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @total_result_size.nil?
+        invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
+      end
+
+      if @data.nil?
+        invalid_properties.push('invalid value for "data", data cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @total_result_size.nil?
+      return false if @data.nil?
       true
     end
 
@@ -76,6 +94,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          total_result_size == o.total_result_size &&
           data == o.data
     end
 
@@ -88,7 +107,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data].hash
+      [total_result_size, data].hash
     end
 
     # Builds the object from hash

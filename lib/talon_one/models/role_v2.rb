@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -37,6 +37,9 @@ module TalonOne
     # A list of user IDs the role is assigned to.
     attr_accessor :members
 
+    # Identifies if the role is read-only. For read-only roles, you can only assign or unassign users. You cannot edit any other properties, such as the name, description, or permissions. The 'isReadonly' property cannot be set for new or existing roles. It is reserved for predefined roles, such as the Talon.One support role.
+    attr_accessor :is_readonly
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -47,7 +50,8 @@ module TalonOne
         :'name' => :'name',
         :'description' => :'description',
         :'permissions' => :'permissions',
-        :'members' => :'members'
+        :'members' => :'members',
+        :'is_readonly' => :'isReadonly'
       }
     end
 
@@ -61,7 +65,8 @@ module TalonOne
         :'name' => :'String',
         :'description' => :'String',
         :'permissions' => :'RoleV2Permissions',
-        :'members' => :'Array<Integer>'
+        :'members' => :'Array<Integer>',
+        :'is_readonly' => :'Boolean'
       }
     end
 
@@ -119,6 +124,12 @@ module TalonOne
           self.members = value
         end
       end
+
+      if attributes.key?(:'is_readonly')
+        self.is_readonly = attributes[:'is_readonly']
+      else
+        self.is_readonly = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -166,7 +177,8 @@ module TalonOne
           name == o.name &&
           description == o.description &&
           permissions == o.permissions &&
-          members == o.members
+          members == o.members &&
+          is_readonly == o.is_readonly
     end
 
     # @see the `==` method
@@ -178,7 +190,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, modified, account_id, name, description, permissions, members].hash
+      [id, created, modified, account_id, name, description, permissions, members, is_readonly].hash
     end
 
     # Builds the object from hash

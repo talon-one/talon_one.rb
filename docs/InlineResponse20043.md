@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;Export&gt;**](Export.md) |  | 
+**data** | [**Array&lt;User&gt;**](User.md) |  | 
 
 ## Code Sample
 

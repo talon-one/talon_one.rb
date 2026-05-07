@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -33,7 +33,7 @@ module TalonOne
     # Name or reason of the loyalty ledger transaction.
     attr_accessor :name
 
-    # When points become active. Possible values:   - `immediate`: Points are immediately active.   - a timestamp value: Points become active at a given date and time. 
+    # When points become active. Possible values:   - `immediate`: Points are immediately active.   - `on_action`: Points become active based on the customer's action.   - a timestamp value: Points become active at a given date and time. 
     attr_accessor :start_date
 
     # Date when points expire. Possible values are:   - `unlimited`: Points have no expiration date.   - `timestamp value`: Points expire on the given date. 
@@ -55,6 +55,9 @@ module TalonOne
     attr_accessor :rule_name
 
     attr_accessor :flags
+
+    # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
+    attr_accessor :validity_duration
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -94,7 +97,8 @@ module TalonOne
         :'id' => :'id',
         :'ruleset_id' => :'rulesetId',
         :'rule_name' => :'ruleName',
-        :'flags' => :'flags'
+        :'flags' => :'flags',
+        :'validity_duration' => :'validityDuration'
       }
     end
 
@@ -114,7 +118,8 @@ module TalonOne
         :'id' => :'Integer',
         :'ruleset_id' => :'Integer',
         :'rule_name' => :'String',
-        :'flags' => :'LoyaltyLedgerEntryFlags'
+        :'flags' => :'LoyaltyLedgerEntryFlags',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -193,6 +198,10 @@ module TalonOne
 
       if attributes.key?(:'flags')
         self.flags = attributes[:'flags']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
       end
     end
 
@@ -366,7 +375,8 @@ module TalonOne
           id == o.id &&
           ruleset_id == o.ruleset_id &&
           rule_name == o.rule_name &&
-          flags == o.flags
+          flags == o.flags &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -378,7 +388,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_uuid, created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags].hash
+      [transaction_uuid, created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags, validity_duration].hash
     end
 
     # Builds the object from hash

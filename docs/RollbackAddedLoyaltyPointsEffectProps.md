@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **transaction_uuid** | **String** | The identifier of &#39;deduction&#39; entry added to the ledger as the &#x60;addLoyaltyPoints&#x60; effect is rolled back. | 
 **cart_item_position** | **Float** | The index of the item in the cart items for which the loyalty points were rolled back. | [optional] 
 **cart_item_sub_position** | **Float** | For cart items with &#x60;quantity&#x60; &gt; 1, the sub-position indicates to which item the loyalty points were rolled back.  | [optional] 
-**card_identifier** | **String** | The alphanumeric identifier of the loyalty card.  | [optional] 
+**card_identifier** | **String** | The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;.  | [optional] 
 
 ## Code Sample
 

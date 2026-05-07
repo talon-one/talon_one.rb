@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -50,6 +50,9 @@ module TalonOne
     # Indicates whether this is the first session for the customer's profile. Will always be true for anonymous sessions.
     attr_accessor :first_session
 
+    # The number of times the session was updated. When the session is created, this value is initialized to `1`.
+    attr_accessor :update_count
+
     # A map of labelled discount values, values will be in the same currency as the application associated with the session.
     attr_accessor :discounts
 
@@ -93,6 +96,7 @@ module TalonOne
         :'total' => :'total',
         :'attributes' => :'attributes',
         :'first_session' => :'firstSession',
+        :'update_count' => :'updateCount',
         :'discounts' => :'discounts',
         :'updated' => :'updated'
       }
@@ -113,6 +117,7 @@ module TalonOne
         :'total' => :'Float',
         :'attributes' => :'Object',
         :'first_session' => :'Boolean',
+        :'update_count' => :'Integer',
         :'discounts' => :'Hash<String, Float>',
         :'updated' => :'DateTime'
       }
@@ -193,6 +198,10 @@ module TalonOne
         self.first_session = attributes[:'first_session']
       end
 
+      if attributes.key?(:'update_count')
+        self.update_count = attributes[:'update_count']
+      end
+
       if attributes.key?(:'discounts')
         if (value = attributes[:'discounts']).is_a?(Hash)
           self.discounts = value
@@ -264,6 +273,10 @@ module TalonOne
         invalid_properties.push('invalid value for "first_session", first_session cannot be nil.')
       end
 
+      if @update_count.nil?
+        invalid_properties.push('invalid value for "update_count", update_count cannot be nil.')
+      end
+
       if @discounts.nil?
         invalid_properties.push('invalid value for "discounts", discounts cannot be nil.')
       end
@@ -294,6 +307,7 @@ module TalonOne
       return false if @total.nil?
       return false if @attributes.nil?
       return false if @first_session.nil?
+      return false if @update_count.nil?
       return false if @discounts.nil?
       return false if @updated.nil?
       true
@@ -368,6 +382,7 @@ module TalonOne
           total == o.total &&
           attributes == o.attributes &&
           first_session == o.first_session &&
+          update_count == o.update_count &&
           discounts == o.discounts &&
           updated == o.updated
     end
@@ -381,7 +396,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [integration_id, created, application_id, profile_id, coupon, referral, state, cart_items, identifiers, total, attributes, first_session, discounts, updated].hash
+      [integration_id, created, application_id, profile_id, coupon, referral, state, cart_items, identifiers, total, attributes, first_session, update_count, discounts, updated].hash
     end
 
     # Builds the object from hash

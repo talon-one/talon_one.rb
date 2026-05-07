@@ -1,7 +1,7 @@
 =begin
 #Talon.One API
 
-#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) are used to integrate with our platform - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment. For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}` 
+#Use the Talon.One API to integrate with your application and to manage applications and campaigns:  - Use the operations in the [Integration API section](#integration-api) to integrate with our platform. - Use the operation in the [Management API section](#management-api) to manage applications and campaigns.  ## Determining the base URL of the endpoints  The API is available at the same hostname as your Campaign Manager deployment.  For example, if you access the Campaign Manager at `https://yourbaseurl.talon.one/`, the URL for the [updateCustomerSessionV2](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint is `https://yourbaseurl.talon.one/v2/customer_sessions/{Id}`. 
 
 The version of the OpenAPI document: 
 
@@ -14,44 +14,47 @@ require 'date'
 
 module TalonOne
   class AddedDeductedPointsNotification
-    # The integration ID of the customer profile to whom points were added or deducted.
-    attr_accessor :profile_integration_id
+    # The name of the employee who added or deducted points.
+    attr_accessor :employee_name
 
     # The ID of the loyalty program.
     attr_accessor :loyalty_program_id
 
-    # The ID of the subledger within the loyalty program where these points were added.
-    attr_accessor :subledger_id
+    # The type of notification.
+    attr_accessor :notification_type
 
-    # The amount of added or deducted loyalty points.
-    attr_accessor :amount
-
-    # The reason for the points addition or deduction.
-    attr_accessor :reason
-
-    # The notification source, that is, it indicates whether the points were added or deducted via one of the following routes:  - [The Campaign Manager](/docs/product/getting-started)  - [Management API](/management-api#tag/Loyalty)  - [Rule Engine](/docs/product/applications/evaluation-order-for-rules-and-filters) 
-    attr_accessor :type_of_change
-
-    # The name of the employee who added or deducted points.
-    attr_accessor :employee_name
-
-    # The ID of the employee who added or deducted points.
-    attr_accessor :user_id
-
-    # The action (addition or deduction) made with loyalty points.
-    attr_accessor :operation
-
-    # The start date for loyalty points.
-    attr_accessor :start_date
-
-    # The expiration date for loyalty points.
-    attr_accessor :expiry_date
+    # The integration ID of the customer profile to whom points were added or deducted.
+    attr_accessor :profile_integration_id
 
     # The integration ID of the session through which the points were earned or lost.
     attr_accessor :session_integration_id
 
-    # The type of notification.
-    attr_accessor :notification_type
+    # The ID of the subledger within the loyalty program where these points were added.
+    attr_accessor :subledger_id
+
+    # The notification source, that is, it indicates whether the points were added or deducted via one of the following routes:  - [The Campaign Manager](/docs/product/getting-started)  - [Management API](/management-api#tag/Loyalty)  - [Rule Engine](/docs/product/applications/evaluation-order-for-rules-and-filters) 
+    attr_accessor :type_of_change
+
+    # The ID of the employee who added or deducted points.
+    attr_accessor :user_id
+
+    # The amount of added or deducted loyalty points.
+    attr_accessor :amount
+
+    # The expiration date for loyalty points.
+    attr_accessor :expiry_date
+
+    # The action (addition or subtraction) made with loyalty points.
+    attr_accessor :operation
+
+    # The reason for the points addition or deduction.
+    attr_accessor :reason
+
+    # The start date for loyalty points.
+    attr_accessor :start_date
+
+    # The identifier of the transaction in the loyalty ledger.
+    attr_accessor :transaction_uuid
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -78,38 +81,40 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'profile_integration_id' => :'ProfileIntegrationID',
-        :'loyalty_program_id' => :'LoyaltyProgramID',
-        :'subledger_id' => :'SubledgerID',
-        :'amount' => :'Amount',
-        :'reason' => :'Reason',
-        :'type_of_change' => :'TypeOfChange',
         :'employee_name' => :'EmployeeName',
-        :'user_id' => :'UserID',
-        :'operation' => :'Operation',
-        :'start_date' => :'StartDate',
-        :'expiry_date' => :'ExpiryDate',
+        :'loyalty_program_id' => :'LoyaltyProgramID',
+        :'notification_type' => :'NotificationType',
+        :'profile_integration_id' => :'ProfileIntegrationID',
         :'session_integration_id' => :'SessionIntegrationID',
-        :'notification_type' => :'NotificationType'
+        :'subledger_id' => :'SubledgerID',
+        :'type_of_change' => :'TypeOfChange',
+        :'user_id' => :'UserID',
+        :'amount' => :'Amount',
+        :'expiry_date' => :'ExpiryDate',
+        :'operation' => :'Operation',
+        :'reason' => :'Reason',
+        :'start_date' => :'StartDate',
+        :'transaction_uuid' => :'TransactionUUID'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'profile_integration_id' => :'String',
-        :'loyalty_program_id' => :'Integer',
-        :'subledger_id' => :'String',
-        :'amount' => :'Float',
-        :'reason' => :'String',
-        :'type_of_change' => :'String',
         :'employee_name' => :'String',
-        :'user_id' => :'Integer',
-        :'operation' => :'String',
-        :'start_date' => :'DateTime',
-        :'expiry_date' => :'DateTime',
+        :'loyalty_program_id' => :'Integer',
+        :'notification_type' => :'String',
+        :'profile_integration_id' => :'String',
         :'session_integration_id' => :'String',
-        :'notification_type' => :'String'
+        :'subledger_id' => :'String',
+        :'type_of_change' => :'String',
+        :'user_id' => :'Integer',
+        :'amount' => :'Float',
+        :'expiry_date' => :'DateTime',
+        :'operation' => :'String',
+        :'reason' => :'String',
+        :'start_date' => :'DateTime',
+        :'transaction_uuid' => :'String'
       }
     end
 
@@ -134,56 +139,60 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'profile_integration_id')
-        self.profile_integration_id = attributes[:'profile_integration_id']
+      if attributes.key?(:'employee_name')
+        self.employee_name = attributes[:'employee_name']
       end
 
       if attributes.key?(:'loyalty_program_id')
         self.loyalty_program_id = attributes[:'loyalty_program_id']
       end
 
-      if attributes.key?(:'subledger_id')
-        self.subledger_id = attributes[:'subledger_id']
+      if attributes.key?(:'notification_type')
+        self.notification_type = attributes[:'notification_type']
       end
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
-      end
-
-      if attributes.key?(:'reason')
-        self.reason = attributes[:'reason']
-      end
-
-      if attributes.key?(:'type_of_change')
-        self.type_of_change = attributes[:'type_of_change']
-      end
-
-      if attributes.key?(:'employee_name')
-        self.employee_name = attributes[:'employee_name']
-      end
-
-      if attributes.key?(:'user_id')
-        self.user_id = attributes[:'user_id']
-      end
-
-      if attributes.key?(:'operation')
-        self.operation = attributes[:'operation']
-      end
-
-      if attributes.key?(:'start_date')
-        self.start_date = attributes[:'start_date']
-      end
-
-      if attributes.key?(:'expiry_date')
-        self.expiry_date = attributes[:'expiry_date']
+      if attributes.key?(:'profile_integration_id')
+        self.profile_integration_id = attributes[:'profile_integration_id']
       end
 
       if attributes.key?(:'session_integration_id')
         self.session_integration_id = attributes[:'session_integration_id']
       end
 
-      if attributes.key?(:'notification_type')
-        self.notification_type = attributes[:'notification_type']
+      if attributes.key?(:'subledger_id')
+        self.subledger_id = attributes[:'subledger_id']
+      end
+
+      if attributes.key?(:'type_of_change')
+        self.type_of_change = attributes[:'type_of_change']
+      end
+
+      if attributes.key?(:'user_id')
+        self.user_id = attributes[:'user_id']
+      end
+
+      if attributes.key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'operation')
+        self.operation = attributes[:'operation']
+      end
+
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'transaction_uuid')
+        self.transaction_uuid = attributes[:'transaction_uuid']
       end
     end
 
@@ -191,8 +200,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @profile_integration_id.nil?
-        invalid_properties.push('invalid value for "profile_integration_id", profile_integration_id cannot be nil.')
+      if @employee_name.nil?
+        invalid_properties.push('invalid value for "employee_name", employee_name cannot be nil.')
       end
 
       if @loyalty_program_id.nil?
@@ -203,44 +212,44 @@ module TalonOne
         invalid_properties.push('invalid value for "loyalty_program_id", must be greater than or equal to 1.')
       end
 
-      if @subledger_id.nil?
-        invalid_properties.push('invalid value for "subledger_id", subledger_id cannot be nil.')
+      if @notification_type.nil?
+        invalid_properties.push('invalid value for "notification_type", notification_type cannot be nil.')
       end
 
-      if @amount.nil?
-        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
-      end
-
-      if @reason.nil?
-        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
-      end
-
-      if @type_of_change.nil?
-        invalid_properties.push('invalid value for "type_of_change", type_of_change cannot be nil.')
-      end
-
-      if @employee_name.nil?
-        invalid_properties.push('invalid value for "employee_name", employee_name cannot be nil.')
-      end
-
-      if @user_id.nil?
-        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
-      end
-
-      if @user_id < 1
-        invalid_properties.push('invalid value for "user_id", must be greater than or equal to 1.')
-      end
-
-      if @operation.nil?
-        invalid_properties.push('invalid value for "operation", operation cannot be nil.')
+      if @profile_integration_id.nil?
+        invalid_properties.push('invalid value for "profile_integration_id", profile_integration_id cannot be nil.')
       end
 
       if @session_integration_id.nil?
         invalid_properties.push('invalid value for "session_integration_id", session_integration_id cannot be nil.')
       end
 
-      if @notification_type.nil?
-        invalid_properties.push('invalid value for "notification_type", notification_type cannot be nil.')
+      if @subledger_id.nil?
+        invalid_properties.push('invalid value for "subledger_id", subledger_id cannot be nil.')
+      end
+
+      if @type_of_change.nil?
+        invalid_properties.push('invalid value for "type_of_change", type_of_change cannot be nil.')
+      end
+
+      if @user_id.nil?
+        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
+      end
+
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @operation.nil?
+        invalid_properties.push('invalid value for "operation", operation cannot be nil.')
+      end
+
+      if @reason.nil?
+        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
+      end
+
+      if @transaction_uuid.nil?
+        invalid_properties.push('invalid value for "transaction_uuid", transaction_uuid cannot be nil.')
       end
 
       invalid_properties
@@ -249,25 +258,25 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @profile_integration_id.nil?
+      return false if @employee_name.nil?
       return false if @loyalty_program_id.nil?
       return false if @loyalty_program_id < 1
-      return false if @subledger_id.nil?
-      return false if @amount.nil?
-      return false if @reason.nil?
-      return false if @type_of_change.nil?
-      type_of_change_validator = EnumAttributeValidator.new('String', ["campaign_manager", "rule_engine", "management_api"])
-      return false unless type_of_change_validator.valid?(@type_of_change)
-      return false if @employee_name.nil?
-      return false if @user_id.nil?
-      return false if @user_id < 1
-      return false if @operation.nil?
-      operation_validator = EnumAttributeValidator.new('String', ["addition", "deduction"])
-      return false unless operation_validator.valid?(@operation)
-      return false if @session_integration_id.nil?
       return false if @notification_type.nil?
       notification_type_validator = EnumAttributeValidator.new('String', ["LoyaltyPointsDeducted", "LoyaltyPointsAdded"])
       return false unless notification_type_validator.valid?(@notification_type)
+      return false if @profile_integration_id.nil?
+      return false if @session_integration_id.nil?
+      return false if @subledger_id.nil?
+      return false if @type_of_change.nil?
+      type_of_change_validator = EnumAttributeValidator.new('String', ["campaign_manager", "rule_engine", "management_api"])
+      return false unless type_of_change_validator.valid?(@type_of_change)
+      return false if @user_id.nil?
+      return false if @amount.nil?
+      return false if @operation.nil?
+      operation_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
+      return false unless operation_validator.valid?(@operation)
+      return false if @reason.nil?
+      return false if @transaction_uuid.nil?
       true
     end
 
@@ -286,40 +295,6 @@ module TalonOne
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type_of_change Object to be assigned
-    def type_of_change=(type_of_change)
-      validator = EnumAttributeValidator.new('String', ["campaign_manager", "rule_engine", "management_api"])
-      unless validator.valid?(type_of_change)
-        fail ArgumentError, "invalid value for \"type_of_change\", must be one of #{validator.allowable_values}."
-      end
-      @type_of_change = type_of_change
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] user_id Value to be assigned
-    def user_id=(user_id)
-      if user_id.nil?
-        fail ArgumentError, 'user_id cannot be nil'
-      end
-
-      if user_id < 1
-        fail ArgumentError, 'invalid value for "user_id", must be greater than or equal to 1.'
-      end
-
-      @user_id = user_id
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] operation Object to be assigned
-    def operation=(operation)
-      validator = EnumAttributeValidator.new('String', ["addition", "deduction"])
-      unless validator.valid?(operation)
-        fail ArgumentError, "invalid value for \"operation\", must be one of #{validator.allowable_values}."
-      end
-      @operation = operation
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] notification_type Object to be assigned
     def notification_type=(notification_type)
       validator = EnumAttributeValidator.new('String', ["LoyaltyPointsDeducted", "LoyaltyPointsAdded"])
@@ -329,24 +304,45 @@ module TalonOne
       @notification_type = notification_type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type_of_change Object to be assigned
+    def type_of_change=(type_of_change)
+      validator = EnumAttributeValidator.new('String', ["campaign_manager", "rule_engine", "management_api"])
+      unless validator.valid?(type_of_change)
+        fail ArgumentError, "invalid value for \"type_of_change\", must be one of #{validator.allowable_values}."
+      end
+      @type_of_change = type_of_change
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] operation Object to be assigned
+    def operation=(operation)
+      validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
+      unless validator.valid?(operation)
+        fail ArgumentError, "invalid value for \"operation\", must be one of #{validator.allowable_values}."
+      end
+      @operation = operation
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          profile_integration_id == o.profile_integration_id &&
-          loyalty_program_id == o.loyalty_program_id &&
-          subledger_id == o.subledger_id &&
-          amount == o.amount &&
-          reason == o.reason &&
-          type_of_change == o.type_of_change &&
           employee_name == o.employee_name &&
-          user_id == o.user_id &&
-          operation == o.operation &&
-          start_date == o.start_date &&
-          expiry_date == o.expiry_date &&
+          loyalty_program_id == o.loyalty_program_id &&
+          notification_type == o.notification_type &&
+          profile_integration_id == o.profile_integration_id &&
           session_integration_id == o.session_integration_id &&
-          notification_type == o.notification_type
+          subledger_id == o.subledger_id &&
+          type_of_change == o.type_of_change &&
+          user_id == o.user_id &&
+          amount == o.amount &&
+          expiry_date == o.expiry_date &&
+          operation == o.operation &&
+          reason == o.reason &&
+          start_date == o.start_date &&
+          transaction_uuid == o.transaction_uuid
     end
 
     # @see the `==` method
@@ -358,7 +354,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_integration_id, loyalty_program_id, subledger_id, amount, reason, type_of_change, employee_name, user_id, operation, start_date, expiry_date, session_integration_id, notification_type].hash
+      [employee_name, loyalty_program_id, notification_type, profile_integration_id, session_integration_id, subledger_id, type_of_change, user_id, amount, expiry_date, operation, reason, start_date, transaction_uuid].hash
     end
 
     # Builds the object from hash

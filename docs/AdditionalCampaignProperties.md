@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **frontend_state** | **String** | The campaign state displayed in the Campaign Manager. | 
 **stores_imported** | **Boolean** | Indicates whether the linked stores were imported via a CSV file. | 
 **value_maps_ids** | **Array&lt;Integer&gt;** | A list of value map IDs for the campaign. | [optional] 
+**experiment_id** | **Integer** | The ID of the Experiment this Campaign is part of. | [optional] 
 
 ## Code Sample
 
@@ -57,7 +58,8 @@ instance = TalonOne::AdditionalCampaignProperties.new(budgets: null,
                                  template_id: 3,
                                  frontend_state: running,
                                  stores_imported: true,
-                                 value_maps_ids: [100, 215])
+                                 value_maps_ids: [100, 215],
+                                 experiment_id: 1)
 ```
 
 
