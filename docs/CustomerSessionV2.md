@@ -14,7 +14,8 @@ Name | Type | Description | Notes
 **coupon_codes** | **Array&lt;String&gt;** | Any coupon codes entered.  **Important - for requests only**:  - If you [create a coupon budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a coupon code by the time you close it. - In requests where &#x60;dry&#x3D;false&#x60;, providing an empty array discards any previous coupons. To avoid this, omit the parameter entirely.  | [optional] 
 **referral_code** | **String** | Any referral code entered.  **Important - for requests only**:  - If you [create a referral budget](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-budgets/#budget-types) for your campaign, ensure the session contains a referral code by the time you close it. - In requests where &#x60;dry&#x3D;false&#x60;, providing an empty value discards the previous referral code. To avoid this, omit the parameter entirely.  | [optional] 
 **loyalty_cards** | **Array&lt;String&gt;** | Identifier of a loyalty card. | [optional] 
-**state** | **String** | Indicates the current state of the session. Sessions can be created as &#x60;open&#x60; or &#x60;closed&#x60;. The state transitions are:  1. &#x60;open&#x60; → &#x60;closed&#x60; 2. &#x60;open&#x60; → &#x60;cancelled&#x60; 3. Either:    - &#x60;closed&#x60; → &#x60;cancelled&#x60; (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - &#x60;closed&#x60; → &#x60;partially_returned&#x60; (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - &#x60;closed&#x60; → &#x60;open&#x60; (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. &#x60;partially_returned&#x60; → &#x60;cancelled&#x60;  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions).  | [default to &#39;open&#39;]
+**reward_integration_ids** | **Array&lt;String&gt;** | The integration IDs of the unlocked rewards that can be used in this session.  | [optional] 
+**state** | **String** | Indicates the current state of the session. Sessions can be created as &#x60;open&#x60; or &#x60;closed&#x60;. The state transitions are:  1. &#x60;open&#x60; -&gt; &#x60;closed&#x60; 2. &#x60;open&#x60; -&gt; &#x60;cancelled&#x60; 3. Either:    - &#x60;closed&#x60; -&gt; &#x60;cancelled&#x60; (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - &#x60;closed&#x60; -&gt; &#x60;partially_returned&#x60; (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - &#x60;closed&#x60; -&gt; &#x60;open&#x60; (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. &#x60;partially_returned&#x60; -&gt; &#x60;cancelled&#x60;  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions).  | [default to &#39;open&#39;]
 **cart_items** | [**Array&lt;CartItem&gt;**](CartItem.md) | The items to add to this session. **Do not exceed 1000 items** and ensure the sum of all cart item&#39;s &#x60;quantity&#x60; **does not exceed 10.000** per request.  | 
 **experiment_variant_allocations** | [**Array&lt;ExperimentVariantAllocation&gt;**](ExperimentVariantAllocation.md) | The experiment variant allocations to add to this session.  | [optional] 
 **additional_costs** | [**Hash&lt;String, AdditionalCost&gt;**](AdditionalCost.md) | Use this property to set a value for the additional costs of this session, such as a shipping cost.  They must be created in the Campaign Manager before you set them with this property. See [Managing additional costs](https://docs.talon.one/docs/product/account/dev-tools/managing-additional-costs).  | [optional] 
@@ -25,6 +26,7 @@ Name | Type | Description | Notes
 **total** | **Float** | The total value of cart items and additional costs in the session, before any discounts are applied. | 
 **cart_item_total** | **Float** | The total value of cart items, before any discounts are applied. | 
 **additional_cost_total** | **Float** | The total value of additional costs, before any discounts are applied. | 
+**cart_item_additional_cost_total** | **Float** | The total value of additional costs applied to individual items, before any discounts are applied. | [readonly] 
 **updated** | **DateTime** | Timestamp of the most recent event received on this session. | 
 
 ## Code Sample
@@ -42,6 +44,7 @@ instance = TalonOne::CustomerSessionV2.new(id: 6,
                                  coupon_codes: [XMAS-20-2021],
                                  referral_code: NT2K54D9,
                                  loyalty_cards: [loyalty-card-1],
+                                 reward_integration_ids: [5c0b5e6d-3f8a-4c2b-9f1e-2a7d6b4c8e90],
                                  state: open,
                                  cart_items: null,
                                  experiment_variant_allocations: null,
@@ -50,9 +53,10 @@ instance = TalonOne::CustomerSessionV2.new(id: 6,
                                  attributes: {&quot;ShippingCity&quot;:&quot;Berlin&quot;},
                                  first_session: true,
                                  update_count: 3,
-                                 total: 119.99,
+                                 total: 134.99,
                                  cart_item_total: 99.99,
                                  additional_cost_total: 20.0,
+                                 cart_item_additional_cost_total: 15.0,
                                  updated: 2020-02-08T14:15:22Z)
 ```
 

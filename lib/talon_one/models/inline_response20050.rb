@@ -26,7 +26,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<SummaryCampaignStoreBudget>'
+        :'data' => :'Array<ListCampaignStoreBudgets>'
       }
     end
 

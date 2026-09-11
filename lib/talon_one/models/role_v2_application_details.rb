@@ -26,16 +26,13 @@ module TalonOne
     # Name of the tools-related permission set.
     attr_accessor :tools
 
-    attr_accessor :thresholds
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'application' => :'application',
         :'campaign' => :'campaign',
         :'draft_campaign' => :'draftCampaign',
-        :'tools' => :'tools',
-        :'thresholds' => :'thresholds'
+        :'tools' => :'tools'
       }
     end
 
@@ -45,8 +42,7 @@ module TalonOne
         :'application' => :'String',
         :'campaign' => :'String',
         :'draft_campaign' => :'String',
-        :'tools' => :'String',
-        :'thresholds' => :'RolesV2Thresholds'
+        :'tools' => :'String'
       }
     end
 
@@ -86,10 +82,6 @@ module TalonOne
       if attributes.key?(:'tools')
         self.tools = attributes[:'tools']
       end
-
-      if attributes.key?(:'thresholds')
-        self.thresholds = attributes[:'thresholds']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -113,8 +105,7 @@ module TalonOne
           application == o.application &&
           campaign == o.campaign &&
           draft_campaign == o.draft_campaign &&
-          tools == o.tools &&
-          thresholds == o.thresholds
+          tools == o.tools
     end
 
     # @see the `==` method
@@ -126,7 +117,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application, campaign, draft_campaign, tools, thresholds].hash
+      [application, campaign, draft_campaign, tools].hash
     end
 
     # Builds the object from hash

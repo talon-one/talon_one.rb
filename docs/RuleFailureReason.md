@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **coupon_value** | **String** | The code of the coupon that was being evaluated at the time of the rule failure. | [optional] 
 **referral_id** | **Integer** | The ID of the referral that was being evaluated at the time of the rule failure. | [optional] 
 **referral_value** | **String** | The code of the referral that was being evaluated at the time of the rule failure. | [optional] 
+**reward_id** | **Integer** | The ID of the reward that was being evaluated at the time of the rule failure. | [optional] 
+**reward_integration_id** | **String** | The integration ID of the reward that was being evaluated at the time of the rule failure. | [optional] 
 **rule_index** | **Integer** | The index of the rule that failed within the ruleset. | 
 **rule_name** | **String** | The name of the rule that failed within the ruleset. | 
 **condition_index** | **Integer** | The index of the condition that failed. | [optional] 
@@ -31,6 +33,8 @@ instance = TalonOne::RuleFailureReason.new(campaign_id: null,
                                  coupon_value: null,
                                  referral_id: null,
                                  referral_value: null,
+                                 reward_id: 7,
+                                 reward_integration_id: 5c0b5e6d-3f8a-4c2b-9f1e-2a7d6b4c8e90,
                                  rule_index: null,
                                  rule_name: null,
                                  condition_index: null,

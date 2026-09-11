@@ -13,21 +13,21 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"setDiscountPerAdditionalCost\" effect. This gets triggered whenever a validated rule contained a \"set per additional cost discount\" effect. This is a discount that should be applied on a specific additional cost.
+  # This effect indicates that a discount that should be applied on a specific additional cost. It is triggered whenever a rule containing a **Discount additional cost** effect is validated.  Enabling [partial rewards](https://docs.talon.one/docs/product/applications/manage-general-settings#partial-rewards) allows a rule that would fail because of insufficient budget to pass. The rule still fails when the budget reaches 0. Use the `desiredValue` property to identify the original amount of loyalty points.
   class SetDiscountPerAdditionalCostEffectProps
-    # The name / description of this discount
+    # The name of the discount.
     attr_accessor :name
 
-    # The ID of the additional cost.
+    # The identifier of the additional cost.
     attr_accessor :additional_cost_id
 
-    # The name of the additional cost.
+    # The API name of the additional cost.
     attr_accessor :additional_cost
 
-    # The total monetary value of the discount.
+    # The monetary value of the discount to apply.
     attr_accessor :value
 
-    # The original value of the discount.
+    # _(Partial discounts enabled only)_ The monetary value of the discount to be applied without considering budget limitations.
     attr_accessor :desired_value
 
     # Attribute mapping from ruby-style variable name to JSON key.

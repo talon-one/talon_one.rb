@@ -13,21 +13,21 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"awardGiveaway\" effect. This effect contains information on the giveaway item, and which profile it was awarded to.
+  # This effect indicates the awarded giveaway item and to which profile the item was awarded. Learn more about [giveaways](https://docs.talon.one/docs/product/giveaways/overview).
   class AwardGiveawayEffectProps
-    # The ID of the giveaways pool the code was taken from.
+    # The internal ID of the giveaway pool.
     attr_accessor :pool_id
 
-    # The name of the giveaways pool the code was taken from.
+    # The name of the giveaway pool.
     attr_accessor :pool_name
 
-    # The integration ID of the profile that was awarded the giveaway.
+    # The integration ID of the customer that receives the giveaway.
     attr_accessor :recipient_integration_id
 
-    # The internal ID for the giveaway that was awarded.
+    # The internal ID of the giveaway.
     attr_accessor :giveaway_id
 
-    # The giveaway code that was awarded.
+    # The giveaway code to be rewarded.
     attr_accessor :code
 
     # Attribute mapping from ruby-style variable name to JSON key.

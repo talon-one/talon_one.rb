@@ -35,7 +35,7 @@ describe 'TalangAttribute' do
   describe 'test attribute "entity"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "LoyaltyCard", "Profile", "Giveaway", "Referral", "Session", "Store", "Achievements"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["AdvocateProfile", "Account", "Application", "AwardedGiveaway", "Bundle", "Campaign", "CartItem", "Coupon", "CustomerProfile", "CustomerSession", "Event", "Item", "Loyalty", "LoyaltyCard", "Profile", "Giveaway", "Referral", "Session", "Store", "Achievements", "AdvancedEvent", "AdvancedEventConnectedSession"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.entity = value }.not_to raise_error
       # end

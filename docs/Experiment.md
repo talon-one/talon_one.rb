@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **activated** | **DateTime** | The date and time the experiment was activated.  | [optional] 
 **state** | **String** | A disabled experiment is not evaluated for rules or coupons.  | [default to &#39;disabled&#39;]
 **variants** | [**Array&lt;ExperimentVariant&gt;**](ExperimentVariant.md) |  | [optional] 
+**goal_type** | **String** | The goal of the experiment. Determines which single metric is used to decide the winning variant. When set to &#x60;other&#x60;, multiple metrics are used.  | 
+**goal_description** | **String** | A description of the experiment goal. Provides context for the AI summary and helps it interpret the outcome of the experiment against the stated goal.  | [optional] 
 **deletedat** | **DateTime** | The date and time the experiment was deleted.  | [optional] 
 
 ## Code Sample
@@ -27,6 +29,8 @@ instance = TalonOne::Experiment.new(id: 6,
                                  activated: null,
                                  state: enabled,
                                  variants: null,
+                                 goal_type: null,
+                                 goal_description: Offering free shipping will increase average order revenue more than a 10% discount,
                                  deletedat: null)
 ```
 

@@ -13,9 +13,9 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"referralCreated\" effect. This gets triggered whenever a validated rule contained a \"create referral\" effect, and a referral code was created for a customer. See \"createdReferrals\" on the response for all details of this referral code.
+  # The `referralCreated` effect behaves similarly to [couponCreated](https://docs.talon.one/docs/dev/integration-api/api-effects#couponcreated). If the `friendProfileIntegrationId` parameter is empty, the referral code can be redeemed by anyone.
   class ReferralCreatedEffectProps
-    # The referral code that was created.
+    # The referral code provided in the session.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.

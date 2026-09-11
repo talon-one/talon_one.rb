@@ -18,6 +18,9 @@ module TalonOne
     # The location where the SAML assertion is sent with a HTTP POST.
     attr_accessor :assertion_consumer_service_url
 
+    # The expiry date of the X.509 certificate.
+    attr_accessor :certificate_expiry
+
     # The ID of the account that owns this entity.
     attr_accessor :account_id
 
@@ -52,6 +55,7 @@ module TalonOne
     def self.attribute_map
       {
         :'assertion_consumer_service_url' => :'assertionConsumerServiceURL',
+        :'certificate_expiry' => :'certificateExpiry',
         :'account_id' => :'accountId',
         :'name' => :'name',
         :'enabled' => :'enabled',
@@ -69,6 +73,7 @@ module TalonOne
     def self.openapi_types
       {
         :'assertion_consumer_service_url' => :'String',
+        :'certificate_expiry' => :'DateTime',
         :'account_id' => :'Integer',
         :'name' => :'String',
         :'enabled' => :'Boolean',
@@ -105,6 +110,10 @@ module TalonOne
 
       if attributes.key?(:'assertion_consumer_service_url')
         self.assertion_consumer_service_url = attributes[:'assertion_consumer_service_url']
+      end
+
+      if attributes.key?(:'certificate_expiry')
+        self.certificate_expiry = attributes[:'certificate_expiry']
       end
 
       if attributes.key?(:'account_id')
@@ -269,6 +278,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           assertion_consumer_service_url == o.assertion_consumer_service_url &&
+          certificate_expiry == o.certificate_expiry &&
           account_id == o.account_id &&
           name == o.name &&
           enabled == o.enabled &&
@@ -290,7 +300,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [assertion_consumer_service_url, account_id, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, audience_uri, id, created].hash
+      [assertion_consumer_service_url, certificate_expiry, account_id, name, enabled, issuer, sign_on_url, sign_out_url, metadata_url, audience_uri, id, created].hash
     end
 
     # Builds the object from hash

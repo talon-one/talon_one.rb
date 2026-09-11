@@ -33,7 +33,10 @@ module TalonOne
     # Identifier of a loyalty card.
     attr_accessor :loyalty_cards
 
-    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. Either:    - `closed` → `cancelled` (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - `closed` → `partially_returned` (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - `closed` → `open` (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. `partially_returned` → `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). 
+    # The integration IDs of the unlocked rewards that can be used in this session. 
+    attr_accessor :reward_integration_ids
+
+    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` -> `closed` 2. `open` -> `cancelled` 3. Either:    - `closed` -> `cancelled` (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - `closed` -> `partially_returned` (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - `closed` -> `open` (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. `partially_returned` -> `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). 
     attr_accessor :state
 
     # The items to add to this session. **Do not exceed 1000 items** and ensure the sum of all cart item's `quantity` **does not exceed 10.000** per request. 
@@ -82,6 +85,7 @@ module TalonOne
         :'coupon_codes' => :'couponCodes',
         :'referral_code' => :'referralCode',
         :'loyalty_cards' => :'loyaltyCards',
+        :'reward_integration_ids' => :'rewardIntegrationIds',
         :'state' => :'state',
         :'cart_items' => :'cartItems',
         :'experiment_variant_allocations' => :'experimentVariantAllocations',
@@ -100,6 +104,7 @@ module TalonOne
         :'coupon_codes' => :'Array<String>',
         :'referral_code' => :'String',
         :'loyalty_cards' => :'Array<String>',
+        :'reward_integration_ids' => :'Array<String>',
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
         :'experiment_variant_allocations' => :'Array<ExperimentVariantAllocation>',
@@ -157,6 +162,12 @@ module TalonOne
       if attributes.key?(:'loyalty_cards')
         if (value = attributes[:'loyalty_cards']).is_a?(Array)
           self.loyalty_cards = value
+        end
+      end
+
+      if attributes.key?(:'reward_integration_ids')
+        if (value = attributes[:'reward_integration_ids']).is_a?(Array)
+          self.reward_integration_ids = value
         end
       end
 
@@ -270,6 +281,7 @@ module TalonOne
           coupon_codes == o.coupon_codes &&
           referral_code == o.referral_code &&
           loyalty_cards == o.loyalty_cards &&
+          reward_integration_ids == o.reward_integration_ids &&
           state == o.state &&
           cart_items == o.cart_items &&
           experiment_variant_allocations == o.experiment_variant_allocations &&
@@ -287,7 +299,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, reward_integration_ids, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes].hash
     end
 
     # Builds the object from hash

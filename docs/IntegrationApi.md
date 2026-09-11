@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**get_customer_achievements**](IntegrationApi.md#get_customer_achievements) | **GET** /v1/customer_profiles/{integrationId}/achievements | List customer&#39;s available achievements
 [**get_customer_inventory**](IntegrationApi.md#get_customer_inventory) | **GET** /v1/customer_profiles/{integrationId}/inventory | List customer data
 [**get_customer_session**](IntegrationApi.md#get_customer_session) | **GET** /v2/customer_sessions/{customerSessionId} | Get customer session
+[**get_event_v3**](IntegrationApi.md#get_event_v3) | **GET** /v3/events/{integrationId} | Get advanced event
 [**get_loyalty_balances**](IntegrationApi.md#get_loyalty_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/balances | Get customer&#39;s loyalty balances
 [**get_loyalty_card_balances**](IntegrationApi.md#get_loyalty_card_balances) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/balances | Get card&#39;s point balances
 [**get_loyalty_card_points**](IntegrationApi.md#get_loyalty_card_points) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/points | List card&#39;s unused loyalty points
@@ -28,12 +29,16 @@ Method | HTTP request | Description
 [**get_loyalty_program_profile_transactions**](IntegrationApi.md#get_loyalty_program_profile_transactions) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/transactions | List customer&#39;s loyalty transactions
 [**get_reserved_customers**](IntegrationApi.md#get_reserved_customers) | **GET** /v1/coupon_reservations/customerprofiles/{couponValue} | List customers that have this coupon reserved
 [**integration_get_all_campaigns**](IntegrationApi.md#integration_get_all_campaigns) | **GET** /v1/integration/campaigns | List all running campaigns
+[**integration_rewards_catalog**](IntegrationApi.md#integration_rewards_catalog) | **GET** /v1/rewards/catalog | List rewards in the catalog
+[**join_loyalty_program**](IntegrationApi.md#join_loyalty_program) | **POST** /v1/loyalty_programs/{loyaltyProgramId}/profile/{integrationId}/join | Join customer profile to loyalty program
 [**link_loyalty_card_to_profile**](IntegrationApi.md#link_loyalty_card_to_profile) | **POST** /v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/link_profile | Link customer profile to card
 [**reopen_customer_session**](IntegrationApi.md#reopen_customer_session) | **PUT** /v2/customer_sessions/{customerSessionId}/reopen | Reopen customer session
 [**return_cart_items**](IntegrationApi.md#return_cart_items) | **POST** /v2/customer_sessions/{customerSessionId}/returns | Return cart items
 [**sync_catalog**](IntegrationApi.md#sync_catalog) | **PUT** /v1/catalogs/{catalogId}/sync | Sync cart item catalog
 [**track_event_v2**](IntegrationApi.md#track_event_v2) | **POST** /v2/events | Track event
+[**track_event_v3**](IntegrationApi.md#track_event_v3) | **POST** /v3/events | Track advanced event
 [**unlink_loyalty_card_from_profile**](IntegrationApi.md#unlink_loyalty_card_from_profile) | **POST** /v2/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/unlink_profile | Unlink customer profile from a loyalty card
+[**unlock_reward**](IntegrationApi.md#unlock_reward) | **POST** /v1/rewards/{rewardId}/unlock | Unlock a reward
 [**update_audience_customers_attributes**](IntegrationApi.md#update_audience_customers_attributes) | **PUT** /v2/audience_customers/{audienceId}/attributes | Update profile attributes for all customers in audience
 [**update_audience_v2**](IntegrationApi.md#update_audience_v2) | **PUT** /v2/audiences/{audienceId} | Update audience name
 [**update_customer_profile_audiences**](IntegrationApi.md#update_customer_profile_audiences) | **POST** /v2/customer_audiences | Update multiple customer profiles&#39; audiences
@@ -444,7 +449,7 @@ nil (empty response body)
 
 Delete audience
 
-Delete an audience created by a third-party integration.  > [!warning] This endpoint also removes any associations recorded between a customer profile and this audience.  > [!note] Audiences can also be deleted via the Campaign Manager. See the [docs](https://docs.talon.one/docs/product/audiences/managing-audiences#deleting-an-audience). 
+Delete an audience.  > [!warning] This endpoint also removes any associations recorded between a customer profile and this audience.  > [!note] Audiences can also be deleted via the Campaign Manager. See the [docs](https://docs.talon.one/docs/product/audiences/managing-audiences#deleting-an-audience).  The audience isn't deleted if any experiment variant uses it. The response identifies each blocking experiment by its Campaign Manager path. 
 
 ### Example
 
@@ -877,7 +882,8 @@ opts = {
   coupons: true, # Boolean | Set to `true` to include coupon information in the response.
   loyalty: true, # Boolean | Set to `true` to include loyalty information in the response.
   giveaways: true, # Boolean | Set to `true` to include giveaways information in the response.
-  achievements: true # Boolean | Set to `true` to include achievement information in the response.
+  achievements: true, # Boolean | Set to `true` to include achievement information in the response.
+  unlocked_rewards: true # Boolean | Set to `true` to include `unlocked` rewards that have not been `used` in the response.
 }
 
 begin
@@ -901,6 +907,7 @@ Name | Type | Description  | Notes
  **loyalty** | **Boolean**| Set to &#x60;true&#x60; to include loyalty information in the response. | [optional] 
  **giveaways** | **Boolean**| Set to &#x60;true&#x60; to include giveaways information in the response. | [optional] 
  **achievements** | **Boolean**| Set to &#x60;true&#x60; to include achievement information in the response. | [optional] 
+ **unlocked_rewards** | **Boolean**| Set to &#x60;true&#x60; to include &#x60;unlocked&#x60; rewards that have not been &#x60;used&#x60; in the response. | [optional] 
 
 ### Return type
 
@@ -938,7 +945,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-customer_session_id = 'customer_session_id_example' # String | The `integration ID` of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager's **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. 
+customer_session_id = 'customer_session_id_example' # String | The `integration ID` of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager's **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. **Notes**: - There is no length limit for this ID. - It must be URL-encoded. For example, replace spaces with `%20`. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp). 
 
 begin
   #Get customer session
@@ -954,11 +961,65 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customer_session_id** | **String**| The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint.  | 
+ **customer_session_id** | **String**| The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. **Notes**: - There is no length limit for this ID. - It must be URL-encoded. For example, replace spaces with &#x60;%20&#x60;. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp).  | 
 
 ### Return type
 
 [**IntegrationCustomerSessionResponse**](IntegrationCustomerSessionResponse.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_event_v3
+
+> EventV3 get_event_v3(integration_id)
+
+Get advanced event
+
+Retrieve an advanced event by its identifier. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+integration_id = 'integration_id_example' # String | The unique ID of the advanced event.
+
+begin
+  #Get advanced event
+  result = api_instance.get_event_v3(integration_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->get_event_v3: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration_id** | **String**| The unique ID of the advanced event. | 
+
+### Return type
+
+[**EventV3**](EventV3.md)
 
 ### Authorization
 
@@ -1272,12 +1333,12 @@ loyalty_program_id = 56 # Integer | Identifier of the profile-based loyalty prog
 integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
 opts = {
   status: 'active', # String | Filter points based on their status.
-  subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
-  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
-  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
+  subledger_id: ['subledger_id_example'], # Array<String> | Filter the results by a list of subledger IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?subledgerId=id1&subledgerId=id2`.  The response contains only data associated with the specified subledgers. 
+  customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
+  transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
   page_size: 50, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  sort: 'sort_example' # String | The field by which results should be sorted. You can enter one of the following values:  - `startDate`: Sorts the results by the start date of the points. - `expiryDate`: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order.  To sort them in descending order, prefix the field name with `-`.  **Note:** You can only sort by one field at a time. 
+  sort: 'sort_example' # String | The field by which results should be sorted. You can enter one of the following values:  - `startDate`: Sorts the results by the start date of the points. - `expiryDate`: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You can only sort by one field at a time. 
 }
 
 begin
@@ -1297,12 +1358,12 @@ Name | Type | Description  | Notes
  **loyalty_program_id** | **Integer**| Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **status** | **String**| Filter points based on their status. | [optional] [default to &#39;active&#39;]
- **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
- **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.   To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
- **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example,  &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
+ **subledger_id** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of subledger IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?subledgerId&#x3D;id1&amp;subledgerId&#x3D;id2&#x60;.  The response contains only data associated with the specified subledgers.  | [optional] 
+ **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
+ **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
- **sort** | **String**| The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order.  To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time.  | [optional] 
+ **sort** | **String**| The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time.  | [optional] 
 
 ### Return type
 
@@ -1345,7 +1406,7 @@ integration_id = 'integration_id_example' # String | The integration identifier 
 opts = {
   customer_session_i_ds: ['customer_session_i_ds_example'], # Array<String> | Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?customerSessionIDs=id1&customerSessionIDs=id2`.  The response contains only data associated with the specified sessions. 
   transaction_uui_ds: ['transaction_uui_ds_example'], # Array<String> | Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, `?transactionUUIDs=uuid1&transactionUUIDs=uuid2`.  The response contains only data associated with the specified transactions. 
-  subledger_id: 'subledger_id_example', # String | The ID of the subledger by which we filter the data.
+  subledger_id: ['subledger_id_example'], # Array<String> | Filter the results by a list of subledger IDs.  To include multiple IDs, repeat the parameter for each one, for example, `?subledgerId=id1&subledgerId=id2`.  The response contains only data associated with the specified subledgers. 
   loyalty_transaction_type: 'loyalty_transaction_type_example', # String | Filter results by loyalty transaction type: - `manual`: Loyalty transaction that was done manually. - `session`: Loyalty transaction that resulted from a customer session. - `import`: Loyalty transaction that was imported from a CSV file. 
   start_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time from which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
@@ -1372,7 +1433,7 @@ Name | Type | Description  | Notes
  **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
  **customer_session_i_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions.  | [optional] 
  **transaction_uui_ds** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions.  | [optional] 
- **subledger_id** | **String**| The ID of the subledger by which we filter the data. | [optional] 
+ **subledger_id** | [**Array&lt;String&gt;**](String.md)| Filter the results by a list of subledger IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?subledgerId&#x3D;id1&amp;subledgerId&#x3D;id2&#x60;.  The response contains only data associated with the specified subledgers.  | [optional] 
  **loyalty_transaction_type** | **String**| Filter results by loyalty transaction type: - &#x60;manual&#x60;: Loyalty transaction that was done manually. - &#x60;session&#x60;: Loyalty transaction that resulted from a customer session. - &#x60;import&#x60;: Loyalty transaction that was imported from a CSV file.  | [optional] 
  **start_date** | **DateTime**| Date and time from which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
@@ -1416,7 +1477,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-coupon_value = 'coupon_value_example' # String | The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp)  if it contains special characters. For example, you must encode `SUMMER25%OFF` as `SUMMER25%25OFF`. 
+coupon_value = 'coupon_value_example' # String | The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode `SUMMER25%OFF` as `SUMMER25%25OFF`. 
 
 begin
   #List customers that have this coupon reserved
@@ -1432,7 +1493,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **coupon_value** | **String**| The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp)  if it contains special characters. For example, you must encode &#x60;SUMMER25%OFF&#x60; as &#x60;SUMMER25%25OFF&#x60;.  | 
+ **coupon_value** | **String**| The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;SUMMER25%OFF&#x60; as &#x60;SUMMER25%25OFF&#x60;.  | 
 
 ### Return type
 
@@ -1477,7 +1538,9 @@ opts = {
   start_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results to only include campaigns that start on or after  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   start_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results to only include campaigns that start on or before  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   end_after: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results to only include campaigns that end on or after  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
-  end_before: DateTime.parse('2013-10-20T19:20:30+01:00') # DateTime | Filter results to only include campaigns that end on or before  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  end_before: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Filter results to only include campaigns that end on or before  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
+  store_id: 56, # Integer | Filter results to campaigns linked to the specified store ID.
+  audience_id: 56 # Integer | Filter results to campaigns linked to the specified audience ID.
 }
 
 begin
@@ -1501,10 +1564,139 @@ Name | Type | Description  | Notes
  **start_before** | **DateTime**| Filter results to only include campaigns that start on or before  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **end_after** | **DateTime**| Filter results to only include campaigns that end on or after  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **end_before** | **DateTime**| Filter results to only include campaigns that end on or before  the specified timestamp.  **Note:**  - It must be an RFC3339 timestamp string.  - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
+ **store_id** | **Integer**| Filter results to campaigns linked to the specified store ID. | [optional] 
+ **audience_id** | **Integer**| Filter results to campaigns linked to the specified audience ID. | [optional] 
 
 ### Return type
 
 [**InlineResponse200**](InlineResponse200.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## integration_rewards_catalog
+
+> InlineResponse20056 integration_rewards_catalog(opts)
+
+List rewards in the catalog
+
+Retrieve the rewards catalog for the Application. Returns a paginated list of rewards. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+opts = {
+  page_size: 1000, # Integer | The number of items in the response.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  points_from: 3.4, # Float | Return only rewards whose points required is greater than or equal to this value.
+  points_to: 3.4, # Float | Return only rewards whose points required is less than or equal to this value.
+  include_free: true, # Boolean | Whether to include rewards that have no `pointsRequired`. These rewards are treated as free and available to all customers. 
+  loyalty_program_id: 56, # Integer | Return only rewards available in this loyalty program. 
+  subledger_id: 'subledger_id_example', # String | Return only rewards available in this subledger. Must be combined with `loyaltyProgramId`. To specify the main ledger, provide an empty string (\"\"). 
+  profile_integration_id: 'profile_integration_id_example', # String | The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when `loyaltyProgramId` is also provided.  **Note:** `profileIntegrationId` and `loyaltyCardId` are mutually exclusive. Do not send both in the same request. 
+  loyalty_card_id: 'loyalty_card_id_example' # String | The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when `loyaltyProgramId` is also provided.  **Note:** `profileIntegrationId` and `loyaltyCardId` are mutually exclusive. Do not send both in the same request. 
+}
+
+begin
+  #List rewards in the catalog
+  result = api_instance.integration_rewards_catalog(opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->integration_rewards_catalog: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
+ **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **points_from** | **Float**| Return only rewards whose points required is greater than or equal to this value. | [optional] 
+ **points_to** | **Float**| Return only rewards whose points required is less than or equal to this value. | [optional] 
+ **include_free** | **Boolean**| Whether to include rewards that have no &#x60;pointsRequired&#x60;. These rewards are treated as free and available to all customers.  | [optional] [default to true]
+ **loyalty_program_id** | **Integer**| Return only rewards available in this loyalty program.  | [optional] 
+ **subledger_id** | **String**| Return only rewards available in this subledger. Must be combined with &#x60;loyaltyProgramId&#x60;. To specify the main ledger, provide an empty string (\&quot;\&quot;).  | [optional] 
+ **profile_integration_id** | **String**| The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request.  | [optional] 
+ **loyalty_card_id** | **String**| The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request.  | [optional] 
+
+### Return type
+
+[**InlineResponse20056**](InlineResponse20056.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## join_loyalty_program
+
+> join_loyalty_program(loyalty_program_id, integration_id)
+
+Join customer profile to loyalty program
+
+Join a customer profile to the specified loyalty program.  If the customer profile does not exist, it will be created first using the provided `integrationId`, then joined to the loyalty program.  > [!note] This endpoint only works with profile-based loyalty programs.  **Behavior**: - If the loyalty program does not exist, the request fails. - If the customer profile is already joined to the loyalty program, the request fails. - If the customer profile does not exist, it is created and then joined to the loyalty program. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+loyalty_program_id = 56 # Integer | Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
+integration_id = 'integration_id_example' # String | The integration ID of the customer profile. You can get the `integrationId` of a profile using: - A customer session integration ID with the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint. - The Management API with the [List application's customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint. 
+
+begin
+  #Join customer profile to loyalty program
+  api_instance.join_loyalty_program(loyalty_program_id, integration_id)
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->join_loyalty_program: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loyalty_program_id** | **Integer**| Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
+ **integration_id** | **String**| The integration ID of the customer profile. You can get the &#x60;integrationId&#x60; of a profile using: - A customer session integration ID with the [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2) endpoint. - The Management API with the [List application&#39;s customers](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationCustomers) endpoint.  | 
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 
@@ -1634,7 +1826,7 @@ Name | Type | Description  | Notes
 
 Return cart items
 
-Create a new return request for the specified cart items.  This endpoint automatically changes the session state from `closed` to `partially_returned`.  > [!note] This will roll back any effects associated with these cart items. > For more information, see [our documentation on session > states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#customer-session-states) > and [this tutorial](https://docs.talon.one/docs/dev/tutorials/partially-returning-a-session).  > [!note] To make request processing idempotent for this endpoint, include the `Idempotency-Key` header with an idempotency key in requests. Also: > - Requests with the `Idempotency-Key` header are logged in the Talon.One access logs. > - Responses for idempotent requests are stored in the database and expire 24 hours after the request is sent. > - Idempotency keys are typically UUID keys and should not exceed 255 characters in length. 
+Create a new return request for the specified cart items.  This endpoint automatically changes the session state from `closed` to `partially_returned`.  > [!note] This will roll back any effects associated with these cart items. > For more information, see [our documentation on session > states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#customer-session-states) > and [this tutorial](https://docs.talon.one/docs/dev/tutorials/partially-returning-a-session). 
 
 ### Example
 
@@ -1696,7 +1888,7 @@ Name | Type | Description  | Notes
 
 Sync cart item catalog
 
-Perform the following actions for a given cart item catalog:  - Add an item to the catalog. - Add multiple items to the catalog. - Update the attributes of an item in the catalog. - Update the attributes of multiple items in the catalog. - Remove an item from the catalog. - Remove multiple items from the catalog.  You can either add, update, or delete up to 1000 cart items in a single request. Each item synced to a catalog must have a unique `SKU`.  > [!important] You can perform only one type of action in a single sync request. Syncing items with duplicate `SKU` values in a single request returns an error message with a `400` status code.  For more information, read [managing cart item catalogs](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs).  ### Filtering cart items  Use [cart item attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes) to filter items and select the ones you want to edit or delete when editing or deleting more than one item at a time.  The `filters` array contains an object with the following properties:  - `attr`: A [cart item attribute](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes)   connected to the catalog. It is applied to all items in the catalog. - `op`: The filtering operator indicating the relationship between the value   of each cart item in the catalog and the value of the `value` property for the attribute selected   in `attr`.    The value of `op` can be one of the following:    - `EQ`: Equal to `value`   - `LT`: Less than `value`   - `LE`: Less than or equal to `value`   - `GT`: Greater than `value`   - `GE`: Greater than or equal to `value`   - `IN`: One of the comma-separated values that `value` is set to.    **Note:** `GE`, `LE`, `GT`, `LT` are for numeric values only. - `value`: The value of the attribute selected in `attr`.  ### Payload examples  Synchronization actions are sent as `PUT` requests. See the structure for each action:  <details>   <summary><strong>Adding an item to the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"attributes\": {             \"color\": \"Navy blue\",             \"type\": \"shoes\"           },           \"replaceIfExists\": true,           \"sku\": \"SKU1241028\",           \"price\": 100,           \"product\": {             \"name\": \"sneakers\"           }         },         \"type\": \"ADD\"       }     ]   }   ```   </div> </details>  <details>   <summary><strong>Adding multiple items to the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"attributes\": {             \"color\": \"Navy blue\",             \"type\": \"shoes\"           },           \"replaceIfExists\": true,           \"sku\": \"SKU1241027\",           \"price\": 100,           \"product\": {             \"name\": \"sneakers\"           }         },         \"type\": \"ADD\"       },       {         \"payload\": {           \"attributes\": {             \"color\": \"Navy blue\",             \"type\": \"shoes\"           },           \"replaceIfExists\": true,           \"sku\": \"SKU1241028\",           \"price\": 100,           \"product\": {             \"name\": \"sneakers\"           }         },         \"type\": \"ADD\"       }     ]   }   ```   </div> </details>  <details>   <summary><strong>Updating the attributes of an item in the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"attributes\": {             \"age\": 11,             \"origin\": \"germany\"           },           \"createIfNotExists\": false,           \"sku\": \"SKU1241028\",           \"product\": {             \"name\": \"sneakers\"           }         },         \"type\": \"PATCH\"       }     ]   }   ```   </div> </details>  <details>   <summary><strong>Updating the attributes of multiple items in the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"attributes\": {             \"color\": \"red\"           },           \"filters\": [             {               \"attr\": \"color\",               \"op\": \"EQ\",               \"value\": \"blue\"             }           ]         },         \"type\": \"PATCH_MANY\"       }     ]   }   ```    </div> </details>  <details>   <summary><strong>Removing an item from the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"sku\": \"SKU1241028\"         },         \"type\": \"REMOVE\"       }     ]   }   ```    </div> </details>  <details>   <summary><strong>Removing multiple items from the catalog</strong></summary>   <div>    ```json   {     \"actions\": [       {         \"payload\": {           \"filters\": [             {               \"attr\": \"color\",               \"op\": \"EQ\",               \"value\": \"blue\"             }           ]         },         \"type\": \"REMOVE_MANY\"       }     ]   }   ```   </div> </details>  <details>   <summary><strong>Removing shoes of sizes above 45 from the catalog</strong></summary>   <div>   <p>   Let's imagine that we have a shoe store and we have decided to stop selling   shoes larger than size 45. We can remove from the catalog all the shoes of sizes above 45   with a single action:</p>    ```json   {     \"actions\": [       {         \"payload\": {           \"filters\": [             {               \"attr\": \"size\",               \"op\": \"GT\",               \"value\": \"45\"             }           ]         },         \"type\": \"REMOVE_MANY\"       }     ]   }   ```   </div> </details> 
+Perform the following actions for a given cart item catalog:  - Add an item to the catalog. - Add multiple items to the catalog. - Update the attributes of an item in the catalog. - Update the attributes of multiple items in the catalog. - Remove an item from the catalog. - Remove multiple items from the catalog.  You can either add, update, or delete up to 1000 cart items in a single request. Each item synced to a catalog must have a unique `SKU`.  > [!important] You can perform only one type of action in a single sync request. Syncing items with duplicate `SKU` values in a single request returns an error message with a `400` status code.  For more information, read [managing cart item catalogs](https://docs.talon.one/docs/product/account/dev-tools/managing-cart-item-catalogs).  ### Filtering cart items  Use [cart item attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes) to filter items and select the ones you want to edit or delete when editing or deleting more than one item at a time.  The `filters` array contains an object with the following properties:  - `attr`: A [cart item attribute](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes)   connected to the catalog. It is applied to all items in the catalog. - `op`: The filtering operator indicating the relationship between the value   of each cart item in the catalog and the value of the `value` property for the attribute selected   in `attr`.    The value of `op` can be one of the following:    - `EQ`: Equal to `value`   - `LT`: Less than `value`   - `LE`: Less than or equal to `value`   - `GT`: Greater than `value`   - `GE`: Greater than or equal to `value`   - `IN`: One of the comma-separated values that `value` is set to.    **Note:** `GE`, `LE`, `GT`, `LT` are for numeric values only. - `value`: The value of the attribute selected in `attr`.  For request examples of each action, see the **Request Body** examples. 
 
 ### Example
 
@@ -1752,7 +1944,7 @@ Name | Type | Description  | Notes
 
 Track event
 
-Triggers a custom event.  To use this endpoint:  1. Define a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) in the Campaign Manager. 1. Update or create a rule to check for this event. 1. Trigger the event with this endpoint. After you have successfully sent an event to Talon.One, you can list the received events in the **Events** view in the Campaign Manager.  Talon.One also offers a set of [built-in events](https://docs.talon.one/docs/dev/concepts/entities/events). Ensure you do not create a custom event when you can use a built-in event.  For example, use this endpoint to trigger an event when a customer shares a link to a product.  See the [tutorial](https://docs.talon.one/docs/product/tutorials/referrals/incentivizing-product-link-sharing).  > [!note] **Note** > - `profileId` is required even though the schema does not specify it. > - If the customer profile ID is new, a new profile is automatically created but the `customer_profile_created` [built-in event ](https://docs.talon.one/docs/dev/concepts/entities/events) is **not** triggered. > - We recommend sending requests sequentially. See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests). > - [Archived campaigns](https://docs.talon.one/docs/product/campaigns/managing-campaigns#archiving-a-campaign) are not considered in rule evaluation. 
+Trigger a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#custom-events).  To use this endpoint:  1. [Create](https://docs.talon.one/docs/dev/concepts/entities/events#create-an-event) an event in the Campaign Manager. 1. In a rule, add the **Check for event types** [condition](https://docs.talon.one/docs/dev/concepts/entities/events#use-an-event-in-a-rule) and select the event you created. 1. Trigger the event with this endpoint.  You can [list](https://docs.talon.one/docs/product/applications/display-events#list-events) the received events in the **Events** view of the Campaign Manager.  For example, you can use this endpoint to trigger an event when a customer shares a link to a product. See our [tutorial](https://docs.talon.one/docs/product/tutorials/referrals/incentivizing-product-link-sharing).  > [!note] **Note** > - `profileId` is required even though the schema does not specify it. > - If the customer profile ID is new, a new profile is automatically created but the `customer_profile_created` [built-in event ](https://docs.talon.one/docs/dev/concepts/entities/events) is **not** triggered. > - We recommend sending requests sequentially. See [Manage parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#manage-parallel-requests). > - [Archived campaigns](https://docs.talon.one/docs/product/campaigns/managing-campaigns#archive-a-campaign) are not considered in rule evaluation. 
 
 ### Example
 
@@ -1797,6 +1989,68 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IntegrationEventV2Response**](IntegrationEventV2Response.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## track_event_v3
+
+> IntegrationEventV3Response track_event_v3(body, opts)
+
+Track advanced event
+
+Trigger an [advanced event](https://docs.talon.one/docs/dev/concepts/entities/events#advanced-events).  Advanced events are idempotent, uniquely identifiable events. They can also reference a previously closed session to add more context for rule evaluation.  To use this endpoint:  1. [Create](https://docs.talon.one/docs/dev/concepts/entities/events#create-an-event) an event in the Campaign Manager. 1. In a rule, add the **Check for event types** [condition](https://docs.talon.one/docs/dev/concepts/entities/events#use-an-event-in-a-rule) and select the event you created. 1. Trigger the event with this endpoint.  You can [list](https://docs.talon.one/docs/product/applications/display-events#list-events) the received events in the **Events** view of the Campaign Manager.  For example, you can use this endpoint to award loyalty points after an order is delivered. See our [tutorial](https://docs.talon.one/docs/dev/tutorials/award-loyalty-points-after-delivery).  > [!note] **Note** > - If the customer profile does not exist, it will be created. However, the `customer_profile_created` [built-in event](https://docs.talon.one/docs/dev/concepts/entities/events#built-in-events) is **not** triggered. > - We recommend sending requests sequentially. See [Manage parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#manage-parallel-requests). > - [Archived campaigns](https://docs.talon.one/docs/product/campaigns/managing-campaigns#archive-a-campaign) are not considered in rule evaluation. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+body = TalonOne::IntegrationEventV3Request.new # IntegrationEventV3Request | body
+opts = {
+  silent: 'yes', # String | Possible values: `yes` or `no`. - `yes`: Increases the performance of the API call by returning a 204 response. - `no`: Returns a 200 response that contains the updated customer profiles. 
+  dry: true, # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`. 
+  force_complete_evaluation: false # Boolean | Forces evaluation for all matching campaigns regardless of the [campaign evaluation mode](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation#setting-campaign-evaluation-mode). Requires `dry=true`. 
+}
+
+begin
+  #Track advanced event
+  result = api_instance.track_event_v3(body, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->track_event_v3: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**IntegrationEventV3Request**](IntegrationEventV3Request.md)| body | 
+ **silent** | **String**| Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles.  | [optional] [default to &#39;yes&#39;]
+ **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.  | [optional] 
+ **force_complete_evaluation** | **Boolean**| Forces evaluation for all matching campaigns regardless of the [campaign evaluation mode](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation#setting-campaign-evaluation-mode). Requires &#x60;dry&#x3D;true&#x60;.  | [optional] [default to false]
+
+### Return type
+
+[**IntegrationEventV3Response**](IntegrationEventV3Response.md)
 
 ### Authorization
 
@@ -1855,6 +2109,66 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LoyaltyCard**](LoyaltyCard.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## unlock_reward
+
+> IntegrationStateV2 unlock_reward(reward_id, body, opts)
+
+Unlock a reward
+
+Unlock a reward for a customer. If the reward has `pointsRequired` configured, the corresponding loyalty points are deducted from the customer's balance.  To unlock a reward with the points of a loyalty card, provide the card in `cardIdentifier`. The points are then deducted from the card, and the unlocked reward belongs to the card, which makes it available to all customer profiles linked to that card. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::IntegrationApi.new
+reward_id = 56 # Integer | The ID of the reward. You can get the ID with the [List rewards](#tag/Rewards/operation/listRewards) endpoint.
+body = TalonOne::IntegrationUnlockRewardRequest.new # IntegrationUnlockRewardRequest | 
+opts = {
+  dry: true # Boolean | When set to `true`, the rule evaluation is performed but no changes are persisted. Use this to preview the outcome of an unlocking.
+}
+
+begin
+  #Unlock a reward
+  result = api_instance.unlock_reward(reward_id, body, opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling IntegrationApi->unlock_reward: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reward_id** | **Integer**| The ID of the reward. You can get the ID with the [List rewards](#tag/Rewards/operation/listRewards) endpoint. | 
+ **body** | [**IntegrationUnlockRewardRequest**](IntegrationUnlockRewardRequest.md)|  | 
+ **dry** | **Boolean**| When set to &#x60;true&#x60;, the rule evaluation is performed but no changes are persisted. Use this to preview the outcome of an unlocking. | [optional] 
+
+### Return type
+
+[**IntegrationStateV2**](IntegrationStateV2.md)
 
 ### Authorization
 
@@ -2036,7 +2350,7 @@ nil (empty response body)
 
 Update customer profile
 
-Update or create a [Customer Profile](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles). This endpoint triggers the Rule Builder.  You can use this endpoint to: - Set attributes on the given customer profile. Ensure you create the attributes in the Campaign Manager, first. - Modify the audience the customer profile is a member of.  > [!note] **Note** > - Updating a customer profile returns a response with the requested integration state. > - You can use the `responseContent` property to save yourself extra API calls. For example, you can get >   the customer profile details directly without extra requests. > - We recommend sending requests sequentially. >   See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests). > - [Archived campaigns](https://docs.talon.one/docs/product/campaigns/managing-campaigns#archiving-a-campaign) are not considered in rule evaluation when `runRuleEngine` is `true`. 
+Update or create a [Customer Profile](https://docs.talon.one/docs/dev/concepts/entities/customer-profiles). This endpoint triggers the Rule Builder.  You can use this endpoint to: - Set attributes on the given customer profile. Ensure you create the attributes in the Campaign Manager, first. - Modify the audience the customer profile is a member of.  > [!note] **Note** > - Updating a customer profile returns a response with the requested integration state. > - The [Has joined an audience](https://docs.talon.one/docs/product/rules/conditions/available-conditions#audience-conditions) and >   [Has left an audience](https://docs.talon.one/docs/product/rules/conditions/available-conditions#audience-conditions) conditions >   only trigger through this endpoint. > - You can use the `responseContent` property to save yourself extra API calls. For example, you can get >   the customer profile details directly without extra requests. > - We recommend sending requests sequentially. >   See [Managing parallel requests](https://docs.talon.one/docs/dev/getting-started/integration-tutorial#managing-parallel-requests). > - [Archived campaigns](https://docs.talon.one/docs/product/campaigns/managing-campaigns#archiving-a-campaign) are not considered in rule evaluation when `runRuleEngine` is `true`. 
 
 ### Example
 
@@ -2052,7 +2366,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
+integration_id = 'integration_id_example' # String | The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. **Note**: It must be URL-encoded. For example, replace spaces with `%20`. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp). 
 body = TalonOne::CustomerProfileIntegrationRequestV2.new # CustomerProfileIntegrationRequestV2 | body
 opts = {
   run_rule_engine: false, # Boolean | Indicates whether to run the Rule Engine.  If `true`, the response includes: - The effects generated by the triggered campaigns are returned in the `effects` property. - The created coupons and referral objects.  If `false`: - The rules are not executed and the `effects` property is always empty. - The response time improves. - You cannot use `responseContent` in the body. 
@@ -2073,7 +2387,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier.  | 
+ **integration_id** | **String**| The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. **Note**: It must be URL-encoded. For example, replace spaces with &#x60;%20&#x60;. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp).  | 
  **body** | [**CustomerProfileIntegrationRequestV2**](CustomerProfileIntegrationRequestV2.md)| body | 
  **run_rule_engine** | **Boolean**| Indicates whether to run the Rule Engine.  If &#x60;true&#x60;, the response includes: - The effects generated by the triggered campaigns are returned in the &#x60;effects&#x60; property. - The created coupons and referral objects.  If &#x60;false&#x60;: - The rules are not executed and the &#x60;effects&#x60; property is always empty. - The response time improves. - You cannot use &#x60;responseContent&#x60; in the body.  | [optional] [default to false]
  **dry** | **Boolean**| (Only works when &#x60;runRuleEngine&#x3D;true&#x60;) Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.  When set to &#x60;true&#x60;, you can use the &#x60;evaluableCampaignIds&#x60; body property to select specific campaigns to run.  | [optional] 
@@ -2172,7 +2486,7 @@ TalonOne.configure do |config|
 end
 
 api_instance = TalonOne::IntegrationApi.new
-customer_session_id = 'customer_session_id_example' # String | The `integration ID` of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager's **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. 
+customer_session_id = 'customer_session_id_example' # String | The `integration ID` of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager's **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. **Notes**: - There is no length limit for this ID. - It must be URL-encoded. For example, replace spaces with `%20`. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp). 
 body = TalonOne::IntegrationRequest.new # IntegrationRequest | body
 opts = {
   dry: true, # Boolean | Indicates whether to persist the changes. Changes are ignored when `dry=true`.  When set to `true`: - The endpoint considers **only** the payload that you pass when **closing** the session.   When you do not use the `dry` parameter, the endpoint behaves as a typical PUT endpoint. Each update builds upon the previous ones. - You can use the `evaluableCampaignIds` body property to select specific campaigns to run.  [See the docs](https://docs.talon.one/docs/dev/integration-api/dry-requests). 
@@ -2193,7 +2507,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customer_session_id** | **String**| The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint.  | 
+ **customer_session_id** | **String**| The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. **Notes**: - There is no length limit for this ID. - It must be URL-encoded. For example, replace spaces with &#x60;%20&#x60;. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp).  | 
  **body** | [**IntegrationRequest**](IntegrationRequest.md)| body | 
  **dry** | **Boolean**| Indicates whether to persist the changes. Changes are ignored when &#x60;dry&#x3D;true&#x60;.  When set to &#x60;true&#x60;: - The endpoint considers **only** the payload that you pass when **closing** the session.   When you do not use the &#x60;dry&#x60; parameter, the endpoint behaves as a typical PUT endpoint. Each update builds upon the previous ones. - You can use the &#x60;evaluableCampaignIds&#x60; body property to select specific campaigns to run.  [See the docs](https://docs.talon.one/docs/dev/integration-api/dry-requests).  | [optional] 
  **now** | **DateTime**| A timestamp value of a future date that acts as a current date when included in the query.  Use this parameter, for example, to test campaigns that would be evaluated for this customer session in the future (say, [scheduled campaigns](https://docs.talon.one/docs/product/campaigns/settings/managing-campaign-schedule)).  &gt; [!note] **Note** &gt; - It must be an RFC3339 timestamp string. &gt; - It can **only** be a date in the future. &gt; - It can **only** be used if the &#x60;dry&#x60; parameter in the query is set to &#x60;true&#x60;.  | [optional] 

@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"rollbackDeductedLoyaltyPoints\" effect. This effect is triggered whenever a previously closed session is cancelled and a deductLoyaltyPoints effect was revoked.
+  # This effect is triggered in the following cases:  - A session is _cancelled_ and this session deducted loyalty points. The rollback action returns the redeemed loyalty points to the customer. - A session is impacted by a _partial return_. Only added loyalty points that are still **pending** are rolled back. - A session in which loyalty points were spent is reopened.  See the [session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#customer-session-states).  If you set custom activation and expiration dates for the loyalty points, use the `startDate` and `expiryDate` properties to identify when the reward will be active and when will expire.  If the loyalty program is [profile-based](https://docs.talon.one/docs/product/loyalty-programs/profile-based/profile-based-overview), use the `recipientIntegrationId` property to identify the user who receives the loyalty points. If the loyalty program is [card-based](https://docs.talon.one/docs/product/loyalty-programs/overview#loyalty-program-types), use the `cardIdentifier` property to identify the loyalty card where the points are reimbursed.
   class RollbackDeductedLoyaltyPointsEffectProps
     # The ID of the loyalty program where these points were reimbursed.
     attr_accessor :program_id
@@ -21,19 +21,19 @@ module TalonOne
     # The ID of the subledger within the loyalty program where these points were reimbursed.
     attr_accessor :sub_ledger_id
 
-    # The amount of reimbursed points that were added.
+    # The amount of points that were reimbursed.
     attr_accessor :value
 
     # The user for whom these points were reimbursed.
     attr_accessor :recipient_integration_id
 
-    # Date after which the reimbursed points will be valid.
+    # The date after which the reimbursed points will be valid.
     attr_accessor :start_date
 
-    # Date after which the reimbursed points will expire.
+    # The date after which the reimbursed points will expire.
     attr_accessor :expiry_date
 
-    # The identifier of 'addition' entries added to the ledger as the `deductLoyaltyPoints` effect is rolled back.
+    # The identifier of this loyalty point transaction.
     attr_accessor :transaction_uuid
 
     # The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. 

@@ -17,25 +17,41 @@ module TalonOne
     # ID of the integration hub flow.
     attr_accessor :id
 
-    # ID of application the flow is registered for.
+    # Name of the integration.
+    attr_accessor :integration_name
+
+    # Name of the integration instance.
+    attr_accessor :instance_name
+
+    # Timestamp when the flow was created.
+    attr_accessor :created_at
+
+    # Timestamp until which the flow is disabled. Null when the flow is active.
+    attr_accessor :disabled_until
+
+    # ID of the application the flow is registered for.
     attr_accessor :application_id
+
+    # ID of the loyalty program the flow is registered for.
+    attr_accessor :loyalty_program_id
 
     # The event type we want to register a flow for.
     attr_accessor :event_type
-
-    # The URL of the integration hub flow that we want to trigger for the event.
-    attr_accessor :integration_hub_flow_url
 
     attr_accessor :config
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'Id',
-        :'application_id' => :'ApplicationID',
-        :'event_type' => :'EventType',
-        :'integration_hub_flow_url' => :'IntegrationHubFlowUrl',
-        :'config' => :'Config'
+        :'id' => :'id',
+        :'integration_name' => :'integrationName',
+        :'instance_name' => :'instanceName',
+        :'created_at' => :'createdAt',
+        :'disabled_until' => :'disabledUntil',
+        :'application_id' => :'applicationId',
+        :'loyalty_program_id' => :'loyaltyProgramId',
+        :'event_type' => :'eventType',
+        :'config' => :'config'
       }
     end
 
@@ -43,9 +59,13 @@ module TalonOne
     def self.openapi_types
       {
         :'id' => :'Integer',
+        :'integration_name' => :'String',
+        :'instance_name' => :'String',
+        :'created_at' => :'DateTime',
+        :'disabled_until' => :'DateTime',
         :'application_id' => :'Integer',
+        :'loyalty_program_id' => :'Integer',
         :'event_type' => :'String',
-        :'integration_hub_flow_url' => :'String',
         :'config' => :'IntegrationHubFlowConfigResponse'
       }
     end
@@ -53,6 +73,7 @@ module TalonOne
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'disabled_until',
       ])
     end
 
@@ -75,16 +96,32 @@ module TalonOne
         self.id = attributes[:'id']
       end
 
+      if attributes.key?(:'integration_name')
+        self.integration_name = attributes[:'integration_name']
+      end
+
+      if attributes.key?(:'instance_name')
+        self.instance_name = attributes[:'instance_name']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'disabled_until')
+        self.disabled_until = attributes[:'disabled_until']
+      end
+
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
       end
 
-      if attributes.key?(:'event_type')
-        self.event_type = attributes[:'event_type']
+      if attributes.key?(:'loyalty_program_id')
+        self.loyalty_program_id = attributes[:'loyalty_program_id']
       end
 
-      if attributes.key?(:'integration_hub_flow_url')
-        self.integration_hub_flow_url = attributes[:'integration_hub_flow_url']
+      if attributes.key?(:'event_type')
+        self.event_type = attributes[:'event_type']
       end
 
       if attributes.key?(:'config')
@@ -100,12 +137,12 @@ module TalonOne
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @event_type.nil?
-        invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
+      if @created_at.nil?
+        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
       end
 
-      if @integration_hub_flow_url.nil?
-        invalid_properties.push('invalid value for "integration_hub_flow_url", integration_hub_flow_url cannot be nil.')
+      if @event_type.nil?
+        invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
       end
 
       if @config.nil?
@@ -119,8 +156,8 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
+      return false if @created_at.nil?
       return false if @event_type.nil?
-      return false if @integration_hub_flow_url.nil?
       return false if @config.nil?
       true
     end
@@ -131,9 +168,13 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          integration_name == o.integration_name &&
+          instance_name == o.instance_name &&
+          created_at == o.created_at &&
+          disabled_until == o.disabled_until &&
           application_id == o.application_id &&
+          loyalty_program_id == o.loyalty_program_id &&
           event_type == o.event_type &&
-          integration_hub_flow_url == o.integration_hub_flow_url &&
           config == o.config
     end
 
@@ -146,7 +187,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, application_id, event_type, integration_hub_flow_url, config].hash
+      [id, integration_name, instance_name, created_at, disabled_until, application_id, loyalty_program_id, event_type, config].hash
     end
 
     # Builds the object from hash

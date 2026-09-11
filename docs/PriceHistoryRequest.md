@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::PriceHistoryRequest.new(sku: ,
+instance = TalonOne::PriceHistoryRequest.new(sku: SKU1241028,
                                  start_date: 2020-11-10T23:00Z,
                                  end_date: 2020-12-10T23:00Z)
 ```

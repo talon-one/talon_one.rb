@@ -27,6 +27,9 @@ module TalonOne
     # ID of the customer session where the transaction occurred.
     attr_accessor :customer_session_id
 
+    # The integration ID of the store where the transaction occurred. Only set for transactions created by a customer session or event that referenced a store.
+    attr_accessor :store_integration_id
+
     # Type of transaction. Possible values:   - `addition`: Signifies added points.   - `subtraction`: Signifies deducted points. 
     attr_accessor :type
 
@@ -56,7 +59,7 @@ module TalonOne
 
     attr_accessor :flags
 
-    # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
+    # The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
     attr_accessor :validity_duration
 
     class EnumAttributeValidator
@@ -88,6 +91,7 @@ module TalonOne
         :'created' => :'created',
         :'program_id' => :'programId',
         :'customer_session_id' => :'customerSessionId',
+        :'store_integration_id' => :'storeIntegrationId',
         :'type' => :'type',
         :'name' => :'name',
         :'start_date' => :'startDate',
@@ -109,6 +113,7 @@ module TalonOne
         :'created' => :'DateTime',
         :'program_id' => :'Integer',
         :'customer_session_id' => :'String',
+        :'store_integration_id' => :'String',
         :'type' => :'String',
         :'name' => :'String',
         :'start_date' => :'String',
@@ -158,6 +163,10 @@ module TalonOne
 
       if attributes.key?(:'customer_session_id')
         self.customer_session_id = attributes[:'customer_session_id']
+      end
+
+      if attributes.key?(:'store_integration_id')
+        self.store_integration_id = attributes[:'store_integration_id']
       end
 
       if attributes.key?(:'type')
@@ -225,6 +234,14 @@ module TalonOne
         invalid_properties.push('invalid value for "customer_session_id", the character length must be smaller than or equal to 255.')
       end
 
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "store_integration_id", the character length must be great than or equal to 1.')
+      end
+
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -279,6 +296,8 @@ module TalonOne
       return false if @created.nil?
       return false if @program_id.nil?
       return false if !@customer_session_id.nil? && @customer_session_id.to_s.length > 255
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
+      return false if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["addition", "subtraction"])
       return false unless type_validator.valid?(@type)
@@ -303,6 +322,20 @@ module TalonOne
       end
 
       @customer_session_id = customer_session_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] store_integration_id Value to be assigned
+    def store_integration_id=(store_integration_id)
+      if !store_integration_id.nil? && store_integration_id.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !store_integration_id.nil? && store_integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "store_integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @store_integration_id = store_integration_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -366,6 +399,7 @@ module TalonOne
           created == o.created &&
           program_id == o.program_id &&
           customer_session_id == o.customer_session_id &&
+          store_integration_id == o.store_integration_id &&
           type == o.type &&
           name == o.name &&
           start_date == o.start_date &&
@@ -388,7 +422,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_uuid, created, program_id, customer_session_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags, validity_duration].hash
+      [transaction_uuid, created, program_id, customer_session_id, store_integration_id, type, name, start_date, expiry_date, subledger_id, amount, id, ruleset_id, rule_name, flags, validity_duration].hash
     end
 
     # Builds the object from hash

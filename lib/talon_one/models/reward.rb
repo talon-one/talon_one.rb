@@ -38,6 +38,19 @@ module TalonOne
     # Indicates if this is a live or sandbox reward. Rewards of a given type can only be connected to Applications of the same type.
     attr_accessor :sandbox
 
+    attr_accessor :eligibility_conditions
+
+    attr_accessor :rule
+
+    # A list of named variables created before the reward's rules are evaluated. Each binding pairs a name with a talang expression. The expression is evaluated once and its result is available by name in any rule condition or effect. Bindings must be defined outside of individual rules.
+    attr_accessor :bindings
+
+    # The loyalty points required to activate the reward. Each object defines the specific loyalty program and subledger from which points are deducted when activating the reward.  **Note:** When creating a reward, the `id` of each entry is ignored and a new entry is always created. 
+    attr_accessor :points_required
+
+    # The timestamp when the reward was last updated in RFC3339 format.
+    attr_accessor :modified
+
     # The status of the reward.
     attr_accessor :status
 
@@ -74,6 +87,11 @@ module TalonOne
         :'description' => :'description',
         :'application_ids' => :'applicationIds',
         :'sandbox' => :'sandbox',
+        :'eligibility_conditions' => :'eligibilityConditions',
+        :'rule' => :'rule',
+        :'bindings' => :'bindings',
+        :'points_required' => :'pointsRequired',
+        :'modified' => :'modified',
         :'status' => :'status'
       }
     end
@@ -89,6 +107,11 @@ module TalonOne
         :'description' => :'String',
         :'application_ids' => :'Array<Integer>',
         :'sandbox' => :'Boolean',
+        :'eligibility_conditions' => :'Rule',
+        :'rule' => :'Rule',
+        :'bindings' => :'Array<Binding>',
+        :'points_required' => :'Array<RewardPointsRequired>',
+        :'modified' => :'DateTime',
         :'status' => :'String'
       }
     end
@@ -146,6 +169,30 @@ module TalonOne
 
       if attributes.key?(:'sandbox')
         self.sandbox = attributes[:'sandbox']
+      end
+
+      if attributes.key?(:'eligibility_conditions')
+        self.eligibility_conditions = attributes[:'eligibility_conditions']
+      end
+
+      if attributes.key?(:'rule')
+        self.rule = attributes[:'rule']
+      end
+
+      if attributes.key?(:'bindings')
+        if (value = attributes[:'bindings']).is_a?(Array)
+          self.bindings = value
+        end
+      end
+
+      if attributes.key?(:'points_required')
+        if (value = attributes[:'points_required']).is_a?(Array)
+          self.points_required = value
+        end
+      end
+
+      if attributes.key?(:'modified')
+        self.modified = attributes[:'modified']
       end
 
       if attributes.key?(:'status')
@@ -269,6 +316,11 @@ module TalonOne
           description == o.description &&
           application_ids == o.application_ids &&
           sandbox == o.sandbox &&
+          eligibility_conditions == o.eligibility_conditions &&
+          rule == o.rule &&
+          bindings == o.bindings &&
+          points_required == o.points_required &&
+          modified == o.modified &&
           status == o.status
     end
 
@@ -281,7 +333,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, account_id, name, api_name, description, application_ids, sandbox, status].hash
+      [id, created, account_id, name, api_name, description, application_ids, sandbox, eligibility_conditions, rule, bindings, points_required, modified, status].hash
     end
 
     # Builds the object from hash

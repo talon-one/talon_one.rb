@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **id** | **Integer** | ID of the loyalty ledger transaction. | 
 **ruleset_id** | **Integer** | The ID of the ruleset containing the rule that triggered this effect. | [optional] 
 **rule_name** | **String** | The name of the rule that triggered this effect. | [optional] 
-**validity_duration** | **String** | The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which &#x60;awaitsActivation&#x60; is &#x60;true&#x60; and &#x60;expiryDate&#x60; is not set.  | [optional] 
+**validity_duration** | **String** | The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which &#x60;awaitsActivation&#x60; is &#x60;true&#x60; and &#x60;expiryDate&#x60; is not set.  | [optional] 
 
 ## Code Sample
 

@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # This effect is **deprecated**. The properties specific to the \"redeemReferral\" effect. This gets triggered whenever the referral code is valid, and a rule was triggered that contains a \"redeem referral\" effect. 
+  # This effect is **deprecated**. It has been replaced by the `acceptReferral` effect. This effect indicates that the referral code is valid and has been redeemed. 
   class RedeemReferralEffectProps
     # The id of the referral code that was redeemed.
     attr_accessor :id

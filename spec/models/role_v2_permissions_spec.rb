@@ -44,4 +44,10 @@ describe 'RoleV2Permissions' do
     end
   end
 
+  describe 'test attribute "thresholds"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

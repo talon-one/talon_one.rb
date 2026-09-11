@@ -13,42 +13,42 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the `setDiscountPerItem` effect, triggered whenever a validated rule contained a \"set per item discount\" effect. This is a discount that will be applied either on a specific item, on a specific item + additional cost or on all additional costs per item. This depends on the chosen scope. 
+  # This effect schema is returned when you use the **Discount individual items**, **Discount individual items pro rata**, or **Discount individual item in bundles** effect in a rule.  It indicates that a discount per item should be applied on the specific item specified in the effect.  The properties it contains depends on:  - Whether you used a pro rata effect or not. - Whether you used an effect with bundles or not. - Whether the partial discount feature is enabled.
   class SetDiscountPerItemEffectProps
-    # The name of the discount. Contains a hashtag character indicating the index of the position of the item the discount applies to. It is identical to the value of the `position` property. 
+    # The description of this discount. `#number` is equal to the `position` property.
     attr_accessor :name
 
-    # The total monetary value of the discount.
+    # The monetary value of the effective discount applied to the item.
     attr_accessor :value
 
-    # The index of the item in the cart items list on which this discount should be applied.
+    # The index of the item in the `cartItem` object on which this discount should be applied.
     attr_accessor :position
 
-    # For cart items with `quantity` > 1, the sub position indicates which item the discount applies to. 
+    # The index of the item unit in its line item.
     attr_accessor :sub_position
 
-    # The original value of the discount.
+    # _(Partial discounts enabled only)_ The monetary value of the discount to be applied to the item without considering budget limitations.
     attr_accessor :desired_value
 
-    # The scope of the discount: - `additionalCosts`: The discount applies to all the additional costs of the item. - `itemTotal`: The discount applies to the price of the item + the additional costs of the item. - `price`: The discount applies to the price of the item. 
+    # What the discount applies to. Possible values:  - `price`: discount on the price of the item. - `additionalCosts`: discount on the [additional cost](https://docs.talon.one/docs/product/account/dev-tools/manage-additional-costs) of the item. - `itemTotal`: discount on the sum of price + additional cost of the item.
     attr_accessor :scope
 
-    # The total discount given if this effect is a result of a prorated discount.
+    # _(Pro rata discounts only)_ The monetary value of the total effective discount
     attr_accessor :total_discount
 
-    # The original total discount to give if this effect is a result of a prorated discount.
+    # _(Pro rata discounts only)_ The monetary value of the total discount to be applied without considering budget limitations
     attr_accessor :desired_total_discount
 
-    # The position of the bundle in a list of item bundles created from the same bundle definition.
+    # _(Discounts with bundles only)_ The position of the specific item bundle in the list of bundles created from the same bundle definition.
     attr_accessor :bundle_index
 
-    # The name of the bundle definition.
+    # _(Discounts with bundles only)_ The name of the bundle definition.
     attr_accessor :bundle_name
 
-    # The index of the targeted bundle item on which the applied discount is based.
+    # _(Discounting individual item in bundles only)_ The index of the targeted bundle item on which the applied discount is based.
     attr_accessor :targeted_item_position
 
-    # The sub-position of the targeted bundle item on which the applied discount is based. 
+    # _(Discounting individual item in bundles only)_ The sub-position of the targeted bundle item on which the applied discount is based.
     attr_accessor :targeted_item_sub_position
 
     # When set to `true`, the applied discount is excluded from the item's price history.

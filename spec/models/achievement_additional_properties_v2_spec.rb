@@ -44,6 +44,12 @@ describe 'AchievementAdditionalPropertiesV2' do
     end
   end
 
+  describe 'test attribute "period_end_override"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "has_progress"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -53,7 +59,7 @@ describe 'AchievementAdditionalPropertiesV2' do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["active", "scheduled", "expired"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.status = value }.not_to raise_error
       # end

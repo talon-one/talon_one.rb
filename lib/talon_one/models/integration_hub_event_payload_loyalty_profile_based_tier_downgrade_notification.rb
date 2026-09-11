@@ -14,14 +14,21 @@ require 'date'
 
 module TalonOne
   class IntegrationHubEventPayloadLoyaltyProfileBasedTierDowngradeNotification
+    # The ID of the integration hub event. Return this value in the delivery-status callback to mark the event delivered or failed.
+    attr_accessor :event_id
+
     attr_accessor :profile_integration_id
 
     attr_accessor :loyalty_program_id
+
+    # The name of the loyalty program.
+    attr_accessor :loyalty_program_name
 
     attr_accessor :subledger_id
 
     attr_accessor :source_of_event
 
+    # The name of the customer's current tier, or null if the customer was downgraded below all tiers.
     attr_accessor :current_tier
 
     attr_accessor :current_points
@@ -38,8 +45,10 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'event_id' => :'EventId',
         :'profile_integration_id' => :'ProfileIntegrationID',
         :'loyalty_program_id' => :'LoyaltyProgramID',
+        :'loyalty_program_name' => :'LoyaltyProgramName',
         :'subledger_id' => :'SubledgerID',
         :'source_of_event' => :'SourceOfEvent',
         :'current_tier' => :'CurrentTier',
@@ -54,8 +63,10 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'event_id' => :'Integer',
         :'profile_integration_id' => :'String',
         :'loyalty_program_id' => :'Integer',
+        :'loyalty_program_name' => :'String',
         :'subledger_id' => :'String',
         :'source_of_event' => :'String',
         :'current_tier' => :'String',
@@ -88,12 +99,20 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'event_id')
+        self.event_id = attributes[:'event_id']
+      end
+
       if attributes.key?(:'profile_integration_id')
         self.profile_integration_id = attributes[:'profile_integration_id']
       end
 
       if attributes.key?(:'loyalty_program_id')
         self.loyalty_program_id = attributes[:'loyalty_program_id']
+      end
+
+      if attributes.key?(:'loyalty_program_name')
+        self.loyalty_program_name = attributes[:'loyalty_program_name']
       end
 
       if attributes.key?(:'subledger_id')
@@ -133,12 +152,20 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @event_id.nil?
+        invalid_properties.push('invalid value for "event_id", event_id cannot be nil.')
+      end
+
       if @profile_integration_id.nil?
         invalid_properties.push('invalid value for "profile_integration_id", profile_integration_id cannot be nil.')
       end
 
       if @loyalty_program_id.nil?
         invalid_properties.push('invalid value for "loyalty_program_id", loyalty_program_id cannot be nil.')
+      end
+
+      if @loyalty_program_name.nil?
+        invalid_properties.push('invalid value for "loyalty_program_name", loyalty_program_name cannot be nil.')
       end
 
       if @subledger_id.nil?
@@ -163,8 +190,10 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @event_id.nil?
       return false if @profile_integration_id.nil?
       return false if @loyalty_program_id.nil?
+      return false if @loyalty_program_name.nil?
       return false if @subledger_id.nil?
       return false if @source_of_event.nil?
       return false if @current_points.nil?
@@ -177,8 +206,10 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          event_id == o.event_id &&
           profile_integration_id == o.profile_integration_id &&
           loyalty_program_id == o.loyalty_program_id &&
+          loyalty_program_name == o.loyalty_program_name &&
           subledger_id == o.subledger_id &&
           source_of_event == o.source_of_event &&
           current_tier == o.current_tier &&
@@ -198,7 +229,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_integration_id, loyalty_program_id, subledger_id, source_of_event, current_tier, current_points, old_tier, tier_expiration_date, timestamp_of_tier_change, published_at].hash
+      [event_id, profile_integration_id, loyalty_program_id, loyalty_program_name, subledger_id, source_of_event, current_tier, current_points, old_tier, tier_expiration_date, timestamp_of_tier_change, published_at].hash
     end
 
     # Builds the object from hash

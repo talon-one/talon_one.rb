@@ -63,6 +63,9 @@ module TalonOne
     # The reference identifier of the selected price adjustment for this SKU. This is only returned if the `selectedPrice` resulted from a price adjustment.
     attr_accessor :adjustment_reference_id
 
+    # The ID of the reward that was being evaluated when this effect was triggered.
+    attr_accessor :reward_id
+
     attr_accessor :props
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -84,6 +87,7 @@ module TalonOne
         :'selected_price_type' => :'selectedPriceType',
         :'selected_price' => :'selectedPrice',
         :'adjustment_reference_id' => :'adjustmentReferenceId',
+        :'reward_id' => :'rewardId',
         :'props' => :'props'
       }
     end
@@ -107,6 +111,7 @@ module TalonOne
         :'selected_price_type' => :'String',
         :'selected_price' => :'Float',
         :'adjustment_reference_id' => :'String',
+        :'reward_id' => :'Integer',
         :'props' => :'Object'
       }
     end
@@ -196,6 +201,10 @@ module TalonOne
         self.adjustment_reference_id = attributes[:'adjustment_reference_id']
       end
 
+      if attributes.key?(:'reward_id')
+        self.reward_id = attributes[:'reward_id']
+      end
+
       if attributes.key?(:'props')
         self.props = attributes[:'props']
       end
@@ -265,6 +274,7 @@ module TalonOne
           selected_price_type == o.selected_price_type &&
           selected_price == o.selected_price &&
           adjustment_reference_id == o.adjustment_reference_id &&
+          reward_id == o.reward_id &&
           props == o.props
     end
 
@@ -277,7 +287,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [experiment_id, campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, selected_price_type, selected_price, adjustment_reference_id, props].hash
+      [experiment_id, campaign_id, ruleset_id, rule_index, rule_name, effect_type, triggered_by_coupon, triggered_for_catalog_item, condition_index, evaluation_group_id, evaluation_group_mode, campaign_revision_id, campaign_revision_version_id, selected_price_type, selected_price, adjustment_reference_id, reward_id, props].hash
     end
 
     # Builds the object from hash

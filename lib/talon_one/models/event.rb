@@ -29,11 +29,14 @@ module TalonOne
     # The integration ID of the store. You choose this ID when you create a store.
     attr_accessor :store_integration_id
 
-    # A string representing the event. Must not be a reserved event name.
+    # The name of the event. Must be a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#custom-events), not a built-in event.
     attr_accessor :type
 
     # Arbitrary additional JSON data associated with the event.
     attr_accessor :attributes
+
+    # The unique ID of the event. Only one event with this ID can be registered. 
+    attr_accessor :integration_id
 
     # The ID of the session that this event occurred in.
     attr_accessor :session_id
@@ -56,6 +59,7 @@ module TalonOne
         :'store_integration_id' => :'storeIntegrationId',
         :'type' => :'type',
         :'attributes' => :'attributes',
+        :'integration_id' => :'integrationId',
         :'session_id' => :'sessionId',
         :'effects' => :'effects',
         :'ledger_entries' => :'ledgerEntries',
@@ -73,6 +77,7 @@ module TalonOne
         :'store_integration_id' => :'String',
         :'type' => :'String',
         :'attributes' => :'Object',
+        :'integration_id' => :'String',
         :'session_id' => :'String',
         :'effects' => :'Array<Object>',
         :'ledger_entries' => :'Array<LedgerEntry>',
@@ -127,6 +132,10 @@ module TalonOne
 
       if attributes.key?(:'attributes')
         self.attributes = attributes[:'attributes']
+      end
+
+      if attributes.key?(:'integration_id')
+        self.integration_id = attributes[:'integration_id']
       end
 
       if attributes.key?(:'session_id')
@@ -186,6 +195,10 @@ module TalonOne
         invalid_properties.push('invalid value for "attributes", attributes cannot be nil.')
       end
 
+      if !@integration_id.nil? && @integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "integration_id", the character length must be great than or equal to 1.')
+      end
+
       if @effects.nil?
         invalid_properties.push('invalid value for "effects", effects cannot be nil.')
       end
@@ -204,6 +217,7 @@ module TalonOne
       return false if @type.nil?
       return false if @type.to_s.length < 1
       return false if @attributes.nil?
+      return false if !@integration_id.nil? && @integration_id.to_s.length < 1
       return false if @effects.nil?
       true
     end
@@ -236,6 +250,16 @@ module TalonOne
       @type = type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] integration_id Value to be assigned
+    def integration_id=(integration_id)
+      if !integration_id.nil? && integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @integration_id = integration_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -248,6 +272,7 @@ module TalonOne
           store_integration_id == o.store_integration_id &&
           type == o.type &&
           attributes == o.attributes &&
+          integration_id == o.integration_id &&
           session_id == o.session_id &&
           effects == o.effects &&
           ledger_entries == o.ledger_entries &&
@@ -263,7 +288,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, profile_id, store_integration_id, type, attributes, session_id, effects, ledger_entries, meta].hash
+      [id, created, application_id, profile_id, store_integration_id, type, attributes, integration_id, session_id, effects, ledger_entries, meta].hash
     end
 
     # Builds the object from hash

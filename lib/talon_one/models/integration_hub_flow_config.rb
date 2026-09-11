@@ -25,13 +25,21 @@ module TalonOne
     # Maximum number of retries for a IntegrationHub event before it is ignored.
     attr_accessor :max_retries
 
+    # Name of the Prismatic instance that registered this flow.
+    attr_accessor :instance_name
+
+    # Name of the Prismatic integration that registered this flow.
+    attr_accessor :integration_name
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'api_key' => :'ApiKey',
         :'worker_count' => :'WorkerCount',
         :'max_events_per_message' => :'MaxEventsPerMessage',
-        :'max_retries' => :'MaxRetries'
+        :'max_retries' => :'MaxRetries',
+        :'instance_name' => :'InstanceName',
+        :'integration_name' => :'IntegrationName'
       }
     end
 
@@ -41,7 +49,9 @@ module TalonOne
         :'api_key' => :'String',
         :'worker_count' => :'Integer',
         :'max_events_per_message' => :'Integer',
-        :'max_retries' => :'Integer'
+        :'max_retries' => :'Integer',
+        :'instance_name' => :'String',
+        :'integration_name' => :'String'
       }
     end
 
@@ -86,6 +96,14 @@ module TalonOne
         self.max_retries = attributes[:'max_retries']
       else
         self.max_retries = 10
+      end
+
+      if attributes.key?(:'instance_name')
+        self.instance_name = attributes[:'instance_name']
+      end
+
+      if attributes.key?(:'integration_name')
+        self.integration_name = attributes[:'integration_name']
       end
     end
 
@@ -169,7 +187,9 @@ module TalonOne
           api_key == o.api_key &&
           worker_count == o.worker_count &&
           max_events_per_message == o.max_events_per_message &&
-          max_retries == o.max_retries
+          max_retries == o.max_retries &&
+          instance_name == o.instance_name &&
+          integration_name == o.integration_name
     end
 
     # @see the `==` method
@@ -181,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [api_key, worker_count, max_events_per_message, max_retries].hash
+      [api_key, worker_count, max_events_per_message, max_retries, instance_name, integration_name].hash
     end
 
     # Builds the object from hash

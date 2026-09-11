@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;ApplicationCIF&gt;**](ApplicationCIF.md) |  | 
+**total_result_size** | **Integer** |  | [optional] 
+**data** | [**Array&lt;Store&gt;**](Store.md) |  | 
 
 ## Code Sample
 
@@ -13,6 +14,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::InlineResponse20048.new(has_more: null,
+                                 total_result_size: 1,
                                  data: null)
 ```
 

@@ -32,13 +32,13 @@ describe 'IntegrationCampaign' do
       expect(@instance).to be_instance_of(TalonOne::IntegrationCampaign)
     end
   end
-  describe 'test attribute "id"' do
+  describe 'test attribute "application_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "application_id"' do
+  describe 'test attribute "id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -93,10 +93,28 @@ describe 'IntegrationCampaign' do
   describe 'test attribute "features"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough", "achievements"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["coupons", "referrals", "loyalty", "giveaways", "strikethrough", "achievements", "advancedEvents"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.features = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "rules"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "linked_store_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "linked_audience_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

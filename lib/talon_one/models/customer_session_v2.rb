@@ -45,7 +45,10 @@ module TalonOne
     # Identifier of a loyalty card.
     attr_accessor :loyalty_cards
 
-    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` → `closed` 2. `open` → `cancelled` 3. Either:    - `closed` → `cancelled` (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - `closed` → `partially_returned` (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - `closed` → `open` (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. `partially_returned` → `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). 
+    # The integration IDs of the unlocked rewards that can be used in this session. 
+    attr_accessor :reward_integration_ids
+
+    # Indicates the current state of the session. Sessions can be created as `open` or `closed`. The state transitions are:  1. `open` -> `closed` 2. `open` -> `cancelled` 3. Either:    - `closed` -> `cancelled` (**only** via [Update customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/updateCustomerSessionV2)) or    - `closed` -> `partially_returned` (**only** via [Return cart items](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/returnCartItems))    - `closed` -> `open` (**only** via [Reopen customer session](https://docs.talon.one/integration-api#tag/Customer-sessions/operation/reopenCustomerSession)) 4. `partially_returned` -> `cancelled`  For more information, see [Customer session states](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions). 
     attr_accessor :state
 
     # The items to add to this session. **Do not exceed 1000 items** and ensure the sum of all cart item's `quantity` **does not exceed 10.000** per request. 
@@ -77,6 +80,9 @@ module TalonOne
 
     # The total value of additional costs, before any discounts are applied.
     attr_accessor :additional_cost_total
+
+    # The total value of additional costs applied to individual items, before any discounts are applied.
+    attr_accessor :cart_item_additional_cost_total
 
     # Timestamp of the most recent event received on this session.
     attr_accessor :updated
@@ -116,6 +122,7 @@ module TalonOne
         :'coupon_codes' => :'couponCodes',
         :'referral_code' => :'referralCode',
         :'loyalty_cards' => :'loyaltyCards',
+        :'reward_integration_ids' => :'rewardIntegrationIds',
         :'state' => :'state',
         :'cart_items' => :'cartItems',
         :'experiment_variant_allocations' => :'experimentVariantAllocations',
@@ -127,6 +134,7 @@ module TalonOne
         :'total' => :'total',
         :'cart_item_total' => :'cartItemTotal',
         :'additional_cost_total' => :'additionalCostTotal',
+        :'cart_item_additional_cost_total' => :'cartItemAdditionalCostTotal',
         :'updated' => :'updated'
       }
     end
@@ -144,6 +152,7 @@ module TalonOne
         :'coupon_codes' => :'Array<String>',
         :'referral_code' => :'String',
         :'loyalty_cards' => :'Array<String>',
+        :'reward_integration_ids' => :'Array<String>',
         :'state' => :'String',
         :'cart_items' => :'Array<CartItem>',
         :'experiment_variant_allocations' => :'Array<ExperimentVariantAllocation>',
@@ -155,6 +164,7 @@ module TalonOne
         :'total' => :'Float',
         :'cart_item_total' => :'Float',
         :'additional_cost_total' => :'Float',
+        :'cart_item_additional_cost_total' => :'Float',
         :'updated' => :'DateTime'
       }
     end
@@ -226,6 +236,12 @@ module TalonOne
         end
       end
 
+      if attributes.key?(:'reward_integration_ids')
+        if (value = attributes[:'reward_integration_ids']).is_a?(Array)
+          self.reward_integration_ids = value
+        end
+      end
+
       if attributes.key?(:'state')
         self.state = attributes[:'state']
       else
@@ -278,6 +294,10 @@ module TalonOne
 
       if attributes.key?(:'additional_cost_total')
         self.additional_cost_total = attributes[:'additional_cost_total']
+      end
+
+      if attributes.key?(:'cart_item_additional_cost_total')
+        self.cart_item_additional_cost_total = attributes[:'cart_item_additional_cost_total']
       end
 
       if attributes.key?(:'updated')
@@ -357,6 +377,10 @@ module TalonOne
         invalid_properties.push('invalid value for "additional_cost_total", additional_cost_total cannot be nil.')
       end
 
+      if @cart_item_additional_cost_total.nil?
+        invalid_properties.push('invalid value for "cart_item_additional_cost_total", cart_item_additional_cost_total cannot be nil.')
+      end
+
       if @updated.nil?
         invalid_properties.push('invalid value for "updated", updated cannot be nil.')
       end
@@ -386,6 +410,7 @@ module TalonOne
       return false if @total.nil?
       return false if @cart_item_total.nil?
       return false if @additional_cost_total.nil?
+      return false if @cart_item_additional_cost_total.nil?
       return false if @updated.nil?
       true
     end
@@ -453,6 +478,7 @@ module TalonOne
           coupon_codes == o.coupon_codes &&
           referral_code == o.referral_code &&
           loyalty_cards == o.loyalty_cards &&
+          reward_integration_ids == o.reward_integration_ids &&
           state == o.state &&
           cart_items == o.cart_items &&
           experiment_variant_allocations == o.experiment_variant_allocations &&
@@ -464,6 +490,7 @@ module TalonOne
           total == o.total &&
           cart_item_total == o.cart_item_total &&
           additional_cost_total == o.additional_cost_total &&
+          cart_item_additional_cost_total == o.cart_item_additional_cost_total &&
           updated == o.updated
     end
 
@@ -476,7 +503,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes, first_session, update_count, total, cart_item_total, additional_cost_total, updated].hash
+      [id, created, integration_id, application_id, profile_id, store_integration_id, evaluable_campaign_ids, coupon_codes, referral_code, loyalty_cards, reward_integration_ids, state, cart_items, experiment_variant_allocations, additional_costs, identifiers, attributes, first_session, update_count, total, cart_item_total, additional_cost_total, cart_item_additional_cost_total, updated].hash
     end
 
     # Builds the object from hash

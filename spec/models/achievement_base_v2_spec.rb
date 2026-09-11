@@ -100,19 +100,7 @@ describe 'AchievementBaseV2' do
     end
   end
 
-  describe 'test attribute "sandbox"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "subscribed_applications"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "timezone"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

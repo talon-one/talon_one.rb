@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The name / description of this discount | 
-**additional_cost_id** | **Integer** | The ID of the additional cost. | 
-**additional_cost** | **String** | The name of the additional cost. | 
-**value** | **Float** | The total monetary value of the discount. | 
-**desired_value** | **Float** | The original value of the discount. | [optional] 
+**name** | **String** | The name of the discount. | 
+**additional_cost_id** | **Integer** | The identifier of the additional cost. | 
+**additional_cost** | **String** | The API name of the additional cost. | 
+**value** | **Float** | The monetary value of the discount to apply. | 
+**desired_value** | **Float** | _(Partial discounts enabled only)_ The monetary value of the discount to be applied without considering budget limitations. | [optional] 
 
 ## Code Sample
 

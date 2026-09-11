@@ -29,6 +29,9 @@ module TalonOne
     # Expiration date of the coupon. Coupon never expires if this is omitted.
     attr_accessor :expiry_date
 
+    # The batch ID that all coupons created by the request will bear. If omitted, a batch ID is generated automatically.
+    attr_accessor :batch_id
+
     # Arbitrary properties associated with this item.
     attr_accessor :attributes
 
@@ -49,6 +52,7 @@ module TalonOne
         :'reservation_limit' => :'reservationLimit',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
+        :'batch_id' => :'batchId',
         :'attributes' => :'attributes',
         :'recipients_integration_ids' => :'recipientsIntegrationIds',
         :'valid_characters' => :'validCharacters',
@@ -64,6 +68,7 @@ module TalonOne
         :'reservation_limit' => :'Integer',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
+        :'batch_id' => :'String',
         :'attributes' => :'Object',
         :'recipients_integration_ids' => :'Array<String>',
         :'valid_characters' => :'Array<String>',
@@ -110,6 +115,10 @@ module TalonOne
 
       if attributes.key?(:'expiry_date')
         self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'batch_id')
+        self.batch_id = attributes[:'batch_id']
       end
 
       if attributes.key?(:'attributes')
@@ -266,6 +275,7 @@ module TalonOne
           reservation_limit == o.reservation_limit &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
+          batch_id == o.batch_id &&
           attributes == o.attributes &&
           recipients_integration_ids == o.recipients_integration_ids &&
           valid_characters == o.valid_characters &&
@@ -281,7 +291,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, attributes, recipients_integration_ids, valid_characters, coupon_pattern].hash
+      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, batch_id, attributes, recipients_integration_ids, valid_characters, coupon_pattern].hash
     end
 
     # Builds the object from hash

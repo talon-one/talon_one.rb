@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **reservation_limit** | **Integer** | The number of reservations that can be made with this coupon code.  | [optional] 
 **start_date** | **DateTime** | Timestamp at which point the coupon becomes valid. | [optional] 
 **expiry_date** | **DateTime** | Expiration date of the coupon. Coupon never expires if this is omitted. | [optional] 
+**batch_id** | **String** | The batch ID that all coupons created by the request will bear. If omitted, a batch ID is generated automatically. | [optional] 
 **attributes** | [**Object**](.md) | Arbitrary properties associated with this item. | [optional] 
 **recipients_integration_ids** | **Array&lt;String&gt;** | The integration IDs for recipients. | 
 **valid_characters** | **Array&lt;String&gt;** | List of characters used to generate the random parts of a code. By default, the list of characters is equivalent to the &#x60;[A-Z, 0-9]&#x60; regular expression.  | [optional] 
@@ -24,6 +25,7 @@ instance = TalonOne::NewCouponsForMultipleRecipients.new(usage_limit: 100,
                                  reservation_limit: 45,
                                  start_date: 2020-01-24T14:15:22Z,
                                  expiry_date: 2023-08-24T14:15:22Z,
+                                 batch_id: 3rdparty_fjsieoaa,
                                  attributes: {&quot;venueId&quot;:12},
                                  recipients_integration_ids: [URNGV8294NV, BZGGC2454PA],
                                  valid_characters: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z],

@@ -36,6 +36,12 @@ module TalonOne
     # The code of the referral that was being evaluated at the time of the rule failure.
     attr_accessor :referral_value
 
+    # The ID of the reward that was being evaluated at the time of the rule failure.
+    attr_accessor :reward_id
+
+    # The integration ID of the reward that was being evaluated at the time of the rule failure.
+    attr_accessor :reward_integration_id
+
     # The index of the rule that failed within the ruleset.
     attr_accessor :rule_index
 
@@ -67,6 +73,8 @@ module TalonOne
         :'coupon_value' => :'couponValue',
         :'referral_id' => :'referralID',
         :'referral_value' => :'referralValue',
+        :'reward_id' => :'rewardId',
+        :'reward_integration_id' => :'rewardIntegrationId',
         :'rule_index' => :'ruleIndex',
         :'rule_name' => :'ruleName',
         :'condition_index' => :'conditionIndex',
@@ -87,6 +95,8 @@ module TalonOne
         :'coupon_value' => :'String',
         :'referral_id' => :'Integer',
         :'referral_value' => :'String',
+        :'reward_id' => :'Integer',
+        :'reward_integration_id' => :'String',
         :'rule_index' => :'Integer',
         :'rule_name' => :'String',
         :'condition_index' => :'Integer',
@@ -144,6 +154,14 @@ module TalonOne
 
       if attributes.key?(:'referral_value')
         self.referral_value = attributes[:'referral_value']
+      end
+
+      if attributes.key?(:'reward_id')
+        self.reward_id = attributes[:'reward_id']
+      end
+
+      if attributes.key?(:'reward_integration_id')
+        self.reward_integration_id = attributes[:'reward_integration_id']
       end
 
       if attributes.key?(:'rule_index')
@@ -225,6 +243,8 @@ module TalonOne
           coupon_value == o.coupon_value &&
           referral_id == o.referral_id &&
           referral_value == o.referral_value &&
+          reward_id == o.reward_id &&
+          reward_integration_id == o.reward_integration_id &&
           rule_index == o.rule_index &&
           rule_name == o.rule_name &&
           condition_index == o.condition_index &&
@@ -243,7 +263,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, campaign_name, ruleset_id, coupon_id, coupon_value, referral_id, referral_value, rule_index, rule_name, condition_index, effect_index, details, evaluation_group_id, evaluation_group_mode].hash
+      [campaign_id, campaign_name, ruleset_id, coupon_id, coupon_value, referral_id, referral_value, reward_id, reward_integration_id, rule_index, rule_name, condition_index, effect_index, details, evaluation_group_id, evaluation_group_mode].hash
     end
 
     # Builds the object from hash

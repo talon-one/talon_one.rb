@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Whenever an error occurred during evaluation, we return an error effect. This should never happen for rules created in the rule builder.
+  # This effect is triggered whenever an error occurs during rule evaluation. This effect only provides information about what the error is.
   class ErrorEffectProps
     # The error message.
     attr_accessor :message

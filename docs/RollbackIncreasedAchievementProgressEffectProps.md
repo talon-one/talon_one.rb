@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **achievement_id** | **Integer** | The internal ID of the achievement. | 
 **achievement_name** | **String** | The name of the achievement. | 
 **progress_tracker_id** | **Integer** | The internal ID of the achievement progress tracker. | 
-**decrease_progress_by** | **Float** | The value by which the customer&#39;s current progress in the achievement is decreased. | 
+**decrease_progress_by** | **Float** | The value by which the customer&#39;s current progress in the achievement has decreased. | 
 **current_progress** | **Float** | The current progress of the customer in the achievement. | 
 **target** | **Float** | The target value to complete the achievement. | 
 

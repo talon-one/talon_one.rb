@@ -10,8 +10,9 @@ Name | Type | Description | Notes
 **profile_id** | **Integer** | The globally unique Talon.One ID of the customer that created this entity. | [optional] 
 **store_id** | **Integer** | The ID of the store. | [optional] 
 **store_integration_id** | **String** | The integration ID of the store. You choose this ID when you create a store. | [optional] 
+**integration_id** | **String** | The unique ID of the event. Only one event with this ID can be registered.  | [optional] 
 **session_id** | **Integer** | The globally unique Talon.One ID of the session that contains this event. | [optional] 
-**type** | **String** | A string representing the event. Must not be a reserved event name. | 
+**type** | **String** | The name of the event. Must be a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#custom-events), not a built-in event. | 
 **attributes** | [**Object**](.md) | Additional JSON serialized data associated with the event. | 
 **effects** | [**Array&lt;Effect&gt;**](Effect.md) | An array containing the effects that were applied as a result of this event. | 
 **rule_failure_reasons** | [**Array&lt;RuleFailureReason&gt;**](RuleFailureReason.md) | An array containing the rule failure reasons which happened during this event. | [optional] 
@@ -27,6 +28,7 @@ instance = TalonOne::ApplicationEvent.new(id: 6,
                                  profile_id: 138,
                                  store_id: null,
                                  store_integration_id: STORE-001,
+                                 integration_id: 175KJPS947296,
                                  session_id: null,
                                  type: null,
                                  attributes: null,

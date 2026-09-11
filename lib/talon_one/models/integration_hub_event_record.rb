@@ -14,33 +14,52 @@ require 'date'
 
 module TalonOne
   class IntegrationHubEventRecord
+    # ID of the event record.
     attr_accessor :id
 
+    # ID of the integration hub flow.
     attr_accessor :flow_id
+
+    # Name of the integration.
+    attr_accessor :integration_name
+
+    # Name of the integration instance.
+    attr_accessor :instance_name
 
     attr_accessor :event_type
 
-    attr_accessor :event_data
-
+    # Timestamp when the event was published.
     attr_accessor :published_at
 
+    # Timestamp when the event was processed.
     attr_accessor :processed_at
 
-    attr_accessor :process_after
+    # Timestamp when the event was delivered.
+    attr_accessor :delivered_at
 
+    # Timestamp after which the event is scheduled to be processed.
+    attr_accessor :scheduled_to
+
+    # Number of delivery retries attempted.
     attr_accessor :_retry
+
+    # The event payload as a formatted JSON string.
+    attr_accessor :payload
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'Id',
-        :'flow_id' => :'FlowId',
-        :'event_type' => :'EventType',
-        :'event_data' => :'EventData',
-        :'published_at' => :'PublishedAt',
-        :'processed_at' => :'ProcessedAt',
-        :'process_after' => :'ProcessAfter',
-        :'_retry' => :'Retry'
+        :'id' => :'id',
+        :'flow_id' => :'flowId',
+        :'integration_name' => :'integrationName',
+        :'instance_name' => :'instanceName',
+        :'event_type' => :'eventType',
+        :'published_at' => :'publishedAt',
+        :'processed_at' => :'processedAt',
+        :'delivered_at' => :'deliveredAt',
+        :'scheduled_to' => :'scheduledTo',
+        :'_retry' => :'retry',
+        :'payload' => :'payload'
       }
     end
 
@@ -49,12 +68,15 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'flow_id' => :'Integer',
-        :'event_type' => :'String',
-        :'event_data' => :'Object',
+        :'integration_name' => :'String',
+        :'instance_name' => :'String',
+        :'event_type' => :'IntegrationHubEventType',
         :'published_at' => :'DateTime',
         :'processed_at' => :'DateTime',
-        :'process_after' => :'DateTime',
-        :'_retry' => :'Integer'
+        :'delivered_at' => :'DateTime',
+        :'scheduled_to' => :'DateTime',
+        :'_retry' => :'Integer',
+        :'payload' => :'String'
       }
     end
 
@@ -87,12 +109,16 @@ module TalonOne
         self.flow_id = attributes[:'flow_id']
       end
 
-      if attributes.key?(:'event_type')
-        self.event_type = attributes[:'event_type']
+      if attributes.key?(:'integration_name')
+        self.integration_name = attributes[:'integration_name']
       end
 
-      if attributes.key?(:'event_data')
-        self.event_data = attributes[:'event_data']
+      if attributes.key?(:'instance_name')
+        self.instance_name = attributes[:'instance_name']
+      end
+
+      if attributes.key?(:'event_type')
+        self.event_type = attributes[:'event_type']
       end
 
       if attributes.key?(:'published_at')
@@ -103,12 +129,20 @@ module TalonOne
         self.processed_at = attributes[:'processed_at']
       end
 
-      if attributes.key?(:'process_after')
-        self.process_after = attributes[:'process_after']
+      if attributes.key?(:'delivered_at')
+        self.delivered_at = attributes[:'delivered_at']
+      end
+
+      if attributes.key?(:'scheduled_to')
+        self.scheduled_to = attributes[:'scheduled_to']
       end
 
       if attributes.key?(:'_retry')
         self._retry = attributes[:'_retry']
+      end
+
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       end
     end
 
@@ -128,20 +162,20 @@ module TalonOne
         invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
       end
 
-      if @event_data.nil?
-        invalid_properties.push('invalid value for "event_data", event_data cannot be nil.')
-      end
-
       if @published_at.nil?
         invalid_properties.push('invalid value for "published_at", published_at cannot be nil.')
       end
 
-      if @process_after.nil?
-        invalid_properties.push('invalid value for "process_after", process_after cannot be nil.')
+      if @scheduled_to.nil?
+        invalid_properties.push('invalid value for "scheduled_to", scheduled_to cannot be nil.')
       end
 
       if @_retry.nil?
         invalid_properties.push('invalid value for "_retry", _retry cannot be nil.')
+      end
+
+      if @payload.nil?
+        invalid_properties.push('invalid value for "payload", payload cannot be nil.')
       end
 
       invalid_properties
@@ -153,10 +187,10 @@ module TalonOne
       return false if @id.nil?
       return false if @flow_id.nil?
       return false if @event_type.nil?
-      return false if @event_data.nil?
       return false if @published_at.nil?
-      return false if @process_after.nil?
+      return false if @scheduled_to.nil?
       return false if @_retry.nil?
+      return false if @payload.nil?
       true
     end
 
@@ -167,12 +201,15 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           flow_id == o.flow_id &&
+          integration_name == o.integration_name &&
+          instance_name == o.instance_name &&
           event_type == o.event_type &&
-          event_data == o.event_data &&
           published_at == o.published_at &&
           processed_at == o.processed_at &&
-          process_after == o.process_after &&
-          _retry == o._retry
+          delivered_at == o.delivered_at &&
+          scheduled_to == o.scheduled_to &&
+          _retry == o._retry &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -184,7 +221,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, flow_id, event_type, event_data, published_at, processed_at, process_after, _retry].hash
+      [id, flow_id, integration_name, instance_name, event_type, published_at, processed_at, delivered_at, scheduled_to, _retry, payload].hash
     end
 
     # Builds the object from hash

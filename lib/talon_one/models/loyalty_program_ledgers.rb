@@ -29,7 +29,7 @@ module TalonOne
 
     attr_accessor :ledger
 
-    # A map containing information about each loyalty subledger.
+    # A map containing information about each loyalty subledger. Subledgers for which all balances are zero are excluded from the response.
     attr_accessor :sub_ledgers
 
     # Attribute mapping from ruby-style variable name to JSON key.

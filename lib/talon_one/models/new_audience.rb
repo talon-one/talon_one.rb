@@ -23,6 +23,9 @@ module TalonOne
     # A description of the audience.
     attr_accessor :description
 
+    # A list of the IDs of the Applications that are connected to this audience.
+    attr_accessor :subscribed_applications_ids
+
     # The Talon.One-supported [3rd-party platform](https://docs.talon.one/docs/dev/technology-partners/overview) that this audience was created in.  For example, `mParticle`, `Segment`, `Shopify`, `Braze`, or `Iterable`.  **Note:** If you do not integrate with any of these platforms, do not use this property. 
     attr_accessor :integration
 
@@ -41,6 +44,7 @@ module TalonOne
         :'name' => :'name',
         :'sandbox' => :'sandbox',
         :'description' => :'description',
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds',
         :'integration' => :'integration',
         :'integration_id' => :'integrationId',
         :'created_in3rd_party' => :'createdIn3rdParty',
@@ -54,6 +58,7 @@ module TalonOne
         :'name' => :'String',
         :'sandbox' => :'Boolean',
         :'description' => :'String',
+        :'subscribed_applications_ids' => :'Array<Integer>',
         :'integration' => :'String',
         :'integration_id' => :'String',
         :'created_in3rd_party' => :'Boolean',
@@ -92,6 +97,12 @@ module TalonOne
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'subscribed_applications_ids')
+        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
+          self.subscribed_applications_ids = value
+        end
       end
 
       if attributes.key?(:'integration')
@@ -180,6 +191,7 @@ module TalonOne
           name == o.name &&
           sandbox == o.sandbox &&
           description == o.description &&
+          subscribed_applications_ids == o.subscribed_applications_ids &&
           integration == o.integration &&
           integration_id == o.integration_id &&
           created_in3rd_party == o.created_in3rd_party &&
@@ -195,7 +207,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sandbox, description, integration, integration_id, created_in3rd_party, last_update].hash
+      [name, sandbox, description, subscribed_applications_ids, integration, integration_id, created_in3rd_party, last_update].hash
     end
 
     # Builds the object from hash

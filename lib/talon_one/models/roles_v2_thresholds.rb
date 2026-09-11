@@ -14,12 +14,16 @@ require 'date'
 
 module TalonOne
   class RolesV2Thresholds
+    # Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.
+    attr_accessor :loyalty_program_id
+
     # Maximum number of loyalty points a support user can award without approval.
     attr_accessor :loyalty_points_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'loyalty_program_id' => :'loyaltyProgramId',
         :'loyalty_points_limit' => :'loyaltyPointsLimit'
       }
     end
@@ -27,6 +31,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'loyalty_program_id' => :'Integer',
         :'loyalty_points_limit' => :'Integer'
       }
     end
@@ -52,6 +57,10 @@ module TalonOne
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'loyalty_program_id')
+        self.loyalty_program_id = attributes[:'loyalty_program_id']
+      end
+
       if attributes.key?(:'loyalty_points_limit')
         self.loyalty_points_limit = attributes[:'loyalty_points_limit']
       end
@@ -75,6 +84,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          loyalty_program_id == o.loyalty_program_id &&
           loyalty_points_limit == o.loyalty_points_limit
     end
 
@@ -87,7 +97,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [loyalty_points_limit].hash
+      [loyalty_program_id, loyalty_points_limit].hash
     end
 
     # Builds the object from hash

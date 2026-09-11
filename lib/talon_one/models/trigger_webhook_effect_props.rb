@@ -13,12 +13,12 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"triggerWebhook\" effect. This gets triggered whenever a validated rule contained a \"trigger webhook\" effect. This is communicated as an FYI and should usually not require action on your side.
+  # This effect is triggered when a rule containing a [webhook effect](https://docs.talon.one/docs/product/rules/effects/available-effects#webhooks) is validated. The details are shared with you for your information only. It usually doesn't require an action on your side.
   class TriggerWebhookEffectProps
-    # The ID of the webhook that was triggered.
+    # The internal ID of the webhook.
     attr_accessor :webhook_id
 
-    # The name of the webhook that was triggered.
+    # The name of the webhook.
     attr_accessor :webhook_name
 
     # Attribute mapping from ruby-style variable name to JSON key.

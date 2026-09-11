@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **selected_price_type** | **String** | The selected price type for the SKU targeted by this effect. | [optional] 
 **selected_price** | **Float** | The value of the selected price type to apply to the SKU targeted by this effect, before any discounts are applied. | [optional] 
 **adjustment_reference_id** | **String** | The reference identifier of the selected price adjustment for this SKU. This is only returned if the &#x60;selectedPrice&#x60; resulted from a price adjustment. | [optional] 
+**reward_id** | **Integer** | The ID of the reward that was being evaluated when this effect was triggered. | [optional] 
 
 ## Code Sample
 
@@ -41,7 +42,8 @@ instance = TalonOne::EffectEntity.new(experiment_id: 12,
                                  campaign_revision_version_id: 5,
                                  selected_price_type: member,
                                  selected_price: 100.0,
-                                 adjustment_reference_id: 68851723-e6fa-488f-ace9-112581e6c19b)
+                                 adjustment_reference_id: 68851723-e6fa-488f-ace9-112581e6c19b,
+                                 reward_id: 7)
 ```
 
 

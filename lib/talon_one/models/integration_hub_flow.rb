@@ -14,10 +14,12 @@ require 'date'
 
 module TalonOne
   class IntegrationHubFlow
-    # ID of application the flow is registered for.
+    # ID of the application the flow is registered for.
     attr_accessor :application_id
 
-    # The event type we want to register a flow for.
+    # ID of the loyalty program the flow is registered for.
+    attr_accessor :loyalty_program_id
+
     attr_accessor :event_type
 
     # The URL of the integration hub flow that we want to trigger for the event.
@@ -27,6 +29,7 @@ module TalonOne
     def self.attribute_map
       {
         :'application_id' => :'ApplicationID',
+        :'loyalty_program_id' => :'LoyaltyProgramID',
         :'event_type' => :'EventType',
         :'integration_hub_flow_url' => :'IntegrationHubFlowUrl'
       }
@@ -36,7 +39,8 @@ module TalonOne
     def self.openapi_types
       {
         :'application_id' => :'Integer',
-        :'event_type' => :'String',
+        :'loyalty_program_id' => :'Integer',
+        :'event_type' => :'IntegrationHubEventType',
         :'integration_hub_flow_url' => :'String'
       }
     end
@@ -64,6 +68,10 @@ module TalonOne
 
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
+      end
+
+      if attributes.key?(:'loyalty_program_id')
+        self.loyalty_program_id = attributes[:'loyalty_program_id']
       end
 
       if attributes.key?(:'event_type')
@@ -104,6 +112,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           application_id == o.application_id &&
+          loyalty_program_id == o.loyalty_program_id &&
           event_type == o.event_type &&
           integration_hub_flow_url == o.integration_hub_flow_url
     end
@@ -117,7 +126,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [application_id, event_type, integration_hub_flow_url].hash
+      [application_id, loyalty_program_id, event_type, integration_hub_flow_url].hash
     end
 
     # Builds the object from hash

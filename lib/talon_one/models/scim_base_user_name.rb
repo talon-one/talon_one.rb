@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The components of the user’s real name.
+  # The components of the user's real name.
   class ScimBaseUserName
     # The full name, including all middle names, titles, and suffixes as appropriate, formatted for display.
     attr_accessor :formatted

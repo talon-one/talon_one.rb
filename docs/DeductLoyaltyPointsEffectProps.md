@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_title** | **String** | The title of the rule that contained triggered this points deduction. | 
-**program_id** | **Integer** | The ID of the loyalty program where these points were added. | 
-**sub_ledger_id** | **String** | The ID of the subledger within the loyalty program where these points were added. | 
+**program_id** | **Integer** | The ID of the loyalty program from which these points were deducted. | 
+**sub_ledger_id** | **String** | The ID of the subledger within the loyalty program from which these points were deducted. | 
 **value** | **Float** | The amount of points that were deducted. | 
-**transaction_uuid** | **String** | The identifier of this deduction in the loyalty ledger. | 
-**name** | **String** | The name property gets one of the following two values. It can be the loyalty program name or it can represent a reason for the respective deduction of loyalty points. The latter is an optional value defined in a deduction rule.  | 
+**transaction_uuid** | **String** | The identifier of this loyalty point transaction. | 
+**name** | **String** | The reason of this loyalty points deduction. | 
 **card_identifier** | **String** | The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;.  | [optional] 
 
 ## Code Sample

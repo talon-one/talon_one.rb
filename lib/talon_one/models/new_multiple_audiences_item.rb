@@ -17,6 +17,9 @@ module TalonOne
     # The human-friendly display name for this audience.
     attr_accessor :name
 
+    # A list of the IDs of the Applications that are connected to this audience.
+    attr_accessor :subscribed_applications_ids
+
     # The ID of this audience in the third-party integration.
     attr_accessor :integration_id
 
@@ -24,6 +27,7 @@ module TalonOne
     def self.attribute_map
       {
         :'name' => :'name',
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds',
         :'integration_id' => :'integrationId'
       }
     end
@@ -32,6 +36,7 @@ module TalonOne
     def self.openapi_types
       {
         :'name' => :'String',
+        :'subscribed_applications_ids' => :'Array<Integer>',
         :'integration_id' => :'String'
       }
     end
@@ -59,6 +64,12 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'subscribed_applications_ids')
+        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
+          self.subscribed_applications_ids = value
+        end
       end
 
       if attributes.key?(:'integration_id')
@@ -133,6 +144,7 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          subscribed_applications_ids == o.subscribed_applications_ids &&
           integration_id == o.integration_id
     end
 
@@ -145,7 +157,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, integration_id].hash
+      [name, subscribed_applications_ids, integration_id].hash
     end
 
     # Builds the object from hash

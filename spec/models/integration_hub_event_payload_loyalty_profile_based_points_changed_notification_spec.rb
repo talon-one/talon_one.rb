@@ -32,6 +32,12 @@ describe 'IntegrationHubEventPayloadLoyaltyProfileBasedPointsChangedNotification
       expect(@instance).to be_instance_of(TalonOne::IntegrationHubEventPayloadLoyaltyProfileBasedPointsChangedNotification)
     end
   end
+  describe 'test attribute "event_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "profile_integration_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -44,6 +50,12 @@ describe 'IntegrationHubEventPayloadLoyaltyProfileBasedPointsChangedNotification
     end
   end
 
+  describe 'test attribute "loyalty_program_name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "subledger_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -51,6 +63,18 @@ describe 'IntegrationHubEventPayloadLoyaltyProfileBasedPointsChangedNotification
   end
 
   describe 'test attribute "source_of_event"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "current_tier"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "session_integration_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

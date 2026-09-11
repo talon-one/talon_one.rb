@@ -44,4 +44,20 @@ describe 'UpdateExperiment' do
     end
   end
 
+  describe 'test attribute "goal_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["other", "maximize_revenue", "maximize_items_sold", "optimize_discount_efficiency"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.goal_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "goal_description"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

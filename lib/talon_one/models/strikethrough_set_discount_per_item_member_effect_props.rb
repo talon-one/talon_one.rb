@@ -15,10 +15,10 @@ require 'date'
 module TalonOne
   # setDiscountPerItem member effect in strikethrough pricing payload.
   class StrikethroughSetDiscountPerItemMemberEffectProps
-    # effect name.
+    # The effect name.
     attr_accessor :name
 
-    # discount value.
+    # The discount value.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.

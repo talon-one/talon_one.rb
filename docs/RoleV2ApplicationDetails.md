@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **campaign** | **String** | Name of the campaign-related permission set for the given Application. | [optional] 
 **draft_campaign** | **String** | Name of the draft campaign-related permission set for the given Application. | [optional] 
 **tools** | **String** | Name of the tools-related permission set. | [optional] 
-**thresholds** | [**RolesV2Thresholds**](RolesV2Thresholds.md) |  | [optional] 
 
 ## Code Sample
 
@@ -18,8 +17,7 @@ require 'TalonOne'
 instance = TalonOne::RoleV2ApplicationDetails.new(application: null,
                                  campaign: null,
                                  draft_campaign: null,
-                                 tools: Tools permission set,
-                                 thresholds: null)
+                                 tools: Tools permission set)
 ```
 
 

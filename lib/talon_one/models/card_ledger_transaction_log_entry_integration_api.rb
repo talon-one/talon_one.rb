@@ -57,7 +57,7 @@ module TalonOne
     # The name of the rule that triggered this effect.
     attr_accessor :rule_name
 
-    # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
+    # The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
     attr_accessor :validity_duration
 
     class EnumAttributeValidator

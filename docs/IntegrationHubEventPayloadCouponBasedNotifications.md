@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**event_id** | **Integer** | The ID of the integration hub event. Return this value in the delivery-status callback to mark the event delivered or failed. | 
 **id** | **Integer** |  | 
 **created** | **DateTime** |  | 
 **campaign_id** | **Integer** |  | 
@@ -31,7 +32,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::IntegrationHubEventPayloadCouponBasedNotifications.new(id: null,
+instance = TalonOne::IntegrationHubEventPayloadCouponBasedNotifications.new(event_id: 123,
+                                 id: null,
                                  created: null,
                                  campaign_id: null,
                                  value: null,
