@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **coupons** | [**Array&lt;InventoryCoupon&gt;**](InventoryCoupon.md) | The coupons reserved by this profile. This array includes hard and soft reservations.  | [optional] 
 **giveaways** | [**Array&lt;Giveaway&gt;**](Giveaway.md) |  | [optional] 
 **achievements** | [**Array&lt;AchievementProgressWithDefinition&gt;**](AchievementProgressWithDefinition.md) |  | [optional] 
+**rewards** | [**Array&lt;RewardWithUnlocks&gt;**](RewardWithUnlocks.md) | The customer rewards that are &#x60;unlocked&#x60; and not yet &#x60;used&#x60;. | [optional] 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = TalonOne::CustomerInventory.new(profile: null,
                                  referrals: null,
                                  coupons: null,
                                  giveaways: null,
-                                 achievements: null)
+                                 achievements: null,
+                                 rewards: null)
 ```
 
 

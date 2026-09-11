@@ -23,12 +23,16 @@ module TalonOne
     # A description of the audience.
     attr_accessor :description
 
+    # A list of the IDs of the Applications that are connected to this audience.
+    attr_accessor :subscribed_applications_ids
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'sandbox' => :'sandbox',
-        :'description' => :'description'
+        :'description' => :'description',
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds'
       }
     end
 
@@ -37,7 +41,8 @@ module TalonOne
       {
         :'name' => :'String',
         :'sandbox' => :'Boolean',
-        :'description' => :'String'
+        :'description' => :'String',
+        :'subscribed_applications_ids' => :'Array<Integer>'
       }
     end
 
@@ -72,6 +77,12 @@ module TalonOne
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'subscribed_applications_ids')
+        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
+          self.subscribed_applications_ids = value
+        end
       end
     end
 
@@ -119,7 +130,8 @@ module TalonOne
       self.class == o.class &&
           name == o.name &&
           sandbox == o.sandbox &&
-          description == o.description
+          description == o.description &&
+          subscribed_applications_ids == o.subscribed_applications_ids
     end
 
     # @see the `==` method
@@ -131,7 +143,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, sandbox, description].hash
+      [name, sandbox, description, subscribed_applications_ids].hash
     end
 
     # Builds the object from hash

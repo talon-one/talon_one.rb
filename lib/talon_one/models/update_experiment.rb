@@ -19,11 +19,41 @@ module TalonOne
 
     attr_accessor :campaign
 
+    # The goal of the experiment. Determines which single metric is used to decide the winning variant. When set to `other`, multiple metrics are used. If omitted, the current value is preserved. 
+    attr_accessor :goal_type
+
+    # A description of the experiment goal. Provides context for the AI summary and helps it interpret the outcome of the experiment against the stated goal. If omitted, the current value is preserved. 
+    attr_accessor :goal_description
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'is_variant_assignment_external' => :'isVariantAssignmentExternal',
-        :'campaign' => :'campaign'
+        :'campaign' => :'campaign',
+        :'goal_type' => :'goalType',
+        :'goal_description' => :'goalDescription'
       }
     end
 
@@ -31,7 +61,9 @@ module TalonOne
     def self.openapi_types
       {
         :'is_variant_assignment_external' => :'Boolean',
-        :'campaign' => :'UpdateCampaign'
+        :'campaign' => :'UpdateCampaign',
+        :'goal_type' => :'String',
+        :'goal_description' => :'String'
       }
     end
 
@@ -63,6 +95,14 @@ module TalonOne
       if attributes.key?(:'campaign')
         self.campaign = attributes[:'campaign']
       end
+
+      if attributes.key?(:'goal_type')
+        self.goal_type = attributes[:'goal_type']
+      end
+
+      if attributes.key?(:'goal_description')
+        self.goal_description = attributes[:'goal_description']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,7 +125,19 @@ module TalonOne
     def valid?
       return false if @is_variant_assignment_external.nil?
       return false if @campaign.nil?
+      goal_type_validator = EnumAttributeValidator.new('String', ["other", "maximize_revenue", "maximize_items_sold", "optimize_discount_efficiency"])
+      return false unless goal_type_validator.valid?(@goal_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] goal_type Object to be assigned
+    def goal_type=(goal_type)
+      validator = EnumAttributeValidator.new('String', ["other", "maximize_revenue", "maximize_items_sold", "optimize_discount_efficiency"])
+      unless validator.valid?(goal_type)
+        fail ArgumentError, "invalid value for \"goal_type\", must be one of #{validator.allowable_values}."
+      end
+      @goal_type = goal_type
     end
 
     # Checks equality by comparing each attribute.
@@ -94,7 +146,9 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           is_variant_assignment_external == o.is_variant_assignment_external &&
-          campaign == o.campaign
+          campaign == o.campaign &&
+          goal_type == o.goal_type &&
+          goal_description == o.goal_description
     end
 
     # @see the `==` method
@@ -106,7 +160,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [is_variant_assignment_external, campaign].hash
+      [is_variant_assignment_external, campaign, goal_type, goal_description].hash
     end
 
     # Builds the object from hash

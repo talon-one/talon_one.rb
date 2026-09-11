@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::PriceHistoryResponse.new(sku: ,
+instance = TalonOne::PriceHistoryResponse.new(sku: SKU1241028,
                                  history: null)
 ```
 

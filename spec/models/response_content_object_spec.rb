@@ -35,7 +35,7 @@ describe 'ResponseContentObject' do
   describe 'test attribute "response_content"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["customerProfile", "triggeredCampaigns", "loyalty", "event", "awardedGiveaways", "ruleFailureReasons"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["customerProfile", "triggeredCampaigns", "loyalty", "event", "awardedGiveaways", "ruleFailureReasons", "campaignEligibility", "achievements", "unlockedRewards"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.response_content = value }.not_to raise_error
       # end

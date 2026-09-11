@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** | The version of the strikethrough pricing notification. | [optional] 
+**version** | **String** | The version of the strikethrough pricing notification. Set for **scheduled** strikethrough pricing updates only.  | [optional] 
 **valid_from** | **DateTime** | Timestamp at which the strikethrough pricing update becomes valid. Set for **scheduled** strikethrough pricing updates (version: v2) only.  | [optional] 
 **application_id** | **Integer** | The ID of the Application to which the catalog items labels belongs. | 
 **current_batch** | **Integer** | The batch number of the notification. Notifications might be sent in different batches. | 

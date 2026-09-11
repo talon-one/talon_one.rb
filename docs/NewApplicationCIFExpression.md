@@ -15,7 +15,7 @@ require 'TalonOne'
 
 instance = TalonOne::NewApplicationCIFExpression.new(cart_item_filter_id: 216,
                                  created_by: 216,
-                                 expression: {expr&#x3D;[filter, [., Session, CartItems], [[Item], [catch, false, [&#x3D;, [., Item, Category], Kitchen]]]]})
+                                 expression: {expr&#x3D;[filter, [., Session, CartItems], [[Item], [catch, false, [contains, [., Item, Category], Kitchen]]]]})
 ```
 
 

@@ -50,14 +50,8 @@ module TalonOne
     # When `true`, customer progress can be rolled back in completed achievements.
     attr_accessor :allow_rollback_after_completion
 
-    # Indicates if this achievement is a live or sandbox achievement. Achievements of a given type can only be connected to Applications of the same type.
-    attr_accessor :sandbox
-
     # A list containing the IDs of all applications that are subscribed to A list containing the IDs of all Applications that are connected to this achievement.
     attr_accessor :subscribed_applications
-
-    # A string containing an IANA timezone descriptor.
-    attr_accessor :timezone
 
     # The ID of the user that created this achievement.
     attr_accessor :user_id
@@ -65,11 +59,25 @@ module TalonOne
     # Name of the user that created the achievement.  **Note**: This is not available if the user has been deleted. 
     attr_accessor :created_by
 
+    attr_accessor :period_end_override
+
     # Indicates if a customer has made progress in the achievement.
     attr_accessor :has_progress
 
-    # The status of the achievement.
+    # The status of the achievement.                                                                                               - `active`: The achievement is available to customers. - `scheduled`: The achievement has a `fixedStartDate` set in the future. - `expired`: The achievement's `endDate` is in the past. 
     attr_accessor :status
+
+    # Indicates if this achievement is a live or sandbox achievement. Achievements of a given type can only be connected to Applications of the same type.
+    attr_accessor :sandbox
+
+    # A string containing an IANA timezone descriptor.
+    attr_accessor :timezone
+
+    # This property is **deprecated**. Use `referencedByCampaigns` instead. This field contains the first campaign ID from the related `referencedByCampaigns`, and is omitted when `referencedByCampaigns` is empty.
+    attr_accessor :campaign_id
+
+    # The campaigns that reference this achievement. They are sorted in ascending order by their id.
+    attr_accessor :referenced_by_campaigns
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -108,13 +116,16 @@ module TalonOne
         :'fixed_start_date' => :'fixedStartDate',
         :'end_date' => :'endDate',
         :'allow_rollback_after_completion' => :'allowRollbackAfterCompletion',
-        :'sandbox' => :'sandbox',
         :'subscribed_applications' => :'subscribedApplications',
-        :'timezone' => :'timezone',
         :'user_id' => :'userId',
         :'created_by' => :'createdBy',
+        :'period_end_override' => :'periodEndOverride',
         :'has_progress' => :'hasProgress',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'sandbox' => :'sandbox',
+        :'timezone' => :'timezone',
+        :'campaign_id' => :'campaignId',
+        :'referenced_by_campaigns' => :'referencedByCampaigns'
       }
     end
 
@@ -133,13 +144,16 @@ module TalonOne
         :'fixed_start_date' => :'DateTime',
         :'end_date' => :'DateTime',
         :'allow_rollback_after_completion' => :'Boolean',
-        :'sandbox' => :'Boolean',
         :'subscribed_applications' => :'Array<Integer>',
-        :'timezone' => :'String',
         :'user_id' => :'Integer',
         :'created_by' => :'String',
+        :'period_end_override' => :'TimePoint',
         :'has_progress' => :'Boolean',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'sandbox' => :'Boolean',
+        :'timezone' => :'String',
+        :'campaign_id' => :'Integer',
+        :'referenced_by_campaigns' => :'Array<CampaignReference>'
       }
     end
 
@@ -212,18 +226,10 @@ module TalonOne
         self.allow_rollback_after_completion = attributes[:'allow_rollback_after_completion']
       end
 
-      if attributes.key?(:'sandbox')
-        self.sandbox = attributes[:'sandbox']
-      end
-
       if attributes.key?(:'subscribed_applications')
         if (value = attributes[:'subscribed_applications']).is_a?(Array)
           self.subscribed_applications = value
         end
-      end
-
-      if attributes.key?(:'timezone')
-        self.timezone = attributes[:'timezone']
       end
 
       if attributes.key?(:'user_id')
@@ -234,12 +240,34 @@ module TalonOne
         self.created_by = attributes[:'created_by']
       end
 
+      if attributes.key?(:'period_end_override')
+        self.period_end_override = attributes[:'period_end_override']
+      end
+
       if attributes.key?(:'has_progress')
         self.has_progress = attributes[:'has_progress']
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'sandbox')
+        self.sandbox = attributes[:'sandbox']
+      end
+
+      if attributes.key?(:'timezone')
+        self.timezone = attributes[:'timezone']
+      end
+
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
+      end
+
+      if attributes.key?(:'referenced_by_campaigns')
+        if (value = attributes[:'referenced_by_campaigns']).is_a?(Array)
+          self.referenced_by_campaigns = value
+        end
       end
     end
 
@@ -292,12 +320,16 @@ module TalonOne
         invalid_properties.push('invalid value for "activation_policy", activation_policy cannot be nil.')
       end
 
-      if @sandbox.nil?
-        invalid_properties.push('invalid value for "sandbox", sandbox cannot be nil.')
-      end
-
       if @subscribed_applications.nil?
         invalid_properties.push('invalid value for "subscribed_applications", subscribed_applications cannot be nil.')
+      end
+
+      if @user_id.nil?
+        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
+      end
+
+      if @sandbox.nil?
+        invalid_properties.push('invalid value for "sandbox", sandbox cannot be nil.')
       end
 
       if @timezone.nil?
@@ -308,8 +340,8 @@ module TalonOne
         invalid_properties.push('invalid value for "timezone", the character length must be great than or equal to 1.')
       end
 
-      if @user_id.nil?
-        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
+      if @referenced_by_campaigns.nil?
+        invalid_properties.push('invalid value for "referenced_by_campaigns", referenced_by_campaigns cannot be nil.')
       end
 
       invalid_properties
@@ -333,13 +365,14 @@ module TalonOne
       return false if @activation_policy.nil?
       activation_policy_validator = EnumAttributeValidator.new('String', ["user_action", "fixed_schedule"])
       return false unless activation_policy_validator.valid?(@activation_policy)
-      return false if @sandbox.nil?
       return false if @subscribed_applications.nil?
+      return false if @user_id.nil?
+      status_validator = EnumAttributeValidator.new('String', ["active", "scheduled", "expired"])
+      return false unless status_validator.valid?(@status)
+      return false if @sandbox.nil?
       return false if @timezone.nil?
       return false if @timezone.to_s.length < 1
-      return false if @user_id.nil?
-      status_validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
-      return false unless status_validator.valid?(@status)
+      return false if @referenced_by_campaigns.nil?
       true
     end
 
@@ -386,6 +419,16 @@ module TalonOne
       @activation_policy = activation_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["active", "scheduled", "expired"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] timezone Value to be assigned
     def timezone=(timezone)
@@ -398,16 +441,6 @@ module TalonOne
       end
 
       @timezone = timezone
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -427,13 +460,16 @@ module TalonOne
           fixed_start_date == o.fixed_start_date &&
           end_date == o.end_date &&
           allow_rollback_after_completion == o.allow_rollback_after_completion &&
-          sandbox == o.sandbox &&
           subscribed_applications == o.subscribed_applications &&
-          timezone == o.timezone &&
           user_id == o.user_id &&
           created_by == o.created_by &&
+          period_end_override == o.period_end_override &&
           has_progress == o.has_progress &&
-          status == o.status
+          status == o.status &&
+          sandbox == o.sandbox &&
+          timezone == o.timezone &&
+          campaign_id == o.campaign_id &&
+          referenced_by_campaigns == o.referenced_by_campaigns
     end
 
     # @see the `==` method
@@ -445,7 +481,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, name, title, description, target, period, recurrence_policy, activation_policy, fixed_start_date, end_date, allow_rollback_after_completion, sandbox, subscribed_applications, timezone, user_id, created_by, has_progress, status].hash
+      [id, created, name, title, description, target, period, recurrence_policy, activation_policy, fixed_start_date, end_date, allow_rollback_after_completion, subscribed_applications, user_id, created_by, period_end_override, has_progress, status, sandbox, timezone, campaign_id, referenced_by_campaigns].hash
     end
 
     # Builds the object from hash

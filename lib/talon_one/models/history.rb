@@ -20,8 +20,8 @@ module TalonOne
     # The date and time when the price was observed.
     attr_accessor :observed_at
 
-    # Identifier of the relevant context at the time the price was observed (e.g. summer sale). 
-    attr_accessor :context_id
+    # The identifiers of the relevant context at the time the price was observed. Includes the context IDs of any price adjustments and of the campaigns that influenced the final price. 
+    attr_accessor :context_ids
 
     # Price of the item.
     attr_accessor :price
@@ -30,15 +30,23 @@ module TalonOne
 
     attr_accessor :target
 
+    # The date and time when the historical price ID was excluded.
+    attr_accessor :excluded_at
+
+    # The reason for excluding this historical price ID.
+    attr_accessor :exclusion_reason
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'observed_at' => :'observedAt',
-        :'context_id' => :'contextId',
+        :'context_ids' => :'contextIds',
         :'price' => :'price',
         :'metadata' => :'metadata',
-        :'target' => :'target'
+        :'target' => :'target',
+        :'excluded_at' => :'excludedAt',
+        :'exclusion_reason' => :'exclusionReason'
       }
     end
 
@@ -47,10 +55,12 @@ module TalonOne
       {
         :'id' => :'Integer',
         :'observed_at' => :'DateTime',
-        :'context_id' => :'String',
+        :'context_ids' => :'Array<String>',
         :'price' => :'Float',
         :'metadata' => :'BestPriorPriceMetadata',
-        :'target' => :'Object'
+        :'target' => :'Object',
+        :'excluded_at' => :'DateTime',
+        :'exclusion_reason' => :'String'
       }
     end
 
@@ -83,8 +93,10 @@ module TalonOne
         self.observed_at = attributes[:'observed_at']
       end
 
-      if attributes.key?(:'context_id')
-        self.context_id = attributes[:'context_id']
+      if attributes.key?(:'context_ids')
+        if (value = attributes[:'context_ids']).is_a?(Array)
+          self.context_ids = value
+        end
       end
 
       if attributes.key?(:'price')
@@ -97,6 +109,14 @@ module TalonOne
 
       if attributes.key?(:'target')
         self.target = attributes[:'target']
+      end
+
+      if attributes.key?(:'excluded_at')
+        self.excluded_at = attributes[:'excluded_at']
+      end
+
+      if attributes.key?(:'exclusion_reason')
+        self.exclusion_reason = attributes[:'exclusion_reason']
       end
     end
 
@@ -112,8 +132,8 @@ module TalonOne
         invalid_properties.push('invalid value for "observed_at", observed_at cannot be nil.')
       end
 
-      if @context_id.nil?
-        invalid_properties.push('invalid value for "context_id", context_id cannot be nil.')
+      if @context_ids.nil?
+        invalid_properties.push('invalid value for "context_ids", context_ids cannot be nil.')
       end
 
       if @price.nil?
@@ -136,7 +156,7 @@ module TalonOne
     def valid?
       return false if @id.nil?
       return false if @observed_at.nil?
-      return false if @context_id.nil?
+      return false if @context_ids.nil?
       return false if @price.nil?
       return false if @metadata.nil?
       return false if @target.nil?
@@ -150,10 +170,12 @@ module TalonOne
       self.class == o.class &&
           id == o.id &&
           observed_at == o.observed_at &&
-          context_id == o.context_id &&
+          context_ids == o.context_ids &&
           price == o.price &&
           metadata == o.metadata &&
-          target == o.target
+          target == o.target &&
+          excluded_at == o.excluded_at &&
+          exclusion_reason == o.exclusion_reason
     end
 
     # @see the `==` method
@@ -165,7 +187,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, observed_at, context_id, price, metadata, target].hash
+      [id, observed_at, context_ids, price, metadata, target, excluded_at, exclusion_reason].hash
     end
 
     # Builds the object from hash

@@ -35,6 +35,9 @@ module TalonOne
     # The number of new coupon codes to generate for the campaign. Must be at least 1.
     attr_accessor :number_of_coupons
 
+    # The batch ID that all coupons created by the request will bear. If omitted, a batch ID is generated automatically.
+    attr_accessor :batch_id
+
     # **DEPRECATED** To create more than 20,000 coupons in one request, use [Create coupons asynchronously](https://docs.talon.one/management-api#tag/Coupons/operation/createCouponsAsync) endpoint. 
     attr_accessor :unique_prefix
 
@@ -56,6 +59,12 @@ module TalonOne
     # An indication of whether the coupon is implicitly reserved for all customers.
     attr_accessor :implicitly_reserved
 
+    # The identifier of the support request to link to the coupon creation. The request must exist and not yet be processed.
+    attr_accessor :support_request_id
+
+    # A note recorded when the linked support request is approved or rejected. Applied when `supportRequestId` is provided.
+    attr_accessor :support_request_note
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -66,13 +75,16 @@ module TalonOne
         :'expiry_date' => :'expiryDate',
         :'limits' => :'limits',
         :'number_of_coupons' => :'numberOfCoupons',
+        :'batch_id' => :'batchId',
         :'unique_prefix' => :'uniquePrefix',
         :'attributes' => :'attributes',
         :'recipient_integration_id' => :'recipientIntegrationId',
         :'valid_characters' => :'validCharacters',
         :'coupon_pattern' => :'couponPattern',
         :'is_reservation_mandatory' => :'isReservationMandatory',
-        :'implicitly_reserved' => :'implicitlyReserved'
+        :'implicitly_reserved' => :'implicitlyReserved',
+        :'support_request_id' => :'supportRequestId',
+        :'support_request_note' => :'supportRequestNote'
       }
     end
 
@@ -86,13 +98,16 @@ module TalonOne
         :'expiry_date' => :'DateTime',
         :'limits' => :'Array<LimitConfig>',
         :'number_of_coupons' => :'Integer',
+        :'batch_id' => :'String',
         :'unique_prefix' => :'String',
         :'attributes' => :'Object',
         :'recipient_integration_id' => :'String',
         :'valid_characters' => :'Array<String>',
         :'coupon_pattern' => :'String',
         :'is_reservation_mandatory' => :'Boolean',
-        :'implicitly_reserved' => :'Boolean'
+        :'implicitly_reserved' => :'Boolean',
+        :'support_request_id' => :'Integer',
+        :'support_request_note' => :'String'
       }
     end
 
@@ -147,6 +162,10 @@ module TalonOne
         self.number_of_coupons = attributes[:'number_of_coupons']
       end
 
+      if attributes.key?(:'batch_id')
+        self.batch_id = attributes[:'batch_id']
+      end
+
       if attributes.key?(:'unique_prefix')
         self.unique_prefix = attributes[:'unique_prefix']
       end
@@ -177,6 +196,14 @@ module TalonOne
 
       if attributes.key?(:'implicitly_reserved')
         self.implicitly_reserved = attributes[:'implicitly_reserved']
+      end
+
+      if attributes.key?(:'support_request_id')
+        self.support_request_id = attributes[:'support_request_id']
+      end
+
+      if attributes.key?(:'support_request_note')
+        self.support_request_note = attributes[:'support_request_note']
       end
     end
 
@@ -330,13 +357,16 @@ module TalonOne
           expiry_date == o.expiry_date &&
           limits == o.limits &&
           number_of_coupons == o.number_of_coupons &&
+          batch_id == o.batch_id &&
           unique_prefix == o.unique_prefix &&
           attributes == o.attributes &&
           recipient_integration_id == o.recipient_integration_id &&
           valid_characters == o.valid_characters &&
           coupon_pattern == o.coupon_pattern &&
           is_reservation_mandatory == o.is_reservation_mandatory &&
-          implicitly_reserved == o.implicitly_reserved
+          implicitly_reserved == o.implicitly_reserved &&
+          support_request_id == o.support_request_id &&
+          support_request_note == o.support_request_note
     end
 
     # @see the `==` method
@@ -348,7 +378,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, number_of_coupons, unique_prefix, attributes, recipient_integration_id, valid_characters, coupon_pattern, is_reservation_mandatory, implicitly_reserved].hash
+      [usage_limit, discount_limit, reservation_limit, start_date, expiry_date, limits, number_of_coupons, batch_id, unique_prefix, attributes, recipient_integration_id, valid_characters, coupon_pattern, is_reservation_mandatory, implicitly_reserved, support_request_id, support_request_note].hash
     end
 
     # Builds the object from hash

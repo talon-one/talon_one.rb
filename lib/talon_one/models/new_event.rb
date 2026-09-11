@@ -20,7 +20,7 @@ module TalonOne
     # The integration ID of the store. You choose this ID when you create a store.
     attr_accessor :store_integration_id
 
-    # A string representing the event. Must not be a reserved event name.
+    # The name of the event. Must be a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#custom-events), not a built-in event.
     attr_accessor :type
 
     # Arbitrary additional JSON data associated with the event.

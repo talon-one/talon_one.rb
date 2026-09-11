@@ -14,13 +14,13 @@ require 'date'
 
 module TalonOne
   class IntegrationCampaign
-    # Unique ID of Campaign.
-    attr_accessor :id
-
     # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
-    # A user-facing name for this campaign.
+    # Unique ID of Campaign.
+    attr_accessor :id
+
+    # The name of the campaign.
     attr_accessor :name
 
     # A detailed description of the campaign.
@@ -43,6 +43,15 @@ module TalonOne
 
     # The features enabled in this campaign.
     attr_accessor :features
+
+    # A list of rules containing customer-facing details of the rewards defined in the campaign.
+    attr_accessor :rules
+
+    # A list of store IDs linked to this campaign.
+    attr_accessor :linked_store_ids
+
+    # A list of audience IDs linked to this campaign.
+    attr_accessor :linked_audience_ids
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -69,8 +78,8 @@ module TalonOne
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
         :'application_id' => :'applicationId',
+        :'id' => :'id',
         :'name' => :'name',
         :'description' => :'description',
         :'start_time' => :'startTime',
@@ -78,15 +87,18 @@ module TalonOne
         :'attributes' => :'attributes',
         :'state' => :'state',
         :'tags' => :'tags',
-        :'features' => :'features'
+        :'features' => :'features',
+        :'rules' => :'rules',
+        :'linked_store_ids' => :'linkedStoreIds',
+        :'linked_audience_ids' => :'linkedAudienceIds'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'Integer',
         :'application_id' => :'Integer',
+        :'id' => :'Integer',
         :'name' => :'String',
         :'description' => :'String',
         :'start_time' => :'DateTime',
@@ -94,7 +106,10 @@ module TalonOne
         :'attributes' => :'Object',
         :'state' => :'String',
         :'tags' => :'Array<String>',
-        :'features' => :'Array<String>'
+        :'features' => :'Array<String>',
+        :'rules' => :'Array<RuleMetadata>',
+        :'linked_store_ids' => :'Array<Integer>',
+        :'linked_audience_ids' => :'Array<Integer>'
       }
     end
 
@@ -119,12 +134,12 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'name')
@@ -164,18 +179,36 @@ module TalonOne
           self.features = value
         end
       end
+
+      if attributes.key?(:'rules')
+        if (value = attributes[:'rules']).is_a?(Array)
+          self.rules = value
+        end
+      end
+
+      if attributes.key?(:'linked_store_ids')
+        if (value = attributes[:'linked_store_ids']).is_a?(Array)
+          self.linked_store_ids = value
+        end
+      end
+
+      if attributes.key?(:'linked_audience_ids')
+        if (value = attributes[:'linked_audience_ids']).is_a?(Array)
+          self.linked_audience_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
       if @application_id.nil?
         invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
+      end
+
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @name.nil?
@@ -198,14 +231,18 @@ module TalonOne
         invalid_properties.push('invalid value for "features", features cannot be nil.')
       end
 
+      if @rules.nil?
+        invalid_properties.push('invalid value for "rules", rules cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
       return false if @application_id.nil?
+      return false if @id.nil?
       return false if @name.nil?
       return false if @name.to_s.length < 1
       return false if @state.nil?
@@ -213,6 +250,7 @@ module TalonOne
       return false unless state_validator.valid?(@state)
       return false if @tags.nil?
       return false if @features.nil?
+      return false if @rules.nil?
       true
     end
 
@@ -245,8 +283,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
           application_id == o.application_id &&
+          id == o.id &&
           name == o.name &&
           description == o.description &&
           start_time == o.start_time &&
@@ -254,7 +292,10 @@ module TalonOne
           attributes == o.attributes &&
           state == o.state &&
           tags == o.tags &&
-          features == o.features
+          features == o.features &&
+          rules == o.rules &&
+          linked_store_ids == o.linked_store_ids &&
+          linked_audience_ids == o.linked_audience_ids
     end
 
     # @see the `==` method
@@ -266,7 +307,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, application_id, name, description, start_time, end_time, attributes, state, tags, features].hash
+      [application_id, id, name, description, start_time, end_time, attributes, state, tags, features, rules, linked_store_ids, linked_audience_ids].hash
     end
 
     # Builds the object from hash

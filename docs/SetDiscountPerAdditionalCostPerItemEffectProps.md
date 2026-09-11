@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The name / description of this discount | 
-**additional_cost_id** | **Integer** | The ID of the additional cost. | 
-**value** | **Float** | The total monetary value of the discount. | 
-**position** | **Float** | The index of the item in the cart item list containing the additional cost to be discounted. | 
-**sub_position** | **Float** | For cart items with &#x60;quantity&#x60; &gt; 1, the sub position indicates which item the discount applies to.  | [optional] 
-**additional_cost** | **String** | The name of the additional cost. | 
-**desired_value** | **Float** | Only with [partial discounts enabled](https://docs.talon.one/docs/product/campaigns/campaign-evaluation/#partial-discounts). Represents the monetary value of the discount to be applied to additional discount without considering budget limitations.  | [optional] 
+**name** | **String** | The description of this discount. &#x60;#number&#x60; is appended to the name. It is equal to the &#x60;position&#x60; property. | 
+**additional_cost_id** | **Integer** | The identifier of the additional cost to be discounted. | 
+**value** | **Float** | The monetary value of the effective discount applied to the item&#39;s additional cost. | 
+**position** | **Float** | The index of the item in the &#x60;cartItem&#x60; object containing the additional cost that this discount applies to. | 
+**sub_position** | **Float** | The index of the item unit in its line item. | [optional] 
+**additional_cost** | **String** | The API name of the additional cost to be discounted. | 
+**desired_value** | **Float** | _[(Partial discounts enabled only)](https://docs.talon.one/docs/product/applications/manage-general-settings#partial-discounts)_. The monetary value of the discount to be applied to the additional cost without considering budget limitations. | [optional] 
 
 ## Code Sample
 

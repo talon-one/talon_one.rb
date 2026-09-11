@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
 **batched_at** | **DateTime** | Timestamp when the batch was created. | [optional] 
-**event_type** | **String** |  | 
+**event_type** | [**IntegrationHubEventType**](IntegrationHubEventType.md) |  | 
 **data** | **Array&lt;Object&gt;** |  | 
 
 ## Code Sample

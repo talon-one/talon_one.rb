@@ -42,8 +42,14 @@ module TalonOne
     # The description of the achievement in the Campaign Manager.
     attr_accessor :description
 
-    # The ID of the campaign the achievement belongs to.
+    # This property is **deprecated**. Use `campaignIds` (Integration API) or `referencedByCampaigns` (Management API) instead. This field contains the first campaign ID from the related `campaignIds`, and is omitted when `campaignIds` is empty.
     attr_accessor :campaign_id
+
+    # The IDs of the campaigns that reference this achievement, in ascending order.
+    attr_accessor :campaign_ids
+
+    # The campaigns that reference this achievement, in ascending order of their `id`.
+    attr_accessor :referenced_by_campaigns
 
     # The required number of actions or the transactional milestone to complete the achievement.
     attr_accessor :target
@@ -98,6 +104,8 @@ module TalonOne
         :'title' => :'title',
         :'description' => :'description',
         :'campaign_id' => :'campaignId',
+        :'campaign_ids' => :'campaignIds',
+        :'referenced_by_campaigns' => :'referencedByCampaigns',
         :'target' => :'target',
         :'achievement_recurrence_policy' => :'achievementRecurrencePolicy',
         :'achievement_activation_policy' => :'achievementActivationPolicy',
@@ -120,6 +128,8 @@ module TalonOne
         :'title' => :'String',
         :'description' => :'String',
         :'campaign_id' => :'Integer',
+        :'campaign_ids' => :'Array<Integer>',
+        :'referenced_by_campaigns' => :'Array<CampaignReference>',
         :'target' => :'Float',
         :'achievement_recurrence_policy' => :'String',
         :'achievement_activation_policy' => :'String',
@@ -190,6 +200,18 @@ module TalonOne
         self.campaign_id = attributes[:'campaign_id']
       end
 
+      if attributes.key?(:'campaign_ids')
+        if (value = attributes[:'campaign_ids']).is_a?(Array)
+          self.campaign_ids = value
+        end
+      end
+
+      if attributes.key?(:'referenced_by_campaigns')
+        if (value = attributes[:'referenced_by_campaigns']).is_a?(Array)
+          self.referenced_by_campaigns = value
+        end
+      end
+
       if attributes.key?(:'target')
         self.target = attributes[:'target']
       end
@@ -256,8 +278,12 @@ module TalonOne
         invalid_properties.push('invalid value for "description", description cannot be nil.')
       end
 
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
+      if @campaign_ids.nil?
+        invalid_properties.push('invalid value for "campaign_ids", campaign_ids cannot be nil.')
+      end
+
+      if @referenced_by_campaigns.nil?
+        invalid_properties.push('invalid value for "referenced_by_campaigns", referenced_by_campaigns cannot be nil.')
       end
 
       if @achievement_recurrence_policy.nil?
@@ -285,7 +311,8 @@ module TalonOne
       return false if @name !~ Regexp.new(/^[a-zA-Z]\w+$/)
       return false if @title.nil?
       return false if @description.nil?
-      return false if @campaign_id.nil?
+      return false if @campaign_ids.nil?
+      return false if @referenced_by_campaigns.nil?
       return false if @achievement_recurrence_policy.nil?
       achievement_recurrence_policy_validator = EnumAttributeValidator.new('String', ["no_recurrence", "on_expiration", "on_completion"])
       return false unless achievement_recurrence_policy_validator.valid?(@achievement_recurrence_policy)
@@ -363,6 +390,8 @@ module TalonOne
           title == o.title &&
           description == o.description &&
           campaign_id == o.campaign_id &&
+          campaign_ids == o.campaign_ids &&
+          referenced_by_campaigns == o.referenced_by_campaigns &&
           target == o.target &&
           achievement_recurrence_policy == o.achievement_recurrence_policy &&
           achievement_activation_policy == o.achievement_activation_policy &&
@@ -380,7 +409,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, progress, start_date, completion_date, end_date, achievement_id, name, title, description, campaign_id, target, achievement_recurrence_policy, achievement_activation_policy, achievement_fixed_start_date, achievement_end_date, achievement_allow_rollback_after_completion].hash
+      [status, progress, start_date, completion_date, end_date, achievement_id, name, title, description, campaign_id, campaign_ids, referenced_by_campaigns, target, achievement_recurrence_policy, achievement_activation_policy, achievement_fixed_start_date, achievement_end_date, achievement_allow_rollback_after_completion].hash
     end
 
     # Builds the object from hash

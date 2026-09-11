@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **name** | **String** | The internal name of the achievement used in API requests.  | 
 **title** | **String** | The display name of the achievement in the Campaign Manager. | 
 **description** | **String** | The description of the achievement in the Campaign Manager. | 
-**campaign_id** | **Integer** | The ID of the campaign the achievement belongs to. | 
+**campaign_id** | **Integer** | This property is **deprecated**. Use &#x60;campaignIds&#x60; (Integration API) or &#x60;referencedByCampaigns&#x60; (Management API) instead. This field contains the first campaign ID from the related &#x60;campaignIds&#x60;, and is omitted when &#x60;campaignIds&#x60; is empty. | [optional] 
+**campaign_ids** | **Array&lt;Integer&gt;** | The IDs of the campaigns that reference this achievement, in ascending order. | 
+**referenced_by_campaigns** | [**Array&lt;CampaignReference&gt;**](CampaignReference.md) | The campaigns that reference this achievement, in ascending order of their &#x60;id&#x60;. | 
 **target** | **Float** | The required number of actions or the transactional milestone to complete the achievement. | [optional] 
 **achievement_recurrence_policy** | **String** | The policy that determines if and how the achievement recurs. - &#x60;no_recurrence&#x60;: The achievement can be completed only once. - &#x60;on_expiration&#x60;: The achievement resets after it expires and becomes available again. - &#x60;on_completion&#x60;: When the customer progress status reaches &#x60;completed&#x60;, the achievement resets and becomes available again.  | 
 **achievement_activation_policy** | **String** | The policy that determines how the achievement starts, ends, or resets. - &#x60;user_action&#x60;: The achievement ends or resets relative to when the customer started the achievement. - &#x60;fixed_schedule&#x60;: The achievement starts, ends, or resets for all customers following a fixed schedule.  | 
@@ -36,6 +38,8 @@ instance = TalonOne::AchievementProgressWithDefinition.new(status: completed,
                                  title: 50% off on 50th purchase.,
                                  description: 50% off for every 50th purchase in a year.,
                                  campaign_id: 3,
+                                 campaign_ids: [1, 14, 27],
+                                 referenced_by_campaigns: null,
                                  target: 10.0,
                                  achievement_recurrence_policy: no_recurrence,
                                  achievement_activation_policy: fixed_schedule,

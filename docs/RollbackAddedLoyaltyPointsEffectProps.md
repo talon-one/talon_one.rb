@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**program_id** | **Integer** | The ID of the loyalty program where the points were originally added. | 
-**sub_ledger_id** | **String** | The ID of the subledger within the loyalty program where these points were originally added. | 
+**program_id** | **Integer** | The ID of the loyalty program where these points were rolled back. | 
+**sub_ledger_id** | **String** | The ID of the subledger within the loyalty program where these points were rolled back. | 
 **value** | **Float** | The amount of points that were rolled back. | 
-**recipient_integration_id** | **String** | The user for whom these points were originally added. | 
-**transaction_uuid** | **String** | The identifier of &#39;deduction&#39; entry added to the ledger as the &#x60;addLoyaltyPoints&#x60; effect is rolled back. | 
-**cart_item_position** | **Float** | The index of the item in the cart items for which the loyalty points were rolled back. | [optional] 
-**cart_item_sub_position** | **Float** | For cart items with &#x60;quantity&#x60; &gt; 1, the sub-position indicates to which item the loyalty points were rolled back.  | [optional] 
+**recipient_integration_id** | **String** | The user for whom these points were rolled back. | 
+**transaction_uuid** | **String** | The identifier of this loyalty point transaction. | 
+**cart_item_position** | **Float** | (_Add points per cart item_ only.) The index of the item in the &#x60;cartItem&#x60; object for which these points were rolled back. | [optional] 
+**cart_item_sub_position** | **Float** | (_Add points per cart item_ ) The index of the item unit in its line item. | [optional] 
 **card_identifier** | **String** | The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;.  | [optional] 
 
 ## Code Sample

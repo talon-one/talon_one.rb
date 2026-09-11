@@ -23,6 +23,9 @@ module TalonOne
     # The human-friendly display name for this audience.
     attr_accessor :name
 
+    # A list of the IDs of the Applications that are connected to this audience.
+    attr_accessor :subscribed_applications_ids
+
     # The ID of this audience in the third-party integration.
     attr_accessor :integration_id
 
@@ -57,6 +60,7 @@ module TalonOne
         :'id' => :'id',
         :'created' => :'created',
         :'name' => :'name',
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds',
         :'integration_id' => :'integrationId',
         :'status' => :'status'
       }
@@ -68,6 +72,7 @@ module TalonOne
         :'id' => :'Integer',
         :'created' => :'DateTime',
         :'name' => :'String',
+        :'subscribed_applications_ids' => :'Array<Integer>',
         :'integration_id' => :'String',
         :'status' => :'String'
       }
@@ -104,6 +109,12 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'subscribed_applications_ids')
+        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
+          self.subscribed_applications_ids = value
+        end
       end
 
       if attributes.key?(:'integration_id')
@@ -220,6 +231,7 @@ module TalonOne
           id == o.id &&
           created == o.created &&
           name == o.name &&
+          subscribed_applications_ids == o.subscribed_applications_ids &&
           integration_id == o.integration_id &&
           status == o.status
     end
@@ -233,7 +245,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, name, integration_id, status].hash
+      [id, created, name, subscribed_applications_ids, integration_id, status].hash
     end
 
     # Builds the object from hash

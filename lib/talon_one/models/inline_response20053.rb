@@ -14,11 +14,14 @@ require 'date'
 
 module TalonOne
   class InlineResponse20053
+    attr_accessor :has_more
+
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'has_more' => :'hasMore',
         :'data' => :'data'
       }
     end
@@ -26,7 +29,8 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<CouponFailureSummary>'
+        :'has_more' => :'Boolean',
+        :'data' => :'Array<AchievementV2>'
       }
     end
 
@@ -50,6 +54,10 @@ module TalonOne
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
+      end
 
       if attributes.key?(:'data')
         if (value = attributes[:'data']).is_a?(Array)
@@ -81,6 +89,7 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          has_more == o.has_more &&
           data == o.data
     end
 
@@ -93,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data].hash
+      [has_more, data].hash
     end
 
     # Builds the object from hash

@@ -19,11 +19,15 @@ module TalonOne
 
     attr_accessor :roles
 
+    # Support user limits for actions that require admin approval within the given application.
+    attr_accessor :thresholds
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'permission_sets' => :'permissionSets',
-        :'roles' => :'roles'
+        :'roles' => :'roles',
+        :'thresholds' => :'thresholds'
       }
     end
 
@@ -31,7 +35,8 @@ module TalonOne
     def self.openapi_types
       {
         :'permission_sets' => :'Array<RoleV2PermissionSet>',
-        :'roles' => :'RoleV2RolesGroup'
+        :'roles' => :'RoleV2RolesGroup',
+        :'thresholds' => :'Array<RolesV2Thresholds>'
       }
     end
 
@@ -65,6 +70,12 @@ module TalonOne
       if attributes.key?(:'roles')
         self.roles = attributes[:'roles']
       end
+
+      if attributes.key?(:'thresholds')
+        if (value = attributes[:'thresholds']).is_a?(Array)
+          self.thresholds = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -86,7 +97,8 @@ module TalonOne
       return true if self.equal?(o)
       self.class == o.class &&
           permission_sets == o.permission_sets &&
-          roles == o.roles
+          roles == o.roles &&
+          thresholds == o.thresholds
     end
 
     # @see the `==` method
@@ -98,7 +110,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [permission_sets, roles].hash
+      [permission_sets, roles, thresholds].hash
     end
 
     # Builds the object from hash

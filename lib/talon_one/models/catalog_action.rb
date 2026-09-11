@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Definition of all the properties that are needed for a single catalog sync action.
+  # Definition of all the properties that are needed for a single catalog sync action. The `type` field selects the concrete action variant.
   class CatalogAction
     # The type of sync action.
     attr_accessor :type
@@ -64,6 +64,11 @@ module TalonOne
       ])
     end
 
+    # discriminator's property name in OpenAPI v3
+    def self.openapi_discriminator_name
+      :'type'
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
@@ -92,24 +97,14 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @payload.nil?
-        invalid_properties.push('invalid value for "payload", payload cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["ADD", "PATCH", "PATCH_MANY", "REMOVE", "REMOVE_MANY", "ADD_PRICE_ADJUSTMENT"])
       return false unless type_validator.valid?(@type)
-      return false if @payload.nil?
       true
     end
 

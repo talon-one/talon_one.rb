@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application_id** | **Integer** | ID of application the flow is registered for. | [optional] 
-**event_type** | **String** | The event type we want to register a flow for. | 
+**application_id** | **Integer** | ID of the application the flow is registered for. | [optional] 
+**loyalty_program_id** | **Integer** | ID of the loyalty program the flow is registered for. | [optional] 
+**event_type** | [**IntegrationHubEventType**](IntegrationHubEventType.md) |  | 
 **integration_hub_flow_url** | **String** | The URL of the integration hub flow that we want to trigger for the event. | 
 
 ## Code Sample
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::IntegrationHubFlow.new(application_id: 54,
+                                 loyalty_program_id: 12,
                                  event_type: null,
                                  integration_hub_flow_url: null)
 ```

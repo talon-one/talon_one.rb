@@ -1,0 +1,35 @@
+# TalonOne::AddLoyaltyPointsSupport
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**points** | **Float** | Amount of loyalty points. | 
+**name** | **String** | Name / reason for the point addition. | [optional] 
+**validity_duration** | **String** | The time format is either: - &#x60;unlimited&#x60; or, - an **integer** followed by one letter indicating the time unit.  Examples: &#x60;unlimited&#x60;, &#x60;30s&#x60;, &#x60;40m&#x60;, &#x60;1h&#x60;, &#x60;5D&#x60;, &#x60;7W&#x60;, &#x60;10M&#x60;, &#x60;15Y&#x60;.  Available units:  - &#x60;s&#x60;: seconds - &#x60;m&#x60;: minutes - &#x60;h&#x60;: hours - &#x60;D&#x60;: days - &#x60;W&#x60;: weeks - &#x60;M&#x60;: months - &#x60;Y&#x60;: years  You can round certain units up or down: - &#x60;_D&#x60; for rounding down days only. Signifies the start of the day. - &#x60;_U&#x60; for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year.  If passed, &#x60;validUntil&#x60; should be omitted.  | [optional] 
+**valid_until** | **DateTime** | Date and time when points should expire. The value should be provided in RFC 3339 format. If passed, &#x60;validityDuration&#x60; should be omitted.  | [optional] 
+**pending_duration** | **String** | The amount of time before the points are considered valid.  The time format is either: - &#x60;immediate&#x60; or, - &#x60;on_action&#x60; or, - an **integer** followed by one letter indicating the time unit.  Examples: &#x60;immediate&#x60;, &#x60;30s&#x60;, &#x60;40m&#x60;, &#x60;1h&#x60;, &#x60;5D&#x60;, &#x60;7W&#x60;, &#x60;10M&#x60;, &#x60;15Y&#x60;, &#x60;on_action&#x60;.  Available units:  - &#x60;s&#x60;: seconds - &#x60;m&#x60;: minutes - &#x60;h&#x60;: hours - &#x60;D&#x60;: days - &#x60;W&#x60;: weeks - &#x60;M&#x60;: months - &#x60;Y&#x60;: years  You can round certain units up or down: - &#x60;_D&#x60; for rounding down days only. Signifies the start of the day. - &#x60;_U&#x60; for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year.  | [optional] 
+**pending_until** | **DateTime** | Date and time after the points are considered valid. The value should be provided in RFC 3339 format. If passed, &#x60;pendingDuration&#x60; should be omitted.  | [optional] 
+**subledger_id** | **String** | ID of the subledger the points are added to. If there is no existing subledger with this ID, the subledger is created automatically. | [optional] 
+**application_id** | **Integer** | ID of the Application that is connected to the loyalty program. It is displayed in your Talon.One deployment URL. | [optional] 
+**support_request_id** | **Integer** | ID of the support request to approve. When provided by an admin, the points are added on behalf of the support user who created the request. | [optional] 
+**processing_note** | **String** | Note from the admin approving the support request. Stored as the processing note on the support request record. This is only used when a supportRequestId is passed. | [optional] 
+
+## Code Sample
+
+```ruby
+require 'TalonOne'
+
+instance = TalonOne::AddLoyaltyPointsSupport.new(points: 300.0,
+                                 name: Compensation,
+                                 validity_duration: 5D,
+                                 valid_until: 2021-07-20T22:00Z,
+                                 pending_duration: 12h,
+                                 pending_until: 2021-07-20T22:00Z,
+                                 subledger_id: sub-123,
+                                 application_id: 322,
+                                 support_request_id: 42,
+                                 processing_note: Approved after manual review.)
+```
+
+

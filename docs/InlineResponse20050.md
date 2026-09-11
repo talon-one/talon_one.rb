@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**Array&lt;SummaryCampaignStoreBudget&gt;**](SummaryCampaignStoreBudget.md) |  | [optional] 
+**data** | [**Array&lt;ListCampaignStoreBudgets&gt;**](ListCampaignStoreBudgets.md) |  | [optional] 
 
 ## Code Sample
 

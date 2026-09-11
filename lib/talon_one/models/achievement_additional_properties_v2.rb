@@ -20,10 +20,12 @@ module TalonOne
     # Name of the user that created the achievement.  **Note**: This is not available if the user has been deleted. 
     attr_accessor :created_by
 
+    attr_accessor :period_end_override
+
     # Indicates if a customer has made progress in the achievement.
     attr_accessor :has_progress
 
-    # The status of the achievement.
+    # The status of the achievement.                                                                                               - `active`: The achievement is available to customers. - `scheduled`: The achievement has a `fixedStartDate` set in the future. - `expired`: The achievement's `endDate` is in the past. 
     attr_accessor :status
 
     class EnumAttributeValidator
@@ -53,6 +55,7 @@ module TalonOne
       {
         :'user_id' => :'userId',
         :'created_by' => :'createdBy',
+        :'period_end_override' => :'periodEndOverride',
         :'has_progress' => :'hasProgress',
         :'status' => :'status'
       }
@@ -63,6 +66,7 @@ module TalonOne
       {
         :'user_id' => :'Integer',
         :'created_by' => :'String',
+        :'period_end_override' => :'TimePoint',
         :'has_progress' => :'Boolean',
         :'status' => :'String'
       }
@@ -97,6 +101,10 @@ module TalonOne
         self.created_by = attributes[:'created_by']
       end
 
+      if attributes.key?(:'period_end_override')
+        self.period_end_override = attributes[:'period_end_override']
+      end
+
       if attributes.key?(:'has_progress')
         self.has_progress = attributes[:'has_progress']
       end
@@ -121,7 +129,7 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @user_id.nil?
-      status_validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
+      status_validator = EnumAttributeValidator.new('String', ["active", "scheduled", "expired"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -129,7 +137,7 @@ module TalonOne
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["inprogress", "expired", "not_started", "completed"])
+      validator = EnumAttributeValidator.new('String', ["active", "scheduled", "expired"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -143,6 +151,7 @@ module TalonOne
       self.class == o.class &&
           user_id == o.user_id &&
           created_by == o.created_by &&
+          period_end_override == o.period_end_override &&
           has_progress == o.has_progress &&
           status == o.status
     end
@@ -156,7 +165,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user_id, created_by, has_progress, status].hash
+      [user_id, created_by, period_end_override, has_progress, status].hash
     end
 
     # Builds the object from hash

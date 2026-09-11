@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **default_discount_additional_cost_per_item_scope** | **String** | The default scope to apply &#x60;setDiscountPerItem&#x60; effects on if no scope was provided with the effect.  | [optional] 
 **key** | **String** | Hex key for HMAC-signing API calls as coming from this application (16 hex digits). | [optional] 
 **enable_campaign_state_management** | **Boolean** | Indicates whether the campaign staging and revisions feature is enabled for the Application.  **Important:** After this feature is enabled, it cannot be disabled.  | [optional] 
+**best_prior_price_settings** | [**BestPriorPriceSettings**](BestPriorPriceSettings.md) |  | [optional] 
 
 ## Code Sample
 
@@ -41,7 +42,8 @@ instance = TalonOne::NewApplication.new(name: My Application,
                                  enable_partial_discounts: false,
                                  default_discount_additional_cost_per_item_scope: null,
                                  key: null,
-                                 enable_campaign_state_management: false)
+                                 enable_campaign_state_management: false,
+                                 best_prior_price_settings: null)
 ```
 
 

@@ -13,15 +13,15 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # The properties specific to the \"awardGiveaway\" effect when the session is not closed yet. This effect replaces \"awardGiveaway\" only when updating a session with any state other than \"closed\". This is to ensure no giveaway codes are leaked when they are still not guaranteed to be awarded.
+  # The equivalent of the `awardGiveaway` effect but returned when updating a session with any state other than `closed`. This ensures no giveaway codes are leaked when they are still not guaranteed to be awarded.  For more information about session states, see [Manage the session's state](https://docs.talon.one/docs/dev/concepts/entities/customer-sessions#manage-the-sessions-state).
   class WillAwardGiveawayEffectProps
-    # The ID of the giveaways pool the code will be taken from.
+    # The internal ID of the giveaway pool.
     attr_accessor :pool_id
 
-    # The name of the giveaways pool the code will be taken from.
+    # The name of the giveaway pool.
     attr_accessor :pool_name
 
-    # The integration ID of the profile that will be awarded the giveaway.
+    # The integration ID of the customer that receives the giveaway.
     attr_accessor :recipient_integration_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

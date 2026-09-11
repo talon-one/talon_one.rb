@@ -23,8 +23,8 @@ module TalonOne
     # The date and time when the price was observed.
     attr_accessor :observed_at
 
-    # The context ID of the context active at the time of observation. 
-    attr_accessor :context_id
+    # The identifiers of the relevant context at the time the price was observed. Includes the context IDs of any price adjustments and of the campaigns that influenced the final price. 
+    attr_accessor :context_ids
 
     # Price of the item.
     attr_accessor :price
@@ -39,7 +39,7 @@ module TalonOne
         :'id' => :'id',
         :'sku' => :'sku',
         :'observed_at' => :'observedAt',
-        :'context_id' => :'contextId',
+        :'context_ids' => :'contextIds',
         :'price' => :'price',
         :'metadata' => :'metadata',
         :'target' => :'target'
@@ -52,7 +52,7 @@ module TalonOne
         :'id' => :'Integer',
         :'sku' => :'String',
         :'observed_at' => :'DateTime',
-        :'context_id' => :'String',
+        :'context_ids' => :'Array<String>',
         :'price' => :'Float',
         :'metadata' => :'BestPriorPriceMetadata',
         :'target' => :'Object'
@@ -92,8 +92,10 @@ module TalonOne
         self.observed_at = attributes[:'observed_at']
       end
 
-      if attributes.key?(:'context_id')
-        self.context_id = attributes[:'context_id']
+      if attributes.key?(:'context_ids')
+        if (value = attributes[:'context_ids']).is_a?(Array)
+          self.context_ids = value
+        end
       end
 
       if attributes.key?(:'price')
@@ -125,8 +127,8 @@ module TalonOne
         invalid_properties.push('invalid value for "observed_at", observed_at cannot be nil.')
       end
 
-      if @context_id.nil?
-        invalid_properties.push('invalid value for "context_id", context_id cannot be nil.')
+      if @context_ids.nil?
+        invalid_properties.push('invalid value for "context_ids", context_ids cannot be nil.')
       end
 
       if @price.nil?
@@ -150,7 +152,7 @@ module TalonOne
       return false if @id.nil?
       return false if @sku.nil?
       return false if @observed_at.nil?
-      return false if @context_id.nil?
+      return false if @context_ids.nil?
       return false if @price.nil?
       return false if @metadata.nil?
       return false if @target.nil?
@@ -165,7 +167,7 @@ module TalonOne
           id == o.id &&
           sku == o.sku &&
           observed_at == o.observed_at &&
-          context_id == o.context_id &&
+          context_ids == o.context_ids &&
           price == o.price &&
           metadata == o.metadata &&
           target == o.target
@@ -180,7 +182,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, sku, observed_at, context_id, price, metadata, target].hash
+      [id, sku, observed_at, context_ids, price, metadata, target].hash
     end
 
     # Builds the object from hash

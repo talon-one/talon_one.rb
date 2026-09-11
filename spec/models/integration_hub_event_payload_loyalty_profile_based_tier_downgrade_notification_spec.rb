@@ -32,6 +32,12 @@ describe 'IntegrationHubEventPayloadLoyaltyProfileBasedTierDowngradeNotification
       expect(@instance).to be_instance_of(TalonOne::IntegrationHubEventPayloadLoyaltyProfileBasedTierDowngradeNotification)
     end
   end
+  describe 'test attribute "event_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "profile_integration_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -39,6 +45,12 @@ describe 'IntegrationHubEventPayloadLoyaltyProfileBasedTierDowngradeNotification
   end
 
   describe 'test attribute "loyalty_program_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "loyalty_program_name"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

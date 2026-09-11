@@ -26,13 +26,43 @@ module TalonOne
     # The ID of the campaign that references this achievement.
     attr_accessor :campaign_id
 
+    # The name of the campaign that references this achievement.
+    attr_accessor :campaign_name
+
+    # The state of the campaign that references this achievement.
+    attr_accessor :campaign_state
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'achievement_id' => :'achievementId',
         :'application_id' => :'applicationId',
         :'application_name' => :'applicationName',
-        :'campaign_id' => :'campaignId'
+        :'campaign_id' => :'campaignId',
+        :'campaign_name' => :'campaignName',
+        :'campaign_state' => :'campaignState'
       }
     end
 
@@ -42,7 +72,9 @@ module TalonOne
         :'achievement_id' => :'Integer',
         :'application_id' => :'Integer',
         :'application_name' => :'String',
-        :'campaign_id' => :'Integer'
+        :'campaign_id' => :'Integer',
+        :'campaign_name' => :'String',
+        :'campaign_state' => :'String'
       }
     end
 
@@ -82,6 +114,14 @@ module TalonOne
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
       end
+
+      if attributes.key?(:'campaign_name')
+        self.campaign_name = attributes[:'campaign_name']
+      end
+
+      if attributes.key?(:'campaign_state')
+        self.campaign_state = attributes[:'campaign_state']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,6 +144,14 @@ module TalonOne
         invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
       end
 
+      if @campaign_name.nil?
+        invalid_properties.push('invalid value for "campaign_name", campaign_name cannot be nil.')
+      end
+
+      if @campaign_state.nil?
+        invalid_properties.push('invalid value for "campaign_state", campaign_state cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -114,7 +162,21 @@ module TalonOne
       return false if @application_id.nil?
       return false if @application_name.nil?
       return false if @campaign_id.nil?
+      return false if @campaign_name.nil?
+      return false if @campaign_state.nil?
+      campaign_state_validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
+      return false unless campaign_state_validator.valid?(@campaign_state)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_state Object to be assigned
+    def campaign_state=(campaign_state)
+      validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
+      unless validator.valid?(campaign_state)
+        fail ArgumentError, "invalid value for \"campaign_state\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_state = campaign_state
     end
 
     # Checks equality by comparing each attribute.
@@ -125,7 +187,9 @@ module TalonOne
           achievement_id == o.achievement_id &&
           application_id == o.application_id &&
           application_name == o.application_name &&
-          campaign_id == o.campaign_id
+          campaign_id == o.campaign_id &&
+          campaign_name == o.campaign_name &&
+          campaign_state == o.campaign_state
     end
 
     # @see the `==` method
@@ -137,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [achievement_id, application_id, application_name, campaign_id].hash
+      [achievement_id, application_id, application_name, campaign_id, campaign_name, campaign_state].hash
     end
 
     # Builds the object from hash

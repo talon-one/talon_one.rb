@@ -23,28 +23,6 @@ module TalonOne
 
     attr_accessor :data
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,7 +38,7 @@ module TalonOne
       {
         :'total_result_size' => :'Integer',
         :'batched_at' => :'DateTime',
-        :'event_type' => :'String',
+        :'event_type' => :'IntegrationHubEventType',
         :'data' => :'Array<Object>'
       }
     end
@@ -129,20 +107,8 @@ module TalonOne
     def valid?
       return false if @total_result_size.nil?
       return false if @event_type.nil?
-      event_type_validator = EnumAttributeValidator.new('String', ["LoyaltyPointsChanged", "LoyaltyTierDowngrade", "LoyaltyTierUpgrade", "CouponCreated", "CouponUpdated", "CouponDeleted"])
-      return false unless event_type_validator.valid?(@event_type)
       return false if @data.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] event_type Object to be assigned
-    def event_type=(event_type)
-      validator = EnumAttributeValidator.new('String', ["LoyaltyPointsChanged", "LoyaltyTierDowngrade", "LoyaltyTierUpgrade", "CouponCreated", "CouponUpdated", "CouponDeleted"])
-      unless validator.valid?(event_type)
-        fail ArgumentError, "invalid value for \"event_type\", must be one of #{validator.allowable_values}."
-      end
-      @event_type = event_type
     end
 
     # Checks equality by comparing each attribute.

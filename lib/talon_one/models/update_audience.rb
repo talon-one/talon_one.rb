@@ -17,17 +17,22 @@ module TalonOne
     # The human-friendly display name for this audience.
     attr_accessor :name
 
+    # A list of the IDs of the Applications that are connected to this audience.
+    attr_accessor :subscribed_applications_ids
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name'
+        :'name' => :'name',
+        :'subscribed_applications_ids' => :'subscribedApplicationsIds'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String'
+        :'name' => :'String',
+        :'subscribed_applications_ids' => :'Array<Integer>'
       }
     end
 
@@ -54,6 +59,12 @@ module TalonOne
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'subscribed_applications_ids')
+        if (value = attributes[:'subscribed_applications_ids']).is_a?(Array)
+          self.subscribed_applications_ids = value
+        end
       end
     end
 
@@ -99,7 +110,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name
+          name == o.name &&
+          subscribed_applications_ids == o.subscribed_applications_ids
     end
 
     # @see the `==` method
@@ -111,7 +123,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name].hash
+      [name, subscribed_applications_ids].hash
     end
 
     # Builds the object from hash

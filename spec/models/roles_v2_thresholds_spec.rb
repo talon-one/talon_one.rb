@@ -32,6 +32,12 @@ describe 'RolesV2Thresholds' do
       expect(@instance).to be_instance_of(TalonOne::RolesV2Thresholds)
     end
   end
+  describe 'test attribute "loyalty_program_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "loyalty_points_limit"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

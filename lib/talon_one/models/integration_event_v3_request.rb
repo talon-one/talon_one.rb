@@ -23,20 +23,20 @@ module TalonOne
     # When using the `dry` query parameter, use this property to list the campaign to be evaluated by the Rule Engine.  These campaigns will be evaluated, even if they are disabled, allowing you to test specific campaigns before activating them. 
     attr_accessor :evaluable_campaign_ids
 
-    # The unique ID of the current event. Only one event with this ID could be activated, duplicated events are forbidden. 
-    attr_accessor :integration_id
-
-    # A string representing the event name. Must not be a reserved event name. You create this value when you [create an attribute](https://docs.talon.one/docs/dev/concepts/entities/events#creating-a-custom-event) of type `event` in the Campaign Manager. 
+    # The name of the event. Must be a [custom event](https://docs.talon.one/docs/dev/concepts/entities/events#custom-events), not a built-in event.
     attr_accessor :type
 
     # Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-a-custom-attribute).
     attr_accessor :attributes
 
-    # The ID of the session that happened in the past.
+    # The unique ID of the event. Only one event with this ID can be registered. 
+    attr_accessor :integration_id
+
+    # The ID of the session to reference. The session must be in `closed` state. Otherwise, the API call will fail.
     attr_accessor :connected_session_id
 
-    # The unique identifier of the event that happened in the past.
-    attr_accessor :previous_event_id
+    # The referral code submitted with the event. The endpoint does not validate the code, and submitting a code does not redeem it. Use the \"Referral code is valid\" condition in the Rule Builder to validate and redeem the code, or \"Referral code is valid (without redemption)\" to validate without redeeming. 
+    attr_accessor :referral_code
 
     # Identifiers of the loyalty cards used during this event.
     attr_accessor :loyalty_cards
@@ -72,11 +72,11 @@ module TalonOne
         :'profile_id' => :'profileId',
         :'store_integration_id' => :'storeIntegrationId',
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
-        :'integration_id' => :'integrationId',
         :'type' => :'type',
         :'attributes' => :'attributes',
-        :'connected_session_id' => :'connectedSessionID',
-        :'previous_event_id' => :'previousEventID',
+        :'integration_id' => :'integrationId',
+        :'connected_session_id' => :'connectedSessionId',
+        :'referral_code' => :'referralCode',
         :'loyalty_cards' => :'loyaltyCards',
         :'response_content' => :'responseContent'
       }
@@ -88,11 +88,11 @@ module TalonOne
         :'profile_id' => :'String',
         :'store_integration_id' => :'String',
         :'evaluable_campaign_ids' => :'Array<Integer>',
-        :'integration_id' => :'String',
         :'type' => :'String',
         :'attributes' => :'Object',
+        :'integration_id' => :'String',
         :'connected_session_id' => :'String',
-        :'previous_event_id' => :'String',
+        :'referral_code' => :'String',
         :'loyalty_cards' => :'Array<String>',
         :'response_content' => :'Array<String>'
       }
@@ -133,10 +133,6 @@ module TalonOne
         end
       end
 
-      if attributes.key?(:'integration_id')
-        self.integration_id = attributes[:'integration_id']
-      end
-
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
@@ -145,12 +141,16 @@ module TalonOne
         self.attributes = attributes[:'attributes']
       end
 
+      if attributes.key?(:'integration_id')
+        self.integration_id = attributes[:'integration_id']
+      end
+
       if attributes.key?(:'connected_session_id')
         self.connected_session_id = attributes[:'connected_session_id']
       end
 
-      if attributes.key?(:'previous_event_id')
-        self.previous_event_id = attributes[:'previous_event_id']
+      if attributes.key?(:'referral_code')
+        self.referral_code = attributes[:'referral_code']
       end
 
       if attributes.key?(:'loyalty_cards')
@@ -182,14 +182,6 @@ module TalonOne
         invalid_properties.push('invalid value for "store_integration_id", the character length must be great than or equal to 1.')
       end
 
-      if @integration_id.nil?
-        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
-      end
-
-      if @integration_id.to_s.length < 1
-        invalid_properties.push('invalid value for "integration_id", the character length must be great than or equal to 1.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -198,12 +190,20 @@ module TalonOne
         invalid_properties.push('invalid value for "type", the character length must be great than or equal to 1.')
       end
 
+      if @integration_id.nil?
+        invalid_properties.push('invalid value for "integration_id", integration_id cannot be nil.')
+      end
+
+      if @integration_id.to_s.length < 1
+        invalid_properties.push('invalid value for "integration_id", the character length must be great than or equal to 1.')
+      end
+
       if !@connected_session_id.nil? && @connected_session_id.to_s.length < 1
         invalid_properties.push('invalid value for "connected_session_id", the character length must be great than or equal to 1.')
       end
 
-      if !@previous_event_id.nil? && @previous_event_id.to_s.length < 1
-        invalid_properties.push('invalid value for "previous_event_id", the character length must be great than or equal to 1.')
+      if !@referral_code.nil? && @referral_code.to_s.length > 100
+        invalid_properties.push('invalid value for "referral_code", the character length must be smaller than or equal to 100.')
       end
 
       invalid_properties
@@ -215,12 +215,12 @@ module TalonOne
       return false if @profile_id.nil?
       return false if !@store_integration_id.nil? && @store_integration_id.to_s.length > 1000
       return false if !@store_integration_id.nil? && @store_integration_id.to_s.length < 1
-      return false if @integration_id.nil?
-      return false if @integration_id.to_s.length < 1
       return false if @type.nil?
       return false if @type.to_s.length < 1
+      return false if @integration_id.nil?
+      return false if @integration_id.to_s.length < 1
       return false if !@connected_session_id.nil? && @connected_session_id.to_s.length < 1
-      return false if !@previous_event_id.nil? && @previous_event_id.to_s.length < 1
+      return false if !@referral_code.nil? && @referral_code.to_s.length > 100
       true
     end
 
@@ -239,20 +239,6 @@ module TalonOne
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] integration_id Value to be assigned
-    def integration_id=(integration_id)
-      if integration_id.nil?
-        fail ArgumentError, 'integration_id cannot be nil'
-      end
-
-      if integration_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "integration_id", the character length must be great than or equal to 1.'
-      end
-
-      @integration_id = integration_id
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] type Value to be assigned
     def type=(type)
       if type.nil?
@@ -267,6 +253,20 @@ module TalonOne
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] integration_id Value to be assigned
+    def integration_id=(integration_id)
+      if integration_id.nil?
+        fail ArgumentError, 'integration_id cannot be nil'
+      end
+
+      if integration_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "integration_id", the character length must be great than or equal to 1.'
+      end
+
+      @integration_id = integration_id
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] connected_session_id Value to be assigned
     def connected_session_id=(connected_session_id)
       if !connected_session_id.nil? && connected_session_id.to_s.length < 1
@@ -277,13 +277,13 @@ module TalonOne
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] previous_event_id Value to be assigned
-    def previous_event_id=(previous_event_id)
-      if !previous_event_id.nil? && previous_event_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "previous_event_id", the character length must be great than or equal to 1.'
+    # @param [Object] referral_code Value to be assigned
+    def referral_code=(referral_code)
+      if !referral_code.nil? && referral_code.to_s.length > 100
+        fail ArgumentError, 'invalid value for "referral_code", the character length must be smaller than or equal to 100.'
       end
 
-      @previous_event_id = previous_event_id
+      @referral_code = referral_code
     end
 
     # Checks equality by comparing each attribute.
@@ -294,11 +294,11 @@ module TalonOne
           profile_id == o.profile_id &&
           store_integration_id == o.store_integration_id &&
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
-          integration_id == o.integration_id &&
           type == o.type &&
           attributes == o.attributes &&
+          integration_id == o.integration_id &&
           connected_session_id == o.connected_session_id &&
-          previous_event_id == o.previous_event_id &&
+          referral_code == o.referral_code &&
           loyalty_cards == o.loyalty_cards &&
           response_content == o.response_content
     end
@@ -312,7 +312,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, integration_id, type, attributes, connected_session_id, previous_event_id, loyalty_cards, response_content].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, integration_id, connected_session_id, referral_code, loyalty_cards, response_content].hash
     end
 
     # Builds the object from hash

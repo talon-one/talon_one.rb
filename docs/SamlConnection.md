@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **assertion_consumer_service_url** | **String** | The location where the SAML assertion is sent with a HTTP POST. | 
+**certificate_expiry** | **DateTime** | The expiry date of the X.509 certificate. | [optional] 
 **account_id** | **Integer** | The ID of the account that owns this entity. | 
 **name** | **String** | ID of the SAML service. | 
 **enabled** | **Boolean** | Determines if this SAML connection active. | 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::SamlConnection.new(assertion_consumer_service_url: null,
+                                 certificate_expiry: 2021-07-20T21:59Z,
                                  account_id: 3885,
                                  name: null,
                                  enabled: null,

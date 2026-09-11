@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** | The name / description of this discount | 
-**value** | **Float** | The total monetary value of the discount. | 
-**scope** | **String** | The scope which the discount was applied on, can be one of (cartItems,additionalCosts,sessionTotal). | [optional] 
-**desired_value** | **Float** | The original value of the discount. | [optional] 
+**name** | **String** | The name or description of this discount. | 
+**value** | **Float** | The monetary value of the effective discount. | 
+**scope** | **String** | What the discount applies to. Possible values:  - &#x60;cartItems&#x60;: Discount on the price of the items. - &#x60;additionalCosts&#x60;: Discount on the [additional costs](https://docs.talon.one/docs/product/account/dev-tools/manage-additional-costs) of the items. - &#x60;sessionTotal&#x60;: Discount on the total value of the customer session.  **Note:** [Cascading discounts](https://docs.talon.one/docs/product/applications/manage-general-settings#cascading-discounts) must be enabled for this property to be returned. | [optional] 
+**desired_value** | **Float** | _(Partial discounts enabled only)_ The monetary value of the discount to be applied without considering budget limitations. | [optional] 
 
 ## Code Sample
 
