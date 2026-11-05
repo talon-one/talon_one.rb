@@ -120,17 +120,17 @@ begin
 
   # Parsing the returned effects list, please consult https://developers.talon.one/Integration-API/handling-effects-v2 for the full list of effects and their corresponding properties
   result.effects.each do |effect|
-    if effect.effect_type == 'setDiscount'
+    if effect[:effectType] == 'setDiscount'
       # Initiating right props instance according to the effect type
-      props = TalonOne::SetDiscountEffectProps.build_from_hash(effect.props)
+      props = TalonOne::SetDiscountEffectProps.build_from_hash(effect[:props])
 
       # Access the specific effect's properties
       puts "Set a discount '#{props.name}' of #{props.value}"
-    elsif effect.effect_type == 'rejectCoupon'
+    elsif effect[:effectType] == 'rejectCoupon'
       # Initiating right props instance according to the effect type
-      props = TalonOne::RejectCouponEffectProps.build_from_hash(effect.props)
+      props = TalonOne::RejectCouponEffectProps.build_from_hash(effect[:props])
 
-      # Work with AcceptCouponEffectProps' properties
+      # Work with RejectCouponEffectProps' properties
       # ...
     end
   end
