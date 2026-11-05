@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **attributes** | [**Object**](.md) | Arbitrary additional JSON properties associated with the event. They must be created in the Campaign Manager before setting them with this property. See [creating custom attributes](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#creating-a-custom-attribute). | [optional] 
 **response_content** | **Array&lt;String&gt;** | Extends the response with the chosen data entities. Use this property to get as much data back as needed from one request instead of sending extra requests to other endpoints.  | [optional] 
 **loyalty_cards** | **Array&lt;String&gt;** | Identifiers of the loyalty cards used during this event. | [optional] 
+**reward_integration_ids** | **Array&lt;String&gt;** | The integration IDs of the unlocked rewards that can be used in this event.  | [optional] 
 
 ## Code Sample
 
@@ -23,7 +24,8 @@ instance = TalonOne::IntegrationEventV2Request.new(profile_id: URNGV8294NV,
                                  type: pageViewed,
                                  attributes: {&quot;myAttribute&quot;:&quot;myValue&quot;},
                                  response_content: [triggeredCampaigns, customerProfile],
-                                 loyalty_cards: [loyalty-card-1])
+                                 loyalty_cards: [loyalty-card-1],
+                                 reward_integration_ids: [5c0b5e6d-3f8a-4c2b-9f1e-2a7d6b4c8e90])
 ```
 
 

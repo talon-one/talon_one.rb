@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **notification_type** | **String** | The type of the notification | 
 **total_result_size** | **Integer** | The total size of the result set. | 
-**data** | [**Array&lt;ApplicationNotification&gt;**](ApplicationNotification.md) | The array of changes. | [optional] 
+**data** | [**Array&lt;ApplicationNotification&gt;**](ApplicationNotification.md) | The array of changes. | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignEvaluationTreeChangedMessage.new(notification_type: CampaignNotification,
+instance = TalonOne::CampaignEvaluationTreeChangedMessage.new(notification_type: CampaignEvaluationTreeChanged,
                                  total_result_size: null,
                                  data: null)
 ```

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Integer** | Unique ID for this entity. Not to be confused with the Integration ID, which is set by your integration layer and used in most endpoints. | 
-**account_id** | **Integer** |  | 
-**application_id** | **Integer** |  | 
-**campaign_id** | **Integer** |  | 
-**created** | **DateTime** |  | 
-**created_by** | **Integer** |  | 
-**revision_id** | **Integer** |  | 
-**version** | **Integer** |  | 
+**account_id** | **Integer** | The ID of the account that owns this entity. | 
+**application_id** | **Integer** | The ID of the Application that owns this entity. | 
+**campaign_id** | **Integer** | The ID of the campaign that the revision was created from. | 
+**created** | **DateTime** | Timestamp when the revision was created. | 
+**created_by** | **Integer** | The ID of the user who created this revision. | 
+**revision_id** | **Integer** | The ID of the revision. | 
+**version** | **Integer** | Incrementing number representing how many revisions have been activated on this campaign. Starts from &#x60;0&#x60; for a new campaign.  | 
 **name** | **String** | A user-facing name for this campaign. | [optional] 
 **start_time** | **DateTime** | Timestamp when the campaign will become active. | [optional] 
 **end_time** | **DateTime** | Timestamp when the campaign will become inactive. | [optional] 
@@ -32,12 +32,12 @@ Name | Type | Description | Notes
 require 'TalonOne'
 
 instance = TalonOne::RevisionVersion.new(id: 6,
-                                 account_id: null,
-                                 application_id: null,
-                                 campaign_id: null,
-                                 created: null,
-                                 created_by: null,
-                                 revision_id: null,
+                                 account_id: 3886,
+                                 application_id: 42,
+                                 campaign_id: 18,
+                                 created: 2026-10-01T08:00Z,
+                                 created_by: 134,
+                                 revision_id: 6,
                                  version: null,
                                  name: Summer promotions,
                                  start_time: 2021-07-20T22:00Z,

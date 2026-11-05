@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # A block that displays a notification to the customer with a configurable type, title, and optional body message.
+  # A block that displays a notification to the customer with a configurable type, title, and body message.
   class ShowNotificationBlock
     # Unique identifier for this block.
     attr_accessor :id
@@ -33,9 +33,6 @@ module TalonOne
     # The notification body text. Supports template placeholders (e.g. \"{{$Session.Total}}\") evaluated at rule execution time.
     attr_accessor :body
 
-    # Blocks evaluated when this block fails or returns false.
-    attr_accessor :on_failure
-
     # Named error handlers evaluated when a specific error occurs.
     attr_accessor :on_error
 
@@ -48,7 +45,6 @@ module TalonOne
         :'notification_type' => :'notificationType',
         :'title' => :'title',
         :'body' => :'body',
-        :'on_failure' => :'onFailure',
         :'on_error' => :'onError'
       }
     end
@@ -62,7 +58,6 @@ module TalonOne
         :'notification_type' => :'String',
         :'title' => :'String',
         :'body' => :'String',
-        :'on_failure' => :'Array<Object>',
         :'on_error' => :'Hash<String, Array<Object>>'
       }
     end
@@ -114,12 +109,6 @@ module TalonOne
         self.body = attributes[:'body']
       end
 
-      if attributes.key?(:'on_failure')
-        if (value = attributes[:'on_failure']).is_a?(Array)
-          self.on_failure = value
-        end
-      end
-
       if attributes.key?(:'on_error')
         if (value = attributes[:'on_error']).is_a?(Hash)
           self.on_error = value
@@ -143,6 +132,10 @@ module TalonOne
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
+      if @body.nil?
+        invalid_properties.push('invalid value for "body", body cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -152,6 +145,7 @@ module TalonOne
       return false if @type.nil?
       return false if @notification_type.nil?
       return false if @title.nil?
+      return false if @body.nil?
       true
     end
 
@@ -166,7 +160,6 @@ module TalonOne
           notification_type == o.notification_type &&
           title == o.title &&
           body == o.body &&
-          on_failure == o.on_failure &&
           on_error == o.on_error
     end
 
@@ -179,7 +172,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, tags, notification_type, title, body, on_failure, on_error].hash
+      [id, type, tags, notification_type, title, body, on_error].hash
     end
 
     # Builds the object from hash

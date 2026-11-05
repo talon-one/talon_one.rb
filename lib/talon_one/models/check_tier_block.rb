@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # A block that checks whether a user profile is a member of a specific tier within a loyalty program.
+  # A block that checks whether a customer profile is a member of a specific tier in a loyalty program.
   class CheckTierBlock
     # Unique identifier for this block.
     attr_accessor :id
@@ -27,7 +27,7 @@ module TalonOne
     # An indicator of how the block compares its elements.
     attr_accessor :operator
 
-    # The name of the subledger to check the balance of. Can be empty if this block checks the loyalty program's main ledger balance instead of a subledger.
+    # The name of the subledger to check a customer's tier in. Can be empty if this block checks the loyalty program's main ledger instead of a subledger. A subledger can only be used when the loyalty program that the tier is in has subledgers enabled. To specify the main ledger, provide an empty string (\"\").
     attr_accessor :subledger
 
     attr_accessor :tier
@@ -78,7 +78,7 @@ module TalonOne
         :'tags' => :'Array<String>',
         :'operator' => :'String',
         :'subledger' => :'String',
-        :'tier' => :'CheckTierBlockTier',
+        :'tier' => :'TierBlockReference',
         :'on_failure' => :'Array<Object>'
       }
     end

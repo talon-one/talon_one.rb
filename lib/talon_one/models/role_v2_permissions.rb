@@ -13,6 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # The permissions that this role gives.
   class RoleV2Permissions
     # List of grouped logical operations referenced by roles.
     attr_accessor :permission_sets

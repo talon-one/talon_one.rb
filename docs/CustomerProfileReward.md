@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **used_at** | **DateTime** | The date and time when the reward was used. | [optional] 
 **used_by_profile_integration_id** | **String** | The integration ID of the customer profile that used the reward.   For rewards unlocked with a loyalty card, this can be any customer profile  linked to that loyalty card.   Only returned when the reward has been used.  | [optional] 
 **loyalty_program_id** | **Integer** | The ID of the loyalty program that the loyalty card belongs to. Only returned for rewards unlocked with a loyalty card. | [optional] 
-**loyalty_card_identifier** | **String** | The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;.  | [optional] 
+**loyalty_card_id** | **String** | The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;.  | [optional] 
 
 ## Code Sample
 
@@ -37,7 +37,7 @@ instance = TalonOne::CustomerProfileReward.new(id: 6,
                                  used_at: 2026-07-02T10:30Z,
                                  used_by_profile_integration_id: customer2840,
                                  loyalty_program_id: 9,
-                                 loyalty_card_identifier: summer-loyalty-card-0543)
+                                 loyalty_card_id: summer-loyalty-card-0543)
 ```
 
 

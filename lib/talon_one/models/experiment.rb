@@ -23,7 +23,10 @@ module TalonOne
     # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
-    # The source of the assignment. - false - The variant assignment is handled internally by Talon.One. - true - The variant assignment is handled externally. 
+    # Controls how customers are assigned to experiment variants. - `random`: Talon.One assigns customers randomly based on variant weights. - `external`: Variant assignment is handled externally. - `audience`: Each variant targets a specific audience; customers are assigned based on audience membership. 
+    attr_accessor :assignment_type
+
+    # Deprecated. Use `assignmentType` instead. - false - The variant assignment is handled internally by Talon.One. - true - The variant assignment is handled externally. 
     attr_accessor :is_variant_assignment_external
 
     attr_accessor :campaign
@@ -73,6 +76,7 @@ module TalonOne
         :'id' => :'id',
         :'created' => :'created',
         :'application_id' => :'applicationId',
+        :'assignment_type' => :'assignmentType',
         :'is_variant_assignment_external' => :'isVariantAssignmentExternal',
         :'campaign' => :'campaign',
         :'activated' => :'activated',
@@ -90,6 +94,7 @@ module TalonOne
         :'id' => :'Integer',
         :'created' => :'DateTime',
         :'application_id' => :'Integer',
+        :'assignment_type' => :'String',
         :'is_variant_assignment_external' => :'Boolean',
         :'campaign' => :'Campaign',
         :'activated' => :'DateTime',
@@ -132,6 +137,10 @@ module TalonOne
 
       if attributes.key?(:'application_id')
         self.application_id = attributes[:'application_id']
+      end
+
+      if attributes.key?(:'assignment_type')
+        self.assignment_type = attributes[:'assignment_type']
       end
 
       if attributes.key?(:'is_variant_assignment_external')
@@ -204,6 +213,8 @@ module TalonOne
       return false if @id.nil?
       return false if @created.nil?
       return false if @application_id.nil?
+      assignment_type_validator = EnumAttributeValidator.new('String', ["random", "external", "audience"])
+      return false unless assignment_type_validator.valid?(@assignment_type)
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["enabled", "disabled", "archived"])
       return false unless state_validator.valid?(@state)
@@ -211,6 +222,16 @@ module TalonOne
       goal_type_validator = EnumAttributeValidator.new('String', ["other", "maximize_revenue", "optimize_discount_efficiency", "maximize_items_sold"])
       return false unless goal_type_validator.valid?(@goal_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] assignment_type Object to be assigned
+    def assignment_type=(assignment_type)
+      validator = EnumAttributeValidator.new('String', ["random", "external", "audience"])
+      unless validator.valid?(assignment_type)
+        fail ArgumentError, "invalid value for \"assignment_type\", must be one of #{validator.allowable_values}."
+      end
+      @assignment_type = assignment_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -241,6 +262,7 @@ module TalonOne
           id == o.id &&
           created == o.created &&
           application_id == o.application_id &&
+          assignment_type == o.assignment_type &&
           is_variant_assignment_external == o.is_variant_assignment_external &&
           campaign == o.campaign &&
           activated == o.activated &&
@@ -260,7 +282,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, application_id, is_variant_assignment_external, campaign, activated, state, variants, goal_type, goal_description, deletedat].hash
+      [id, created, application_id, assignment_type, is_variant_assignment_external, campaign, activated, state, variants, goal_type, goal_description, deletedat].hash
     end
 
     # Builds the object from hash

@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**create_additional_cost**](ManagementApi.md#create_additional_cost) | **POST** /v1/additional_costs | Create additional cost
 [**create_attribute**](ManagementApi.md#create_attribute) | **POST** /v1/attributes | Create custom attribute
 [**create_batch_loyalty_cards**](ManagementApi.md#create_batch_loyalty_cards) | **POST** /v1/loyalty_programs/{loyaltyProgramId}/cards/batch | Create loyalty cards
+[**create_campaign**](ManagementApi.md#create_campaign) | **POST** /v1/applications/{applicationId}/campaigns | Create campaign
 [**create_campaign_from_template**](ManagementApi.md#create_campaign_from_template) | **POST** /v1/applications/{applicationId}/create_campaign_from_template | Create campaign from campaign template
 [**create_campaign_store_budget**](ManagementApi.md#create_campaign_store_budget) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/stores/budgets | Create campaign store budget
 [**create_collection**](ManagementApi.md#create_collection) | **POST** /v1/applications/{applicationId}/campaigns/{campaignId}/collections | Create campaign-level collection
@@ -105,6 +106,7 @@ Method | HTTP request | Description
 [**get_collection**](ManagementApi.md#get_collection) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/collections/{collectionId} | Get campaign-level collection
 [**get_collection_items**](ManagementApi.md#get_collection_items) | **GET** /v1/collections/{collectionId}/items | Get collection items
 [**get_coupons_without_total_count**](ManagementApi.md#get_coupons_without_total_count) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/coupons/no_total | List coupons
+[**get_current_revision**](ManagementApi.md#get_current_revision) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/revisions/current | Get current revision version
 [**get_customer_activity_report**](ManagementApi.md#get_customer_activity_report) | **GET** /v1/applications/{applicationId}/customer_activity_reports/{customerId} | Get customer&#39;s activity report
 [**get_customer_activity_reports_without_total_count**](ManagementApi.md#get_customer_activity_reports_without_total_count) | **GET** /v1/applications/{applicationId}/customer_activity_reports/no_total | Get Activity Reports for Application Customers
 [**get_customer_analytics**](ManagementApi.md#get_customer_analytics) | **GET** /v1/applications/{applicationId}/customers/{customerId}/analytics | Get customer&#39;s analytics report
@@ -116,6 +118,7 @@ Method | HTTP request | Description
 [**get_event_types**](ManagementApi.md#get_event_types) | **GET** /v1/event_types | List event types
 [**get_experiment**](ManagementApi.md#get_experiment) | **GET** /v1/applications/{applicationId}/experiments/{experimentId} | Get experiment in Application
 [**get_exports**](ManagementApi.md#get_exports) | **GET** /v1/exports | Get exports
+[**get_giveaways_pool**](ManagementApi.md#get_giveaways_pool) | **GET** /v1/giveaways/pools/{poolId} | Get giveaway pool
 [**get_loyalty_card**](ManagementApi.md#get_loyalty_card) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId} | Get loyalty card
 [**get_loyalty_card_transaction_logs**](ManagementApi.md#get_loyalty_card_transaction_logs) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards/{loyaltyCardId}/logs | List card&#39;s transactions (Management API)
 [**get_loyalty_cards**](ManagementApi.md#get_loyalty_cards) | **GET** /v1/loyalty_programs/{loyaltyProgramId}/cards | List loyalty cards
@@ -161,6 +164,7 @@ Method | HTTP request | Description
 [**list_collections**](ManagementApi.md#list_collections) | **GET** /v1/applications/{applicationId}/campaigns/{campaignId}/collections | List collections in campaign
 [**list_collections_in_application**](ManagementApi.md#list_collections_in_application) | **GET** /v1/applications/{applicationId}/collections | List collections in Application
 [**list_experiments**](ManagementApi.md#list_experiments) | **GET** /v1/applications/{applicationId}/experiments | List experiments
+[**list_giveaways_pool**](ManagementApi.md#list_giveaways_pool) | **GET** /v1/giveaways/pools | List giveaway pools
 [**list_stores**](ManagementApi.md#list_stores) | **GET** /v1/applications/{applicationId}/stores | List stores
 [**okta_event_handler_challenge**](ManagementApi.md#okta_event_handler_challenge) | **GET** /v1/provisioning/okta | Validate Okta API ownership
 [**price_history**](ManagementApi.md#price_history) | **POST** /v1/applications/{applicationId}/price_history | Get summary of price history
@@ -401,7 +405,7 @@ nil (empty response body)
 
 ## copy_campaign_to_applications
 
-> InlineResponse2009 copy_campaign_to_applications(application_id, campaign_id, body)
+> InlineResponse20011 copy_campaign_to_applications(application_id, campaign_id, body)
 
 Copy the campaign into the specified Application
 
@@ -455,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -857,6 +861,72 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
+## create_campaign
+
+> Campaign create_campaign(application_id, body)
+
+Create campaign
+
+Create a campaign. A campaign is part of an Application and contains a set of rules. 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+body = TalonOne::NewCampaign.new # NewCampaign | body
+
+begin
+  #Create campaign
+  result = api_instance.create_campaign(application_id, body)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->create_campaign: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **body** | [**NewCampaign**](NewCampaign.md)| body | 
+
+### Return type
+
+[**Campaign**](Campaign.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_campaign_from_template
 
 > CreateTemplateCampaignResponse create_campaign_from_template(application_id, body)
@@ -1060,7 +1130,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons
 
-> InlineResponse20011 create_coupons(application_id, campaign_id, body, opts)
+> InlineResponse20013 create_coupons(application_id, campaign_id, body, opts)
 
 Create coupons
 
@@ -1118,7 +1188,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -1268,7 +1338,7 @@ Name | Type | Description  | Notes
 
 ## create_coupons_for_multiple_recipients
 
-> InlineResponse20011 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
+> InlineResponse20013 create_coupons_for_multiple_recipients(application_id, campaign_id, body, opts)
 
 Create coupons for multiple recipients
 
@@ -1326,7 +1396,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -1536,7 +1606,7 @@ Name | Type | Description  | Notes
 
 Create ruleset (V2)
 
-Create a ruleset from promotion and strikethrough rules in the V2 JSON block format. A ruleset is a revision of all the rules of a campaign.  Only `group` and `passthrough` blocks are currently writable, with optional `onFailure` blocks. A payload containing any other block type is rejected. Each rule's `blocks` array may contain at most one block.
+Create a ruleset from promotion and strikethrough rules in the V2 JSON block format. A ruleset is a revision of all the rules of a campaign.  Only the first block of a rule can be a condition. Every other block must be an effect.
 
 ### Example
 
@@ -3786,7 +3856,7 @@ Name | Type | Description  | Notes
 
 Export triggered effects
 
-Download a CSV file containing the triggered effects that match the given attributes.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `applicationid`: The ID of the Application. - `campaignid`: The ID of the campaign. - `couponid`: The ID of the coupon, when applicable to the effect. - `created`: The timestamp of the effect. - `event_type`: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - `eventid`: The internal ID of the effect. - `name`: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - `profileintegrationid`: The ID of the customer profile, when applicable. - `props`: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - `ruleindex`: The index of the rule. - `rulesetid`: The ID of the rule set. - `sessionid`: The internal ID of the session that triggered the effect. - `profileid`: The internal ID of the customer profile. - `sessionintegrationid`: The integration ID of the session. - `total_revenue`: The total revenue. - `store_integration_id`: The integration ID of the store. You choose this ID when you create a store. 
+Download a CSV file containing the triggered effects that match the given attributes.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `applicationid`: The ID of the Application. - `campaignid`: The ID of the campaign. - `couponid`: The ID of the coupon, when applicable to the effect. - `created`: The timestamp of the effect. - `event_type`: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - `eventid`: The internal ID of the effect. - `name`: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - `profileintegrationid`: The ID of the customer profile, when applicable. - `props`: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - `ruleindex`: The index of the rule. - `rulesetid`: The ID of the rule set. - `sessionid`: The internal ID of the session that triggered the effect. - `profileid`: The internal ID of the customer profile. - `sessionintegrationid`: The integration ID of the session. - `total_revenue`: The total revenue. - `store_integration_id`: The integration ID of the store. You choose this ID when you create a store. - `reward_id`: The ID of the reward whose rule generated this effect, when applicable. - `reward_integration_id`: The integration ID of the specific customer reward whose usage produced this effect, when applicable. 
 
 ### Example
 
@@ -3930,7 +4000,7 @@ Name | Type | Description  | Notes
 
 Export customer loyalty balances
 
-Download a CSV file containing the balance of each customer in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subledger, when applicable. - `profileIntegrationID`: The integration ID of the customer profile. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. - `currentTier`: The tier that the customer is in at the time of the export. 
+Download a CSV file containing the balance of each customer in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file contains the following columns:  - `loyaltyProgramID`: The ID of the loyalty program. - `loyaltySubledger`: The name of the subledger, when applicable. - `profileIntegrationID`: The integration ID of the customer profile. - `currentBalance`: The current point balance. - `pendingBalance`: The number of pending points. - `expiredBalance`: The number of expired points. - `spentBalance`: The number of spent points. - `currentTier`: The tier that the customer is in at the time of the export. - `negativeBalance`: The number of negative points. Only contains a value when requested via `balances` and the program uses negative points. 
 
 ### Example
 
@@ -3959,7 +4029,8 @@ api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 'loyalty_program_id_example' # String | The identifier for the loyalty program.
 opts = {
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. > - This parameter does not affect the `currentTier` field in the CSV file, which shows the customer's tier at the time of export. 
-  balances: 'balances_example' # String | Filters which balance fields are included in the CSV export. `currentBalance` is always returned.  By default, all balance fields are included. When this parameter is provided, only the listed fields contain values and the rest are returned empty.  Accepted values: - `currentBalance` - `pendingBalance` - `expiredBalance` - `spentBalance` - `negativeBalance`  Multiple values must be provided as a comma-separated list. 
+  balances: 'balances_example', # String | Filters which balance fields are included in the CSV export. `currentBalance` is always returned.  By default, all balance fields are included. When this parameter is provided, only the listed fields contain values and the rest are returned empty.  Accepted values: - `currentBalance` - `pendingBalance` - `expiredBalance` - `spentBalance` - `negativeBalance`  Multiple values must be provided as a comma-separated list. 
+  subledger_ids: ['subledger_ids_example'] # Array<String> | Filters the results to specific subledgers.  **Note:** - When this parameter is not provided, the export includes all subledgers   and main ledger data for the specified loyalty program. 
 }
 
 begin
@@ -3979,6 +4050,7 @@ Name | Type | Description  | Notes
  **loyalty_program_id** | **String**| The identifier for the loyalty program. | 
  **end_date** | **DateTime**| Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. &gt; - This parameter does not affect the &#x60;currentTier&#x60; field in the CSV file, which shows the customer&#39;s tier at the time of export.  | [optional] 
  **balances** | **String**| Filters which balance fields are included in the CSV export. &#x60;currentBalance&#x60; is always returned.  By default, all balance fields are included. When this parameter is provided, only the listed fields contain values and the rest are returned empty.  Accepted values: - &#x60;currentBalance&#x60; - &#x60;pendingBalance&#x60; - &#x60;expiredBalance&#x60; - &#x60;spentBalance&#x60; - &#x60;negativeBalance&#x60;  Multiple values must be provided as a comma-separated list.  | [optional] 
+ **subledger_ids** | [**Array&lt;String&gt;**](String.md)| Filters the results to specific subledgers.  **Note:** - When this parameter is not provided, the export includes all subledgers   and main ledger data for the specified loyalty program.  | [optional] 
 
 ### Return type
 
@@ -4070,7 +4142,7 @@ Name | Type | Description  | Notes
 
 Export card's ledger log
 
-Download a CSV file containing a loyalty card ledger log of the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files). 
+Download a CSV file containing a loyalty card ledger log of the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `cardidentifier`: The identifier of the loyalty card. - `applicationid`: The ID of the Application. - `sessionid`: The ID of the session. - `customersessionid`: The integration ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the points. - `expirydate`: The expiration date of the points. - `id`: The ID of the transaction. - `created`: The timestamp of the transaction creation. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `transactionUUID`: Unique identifier of the transaction in the UUID format. - `validityDuration`: The duration for which the points remain active, relative to the activation date. - `remainingAmount`: The current unused amount of points, when applicable to `addition` transactions. 
 
 ### Example
 
@@ -4282,7 +4354,7 @@ Name | Type | Description  | Notes
 
 Export customer's transaction logs
 
-Download a CSV file containing a customer's transaction logs in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. 
+Download a CSV file containing a customer's transaction logs in the loyalty program.  > [!tip] If the exported CSV file is too large to view, you can > [split it into multiple files](https://www.google.com/search?q=split+CSV+into+multiple+files).  The generated file can contain the following columns:  - `customerprofileid`: The ID of the profile. - `customersessionid`: The ID of the customer session. - `rulesetid`: The ID of the rule set. - `rulename`: The name of the rule. - `programid`: The ID of the loyalty program. - `type`: The transaction type, such as `addition` or `subtraction`. - `name`: The reason for the transaction. - `subledgerid`: The ID of the subledger, when applicable. - `startdate`: The start date of the program. - `expirydate`: The expiration date of the program. - `id`: The ID of the transaction. - `created`: The timestamp of the creation of the loyalty program. - `amount`: The number of points in that transaction. - `archived`: Whether the session related to the transaction is archived. - `campaignid`: The ID of the campaign. - `flags`: The flags of the transaction, when applicable. The `createsNegativeBalance` flag indicates whether the transaction results in a negative balance. - `transactionUUID`: Unique identifier of the transaction in the UUID format. - `validityDuration`: The duration for which the points remain active, relative to the activation date. - `remainingAmount`: The current unused amount of points, when applicable to `addition` transactions. 
 
 ### Example
 
@@ -4502,7 +4574,7 @@ Name | Type | Description  | Notes
 
 ## generate_coupon_rejections
 
-> InlineResponse20055 generate_coupon_rejections(session_integration_id, opts)
+> InlineResponse20058 generate_coupon_rejections(session_integration_id, opts)
 
 Summarize coupon redemption failures in session
 
@@ -4560,7 +4632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20055**](InlineResponse20055.md)
+[**InlineResponse20058**](InlineResponse20058.md)
 
 ### Authorization
 
@@ -4574,7 +4646,7 @@ Name | Type | Description  | Notes
 
 ## get_access_logs_without_total_count
 
-> InlineResponse20024 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
+> InlineResponse20027 get_access_logs_without_total_count(application_id, range_start, range_end, opts)
 
 Get access logs for Application
 
@@ -4642,7 +4714,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**InlineResponse20027**](InlineResponse20027.md)
 
 ### Authorization
 
@@ -5044,7 +5116,7 @@ Name | Type | Description  | Notes
 
 ## get_additional_costs
 
-> InlineResponse20041 get_additional_costs(opts)
+> InlineResponse20044 get_additional_costs(opts)
 
 List additional costs
 
@@ -5100,7 +5172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20041**](InlineResponse20041.md)
+[**InlineResponse20044**](InlineResponse20044.md)
 
 ### Authorization
 
@@ -5376,7 +5448,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customer_friends
 
-> InlineResponse20038 get_application_customer_friends(application_id, integration_id, opts)
+> InlineResponse20041 get_application_customer_friends(application_id, integration_id, opts)
 
 List friends referred by customer profile
 
@@ -5438,7 +5510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20038**](InlineResponse20038.md)
+[**InlineResponse20041**](InlineResponse20041.md)
 
 ### Authorization
 
@@ -5452,7 +5524,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers
 
-> InlineResponse20026 get_application_customers(application_id, opts)
+> InlineResponse20029 get_application_customers(application_id, opts)
 
 List application's customers
 
@@ -5487,7 +5559,8 @@ opts = {
   integration_id: 'integration_id_example', # String | Filter results performing an exact matching against the profile integration identifier.
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
+  with_loyalty_memberships: true # Boolean | When set to `true`, the `loyaltyProgramJoinDates` property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets.
 }
 
 begin
@@ -5509,10 +5582,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
+ **with_loyalty_memberships** | **Boolean**| When set to &#x60;true&#x60;, the &#x60;loyaltyProgramJoinDates&#x60; property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets. | [optional] 
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**InlineResponse20029**](InlineResponse20029.md)
 
 ### Authorization
 
@@ -5526,7 +5600,7 @@ Name | Type | Description  | Notes
 
 ## get_application_customers_by_attributes
 
-> InlineResponse20027 get_application_customers_by_attributes(application_id, body, opts)
+> InlineResponse20030 get_application_customers_by_attributes(application_id, body, opts)
 
 List application customers matching the given attributes
 
@@ -5561,7 +5635,8 @@ body = TalonOne::CustomerProfileSearchQuery.new # CustomerProfileSearchQuery | b
 opts = {
   page_size: 1000, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
-  with_total_result_size: true # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
+  with_loyalty_memberships: true # Boolean | When set to `true`, the `loyaltyProgramJoinDates` property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets.
 }
 
 begin
@@ -5583,10 +5658,11 @@ Name | Type | Description  | Notes
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
+ **with_loyalty_memberships** | **Boolean**| When set to &#x60;true&#x60;, the &#x60;loyaltyProgramJoinDates&#x60; property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets. | [optional] 
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**InlineResponse20030**](InlineResponse20030.md)
 
 ### Authorization
 
@@ -5600,7 +5676,7 @@ Name | Type | Description  | Notes
 
 ## get_application_event_types
 
-> InlineResponse20034 get_application_event_types(application_id, opts)
+> InlineResponse20037 get_application_event_types(application_id, opts)
 
 List Applications event types
 
@@ -5658,7 +5734,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20034**](InlineResponse20034.md)
+[**InlineResponse20037**](InlineResponse20037.md)
 
 ### Authorization
 
@@ -5672,7 +5748,7 @@ Name | Type | Description  | Notes
 
 ## get_application_events_without_total_count
 
-> InlineResponse20033 get_application_events_without_total_count(application_id, opts)
+> InlineResponse20036 get_application_events_without_total_count(application_id, opts)
 
 List Applications events
 
@@ -5754,7 +5830,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20033**](InlineResponse20033.md)
+[**InlineResponse20036**](InlineResponse20036.md)
 
 ### Authorization
 
@@ -5834,7 +5910,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions
 
-> InlineResponse20031 get_application_sessions(application_id, opts)
+> InlineResponse20034 get_application_sessions(application_id, opts)
 
 List Application sessions
 
@@ -5910,7 +5986,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20031**](InlineResponse20031.md)
+[**InlineResponse20034**](InlineResponse20034.md)
 
 ### Authorization
 
@@ -5924,7 +6000,7 @@ Name | Type | Description  | Notes
 
 ## get_application_sessions_by_customer_attributes
 
-> InlineResponse20032 get_application_sessions_by_customer_attributes(application_id, body, opts)
+> InlineResponse20035 get_application_sessions_by_customer_attributes(application_id, body, opts)
 
 List Application sessions matching the given customer attributes
 
@@ -5984,7 +6060,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20032**](InlineResponse20032.md)
+[**InlineResponse20035**](InlineResponse20035.md)
 
 ### Authorization
 
@@ -5998,7 +6074,7 @@ Name | Type | Description  | Notes
 
 ## get_applications
 
-> InlineResponse2008 get_applications(opts)
+> InlineResponse20010 get_applications(opts)
 
 List Applications
 
@@ -6054,7 +6130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 
@@ -6132,7 +6208,7 @@ Name | Type | Description  | Notes
 
 ## get_attributes
 
-> InlineResponse20039 get_attributes(opts)
+> InlineResponse20042 get_attributes(opts)
 
 List custom attributes
 
@@ -6200,7 +6276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20039**](InlineResponse20039.md)
+[**InlineResponse20042**](InlineResponse20042.md)
 
 ### Authorization
 
@@ -6214,7 +6290,7 @@ Name | Type | Description  | Notes
 
 ## get_audience_memberships
 
-> InlineResponse20037 get_audience_memberships(audience_id, opts)
+> InlineResponse20040 get_audience_memberships(audience_id, opts)
 
 List audience members
 
@@ -6274,7 +6350,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20037**](InlineResponse20037.md)
+[**InlineResponse20040**](InlineResponse20040.md)
 
 ### Authorization
 
@@ -6288,7 +6364,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences
 
-> InlineResponse20035 get_audiences(opts)
+> InlineResponse20038 get_audiences(opts)
 
 List audiences
 
@@ -6346,7 +6422,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20035**](InlineResponse20035.md)
+[**InlineResponse20038**](InlineResponse20038.md)
 
 ### Authorization
 
@@ -6360,7 +6436,7 @@ Name | Type | Description  | Notes
 
 ## get_audiences_analytics
 
-> InlineResponse20036 get_audiences_analytics(audience_ids, opts)
+> InlineResponse20039 get_audiences_analytics(audience_ids, opts)
 
 List audience analytics
 
@@ -6414,7 +6490,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20036**](InlineResponse20036.md)
+[**InlineResponse20039**](InlineResponse20039.md)
 
 ### Authorization
 
@@ -6494,7 +6570,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_analytics
 
-> InlineResponse20025 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
+> InlineResponse20028 get_campaign_analytics(application_id, campaign_id, range_start, range_end, opts)
 
 Get analytics of campaigns
 
@@ -6554,7 +6630,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**InlineResponse20028**](InlineResponse20028.md)
 
 ### Authorization
 
@@ -6568,7 +6644,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_by_attributes
 
-> InlineResponse2009 get_campaign_by_attributes(application_id, body, opts)
+> InlineResponse20011 get_campaign_by_attributes(application_id, body, opts)
 
 List campaigns that match the given attributes
 
@@ -6630,7 +6706,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -6708,7 +6784,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_groups
 
-> InlineResponse20014 get_campaign_groups(opts)
+> InlineResponse20016 get_campaign_groups(opts)
 
 List campaign access groups
 
@@ -6764,7 +6840,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**InlineResponse20016**](InlineResponse20016.md)
 
 ### Authorization
 
@@ -6778,7 +6854,7 @@ Name | Type | Description  | Notes
 
 ## get_campaign_templates
 
-> InlineResponse20015 get_campaign_templates(opts)
+> InlineResponse20017 get_campaign_templates(opts)
 
 List campaign templates
 
@@ -6842,7 +6918,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
@@ -6856,7 +6932,7 @@ Name | Type | Description  | Notes
 
 ## get_campaigns
 
-> InlineResponse2009 get_campaigns(application_id, opts)
+> InlineResponse20011 get_campaigns(application_id, opts)
 
 List campaigns
 
@@ -6938,7 +7014,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -6952,7 +7028,7 @@ Name | Type | Description  | Notes
 
 ## get_changes
 
-> InlineResponse20045 get_changes(opts)
+> InlineResponse20048 get_changes(opts)
 
 Get audit logs for an account
 
@@ -7024,7 +7100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20045**](InlineResponse20045.md)
+[**InlineResponse20048**](InlineResponse20048.md)
 
 ### Authorization
 
@@ -7106,7 +7182,7 @@ Name | Type | Description  | Notes
 
 ## get_collection_items
 
-> InlineResponse20023 get_collection_items(collection_id, opts)
+> InlineResponse20026 get_collection_items(collection_id, opts)
 
 Get collection items
 
@@ -7162,7 +7238,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**InlineResponse20026**](InlineResponse20026.md)
 
 ### Authorization
 
@@ -7176,7 +7252,7 @@ Name | Type | Description  | Notes
 
 ## get_coupons_without_total_count
 
-> InlineResponse20012 get_coupons_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20014 get_coupons_without_total_count(application_id, campaign_id, opts)
 
 List coupons
 
@@ -7266,7 +7342,73 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20014**](InlineResponse20014.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_current_revision
+
+> Revision get_current_revision(application_id, campaign_id)
+
+Get current revision version
+
+Get the current revision version for the given campaign.  **Note:** The [Campaign staging and revisions](https://docs.talon.one/docs/product/applications/manage-general-settings#campaign-staging-and-revisions) feature must be enabled for your Application. For more information, see [Revise campaigns](https://docs.talon.one/docs/product/campaigns/revise-campaigns). 
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
+campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
+
+begin
+  #Get current revision version
+  result = api_instance.get_current_revision(application_id, campaign_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_current_revision: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
+ **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
+
+### Return type
+
+[**Revision**](Revision.md)
 
 ### Authorization
 
@@ -7356,7 +7498,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_activity_reports_without_total_count
 
-> InlineResponse20030 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
+> InlineResponse20033 get_customer_activity_reports_without_total_count(range_start, range_end, application_id, opts)
 
 Get Activity Reports for Application Customers
 
@@ -7426,7 +7568,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**InlineResponse20033**](InlineResponse20033.md)
 
 ### Authorization
 
@@ -7578,7 +7720,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profile_achievement_progress
 
-> InlineResponse20054 get_customer_profile_achievement_progress(application_id, integration_id, opts)
+> InlineResponse20057 get_customer_profile_achievement_progress(application_id, integration_id, opts)
 
 List customer achievements
 
@@ -7640,7 +7782,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20054**](InlineResponse20054.md)
+[**InlineResponse20057**](InlineResponse20057.md)
 
 ### Authorization
 
@@ -7654,7 +7796,7 @@ Name | Type | Description  | Notes
 
 ## get_customer_profiles
 
-> InlineResponse20029 get_customer_profiles(opts)
+> InlineResponse20032 get_customer_profiles(opts)
 
 List customer profiles
 
@@ -7710,7 +7852,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**InlineResponse20032**](InlineResponse20032.md)
 
 ### Authorization
 
@@ -7724,7 +7866,7 @@ Name | Type | Description  | Notes
 
 ## get_customers_by_attributes
 
-> InlineResponse20028 get_customers_by_attributes(body, opts)
+> InlineResponse20031 get_customers_by_attributes(body, opts)
 
 List customer profiles matching the given attributes
 
@@ -7782,7 +7924,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse20031**](InlineResponse20031.md)
 
 ### Authorization
 
@@ -7796,7 +7938,7 @@ Name | Type | Description  | Notes
 
 ## get_dashboard_statistics
 
-> InlineResponse20018 get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
+> InlineResponse20020 get_dashboard_statistics(loyalty_program_id, range_start, range_end, opts)
 
 Get statistics for loyalty dashboard
 
@@ -7854,7 +7996,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -7868,7 +8010,7 @@ Name | Type | Description  | Notes
 
 ## get_event_types
 
-> InlineResponse20043 get_event_types(opts)
+> InlineResponse20046 get_event_types(opts)
 
 List event types
 
@@ -7928,7 +8070,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20043**](InlineResponse20043.md)
+[**InlineResponse20046**](InlineResponse20046.md)
 
 ### Authorization
 
@@ -8008,7 +8150,7 @@ Name | Type | Description  | Notes
 
 ## get_exports
 
-> InlineResponse20046 get_exports(opts)
+> InlineResponse20049 get_exports(opts)
 
 Get exports
 
@@ -8068,7 +8210,71 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20046**](InlineResponse20046.md)
+[**InlineResponse20049**](InlineResponse20049.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_giveaways_pool
+
+> GiveawaysPool get_giveaways_pool(pool_id)
+
+Get giveaway pool
+
+Retrieve the details of a specified giveaway pool.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+pool_id = 56 # Integer | The ID of the pool. You can find it in the Campaign Manager, in the **Incentives** section.
+
+begin
+  #Get giveaway pool
+  result = api_instance.get_giveaways_pool(pool_id)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->get_giveaways_pool: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pool_id** | **Integer**| The ID of the pool. You can find it in the Campaign Manager, in the **Incentives** section. | 
+
+### Return type
+
+[**GiveawaysPool**](GiveawaysPool.md)
 
 ### Authorization
 
@@ -8148,7 +8354,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_card_transaction_logs
 
-> InlineResponse20021 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
+> InlineResponse20023 get_loyalty_card_transaction_logs(loyalty_program_id, loyalty_card_id, opts)
 
 List card's transactions (Management API)
 
@@ -8216,7 +8422,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**InlineResponse20023**](InlineResponse20023.md)
 
 ### Authorization
 
@@ -8230,7 +8436,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_cards
 
-> InlineResponse20020 get_loyalty_cards(loyalty_program_id, opts)
+> InlineResponse20022 get_loyalty_cards(loyalty_program_id, opts)
 
 List loyalty cards
 
@@ -8294,7 +8500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**InlineResponse20022**](InlineResponse20022.md)
 
 ### Authorization
 
@@ -8514,11 +8720,11 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_program_profile_ledger_transactions
 
-> InlineResponse2005 get_loyalty_program_profile_ledger_transactions(loyalty_program_id, integration_id, opts)
+> InlineResponse2007 get_loyalty_program_profile_ledger_transactions(loyalty_program_id, integration_id, opts)
 
 List customer's loyalty transactions (Management API)
 
-Retrieve paginated results of loyalty transaction logs for the given Integration ID in the specified loyalty program.  You can filter transactions by date or by ledger (subledger or main ledger). If no filters are applied, the last 50 loyalty transactions for the given integration ID are returned.  > [!note] **Note** > - For most use cases, especially real-time integrations, use the Integration API endpoint: >   [List customer's loyalty transactions](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). > - To retrieve all loyalty program transaction logs in a given loyalty program, use the >   [List loyalty program transactions](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyProgramTransactions) endpoint. 
+Retrieve paginated results of loyalty transaction logs for the given integration ID in the specified loyalty program.  You can filter transactions by date or by ledger (subledger or main ledger), and include the UUIDs of transactions referenced by deductions. If no filters are applied, the last 50 loyalty transactions for the given integration ID are returned.  > [!note] **Note** > - For most use cases, especially real-time integrations, use the Integration API endpoint: >   [List customer's loyalty transactions](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). > - To retrieve all loyalty program transaction logs in a given loyalty program, use the >   [List loyalty program transactions](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyProgramTransactions) endpoint. 
 
 ### Example
 
@@ -8555,6 +8761,7 @@ opts = {
   end_date: DateTime.parse('2013-10-20T19:20:30+01:00'), # DateTime | Date and time by which results are returned. Results are filtered by transaction creation date.  > [!note] **Note** > - This must be an RFC3339 timestamp string. > - You can include a time component in your string, for example, `T23:59:59` to specify the end of the day. The time zone setting >   considered is `UTC`. If you do not include a time component, a default time value of `T00:00:00` (midnight) in `UTC` is considered. 
   page_size: 50, # Integer | The number of items in the response.
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  include_references: false, # Boolean | Whether to include the UUIDs of transactions referenced by deductions.  **Note:** Enabling this can decrease query performance, especially when no date filter is applied to a large transaction history. 
   awaits_activation: true # Boolean | If `true`: Filters results to include only point transactions that have action-based activation and have not expired.  If `false`: Returns a `400` response. 
 }
 
@@ -8582,11 +8789,12 @@ Name | Type | Description  | Notes
  **end_date** | **DateTime**| Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered.  | [optional] 
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **include_references** | **Boolean**| Whether to include the UUIDs of transactions referenced by deductions.  **Note:** Enabling this can decrease query performance, especially when no date filter is applied to a large transaction history.  | [optional] [default to false]
  **awaits_activation** | **Boolean**| If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response.  | [optional] 
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -8600,7 +8808,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_program_transactions
 
-> InlineResponse20019 get_loyalty_program_transactions(loyalty_program_id, opts)
+> InlineResponse20021 get_loyalty_program_transactions(loyalty_program_id, opts)
 
 List loyalty program transactions
 
@@ -8670,7 +8878,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**InlineResponse20021**](InlineResponse20021.md)
 
 ### Authorization
 
@@ -8684,7 +8892,7 @@ Name | Type | Description  | Notes
 
 ## get_loyalty_programs
 
-> InlineResponse20017 get_loyalty_programs
+> InlineResponse20019 get_loyalty_programs
 
 List loyalty programs
 
@@ -8730,7 +8938,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20019**](InlineResponse20019.md)
 
 ### Authorization
 
@@ -8902,7 +9110,7 @@ Name | Type | Description  | Notes
 
 ## get_referrals_without_total_count
 
-> InlineResponse20013 get_referrals_without_total_count(application_id, campaign_id, opts)
+> InlineResponse20015 get_referrals_without_total_count(application_id, campaign_id, opts)
 
 List referrals
 
@@ -8974,7 +9182,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**InlineResponse20015**](InlineResponse20015.md)
 
 ### Authorization
 
@@ -9188,7 +9396,7 @@ Name | Type | Description  | Notes
 
 ## get_rulesets
 
-> InlineResponse20010 get_rulesets(application_id, campaign_id, opts)
+> InlineResponse20012 get_rulesets(application_id, campaign_id, opts)
 
 List campaign rulesets
 
@@ -9248,7 +9456,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -9392,7 +9600,7 @@ Name | Type | Description  | Notes
 
 ## get_users
 
-> InlineResponse20044 get_users(opts)
+> InlineResponse20047 get_users(opts)
 
 List users in account
 
@@ -9448,7 +9656,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20044**](InlineResponse20044.md)
+[**InlineResponse20047**](InlineResponse20047.md)
 
 ### Authorization
 
@@ -9526,7 +9734,7 @@ Name | Type | Description  | Notes
 
 ## get_webhooks
 
-> InlineResponse20042 get_webhooks(opts)
+> InlineResponse20045 get_webhooks(opts)
 
 List webhooks
 
@@ -9592,7 +9800,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20042**](InlineResponse20042.md)
+[**InlineResponse20045**](InlineResponse20045.md)
 
 ### Authorization
 
@@ -9638,7 +9846,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -9656,7 +9864,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -9706,7 +9914,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 attribute_id = 56 # Integer | The ID of the attribute. You can find the ID in the Campaign Manager's URL when you display the details of an attribute in **Account** > **Tools** > **Attributes**.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -9724,7 +9932,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **attribute_id** | **Integer**| The ID of the attribute. You can find the ID in the Campaign Manager&#39;s URL when you display the details of an attribute in **Account** &gt; **Tools** &gt; **Attributes**. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -9774,7 +9982,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 audience_id = 56 # Integer | The ID of the audience.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -9792,7 +10000,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **audience_id** | **Integer**| The ID of the audience. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -9845,7 +10053,7 @@ campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Tal
 opts = {
   action: 'action_example', # String | The action that this budget is limiting.
   period: 'period_example', # String | The period to which the limit applies.  **Note**: For budgets with no period, set this to `overall`. 
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -9866,7 +10074,7 @@ Name | Type | Description  | Notes
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
  **action** | **String**| The action that this budget is limiting. | [optional] 
  **period** | **String**| The period to which the limit applies.  **Note**: For budgets with no period, set this to &#x60;overall&#x60;.  | [optional] 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -9917,7 +10125,7 @@ api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -9936,7 +10144,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -9988,7 +10196,7 @@ application_id = 56 # Integer | The ID of the Application. It is displayed in yo
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 collection_id = 56 # Integer | The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10008,7 +10216,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
  **collection_id** | **Integer**| The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10060,7 +10268,7 @@ application_id = 56 # Integer | The ID of the Application. It is displayed in yo
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 opts = {
   skip_duplicates: true, # Boolean | An indicator of whether to skip duplicate coupon values instead of causing an error. Duplicate values are ignored when `skipDuplicates=true`. 
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10080,7 +10288,7 @@ Name | Type | Description  | Notes
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
  **skip_duplicates** | **Boolean**| An indicator of whether to skip duplicate coupon values instead of causing an error. Duplicate values are ignored when &#x60;skipDuplicates&#x3D;true&#x60;.  | [optional] 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10130,7 +10338,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10148,7 +10356,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10198,7 +10406,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10216,7 +10424,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10238,7 +10446,7 @@ Name | Type | Description  | Notes
 
 Import join dates for a loyalty program
 
-Upload a CSV file containing customer profile IDs and their join dates for the specified loyalty program. Send the file as multipart data.  > [!important] This endpoint only works with profile-based loyalty programs.  The CSV file **must** contain the following columns:  - `customerprofileid`: The integration ID of the customer profile whose join   date you want to update. - `newjoindate`: The new join date for the customer in RFC3339 format. You   can use the time zone of your choice. It is converted to UTC internally   by Talon.One.  **Note**: - Customer profiles must already exist. If a referenced profile does not exist, the import fails with a `400` error. - If a join date already exists for a profile, the uploaded date replaces it.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```csv customerprofileid,newjoindate customer1,2024-03-21T07:32:14Z customer2,2025-04-16T21:12:37Z customer3,2026-05-03T11:47:01Z ``` 
+Upload a CSV file containing customer profile IDs and their join dates for the specified loyalty program. Send the file as multipart data.  > [!important] This endpoint only works with profile-based loyalty programs.  The CSV file **must** contain the following columns:  - `customerprofileid`: The integration ID of the customer profile whose join   date you want to update. - `joindate`: The join date for the customer in RFC3339 format. You   can use the time zone of your choice. It is converted to UTC internally   by Talon.One.  **Note**: - Customer profiles must already exist. If a referenced profile does not exist, the import fails with a `400` error. - If a join date already exists for a profile, the uploaded date replaces it. - If a join date is in the future at the time of the import, the import fails with a `400` error.  > [!note] We recommend limiting your file size to 500 MB.  ## Example  ```csv customerprofileid,joindate customer1,2024-03-21T07:32:14Z customer2,2025-04-16T21:12:37Z customer3,2026-05-03T11:47:01Z ``` 
 
 ### Example
 
@@ -10266,7 +10474,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10284,7 +10492,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10335,7 +10543,7 @@ api_instance = TalonOne::ManagementApi.new
 loyalty_program_id = 56 # Integer | Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
 opts = {
   notifications_enabled: true, # Boolean | Indicates whether the points import triggers notifications about its effects. For example, a notification is sent if the import upgrades a customer's tier or offsets their negative points balance.  This parameter is optional and defaults to `true`. 
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10354,7 +10562,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loyalty_program_id** | **Integer**| Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.  | 
  **notifications_enabled** | **Boolean**| Indicates whether the points import triggers notifications about its effects. For example, a notification is sent if the import upgrades a customer&#39;s tier or offsets their negative points balance.  This parameter is optional and defaults to &#x60;true&#x60;.  | [optional] 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10404,7 +10612,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 pool_id = 56 # Integer | The ID of the pool. You can find it in the Campaign Manager, in the **Giveaways** section.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10422,7 +10630,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pool_id** | **Integer**| The ID of the pool. You can find it in the Campaign Manager, in the **Giveaways** section. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10473,7 +10681,7 @@ api_instance = TalonOne::ManagementApi.new
 application_id = 56 # Integer | The ID of the Application. It is displayed in your Talon.One deployment URL.
 campaign_id = 56 # Integer | The ID of the campaign. It is displayed in your Talon.One deployment URL.
 opts = {
-  up_file: File.new('/path/to/file') # File | The CSV file containing the data that is being imported.
+  up_file: 'up_file_example' # String | The CSV file containing the data that is being imported.
 }
 
 begin
@@ -10492,7 +10700,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **application_id** | **Integer**| The ID of the Application. It is displayed in your Talon.One deployment URL. | 
  **campaign_id** | **Integer**| The ID of the campaign. It is displayed in your Talon.One deployment URL. | 
- **up_file** | **File**| The CSV file containing the data that is being imported. | [optional] 
+ **up_file** | **String**| The CSV file containing the data that is being imported. | [optional] 
 
 ### Return type
 
@@ -10573,7 +10781,7 @@ nil (empty response body)
 
 ## list_account_collections
 
-> InlineResponse20022 list_account_collections(opts)
+> InlineResponse20025 list_account_collections(opts)
 
 List collections in account
 
@@ -10633,7 +10841,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -10647,7 +10855,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements
 
-> InlineResponse20052 list_achievements(application_id, campaign_id, opts)
+> InlineResponse20055 list_achievements(application_id, campaign_id, opts)
 
 List achievements
 
@@ -10707,7 +10915,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20052**](InlineResponse20052.md)
+[**InlineResponse20055**](InlineResponse20055.md)
 
 ### Authorization
 
@@ -10721,7 +10929,7 @@ Name | Type | Description  | Notes
 
 ## list_achievements_v2
 
-> InlineResponse20053 list_achievements_v2(opts)
+> InlineResponse20056 list_achievements_v2(opts)
 
 List achievements
 
@@ -10753,6 +10961,7 @@ end
 api_instance = TalonOne::ManagementApi.new
 opts = {
   page_size: 50, # Integer | The number of items in the response.
+  campaign_id: [56], # Array<Integer> | Filter results by one or more campaign IDs.  To include multiple IDs, repeat the parameter for each one, for example,`?campaignId=123&campaignId=456`. The response contains only achievements associated with the specified campaigns. 
   skip: 56, # Integer | The number of items to skip when paging through large result sets.
   sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   title: 'title_example', # String | Filter by the display name of the achievement.
@@ -10774,6 +10983,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **Integer**| The number of items in the response. | [optional] [default to 50]
+ **campaign_id** | [**Array&lt;Integer&gt;**](Integer.md)| Filter results by one or more campaign IDs.  To include multiple IDs, repeat the parameter for each one, for example,&#x60;?campaignId&#x3D;123&amp;campaignId&#x3D;456&#x60;. The response contains only achievements associated with the specified campaigns.  | [optional] 
  **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
  **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
  **title** | **String**| Filter by the display name of the achievement. | [optional] 
@@ -10781,7 +10991,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20053**](InlineResponse20053.md)
+[**InlineResponse20056**](InlineResponse20056.md)
 
 ### Authorization
 
@@ -10795,11 +11005,11 @@ Name | Type | Description  | Notes
 
 ## list_all_roles_v2
 
-> InlineResponse20047 list_all_roles_v2
+> InlineResponse20050 list_all_roles_v2
 
 List roles
 
-List all roles.
+List the roles defined in the deployment.  The roles returned depend on the role of the user calling this endpoint: - If the user has an admin role, all roles defined in the deployment are returned. - If the user does not have an admin role, only the roles currently assigned to this user are returned.  If your identity provider provisions roles through SCIM, any admin roles it defines are not included in this list.  To view the details of a specific role, use the [Get role](https://docs.talon.one/management-api#tag/Roles/operation/getRoleV2) endpoint. 
 
 ### Example
 
@@ -10841,7 +11051,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20047**](InlineResponse20047.md)
+[**InlineResponse20050**](InlineResponse20050.md)
 
 ### Authorization
 
@@ -10855,7 +11065,7 @@ This endpoint does not need any parameter.
 
 ## list_application_cart_item_filters
 
-> InlineResponse20049 list_application_cart_item_filters(application_id, opts)
+> InlineResponse20052 list_application_cart_item_filters(application_id, opts)
 
 List Application cart item filters
 
@@ -10913,7 +11123,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20049**](InlineResponse20049.md)
+[**InlineResponse20052**](InlineResponse20052.md)
 
 ### Authorization
 
@@ -10927,7 +11137,7 @@ Name | Type | Description  | Notes
 
 ## list_campaign_store_budget_limits
 
-> InlineResponse20050 list_campaign_store_budget_limits(application_id, campaign_id, opts)
+> InlineResponse20053 list_campaign_store_budget_limits(application_id, campaign_id, opts)
 
 List campaign store budget limits
 
@@ -10985,7 +11195,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20050**](InlineResponse20050.md)
+[**InlineResponse20053**](InlineResponse20053.md)
 
 ### Authorization
 
@@ -10999,7 +11209,7 @@ Name | Type | Description  | Notes
 
 ## list_catalog_items
 
-> InlineResponse20040 list_catalog_items(catalog_id, opts)
+> InlineResponse20043 list_catalog_items(catalog_id, opts)
 
 List items in a catalog
 
@@ -11061,7 +11271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20040**](InlineResponse20040.md)
+[**InlineResponse20043**](InlineResponse20043.md)
 
 ### Authorization
 
@@ -11075,7 +11285,7 @@ Name | Type | Description  | Notes
 
 ## list_collections
 
-> InlineResponse20022 list_collections(application_id, campaign_id, opts)
+> InlineResponse20025 list_collections(application_id, campaign_id, opts)
 
 List collections in campaign
 
@@ -11139,7 +11349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -11153,7 +11363,7 @@ Name | Type | Description  | Notes
 
 ## list_collections_in_application
 
-> InlineResponse20022 list_collections_in_application(application_id, opts)
+> InlineResponse20025 list_collections_in_application(application_id, opts)
 
 List collections in Application
 
@@ -11215,7 +11425,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**InlineResponse20025**](InlineResponse20025.md)
 
 ### Authorization
 
@@ -11229,7 +11439,7 @@ Name | Type | Description  | Notes
 
 ## list_experiments
 
-> InlineResponse20016 list_experiments(application_id, opts)
+> InlineResponse20018 list_experiments(application_id, opts)
 
 List experiments
 
@@ -11287,7 +11497,81 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**InlineResponse20018**](InlineResponse20018.md)
+
+### Authorization
+
+[api_key_v1](../README.md#api_key_v1), [management_key](../README.md#management_key), [manager_auth](../README.md#manager_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_giveaways_pool
+
+> InlineResponse20024 list_giveaways_pool(opts)
+
+List giveaway pools
+
+Retrieve all the giveaway pools for an account.
+
+### Example
+
+```ruby
+# load the gem
+require 'talon_one'
+# setup authorization
+TalonOne.configure do |config|
+  # Configure API key authorization: api_key_v1
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: management_key
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+
+  # Configure API key authorization: manager_auth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = TalonOne::ManagementApi.new
+opts = {
+  page_size: 1000, # Integer | The number of items in the response.
+  skip: 56, # Integer | The number of items to skip when paging through large result sets.
+  sort: 'sort_example', # String | The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with `-`.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
+  with_total_result_size: true, # Boolean | When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When `true`: `totalResultSize` contains the total number of results for this query. - When `false`: Only `hasMore` is returned, and it is set to `true` when there are more results than shown on the page. 
+  application_ids: 'application_ids_example' # String | Filter by one or more Application IDs, separated by a comma.
+}
+
+begin
+  #List giveaway pools
+  result = api_instance.list_giveaways_pool(opts)
+  p result
+rescue TalonOne::ApiError => e
+  puts "Exception when calling ManagementApi->list_giveaways_pool: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page_size** | **Integer**| The number of items in the response. | [optional] [default to 1000]
+ **skip** | **Integer**| The number of items to skip when paging through large result sets. | [optional] 
+ **sort** | **String**| The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations.  | [optional] 
+ **with_total_result_size** | **Boolean**| When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page.  | [optional] 
+ **application_ids** | **String**| Filter by one or more Application IDs, separated by a comma. | [optional] 
+
+### Return type
+
+[**InlineResponse20024**](InlineResponse20024.md)
 
 ### Authorization
 
@@ -11301,7 +11585,7 @@ Name | Type | Description  | Notes
 
 ## list_stores
 
-> InlineResponse20048 list_stores(application_id, opts)
+> InlineResponse20051 list_stores(application_id, opts)
 
 List stores
 
@@ -11369,7 +11653,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20048**](InlineResponse20048.md)
+[**InlineResponse20051**](InlineResponse20051.md)
 
 ### Authorization
 
@@ -12585,7 +12869,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_application_wide_without_total_count
 
-> InlineResponse20012 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
+> InlineResponse20014 search_coupons_advanced_application_wide_without_total_count(application_id, body, opts)
 
 List coupons that match the given attributes (without total count)
 
@@ -12665,7 +12949,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -12679,7 +12963,7 @@ Name | Type | Description  | Notes
 
 ## search_coupons_advanced_without_total_count
 
-> InlineResponse20012 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
+> InlineResponse20014 search_coupons_advanced_without_total_count(application_id, campaign_id, body, opts)
 
 List coupons that match the given attributes in campaign (without total count)
 
@@ -12759,7 +13043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -12773,7 +13057,7 @@ Name | Type | Description  | Notes
 
 ## summarize_campaign_store_budget
 
-> InlineResponse20051 summarize_campaign_store_budget(application_id, campaign_id)
+> InlineResponse20054 summarize_campaign_store_budget(application_id, campaign_id)
 
 Get summary of campaign store budgets
 
@@ -12825,7 +13109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20051**](InlineResponse20051.md)
+[**InlineResponse20054**](InlineResponse20054.md)
 
 ### Authorization
 

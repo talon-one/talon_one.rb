@@ -29,6 +29,15 @@ module TalonOne
     # The ID of the subledger within the loyalty program where these points were added.
     attr_accessor :subledger_id
 
+    # The timestamp when the loyalty transaction occurred.
+    attr_accessor :created
+
+    # Indicates whether the points have an action-based start date. This property is returned only for point transactions with an action-based start date.
+    attr_accessor :awaits_activation
+
+    # The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which `AwaitsActivation` is `true` and `ExpiryDate` is not set. 
+    attr_accessor :validity_duration
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +45,10 @@ module TalonOne
         :'loyalty_program_id' => :'LoyaltyProgramID',
         :'customer_profile_id' => :'CustomerProfileID',
         :'amount_of_expiring_points' => :'AmountOfExpiringPoints',
-        :'subledger_id' => :'SubledgerID'
+        :'subledger_id' => :'SubledgerID',
+        :'created' => :'Created',
+        :'awaits_activation' => :'AwaitsActivation',
+        :'validity_duration' => :'ValidityDuration'
       }
     end
 
@@ -47,7 +59,10 @@ module TalonOne
         :'loyalty_program_id' => :'Integer',
         :'customer_profile_id' => :'String',
         :'amount_of_expiring_points' => :'Float',
-        :'subledger_id' => :'String'
+        :'subledger_id' => :'String',
+        :'created' => :'DateTime',
+        :'awaits_activation' => :'Boolean',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -90,6 +105,18 @@ module TalonOne
 
       if attributes.key?(:'subledger_id')
         self.subledger_id = attributes[:'subledger_id']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'awaits_activation')
+        self.awaits_activation = attributes[:'awaits_activation']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
       end
     end
 
@@ -159,7 +186,10 @@ module TalonOne
           loyalty_program_id == o.loyalty_program_id &&
           customer_profile_id == o.customer_profile_id &&
           amount_of_expiring_points == o.amount_of_expiring_points &&
-          subledger_id == o.subledger_id
+          subledger_id == o.subledger_id &&
+          created == o.created &&
+          awaits_activation == o.awaits_activation &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -171,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [expiry_date, loyalty_program_id, customer_profile_id, amount_of_expiring_points, subledger_id].hash
+      [expiry_date, loyalty_program_id, customer_profile_id, amount_of_expiring_points, subledger_id, created, awaits_activation, validity_duration].hash
     end
 
     # Builds the object from hash

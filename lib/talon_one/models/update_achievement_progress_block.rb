@@ -26,7 +26,7 @@ module TalonOne
 
     attr_accessor :operator
 
-    # The value to update the progress by. Supports template placeholders (e.g. \"{{$Session.Total / 2}}\") for dynamic quantities.
+    # The value to update the progress by. Either a numeric scalar or a `{{expression}}` string that resolves to a number at evaluation time.
     attr_accessor :value
 
     attr_accessor :achievement
@@ -72,8 +72,8 @@ module TalonOne
         :'type' => :'String',
         :'tags' => :'Array<String>',
         :'operator' => :'String',
-        :'value' => :'String',
-        :'achievement' => :'UpdateAchievementProgressBlockAchievement'
+        :'value' => :'Object',
+        :'achievement' => :'AchievementBlockReference'
       }
     end
 

@@ -53,7 +53,7 @@ module TalonOne
         :'id' => :'String',
         :'type' => :'String',
         :'tags' => :'Array<String>',
-        :'custom_effect' => :'TriggerCustomEffectBlockCustomEffect',
+        :'custom_effect' => :'CustomEffectBlockReference',
         :'params' => :'Object',
         :'target' => :'TriggerCustomEffectBlockTarget',
         :'on_error' => :'Hash<String, Array<Object>>'

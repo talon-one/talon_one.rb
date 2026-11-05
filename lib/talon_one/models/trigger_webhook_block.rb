@@ -50,7 +50,7 @@ module TalonOne
         :'id' => :'String',
         :'type' => :'String',
         :'tags' => :'Array<String>',
-        :'webhook' => :'TriggerWebhookBlockWebhook',
+        :'webhook' => :'WebhookBlockReference',
         :'params' => :'Object',
         :'on_error' => :'Hash<String, Array<Object>>'
       }

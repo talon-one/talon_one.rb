@@ -86,10 +86,16 @@ describe 'IntegrationEventV3Request' do
     end
   end
 
+  describe 'test attribute "reward_integration_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "response_content"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["advancedEvent", "awardedGiveaways", "customerProfile", "loyalty", "referral", "ruleFailureReasons", "triggeredCampaigns"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["advancedEvent", "awardedGiveaways", "customerProfile", "loyalty", "referral", "ruleFailureReasons", "triggeredCampaigns", "unlockedRewards"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.response_content = value }.not_to raise_error
       # end

@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **subledger** | **String** | The name of the subledger to deduct points from. Can be empty if this block deducts from the loyalty program&#39;s main ledger instead of a subledger. | 
 **value** | [**Object**](.md) | Number of points to deduct. Either a numeric scalar or a &#x60;{{expression}}&#x60; string that resolves to a number at evaluation time. | 
 **name** | **String** | A custom description recorded as the reason for the point deduction. | [optional] 
-**on_failure** | **Array&lt;Object&gt;** | Promotion blocks evaluated when this block fails or returns false. | [optional] 
 
 ## Code Sample
 
@@ -24,8 +23,7 @@ instance = TalonOne::RedeemLoyaltyPointsBlock.new(id: a1b2c3d4-e5f6-7890-abcd-ef
                                  program: null,
                                  subledger: main,
                                  value: null,
-                                 name: Purchase Deduction,
-                                 on_failure: null)
+                                 name: Purchase Deduction)
 ```
 
 

@@ -17,12 +17,15 @@ module TalonOne
     # The name of this variant.
     attr_accessor :name
 
-    # The percentage split of this variant. The sum of all variant percentages must be 100.
+    # The percentage split of this variant. For `random` assignment, the split must be between 1 and 99 and the sum across all variants must equal 100. Ignored for `audience` and `external` assignment. 
     attr_accessor :weight
 
     attr_accessor :ruleset
 
     attr_accessor :is_primary
+
+    # The ID of the audience this variant targets. Only used when the experiment `assignmentType` is `audience`. 
+    attr_accessor :audience_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -30,7 +33,8 @@ module TalonOne
         :'name' => :'name',
         :'weight' => :'weight',
         :'ruleset' => :'ruleset',
-        :'is_primary' => :'isPrimary'
+        :'is_primary' => :'isPrimary',
+        :'audience_id' => :'audienceId'
       }
     end
 
@@ -40,7 +44,8 @@ module TalonOne
         :'name' => :'String',
         :'weight' => :'Integer',
         :'ruleset' => :'NewRuleset',
-        :'is_primary' => :'Boolean'
+        :'is_primary' => :'Boolean',
+        :'audience_id' => :'Integer'
       }
     end
 
@@ -80,6 +85,10 @@ module TalonOne
       if attributes.key?(:'is_primary')
         self.is_primary = attributes[:'is_primary']
       end
+
+      if attributes.key?(:'audience_id')
+        self.audience_id = attributes[:'audience_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,8 +115,8 @@ module TalonOne
         invalid_properties.push('invalid value for "weight", must be smaller than or equal to 99.')
       end
 
-      if @weight < 1
-        invalid_properties.push('invalid value for "weight", must be greater than or equal to 1.')
+      if @weight < 0
+        invalid_properties.push('invalid value for "weight", must be greater than or equal to 0.')
       end
 
       if @ruleset.nil?
@@ -129,7 +138,7 @@ module TalonOne
       return false if @name.to_s.length < 1
       return false if @weight.nil?
       return false if @weight > 99
-      return false if @weight < 1
+      return false if @weight < 0
       return false if @ruleset.nil?
       return false if @is_primary.nil?
       true
@@ -164,8 +173,8 @@ module TalonOne
         fail ArgumentError, 'invalid value for "weight", must be smaller than or equal to 99.'
       end
 
-      if weight < 1
-        fail ArgumentError, 'invalid value for "weight", must be greater than or equal to 1.'
+      if weight < 0
+        fail ArgumentError, 'invalid value for "weight", must be greater than or equal to 0.'
       end
 
       @weight = weight
@@ -179,7 +188,8 @@ module TalonOne
           name == o.name &&
           weight == o.weight &&
           ruleset == o.ruleset &&
-          is_primary == o.is_primary
+          is_primary == o.is_primary &&
+          audience_id == o.audience_id
     end
 
     # @see the `==` method
@@ -191,7 +201,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, weight, ruleset, is_primary].hash
+      [name, weight, ruleset, is_primary, audience_id].hash
     end
 
     # Builds the object from hash

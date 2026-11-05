@@ -60,7 +60,7 @@ module TalonOne
     # The ID of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation).
     attr_accessor :evaluation_group_id
 
-    # The evaluation mode of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-
+    # The evaluation mode of the evaluation group. For more information, see [Managing campaign evaluation](https://docs.talon.one/docs/product/applications/managing-campaign-evaluation).
     attr_accessor :evaluation_group_mode
 
     # Attribute mapping from ruby-style variable name to JSON key.

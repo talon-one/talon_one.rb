@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **next_tier** | **String** | The name of the customer&#39;s next tier. | [optional] 
 **tier_expiration_date** | **DateTime** | The exact date and time the tier expires. | 
 **timestamp_of_tier_change** | **DateTime** | The exact date and time the tier was changed. | 
+**source** | **String** | The source of the tier change, whether from a points change or boost.  | [optional] [default to &#39;points&#39;]
+**reason** | **String** | The reason for the tier change.  | [optional] 
 
 ## Code Sample
 
@@ -29,7 +31,9 @@ instance = TalonOne::TierUpgradeData.new(customer_profile_id: URNGV8294NV,
                                  points_required_to_the_next_tier: 23.51,
                                  next_tier: Gold,
                                  tier_expiration_date: 2023-12-01T12:23+02:00,
-                                 timestamp_of_tier_change: 2023-10-26T12:23+02:00)
+                                 timestamp_of_tier_change: 2023-10-26T12:23+02:00,
+                                 source: null,
+                                 reason: null)
 ```
 
 

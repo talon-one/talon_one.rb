@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **points_required_to_remain** | **Float** | The number of points needed for a customer to remain on the same tier. | 
 **next_tier** | **String** | The name of the customer&#39;s next tier. | [optional] 
 **tier_expiration_date** | **DateTime** | The date and time the tier expires. | [optional] 
+**source** | **String** | The source of the tier change, whether from a points change or boost. | [optional] [default to &#39;points&#39;]
+**reason** | **String** | The reason for the tier change. | [optional] 
 
 ## Code Sample
 
@@ -25,7 +27,9 @@ instance = TalonOne::TierWillDowngradeData.new(customer_profile_id: URNGV8294NV,
                                  current_points: 120.55,
                                  points_required_to_remain: 23.51,
                                  next_tier: Bronze,
-                                 tier_expiration_date: 2023-12-01T12:23+02:00)
+                                 tier_expiration_date: 2023-12-01T12:23+02:00,
+                                 source: null,
+                                 reason: null)
 ```
 
 

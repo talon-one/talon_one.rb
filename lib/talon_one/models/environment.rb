@@ -35,7 +35,7 @@ module TalonOne
     # A stringified version of the environment's Talang variables scope.
     attr_accessor :variables
 
-    # The giveaways pools that the application is subscribed to.
+    # The giveaway pools that the Application is subscribed to.
     attr_accessor :giveaways_pools
 
     # The loyalty programs that the application is subscribed to.

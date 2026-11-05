@@ -29,6 +29,12 @@ module TalonOne
     # The policy that defines how customer tiers are downgraded in the loyalty program after tier reevaluation.  - `one_down`: If the customer doesn't have enough points to stay in the current tier, they are downgraded by one tier.  - `balance_based`: The customer's tier is reevaluated based on the amount of active points they have at the moment. 
     attr_accessor :downgrade_policy
 
+    # Indicates whether the customer's current tier was determined based on their points balance or a temporary boost.  - `points`: The tier reflects the customer's current point balance. - `boost`: A temporary tier boost is in effect where the customer is in a higher tier than their points-based tier. The boost expires after a set duration and the customer returns to their points-based tier. 
+    attr_accessor :source
+
+    # The reason for the tier assignment. 
+    attr_accessor :reason
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -58,7 +64,9 @@ module TalonOne
         :'name' => :'name',
         :'start_date' => :'startDate',
         :'expiry_date' => :'expiryDate',
-        :'downgrade_policy' => :'downgradePolicy'
+        :'downgrade_policy' => :'downgradePolicy',
+        :'source' => :'source',
+        :'reason' => :'reason'
       }
     end
 
@@ -69,7 +77,9 @@ module TalonOne
         :'name' => :'String',
         :'start_date' => :'DateTime',
         :'expiry_date' => :'DateTime',
-        :'downgrade_policy' => :'String'
+        :'downgrade_policy' => :'String',
+        :'source' => :'String',
+        :'reason' => :'String'
       }
     end
 
@@ -113,6 +123,16 @@ module TalonOne
       if attributes.key?(:'downgrade_policy')
         self.downgrade_policy = attributes[:'downgrade_policy']
       end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      else
+        self.source = 'points'
+      end
+
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -137,6 +157,8 @@ module TalonOne
       return false if @name.nil?
       downgrade_policy_validator = EnumAttributeValidator.new('String', ["one_down", "balance_based"])
       return false unless downgrade_policy_validator.valid?(@downgrade_policy)
+      source_validator = EnumAttributeValidator.new('String', ["boost", "points"])
+      return false unless source_validator.valid?(@source)
       true
     end
 
@@ -150,6 +172,16 @@ module TalonOne
       @downgrade_policy = downgrade_policy
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["boost", "points"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
+      end
+      @source = source
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -159,7 +191,9 @@ module TalonOne
           name == o.name &&
           start_date == o.start_date &&
           expiry_date == o.expiry_date &&
-          downgrade_policy == o.downgrade_policy
+          downgrade_policy == o.downgrade_policy &&
+          source == o.source &&
+          reason == o.reason
     end
 
     # @see the `==` method
@@ -171,7 +205,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, start_date, expiry_date, downgrade_policy].hash
+      [id, name, start_date, expiry_date, downgrade_policy, source, reason].hash
     end
 
     # Builds the object from hash

@@ -104,4 +104,10 @@ describe 'ApplicationCustomer' do
     end
   end
 
+  describe 'test attribute "loyalty_program_join_dates"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

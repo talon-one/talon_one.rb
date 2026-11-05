@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ruleset_id** | **Integer** | The ID of the ruleset that was active in the campaign when this effect was triggered. | 
 **rule_index** | **Integer** | The position of the rule that triggered this effect within the ruleset. | 
 **rule_name** | **String** | The name of the rule that triggered this effect. | 
-**effect_type** | **String** | The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects). | 
+**effect_type** | **String** | See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects). | 
 **triggered_by_coupon** | **Integer** | The ID of the coupon that was being evaluated when this effect was triggered. | [optional] 
 **triggered_for_catalog_item** | **Integer** | The ID of the catalog item that was being evaluated when this effect was triggered. | [optional] 
 **condition_index** | **Integer** | The index of the condition that was triggered. | [optional] 
@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **selected_price** | **Float** | The value of the selected price type to apply to the SKU targeted by this effect, before any discounts are applied. | [optional] 
 **adjustment_reference_id** | **String** | The reference identifier of the selected price adjustment for this SKU. This is only returned if the &#x60;selectedPrice&#x60; resulted from a price adjustment. | [optional] 
 **reward_id** | **Integer** | The ID of the reward that was being evaluated when this effect was triggered. | [optional] 
+**reward_integration_id** | **String** | The integration ID of the specific customer reward whose usage produced this effect. | [optional] 
 
 ## Code Sample
 
@@ -43,7 +44,8 @@ instance = TalonOne::EffectEntity.new(experiment_id: 12,
                                  selected_price_type: member,
                                  selected_price: 100.0,
                                  adjustment_reference_id: 68851723-e6fa-488f-ace9-112581e6c19b,
-                                 reward_id: 7)
+                                 reward_id: 7,
+                                 reward_integration_id: reward-unlock-123)
 ```
 
 

@@ -13,17 +13,18 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # A map of target entities to their permission sets.
   class RoleV2RolesGroup
     # A map of the link between the Application, campaign, or draft campaign-related permission set and the Application ID the permissions apply to.
     attr_accessor :applications
 
-    # A map of the link between the loyalty program-related permission set and the Application ID the permissions apply to.
+    # A map of the link between the loyalty program-related permission set and the loyalty program ID the permissions apply to.
     attr_accessor :loyalty_programs
 
-    # A map of the link between the campaign access group-related permission set and the Application ID the permissions apply to.
+    # A map of the link between the campaign access group-related permission set and the campaign access group ID the permissions apply to.
     attr_accessor :campaign_access_groups
 
-    # Name of the account-level permission set
+    # Name of the account-level permission set.
     attr_accessor :account
 
     # Attribute mapping from ruby-style variable name to JSON key.

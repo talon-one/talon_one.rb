@@ -14,13 +14,13 @@ require 'date'
 
 module TalonOne
   class NewGiveawaysPool
-    # The name of this giveaways pool.
+    # The name of this giveaway pool.
     attr_accessor :name
 
-    # The description of this giveaways pool.
+    # The description of this giveaway pool.
     attr_accessor :description
 
-    # A list of the IDs of the applications that this giveaways pool is enabled for.
+    # A list of the IDs of the Applications that this giveaway pool is enabled for.
     attr_accessor :subscribed_applications_ids
 
     # Indicates if this program is a live or sandbox program. Programs of a given type can only be connected to Applications of the same type.

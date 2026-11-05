@@ -81,7 +81,7 @@ module TalonOne
         :'session_id' => :'Integer',
         :'type' => :'String',
         :'attributes' => :'Object',
-        :'effects' => :'Array<Effect>',
+        :'effects' => :'Array<Object>',
         :'rule_failure_reasons' => :'Array<RuleFailureReason>'
       }
     end

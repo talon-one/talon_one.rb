@@ -159,7 +159,7 @@ module TalonOne
     # ID of the revision version that is active on the campaign. 
     attr_accessor :active_revision_version_id
 
-    # Incrementing number representing how many revisions have been activated on this campaign, starts from 0 for a new campaign. 
+    # Incrementing number representing how many revisions have been activated on this campaign. Starts from `0` for a new campaign. 
     attr_accessor :version
 
     # ID of the revision currently being modified for the campaign. 

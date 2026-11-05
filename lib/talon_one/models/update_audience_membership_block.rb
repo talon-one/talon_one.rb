@@ -74,7 +74,7 @@ module TalonOne
         :'tags' => :'Array<String>',
         :'operator' => :'String',
         :'profile' => :'String',
-        :'audience' => :'UpdateAudienceMembershipBlockAudience'
+        :'audience' => :'AudienceBlockReference'
       }
     end
 

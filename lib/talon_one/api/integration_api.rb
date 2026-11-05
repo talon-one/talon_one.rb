@@ -222,7 +222,7 @@ module TalonOne
     # @param coupon_value [String] The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;SUMMER25%OFF&#x60; as &#x60;SUMMER25%25OFF&#x60;. 
     # @param body [CouponReservations] body
     # @param [Hash] opts the optional parameters
-    # @return [Coupon]
+    # @return [CouponWithReservations]
     def create_coupon_reservation(coupon_value, body, opts = {})
       data, _status_code, _headers = create_coupon_reservation_with_http_info(coupon_value, body, opts)
       data
@@ -233,7 +233,7 @@ module TalonOne
     # @param coupon_value [String] The code of the coupon.  **Important:** The coupon code requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;SUMMER25%OFF&#x60; as &#x60;SUMMER25%25OFF&#x60;. 
     # @param body [CouponReservations] body
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Coupon, Integer, Hash)>] Coupon data, response status code and response headers
+    # @return [Array<(CouponWithReservations, Integer, Hash)>] CouponWithReservations data, response status code and response headers
     def create_coupon_reservation_with_http_info(coupon_value, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.create_coupon_reservation ...'
@@ -266,7 +266,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'Coupon' 
+      return_type = opts[:return_type] || 'CouponWithReservations' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1094,6 +1094,92 @@ module TalonOne
       return data, status_code, headers
     end
 
+    # List customer's rewards
+    # List the rewards held by a given customer profile. This includes shared rewards unlocked with a loyalty card linked to the customer. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be:  - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :status Filter results by one or more customer reward statuses.  **Note:** If no status is specified, rewards of all statuses are returned. 
+    # @option opts [Integer] :page_size The number of items in the response. (default to 1000)
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.   - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query.  - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
+    # @return [InlineResponse2004]
+    def get_customer_rewards(integration_id, opts = {})
+      data, _status_code, _headers = get_customer_rewards_with_http_info(integration_id, opts)
+      data
+    end
+
+    # List customer&#39;s rewards
+    # List the rewards held by a given customer profile. This includes shared rewards unlocked with a loyalty card linked to the customer. 
+    # @param integration_id [String] The integration identifier for this customer profile. Must be:  - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :status Filter results by one or more customer reward statuses.  **Note:** If no status is specified, rewards of all statuses are returned. 
+    # @option opts [Integer] :page_size The number of items in the response.
+    # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+    # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.   - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query.  - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
+    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
+    def get_customer_rewards_with_http_info(integration_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: IntegrationApi.get_customer_rewards ...'
+      end
+      # verify the required parameter 'integration_id' is set
+      if @api_client.config.client_side_validation && integration_id.nil?
+        fail ArgumentError, "Missing the required parameter 'integration_id' when calling IntegrationApi.get_customer_rewards"
+      end
+      allowable_values = ["unlocked", "used"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !opts[:'status'].all? { |item| allowable_values.include?(item) }
+        fail ArgumentError, "invalid value for \"status\", must include one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_rewards, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling IntegrationApi.get_customer_rewards, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/customer_profiles/{integrationId}/rewards'.sub('{' + 'integrationId' + '}', CGI.escape(integration_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'status'] = @api_client.build_collection_param(opts[:'status'], :multi) if !opts[:'status'].nil?
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'withTotalResultSize'] = opts[:'with_total_result_size'] if !opts[:'with_total_result_size'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'InlineResponse2004' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['api_key_v1']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: IntegrationApi#get_customer_rewards\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get customer session
     # Get the details of the given customer session.  You can get the same data via other endpoints that also apply changes, which can help you save requests and increase performance. See:  - [Update customer session](#tag/Customer-sessions/operation/updateCustomerSessionV2) - [Update customer profile](#tag/Customer-profiles/operation/updateCustomerProfileV2) 
     # @param customer_session_id [String] The &#x60;integration ID&#x60; of the customer session. You set this ID when you create a customer session.  You can see existing customer session integration IDs in the Campaign Manager&#39;s **Sessions** menu, or via the [List Application session](https://docs.talon.one/management-api#tag/Customer-data/operation/getApplicationSessions) endpoint. **Notes**: - There is no length limit for this ID. - It must be URL-encoded. For example, replace spaces with &#x60;%20&#x60;. [Learn more](https://www.w3schools.com/tags/ref_urlencode.asp). 
@@ -1392,7 +1478,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time. 
-    # @return [InlineResponse2006]
+    # @return [InlineResponse2008]
     def get_loyalty_card_points(loyalty_program_id, loyalty_card_id, opts = {})
       data, _status_code, _headers = get_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
@@ -1410,7 +1496,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time. 
-    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
+    # @return [Array<(InlineResponse2008, Integer, Hash)>] InlineResponse2008 data, response status code and response headers
     def get_loyalty_card_points_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_points ...'
@@ -1472,7 +1558,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2006' 
+      return_type = opts[:return_type] || 'InlineResponse2008' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1507,7 +1593,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-    # @return [InlineResponse2004]
+    # @return [InlineResponse2005]
     def get_loyalty_card_transactions(loyalty_program_id, loyalty_card_id, opts = {})
       data, _status_code, _headers = get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts)
       data
@@ -1527,7 +1613,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-    # @return [Array<(InlineResponse2004, Integer, Hash)>] InlineResponse2004 data, response status code and response headers
+    # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
     def get_loyalty_card_transactions_with_http_info(loyalty_program_id, loyalty_card_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_card_transactions ...'
@@ -1587,7 +1673,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2004' 
+      return_type = opts[:return_type] || 'InlineResponse2005' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1620,7 +1706,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time. 
-    # @return [InlineResponse2007]
+    # @return [InlineResponse2009]
     def get_loyalty_program_profile_points(loyalty_program_id, integration_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_profile_points_with_http_info(loyalty_program_id, integration_id, opts)
       data
@@ -1638,7 +1724,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [String] :sort The field by which results should be sorted. You can enter one of the following values:  - &#x60;startDate&#x60;: Sorts the results by the start date of the points. - &#x60;expiryDate&#x60;: Sorts the results by the expiry date of the points.  By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You can only sort by one field at a time. 
-    # @return [Array<(InlineResponse2007, Integer, Hash)>] InlineResponse2007 data, response status code and response headers
+    # @return [Array<(InlineResponse2009, Integer, Hash)>] InlineResponse2009 data, response status code and response headers
     def get_loyalty_program_profile_points_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_program_profile_points ...'
@@ -1692,7 +1778,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2007' 
+      return_type = opts[:return_type] || 'InlineResponse2009' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1727,7 +1813,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response. (default to 50)
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-    # @return [InlineResponse2005]
+    # @return [InlineResponse2006]
     def get_loyalty_program_profile_transactions(loyalty_program_id, integration_id, opts = {})
       data, _status_code, _headers = get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts)
       data
@@ -1747,7 +1833,7 @@ module TalonOne
     # @option opts [Integer] :page_size The number of items in the response.
     # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
     # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-    # @return [Array<(InlineResponse2005, Integer, Hash)>] InlineResponse2005 data, response status code and response headers
+    # @return [Array<(InlineResponse2006, Integer, Hash)>] InlineResponse2006 data, response status code and response headers
     def get_loyalty_program_profile_transactions_with_http_info(loyalty_program_id, integration_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.get_loyalty_program_profile_transactions ...'
@@ -1799,7 +1885,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse2005' 
+      return_type = opts[:return_type] || 'InlineResponse2006' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -1983,9 +2069,9 @@ module TalonOne
     # @option opts [Boolean] :include_free Whether to include rewards that have no &#x60;pointsRequired&#x60;. These rewards are treated as free and available to all customers.  (default to true)
     # @option opts [Integer] :loyalty_program_id Return only rewards available in this loyalty program. 
     # @option opts [String] :subledger_id Return only rewards available in this subledger. Must be combined with &#x60;loyaltyProgramId&#x60;. To specify the main ledger, provide an empty string (\&quot;\&quot;). 
-    # @option opts [String] :profile_integration_id The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request. 
-    # @option opts [String] :loyalty_card_id The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request. 
-    # @return [InlineResponse20056]
+    # @option opts [String] :profile_integration_id The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  For a reward with &#x60;pointsRequired&#x60; configured for a card-based loyalty program, eligibility can be evaluated based on both &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60;, if both are provided. The required points are then checked against the card&#39;s balance. 
+    # @option opts [String] :loyalty_card_id The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  For a reward with &#x60;pointsRequired&#x60; configured for a card-based loyalty program, eligibility can be evaluated based on both &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60;, if both are provided. The card must also be linked to that customer profile. - If &#x60;loyaltyCardId&#x60; is not provided, the reward returns the &#x60;CARD_REQUIRED&#x60; failure code, because there is no card balance to compare &#x60;pointsRequired&#x60; against. - If &#x60;profileIntegrationId&#x60; is not provided, the reward returns the &#x60;PROFILE_REQUIRED&#x60; failure code, because its eligibility cannot be evaluated without a customer profile. 
+    # @return [InlineResponse20059]
     def integration_rewards_catalog(opts = {})
       data, _status_code, _headers = integration_rewards_catalog_with_http_info(opts)
       data
@@ -2001,9 +2087,9 @@ module TalonOne
     # @option opts [Boolean] :include_free Whether to include rewards that have no &#x60;pointsRequired&#x60;. These rewards are treated as free and available to all customers. 
     # @option opts [Integer] :loyalty_program_id Return only rewards available in this loyalty program. 
     # @option opts [String] :subledger_id Return only rewards available in this subledger. Must be combined with &#x60;loyaltyProgramId&#x60;. To specify the main ledger, provide an empty string (\&quot;\&quot;). 
-    # @option opts [String] :profile_integration_id The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request. 
-    # @option opts [String] :loyalty_card_id The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  **Note:** &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60; are mutually exclusive. Do not send both in the same request. 
-    # @return [Array<(InlineResponse20056, Integer, Hash)>] InlineResponse20056 data, response status code and response headers
+    # @option opts [String] :profile_integration_id The integration ID of the customer profile whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  For a reward with &#x60;pointsRequired&#x60; configured for a card-based loyalty program, eligibility can be evaluated based on both &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60;, if both are provided. The required points are then checked against the card&#39;s balance. 
+    # @option opts [String] :loyalty_card_id The identifier of the loyalty card whose loyalty balances to include in the response. Balances are returned only when &#x60;loyaltyProgramId&#x60; is also provided.  For a reward with &#x60;pointsRequired&#x60; configured for a card-based loyalty program, eligibility can be evaluated based on both &#x60;profileIntegrationId&#x60; and &#x60;loyaltyCardId&#x60;, if both are provided. The card must also be linked to that customer profile. - If &#x60;loyaltyCardId&#x60; is not provided, the reward returns the &#x60;CARD_REQUIRED&#x60; failure code, because there is no card balance to compare &#x60;pointsRequired&#x60; against. - If &#x60;profileIntegrationId&#x60; is not provided, the reward returns the &#x60;PROFILE_REQUIRED&#x60; failure code, because its eligibility cannot be evaluated without a customer profile. 
+    # @return [Array<(InlineResponse20059, Integer, Hash)>] InlineResponse20059 data, response status code and response headers
     def integration_rewards_catalog_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.integration_rewards_catalog ...'
@@ -2043,7 +2129,7 @@ module TalonOne
       post_body = opts[:body] 
 
       # return_type
-      return_type = opts[:return_type] || 'InlineResponse20056' 
+      return_type = opts[:return_type] || 'InlineResponse20059' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']
@@ -2655,24 +2741,24 @@ module TalonOne
     end
 
     # Unlock a reward
-    # Unlock a reward for a customer. If the reward has `pointsRequired` configured, the corresponding loyalty points are deducted from the customer's balance.  To unlock a reward with the points of a loyalty card, provide the card in `cardIdentifier`. The points are then deducted from the card, and the unlocked reward belongs to the card, which makes it available to all customer profiles linked to that card. 
+    # Unlock a reward for a customer. If the reward has `pointsRequired` configured, the corresponding loyalty points are deducted from the customer's balance.  To unlock a reward with the points of a loyalty card, provide the card in `loyaltyCardId`. The points are then deducted from the card, and the unlocked reward belongs to the card, which makes it available to all customer profiles linked to that card. 
     # @param reward_id [Integer] The ID of the reward. You can get the ID with the [List rewards](#tag/Rewards/operation/listRewards) endpoint.
     # @param body [IntegrationUnlockRewardRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry When set to &#x60;true&#x60;, the rule evaluation is performed but no changes are persisted. Use this to preview the outcome of an unlocking.
-    # @return [IntegrationStateV2]
+    # @return [IntegrationUnlockRewardResponse]
     def unlock_reward(reward_id, body, opts = {})
       data, _status_code, _headers = unlock_reward_with_http_info(reward_id, body, opts)
       data
     end
 
     # Unlock a reward
-    # Unlock a reward for a customer. If the reward has &#x60;pointsRequired&#x60; configured, the corresponding loyalty points are deducted from the customer&#39;s balance.  To unlock a reward with the points of a loyalty card, provide the card in &#x60;cardIdentifier&#x60;. The points are then deducted from the card, and the unlocked reward belongs to the card, which makes it available to all customer profiles linked to that card. 
+    # Unlock a reward for a customer. If the reward has &#x60;pointsRequired&#x60; configured, the corresponding loyalty points are deducted from the customer&#39;s balance.  To unlock a reward with the points of a loyalty card, provide the card in &#x60;loyaltyCardId&#x60;. The points are then deducted from the card, and the unlocked reward belongs to the card, which makes it available to all customer profiles linked to that card. 
     # @param reward_id [Integer] The ID of the reward. You can get the ID with the [List rewards](#tag/Rewards/operation/listRewards) endpoint.
     # @param body [IntegrationUnlockRewardRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry When set to &#x60;true&#x60;, the rule evaluation is performed but no changes are persisted. Use this to preview the outcome of an unlocking.
-    # @return [Array<(IntegrationStateV2, Integer, Hash)>] IntegrationStateV2 data, response status code and response headers
+    # @return [Array<(IntegrationUnlockRewardResponse, Integer, Hash)>] IntegrationUnlockRewardResponse data, response status code and response headers
     def unlock_reward_with_http_info(reward_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: IntegrationApi.unlock_reward ...'
@@ -2706,7 +2792,7 @@ module TalonOne
       post_body = opts[:body] || @api_client.object_to_http_body(body) 
 
       # return_type
-      return_type = opts[:return_type] || 'IntegrationStateV2' 
+      return_type = opts[:return_type] || 'IntegrationUnlockRewardResponse' 
 
       # auth_names
       auth_names = opts[:auth_names] || ['api_key_v1']

@@ -111,6 +111,10 @@ module TalonOne
         invalid_properties.push('invalid value for "total_result_size", total_result_size cannot be nil.')
       end
 
+      if @data.nil?
+        invalid_properties.push('invalid value for "data", data cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -118,16 +122,17 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @notification_type.nil?
-      notification_type_validator = EnumAttributeValidator.new('String', ["CampaignNotification"])
+      notification_type_validator = EnumAttributeValidator.new('String', ["CampaignEvaluationTreeChanged"])
       return false unless notification_type_validator.valid?(@notification_type)
       return false if @total_result_size.nil?
+      return false if @data.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] notification_type Object to be assigned
     def notification_type=(notification_type)
-      validator = EnumAttributeValidator.new('String', ["CampaignNotification"])
+      validator = EnumAttributeValidator.new('String', ["CampaignEvaluationTreeChanged"])
       unless validator.valid?(notification_type)
         fail ArgumentError, "invalid value for \"notification_type\", must be one of #{validator.allowable_values}."
       end

@@ -79,7 +79,7 @@ describe 'ManagementApi' do
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body body
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2009]
+  # @return [InlineResponse20011]
   describe 'copy_campaign_to_applications test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -161,6 +161,19 @@ describe 'ManagementApi' do
     end
   end
 
+  # unit tests for create_campaign
+  # Create campaign
+  # Create a campaign. A campaign is part of an Application and contains a set of rules. 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param body body
+  # @param [Hash] opts the optional parameters
+  # @return [Campaign]
+  describe 'create_campaign test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_campaign_from_template
   # Create campaign from campaign template
   # Use the campaign template referenced in the request body to create a new campaign in one of the connected Applications.  If the template was created from a campaign with rules referencing [campaign collections](https://docs.talon.one/docs/product/campaigns/managing-collections), the corresponding collections for the new campaign are created automatically. 
@@ -210,7 +223,7 @@ describe 'ManagementApi' do
   # @param body body
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
-  # @return [InlineResponse20011]
+  # @return [InlineResponse20013]
   describe 'create_coupons test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -253,7 +266,7 @@ describe 'ManagementApi' do
   # @param body body
   # @param [Hash] opts the optional parameters
   # @option opts [String] :silent Possible values: &#x60;yes&#x60; or &#x60;no&#x60;. - &#x60;yes&#x60;: Increases the performance of the API call by returning a 204 response. - &#x60;no&#x60;: Returns a 200 response that contains the updated customer profiles. 
-  # @return [InlineResponse20011]
+  # @return [InlineResponse20013]
   describe 'create_coupons_for_multiple_recipients test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -298,7 +311,7 @@ describe 'ManagementApi' do
 
   # unit tests for create_ruleset_v2
   # Create ruleset (V2)
-  # Create a ruleset from promotion and strikethrough rules in the V2 JSON block format. A ruleset is a revision of all the rules of a campaign.  Only &#x60;group&#x60; and &#x60;passthrough&#x60; blocks are currently writable, with optional &#x60;onFailure&#x60; blocks. A payload containing any other block type is rejected. Each rule&#39;s &#x60;blocks&#x60; array may contain at most one block.
+  # Create a ruleset from promotion and strikethrough rules in the V2 JSON block format. A ruleset is a revision of all the rules of a campaign.  Only the first block of a rule can be a condition. Every other block must be an effect.
   # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param body body
@@ -766,7 +779,7 @@ describe 'ManagementApi' do
 
   # unit tests for export_effects
   # Export triggered effects
-  # Download a CSV file containing the triggered effects that match the given attributes.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;applicationid&#x60;: The ID of the Application. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;couponid&#x60;: The ID of the coupon, when applicable to the effect. - &#x60;created&#x60;: The timestamp of the effect. - &#x60;event_type&#x60;: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - &#x60;eventid&#x60;: The internal ID of the effect. - &#x60;name&#x60;: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - &#x60;profileintegrationid&#x60;: The ID of the customer profile, when applicable. - &#x60;props&#x60;: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - &#x60;ruleindex&#x60;: The index of the rule. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;sessionid&#x60;: The internal ID of the session that triggered the effect. - &#x60;profileid&#x60;: The internal ID of the customer profile. - &#x60;sessionintegrationid&#x60;: The integration ID of the session. - &#x60;total_revenue&#x60;: The total revenue. - &#x60;store_integration_id&#x60;: The integration ID of the store. You choose this ID when you create a store. 
+  # Download a CSV file containing the triggered effects that match the given attributes.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;applicationid&#x60;: The ID of the Application. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;couponid&#x60;: The ID of the coupon, when applicable to the effect. - &#x60;created&#x60;: The timestamp of the effect. - &#x60;event_type&#x60;: The name of the event. See the [docs](https://docs.talon.one/docs/dev/concepts/entities/events). - &#x60;eventid&#x60;: The internal ID of the effect. - &#x60;name&#x60;: The effect name. See the [docs](https://docs.talon.one/docs/dev/integration-api/api-effects). - &#x60;profileintegrationid&#x60;: The ID of the customer profile, when applicable. - &#x60;props&#x60;: The [properties](https://docs.talon.one/docs/dev/integration-api/api-effects) of the effect. - &#x60;ruleindex&#x60;: The index of the rule. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;sessionid&#x60;: The internal ID of the session that triggered the effect. - &#x60;profileid&#x60;: The internal ID of the customer profile. - &#x60;sessionintegrationid&#x60;: The integration ID of the session. - &#x60;total_revenue&#x60;: The total revenue. - &#x60;store_integration_id&#x60;: The integration ID of the store. You choose this ID when you create a store. - &#x60;reward_id&#x60;: The ID of the reward whose rule generated this effect, when applicable. - &#x60;reward_integration_id&#x60;: The integration ID of the specific customer reward whose usage produced this effect, when applicable. 
   # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Float] :campaign_id Filter results by campaign ID.
@@ -796,11 +809,12 @@ describe 'ManagementApi' do
 
   # unit tests for export_loyalty_balances
   # Export customer loyalty balances
-  # Download a CSV file containing the balance of each customer in the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;loyaltyProgramID&#x60;: The ID of the loyalty program. - &#x60;loyaltySubledger&#x60;: The name of the subledger, when applicable. - &#x60;profileIntegrationID&#x60;: The integration ID of the customer profile. - &#x60;currentBalance&#x60;: The current point balance. - &#x60;pendingBalance&#x60;: The number of pending points. - &#x60;expiredBalance&#x60;: The number of expired points. - &#x60;spentBalance&#x60;: The number of spent points. - &#x60;currentTier&#x60;: The tier that the customer is in at the time of the export. 
+  # Download a CSV file containing the balance of each customer in the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file contains the following columns:  - &#x60;loyaltyProgramID&#x60;: The ID of the loyalty program. - &#x60;loyaltySubledger&#x60;: The name of the subledger, when applicable. - &#x60;profileIntegrationID&#x60;: The integration ID of the customer profile. - &#x60;currentBalance&#x60;: The current point balance. - &#x60;pendingBalance&#x60;: The number of pending points. - &#x60;expiredBalance&#x60;: The number of expired points. - &#x60;spentBalance&#x60;: The number of spent points. - &#x60;currentTier&#x60;: The tier that the customer is in at the time of the export. - &#x60;negativeBalance&#x60;: The number of negative points. Only contains a value when requested via &#x60;balances&#x60; and the program uses negative points. 
   # @param loyalty_program_id The identifier for the loyalty program.
   # @param [Hash] opts the optional parameters
   # @option opts [DateTime] :end_date Used to return expired, active, and pending loyalty balances before this timestamp. You can enter any past, present, or future timestamp value.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. &gt; - This parameter does not affect the &#x60;currentTier&#x60; field in the CSV file, which shows the customer&#39;s tier at the time of export. 
   # @option opts [String] :balances Filters which balance fields are included in the CSV export. &#x60;currentBalance&#x60; is always returned.  By default, all balance fields are included. When this parameter is provided, only the listed fields contain values and the rest are returned empty.  Accepted values: - &#x60;currentBalance&#x60; - &#x60;pendingBalance&#x60; - &#x60;expiredBalance&#x60; - &#x60;spentBalance&#x60; - &#x60;negativeBalance&#x60;  Multiple values must be provided as a comma-separated list. 
+  # @option opts [Array<String>] :subledger_ids Filters the results to specific subledgers.  **Note:** - When this parameter is not provided, the export includes all subledgers   and main ledger data for the specified loyalty program. 
   # @return [String]
   describe 'export_loyalty_balances test' do
     it 'should work' do
@@ -824,7 +838,7 @@ describe 'ManagementApi' do
 
   # unit tests for export_loyalty_card_ledger
   # Export card&#39;s ledger log
-  # Download a CSV file containing a loyalty card ledger log of the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files). 
+  # Download a CSV file containing a loyalty card ledger log of the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;cardidentifier&#x60;: The identifier of the loyalty card. - &#x60;applicationid&#x60;: The ID of the Application. - &#x60;sessionid&#x60;: The ID of the session. - &#x60;customersessionid&#x60;: The integration ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the points. - &#x60;expirydate&#x60;: The expiration date of the points. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the transaction creation. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;transactionUUID&#x60;: Unique identifier of the transaction in the UUID format. - &#x60;validityDuration&#x60;: The duration for which the points remain active, relative to the activation date. - &#x60;remainingAmount&#x60;: The current unused amount of points, when applicable to &#x60;addition&#x60; transactions. 
   # @param loyalty_program_id Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param loyalty_card_id Identifier of the loyalty card. You can get the identifier with the [List loyalty cards](https://docs.talon.one/management-api#tag/Loyalty-cards/operation/getLoyaltyCards) endpoint.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;. 
   # @param range_start Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
@@ -868,7 +882,7 @@ describe 'ManagementApi' do
 
   # unit tests for export_loyalty_ledger
   # Export customer&#39;s transaction logs
-  # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;flags&#x60;: The flags of the transaction, when applicable. The &#x60;createsNegativeBalance&#x60; flag indicates whether the transaction results in a negative balance. - &#x60;transactionUUID&#x60;: Unique identifier of the transaction in the UUID format. 
+  # Download a CSV file containing a customer&#39;s transaction logs in the loyalty program.  &gt; [!tip] If the exported CSV file is too large to view, you can &gt; [split it into multiple files](https://www.google.com/search?q&#x3D;split+CSV+into+multiple+files).  The generated file can contain the following columns:  - &#x60;customerprofileid&#x60;: The ID of the profile. - &#x60;customersessionid&#x60;: The ID of the customer session. - &#x60;rulesetid&#x60;: The ID of the rule set. - &#x60;rulename&#x60;: The name of the rule. - &#x60;programid&#x60;: The ID of the loyalty program. - &#x60;type&#x60;: The transaction type, such as &#x60;addition&#x60; or &#x60;subtraction&#x60;. - &#x60;name&#x60;: The reason for the transaction. - &#x60;subledgerid&#x60;: The ID of the subledger, when applicable. - &#x60;startdate&#x60;: The start date of the program. - &#x60;expirydate&#x60;: The expiration date of the program. - &#x60;id&#x60;: The ID of the transaction. - &#x60;created&#x60;: The timestamp of the creation of the loyalty program. - &#x60;amount&#x60;: The number of points in that transaction. - &#x60;archived&#x60;: Whether the session related to the transaction is archived. - &#x60;campaignid&#x60;: The ID of the campaign. - &#x60;flags&#x60;: The flags of the transaction, when applicable. The &#x60;createsNegativeBalance&#x60; flag indicates whether the transaction results in a negative balance. - &#x60;transactionUUID&#x60;: Unique identifier of the transaction in the UUID format. - &#x60;validityDuration&#x60;: The duration for which the points remain active, relative to the activation date. - &#x60;remainingAmount&#x60;: The current unused amount of points, when applicable to &#x60;addition&#x60; transactions. 
   # @param range_start Only return results from after this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @param range_end Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @param loyalty_program_id The identifier for the loyalty program.
@@ -923,7 +937,7 @@ describe 'ManagementApi' do
   # @option opts [Float] :application_id Filter results by Application ID.
   # @option opts [String] :language The [ISO-639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) code of the language in which the summary will be generated. 
   # @option opts [String] :coupon_code The coupon code for which to get the rejection reason.
-  # @return [InlineResponse20055]
+  # @return [InlineResponse20058]
   describe 'generate_coupon_rejections test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -943,7 +957,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20024]
+  # @return [InlineResponse20027]
   describe 'get_access_logs_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1031,7 +1045,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20041]
+  # @return [InlineResponse20044]
   describe 'get_additional_costs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1099,7 +1113,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
-  # @return [InlineResponse20038]
+  # @return [InlineResponse20041]
   describe 'get_application_customer_friends test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1115,7 +1129,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
-  # @return [InlineResponse20026]
+  # @option opts [Boolean] :with_loyalty_memberships When set to &#x60;true&#x60;, the &#x60;loyaltyProgramJoinDates&#x60; property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets.
+  # @return [InlineResponse20029]
   describe 'get_application_customers test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1131,7 +1146,8 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
-  # @return [InlineResponse20027]
+  # @option opts [Boolean] :with_loyalty_memberships When set to &#x60;true&#x60;, the &#x60;loyaltyProgramJoinDates&#x60; property returns the dates on which each customer joined the profile-based loyalty programs they are part of. This might decrease performance on large data sets.
+  # @return [InlineResponse20030]
   describe 'get_application_customers_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1146,7 +1162,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20034]
+  # @return [InlineResponse20037]
   describe 'get_application_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1173,7 +1189,7 @@ describe 'ManagementApi' do
   # @option opts [String] :rule_query Rule name filter for events
   # @option opts [String] :campaign_query Campaign name filter for events
   # @option opts [String] :effect_type The type of effect that was triggered. See [API effects](https://docs.talon.one/docs/dev/integration-api/api-effects).
-  # @return [InlineResponse20033]
+  # @return [InlineResponse20036]
   describe 'get_application_events_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1210,7 +1226,7 @@ describe 'ManagementApi' do
   # @option opts [String] :referral Filter by sessions with this referral. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters).
   # @option opts [String] :integration_id Filter by sessions with this integration ID. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters).
   # @option opts [String] :store_integration_id The integration ID of the store. You choose this ID when you create a store. By default, requires exact match. Use &#x60;partialMatch&#x3D;true&#x60; to search for partial matches (minimum 3 characters).
-  # @return [InlineResponse20031]
+  # @return [InlineResponse20034]
   describe 'get_application_sessions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1226,7 +1242,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets. - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
-  # @return [InlineResponse20032]
+  # @return [InlineResponse20035]
   describe 'get_application_sessions_by_customer_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1240,7 +1256,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse2008]
+  # @return [InlineResponse20010]
   describe 'get_applications test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1272,7 +1288,7 @@ describe 'ManagementApi' do
   # @option opts [String] :type Returned attributes will be filtered by supplied type
   # @option opts [String] :kind Returned attributes will be filtered by supplied kind (builtin or custom)
   # @option opts [String] :search Returned attributes will be filtered by searching case insensitive through Attribute name, description and type
-  # @return [InlineResponse20039]
+  # @return [InlineResponse20042]
   describe 'get_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1288,7 +1304,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [String] :profile_query The filter to select a profile.
-  # @return [InlineResponse20037]
+  # @return [InlineResponse20040]
   describe 'get_audience_memberships test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1303,7 +1319,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
-  # @return [InlineResponse20035]
+  # @return [InlineResponse20038]
   describe 'get_audiences test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1316,7 +1332,7 @@ describe 'ManagementApi' do
   # @param audience_ids The IDs of one or more audiences, separated by commas, by which to filter results. Do not provide more than 1000 audience IDs.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20036]
+  # @return [InlineResponse20039]
   describe 'get_audiences_analytics test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1345,7 +1361,7 @@ describe 'ManagementApi' do
   # @param range_end Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :granularity The time interval between the results in the returned time-series.
-  # @return [InlineResponse20025]
+  # @return [InlineResponse20028]
   describe 'get_campaign_analytics test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1362,7 +1378,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
-  # @return [InlineResponse2009]
+  # @return [InlineResponse20011]
   describe 'get_campaign_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1388,7 +1404,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20014]
+  # @return [InlineResponse20016]
   describe 'get_campaign_groups test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1406,7 +1422,7 @@ describe 'ManagementApi' do
   # @option opts [String] :name Filter results performing case-insensitive matching against the name of the campaign template.
   # @option opts [String] :tags Filter results performing case-insensitive matching against the tags of the campaign template. When used in conjunction with the \&quot;name\&quot; query parameter, a logical OR will be performed to search both tags and name for the provided values. 
   # @option opts [Integer] :user_id Filter results by user ID.
-  # @return [InlineResponse20015]
+  # @return [InlineResponse20017]
   describe 'get_campaign_templates test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1433,7 +1449,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :campaign_group_id Filter results to campaigns owned by the specified campaign access group ID.
   # @option opts [Integer] :template_id The ID of the campaign template this campaign was created from.
   # @option opts [Integer] :store_id Filter results to campaigns linked to the specified store ID.
-  # @return [InlineResponse2009]
+  # @return [InlineResponse20011]
   describe 'get_campaigns test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1455,7 +1471,7 @@ describe 'ManagementApi' do
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
   # @option opts [Integer] :management_key_id Filter results that match the given management key ID.
   # @option opts [Boolean] :include_old When this flag is set to false, the state without the change will not be returned. The default value is true.
-  # @return [InlineResponse20045]
+  # @return [InlineResponse20048]
   describe 'get_changes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1483,7 +1499,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
-  # @return [InlineResponse20023]
+  # @return [InlineResponse20026]
   describe 'get_collection_items test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1514,8 +1530,21 @@ describe 'ManagementApi' do
   # @option opts [DateTime] :starts_before Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon start date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   # @option opts [DateTime] :starts_after Filter results comparing the parameter value, expected to be an RFC3339 timestamp string, to the coupon start date timestamp. You can use any time zone setting. Talon.One will convert to UTC internally.
   # @option opts [Boolean] :values_only Filter results to only return the coupon codes (&#x60;value&#x60; column) without the associated coupon data.
-  # @return [InlineResponse20012]
+  # @return [InlineResponse20014]
   describe 'get_coupons_without_total_count test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_current_revision
+  # Get current revision version
+  # Get the current revision version for the given campaign.  **Note:** The [Campaign staging and revisions](https://docs.talon.one/docs/product/applications/manage-general-settings#campaign-staging-and-revisions) feature must be enabled for your Application. For more information, see [Revise campaigns](https://docs.talon.one/docs/product/campaigns/revise-campaigns). 
+  # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
+  # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
+  # @param [Hash] opts the optional parameters
+  # @return [Revision]
+  describe 'get_current_revision test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -1552,7 +1581,7 @@ describe 'ManagementApi' do
   # @option opts [String] :integration_id Filter results performing an exact matching against the profile integration identifier.
   # @option opts [String] :campaign_name Only return reports matching the campaign name.
   # @option opts [String] :advocate_name Only return reports matching the current customer referrer name.
-  # @return [InlineResponse20030]
+  # @return [InlineResponse20033]
   describe 'get_customer_activity_reports_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1597,7 +1626,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Integer] :achievement_id The ID of the achievement. You can get this ID with the [List achievement](https://docs.talon.one/management-api#tag/Achievements/operation/listAchievements) endpoint.
   # @option opts [String] :title Filter results by the &#x60;title&#x60; of an achievement.
-  # @return [InlineResponse20054]
+  # @return [InlineResponse20057]
   describe 'get_customer_profile_achievement_progress test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1611,7 +1640,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or live customer.
-  # @return [InlineResponse20029]
+  # @return [InlineResponse20032]
   describe 'get_customer_profiles test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1626,7 +1655,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :sandbox Indicates whether you are pointing to a sandbox or live customer.
-  # @return [InlineResponse20028]
+  # @return [InlineResponse20031]
   describe 'get_customers_by_attributes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1641,7 +1670,7 @@ describe 'ManagementApi' do
   # @param range_end Only return results from before this timestamp.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
-  # @return [InlineResponse20018]
+  # @return [InlineResponse20020]
   describe 'get_dashboard_statistics test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1657,7 +1686,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20043]
+  # @return [InlineResponse20046]
   describe 'get_event_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1686,8 +1715,20 @@ describe 'ManagementApi' do
   # @option opts [Float] :application_id Filter results by Application ID.
   # @option opts [Integer] :campaign_id Filter by the campaign ID on which the limit counters are used.
   # @option opts [String] :entity The name of the entity type that was exported.
-  # @return [InlineResponse20046]
+  # @return [InlineResponse20049]
   describe 'get_exports test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_giveaways_pool
+  # Get giveaway pool
+  # Retrieve the details of a specified giveaway pool.
+  # @param pool_id The ID of the pool. You can find it in the Campaign Manager, in the **Incentives** section.
+  # @param [Hash] opts the optional parameters
+  # @return [GiveawaysPool]
+  describe 'get_giveaways_pool test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -1719,7 +1760,7 @@ describe 'ManagementApi' do
   # @option opts [String] :subledger_id The ID of the subledger by which we filter the data.
   # @option opts [Array<String>] :customer_session_i_ds Filter the results by a list of customer session IDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?customerSessionIDs&#x3D;id1&amp;customerSessionIDs&#x3D;id2&#x60;.  The response contains only data associated with the specified sessions. 
   # @option opts [Array<String>] :transaction_uui_ds Filter the results by a list of transaction UUIDs.  To include multiple IDs, repeat the parameter for each one, for example, &#x60;?transactionUUIDs&#x3D;uuid1&amp;transactionUUIDs&#x3D;uuid2&#x60;.  The response contains only data associated with the specified transactions. 
-  # @return [InlineResponse20021]
+  # @return [InlineResponse20023]
   describe 'get_loyalty_card_transaction_logs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1737,7 +1778,7 @@ describe 'ManagementApi' do
   # @option opts [String] :identifier The card code by which to filter loyalty cards in the response.  **Important**: The loyalty card ID requires [URL encoding](https://www.w3schools.com/tags//ref_urlencode.asp) if it contains special characters. For example, you must encode &#x60;NewCard2026%&#x60; as &#x60;NewCard2026%25&#x60;. 
   # @option opts [Integer] :profile_id Filter results by customer profile ID.
   # @option opts [String] :batch_id Filter results by loyalty card batch ID.
-  # @return [InlineResponse20020]
+  # @return [InlineResponse20022]
   describe 'get_loyalty_cards test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1788,7 +1829,7 @@ describe 'ManagementApi' do
 
   # unit tests for get_loyalty_program_profile_ledger_transactions
   # List customer&#39;s loyalty transactions (Management API)
-  # Retrieve paginated results of loyalty transaction logs for the given Integration ID in the specified loyalty program.  You can filter transactions by date or by ledger (subledger or main ledger). If no filters are applied, the last 50 loyalty transactions for the given integration ID are returned.  &gt; [!note] **Note** &gt; - For most use cases, especially real-time integrations, use the Integration API endpoint: &gt;   [List customer&#39;s loyalty transactions](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). &gt; - To retrieve all loyalty program transaction logs in a given loyalty program, use the &gt;   [List loyalty program transactions](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyProgramTransactions) endpoint. 
+  # Retrieve paginated results of loyalty transaction logs for the given integration ID in the specified loyalty program.  You can filter transactions by date or by ledger (subledger or main ledger), and include the UUIDs of transactions referenced by deductions. If no filters are applied, the last 50 loyalty transactions for the given integration ID are returned.  &gt; [!note] **Note** &gt; - For most use cases, especially real-time integrations, use the Integration API endpoint: &gt;   [List customer&#39;s loyalty transactions](https://docs.talon.one/integration-api#tag/Loyalty/operation/getLoyaltyProgramProfileTransactions). &gt; - To retrieve all loyalty program transaction logs in a given loyalty program, use the &gt;   [List loyalty program transactions](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyProgramTransactions) endpoint. 
   # @param loyalty_program_id Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param integration_id The integration identifier for this customer profile. Must be: - Unique within the deployment. - Stable for the customer. Do not use an ID that the customer can update themselves. For example, you can use a database ID.  Once set, you cannot update this identifier. 
   # @param [Hash] opts the optional parameters
@@ -1800,8 +1841,9 @@ describe 'ManagementApi' do
   # @option opts [DateTime] :end_date Date and time by which results are returned. Results are filtered by transaction creation date.  &gt; [!note] **Note** &gt; - This must be an RFC3339 timestamp string. &gt; - You can include a time component in your string, for example, &#x60;T23:59:59&#x60; to specify the end of the day. The time zone setting &gt;   considered is &#x60;UTC&#x60;. If you do not include a time component, a default time value of &#x60;T00:00:00&#x60; (midnight) in &#x60;UTC&#x60; is considered. 
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+  # @option opts [Boolean] :include_references Whether to include the UUIDs of transactions referenced by deductions.  **Note:** Enabling this can decrease query performance, especially when no date filter is applied to a large transaction history. 
   # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-  # @return [InlineResponse2005]
+  # @return [InlineResponse2007]
   describe 'get_loyalty_program_profile_ledger_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1822,7 +1864,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [Boolean] :awaits_activation If &#x60;true&#x60;: Filters results to include only point transactions that have action-based activation and have not expired.  If &#x60;false&#x60;: Returns a &#x60;400&#x60; response. 
-  # @return [InlineResponse20019]
+  # @return [InlineResponse20021]
   describe 'get_loyalty_program_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1833,7 +1875,7 @@ describe 'ManagementApi' do
   # List loyalty programs
   # List the loyalty programs of the account.
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20017]
+  # @return [InlineResponse20019]
   describe 'get_loyalty_programs test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1893,7 +1935,7 @@ describe 'ManagementApi' do
   # @option opts [String] :valid Either \&quot;expired\&quot;, \&quot;validNow\&quot;, or \&quot;validFuture\&quot;. The first option matches referrals in which the expiration date is set and in the past. The second matches referrals in which start date is null or in the past and expiration date is null or in the future, the third matches referrals in which start date is set and in the future. 
   # @option opts [String] :usable Either \&quot;true\&quot; or \&quot;false\&quot;. If \&quot;true\&quot;, only referrals where &#x60;usageCounter &lt; usageLimit&#x60; will be returned, \&quot;false\&quot; will return only referrals where &#x60;usageCounter &gt;&#x3D; usageLimit&#x60;. 
   # @option opts [String] :advocate Filter results by match with a profile ID specified in the referral&#39;s AdvocateProfileIntegrationId field.
-  # @return [InlineResponse20013]
+  # @return [InlineResponse20015]
   describe 'get_referrals_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1949,7 +1991,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20010]
+  # @return [InlineResponse20012]
   describe 'get_rulesets test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -1988,7 +2030,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20044]
+  # @return [InlineResponse20047]
   describe 'get_users test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2019,7 +2061,7 @@ describe 'ManagementApi' do
   # @option opts [String] :visibility Filter results by visibility.
   # @option opts [Integer] :outgoing_integrations_type_id Filter results by outgoing integration type ID.
   # @option opts [String] :title Filter results performing case-insensitive matching against the webhook title.
-  # @return [InlineResponse20042]
+  # @return [InlineResponse20045]
   describe 'get_webhooks test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2031,7 +2073,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing the collection of string values that should be attached as payload for collection.  The file should be sent as multipart data.  The import **replaces** the initial content of the collection.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: the values in your collection.  A collection is limited to 500,000 items.  ## Example  &#x60;&#x60;&#x60; item Adidas Nike Asics &#x60;&#x60;&#x60;  &gt; [!note] Before sending a request to this endpoint, ensure the data in the &gt; CSV to import is different from the data currently stored in the collection. 
   # @param collection_id The ID of the collection. You can get it with the [List collections in account](#tag/Collections/operation/listAccountCollections) endpoint.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_account_collection test' do
     it 'should work' do
@@ -2044,7 +2086,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing a list of [picklist values](https://docs.talon.one/docs/product/account/dev-tools/managing-attributes#picklist-values) for the specified attribute.  The file should be sent as multipart data.  The import **replaces** the previous list of allowed values for this attribute, if any.  The CSV file **must** only contain the following column:  - &#x60;item&#x60;: The values in your allowed list, for example a list of SKUs.  An allowed list is limited to 500,000 items.  ## Example  &#x60;&#x60;&#x60;text item CS-VG-04032021-UP-50D-10 CS-DV-04042021-UP-49D-12 CS-DG-02082021-UP-50G-07 &#x60;&#x60;&#x60; 
   # @param attribute_id The ID of the attribute. You can find the ID in the Campaign Manager&#39;s URL when you display the details of an attribute in **Account** &gt; **Tools** &gt; **Attributes**.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_allowed_list test' do
     it 'should work' do
@@ -2057,7 +2099,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing the integration IDs of the members you want to add to an audience.  The file should be sent as multipart data and should contain only the following column (required):  - &#x60;profileintegrationid&#x60;: The integration ID of the customer profile.  The import **replaces** the previous list of audience members.  &gt; [!note] We recommend limiting your file size to 500 MB.  ## Example  &#x60;&#x60;&#x60;text profileintegrationid charles alexa &#x60;&#x60;&#x60; 
   # @param audience_id The ID of the audience.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_audiences_memberships test' do
     it 'should work' do
@@ -2073,7 +2115,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :action The action that this budget is limiting.
   # @option opts [String] :period The period to which the limit applies.  **Note**: For budgets with no period, set this to &#x60;overall&#x60;. 
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_campaign_store_budget test' do
     it 'should work' do
@@ -2087,7 +2129,7 @@ describe 'ManagementApi' do
   # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_campaign_stores test' do
     it 'should work' do
@@ -2102,7 +2144,7 @@ describe 'ManagementApi' do
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param collection_id The ID of the collection. You can get it with the [List collections in Application](#tag/Collections/operation/listCollectionsInApplication) endpoint.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_collection test' do
     it 'should work' do
@@ -2117,7 +2159,7 @@ describe 'ManagementApi' do
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :skip_duplicates An indicator of whether to skip duplicate coupon values instead of causing an error. Duplicate values are ignored when &#x60;skipDuplicates&#x3D;true&#x60;. 
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_coupons test' do
     it 'should work' do
@@ -2130,7 +2172,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing the loyalty cards that you want to use in your card-based loyalty program.  Send the file as multipart data.  It contains the following columns for each card:  - &#x60;identifier&#x60; (required): The identifier of the loyalty card, which must match the regular expression &#x60;^[A-Za-z0-9._%+@-]+$&#x60;. - &#x60;state&#x60; (required): The state of the loyalty card. It can be &#x60;active&#x60; or &#x60;inactive&#x60;. - &#x60;customerprofileids&#x60; (optional): An array of strings representing the identifiers of the customer profiles linked to the loyalty card. The identifiers should be separated with a semicolon (;). - &#x60;attributes&#x60; (optional): A JSON object that contains the loyalty card&#39;s custom attributes and their values. These attributes must be created and connected to this loyalty program before they can be assigned to the cards through this endpoint.  &gt; [!note] Your CSV file must contain less than 500,000 rows. Requests time out after 30 seconds.  ## Example  &#x60;&#x60;&#x60;csv identifier,state,customerprofileids,attributes 123-456-789AT,active,Alexa001;UserA,&#39;{\&quot;\&quot;my_attributes\&quot;\&quot;: \&quot;\&quot;10_off\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
   # @param loyalty_program_id Identifier of the card-based loyalty program containing the loyalty card. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_loyalty_cards test' do
     it 'should work' do
@@ -2143,7 +2185,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing existing customers to be assigned to existing tiers.  Send the file as multipart data.  &gt; [!important] This endpoint only works with loyalty programs with advanced &gt; tiers (with expiration and downgrade policy) feature enabled.  The CSV file should contain the following columns:  - &#x60;subledgerid&#x60; (optional): The ID of the subledger. If this field is empty, the main ledger will be used. - &#x60;customerprofileid&#x60;: The integration ID of the customer profile to whom the tier should be assigned. - &#x60;tiername&#x60;: The name of an existing tier to assign to the customer. - &#x60;expirydate&#x60;: The expiry date of the tier when the tier is reevaluated. It should be a future date.  About customer assignment to a tier:  - If the customer isn&#39;t already in a tier, the customer is assigned to the specified tier during the tier import. - If the customer is already in the tier that&#39;s specified in the CSV file, only the expiry date is updated.  &gt; [!note] We recommend importing customers into the tier that matches their &gt; current balance. If a customer is imported into a lower tier, any session &gt; or points update automatically upgrades them to the tier they qualify for.  To update a customer&#39;s tier, you can [add](/management-api#tag/Loyalty/operation/addLoyaltyPoints) or [deduct](/management-api#tag/Loyalty/operation/removeLoyaltyPoints) their loyalty points.  You can use the time zone of your choice. It is converted to UTC internally by Talon.One.  &gt; [!note] We recommend limiting your file size to 500 MB.  ## Example  &#x60;&#x60;&#x60;csv subledgerid,customerprofileid,tiername,expirydate SUB1,alexa,Gold,2024-03-21T07:32:14Z ,george,Silver,2025-04-16T21:12:37Z SUB2,avocado,Bronze,2026-05-03T11:47:01Z &#x60;&#x60;&#x60; 
   # @param loyalty_program_id Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_loyalty_customers_tiers test' do
     it 'should work' do
@@ -2153,10 +2195,10 @@ describe 'ManagementApi' do
 
   # unit tests for import_loyalty_join_dates
   # Import join dates for a loyalty program
-  # Upload a CSV file containing customer profile IDs and their join dates for the specified loyalty program. Send the file as multipart data.  &gt; [!important] This endpoint only works with profile-based loyalty programs.  The CSV file **must** contain the following columns:  - &#x60;customerprofileid&#x60;: The integration ID of the customer profile whose join   date you want to update. - &#x60;newjoindate&#x60;: The new join date for the customer in RFC3339 format. You   can use the time zone of your choice. It is converted to UTC internally   by Talon.One.  **Note**: - Customer profiles must already exist. If a referenced profile does not exist, the import fails with a &#x60;400&#x60; error. - If a join date already exists for a profile, the uploaded date replaces it.  &gt; [!note] We recommend limiting your file size to 500 MB.  ## Example  &#x60;&#x60;&#x60;csv customerprofileid,newjoindate customer1,2024-03-21T07:32:14Z customer2,2025-04-16T21:12:37Z customer3,2026-05-03T11:47:01Z &#x60;&#x60;&#x60; 
+  # Upload a CSV file containing customer profile IDs and their join dates for the specified loyalty program. Send the file as multipart data.  &gt; [!important] This endpoint only works with profile-based loyalty programs.  The CSV file **must** contain the following columns:  - &#x60;customerprofileid&#x60;: The integration ID of the customer profile whose join   date you want to update. - &#x60;joindate&#x60;: The join date for the customer in RFC3339 format. You   can use the time zone of your choice. It is converted to UTC internally   by Talon.One.  **Note**: - Customer profiles must already exist. If a referenced profile does not exist, the import fails with a &#x60;400&#x60; error. - If a join date already exists for a profile, the uploaded date replaces it. - If a join date is in the future at the time of the import, the import fails with a &#x60;400&#x60; error.  &gt; [!note] We recommend limiting your file size to 500 MB.  ## Example  &#x60;&#x60;&#x60;csv customerprofileid,joindate customer1,2024-03-21T07:32:14Z customer2,2025-04-16T21:12:37Z customer3,2026-05-03T11:47:01Z &#x60;&#x60;&#x60; 
   # @param loyalty_program_id Identifier of the profile-based loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_loyalty_join_dates test' do
     it 'should work' do
@@ -2170,7 +2212,7 @@ describe 'ManagementApi' do
   # @param loyalty_program_id Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint. 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :notifications_enabled Indicates whether the points import triggers notifications about its effects. For example, a notification is sent if the import upgrades a customer&#39;s tier or offsets their negative points balance.  This parameter is optional and defaults to &#x60;true&#x60;. 
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_loyalty_points test' do
     it 'should work' do
@@ -2183,7 +2225,7 @@ describe 'ManagementApi' do
   # Upload a CSV file containing the giveaway codes that should be created. Send the file as multipart data.  The CSV file contains the following columns:  - &#x60;code&#x60; (required): The code of your giveaway, for instance, a gift card redemption code. - &#x60;startdate&#x60;:  The start date in RFC3339 of the code redemption period. - &#x60;enddate&#x60;: The last date in RFC3339 of the code redemption period. - &#x60;attributes&#x60;: A JSON object describing _custom_ giveaway attribute names and their values, enclosed with double quotation marks.&lt;br /&gt;   For example, if you created a [custom attribute](https://docs.talon.one/docs/dev/concepts/attributes#custom-attributes)   called &#x60;provider&#x60; associated with the giveaway entity, the object in the CSV file, when opened in a text editor, must be: &#x60;\&quot;{\&quot;provider\&quot;: \&quot;myPartnerCompany\&quot;}\&quot;&#x60;.  The &#x60;startdate&#x60; and &#x60;enddate&#x60; have nothing to do with the _validity_ of the codes. They are only used by the Rule Engine to award the codes or not.  You can use the time zone setting of your choice. The values are converted to UTC internally by Talon.One.  &gt; [!note] **Note** &gt; - We recommend limiting your file size to 500MB. &gt; - You can import the same code multiple times. Duplicate codes are treated and distributed to customers as unique codes.  ## Example  &#x60;&#x60;&#x60;text code,startdate,enddate,attributes GIVEAWAY1,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY2,2020-11-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Amazon\&quot;\&quot;}\&quot; GIVEAWAY3,2021-01-10T23:00:00Z,2022-11-11T23:00:00Z,\&quot;{\&quot;\&quot;provider\&quot;\&quot;: \&quot;\&quot;Aliexpress\&quot;\&quot;}\&quot; &#x60;&#x60;&#x60; 
   # @param pool_id The ID of the pool. You can find it in the Campaign Manager, in the **Giveaways** section.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_pool_giveaways test' do
     it 'should work' do
@@ -2197,7 +2239,7 @@ describe 'ManagementApi' do
   # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :up_file The CSV file containing the data that is being imported.
+  # @option opts [String] :up_file The CSV file containing the data that is being imported.
   # @return [Import]
   describe 'import_referrals test' do
     it 'should work' do
@@ -2226,7 +2268,7 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
   # @option opts [String] :name Filter by collection name.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20025]
   describe 'list_account_collections test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2242,7 +2284,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :title Filter by the display name for the achievement in the campaign manager.  **Note**: If no &#x60;title&#x60; is provided, all the achievements from the campaign are returned. 
-  # @return [InlineResponse20052]
+  # @return [InlineResponse20055]
   describe 'list_achievements test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2254,11 +2296,12 @@ describe 'ManagementApi' do
   # List all achievements. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page_size The number of items in the response.
+  # @option opts [Array<Integer>] :campaign_id Filter results by one or more campaign IDs.  To include multiple IDs, repeat the parameter for each one, for example,&#x60;?campaignId&#x3D;123&amp;campaignId&#x3D;456&#x60;. The response contains only achievements associated with the specified campaigns. 
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [String] :title Filter by the display name of the achievement.
   # @option opts [Integer] :application_id Filter by the ID of an Application connected to the achievement.
-  # @return [InlineResponse20053]
+  # @return [InlineResponse20056]
   describe 'list_achievements_v2 test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2267,9 +2310,9 @@ describe 'ManagementApi' do
 
   # unit tests for list_all_roles_v2
   # List roles
-  # List all roles.
+  # List the roles defined in the deployment.  The roles returned depend on the role of the user calling this endpoint: - If the user has an admin role, all roles defined in the deployment are returned. - If the user does not have an admin role, only the roles currently assigned to this user are returned.  If your identity provider provisions roles through SCIM, any admin roles it defines are not included in this list.  To view the details of a specific role, use the [Get role](https://docs.talon.one/management-api#tag/Roles/operation/getRoleV2) endpoint. 
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20047]
+  # @return [InlineResponse20050]
   describe 'list_all_roles_v2 test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2284,7 +2327,7 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :name Filter by the display name of the Application cart item filter in the Application.  **Note**: If no &#x60;name&#x60; is provided, all the Application cart item filters in the Application are returned. 
-  # @return [InlineResponse20049]
+  # @return [InlineResponse20052]
   describe 'list_application_cart_item_filters test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2299,7 +2342,7 @@ describe 'ManagementApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :action The action that this budget is limiting.
   # @option opts [String] :period The period to which the limit applies.  **Note**: For budgets with no period, set this to &#x60;overall&#x60;. 
-  # @return [InlineResponse20050]
+  # @return [InlineResponse20053]
   describe 'list_campaign_store_budget_limits test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2316,7 +2359,7 @@ describe 'ManagementApi' do
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
   # @option opts [Array<String>] :sku Filter results by one or more SKUs. Must be exact match.
   # @option opts [Array<String>] :product_names Filter results by one or more product names. Must be exact match.
-  # @return [InlineResponse20040]
+  # @return [InlineResponse20043]
   describe 'list_catalog_items test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2334,7 +2377,7 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
   # @option opts [String] :name Filter by collection name.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20025]
   describe 'list_collections test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2351,7 +2394,7 @@ describe 'ManagementApi' do
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
   # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
   # @option opts [String] :name Filter by collection name.
-  # @return [InlineResponse20022]
+  # @return [InlineResponse20025]
   describe 'list_collections_in_application test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2366,8 +2409,24 @@ describe 'ManagementApi' do
   # @option opts [Integer] :page_size The number of items in the response.
   # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
   # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
-  # @return [InlineResponse20016]
+  # @return [InlineResponse20018]
   describe 'list_experiments test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for list_giveaways_pool
+  # List giveaway pools
+  # Retrieve all the giveaway pools for an account.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page_size The number of items in the response.
+  # @option opts [Integer] :skip The number of items to skip when paging through large result sets.
+  # @option opts [String] :sort The field by which results should be sorted. By default, results are sorted in ascending order. To sort them in descending order, prefix the field name with &#x60;-&#x60;.  **Note:** You may not be able to use all fields for sorting. This is due to performance limitations. 
+  # @option opts [Boolean] :with_total_result_size When this flag is set, the result includes the total number of results for this query. This might decrease performance on large data sets.  - When &#x60;true&#x60;: &#x60;totalResultSize&#x60; contains the total number of results for this query. - When &#x60;false&#x60;: Only &#x60;hasMore&#x60; is returned, and it is set to &#x60;true&#x60; when there are more results than shown on the page. 
+  # @option opts [String] :application_ids Filter by one or more Application IDs, separated by a comma.
+  # @return [InlineResponse20024]
+  describe 'list_giveaways_pool test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -2386,7 +2445,7 @@ describe 'ManagementApi' do
   # @option opts [String] :name The name of the store.
   # @option opts [String] :integration_id The integration ID of the store.
   # @option opts [String] :query Filter results by &#x60;name&#x60; or &#x60;integrationId&#x60;.
-  # @return [InlineResponse20048]
+  # @return [InlineResponse20051]
   describe 'list_stores test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2641,7 +2700,7 @@ describe 'ManagementApi' do
   # @option opts [String] :batch_id Filter results by batches of coupons
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code.
   # @option opts [String] :campaign_state Filter results by the state of the campaign.  - &#x60;enabled&#x60;: Campaigns that are scheduled, running (activated), or expired. - &#x60;running&#x60;: Campaigns that are running (activated). - &#x60;disabled&#x60;: Campaigns that are disabled. - &#x60;expired&#x60;: Campaigns that are expired. - &#x60;archived&#x60;: Campaigns that are archived. 
-  # @return [InlineResponse20012]
+  # @return [InlineResponse20014]
   describe 'search_coupons_advanced_application_wide_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2667,7 +2726,7 @@ describe 'ManagementApi' do
   # @option opts [String] :recipient_integration_id Filter results by match with a profile ID specified in the coupon&#39;s RecipientIntegrationId field.
   # @option opts [Boolean] :exact_match Filter results to an exact case-insensitive matching against the coupon code.
   # @option opts [String] :batch_id Filter results by batches of coupons
-  # @return [InlineResponse20012]
+  # @return [InlineResponse20014]
   describe 'search_coupons_advanced_without_total_count test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -2680,7 +2739,7 @@ describe 'ManagementApi' do
   # @param application_id The ID of the Application. It is displayed in your Talon.One deployment URL.
   # @param campaign_id The ID of the campaign. It is displayed in your Talon.One deployment URL.
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse20051]
+  # @return [InlineResponse20054]
   describe 'summarize_campaign_store_budget test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

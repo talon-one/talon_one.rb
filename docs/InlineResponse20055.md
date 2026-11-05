@@ -4,14 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**Array&lt;CouponFailureSummary&gt;**](CouponFailureSummary.md) |  | 
+**has_more** | **Boolean** |  | [optional] 
+**data** | [**Array&lt;Achievement&gt;**](Achievement.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20055.new(data: null)
+instance = TalonOne::InlineResponse20055.new(has_more: null,
+                                 data: null)
 ```
 
 

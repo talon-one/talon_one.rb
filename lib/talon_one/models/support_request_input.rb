@@ -23,7 +23,7 @@ module TalonOne
     # Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.
     attr_accessor :loyalty_program_id
 
-    # Identifier of the subledger the points are added to or deducted from. If there is no existing subledger with this ID, the subledger is created automatically.
+    # ID of the subledger the points are added to or deducted from. Must be combined with `loyaltyProgramId`. The subledger must already exist in the given loyalty program.
     attr_accessor :subledger_id
 
     # Integration ID of the customer profile linked to the support request.
@@ -80,7 +80,7 @@ module TalonOne
         :'application_id' => :'Integer',
         :'campaign_id' => :'Integer',
         :'loyalty_program_id' => :'Integer',
-        :'subledger_id' => :'Integer',
+        :'subledger_id' => :'String',
         :'customer_profile_id' => :'String',
         :'request_type' => :'String',
         :'request_value' => :'Float',

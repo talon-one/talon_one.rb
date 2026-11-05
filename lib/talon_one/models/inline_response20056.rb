@@ -14,24 +14,23 @@ require 'date'
 
 module TalonOne
   class InlineResponse20056
-    attr_accessor :catalog
+    attr_accessor :has_more
 
-    # The customer's loyalty balances for the specified loyalty program. Returned only when `loyaltyProgramId` is provided together with `profileIntegrationId` or `loyaltyCardId`. 
-    attr_accessor :loyalty
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'catalog' => :'catalog',
-        :'loyalty' => :'loyalty'
+        :'has_more' => :'hasMore',
+        :'data' => :'data'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'catalog' => :'InlineResponse20056Catalog',
-        :'loyalty' => :'Hash<String, LoyaltyBalances>'
+        :'has_more' => :'Boolean',
+        :'data' => :'Array<AchievementV2>'
       }
     end
 
@@ -56,13 +55,13 @@ module TalonOne
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'catalog')
-        self.catalog = attributes[:'catalog']
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
 
-      if attributes.key?(:'loyalty')
-        if (value = attributes[:'loyalty']).is_a?(Hash)
-          self.loyalty = value
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
         end
       end
     end
@@ -71,8 +70,8 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @catalog.nil?
-        invalid_properties.push('invalid value for "catalog", catalog cannot be nil.')
+      if @data.nil?
+        invalid_properties.push('invalid value for "data", data cannot be nil.')
       end
 
       invalid_properties
@@ -81,7 +80,7 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @catalog.nil?
+      return false if @data.nil?
       true
     end
 
@@ -90,8 +89,8 @@ module TalonOne
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          catalog == o.catalog &&
-          loyalty == o.loyalty
+          has_more == o.has_more &&
+          data == o.data
     end
 
     # @see the `==` method
@@ -103,7 +102,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [catalog, loyalty].hash
+      [has_more, data].hash
     end
 
     # Builds the object from hash

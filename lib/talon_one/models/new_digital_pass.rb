@@ -26,7 +26,7 @@ module TalonOne
     # The identifier of the loyalty card the pass is issued for.  **Note**: Only applicable for card-based loyalty programs. 
     attr_accessor :loyalty_card_id
 
-    # The wallet platform the pass is generated for.
+    # The wallet platform the pass is generated for. Possible values:  - `apple`: The digital pass is generated for Apple Wallet. - `google`: The digital pass is generated for Google Wallet. 
     attr_accessor :platform
 
     # A map of placeholder values that you provide to fill in the pass template. These values are not validated against the template. 

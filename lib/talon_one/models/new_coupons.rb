@@ -243,6 +243,14 @@ module TalonOne
         invalid_properties.push('invalid value for "number_of_coupons", number_of_coupons cannot be nil.')
       end
 
+      if @number_of_coupons > 20000
+        invalid_properties.push('invalid value for "number_of_coupons", must be smaller than or equal to 20000.')
+      end
+
+      if @number_of_coupons < 1
+        invalid_properties.push('invalid value for "number_of_coupons", must be greater than or equal to 1.')
+      end
+
       if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
         invalid_properties.push('invalid value for "recipient_integration_id", the character length must be smaller than or equal to 1000.')
       end
@@ -269,6 +277,8 @@ module TalonOne
       return false if !@reservation_limit.nil? && @reservation_limit > 999999
       return false if !@reservation_limit.nil? && @reservation_limit < 0
       return false if @number_of_coupons.nil?
+      return false if @number_of_coupons > 20000
+      return false if @number_of_coupons < 1
       return false if !@recipient_integration_id.nil? && @recipient_integration_id.to_s.length > 1000
       return false if !@coupon_pattern.nil? && @coupon_pattern.to_s.length > 100
       return false if !@coupon_pattern.nil? && @coupon_pattern.to_s.length < 3
@@ -319,6 +329,24 @@ module TalonOne
       end
 
       @reservation_limit = reservation_limit
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] number_of_coupons Value to be assigned
+    def number_of_coupons=(number_of_coupons)
+      if number_of_coupons.nil?
+        fail ArgumentError, 'number_of_coupons cannot be nil'
+      end
+
+      if number_of_coupons > 20000
+        fail ArgumentError, 'invalid value for "number_of_coupons", must be smaller than or equal to 20000.'
+      end
+
+      if number_of_coupons < 1
+        fail ArgumentError, 'invalid value for "number_of_coupons", must be greater than or equal to 1.'
+      end
+
+      @number_of_coupons = number_of_coupons
     end
 
     # Custom attribute writer method with validation
