@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Represents the targeted audience. 
+  # Target type when a specific audience is selected. 
   class LabelTargetAudience
     attr_accessor :type
 

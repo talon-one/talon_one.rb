@@ -31,7 +31,7 @@ module TalonOne
     def self.openapi_types
       {
         :'customer_session' => :'CustomerSessionV2',
-        :'effects' => :'Array<Effect>'
+        :'effects' => :'Array<Object>'
       }
     end
 

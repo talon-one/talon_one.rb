@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **promotion_rules** | [**Array&lt;RuleV2&gt;**](RuleV2.md) | Set of promotion rules. | 
 **strikethrough_rules** | [**Array&lt;RuleV2&gt;**](RuleV2.md) | Set of strikethrough rules. | [optional] 
 **selectors** | [**Array&lt;Selector&gt;**](Selector.md) | Variable bindings of type selector. | [optional] [readonly] 
-**bundles** | [**Array&lt;Bundle&gt;**](Bundle.md) | Variable bindings of type bundle. | [optional] [readonly] 
-**parameters** | [**Array&lt;TemplateParameter&gt;**](TemplateParameter.md) | Variable bindings of type template parameter. | [optional] [readonly] 
+**bundles** | [**Array&lt;Bundle&gt;**](Bundle.md) | Variable bindings of type bundle. | [optional] 
+**parameters** | [**Array&lt;TemplateParameter&gt;**](TemplateParameter.md) | Variable bindings of type template parameter. | [optional] 
 
 ## Code Sample
 

@@ -18,7 +18,7 @@ module TalonOne
     # Unique identifier for this block.
     attr_accessor :id
 
-    # Identifies the block variant and determines which additional properties are present in it.
+    # A block discriminator of type `checkReferral`.
     attr_accessor :type
 
     # Semantic labels attached to this block.
@@ -29,6 +29,28 @@ module TalonOne
 
     # Promotion blocks evaluated when this block fails or returns false.
     attr_accessor :on_failure
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -117,8 +139,20 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["checkReferral"])
+      return false unless type_validator.valid?(@type)
       return false if @redeem.nil?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["checkReferral"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.

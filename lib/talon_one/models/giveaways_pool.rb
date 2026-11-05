@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # Giveaways pools is an entity for managing multiple similar giveaways.
+  # A giveaway pool is an entity for managing multiple similar giveaways.
   class GiveawaysPool
     # The internal ID of this entity.
     attr_accessor :id
@@ -24,25 +24,25 @@ module TalonOne
     # The ID of the account that owns this entity.
     attr_accessor :account_id
 
-    # The name of this giveaways pool.
+    # The name of this giveaway pool.
     attr_accessor :name
 
-    # The description of this giveaways pool.
+    # The description of this giveaway pool.
     attr_accessor :description
 
-    # A list of the IDs of the applications that this giveaways pool is enabled for.
+    # A list of the IDs of the Applications that this giveaway pool is enabled for.
     attr_accessor :subscribed_applications_ids
 
     # Indicates if this program is a live or sandbox program. Programs of a given type can only be connected to Applications of the same type.
     attr_accessor :sandbox
 
-    # Timestamp of the most recent update to the giveaways pool.
+    # Timestamp of the most recent update to the giveaway pool.
     attr_accessor :modified
 
-    # ID of the user who created this giveaways pool.
+    # ID of the user who created this giveaway pool.
     attr_accessor :created_by
 
-    # ID of the user who last updated this giveaways pool if available.
+    # ID of the user who last updated this giveaway pool if available.
     attr_accessor :modified_by
 
     # Attribute mapping from ruby-style variable name to JSON key.

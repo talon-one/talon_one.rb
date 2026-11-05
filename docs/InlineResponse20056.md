@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**catalog** | [**InlineResponse20056Catalog**](InlineResponse20056Catalog.md) |  | 
-**loyalty** | [**Hash&lt;String, LoyaltyBalances&gt;**](LoyaltyBalances.md) | The customer&#39;s loyalty balances for the specified loyalty program. Returned only when &#x60;loyaltyProgramId&#x60; is provided together with &#x60;profileIntegrationId&#x60; or &#x60;loyaltyCardId&#x60;.  | [optional] 
+**has_more** | **Boolean** |  | [optional] 
+**data** | [**Array&lt;AchievementV2&gt;**](AchievementV2.md) |  | 
 
 ## Code Sample
 
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::InlineResponse20056.new(catalog: null,
-                                 loyalty: null)
+instance = TalonOne::InlineResponse20056.new(has_more: null,
+                                 data: null)
 ```
 
 

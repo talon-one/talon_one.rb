@@ -41,6 +41,9 @@ module TalonOne
     # Identifiers of the loyalty cards used during this event.
     attr_accessor :loyalty_cards
 
+    # The integration IDs of the unlocked rewards that can be used in this event. 
+    attr_accessor :reward_integration_ids
+
     # Optional list of requested information to be present on the response related to the tracking custom event. 
     attr_accessor :response_content
 
@@ -78,6 +81,7 @@ module TalonOne
         :'connected_session_id' => :'connectedSessionId',
         :'referral_code' => :'referralCode',
         :'loyalty_cards' => :'loyaltyCards',
+        :'reward_integration_ids' => :'rewardIntegrationIds',
         :'response_content' => :'responseContent'
       }
     end
@@ -94,6 +98,7 @@ module TalonOne
         :'connected_session_id' => :'String',
         :'referral_code' => :'String',
         :'loyalty_cards' => :'Array<String>',
+        :'reward_integration_ids' => :'Array<String>',
         :'response_content' => :'Array<String>'
       }
     end
@@ -156,6 +161,12 @@ module TalonOne
       if attributes.key?(:'loyalty_cards')
         if (value = attributes[:'loyalty_cards']).is_a?(Array)
           self.loyalty_cards = value
+        end
+      end
+
+      if attributes.key?(:'reward_integration_ids')
+        if (value = attributes[:'reward_integration_ids']).is_a?(Array)
+          self.reward_integration_ids = value
         end
       end
 
@@ -300,6 +311,7 @@ module TalonOne
           connected_session_id == o.connected_session_id &&
           referral_code == o.referral_code &&
           loyalty_cards == o.loyalty_cards &&
+          reward_integration_ids == o.reward_integration_ids &&
           response_content == o.response_content
     end
 
@@ -312,7 +324,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, integration_id, connected_session_id, referral_code, loyalty_cards, response_content].hash
+      [profile_id, store_integration_id, evaluable_campaign_ids, type, attributes, integration_id, connected_session_id, referral_code, loyalty_cards, reward_integration_ids, response_content].hash
     end
 
     # Builds the object from hash

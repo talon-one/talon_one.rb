@@ -35,6 +35,15 @@ module TalonOne
     # The integration ID of the session through which the points were earned.
     attr_accessor :session_integration_id
 
+    # The timestamp when the loyalty transaction occurred.
+    attr_accessor :created
+
+    # Indicates whether the points have an action-based start date. This property is returned only for point transactions with an action-based start date.
+    attr_accessor :awaits_activation
+
+    # The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which `AwaitsActivation` is `true` and `ExpireOn` is not set. 
+    attr_accessor :validity_duration
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -44,7 +53,10 @@ module TalonOne
         :'points' => :'Points',
         :'active_on' => :'ActiveOn',
         :'expire_on' => :'ExpireOn',
-        :'session_integration_id' => :'SessionIntegrationID'
+        :'session_integration_id' => :'SessionIntegrationID',
+        :'created' => :'Created',
+        :'awaits_activation' => :'AwaitsActivation',
+        :'validity_duration' => :'ValidityDuration'
       }
     end
 
@@ -57,7 +69,10 @@ module TalonOne
         :'points' => :'Float',
         :'active_on' => :'DateTime',
         :'expire_on' => :'DateTime',
-        :'session_integration_id' => :'String'
+        :'session_integration_id' => :'String',
+        :'created' => :'DateTime',
+        :'awaits_activation' => :'Boolean',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -110,6 +125,18 @@ module TalonOne
 
       if attributes.key?(:'session_integration_id')
         self.session_integration_id = attributes[:'session_integration_id']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'awaits_activation')
+        self.awaits_activation = attributes[:'awaits_activation']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
       end
     end
 
@@ -176,7 +203,10 @@ module TalonOne
           points == o.points &&
           active_on == o.active_on &&
           expire_on == o.expire_on &&
-          session_integration_id == o.session_integration_id
+          session_integration_id == o.session_integration_id &&
+          created == o.created &&
+          awaits_activation == o.awaits_activation &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -188,7 +218,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [loyalty_program_id, subledger_id, customer_profile_id, points, active_on, expire_on, session_integration_id].hash
+      [loyalty_program_id, subledger_id, customer_profile_id, points, active_on, expire_on, session_integration_id, created, awaits_activation, validity_duration].hash
     end
 
     # Builds the object from hash

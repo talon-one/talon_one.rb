@@ -29,9 +29,6 @@ module TalonOne
     # The customer profile to award the giveaway to. `Current` targets the customer in the current session; `Advocate` targets the person who invited their friend via referral program.
     attr_accessor :profile
 
-    # Blocks evaluated when this block fails or returns false.
-    attr_accessor :on_failure
-
     # Named error handlers evaluated when a specific error occurs.
     attr_accessor :on_error
 
@@ -65,7 +62,6 @@ module TalonOne
         :'tags' => :'tags',
         :'giveaway_pool' => :'giveawayPool',
         :'profile' => :'profile',
-        :'on_failure' => :'onFailure',
         :'on_error' => :'onError'
       }
     end
@@ -76,9 +72,8 @@ module TalonOne
         :'id' => :'String',
         :'type' => :'String',
         :'tags' => :'Array<String>',
-        :'giveaway_pool' => :'GiveawayPoolReference',
+        :'giveaway_pool' => :'GiveawayPoolBlockReference',
         :'profile' => :'String',
-        :'on_failure' => :'Array<Object>',
         :'on_error' => :'Hash<String, Array<Object>>'
       }
     end
@@ -124,12 +119,6 @@ module TalonOne
 
       if attributes.key?(:'profile')
         self.profile = attributes[:'profile']
-      end
-
-      if attributes.key?(:'on_failure')
-        if (value = attributes[:'on_failure']).is_a?(Array)
-          self.on_failure = value
-        end
       end
 
       if attributes.key?(:'on_error')
@@ -189,7 +178,6 @@ module TalonOne
           tags == o.tags &&
           giveaway_pool == o.giveaway_pool &&
           profile == o.profile &&
-          on_failure == o.on_failure &&
           on_error == o.on_error
     end
 
@@ -202,7 +190,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, tags, giveaway_pool, profile, on_failure, on_error].hash
+      [id, type, tags, giveaway_pool, profile, on_error].hash
     end
 
     # Builds the object from hash

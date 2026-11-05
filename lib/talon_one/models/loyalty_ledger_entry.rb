@@ -53,6 +53,9 @@ module TalonOne
     # The duration for which the points remain active, relative to the  activation date.  **Note**: This only applies to points for which `awaitsActivation` is `true` and `expiryDate` is not set. 
     attr_accessor :validity_duration
 
+    # Indicates whether the points have an action-based start date. This property is returned only for point transactions with an action-based start date.
+    attr_accessor :awaits_activation
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -71,7 +74,8 @@ module TalonOne
         :'user_id' => :'userID',
         :'archived' => :'archived',
         :'flags' => :'flags',
-        :'validity_duration' => :'validityDuration'
+        :'validity_duration' => :'validityDuration',
+        :'awaits_activation' => :'awaitsActivation'
       }
     end
 
@@ -93,7 +97,8 @@ module TalonOne
         :'user_id' => :'Integer',
         :'archived' => :'Boolean',
         :'flags' => :'LoyaltyLedgerEntryFlags',
-        :'validity_duration' => :'String'
+        :'validity_duration' => :'String',
+        :'awaits_activation' => :'Boolean'
       }
     end
 
@@ -181,6 +186,10 @@ module TalonOne
       if attributes.key?(:'validity_duration')
         self.validity_duration = attributes[:'validity_duration']
       end
+
+      if attributes.key?(:'awaits_activation')
+        self.awaits_activation = attributes[:'awaits_activation']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -246,7 +255,8 @@ module TalonOne
           user_id == o.user_id &&
           archived == o.archived &&
           flags == o.flags &&
-          validity_duration == o.validity_duration
+          validity_duration == o.validity_duration &&
+          awaits_activation == o.awaits_activation
     end
 
     # @see the `==` method
@@ -258,7 +268,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created, program_id, customer_profile_id, card_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id, archived, flags, validity_duration].hash
+      [created, program_id, customer_profile_id, card_id, customer_session_id, event_id, type, amount, start_date, expiry_date, name, sub_ledger_id, user_id, archived, flags, validity_duration, awaits_activation].hash
     end
 
     # Builds the object from hash

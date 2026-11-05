@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;CustomerProfile&gt;**](CustomerProfile.md) |  | 
+**data** | [**Array&lt;CustomerReservation&gt;**](CustomerReservation.md) |  | 
 
 ## Code Sample
 

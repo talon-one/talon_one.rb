@@ -35,9 +35,6 @@ module TalonOne
     # A custom description recorded as the reason for the point deduction.
     attr_accessor :name
 
-    # Promotion blocks evaluated when this block fails or returns false.
-    attr_accessor :on_failure
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -47,8 +44,7 @@ module TalonOne
         :'program' => :'program',
         :'subledger' => :'subledger',
         :'value' => :'value',
-        :'name' => :'name',
-        :'on_failure' => :'onFailure'
+        :'name' => :'name'
       }
     end
 
@@ -61,8 +57,7 @@ module TalonOne
         :'program' => :'RedeemLoyaltyPointsBlockProgram',
         :'subledger' => :'String',
         :'value' => :'Object',
-        :'name' => :'String',
-        :'on_failure' => :'Array<Object>'
+        :'name' => :'String'
       }
     end
 
@@ -116,12 +111,6 @@ module TalonOne
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
-
-      if attributes.key?(:'on_failure')
-        if (value = attributes[:'on_failure']).is_a?(Array)
-          self.on_failure = value
-        end
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -168,8 +157,7 @@ module TalonOne
           program == o.program &&
           subledger == o.subledger &&
           value == o.value &&
-          name == o.name &&
-          on_failure == o.on_failure
+          name == o.name
     end
 
     # @see the `==` method
@@ -181,7 +169,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, tags, program, subledger, value, name, on_failure].hash
+      [id, type, tags, program, subledger, value, name].hash
     end
 
     # Builds the object from hash

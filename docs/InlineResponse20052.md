@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
-**data** | [**Array&lt;Achievement&gt;**](Achievement.md) |  | 
+**data** | [**Array&lt;ApplicationCIF&gt;**](ApplicationCIF.md) |  | 
 
 ## Code Sample
 

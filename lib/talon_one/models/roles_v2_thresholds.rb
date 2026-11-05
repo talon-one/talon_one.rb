@@ -13,6 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # Support user limits for actions that require admin approval within the given loyalty program.
   class RolesV2Thresholds
     # Identifier of the loyalty program. You can get the ID with the [List loyalty programs](https://docs.talon.one/management-api#tag/Loyalty/operation/getLoyaltyPrograms) endpoint.
     attr_accessor :loyalty_program_id

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | 
-**data** | [**Array&lt;ApplicationEvent&gt;**](ApplicationEvent.md) |  | 
+**data** | [**Array&lt;CustomerActivityReport&gt;**](CustomerActivityReport.md) |  | 
 
 ## Code Sample
 

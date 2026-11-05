@@ -33,6 +33,12 @@ module TalonOne
     # The loyalty points required to activate the reward. Each object defines the specific loyalty program and subledger from which points are deducted when activating the reward.  **Note:** - Objects with an `id` are updated. - Objects without an `id` are created. - Existing objects omitted from the payload are deleted. 
     attr_accessor :points_required
 
+    # The duration for which the customer rewards unlocked from this reward remain active, relative to when the customer reward was unlocked.  The time format is an **integer** followed by one letter indicating the time unit.  Examples: `5D`, `7W`, `10M`, `15Y`.  Available units:  - `D`: days - `W`: weeks - `M`: months - `Y`: years  You can round certain units up or down: - `_D` for rounding down days only. Signifies the start of the day. - `_U` for rounding up days, weeks, months and years. Signifies the end of the day, week, month or year.  This field cannot be used in combination with `expiryDate`. If both `validityDuration` and `expiryDate` are not set, customer rewards have unlimited validity. 
+    attr_accessor :validity_duration
+
+    # Expiry date of the customer rewards unlocked from this reward. Customer rewards never expire if this is omitted and `validityDuration` is not set.  **Note:** - The date must be in the future. - This field cannot be used in combination with `validityDuration`. 
+    attr_accessor :expiry_date
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -64,7 +70,9 @@ module TalonOne
         :'eligibility_conditions' => :'eligibilityConditions',
         :'rule' => :'rule',
         :'bindings' => :'bindings',
-        :'points_required' => :'pointsRequired'
+        :'points_required' => :'pointsRequired',
+        :'validity_duration' => :'validityDuration',
+        :'expiry_date' => :'expiryDate'
       }
     end
 
@@ -77,7 +85,9 @@ module TalonOne
         :'eligibility_conditions' => :'Rule',
         :'rule' => :'Rule',
         :'bindings' => :'Array<Binding>',
-        :'points_required' => :'Array<RewardPointsRequired>'
+        :'points_required' => :'Array<RewardPointsRequired>',
+        :'validity_duration' => :'String',
+        :'expiry_date' => :'DateTime'
       }
     end
 
@@ -132,6 +142,14 @@ module TalonOne
         if (value = attributes[:'points_required']).is_a?(Array)
           self.points_required = value
         end
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
+      end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
       end
     end
 
@@ -200,7 +218,9 @@ module TalonOne
           eligibility_conditions == o.eligibility_conditions &&
           rule == o.rule &&
           bindings == o.bindings &&
-          points_required == o.points_required
+          points_required == o.points_required &&
+          validity_duration == o.validity_duration &&
+          expiry_date == o.expiry_date
     end
 
     # @see the `==` method
@@ -212,7 +232,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, status, eligibility_conditions, rule, bindings, points_required].hash
+      [name, description, status, eligibility_conditions, rule, bindings, points_required, validity_duration, expiry_date].hash
     end
 
     # Builds the object from hash

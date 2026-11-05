@@ -9,8 +9,7 @@ Name | Type | Description | Notes
 **tags** | **Array&lt;String&gt;** | Semantic labels attached to this block. | [optional] [readonly] 
 **notification_type** | **String** | The type of notification to display. | 
 **title** | **String** | The notification heading shown to the customer. | 
-**body** | **String** | The notification body text. Supports template placeholders (e.g. \&quot;{{$Session.Total}}\&quot;) evaluated at rule execution time. | [optional] 
-**on_failure** | **Array&lt;Object&gt;** | Blocks evaluated when this block fails or returns false. | [optional] 
+**body** | **String** | The notification body text. Supports template placeholders (e.g. \&quot;{{$Session.Total}}\&quot;) evaluated at rule execution time. | 
 **on_error** | **Hash&lt;String, Array&lt;Object&gt;&gt;** | Named error handlers evaluated when a specific error occurs. | [optional] 
 
 ## Code Sample
@@ -24,7 +23,6 @@ instance = TalonOne::ShowNotificationBlock.new(id: a1b2c3d4-e5f6-7890-abcd-ef123
                                  notification_type: Info,
                                  title: You earned a reward!,
                                  body: You saved $10 on your order.,
-                                 on_failure: null,
                                  on_error: null)
 ```
 

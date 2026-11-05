@@ -50,6 +50,9 @@ module TalonOne
     # The Integration ID of the Customer Profile that referred this Customer in the Application.
     attr_accessor :advocate_integration_id
 
+    # The dates on which the customer joined the profile-based loyalty programs they are part of. Returned only when the `withLoyaltyMemberships` query parameter is `true`.
+    attr_accessor :loyalty_program_join_dates
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +67,8 @@ module TalonOne
         :'audience_memberships' => :'audienceMemberships',
         :'last_activity' => :'lastActivity',
         :'sandbox' => :'sandbox',
-        :'advocate_integration_id' => :'advocateIntegrationId'
+        :'advocate_integration_id' => :'advocateIntegrationId',
+        :'loyalty_program_join_dates' => :'loyaltyProgramJoinDates'
       }
     end
 
@@ -82,7 +86,8 @@ module TalonOne
         :'audience_memberships' => :'Array<AudienceMembership>',
         :'last_activity' => :'DateTime',
         :'sandbox' => :'Boolean',
-        :'advocate_integration_id' => :'String'
+        :'advocate_integration_id' => :'String',
+        :'loyalty_program_join_dates' => :'Array<LoyaltyMembership>'
       }
     end
 
@@ -157,6 +162,12 @@ module TalonOne
 
       if attributes.key?(:'advocate_integration_id')
         self.advocate_integration_id = attributes[:'advocate_integration_id']
+      end
+
+      if attributes.key?(:'loyalty_program_join_dates')
+        if (value = attributes[:'loyalty_program_join_dates']).is_a?(Array)
+          self.loyalty_program_join_dates = value
+        end
       end
     end
 
@@ -263,7 +274,8 @@ module TalonOne
           audience_memberships == o.audience_memberships &&
           last_activity == o.last_activity &&
           sandbox == o.sandbox &&
-          advocate_integration_id == o.advocate_integration_id
+          advocate_integration_id == o.advocate_integration_id &&
+          loyalty_program_join_dates == o.loyalty_program_join_dates
     end
 
     # @see the `==` method
@@ -275,7 +287,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created, integration_id, attributes, account_id, closed_sessions, total_sales, loyalty_memberships, audience_memberships, last_activity, sandbox, advocate_integration_id].hash
+      [id, created, integration_id, attributes, account_id, closed_sessions, total_sales, loyalty_memberships, audience_memberships, last_activity, sandbox, advocate_integration_id, loyalty_program_join_dates].hash
     end
 
     # Builds the object from hash

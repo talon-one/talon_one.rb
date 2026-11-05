@@ -68,12 +68,6 @@ describe 'ShowNotificationBlock' do
     end
   end
 
-  describe 'test attribute "on_failure"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "on_error"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

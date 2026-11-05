@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::CampaignEligibilityDetails.new(passed: null,
-                                 coupon_code: null,
+instance = TalonOne::CampaignEligibilityDetails.new(passed: false,
+                                 coupon_code: XMAS-20-2021,
                                  details: null)
 ```
 

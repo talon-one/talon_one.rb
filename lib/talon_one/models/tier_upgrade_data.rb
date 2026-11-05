@@ -44,6 +44,34 @@ module TalonOne
     # The exact date and time the tier was changed.
     attr_accessor :timestamp_of_tier_change
 
+    # The source of the tier change, whether from a points change or boost. 
+    attr_accessor :source
+
+    # The reason for the tier change. 
+    attr_accessor :reason
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -56,7 +84,9 @@ module TalonOne
         :'points_required_to_the_next_tier' => :'PointsRequiredToTheNextTier',
         :'next_tier' => :'NextTier',
         :'tier_expiration_date' => :'TierExpirationDate',
-        :'timestamp_of_tier_change' => :'TimestampOfTierChange'
+        :'timestamp_of_tier_change' => :'TimestampOfTierChange',
+        :'source' => :'Source',
+        :'reason' => :'Reason'
       }
     end
 
@@ -72,7 +102,9 @@ module TalonOne
         :'points_required_to_the_next_tier' => :'Float',
         :'next_tier' => :'String',
         :'tier_expiration_date' => :'DateTime',
-        :'timestamp_of_tier_change' => :'DateTime'
+        :'timestamp_of_tier_change' => :'DateTime',
+        :'source' => :'String',
+        :'reason' => :'String'
       }
     end
 
@@ -138,6 +170,16 @@ module TalonOne
       if attributes.key?(:'timestamp_of_tier_change')
         self.timestamp_of_tier_change = attributes[:'timestamp_of_tier_change']
       end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      else
+        self.source = 'points'
+      end
+
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -190,6 +232,8 @@ module TalonOne
       return false if @current_points.nil?
       return false if @tier_expiration_date.nil?
       return false if @timestamp_of_tier_change.nil?
+      source_validator = EnumAttributeValidator.new('String', ["boost", "points"])
+      return false unless source_validator.valid?(@source)
       true
     end
 
@@ -207,6 +251,16 @@ module TalonOne
       @loyalty_program_id = loyalty_program_id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["boost", "points"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
+      end
+      @source = source
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -221,7 +275,9 @@ module TalonOne
           points_required_to_the_next_tier == o.points_required_to_the_next_tier &&
           next_tier == o.next_tier &&
           tier_expiration_date == o.tier_expiration_date &&
-          timestamp_of_tier_change == o.timestamp_of_tier_change
+          timestamp_of_tier_change == o.timestamp_of_tier_change &&
+          source == o.source &&
+          reason == o.reason
     end
 
     # @see the `==` method
@@ -233,7 +289,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_profile_id, loyalty_program_id, subledger_id, current_tier, current_points, old_tier, points_required_to_the_next_tier, next_tier, tier_expiration_date, timestamp_of_tier_change].hash
+      [customer_profile_id, loyalty_program_id, subledger_id, current_tier, current_points, old_tier, points_required_to_the_next_tier, next_tier, tier_expiration_date, timestamp_of_tier_change, source, reason].hash
     end
 
     # Builds the object from hash

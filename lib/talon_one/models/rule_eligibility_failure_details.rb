@@ -36,6 +36,12 @@ module TalonOne
     # The index of the effect that caused the rule to fail.
     attr_accessor :effect_index
 
+    # The index of the rule that failed within the ruleset.
+    attr_accessor :rule_index
+
+    # The ID of the ruleset containing the rule that failed.
+    attr_accessor :ruleset_id
+
     # Additional details about the failure.
     attr_accessor :details
 
@@ -71,6 +77,8 @@ module TalonOne
         :'referral_value' => :'referralValue',
         :'condition_index' => :'conditionIndex',
         :'effect_index' => :'effectIndex',
+        :'rule_index' => :'ruleIndex',
+        :'ruleset_id' => :'rulesetId',
         :'details' => :'details'
       }
     end
@@ -85,6 +93,8 @@ module TalonOne
         :'referral_value' => :'String',
         :'condition_index' => :'Integer',
         :'effect_index' => :'Integer',
+        :'rule_index' => :'Integer',
+        :'ruleset_id' => :'Integer',
         :'details' => :'String'
       }
     end
@@ -136,6 +146,14 @@ module TalonOne
 
       if attributes.key?(:'effect_index')
         self.effect_index = attributes[:'effect_index']
+      end
+
+      if attributes.key?(:'rule_index')
+        self.rule_index = attributes[:'rule_index']
+      end
+
+      if attributes.key?(:'ruleset_id')
+        self.ruleset_id = attributes[:'ruleset_id']
       end
 
       if attributes.key?(:'details')
@@ -190,6 +208,8 @@ module TalonOne
           referral_value == o.referral_value &&
           condition_index == o.condition_index &&
           effect_index == o.effect_index &&
+          rule_index == o.rule_index &&
+          ruleset_id == o.ruleset_id &&
           details == o.details
     end
 
@@ -202,7 +222,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [failure_code, coupon_id, coupon_value, referral_id, referral_value, condition_index, effect_index, details].hash
+      [failure_code, coupon_id, coupon_value, referral_id, referral_value, condition_index, effect_index, rule_index, ruleset_id, details].hash
     end
 
     # Builds the object from hash

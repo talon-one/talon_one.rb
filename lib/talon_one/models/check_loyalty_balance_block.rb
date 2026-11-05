@@ -29,10 +29,10 @@ module TalonOne
 
     attr_accessor :program
 
-    # The name of the subledger to check the balance of. Can be empty if this block checks the loyalty program's main ledger balance instead of a subledger.
+    # The name of the subledger to check the balance of. Can be empty if this block checks the loyalty program's main ledger balance instead of a subledger. A subledger can only be used when the loyalty program has subledgers enabled.
     attr_accessor :subledger
 
-    # The type of balance to check:  - `current` is the sum of currently active points  - `pending` is the sum of pending points.  - `negative` is the sum of negative points.  - `tentativeCurrent` is the tentative points balance within the current open customer session.
+    # The type of balance to check:  - `current` is the sum of currently active points  - `pending` is the sum of pending points.  - `negative` is the sum of negative points. It cannot be used with a subledger.  - `tentativeCurrent` is the tentative points balance within the current open customer session.
     attr_accessor :balance
 
     # The numeric value to compare the balance against.

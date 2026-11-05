@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pass_id** | **String** | The ID of the generated digital pass. | 
 **pass_template_id** | **String** | The ID of the digital pass template used to generate the pass. | 
-**status** | **String** | The status of the digital pass. | 
+**status** | **String** | The status of the digital pass.  &#x60;created&#x60; indicates that the pass was generated and is ready to be added to a wallet.  | 
 **pass_url** | **String** | The URL you can use to let the customer add the digital pass to their wallet. | 
 
 ## Code Sample

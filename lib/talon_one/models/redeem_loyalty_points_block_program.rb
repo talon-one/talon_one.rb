@@ -84,14 +84,6 @@ module TalonOne
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @title.nil?
-        invalid_properties.push('invalid value for "title", title cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -99,8 +91,6 @@ module TalonOne
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @name.nil?
-      return false if @title.nil?
       true
     end
 

@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **referral_value** | **String** | The referral code that was being evaluated when the rule failed.  | [optional] 
 **condition_index** | **Integer** | The index of the condition that caused the rule to fail. | [optional] 
 **effect_index** | **Integer** | The index of the effect that caused the rule to fail. | [optional] 
+**rule_index** | **Integer** | The index of the rule that failed within the ruleset. | [optional] 
+**ruleset_id** | **Integer** | The ID of the ruleset containing the rule that failed. | [optional] 
 **details** | **String** | Additional details about the failure. | 
 
 ## Code Sample
@@ -25,6 +27,8 @@ instance = TalonOne::RuleEligibilityFailureDetails.new(failure_code: null,
                                  referral_value: null,
                                  condition_index: null,
                                  effect_index: null,
+                                 rule_index: 0,
+                                 ruleset_id: 123,
                                  details: null)
 ```
 

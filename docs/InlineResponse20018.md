@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_result_size** | **Integer** |  | 
-**data** | [**Array&lt;LoyaltyDashboardData&gt;**](LoyaltyDashboardData.md) |  | 
+**data** | [**Array&lt;Experiment&gt;**](Experiment.md) |  | 
 
 ## Code Sample
 

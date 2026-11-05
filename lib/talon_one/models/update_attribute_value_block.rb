@@ -76,7 +76,7 @@ module TalonOne
         :'type' => :'String',
         :'tags' => :'Array<String>',
         :'operator' => :'String',
-        :'attribute' => :'UpdateAttributeValueBlockAttribute',
+        :'attribute' => :'AttributeBlockReference',
         :'value' => :'Object',
         :'target' => :'UpdateAttributeValueBlockTarget'
       }

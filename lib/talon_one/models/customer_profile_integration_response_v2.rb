@@ -67,7 +67,7 @@ module TalonOne
         :'campaign_eligibility' => :'Array<CampaignEligibility>',
         :'awarded_giveaways' => :'Array<Giveaway>',
         :'rewards' => :'Array<RewardWithUnlocks>',
-        :'effects' => :'Array<Effect>',
+        :'effects' => :'Array<Object>',
         :'created_coupons' => :'Array<Coupon>',
         :'created_referrals' => :'Array<Referral>'
       }

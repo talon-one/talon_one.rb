@@ -27,7 +27,7 @@ module TalonOne
     # An indicator of how the block compares its elements.
     attr_accessor :operator
 
-    # The customer profile to check against the audience. `Current` targets the customer in the current session; `Advocate` targets the person who invited their friend via referral program.
+    # The customer profile to check against the audience. `Current` targets the customer in the current session; `Advocate` targets the person who invited their friend via referral program. Only applies to the `member` and `not(member)` operators; ignored for `justJoined` and `justLeft`.
     attr_accessor :profile
 
     attr_accessor :audience
@@ -78,7 +78,7 @@ module TalonOne
         :'tags' => :'Array<String>',
         :'operator' => :'String',
         :'profile' => :'String',
-        :'audience' => :'CheckAudienceBlockAudience',
+        :'audience' => :'AudienceBlockReference',
         :'on_failure' => :'Array<Object>'
       }
     end
@@ -149,10 +149,6 @@ module TalonOne
         invalid_properties.push('invalid value for "operator", operator cannot be nil.')
       end
 
-      if @profile.nil?
-        invalid_properties.push('invalid value for "profile", profile cannot be nil.')
-      end
-
       if @audience.nil?
         invalid_properties.push('invalid value for "audience", audience cannot be nil.')
       end
@@ -167,7 +163,6 @@ module TalonOne
       return false if @operator.nil?
       operator_validator = EnumAttributeValidator.new('String', ["member", "not(member)", "justJoined", "justLeft"])
       return false unless operator_validator.valid?(@operator)
-      return false if @profile.nil?
       profile_validator = EnumAttributeValidator.new('String', ["Current", "Advocate"])
       return false unless profile_validator.valid?(@profile)
       return false if @audience.nil?

@@ -37,7 +37,7 @@ module TalonOne
     # The type of notification.
     attr_accessor :notification_type
 
-    # Timestamp at which the notification was sent.
+    # Timestamp when the notification was sent by Talon.One. There may be a delay before the notification is delivered to the user.
     attr_accessor :sent_at
 
     class EnumAttributeValidator

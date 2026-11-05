@@ -73,7 +73,7 @@ module TalonOne
         :'loyalty' => :'Loyalty',
         :'triggered_campaigns' => :'Array<Campaign>',
         :'campaign_eligibility' => :'Array<CampaignEligibility>',
-        :'effects' => :'Array<Effect>',
+        :'effects' => :'Array<Object>',
         :'rule_failure_reasons' => :'Array<RuleFailureReason>',
         :'created_coupons' => :'Array<Coupon>',
         :'created_referrals' => :'Array<Referral>',

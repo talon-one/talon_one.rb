@@ -28,7 +28,7 @@ module TalonOne
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'effects' => :'Array<Effect>'
+        :'effects' => :'Array<Object>'
       }
     end
 

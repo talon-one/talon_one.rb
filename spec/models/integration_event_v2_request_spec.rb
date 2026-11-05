@@ -78,4 +78,10 @@ describe 'IntegrationEventV2Request' do
     end
   end
 
+  describe 'test attribute "reward_integration_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

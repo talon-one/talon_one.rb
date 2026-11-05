@@ -73,7 +73,7 @@ module TalonOne
         :'type' => :'String',
         :'tags' => :'Array<String>',
         :'operator' => :'String',
-        :'achievement' => :'CheckAchievementBlockAchievement',
+        :'achievement' => :'AchievementBlockReference',
         :'on_failure' => :'Array<Object>'
       }
     end

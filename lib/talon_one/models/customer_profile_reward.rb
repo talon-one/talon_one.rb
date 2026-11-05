@@ -54,7 +54,7 @@ module TalonOne
     attr_accessor :loyalty_program_id
 
     # The identifier of the loyalty card, which must match the regular expression `^[A-Za-z0-9._%+@-]+$`. 
-    attr_accessor :loyalty_card_identifier
+    attr_accessor :loyalty_card_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -94,7 +94,7 @@ module TalonOne
         :'used_at' => :'usedAt',
         :'used_by_profile_integration_id' => :'usedByProfileIntegrationId',
         :'loyalty_program_id' => :'loyaltyProgramId',
-        :'loyalty_card_identifier' => :'loyaltyCardIdentifier'
+        :'loyalty_card_id' => :'loyaltyCardId'
       }
     end
 
@@ -114,7 +114,7 @@ module TalonOne
         :'used_at' => :'DateTime',
         :'used_by_profile_integration_id' => :'String',
         :'loyalty_program_id' => :'Integer',
-        :'loyalty_card_identifier' => :'String'
+        :'loyalty_card_id' => :'String'
       }
     end
 
@@ -191,8 +191,8 @@ module TalonOne
         self.loyalty_program_id = attributes[:'loyalty_program_id']
       end
 
-      if attributes.key?(:'loyalty_card_identifier')
-        self.loyalty_card_identifier = attributes[:'loyalty_card_identifier']
+      if attributes.key?(:'loyalty_card_id')
+        self.loyalty_card_id = attributes[:'loyalty_card_id']
       end
     end
 
@@ -228,17 +228,17 @@ module TalonOne
         invalid_properties.push('invalid value for "unlocked_at", unlocked_at cannot be nil.')
       end
 
-      if !@loyalty_card_identifier.nil? && @loyalty_card_identifier.to_s.length > 108
-        invalid_properties.push('invalid value for "loyalty_card_identifier", the character length must be smaller than or equal to 108.')
+      if !@loyalty_card_id.nil? && @loyalty_card_id.to_s.length > 108
+        invalid_properties.push('invalid value for "loyalty_card_id", the character length must be smaller than or equal to 108.')
       end
 
-      if !@loyalty_card_identifier.nil? && @loyalty_card_identifier.to_s.length < 4
-        invalid_properties.push('invalid value for "loyalty_card_identifier", the character length must be great than or equal to 4.')
+      if !@loyalty_card_id.nil? && @loyalty_card_id.to_s.length < 4
+        invalid_properties.push('invalid value for "loyalty_card_id", the character length must be great than or equal to 4.')
       end
 
       pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
-      if !@loyalty_card_identifier.nil? && @loyalty_card_identifier !~ pattern
-        invalid_properties.push("invalid value for \"loyalty_card_identifier\", must conform to the pattern #{pattern}.")
+      if !@loyalty_card_id.nil? && @loyalty_card_id !~ pattern
+        invalid_properties.push("invalid value for \"loyalty_card_id\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -256,9 +256,9 @@ module TalonOne
       status_validator = EnumAttributeValidator.new('String', ["unlocked", "used"])
       return false unless status_validator.valid?(@status)
       return false if @unlocked_at.nil?
-      return false if !@loyalty_card_identifier.nil? && @loyalty_card_identifier.to_s.length > 108
-      return false if !@loyalty_card_identifier.nil? && @loyalty_card_identifier.to_s.length < 4
-      return false if !@loyalty_card_identifier.nil? && @loyalty_card_identifier !~ Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
+      return false if !@loyalty_card_id.nil? && @loyalty_card_id.to_s.length > 108
+      return false if !@loyalty_card_id.nil? && @loyalty_card_id.to_s.length < 4
+      return false if !@loyalty_card_id.nil? && @loyalty_card_id !~ Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
       true
     end
 
@@ -273,22 +273,22 @@ module TalonOne
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] loyalty_card_identifier Value to be assigned
-    def loyalty_card_identifier=(loyalty_card_identifier)
-      if !loyalty_card_identifier.nil? && loyalty_card_identifier.to_s.length > 108
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier", the character length must be smaller than or equal to 108.'
+    # @param [Object] loyalty_card_id Value to be assigned
+    def loyalty_card_id=(loyalty_card_id)
+      if !loyalty_card_id.nil? && loyalty_card_id.to_s.length > 108
+        fail ArgumentError, 'invalid value for "loyalty_card_id", the character length must be smaller than or equal to 108.'
       end
 
-      if !loyalty_card_identifier.nil? && loyalty_card_identifier.to_s.length < 4
-        fail ArgumentError, 'invalid value for "loyalty_card_identifier", the character length must be great than or equal to 4.'
+      if !loyalty_card_id.nil? && loyalty_card_id.to_s.length < 4
+        fail ArgumentError, 'invalid value for "loyalty_card_id", the character length must be great than or equal to 4.'
       end
 
       pattern = Regexp.new(/^[A-Za-z0-9._%+@-]+$/)
-      if !loyalty_card_identifier.nil? && loyalty_card_identifier !~ pattern
-        fail ArgumentError, "invalid value for \"loyalty_card_identifier\", must conform to the pattern #{pattern}."
+      if !loyalty_card_id.nil? && loyalty_card_id !~ pattern
+        fail ArgumentError, "invalid value for \"loyalty_card_id\", must conform to the pattern #{pattern}."
       end
 
-      @loyalty_card_identifier = loyalty_card_identifier
+      @loyalty_card_id = loyalty_card_id
     end
 
     # Checks equality by comparing each attribute.
@@ -309,7 +309,7 @@ module TalonOne
           used_at == o.used_at &&
           used_by_profile_integration_id == o.used_by_profile_integration_id &&
           loyalty_program_id == o.loyalty_program_id &&
-          loyalty_card_identifier == o.loyalty_card_identifier
+          loyalty_card_id == o.loyalty_card_id
     end
 
     # @see the `==` method
@@ -321,7 +321,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, integration_id, reward_id, reward_integration_id, reward_name, description, rule, status, unlocked_at, unlocked_by_profile_integration_id, used_at, used_by_profile_integration_id, loyalty_program_id, loyalty_card_identifier].hash
+      [id, integration_id, reward_id, reward_integration_id, reward_name, description, rule, status, unlocked_at, unlocked_by_profile_integration_id, used_at, used_by_profile_integration_id, loyalty_program_id, loyalty_card_id].hash
     end
 
     # Builds the object from hash

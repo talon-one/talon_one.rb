@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **connected_session_id** | **String** | The ID of the session to reference. The session must be in &#x60;closed&#x60; state. Otherwise, the API call will fail. | [optional] 
 **referral_code** | **String** | The referral code submitted with the event. The endpoint does not validate the code, and submitting a code does not redeem it. Use the \&quot;Referral code is valid\&quot; condition in the Rule Builder to validate and redeem the code, or \&quot;Referral code is valid (without redemption)\&quot; to validate without redeeming.  | [optional] 
 **loyalty_cards** | **Array&lt;String&gt;** | Identifiers of the loyalty cards used during this event. | [optional] 
+**reward_integration_ids** | **Array&lt;String&gt;** | The integration IDs of the unlocked rewards that can be used in this event.  | [optional] 
 **response_content** | **Array&lt;String&gt;** | Optional list of requested information to be present on the response related to the tracking custom event.  | [optional] 
 
 ## Code Sample
@@ -29,6 +30,7 @@ instance = TalonOne::IntegrationEventV3Request.new(profile_id: URNGV8294NV,
                                  connected_session_id: 175KJPS947296,
                                  referral_code: NT2K54D9,
                                  loyalty_cards: [loyalty-card-1],
+                                 reward_integration_ids: [5c0b5e6d-3f8a-4c2b-9f1e-2a7d6b4c8e90],
                                  response_content: [triggeredCampaigns, customerProfile])
 ```
 

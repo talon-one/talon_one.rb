@@ -14,6 +14,7 @@ require 'date'
 
 module TalonOne
   class RevisionActivation
+    # Timestamp when the revision will be activated.
     attr_accessor :activate_at
 
     # Attribute mapping from ruby-style variable name to JSON key.

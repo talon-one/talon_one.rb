@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
-  # This effect indicates that a free item should be added to the shopping cart in the current session. In this example, add the SKU to the shopping cart and set its price to `0`.  The effect of a successful referral can mean a free item for someone else, such as the referrer.
+  # This effect indicates that a free item should be added to the shopping cart in the current session. In this example, add the SKU to the shopping cart and set its price to `0`.
   class AddFreeItemEffectProps
     # SKU of the item that needs to be added.
     attr_accessor :sku

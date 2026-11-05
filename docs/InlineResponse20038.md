@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **Boolean** |  | [optional] 
 **total_result_size** | **Integer** |  | [optional] 
-**data** | [**Array&lt;ApplicationReferee&gt;**](ApplicationReferee.md) |  | 
+**data** | [**Array&lt;Audience&gt;**](Audience.md) |  | 
 
 ## Code Sample
 

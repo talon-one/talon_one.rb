@@ -17,18 +17,25 @@ module TalonOne
     # Unique ID for this entity. Not to be confused with the Integration ID, which is set by your integration layer and used in most endpoints.
     attr_accessor :id
 
+    # The ID of the account that owns this entity.
     attr_accessor :account_id
 
+    # The ID of the Application that owns this entity.
     attr_accessor :application_id
 
+    # The ID of the campaign that the revision was created from.
     attr_accessor :campaign_id
 
+    # Timestamp when the revision was created.
     attr_accessor :created
 
+    # The ID of the user who created this revision.
     attr_accessor :created_by
 
+    # The ID of the revision.
     attr_accessor :revision_id
 
+    # Incrementing number representing how many revisions have been activated on this campaign. Starts from `0` for a new campaign. 
     attr_accessor :version
 
     # A user-facing name for this campaign.

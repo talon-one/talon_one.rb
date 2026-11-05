@@ -62,6 +62,15 @@ module TalonOne
     # The identifier of the transaction in the loyalty ledger.
     attr_accessor :transaction_uuid
 
+    # The timestamp when the loyalty transaction occurred.
+    attr_accessor :created
+
+    # Indicates whether the points have an action-based start date. This property is returned only for point transactions with an action-based start date.
+    attr_accessor :awaits_activation
+
+    # The duration for which the points remain active, relative to the activation date.  **Note**: This only applies to points for which `AwaitsActivation` is `true` and `ExpiryDate` is not set. 
+    attr_accessor :validity_duration
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -102,7 +111,10 @@ module TalonOne
         :'operation' => :'Operation',
         :'reason' => :'Reason',
         :'start_date' => :'StartDate',
-        :'transaction_uuid' => :'TransactionUUID'
+        :'transaction_uuid' => :'TransactionUUID',
+        :'created' => :'Created',
+        :'awaits_activation' => :'AwaitsActivation',
+        :'validity_duration' => :'ValidityDuration'
       }
     end
 
@@ -124,7 +136,10 @@ module TalonOne
         :'operation' => :'String',
         :'reason' => :'String',
         :'start_date' => :'DateTime',
-        :'transaction_uuid' => :'String'
+        :'transaction_uuid' => :'String',
+        :'created' => :'DateTime',
+        :'awaits_activation' => :'Boolean',
+        :'validity_duration' => :'String'
       }
     end
 
@@ -213,6 +228,18 @@ module TalonOne
 
       if attributes.key?(:'transaction_uuid')
         self.transaction_uuid = attributes[:'transaction_uuid']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'awaits_activation')
+        self.awaits_activation = attributes[:'awaits_activation']
+      end
+
+      if attributes.key?(:'validity_duration')
+        self.validity_duration = attributes[:'validity_duration']
       end
     end
 
@@ -374,7 +401,10 @@ module TalonOne
           operation == o.operation &&
           reason == o.reason &&
           start_date == o.start_date &&
-          transaction_uuid == o.transaction_uuid
+          transaction_uuid == o.transaction_uuid &&
+          created == o.created &&
+          awaits_activation == o.awaits_activation &&
+          validity_duration == o.validity_duration
     end
 
     # @see the `==` method
@@ -386,7 +416,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [card_identifier, employee_name, loyalty_program_id, notification_type, profile_integration_i_ds, session_integration_id, subledger_id, type_of_change, user_id, users_per_card_limit, amount, expiry_date, operation, reason, start_date, transaction_uuid].hash
+      [card_identifier, employee_name, loyalty_program_id, notification_type, profile_integration_i_ds, session_integration_id, subledger_id, type_of_change, user_id, users_per_card_limit, amount, expiry_date, operation, reason, start_date, transaction_uuid, created, awaits_activation, validity_duration].hash
     end
 
     # Builds the object from hash

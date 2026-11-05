@@ -33,7 +33,7 @@ module TalonOne
     # The number of items to award. Supports template placeholders (e.g. \"{{$Session.Total / 2}}\") for dynamic quantities.
     attr_accessor :quantity
 
-    # When set to `true`, applies a partial item reward if the remaining budget is insufficient to award the full reward.
+    # When set to `true`, applies a partial item reward if the remaining budget is insufficient to award the full reward. When omitted, the Application's partial discounts setting applies.
     attr_accessor :partial
 
     # Blocks evaluated when this block fails or returns false.

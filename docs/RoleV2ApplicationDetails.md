@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ```ruby
 require 'TalonOne'
 
-instance = TalonOne::RoleV2ApplicationDetails.new(application: null,
-                                 campaign: null,
-                                 draft_campaign: null,
+instance = TalonOne::RoleV2ApplicationDetails.new(application: Application permission set,
+                                 campaign: Campaign manager permission set,
+                                 draft_campaign: Campaign read-only permission set,
                                  tools: Tools permission set)
 ```
 

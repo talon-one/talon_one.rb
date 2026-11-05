@@ -14,7 +14,7 @@ require 'date'
 
 module TalonOne
   class UpdateExperiment
-    # The source of the assignment. - false - The variant assignment is handled internally by Talon.One. - true - The variant assignment is handled externally. 
+    # Deprecated and ignored. The assignment type is set at experiment creation and cannot be changed. Use `assignmentType` when creating an experiment instead. 
     attr_accessor :is_variant_assignment_external
 
     attr_accessor :campaign
@@ -109,10 +109,6 @@ module TalonOne
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @is_variant_assignment_external.nil?
-        invalid_properties.push('invalid value for "is_variant_assignment_external", is_variant_assignment_external cannot be nil.')
-      end
-
       if @campaign.nil?
         invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
       end
@@ -123,7 +119,6 @@ module TalonOne
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @is_variant_assignment_external.nil?
       return false if @campaign.nil?
       goal_type_validator = EnumAttributeValidator.new('String', ["other", "maximize_revenue", "maximize_items_sold", "optimize_discount_efficiency"])
       return false unless goal_type_validator.valid?(@goal_type)

@@ -17,7 +17,7 @@ module TalonOne
     # Name of the permission set.
     attr_accessor :name
 
-    # List of logical operations in the permission set. Each logical operation must be shown under the `x-permission` tag on an endpoint level. 
+    # List of logical operations in the permission set. 
     attr_accessor :logical_operations
 
     # Attribute mapping from ruby-style variable name to JSON key.

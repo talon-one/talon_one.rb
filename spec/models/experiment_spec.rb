@@ -50,6 +50,16 @@ describe 'Experiment' do
     end
   end
 
+  describe 'test attribute "assignment_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["random", "external", "audience"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.assignment_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "is_variant_assignment_external"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

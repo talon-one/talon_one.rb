@@ -26,6 +26,9 @@ module TalonOne
 
     attr_accessor :audiences_changes
 
+    # The integration IDs of the unlocked rewards that can be used in this request. 
+    attr_accessor :reward_integration_ids
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +57,8 @@ module TalonOne
         :'attributes' => :'attributes',
         :'evaluable_campaign_ids' => :'evaluableCampaignIds',
         :'response_content' => :'responseContent',
-        :'audiences_changes' => :'audiencesChanges'
+        :'audiences_changes' => :'audiencesChanges',
+        :'reward_integration_ids' => :'rewardIntegrationIds'
       }
     end
 
@@ -64,7 +68,8 @@ module TalonOne
         :'attributes' => :'Object',
         :'evaluable_campaign_ids' => :'Array<Integer>',
         :'response_content' => :'Array<String>',
-        :'audiences_changes' => :'ProfileAudiencesChanges'
+        :'audiences_changes' => :'ProfileAudiencesChanges',
+        :'reward_integration_ids' => :'Array<String>'
       }
     end
 
@@ -108,6 +113,12 @@ module TalonOne
       if attributes.key?(:'audiences_changes')
         self.audiences_changes = attributes[:'audiences_changes']
       end
+
+      if attributes.key?(:'reward_integration_ids')
+        if (value = attributes[:'reward_integration_ids']).is_a?(Array)
+          self.reward_integration_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -131,7 +142,8 @@ module TalonOne
           attributes == o.attributes &&
           evaluable_campaign_ids == o.evaluable_campaign_ids &&
           response_content == o.response_content &&
-          audiences_changes == o.audiences_changes
+          audiences_changes == o.audiences_changes &&
+          reward_integration_ids == o.reward_integration_ids
     end
 
     # @see the `==` method
@@ -143,7 +155,7 @@ module TalonOne
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [attributes, evaluable_campaign_ids, response_content, audiences_changes].hash
+      [attributes, evaluable_campaign_ids, response_content, audiences_changes, reward_integration_ids].hash
     end
 
     # Builds the object from hash

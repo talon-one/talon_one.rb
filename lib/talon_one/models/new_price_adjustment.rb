@@ -32,7 +32,7 @@ module TalonOne
     # The date and time until which the price adjustment is effective.
     attr_accessor :effective_until
 
-    # Identifier of the context of this price adjustment (e.g. summer sale).
+    # Identifier of the context of this price adjustment (the sales event, e.g. \"Summer Sale\").
     attr_accessor :context_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

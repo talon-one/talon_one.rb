@@ -13,6 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module TalonOne
+  # Details of the permission sets configured for an Application.
   class RoleV2ApplicationDetails
     # Name of the Application-related permission set for the given Application.
     attr_accessor :application
